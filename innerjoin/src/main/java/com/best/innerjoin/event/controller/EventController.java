@@ -1,9 +1,11 @@
-package com.kh.spring.event.controller;
+package com.best.innerjoin.event.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.spring.event.model.vo.Event;
+import com.best.innerjoin.event.model.vo.Event;
+
+
 
 @Controller
 public class EventController {

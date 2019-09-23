@@ -1,4 +1,4 @@
-package com.kh.spring.event.model.vo;
+package com.best.innerjoin.event.model.vo;
 
 import java.sql.Date;
 

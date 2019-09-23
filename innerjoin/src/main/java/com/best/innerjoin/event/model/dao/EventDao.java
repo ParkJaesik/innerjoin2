@@ -1,4 +1,4 @@
-package com.kh.spring.event.model.dao;
+package com.best.innerjoin.event.model.dao;
 
 import org.springframework.stereotype.Repository;
 
