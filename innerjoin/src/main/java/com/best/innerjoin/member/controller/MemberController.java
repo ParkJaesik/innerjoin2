@@ -22,7 +22,7 @@ public class MemberController {
 		
 		System.out.println(loginUser);
 		
-		return null;
+		return "event/calendar";
 		
 	}
 }

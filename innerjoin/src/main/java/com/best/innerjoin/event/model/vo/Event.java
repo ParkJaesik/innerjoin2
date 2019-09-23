@@ -1,4 +1,4 @@
-package com.kh.spring.event.model.vo;
+package com.best.innerjoin.event.model.vo;
 
 import java.sql.Date;
 
@@ -10,6 +10,7 @@ public class Event {
 	private Date eStart;
 	private Date eEnd;
 	private int eLimit;
+	private int eMemCount;
 	private String gno;
 	
 	public Event() { }
@@ -23,7 +24,7 @@ public class Event {
 		this.eLimit = eLimit;
 	}
 
-	public Event(int eno, String eTitle, String eContent, Date eStart, Date eEnd, int eLimit, String gno) {
+	public Event(int eno, String eTitle, String eContent, Date eStart, Date eEnd, int eLimit, String gno, int eMemCount) {
 		super();
 		this.eno = eno;
 		this.eTitle = eTitle;
@@ -32,6 +33,7 @@ public class Event {
 		this.eEnd = eEnd;
 		this.eLimit = eLimit;
 		this.gno = gno;
+		this.eMemCount = eMemCount;
 	}
 	
 	public int getEno() {
@@ -62,7 +64,7 @@ public class Event {
 		return eStart;
 	}
 
-	public void seteStartDay(Date eStart) {
+	public void seteStart(Date eStart) {
 		this.eStart = eStart;
 	}
 
@@ -70,8 +72,16 @@ public class Event {
 		return eEnd;
 	}
 
-	public void seteEndDay(Date eEnd) {
+	public void seteEnd(Date eEnd) {
 		this.eEnd = eEnd;
+	}
+
+	public int geteMemCount() {
+		return eMemCount;
+	}
+
+	public void seteMemCount(int eMemCount) {
+		this.eMemCount = eMemCount;
 	}
 
 	public int geteLimit() {
@@ -92,8 +102,8 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [eno=" + eno + ", eTitle=" + eTitle + ", eContent=" + eContent + ", eStart=" + eStart
-				+ ", eEnd=" + eEnd + ", eLimit=" + eLimit + ", gno=" + gno + "]";
+		return "Event [eno=" + eno + ", eTitle=" + eTitle + ", eContent=" + eContent + ", eStart=" + eStart + ", eEnd="
+				+ eEnd + ", eLimit=" + eLimit + ", eMemCount=" + eMemCount + ", gno=" + gno + "]";
 	}
 
 	@Override
@@ -103,6 +113,7 @@ public class Event {
 		result = prime * result + ((eContent == null) ? 0 : eContent.hashCode());
 		result = prime * result + ((eEnd == null) ? 0 : eEnd.hashCode());
 		result = prime * result + eLimit;
+		result = prime * result + eMemCount;
 		result = prime * result + ((eStart == null) ? 0 : eStart.hashCode());
 		result = prime * result + ((eTitle == null) ? 0 : eTitle.hashCode());
 		result = prime * result + eno;
@@ -131,6 +142,8 @@ public class Event {
 			return false;
 		if (eLimit != other.eLimit)
 			return false;
+		if (eMemCount != other.eMemCount)
+			return false;
 		if (eStart == null) {
 			if (other.eStart != null)
 				return false;
@@ -150,5 +163,7 @@ public class Event {
 			return false;
 		return true;
 	}
+	
+	
 	
 }

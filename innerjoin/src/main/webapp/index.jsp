@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%-- <jsp:include page="common/menubar.jsp"/> --%>
 	<form action="login.ij">
 		<input type="text" name="memberId"> 아이디 <br>
 		<input type="password" name="memberPwd"> 비밀번호 <br>

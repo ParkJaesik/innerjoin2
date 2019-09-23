@@ -14,6 +14,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.best.innerjoin.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.best.innerjoin.event.model.vo.Event" alias="Event"/>
 	</typeAliases>
 
 	
