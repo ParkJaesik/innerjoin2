@@ -13,5 +13,14 @@
 		
 		<button>로그인</button>
 	</form>
+	
+	<button onclick="goAlbum();">앨범</button>
+	<script>
+		function goAlbum(){
+			
+			location.href="addPhotoForm.ij";
+		} 
+		
+	</script>
 </body>
 </html>
