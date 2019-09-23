@@ -25,4 +25,9 @@ public class MemberController {
 		return null;
 		
 	}
+	
+	@RequestMapping("login2.ij")
+	public String loginMember() {
+		return "member/loginForm";
+	}
 }
