@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+  <!-- 원본 :  <resultMap type="memberResultSet" id="Member"> -->
+  <!-- type , id 반대로 씀 -->
+  
+  <!-- 수정본 -->
+  <resultMap type="Member" id="memberResultSet">
+  	<id property="memberId" column="MEMBER_ID"/>
+  	<result property="memberPwd" column="MEMBER_PWD"/>
+  	<result property="memberName" column="MEMBER_NAME"/>
+  	<result property="loginWay" column="LOGIN_WAY"/>
+  	<result property="memberModifyDate" column="MEMBER_MODIFY_DATE"/>
+  	<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+  	<result property="memberHostCount" column="MEMBER_HOST_COUNT"/>
+  	<result property="memberJoinCount" column="MEMBER_JOIN_COUNT"/>
+  	<result property="memberReptCount" column="MEMBER_REPT_COUNT"/>
+  	<result property="memberProPath" column="MEMBER_PRO_PATH"/>
+  	<result property="memberStatusCode" column="MEMBER_STATUS_CODE"/>
+  </resultMap>
+  
+  
+  <select id="loginMember" parameterType="Member" 
+			resultMap="memberResultSet">
+			
+	SELECT * FROM MEMBER
+	WHERE MEMBER_ID = #{memberId}
+	AND MEMBER_PWD = #{memberPwd}
+	AND MEMBER_STATUS_CODE = 1
+  
+  </select>
+</mapper>
