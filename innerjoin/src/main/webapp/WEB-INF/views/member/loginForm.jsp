@@ -35,20 +35,20 @@
 					<div class="container" style="position: absolute; left: 35%; padding: 70px; text-align: center; border-bottom: 0px; box-shadow: none;">
 						<div class="col-4"></div>
 						<div class="col-4">
-							<form method="post" action="#">
+							<form method="post" action="login.ij">
 								<div class="row gtr-50" aling="cneter">
 									<div class="col-4 col-6-small" >
 										<div>
-											<input name="email" placeholder="Email" type="text" />
+											<input name="memberId" placeholder="Email" type="text" />
 											<br>
-											<input name="password" placeholder="password" type="password" />
+											<input name="memberPwd" placeholder="password" type="password" />
 										</div>
 										<br>
 
 										<!-- 로그인 버튼 -->
 										<div class="col-4 col-6-small">
-											<a href="#" class="form-button-submit button icon solid" 
-											style="padding: 10px 20px 10px 20px; width: 100%;">로그인</a>
+											<button class="form-button-submit button icon solid" 
+											style="padding: 10px 20px 10px 20px; width: 100%;">로그인</button>
 										</div>
 										<!-- ---------- -->
 									</div>
