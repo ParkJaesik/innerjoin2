@@ -45,6 +45,7 @@
 		position : absolute;
 		float:left;
 	}
+	
 </style>
 </head>
     <body>

@@ -31,6 +31,8 @@ public class AlbumController {
 	            System.out.println("fileSize : " + fileSize);
 
 	    }
+	    
+	    
 
 	    int result = 0;
 	    if(files != null) {
