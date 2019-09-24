@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.nav {
+	width:780px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.menu {
+	display:inline-block;
+	background:yellowgreen;
+	text-align:center;
+	line-height:50px;
+	width:150px;
+	height:50px;
+	margin-left:20px;
+	margin-right:20px;
+	border-radius:20px;
+}
+.khnu:hover {
+	background:orangered;
+	color:white;
+	cursor:pointer;
+}

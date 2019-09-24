@@ -1,20 +1,39 @@
 package com.best.innerjoin.event.model.vo;
 
-import java.sql.Date;
 
 public class Event {
 
 	private int eno;
 	private String eTitle;
 	private String eContent;
-	private Date eStart;
-	private Date eEnd;
+	private String eStart;
+	private String eEnd;
 	private int eLimit;
+	private int eMemCount;
 	private String gno;
 	
 	public Event() { }
 	
-	public Event(String eTitle, String eContent, Date eStart, Date eEnd, int eLimit) {
+	
+	
+	public Event(String eTitle, String eStart) {
+		super();
+		this.eTitle = eTitle;
+		this.eStart = eStart;
+	}
+
+	
+
+	public Event(String eTitle, String eStart, String eEnd) {
+		super();
+		this.eTitle = eTitle;
+		this.eStart = eStart;
+		this.eEnd = eEnd;
+	}
+
+
+
+	public Event(String eTitle, String eContent, String eStart, String eEnd, int eLimit) {
 		super();
 		this.eTitle = eTitle;
 		this.eContent = eContent;
@@ -23,7 +42,7 @@ public class Event {
 		this.eLimit = eLimit;
 	}
 
-	public Event(int eno, String eTitle, String eContent, Date eStart, Date eEnd, int eLimit, String gno) {
+	public Event(int eno, String eTitle, String eContent, String eStart, String eEnd, int eLimit, String gno, int eMemCount) {
 		super();
 		this.eno = eno;
 		this.eTitle = eTitle;
@@ -32,6 +51,7 @@ public class Event {
 		this.eEnd = eEnd;
 		this.eLimit = eLimit;
 		this.gno = gno;
+		this.eMemCount = eMemCount;
 	}
 	
 	public int getEno() {
@@ -58,20 +78,28 @@ public class Event {
 		this.eContent = eContent;
 	}
 
-	public Date geteStart() {
+	public String geteStart() {
 		return eStart;
 	}
 
-	public void seteStartDay(Date eStart) {
+	public void seteStart(String eStart) {
 		this.eStart = eStart;
 	}
 
-	public Date geteEnd() {
+	public String geteEnd() {
 		return eEnd;
 	}
 
-	public void seteEndDay(Date eEnd) {
+	public void seteEnd(String eEnd) {
 		this.eEnd = eEnd;
+	}
+
+	public int geteMemCount() {
+		return eMemCount;
+	}
+
+	public void seteMemCount(int eMemCount) {
+		this.eMemCount = eMemCount;
 	}
 
 	public int geteLimit() {
@@ -92,8 +120,8 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [eno=" + eno + ", eTitle=" + eTitle + ", eContent=" + eContent + ", eStart=" + eStart
-				+ ", eEnd=" + eEnd + ", eLimit=" + eLimit + ", gno=" + gno + "]";
+		return "Event [eno=" + eno + ", eTitle=" + eTitle + ", eContent=" + eContent + ", eStart=" + eStart + ", eEnd="
+				+ eEnd + ", eLimit=" + eLimit + ", eMemCount=" + eMemCount + ", gno=" + gno + "]";
 	}
 
 	@Override
@@ -103,6 +131,7 @@ public class Event {
 		result = prime * result + ((eContent == null) ? 0 : eContent.hashCode());
 		result = prime * result + ((eEnd == null) ? 0 : eEnd.hashCode());
 		result = prime * result + eLimit;
+		result = prime * result + eMemCount;
 		result = prime * result + ((eStart == null) ? 0 : eStart.hashCode());
 		result = prime * result + ((eTitle == null) ? 0 : eTitle.hashCode());
 		result = prime * result + eno;
@@ -131,6 +160,8 @@ public class Event {
 			return false;
 		if (eLimit != other.eLimit)
 			return false;
+		if (eMemCount != other.eMemCount)
+			return false;
 		if (eStart == null) {
 			if (other.eStart != null)
 				return false;
@@ -150,5 +181,7 @@ public class Event {
 			return false;
 		return true;
 	}
+	
+	
 	
 }

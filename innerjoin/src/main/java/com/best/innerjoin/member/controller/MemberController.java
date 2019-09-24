@@ -22,12 +22,7 @@ public class MemberController {
 		
 		System.out.println(loginUser);
 		
-		return null;
+		return "event/calendar";
 		
-	}
-	
-	@RequestMapping("login2.ij")
-	public String loginMember() {
-		return "member/loginForm";
 	}
 }
