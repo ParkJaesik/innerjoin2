@@ -14,16 +14,20 @@
 
  
 	#preview {
-		width:500px;
+		width:1020px;
+		
 	}
 	#preview img {
 		max-width: 100%;
-		
+		max-height:75%;
+		margin-left:auto;
+		margin-right:auto;
 	}
 	
 	#preview p {
-		text-overflow: ellipsis;
+		/*  text-overflow: ellipsis;*/
 		overflow: hidden;
+		
 	}
 	
 	.preview-box {
@@ -31,6 +35,15 @@
 		padding: 5px;
 		border-radius: 2px;
 		margin-bottom: 10px;
+		float:left;
+		width:30%;
+		height:250px;
+		
+	}
+	.footer{
+		bottom: 100px;
+		position : absolute;
+		float:left;
 	}
 </style>
 </head>
@@ -60,7 +73,7 @@
                 <div id="preview" class="content"></div>
                 
                 <!-- multipart 업로드시 영역 -->
-                <form id="uploadForm" style="display: none;"/>
+                <form id="uploadForm" action="addPhoto.ij" method="post" style="display: none;" enctype="multipart/form-data"/>
             </div>
             <div class="footer">
                 <button class="submit">등록</button>
@@ -137,20 +150,42 @@
                     var form = $('#uploadForm')[0];
                     var formData = new FormData(form);
         
-                    for (var index = 0; index <= Object.keys(files).length; index++) {
+                    console.log(form);
+                    
+                    for (var index = 0; index < Object.keys(files).length; index++) {
                         //formData 공간에 files라는 이름으로 파일을 추가한다.
                         //동일명으로 계속 추가할 수 있다.
                         formData.append('files',files[index]);
                     }
- /*     
-                    document.form.encoding = "multipart/form-data";
+      
+                    formData.append("title","제목");
+			        for (var value of formData.values()) {
 
-                    document.form.action="location.href='addPhoto.ij";         // 만약 다른 주소로 전송 할 경우
+                    	  console.log(value);
 
-                    document.form.submit(); */
+                    }
+                    
 
+                    //form.setAttribute("method", "Post"); 
+                   // form.setAttribute("enctype","multipart/form-data");
+                   // form.setAttribute("action","addPhoto.ij");
+                    
+                    //return false;
+                    form.submit();
+                    //document.frm.encoding = "multipart/form-data";
+
+                    //$form.prop("enctype","multipart/form-data");
+                    //$form.prop("action","location.href='addPhoto.ij'");
+
+                    //$form.submit();
+                    //document.frm.action="location.href='addPhoto.ij";         // 만약 다른 주소로 전송 할 경우
+
+                    //document.frm.submit(); 
+
+                    
+                    
                     //ajax 통신으로 multipart form을 전송한다.
-                     $.ajax({
+/*                      $.ajax({
                         type : 'POST',
                         enctype : 'multipart/form-data',
                         processData : false,
@@ -169,7 +204,9 @@
 
                         }
                         //전송실패에대한 핸들링은 고려하지 않음
-                    });
+                    }); */
+                    
+                    //return false;
                 }); 
                 // <input type=file> 태그 기능 구현
                 $('#attach input[type=file]').change(function() {

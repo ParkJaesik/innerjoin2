@@ -2,14 +2,12 @@ package com.best.innerjoin.album.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.gson.Gson;
 
 @Controller
 public class AlbumController {
@@ -19,13 +17,13 @@ public class AlbumController {
 		return "album/addPhotoForm";
 	}
 
-	@ResponseBody
-	@RequestMapping(value="addPhoto.ij", method=RequestMethod.POST)
-	public String addPhoto(@RequestParam("files")List<MultipartFile> images) {
+	@RequestMapping("addPhoto.ij")
+	public String addPhoto(HttpServletRequest request,@RequestParam("files")List<MultipartFile> files, String title) {
 		
 
 		System.out.println("==============================");
-	    for (MultipartFile mf : images) {
+		System.out.println("title : " + title);
+	    for (MultipartFile mf : files) {
 	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 	            long fileSize = mf.getSize(); // 파일 사이즈
 
@@ -35,9 +33,9 @@ public class AlbumController {
 	    }
 
 	    int result = 0;
-	    if(images != null) {
+	    if(files != null) {
 	    	result = 1;
 	    }
-		return new Gson().toJson(result);
+		return null;
 	}
 }
