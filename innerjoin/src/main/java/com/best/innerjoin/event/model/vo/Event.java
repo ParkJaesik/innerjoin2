@@ -1,21 +1,39 @@
 package com.best.innerjoin.event.model.vo;
 
-import java.sql.Date;
 
 public class Event {
 
 	private int eno;
 	private String eTitle;
 	private String eContent;
-	private Date eStart;
-	private Date eEnd;
+	private String eStart;
+	private String eEnd;
 	private int eLimit;
 	private int eMemCount;
 	private String gno;
 	
 	public Event() { }
 	
-	public Event(String eTitle, String eContent, Date eStart, Date eEnd, int eLimit) {
+	
+	
+	public Event(String eTitle, String eStart) {
+		super();
+		this.eTitle = eTitle;
+		this.eStart = eStart;
+	}
+
+	
+
+	public Event(String eTitle, String eStart, String eEnd) {
+		super();
+		this.eTitle = eTitle;
+		this.eStart = eStart;
+		this.eEnd = eEnd;
+	}
+
+
+
+	public Event(String eTitle, String eContent, String eStart, String eEnd, int eLimit) {
 		super();
 		this.eTitle = eTitle;
 		this.eContent = eContent;
@@ -24,7 +42,7 @@ public class Event {
 		this.eLimit = eLimit;
 	}
 
-	public Event(int eno, String eTitle, String eContent, Date eStart, Date eEnd, int eLimit, String gno, int eMemCount) {
+	public Event(int eno, String eTitle, String eContent, String eStart, String eEnd, int eLimit, String gno, int eMemCount) {
 		super();
 		this.eno = eno;
 		this.eTitle = eTitle;
@@ -60,19 +78,19 @@ public class Event {
 		this.eContent = eContent;
 	}
 
-	public Date geteStart() {
+	public String geteStart() {
 		return eStart;
 	}
 
-	public void seteStart(Date eStart) {
+	public void seteStart(String eStart) {
 		this.eStart = eStart;
 	}
 
-	public Date geteEnd() {
+	public String geteEnd() {
 		return eEnd;
 	}
 
-	public void seteEnd(Date eEnd) {
+	public void seteEnd(String eEnd) {
 		this.eEnd = eEnd;
 	}
 

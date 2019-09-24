@@ -9,16 +9,16 @@
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script> 
 
-<link href='css/core_main.css' rel='stylesheet' />
-<link href='css/daygrid_main.css' rel='stylesheet' />
-<link href='css/list_main.css' rel='stylesheet' />
-<link href='css/timegrid_main.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/core.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/daygrid.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/list.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/timegrid.css' rel='stylesheet' />
 
-<script src='js/core_main.js'></script>
-<script src='js/daygrid_main.js'></script>
-<script src='js/timegrid_main.js'></script>
-<script src='js/list_main.js'></script>
-<script src='js/interaction_main.js'></script>
+<script src='${contextPath }/resources/js/core.js'></script>
+<script src='${contextPath }/resources/js/daygrid.js'></script>
+<script src='${contextPath }/resources/js/timegrid.js'></script>
+<script src='${contextPath }/resources/js/list.js'></script>
+<script src='${contextPath }/resources/js/interaction.js'></script>
 
 
 <script>
@@ -28,7 +28,7 @@
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-	  						height: 'parent',
+	  		height: 'parent',
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -36,7 +36,6 @@
 			},
 			defaultView: 'dayGridMonth',
 			defaultDate: moment().format('YYYY-MM-DD'),
-	  
 			navLinks: true, 
 			    // can click day/week names to navigate views
 			editable: false,
@@ -45,10 +44,24 @@
 			
 		});
 	
-		assignEvent();
+		console.log(calendar.getDate().getMonth());
+		assignEvent(calendar.getDate().getMonth());
 		calendar.render();
 		
-		function assignEvent() {
+		$(".fc-button").click(function() {
+			
+			var month = calendar.getDate().getMonth();
+			console.log(month);
+			
+			assignEvent(month);
+			
+		}); 
+		
+		
+		
+		
+		
+		function assignEvent(month) {
 			var events;
 			$.each(calendar.getEvents(), function(i, v) {
 				v.remove();
@@ -58,10 +71,19 @@
 				url: "<%=request.getContextPath()%>/ajaxTest",
 				type: "get",
 				dataType: "JSON",
+				data: {month: month},
 				success: function(data) {
 					console.log(data);
 					$.each(data, function(i, v) {
-						calendar.addEvent(v);
+						console.log("data[i]: " + v);
+						console.log("날짜 : " + v.eStart);
+					
+						
+						var event =	{title: v.eTitle, start: v.eStart, end: v.eEnd}; 
+						
+						calendar.addEvent(event);
+						
+						console.log("event: " + event);
 						
 					});
 					//events = data;
