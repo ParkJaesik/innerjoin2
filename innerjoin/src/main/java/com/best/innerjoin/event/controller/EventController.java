@@ -21,7 +21,7 @@ public class EventController {
 	@Autowired
 	private EventService eService;
 
-	@RequestMapping("calendar.kh")
+	@RequestMapping("calendar.ij")
 	public String calendarView() {
 		return "event/calendar";
 	}

@@ -14,5 +14,7 @@
 		
 		<button>로그인</button>
 	</form>
+	
+	<button onclick="location.href='calendar.ij'">일정</button>
 </body>
 </html>

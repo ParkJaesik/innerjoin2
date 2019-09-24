@@ -57,10 +57,6 @@
 			
 		}); 
 		
-		
-		
-		
-		
 		function assignEvent(month) {
 			var events;
 			$.each(calendar.getEvents(), function(i, v) {
@@ -146,7 +142,6 @@
 	
 	<hr>
 	
-	<button id="next">클릭</button>
 
 </body>
 </html>

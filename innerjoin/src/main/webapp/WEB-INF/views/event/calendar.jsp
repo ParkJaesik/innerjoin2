@@ -21,48 +21,71 @@
 
 <script>
 
-
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			height: "parent",
 			plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-	  						height: 'parent',
+	  		height: 'parent',
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 			},
 			defaultView: 'dayGridMonth',
-			defaultDate: '2019-08-12',
-	  
+			defaultDate: moment().format('YYYY-MM-DD'),
 			navLinks: true, 
 			    // can click day/week names to navigate views
 			editable: false,
-			eventLimit: 2, 
+			eventLimit: 3, 
 			    // allow "more" link when too many events
-			events: [
-				{title: 'All Day Event1',	start: '2019-08-01'},
-				{title: 'All Day Event2',	start: '2019-08-01'},
-				{title: 'All Day Event3',	start: '2019-08-01'},
-				{title: 'All Day Event4',	start: '2019-08-01'},
-				{title: 'Long Event', start: '2019-08-07', end: '2019-08-10'},
-				{groupId: 999, title: 'Repeating Event', start: '2019-08-09T16:00:00'},
-				{groupId: 999, title: 'Repeating Event', start: '2019-08-16T16:00:00'},
-				{title: 'Conference', start: '2019-08-11', end: '2019-08-13'},
-				{title: 'Meeting', start: '2019-08-12T10:30:00', end: '2019-08-12T12:30:00'},
-				{title: 'Lunch', start: '2019-08-12T12:00:00'},
-				{title: 'Meeting', start: '2019-08-12T14:30:00'},
-				{title: 'Happy Hour', start: '2019-08-12T17:30:00'},
-				{title: 'Dinner', start: '2019-08-12T20:00:00'},
-				{title: 'Birthday Party', start: '2019-08-13T07:00:00'},
-				{title: 'Click for Google', url: 'http://google.com/', start: '2019-08-28'}
-			]
-	
+			
 		});
 	
+		console.log(calendar.getDate().getMonth());
+		assignEvent(calendar.getDate().getMonth());
+		
 		calendar.render();
-	
+		
+		$(".fc-button").click(function() {
+			
+			var month = calendar.getDate().getMonth();
+			console.log(month);
+			
+			assignEvent(month);
+			
+		}); 
+		
+		function assignEvent(month) {
+			var events;
+			$.each(calendar.getEvents(), function(i, v) {
+				v.remove();
+			});
+			
+			$.ajax({
+				url: "ajaxTest",
+				type: "get",
+				dataType: "JSON",
+				data: {month: month},
+				success: function(data) {
+					console.log(data);
+					$.each(data, function(i, v) {
+						console.log("data[i]: " + v);
+						console.log("날짜 : " + v.eStart);
+						
+						var event =	{title: v.eTitle, start: v.eStart, end: v.eEnd}; 
+						
+						calendar.addEvent(event);
+						
+						console.log("event: " + event);
+						
+					});
+					//events = data;
+				}
+			});
+			
+			return events;
+		}
+		
 	});	
 
 
