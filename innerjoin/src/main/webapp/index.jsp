@@ -12,6 +12,7 @@
 		<input type="password" name="memberPwd"> 비밀번호 <br>
 		
 		<button>로그인</button>
+		
 	</form>
 	
 	<button onclick="goAlbum();">앨범</button>
