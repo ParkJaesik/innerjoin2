@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,16 +13,16 @@
 		<input type="password" name="memberPwd"> 비밀번호 <br>
 		
 		<button>로그인</button>
-		
 	</form>
 	
 	<button onclick="goAlbum();">앨범</button>
 	<script>
 		function goAlbum(){
 			
-			location.href="addPhotoForm.ij";
+			location.href="addAlbumForm.ij";
 		} 
-		
+		 
 	</script> 
 </body>
+
 </html>
