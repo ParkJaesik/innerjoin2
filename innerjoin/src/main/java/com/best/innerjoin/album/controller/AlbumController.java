@@ -40,4 +40,9 @@ public class AlbumController {
 	    }
 		return null;
 	}
+	
+	@RequestMapping("albumListView.ij")
+	public String albumListView() {
+		return "album/albumListView";
+	}
 }
