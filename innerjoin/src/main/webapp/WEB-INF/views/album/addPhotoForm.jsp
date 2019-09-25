@@ -165,6 +165,8 @@
                     	  console.log(value);
 
                     }
+			        
+			        
          
                     //form.setAttribute("method", "Post"); 
                    // form.setAttribute("enctype","multipart/form-data");
