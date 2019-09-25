@@ -18,7 +18,7 @@
 	<script>
 		function goAlbum(){
 			
-			location.href="addPhotoForm.ij";
+			location.href="addAlbumForm.ij";
 		} 
 		 
 	</script> 

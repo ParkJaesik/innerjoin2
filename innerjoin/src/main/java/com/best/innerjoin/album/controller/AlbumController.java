@@ -12,9 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class AlbumController {
 
-	@RequestMapping("addPhotoForm.ij")
+	@RequestMapping("addAlbumForm.ij")
 	public String addPhotoForm() {
-		return "album/addPhotoForm";
+		return "album/addAlbumForm";
 	}
 
 	@RequestMapping("addPhoto.ij")
