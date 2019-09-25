@@ -21,6 +21,6 @@
 			location.href="addPhotoForm.ij";
 		} 
 		
-	</script>
+	</script> 
 </body>
 </html>
