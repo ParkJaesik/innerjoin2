@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 	<style>
 		.wrapper{
-			width: 1020px;
+			max-width: 1020px;
 		}
 		.wrapper div{
 			margin-top: 10px;
@@ -77,7 +77,7 @@
 							</div>
 							<div class="col-md-4">
 								<button class="submit float_right btn btn-warning">앨범등록</button>
-								<button class="float_right btn btn-warning">등록취소</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">등록취소</button>
 							</div>
 						</div>
 					</div>
