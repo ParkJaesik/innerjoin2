@@ -20,7 +20,7 @@
 			
 			location.href="addPhotoForm.ij";
 		} 
-		
+		 
 	</script> 
 </body>
 </html>
