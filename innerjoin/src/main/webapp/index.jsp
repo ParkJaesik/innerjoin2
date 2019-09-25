@@ -14,9 +14,14 @@
 		<button>로그인</button>
 		
 	</form>
-	<button id="goLogin" onclick="javascript:location.href='login2.ij';">로그인 폼</a>
 	
-	
-	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<button onclick="goAlbum();">앨범</button>
+	<script>
+		function goAlbum(){
+			
+			location.href="addPhotoForm.ij";
+		} 
+		
+	</script> 
 </body>
 </html>
