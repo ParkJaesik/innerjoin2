@@ -25,7 +25,7 @@
 			<c:forEach var="b" items="${ list }">
 				<tr>
 					<td id="board-td-no" align="center">
-					
+						${ b.boardNo }
 					</td>
 					
 					<td id="board-td-title" align="left">
@@ -33,19 +33,21 @@
 							<c:param name="" value=""/>
 							<c:param name="" value=""/>
 						</c:url>
-						<a href=""></a>
+						<a href="">
+							${ b.boardTitle }
+						</a>
 					</td>
 					
 					<td id="board-td-writer" align="center">
-					
+						${ b.memberId }
 					</td>
 					
 					<td id="board-td-date" align="center">
-					
+						${ b.boardWriteDate }
 					</td>
 					
 					<td id="board-td-count" align="center">
-					
+						${ b.boardCount }
 					</td>
 				</tr>
 			</c:forEach>
