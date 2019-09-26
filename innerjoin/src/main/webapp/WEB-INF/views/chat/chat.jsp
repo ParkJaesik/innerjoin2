@@ -12,13 +12,14 @@
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> 
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 </head>
 <body>
 	<!-- 로그인한 상태일 경우와 비로그인 상태일 경우의 chat_id설정 -->
-    <c:if test="${(login.id ne '') and !(empty login.id)}">
-        <input type="hidden" value='${login.id }' id='chat_id' />
+    <c:if test="${(loginUser.memberName ne '') and !(empty loginUser.memberName)}">
+        <input type="hidden" value='${loginUser.memberName }' id='chat_id' />
     </c:if>
-    <c:if test="${(login.id eq '') or (empty login.id)}">
+    <c:if test="${(loginUser.memberName eq '') or (empty loginUser.memberName)}">
         <input type="hidden" value='<%=session.getId().substring(0, 6)%>'
             id='chat_id' />
     </c:if>
@@ -30,17 +31,17 @@
             <input type="submit" value="send" onclick="send()" />
         </fieldset>
     </div>
-    <img class="chat" src="./img/chat.png" />
+    <img class="chat" src="${contextPath }/resources/images/chat.png" />
 
 
 <script>
     $(".chat").on({
         "click" : function() {
-            if ($(this).attr("src") == "./img/chat.png") {
+            if ($(this).attr("src") == "${contextPath }/resources/images/chat.png") {
                 $(".chat").attr("src", "./img/chathide.png");
                 $("#_chatbox").css("display", "block");
             } else if ($(this).attr("src") == "./img/chathide.png") {
-                $(".chat").attr("src", "./img/chat.png");
+                $(".chat").attr("src", "${contextPath }/resources/images/chat.png");
                 $("#_chatbox").css("display", "none");
             }
         }
