@@ -26,8 +26,13 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("login2.ij")
+	@RequestMapping("loginForm.ij")
 	public String loginMember() {
 		return "member/loginForm";
+	}
+	
+	@RequestMapping("joinForm.ij")
+	public String joinMember() {
+		return "member/joinForm";
 	}
 }
