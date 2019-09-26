@@ -33,7 +33,7 @@
 		}
 		.footer{
 			width:100%;
-			height: 10%;
+			height: 8%;
 			
 		}
 		.footer *{
@@ -110,7 +110,7 @@
 								<img src="">
 							</div>
 							<h3>album-title</h3>
-							<p>by. user01</p>
+							<p>by. user0<%=i %></p>
 						</div>
 					<% } %>
 					</div>
