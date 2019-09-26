@@ -14,7 +14,7 @@ public class Group { // group VO
 	private String groupThumbNailPath;
 	private Date groupEnrollDate;
 	private int localCode;
-	private int groupStatusName;
+	private int groupStatusName; 
 	private int groupCategoryCode;
 	private int groupReptCount;
 	
