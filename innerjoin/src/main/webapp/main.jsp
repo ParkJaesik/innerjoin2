@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lnag = "ko">
     <head>
@@ -69,7 +70,7 @@
 
     </head>
     <body>
-
+		
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -98,7 +99,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 info_area" >
+                        <c:if test="${ empty sessionScope.loginUser }">
                            <a href="loginForm.ij">로그인</a>
+                        </c:if>
+                        <c:if test="${ !empty sessionScope.loginUser }">
+                        	<a href="logout.ij">로그아웃</a>
+                        </c:if>
+                        	<a href="gochat.ij">채팅창</a>
+                        
+                        
                         <button onclick="goAlbum();">앨범</button>
 						<script>
 							function goAlbum(){
