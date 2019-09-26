@@ -26,7 +26,8 @@
 	SELECT * FROM MEMBER
 	WHERE MEMBER_ID = #{memberId}
 	AND MEMBER_PWD = #{memberPwd}
-	AND MEMBER_STATUS_CODE = 1
+	AND MEMBER_STATUS_CODE != 4
+	
   
   </select>
 </mapper>
