@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
 
-@SessionAttributes({"loginUser", "msg"})
 @Controller
 public class MemberController {
 	
@@ -36,8 +35,13 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("login2.ij")
+	@RequestMapping("loginForm.ij")
 	public String loginMember() {
 		return "member/loginForm";
+	}
+	
+	@RequestMapping("joinForm.ij")
+	public String joinMember() {
+		return "member/joinForm";
 	}
 }
