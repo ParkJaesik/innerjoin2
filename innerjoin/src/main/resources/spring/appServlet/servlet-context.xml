@@ -26,6 +26,14 @@
 	<context:component-scan base-package="com.best.innerjoin" />
 	
 	<!-- websocket handler -->
+
+	<!-- <websocket:handlers>
+		<websocket:mapping handler="myHandler" path="/echo.ij"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
 	
+	<beans:bean id="myHandler" class="com.best.innerjoin.chat.ChatController"/> -->
 	
 </beans:beans>

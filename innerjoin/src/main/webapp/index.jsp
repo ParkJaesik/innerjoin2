@@ -14,7 +14,10 @@
 		<button>로그인</button>
 		
 	</form>
-	<button id="goLogin" onclick="javascript:location.href='login2.ij';">로그인 폼</a>
+	<button id="goLogin" onclick="javascript:location.href='login2.ij';">로그인 폼
+	<br>
+	<button id="goLogin" onclick="location.href='gochat.ij'">채팅화면
+	<button id="goLogin" onclick="location.href='gochat2.ij'">채팅2화면
 	
 	
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
