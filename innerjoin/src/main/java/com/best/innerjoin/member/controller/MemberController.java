@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
 
+
+
 @Controller
 public class MemberController {
 	
