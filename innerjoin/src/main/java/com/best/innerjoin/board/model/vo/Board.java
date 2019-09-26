@@ -9,6 +9,7 @@ public class Board {
 	private Date boardCreateDate;
 	private Date boardModifyDate;
 	private char boardStatus;
+	private int boardCount;
 	private int boardTypeCode;
 	private String memberId;
 	private int groupNo;
@@ -16,7 +17,7 @@ public class Board {
 	public Board() {}
 
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate, Date boardModifyDate,
-			char boardStatus, int boardTypeCode, String memberId, int groupNo) {
+			char boardStatus, int boardCount, int boardTypeCode, String memberId, int groupNo) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -24,6 +25,7 @@ public class Board {
 		this.boardCreateDate = boardCreateDate;
 		this.boardModifyDate = boardModifyDate;
 		this.boardStatus = boardStatus;
+		this.boardCount = boardCount;
 		this.boardTypeCode = boardTypeCode;
 		this.memberId = memberId;
 		this.groupNo = groupNo;
@@ -75,6 +77,14 @@ public class Board {
 
 	public void setBoardStatus(char boardStatus) {
 		this.boardStatus = boardStatus;
+	}
+
+	public int getBoardCount() {
+		return boardCount;
+	}
+
+	public void setBoardCount(int boardCount) {
+		this.boardCount = boardCount;
 	}
 
 	public int getBoardTypeCode() {
