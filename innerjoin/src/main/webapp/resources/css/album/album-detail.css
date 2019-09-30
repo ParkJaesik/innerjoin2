@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+.al-wrapper {
+	max-width: 1020px;
+	min-width: 360px;
+	margin: auto;
+}
+
+.al-wrapper * {
+	border: 1px solid black;
+	margin: auto;
+}
+
+.al-header {
+	max-width: 100%;
+	max-height: 80px;
+}
+
+.al-title {
+	padding-right: 0;
+}
+
+.photo {
+	max-width: 100%;
+	max-height: 500px;
+}
+
+.al-photo {
+	padding-top: 130px;
+}
+
+.al-list div {
+	margin-right: 0;
+}
+
+.al-list img {
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+	margin: 0px auto;
+	cursor: pointer;
+}
+
+.al-photo img {
+	max-width: 60%;
+	max-height: 60%;
+	display: block;
+	margin: 0px auto;
+	cursor: pointer;
+}
+
+.re-txtarea {
+	width: 100%;
+	max-height: 200px;
+	overflow: auto;
+}
+
+.re-txtarea textarea {
+	/* margin-top: 50px; */
+	margin: auto;
+	border-radius: 5px;
+}
+
+.re-submit-btn {
+	max-width: 100%;
+	max-height: 100%;
+	padding: 0;
+	/* margin: auto; */
+}
+
+.re-submit-btn button {
+	width: 80px;
+	height: 40px;
+	margin-right: 0;
+	/* right:0; */
+	/* box-sizing: border-box; */
+}
+
+.re-list {
+	max-width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.re-list table {
+	display: block;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.re-list th {
+	height: 40px;
+}
+
+.re-list tr {
+	width: 100%;
+}
+
+/* 
+            
+            /* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	/* overflow: auto; Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-img-wrapper {
+	width: 100%;
+	height: 80%;
+	overflow: hidden;
+}
+
+.modal-img-wrapper img {
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+	margin: 0px auto;
+	cursor: pointer;
+}
