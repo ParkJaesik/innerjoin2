@@ -31,9 +31,19 @@ public class Event {
       this.eEnd = eEnd;
    }
 
+   
+
+   public Event(int eno, String eTitle, String eStart, String eEnd) {
+	super();
+	this.eno = eno;
+	this.eTitle = eTitle;
+	this.eStart = eStart;
+	this.eEnd = eEnd;
+}
 
 
-   public Event(String eTitle, String eContent, String eStart, String eEnd, int eLimit) {
+
+public Event(String eTitle, String eContent, String eStart, String eEnd, int eLimit) {
       super();
       this.eTitle = eTitle;
       this.eContent = eContent;
@@ -41,8 +51,22 @@ public class Event {
       this.eEnd = eEnd;
       this.eLimit = eLimit;
    }
+   
+   
 
-   public Event(int eno, String eTitle, String eContent, String eStart, String eEnd, int eLimit, String gno, int eMemCount) {
+   public Event(int eno, String eTitle, String eContent, String eStart, String eEnd, int eLimit) {
+	super();
+	this.eno = eno;
+	this.eTitle = eTitle;
+	this.eContent = eContent;
+	this.eStart = eStart;
+	this.eEnd = eEnd;
+	this.eLimit = eLimit;
+}
+
+
+
+public Event(int eno, String eTitle, String eContent, String eStart, String eEnd, int eLimit, String gno, int eMemCount) {
       super();
       this.eno = eno;
       this.eTitle = eTitle;

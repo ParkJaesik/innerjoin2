@@ -70,7 +70,7 @@
        display: block !important;
    }
    
-   .closeBtn, .fc-content {
+   .closeBtn, .checkBtn, .fc-content {
          cursor: pointer;
    }
    
@@ -145,10 +145,15 @@
       padding-right: 0;
    }
    
-   .closeBtn {
+   .closeBtn, .checkBtn {
       max-width: 1em;
-      right: 0;
+      margin-left: 0.8em;
+      display: block;
       float: right;
+   }
+   
+   .checkBtn {
+   	max-width: 1.2em;
    }
    
    .eventMember .member {
