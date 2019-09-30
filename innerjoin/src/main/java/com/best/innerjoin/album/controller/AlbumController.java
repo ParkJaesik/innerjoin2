@@ -24,8 +24,8 @@ public class AlbumController {
 		System.out.println("==============================");
 		System.out.println("title : " + title);
 	    for (MultipartFile mf : files) {
-	            String originFileName = mf.getOriginalFilename(); // ¿øº» ÆÄÀÏ ¸í
-	            long fileSize = mf.getSize(); // ÆÄÀÏ »çÀÌÁî
+	            String originFileName = mf.getOriginalFilename(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	            long fileSize = mf.getSize(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	            System.out.println("originFileName : " + originFileName);
 	            System.out.println("fileSize : " + fileSize);
@@ -44,5 +44,10 @@ public class AlbumController {
 	@RequestMapping("albumListView.ij")
 	public String albumListView() {
 		return "album/albumListView";
+	}
+	
+	@RequestMapping("albumDetailView.ij")
+	public String albumDetailView() {
+		return "album/albumDetailView";
 	}
 }
