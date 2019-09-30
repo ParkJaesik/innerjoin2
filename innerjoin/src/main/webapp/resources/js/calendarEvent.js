@@ -5,6 +5,9 @@
 
 // 달력 렌더링 이벤트 등록
 document.addEventListener('DOMContentLoaded', function() {
+	   
+   var detailViewNum = 0;
+   var detailViewList = [];
    
    var calendarEl = document.getElementById('calendar');
    var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -17,6 +20,23 @@ document.addEventListener('DOMContentLoaded', function() {
          center: 'title',
          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
+//      titleFormat: {
+//    	  month: "yyyy년 MMMM",
+//    	  week: "[yyyy] MMM dd일{ [yyyy] MMM dd일}",
+//    	  day: "yyyy년 MMM d일 dddd"
+//      },
+//      monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+//      monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+//      dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+//      dayNamesShort: ["일","월","화","수","목","금","토"],
+//      buttonText: {
+//    	  today : "오늘",
+//    	  month : "월별",
+//    	  week : "주별",
+//    	  day : "일별",
+//      },
+//      timeFormat : "HH:mm",
+
       defaultView: 'dayGridMonth',
       // 달력에 기본으로 보이는 날짜는 현재날짜
       defaultDate: moment().format('YYYY-MM-DD'),
@@ -27,30 +47,46 @@ document.addEventListener('DOMContentLoaded', function() {
       // 하루에 기본으로 보여지는 이벤트 개수는 최대 2 (3미만)
       eventLimit: 3, 
           // allow "more" link when too many events
-      eventColor: '#ed4c4a88',
+      eventColor: '#ed4c4ad5',
       // 이벤트 클릭했을 때 실행할 액션
       eventClick: function(info) {
-         /*info.jsEvent.preventDefault();
-         
-         if(info.event.url) {
-            window.open(info.event.url);
-         }*/
-         console.log(info);
-         
-         var member = [{'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user01'},
-                  {'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user02'}];
-         
-         console.log(member);
-         var showView = showDetail(info.event, member);
-         showView.attr('tabindex', -1).focus();
-      }    
+
+    	  console.log(info);
+          var eno = info.event.classNames[info.event.classNames.length-1].split('_')[1];
           
+          if (!detailViewList.includes(eno)) {
+         	 
+   	         $.ajax({
+   	        	 url: 'showDetail.ij?eno=' + eno,
+   	        	 type: 'get',
+   	        	 dataType: 'json',
+   	        	 success: function(res) {
+   	        		 var member = [{'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user01'},
+   	        			 {'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user02'}];
+   	        		 console.log(member);
+
+   	        		 var showView = showDetail(res, member);
+   	        		 $('div>.detailView_'+eno).attr('tabindex', -1).focus();
+   	        		 $('div>.detailView_'+eno).removeAttr('tabindex');
+   	        	 },
+   	        	 error: function(err) {
+   	        		 console.log(err);
+   	        	 }
+   	         });
+          }
+          
+          console.log("focus호출");
+          $('div>.detailView_'+eno).attr('tabindex', -1).focus();
+          $('div>.detailView_'+eno).removeAttr('tabindex');
+       }   
    });
 
    assignEvent(calendar.getDate().getMonth());
    
    // 달력 렌더링(화면에 출력)
    calendar.render();
+   
+   attendEventsList(calendar.getDate());
    
    // 다음달, 이전달 버튼을 클릭했을 때 해당하는 이벤트 표시하기
    $(".fc-button").click(function() {
@@ -81,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 이벤트 리스트를 달력에 추가
             $.each(data, function(i, v) {
-               var event =   {title: v.eTitle, start: v.eStart, end: v.eEnd, address: '서울시 중구'}; 
+               var event =   {title: v.eTitle, start: v.eStart, end: v.eEnd, classNames: 'showDetail_'+v.eno}; 
                calendar.addEvent(event);
                console.log("event: " + event);
             });
@@ -93,17 +129,39 @@ document.addEventListener('DOMContentLoaded', function() {
       //return events;
    }
    
-   
-   var detailViewNum = 0;
+   var attendEventsList = [];
+   // 회원 참석 모임 리스트 
+   function attendEventsList(dateInfo) {
+	   var memberId = '${member.memberId}';
+//	   var date = moment(dateInfo).format('YYYY-MM-DD hh:mm:ss.s');
+	   var date = moment(dateInfo).format('YYYY-MM');
+	   console.log(date);
+	   
+	   $.ajax({
+		  url: 'attendEventsList.ij',
+		  data: {date: date, memberId: memberId, gno: 0},
+		  type: 'get',
+		  dataType: 'json',
+		  success: function(res) {
+			  console.log("result : " + JSON.stringify(res));
+			  attendEventsList = res;
+		  },
+		  error: function(err) {
+			  console.log(err);
+		  }
+	   
+	   });
+   }
    
    function showDetail(event, member) {
       console.log("show detail 시작");
-      detailViewNum++;
       // 최종 생성 요소 추가할 부분
+      
+      detailViewList.push(String(event.eno));
       var detailWrapperCol = $(".detailWrapper>div:nth-child(1)");
       
       var $eventDetail = $('<div>');
-      $eventDetail.addClass('row eventDetail detailView' + detailViewNum);
+      $eventDetail.addClass('row eventDetail detailView_' + event.eno);
       
       var $eventDetailCol = $('<div>');
       $eventDetailCol.addClass('col-md-12');
@@ -113,19 +171,21 @@ document.addEventListener('DOMContentLoaded', function() {
       $eventTitle.addClass('row eventTitle');
       
       var $eventTitleCol1 = $('<div>');
-      $eventTitleCol1.addClass('col-md-11');
+      $eventTitleCol1.addClass('col-md-10');
       
       var $eventLabelTitle = $('<span>');
-      $eventLabelTitle.addClass('eventLabel').append(event.title);
+      $eventLabelTitle.addClass('eventLabel').append(event.eTitle);
       $eventTitleCol1.append($eventLabelTitle);
       
       var $eventClose = $('<div>');
-      $eventClose.addClass('col-md-1 eventClose');
+      $eventClose.addClass('col-md-2 eventClose');
       var $eventLabelClose = $('<span>');
       $eventLabelClose.addClass('eventLabel');
       var $closeImg = $('<img>');
-      $closeImg.addClass('closeBtn detailView' + detailViewNum).attr('alt', '닫기').attr('src', 'resources/images/clear.png');
-      $eventLabelClose.append($closeImg);
+      $closeImg.addClass('closeBtn detailView_' + event.eno).attr('alt', '닫기').attr('src', 'resources/images/close.png');
+      var $checkImg = $('<img>');
+      $checkImg.addClass('checkBtn detailView_' + event.eno).attr('alt', '참석').attr('src', 'resources/images/check.jpg');
+      $eventLabelClose.append($closeImg).append($checkImg);
       $eventClose.append($eventLabelClose);
       $eventTitle.append($eventTitleCol1).append($eventClose);
       
@@ -143,10 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       var $eventStartEnd = $('<div>');
       var $eventStart = $('<span>');
-      $eventStart.addClass('eventStart').append(event.start);
+      $eventStart.addClass('eventStart').append(event.eStart);
 
       var $eventEnd = $('<span>');
-      $eventEnd.addClass('eventEnd').append(event.end);
+      $eventEnd.addClass('eventEnd').append(event.eEnd);
       $eventStartEnd.append($eventStart).append(' - ').append($eventEnd);
       
       $eventDay.append($eventLabelDay).append($eventStartEnd);
@@ -170,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
       $eventLabelContent.addClass('badge badge-default eventLabel').append('내용');
       var $textarea = $('<textarea>');
       $textarea.attr('readonly');
-      $textarea.attr('value', event.content);
+      $textarea.append(event.eContent);
       
       $eventContent.append($eventLabelContent).append($textarea);
       
@@ -192,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
          var $memberRow = $('<div>');
          $memberRow.addClass('row');
 
-         
          for(var j = 0; j < 4; j++) {
             var pos = i * 4 + j;
             if(pos >= member.length) {
@@ -220,20 +279,47 @@ document.addEventListener('DOMContentLoaded', function() {
       $eventDetail.append($eventDetailCol);
       detailWrapperCol.append($eventDetail);
       
-      return $eventDetail;
    }
    
-   
-   $(document).on('click', '.closeBtn', function(event) {
-      var className = event.target.className.split(' ')[1];
-      console.log(className);
-      
-      $('.'+className).animate({opacity: 0});
-      
-      setTimeout(function() {
-         $('.eventDetail:has('+className+')').remove();
-      }, 400);
+   // eventDetailView에서 체크버튼 누르면 member_event table에 데이터 삽입.
+   $(document).on('click', '.checkBtn', function(event) {
+	   var eno = Number(event.target.className.split(' ')[1].split('_')[1]);
+	   console.log("eno: " + eno);
+//	   var memberId = ${member.memberId};
+	   console.log("리스트 : " + attendEventsList);
+	   console.log("포함: " + attendEventsList.includes(eno));
+	   if(attendEventsList.includes(eno)) {
+		   console.log("이미 참석버튼 누름");
+		   return;
+	   }
+	   var memberId = 'admin';
+	   $.ajax({
+		  url: 'attendEvent.ij',
+		  data: {eno: eno, memberId: memberId},
+		  type: 'post',
+		  success: function(res) {
+			  console.log(res);
+		  },
+		  error: function(err) {
+			  console.log(err);
+		  }
+	   });
+	   console.log("참석되었음");
    });
+   
+   
+   // eventDetailView에서 닫기버튼 누르면 해당요소 삭제
+	$(document).on('click', '.closeBtn', function(event) {
+		var className = event.target.className.split(' ')[1];
+      
+		$('.'+className).animate({opacity: 0});
+      
+		setTimeout(function() {
+			$('.eventDetail:has(.'+className+')').remove();
+		}, 400);
+      
+		detailViewList.pop(className.split('_')[1]);
+	});
 });   
 
 
@@ -286,10 +372,10 @@ $(function() {
    });  */
    
    // 이벤트 등록 폼의 제출버튼이나 취소버튼이 눌릴 때 폼의 데이터를 초기화하고 폼을 닫는다.
-   function closeEventForm() {
-      $("form[name=eventForm]")[0].reset();
-      $('.eventDay input').val(defaultTime);
-      $("#addEventForm").modal('hide');
-   }
+	function closeEventForm() {
+	   $("form[name=eventForm]")[0].reset();
+	   $('.eventDay input').val(defaultTime);
+	   $("#addEventForm").modal('hide');
+	}
 
 });
