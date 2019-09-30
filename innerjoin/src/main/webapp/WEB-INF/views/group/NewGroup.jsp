@@ -243,7 +243,7 @@
                             </div>
                             <div class="div2">
                                 <select id="pricesel" name="pricesel">
-                                    <option>참가비</option>
+                                       <option>참가비</option>
                                     <option>협의 후 결정</option>
                                     <option>직접 입력</option>
                                 </select>
