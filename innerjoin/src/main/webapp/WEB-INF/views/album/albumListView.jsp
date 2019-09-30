@@ -32,14 +32,12 @@
 			height:100%;
 		}
 		.footer{
+		
+			padding-top:50px;
 			width:100%;
 			
 		}
-		.footer *{
-			margin:0;
-			width:100%;
-			height:100%;
-		}
+
 		.footer img{
 			max-width:100%;
 			max-height:100%;
@@ -47,7 +45,7 @@
 			min-height:50px;
 			cursor:pointer;
 			padding:0;
-			margin:0;
+			margin:auto;
 		}
 		.header{
 			width:100%;
@@ -72,6 +70,7 @@
 		.preview-box img{
 			max-width:100%;
 			max-height:100%;
+			cursor:pointer;
 		}
 		.img-box{
 			width:100%;
@@ -119,14 +118,23 @@
 					</div>
 				</div>
 				<div class="row footer">
-					<div class="col-md-11">
+					<div class="col-md-11" style="min-width:50px; min-height:50px;">
 					</div>
 					<div class="col-md-1" style="width:50px; height:50px;">
-						<img src="${contextPath}/resources/images/upload-button.png">
+						<img src="resources/images/upload-button.png">
 					</div>
 				</div>
-		<!-- 	</div>
+		<!-- </div>
 		</div> -->
 	</div>
+	<script>
+		$(".footer img").click(function(){
+			location.href="addAlbumForm.ij";
+		});
+		
+		$(".section img").click(function(){
+			location.href="albumDetailView.ij";
+		});
+	</script>
 </body>
 </html>
