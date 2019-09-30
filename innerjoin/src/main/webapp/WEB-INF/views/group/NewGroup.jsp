@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	
+</style>
 </head>
 <body>
 	<div class="content">
@@ -223,7 +226,7 @@
 							<label>모임 소개</label>
 						</div>
 						<div class="div2">
-							<textarea rows="40" cols="11"/>
+							<textarea rows="11" cols="40"></textarea>
 						</div>
 					</div>
 					<div class="row">
@@ -231,7 +234,8 @@
 							<label>대표 사진</label>
 						</div>
 						<div class="div2">
-							<textarea rows="40" cols="11"/>
+							<img id="titleImg" style="max-width: 100%">
+							<input type="file" id="imgUpload">
 						</div>
 					</div>
 					<div class="row">
