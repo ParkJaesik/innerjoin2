@@ -16,7 +16,8 @@
 		}
 		.wrapper{
 			max-width: 1020px;
-			max-height: 850px;
+			min-width:1020px;
+			min-height: 850px;
 			margin:auto;
 		}
 		.mid_wrapper{
