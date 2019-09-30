@@ -112,7 +112,7 @@
 						<script>
 							function goAlbum(){
 								
-								location.href="addAlbumForm.ij";
+								location.href="albumListView.ij";
 							} 
 							 
 						</script> 
@@ -364,11 +364,13 @@
 
         <button id="button" class="btn btn-warning" >click!!</button>
 
+		<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
         <script>
             $('.carousel').carousel({
                 interval: false
             });
         </script>
+
 
     </body>
 </html>
