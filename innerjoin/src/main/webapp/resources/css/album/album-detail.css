@@ -6,8 +6,13 @@
 	margin: auto;
 }
 
+.row{
+	margin-left:0 !important;
+	margin-right:0 !important;
+}
+
 .al-wrapper * {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	margin: auto;
 }
 
@@ -21,9 +26,11 @@
 }
 
 .photo {
+
 	max-width: 100%;
 	min-height: 500px;
-}
+ 
+ }
 
 .al-photo {
 	/* padding-top: 130px; */
@@ -42,13 +49,16 @@
 }
 
 .al-photo img {
-	min-width:60%;
-	max-width:90%;
+	min-width:80%;
+	max-width:100%;
 	min-height: 100%;
+	border-radius:10px;
 	display: block;
 	margin: 0px auto;
 	cursor: pointer;
 }
+
+
 
 .re-txtarea {
 	width: 100%;
@@ -58,21 +68,19 @@
 
 .re-txtarea textarea {
 	/* margin-top: 50px; */
-	margin: auto;
 	border-radius: 5px;
 }
 
 .re-submit-btn {
 	max-width: 100%;
 	max-height: 100%;
-	padding: 0;
 	/* margin: auto; */
+	margin-right:50px !important;
 }
 
 .re-submit-btn button {
 	width: 80px;
 	height: 40px;
-	margin-right: 0;
 	margin-top:10px;
 	margin-bottom:10px;
 	/* right:0; */
@@ -100,6 +108,21 @@
 	width: 100%;
 }
 
+.re-info{
+	font-weight:500;
+	margin:auto;
+}
+
+.re-info img{
+	max-width:40%;
+	max-height:40%;
+	cursor:pointer;
+}
+.re-content textarea{
+	border:none;
+	
+}
+
 /* 
             
             /* The Modal (background) */
@@ -119,17 +142,18 @@
 /* Modal Content/Box */
 .modal-content {
 	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
+	margin: 10% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 60%; /* Could be more or less, depending on screen size */
+	min-width: 80%; /* Could be more or less, depending on screen size */
 }
 /* The Close Button */
 .close {
 	color: #aaa;
-	float: right;
-	font-size: 28px;
+	float:right;
+	font-size: 30px !important;
 	font-weight: bold;
+	text-align:right;
 }
 
 .close:hover, .close:focus {
@@ -139,8 +163,8 @@
 }
 
 .modal-img-wrapper {
-	width: 100%;
-	height: 80%;
+	max-width: 100%;
+	height: 100%;
 	overflow: hidden;
 }
 
