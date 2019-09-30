@@ -16,7 +16,7 @@
 		}
 		.wrapper{
 			max-width: 1020px;
-			height: 850px;
+			max-height: 850px;
 			margin:auto;
 		}
 		.mid_wrapper{
@@ -25,7 +25,7 @@
 		}
 		.section{
 			width:100%;
-			height:80%;
+			max-height:80%;
 		}
 		.section *{
 			width:100%;
@@ -33,7 +33,6 @@
 		}
 		.footer{
 			width:100%;
-			height: 8%;
 			
 		}
 		.footer *{
@@ -44,7 +43,11 @@
 		.footer img{
 			max-width:100%;
 			max-height:100%;
+			min-width:50px;
+			min-height:50px;
 			cursor:pointer;
+			padding:0;
+			margin:0;
 		}
 		.header{
 			width:100%;
@@ -118,8 +121,8 @@
 				<div class="row footer">
 					<div class="col-md-11">
 					</div>
-					<div class="col-md-1">
-						<img src="">
+					<div class="col-md-1" style="width:50px; height:50px;">
+						<img src="${contextPath}/resources/images/upload-button.png">
 					</div>
 				</div>
 		<!-- 	</div>

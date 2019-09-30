@@ -14,11 +14,13 @@
 	
 	<typeAliases>
 		<typeAlias type="com.best.innerjoin.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.best.innerjoin.board.model.vo.Board" alias="Board"/>
 	</typeAliases>
 
 	
 	<!-- mapper 파일 등록 부분 -->
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
  	</mappers>
 </configuration>
