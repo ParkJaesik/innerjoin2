@@ -10,12 +10,12 @@ import com.best.innerjoin.event.model.vo.Event;
 @Controller
 public class EventController {
 
-	@RequestMapping("calendar.kh")
+	@RequestMapping("calendar.ij")
 	public String calendarView() {
 		return "event/calendar";
 	}
 	
-	@RequestMapping("addEvent.kh")
+	@RequestMapping("addEvent.ij")
 	public String addEvent(Event event) {
 		
 		
