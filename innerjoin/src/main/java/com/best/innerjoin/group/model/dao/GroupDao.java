@@ -5,13 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.group.model.vo.Group;
 
-@Repository("gaDao")
+@Repository("gDao")
 public class GroupDao {
 
 	private SqlSessionTemplate sqlSession;
 	public int insertGroup(Group group) {
 		
-		return sqlSession.insert("");
+		return sqlSession.insert("groupMapper.insertGroup", group);
 	}
 
 }
