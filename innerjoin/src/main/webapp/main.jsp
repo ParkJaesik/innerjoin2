@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lnag = "ko">
     <head>
@@ -70,10 +70,11 @@
 
     </head>
     <body>
-		
+
+		<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12 nav_area navbar-dark bg-warning">
                             <ul class="nav">
@@ -96,7 +97,9 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    
+                    
                     <div class="row">
                         <div class="col-md-12 info_area" >
                         <c:if test="${ empty sessionScope.loginUser }">
@@ -104,6 +107,8 @@
                         </c:if>
                         <c:if test="${ !empty sessionScope.loginUser }">
                         	<a href="logout.ij">로그아웃</a>
+                        	<br>
+                        	<a href="myGroupForm.ij">마이페이지</a>
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>
                         
@@ -112,7 +117,7 @@
 						<script>
 							function goAlbum(){
 								
-								location.href="addAlbumForm.ij";
+								location.href="albumListView.ij";
 							} 
 							 
 						</script> 
@@ -364,11 +369,13 @@
 
         <button id="button" class="btn btn-warning" >click!!</button>
 
+		<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
         <script>
             $('.carousel').carousel({
                 interval: false
             });
         </script>
+
 
     </body>
 </html>

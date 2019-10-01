@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="resources/css/album/album-detail.css"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" href="resources/css/album/album-detail.css"/>
 </head>
 <body>
         <div class="container-fluid al-wrapper">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-5 al-list">
                     <div style="width: 50px; height: 50px; overflow: hidden">
-                        <img src="resources/images/list.png">
+                        <img src="resources/images/album/list.png">
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     <div class="col-md-12">
                         <div class="row re-input">
                             <div class="col-md-12 re-txtarea">
-                                <textarea rows="3" cols="125" placeholder="comment..."></textarea>
+                                <textarea rows="3" cols="128" placeholder="comment..."></textarea>
                             </div>
                             <div class="col-md-1 re-submit-btn">
                                 <button class="submit-btn">submit</button>
@@ -100,15 +100,16 @@
                                         2019-09-24, 16:39 pm
                                     </div>
                                     <div class="col-md-1">
-                                        <a>수정</a>
+                                        <img src="resources/images/album/edit.png">
                                     </div>
                                     <div class="col-md-1">
-                                        <a>삭제</a>
+                                        <img src="resources/images/album/delete.png">
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="row re-content">
                                     <div class="col-md-12">
-                                        	어쩌고저쩌공ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ~~~~~~~~~~~~~~~
+                                        <textarea rows="3" cols="128" readonly>dfdsfdhaksehfuiwehihhefiu</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -127,13 +128,12 @@
 
            <!-- The Modal -->
         <div id="myModal" class="modal">
- 
             <!-- Modal content -->
             <div class="modal-content">
-              <span class="close">&times;</span>                                                               
-              <div class="modal-img-wrapper">
-                <img>
-              </div>
+            	<span class="close">&times;</span>  
+              	<div class="modal-img-wrapper">
+                	<img>
+              	</div>
             </div>
        
         </div>
@@ -157,9 +157,9 @@
             });
 
             // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
+            $(".modal-content img, .close").click( function() {
                 modal.style.display = "none";
-            }
+            })
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function(event) {
