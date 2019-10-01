@@ -15,7 +15,7 @@ public class Group { // group VO
 	private String groupRenameFileName;
 	private Date groupEnrollDate;
 	private int localCode;
-	private int groupStatusName;
+	private int groupStatusName; 
 	private int groupCategoryCode;
 	private int groupReptCount;
 	
