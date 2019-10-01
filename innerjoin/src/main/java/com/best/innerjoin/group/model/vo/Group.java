@@ -18,6 +18,7 @@ public class Group { // group VO
 	private int gReptCount;
 	private String gOriginFileName;
 	private String gRenameFileName;
+
 	
 	public Group() {
 		// TODO Auto-generated constructor stub

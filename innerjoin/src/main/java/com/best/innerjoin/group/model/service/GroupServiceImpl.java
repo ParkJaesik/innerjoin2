@@ -46,6 +46,7 @@ public class GroupServiceImpl implements GroupService{
 		
 		
 		return result ;
+
 	}
 
 	// 파일 저장 메소드
