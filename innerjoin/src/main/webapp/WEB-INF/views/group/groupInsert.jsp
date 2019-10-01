@@ -58,7 +58,7 @@
 <body>
 	<div class="content">
             <div class="content-wrap">
-                <form action="">
+                <form action="ginsert.ij" method="post" enctype="multipart/form-data">
                     <div class="btn active" style="width: 900px; height:50px; background-color: purple;"></div>
                     <div class="gWrap">
                         <div class="row">
@@ -170,7 +170,7 @@
                             </div>
                             <div class="div2">
                                 <img id="titleImg" style="max-width: 100%">
-                                <input type="file" id="imgUpload">
+                                <input type="file" name="uploadFile">
                             </div>
                         </div>
                         <div class="row">
