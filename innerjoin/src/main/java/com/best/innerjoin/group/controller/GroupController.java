@@ -22,7 +22,15 @@ public class GroupController {
 	public String groupInsert(Group group, HttpServletRequest request, MultipartFile uploadFile, Model model) {
 		
 		int result = gService.insertGroup(group, uploadFile, request);
-		return null;
+		
+		String path= null;
+		if(result>0) {
+			path="redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg", "모임 생성 실패");
+			path = "common/errorPage";
+		}
+		return path;
 		
 	}
 	

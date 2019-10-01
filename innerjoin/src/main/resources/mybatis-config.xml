@@ -16,7 +16,7 @@
 		<typeAlias type="com.best.innerjoin.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.best.innerjoin.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.best.innerjoin.event.model.vo.Event" alias="Event"/>
-		
+		<typeAlias type="com.best.innerjoin.group.model.vo.Group" alias="Group"/>		
 	</typeAliases>
 	
 	<!-- mapper 파일 등록 부분 -->
@@ -24,7 +24,7 @@
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/event-mapper.xml"/>
-		<mapper resource="mappers/event-mapper.xml"/>
+		<mapper resource="mappers/group-mapper.xml"/>
  	</mappers>
  	
 </configuration>
