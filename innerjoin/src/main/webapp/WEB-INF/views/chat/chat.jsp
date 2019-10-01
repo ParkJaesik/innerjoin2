@@ -17,7 +17,8 @@
 <body>
 	<!-- 로그인한 상태일 경우와 비로그인 상태일 경우의 chat_id설정 -->
     <c:if test="${(loginUser.memberName ne '') and !(empty loginUser.memberName)}">
-        <input type="hidden" value='${loginUser.memberName }' id='chat_id' />
+        <input type="hidden" value='${loginUser.memberName }' id='chat_nick' />
+        <input type="hidden" value='${loginUser.memberId }' id='chat_id' />
     </c:if>
     <c:if test="${(loginUser.memberName eq '') or (empty loginUser.memberName)}">
         <input type="hidden" value='<%=session.getId().substring(0, 6)%>'
@@ -51,6 +52,8 @@
 </script>
 <script type="text/javascript">
     var inputMessage = document.getElementById('inputMessage');
+    var loginUserName = "${loginUser.memberName }";
+    var loginUserId = "${loginUser.memberId }";
     
     function send() {
         if (inputMessage.value == "") {
@@ -58,7 +61,9 @@
             $("#messageWindow").html($("#messageWindow").html()
                 + "<p class='chat_content'>나 : " + inputMessage.value + "</p>");
         }
-        socket.send($("#chat_id").val() + "|" + inputMessage.value);
+        socket.send("chat,"+loginUserId+","+loginUserName+","+inputMessage.value );
+        
+        //socket.send($("#chat_nick").val() + "|" + inputMessage.value);
         inputMessage.value = "";
     }
     

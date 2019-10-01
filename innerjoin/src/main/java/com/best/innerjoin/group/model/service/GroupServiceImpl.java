@@ -36,7 +36,7 @@ public class GroupServiceImpl implements GroupService{
 		int result = gaDao.insertGroup(group);
 		
 		
-		return ;
+		return result;
 	}
 
 
