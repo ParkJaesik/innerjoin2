@@ -25,7 +25,7 @@ public class GroupController {
 		
 		String path= null;
 		if(result>0) {
-			path="redirect:myGroupForm.ij";
+			path="redirect:myPageForm.ij";
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");
 			path = "common/errorPage";
