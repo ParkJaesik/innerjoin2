@@ -120,7 +120,6 @@
 								location.href="albumListView.ij";
 							} 
 							 
-						</script> 
                         </div>
                     </div>
 
