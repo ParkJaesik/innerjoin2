@@ -100,7 +100,7 @@
                                     <option>시</option>
                                     <option>서울특별시</option>
                                 </select>
-                                <select id="gusel" name="gusel">
+                                <select id="guSel" name="guSel">
                                     <option value="">구</option>
                                     <option value="">강남구</option>
                                     <option value="">강동구</option>
@@ -175,7 +175,7 @@
                         </div>
                         <div class="row">
                             <div class="button-wrap">
-                                <button type="button" id="cancel">취소</button>
+                                <button type="reset" id="cancel">취소</button>
                                 <button type="submit" id="submit">등록</button>
                             </div>
                         </div>
