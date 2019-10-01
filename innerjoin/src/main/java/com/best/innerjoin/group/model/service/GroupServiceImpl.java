@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.dao.GroupDao;
+import com.best.innerjoin.group.model.exception.GroupException;
 import com.best.innerjoin.group.model.vo.Group;
 
 @Service("gService")
@@ -72,7 +73,7 @@ public class GroupServiceImpl implements GroupService{
 			result = 0;
 			
 		}catch(Exception e) {
-		
+			throw new GroupException("파일 전송 에러");
 			
 		}
 		

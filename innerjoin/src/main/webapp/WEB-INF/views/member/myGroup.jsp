@@ -97,7 +97,7 @@
 				<div class="container">
 					<header class="name-line">
 						<h2 class="detail-name" style="display: inline;"> 내 모임 </h2>
-						<a href="#" class="form-button-submit button icon solid mMenu">모임 생성</a></span>
+						<a href="ginsertForm.ij" class="form-button-submit button icon solid mMenu">모임 생성</a></span>
 					</header>
 								
 

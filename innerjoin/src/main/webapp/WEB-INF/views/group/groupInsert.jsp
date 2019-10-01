@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <style>
     div{
         box-sizing: border-box;
@@ -66,7 +69,7 @@
                                 <label>모임장</label>
                             </div>
                             <div class="div2">
-                                <input type="text" id="userId" name="userId" readonly="readonly" value="#{loginUser.id }">
+                                <input type="text" id="userId" name="userId" readonly value="${loginUser.memberName}">
                             </div>
                         </div>
                         <div class="row">
