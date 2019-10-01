@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(50, 50, 50);
+}
+
+div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.btn {
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.btn:focus {
+	box-shadow: none !important;
+}
+
+#board-container {
+	margin: auto;
+	width: 1000px;
+	height: 100%;
+}
+
+#board-container div {
+	margin: auto;
+}
+
+h1 {
+	margin: 0 0 50px 0;
+	font-weight: bold;
+}
+
+#board-part {
+	width: 100%;
+	height: 650px;
+}
+
+#board-count {
+	width: 900px;
+	height: 25px;
+	text-align: right;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#board-date, #board-writer {
+	width: 900px;
+	height: 35px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#board-date {
+	text-align: right;
+}
+
+#board-writer {
+	text-align: left;
+}
+
+#board-title {
+	width: 900px;
+	height: 55px;
+	border-bottom: 2px solid rgb(190, 190, 190);
+	font-size: 32px;
+	font-weight: bold;
+}
+
+#board-content {
+	margin-top: 50px !important;
+	width: 900px;
+	height: 400px;
+	font-size: 14px;
+	border-top: 2px solid rgb(190, 190, 190);
+	border-bottom: 2px solid rgb(190, 190, 190);
+	overflow: auto;
+}
+
+#attachment-part {
+	width: 100%;
+	height: 25px;
+}
+
+#board-attachment {
+	width: 900px;
+	height: 25px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#button-part {
+	width: 100%;
+	height: 30px;
+}
+
+#board-button {
+	width: 900px;
+	height: 30px;
+	text-align: right;
+}
+
+#board-button button {
+	width: 50px;
+	height: 25px;
+	background-color: rgb(90, 90, 90);
+	font-size: 12px;
+}
+
+#reply-part {
+	margin-top: 50px !important;
+	width: 100%;
+	height: 300px;
+}
+
+#reply-input-part {
+	width: 800px;
+	height: 80px;
+}
+
+#reply-input-part div {
+	float: left;
+}
+
+#reply-input-text {
+	width: 90%;
+	height: 100%;
+}
+
+#text {
+	width: 100%;
+	height: 100%;
+	resize: none;
+	font-size: 14px;
+}
+
+#text:focus {
+	outline: none;
+}
+
+#reply-input-button {
+	width: 10%;
+	height: 100%;
+}
+
+#reply-btn-input {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(90, 90, 90);
+	font-size: 12px;
+}
+
+#reply-count {
+	margin-top: 20px !important;
+	width: 800px;
+	height: 25px;
+}
+
+#reply-view {
+	width: 800px;
+	height: 55px;
+	border-bottom: 2px dotted rgb(190, 190, 190);
+}
+
+#reply-writer {
+	width: 500px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#reply-button {
+	width: 200px;
+	font-size: 13px;
+	text-align: center;
+}
+
+#reply-button a {
+	color: rgb(50, 50, 50);
+}
+
+#reply-content {
+	font-size: 13px;
+}
+
+#reply-date {
+	font-size: 13px;
+	text-align: center;
+}
