@@ -69,6 +69,38 @@ public class MemberController {
 		}
 	}
 	
+	// 비밀번호 찾기 폼으로 가기
+	@RequestMapping("findPwdForm.ij")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
+	
+	
+	// 마이페이지로 이동
+	@RequestMapping("myGroupForm.ij")
+	public String myGroup() {
+		return "member/myGroup";
+	}
+	
+	// 프로필 수정으로 이동
+	@RequestMapping("profileUpdateForm.ij")
+	public String profileUpdateForm() {
+		return "member/profileUpdate";
+	}
+	
+	// 쪽지함으로 이동
+	@RequestMapping("myNoteForm.ij")
+	public String myNoteForm() {
+		return "member/myNote";
+	}
+	
+	// 정보수정으로 이동
+	@RequestMapping("infoUpdateForm.ij")
+	public String infoUpdateForm() {
+		return "member/infoUpdate";
+	}
+	
 
 
 	@RequestMapping("logout.ij")
@@ -83,5 +115,7 @@ public class MemberController {
 		//session.invalidate();
 		return "redirect:/";
 	}
+	
+	
 
 }
