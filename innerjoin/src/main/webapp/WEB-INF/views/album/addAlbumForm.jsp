@@ -4,77 +4,14 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+        <link rel="stylesheet" href="resources/css/album/album-add.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <title>Insert title here</title>
-	<style>
-		.add-wrapper{
-			max-width: 1020px;
-			min-height: 850px;
-		}
- 		.add-wrapper div{
-			margin-top: 10px;
-			margin-bottom:0;
-		} 
-		.float_right{
-			float:right;
-			margin:auto;
-			margin-right:10px;
-		}
-		.preview-box div{
-			width:100%;
-			height:80%;
-			overflow:hidden;
-			margin:auto;
-		}
-		#preview{
-			margin-top: 40px;
-		}
-		.preview-box p{
-			width:100%;
-			height:10%;
-		}
-		#preview img {
-		max-width: 100%;
-		max-height:100%;
-/* 		margin-left:auto;
-		margin-right:auto; */
-		display: block;
-		margin: 0 auto;
-		}
-	
-		#preview *{
-			margin:auto;
-		}
-		#preview p {
-			text-overflow: ellipsis;
-			font-size: 12px;
-			bottom:0;
-			text-align:center;
-		}
-		#preview a {
-			/*  text-overflow: ellipsis;*/
-			height:10%;
-			color:red;
-			float:right;
-		}
-		
-		.preview-box {
-			padding: 5px;
-			border-radius: 10px;
-			margin-right:10px !important;
-			margin-bottom: 10px !important;
-			float:left;
-			width:310px;
-			height:300px;
-			border : 5px solid rgba(255, 0, 0, .5);
-			
-		}
 
-	</style>
 </head>
 <body>
 

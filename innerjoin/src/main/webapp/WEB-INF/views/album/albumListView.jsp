@@ -15,6 +15,7 @@
 </head>
 
 <body>
+ <%-- <jsp:include page="../group/groupMenubar.jsp"/> --%> 
 	<div class="container-fluid wrapper">
 		<!-- <div class="row">
 			<div class="col-md-12 mid_wrapper"> -->
