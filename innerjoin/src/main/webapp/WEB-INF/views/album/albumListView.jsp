@@ -46,11 +46,19 @@
 		<!-- </div>
 		</div> -->
 	</div>
+	
+
+	
 	<script>
-		$(".footer img").click(function(){
-			location.href="addAlbumForm.ij";
-		});
-		
+ 
+        
+        $(".al-list img").click(function(){
+        	location.href="albumListView.ij";
+        });
+        
+        $(".footer img").click(function(){
+        	location.href="addAlbumForm.ij";
+        });
 		$(".section img").click(function(){
 			location.href="albumDetailView.ij";
 		});
