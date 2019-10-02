@@ -3,6 +3,7 @@ package com.best.innerjoin.album.model.vo;
 public class Album {
 
 	private int albumNo;
+	private String albumTitle;
 	private char albumStatus;
 	private String memberId;
 	private int groupNo;
@@ -13,16 +14,21 @@ public class Album {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Album(int albumNo, char albumStatus, String memberId, int groupNo, String albumCreateDate,
+	
+	
+	public Album(int albumNo, String albumTitle, char albumStatus, String memberId, int groupNo, String albumCreateDate,
 			String albumModifyDate) {
 		super();
 		this.albumNo = albumNo;
+		this.albumTitle = albumTitle;
 		this.albumStatus = albumStatus;
 		this.memberId = memberId;
 		this.groupNo = groupNo;
 		this.albumCreateDate = albumCreateDate;
 		this.albumModifyDate = albumModifyDate;
 	}
+
+
 
 	public int getAlbumNo() {
 		return albumNo;
@@ -71,12 +77,28 @@ public class Album {
 	public void setAlbumModifyDate(String albumModifyDate) {
 		this.albumModifyDate = albumModifyDate;
 	}
+	
+
+	public String getAlbumTitle() {
+		return albumTitle;
+	}
+
+
+
+	public void setAlbumTitle(String albumTitle) {
+		this.albumTitle = albumTitle;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Album [albumNo=" + albumNo + ", albumStatus=" + albumStatus + ", memberId=" + memberId + ", groupNo="
-				+ groupNo + ", albumCreateDate=" + albumCreateDate + ", albumModifyDate=" + albumModifyDate + "]";
+		return "Album [albumNo=" + albumNo + ", albumTitle=" + albumTitle + ", albumStatus=" + albumStatus
+				+ ", memberId=" + memberId + ", groupNo=" + groupNo + ", albumCreateDate=" + albumCreateDate
+				+ ", albumModifyDate=" + albumModifyDate + "]";
 	}
-	
+
+
+
 	
 }

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 	<link rel="stylesheet" href="resources/css/album/album-list.css"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,13 +15,16 @@
 </head>
 
 <body>
- <%-- <jsp:include page="../group/groupMenubar.jsp"/> --%> 
+<%@ include file="../group/groupMenubar.jsp" %>
+ <script>
+ 	console.log('gno:'+'${gno}'); 
+ </script>
 	<div class="container-fluid wrapper">
 		<!-- <div class="row">
 			<div class="col-md-12 mid_wrapper"> -->
 				<div class="row header">
 					<div class="col-md-12">
-						<h1>모임이름 - album</h1>
+						<h1>紐⑥엫�씠由� - album</h1>
 					</div>
 				</div>
 				<div class="row section">

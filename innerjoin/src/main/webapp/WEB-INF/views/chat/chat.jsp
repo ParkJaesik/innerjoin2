@@ -59,9 +59,9 @@
         if (inputMessage.value == "") {
         } else {
             $("#messageWindow").html($("#messageWindow").html()
-                + "<p class='chat_content'>나 : " + inputMessage.value + "</p>");
+                + "나 : " + inputMessage.value + "</br>");
         }
-        socket.send("chat,"+loginUserId+","+loginUserName+","+inputMessage.value );
+        socket.send("chat,"+loginUserId+","+loginUserName+","+inputMessage.value);
         
         //socket.send($("#chat_nick").val() + "|" + inputMessage.value);
         inputMessage.value = "";

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.best.innerjoin.event.model.dao.EventDao;
 import com.best.innerjoin.event.model.vo.Event;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Service("eService")
 public class EventServiceImpl implements EventService{
@@ -19,6 +20,7 @@ public class EventServiceImpl implements EventService{
 	
 	@Override
 	public int insertEvent(Event event) {
+		event.seteContent(event.geteContent().replace("\n", "<br>"));
 		return eDao.insertEvent(event);
 	}
 
@@ -45,6 +47,12 @@ public class EventServiceImpl implements EventService{
 		dateGroup.put("date", date);
 		dateGroup.put("gno",  gno);
 		return eDao.groupEventList(dateGroup);
+	}
+
+	@Override
+	public ArrayList<Member> selectMem(String eno) {
+
+		return eDao.selectMem(eno);
 	}
 
 }
