@@ -376,6 +376,8 @@
             });
         </script>
 
+        <button id="groupCalender" class="btn btn-warning" onclick="location.href='calendar.ij'">모임일정</button>
+        <button id="memberCalender" class="btn btn-warning" onclick="location.href='memberCalendar.ij'">개인일정</button>
 
     </body>
 </html>
