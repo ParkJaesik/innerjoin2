@@ -5,13 +5,6 @@
 	color: rgb(50, 50, 50);
 }
 
-div {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	border: 1px solid;
-}
-
 .btn {
 	outline: none;
 	border: none;
@@ -32,6 +25,9 @@ div {
 
 #group-index-container div {
 	margin: auto;
+	padding: 0;
+	box-sizing: border-box;
+	border: 1px solid;
 }
 
 #group-info-container {
