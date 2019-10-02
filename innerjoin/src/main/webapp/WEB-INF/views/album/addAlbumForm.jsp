@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
         <link rel="stylesheet" href="resources/css/album/album-add.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -14,30 +14,34 @@
 
 </head>
 <body>
-
+<%@ include file="../group/groupMenubar.jsp" %>
+<script>
+	console.log('addAlbum groupNo:'+'${groupNo}');
+	console.log('addAlbum memberId:'+'${memberId}');
+</script>  
 	<div class="container-fluid add-wrapper">
 		<!-- <div class="row"> -->
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 align="center">¾Ù¹ü Ãß°¡</h1>
+						<h1 align="center">ì•¨ë²” ì¶”ê°€</h1>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="row">
 							<div id="album_attach" class="col-md-8">
-								<h2 display="inline-block">¾Ù¹üÀÌ¸§</h2>
+								<h2 display="inline-block">ì•¨ë²”ì´ë¦„</h2>
 								<input type="text" class="form-control" name="albumTitle" maxlength="50" required><br>
-								<h2 display="inline-block">»çÁøÃß°¡</h2>
+								<h2 display="inline-block">ì‚¬ì§„ì¶”ê°€</h2>
 								<div class="custom-file">
 									<input id="uploadInputBox" class="custom-file-input"  aria-describedby="inputGroupFileAddon01"  type="file" name="filedata" multiple />	
 									<label class="custom-file-label" for="uploadInputBox">Choose file</label>
 								</div>
 							</div>
 							<div class="col-md-4">
-								<button class="submit float_right btn btn-warning">¾Ù¹üµî·Ï</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">µî·ÏÃë¼Ò</button>
+								<button class="submit float_right btn btn-warning">ì•¨ë²”ë“±ë¡</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">ë“±ë¡ì·¨ì†Œ</button>
 							</div>
 						</div>
 					</div>
@@ -45,7 +49,7 @@
 				<div class="row">
 					<div id="preview" class="col-md-12">
 					</div>
-					<!-- multipart ¾÷·Îµå½Ã ¿µ¿ª -->
+					<!-- multipart ì—…ë¡œë“œì‹œ ì˜ì—­ -->
                 	<form id="uploadForm" action="addPhoto.ij" method="post" style="display: none;" enctype="multipart/form-data"/>
 				</div>
 			</div>
@@ -53,29 +57,29 @@
 	</div>
 	
 	          <script>
-            //ÀÓÀÇÀÇ file object¿µ¿ª
+            //ì„ì˜ì˜ file objectì˜ì—­
             var files = {};
             var previewIndex = 0;
      
-            // image preview ±â´É ±¸Çö
+            // image preview ê¸°ëŠ¥ êµ¬í˜„
             // input = file object[]
 	        function addPreview(input) {
 	            if (input[0].files) {
-	                //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	                //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	                for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 	                    var file = input[0].files[fileIndex];
 	                    if(validation(file.name)) continue;
 	                    setPreviewForm(file);
 	                }
 	            } else
-	                alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	                alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	        }
 	        
 	        function setPreviewForm(file, img){
 	            var reader = new FileReader();
 	            
-	            //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	            //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	            //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	            //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	            reader.onload = function(img) {
 	                var imgNum = previewIndex++;
 	                $("#preview").append(
@@ -83,7 +87,7 @@
 	                        "<div><img class=\"thumbnail\" src=\"" + img.target.result + "\"\/></div>" +
 	                        "<p>" + file.name + "</p>" +
 	                        "<a href=\"#\" value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">" +
-	                        "»èÁ¦" + "</a>"
+	                        "ì‚­ì œ" + "</a>"
 	                        +
 	                        "</div>"
 	                );
@@ -96,16 +100,16 @@
 	            reader.readAsDataURL(file);
 	        }
 
-            //preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦
+            //preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ
             function deletePreview(obj) {
                 var imgNum = obj.attributes['value'].value;
-                console.log("»èÁ¦ÇÏ·Á´Â ¿ä¼Ò")
+                console.log("ì‚­ì œí•˜ë ¤ëŠ” ìš”ì†Œ")
                 console.log(files[imgNum]);
                 
-                console.log("»èÁ¦ Àü files °´Ã¼")
+                console.log("ì‚­ì œ ì „ files ê°ì²´")
 				console.log(files);
                
-                console.log("»èÁ¦ ÈÄ files °´Ã¼")
+                console.log("ì‚­ì œ í›„ files ê°ì²´")
 				delete files[imgNum];	
                 console.log(files);
                 
@@ -128,7 +132,7 @@
                         fileNameExtensionIndex, fileName.length);
                 if (!((fileNameExtension === 'jpg') || (fileNameExtension === 'jpeg')
                         || (fileNameExtension === 'gif') || (fileNameExtension === 'png'))) {
-                    alert('jpg, gif, png È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+                    alert('jpg, gif, png í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
                     return true;
                 } else {
                     return false;
@@ -136,7 +140,7 @@
             }
      
             $(document).ready(function() {
-                //submit µî·Ï. ½ÇÁ¦·Î submit typeÀº ¾Æ´Ï´Ù.
+                //submit ë“±ë¡. ì‹¤ì œë¡œ submit typeì€ ì•„ë‹ˆë‹¤.
                 $('.submit').on('click',function() {                        
                     var form = $('#uploadForm')[0];
                     var formData = new FormData(form);
@@ -148,8 +152,8 @@
                     
                     
                   /* for (var index = 0; index < Object.keys(files).length; index++) {
-                        //formData °ø°£¿¡ files¶ó´Â ÀÌ¸§À¸·Î ÆÄÀÏÀ» Ãß°¡ÇÑ´Ù.
-                        //µ¿ÀÏ¸íÀ¸·Î °è¼Ó Ãß°¡ÇÒ ¼ö ÀÖ´Ù.
+                        //formData ê³µê°„ì— filesë¼ëŠ” ì´ë¦„ìœ¼ë¡œ íŒŒì¼ì„ ì¶”ê°€í•œë‹¤.
+                        //ë™ì¼ëª…ìœ¼ë¡œ ê³„ì† ì¶”ê°€í•  ìˆ˜ ìˆë‹¤.
                         console.log(files[index]);
                         alert(files[index]);
                         formData.append('files',files[index]);
@@ -158,12 +162,13 @@
                   
                   for(var index in files){
                 	  console.log(files[index]);
-                      alert(files[index]);
                       formData.append('files',files[index]);
                   }
                   
       
-                    formData.append("title",title);
+                    formData.append("albumTitle",title);
+                    formData.append("groupNo",parseInt('${groupNo}'));
+                    formData.append("memberId",'${memberId}');
 /* 			        for (var value of formData.get("files")) {
 
                     	  console.log(value);
@@ -173,7 +178,7 @@
 			        console.log(formData.get("title"));
 			        /* console.log(formData.get("files")); */
          
-		              //ajax Åë½ÅÀ¸·Î multipart formÀ» Àü¼ÛÇÑ´Ù.
+		              //ajax í†µì‹ ìœ¼ë¡œ multipart formì„ ì „ì†¡í•œë‹¤.
   	                $.ajax({
 	                    type : 'POST',
 	                    enctype : 'multipart/form-data',
@@ -185,27 +190,27 @@
 	                    dataType : 'JSON',
 	                    data : formData,
 	                    success : function(result) {
-	                        //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ´Ù¾çÇÑ Çàµ¿À» ÇÒ ¼ö ÀÖÀ¸¸ç,
-	                        //¿©±â¼­´Â µ¥ÀÌÅÍ¸¦ Àü¼Û¹Ş¾Ò´Ù¸é ¼ø¼öÇÏ°Ô OK ¸¸À» º¸³»±â·Î ÇÏ¿´´Ù.
-	                        //-1 = Àß¸øµÈ È®ÀåÀÚ ¾÷·Îµå, -2 = ¿ë·®ÃÊ°ú, ±×¿Ü = ¼º°ø(1)
+	                        //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ë‹¤ì–‘í•œ í–‰ë™ì„ í•  ìˆ˜ ìˆìœ¼ë©°,
+	                        //ì—¬ê¸°ì„œëŠ” ë°ì´í„°ë¥¼ ì „ì†¡ë°›ì•˜ë‹¤ë©´ ìˆœìˆ˜í•˜ê²Œ OK ë§Œì„ ë³´ë‚´ê¸°ë¡œ í•˜ì˜€ë‹¤.
+	                        //-1 = ì˜ëª»ëœ í™•ì¥ì ì—…ë¡œë“œ, -2 = ìš©ëŸ‰ì´ˆê³¼, ê·¸ì™¸ = ì„±ê³µ(1)
 	                        if (result === -1) {
-	                            alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-	                            // ÀÌÈÄ µ¿ÀÛ ...
+	                            alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+	                            // ì´í›„ ë™ì‘ ...
 	                        } else if (result === -2) {
-	                            alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-	                            // ÀÌÈÄ µ¿ÀÛ ...
+	                            alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+	                            // ì´í›„ ë™ì‘ ...
 	                        } else {
-	                            alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
-	                            // ÀÌÈÄ µ¿ÀÛ ...
+	                            alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
+	                            // ì´í›„ ë™ì‘ ...
 	                           goList();
 	                        }
 	                    }
-	                    //Àü¼Û½ÇÆĞ¿¡´ëÇÑ ÇÚµé¸µÀº °í·ÁÇÏÁö ¾ÊÀ½
+	                    //ì „ì†¡ì‹¤íŒ¨ì—ëŒ€í•œ í•¸ë“¤ë§ì€ ê³ ë ¤í•˜ì§€ ì•ŠìŒ
 	                });  
                 }); 
-                // <input type=file> ÅÂ±× ±â´É ±¸Çö
+                // <input type=file> íƒœê·¸ ê¸°ëŠ¥ êµ¬í˜„
                 $('#uploadInputBox').change(function() {
-                    addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+                    addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
                 });
             });
             
