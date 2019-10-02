@@ -12,13 +12,18 @@
 		<result property="eMemCount" column="EVENT_MEM_COUNT"/>
 		<result property="eLimit" column="EVENT_LIMIT"/>
 	</resultMap>
+	
+	<resultMap id="eventMemberSet" type="Member">
+		<id property="memberId" column="MEMBER_ID"/>
+		<result property="memberProPath" column="MEMBER_PRO_PATH"/>
+	</resultMap>
 
 
 	<insert id="insertOne" parameterType="Event">
 		INSERT INTO GROUP_EVENT VALUES(
 			SEQ_EID.NEXTVAL, #{eTitle}, #{eContent}, 
 			TO_DATE(#{eStart}, 'YYYY-MM-DD"T"HH24:MI:SS'),
-			TO_DATE(#{eEnd}, 'YYYY-MM-DD"T"HH24:MI:SS'), #{gno}, #{eLimit}
+			TO_DATE(#{eEnd}, 'YYYY-MM-DD"T"HH24:MI:SS'), #{gno}, DEFAULT, #{eLimit}
 		)
 	</insert>
 	
@@ -37,13 +42,20 @@
 	</select>
 	
 	<select id="groupEventList" parameterType="String" resultMap="eventResultSet">
-		SELECT EVENT_NO, EVENT_TITLE, 
-				TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD"T"HH24:MI:SS') EVENT_START_DAY,
-				TO_DATE(EVENT_END_DAY, 'YYYY-MM-DD"T"HH24:MI:SS') EVENT_END_DAY,
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_CONTENT,
+				TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD HH24:MI') EVENT_START_DAY,
+				TO_CHAR(EVENT_END_DAY, 'YYYY-MM-DD HH24:MI') EVENT_END_DAY,
 				EVENT_LIMIT, EVENT_MEM_COUNT 
 		FROM GROUP_EVENT
 		WHERE GROUP_NO = #{gno} 
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
+	</select>
+	
+	<select id="selectMem" parameterType="String" resultMap="eventMemberSet">
+		SELECT MEMBER_ID, MEMBER_PRO_PATH
+		FROM MEMBER
+		JOIN MEMBER_EVENT USING(MEMBER_ID)
+		WHERE EVENT_NO = #{eno}
 	</select>
 </mapper>
