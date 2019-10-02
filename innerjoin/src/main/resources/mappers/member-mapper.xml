@@ -5,7 +5,7 @@
   <!-- type , id 반대로 씀 -->
   
   <!-- 수정본 -->
-  <resultMap type="Member" id="memberResultSet">
+  <resultMap id="memberResultSet"  type="Member">
   	<id property="memberId" column="MEMBER_ID"/>
   	<result property="memberPwd" column="MEMBER_PWD"/>
   	<result property="memberName" column="MEMBER_NAME"/>

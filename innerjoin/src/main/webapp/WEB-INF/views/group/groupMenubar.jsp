@@ -50,7 +50,8 @@
 			</div>
 
 			<div id="group-button">
-				<button type="button" class="btn btn-primary" id="group-btn-manage">모임관리</button>
+				<c:url var="secession" value="rblist.ij"/>
+				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
 				<button type="button" class="btn btn-primary" id="group-btn-join">INNER
 					JOIN하기</button>
 				<button type="button" class="btn btn-primary"

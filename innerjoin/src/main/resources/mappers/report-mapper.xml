@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reportMapper">
+	
+	<!-- 모임 회원 신고 -->
+	<resultMap id="groupMemReportResultSet" type="GroupMemberReport">
+		<id property="rNo" column="MEMBER_REPT_NO"/>
+		<result property="rContent" column="MEMBER_REPT_CONTENT"/>
+		<result property="rCategory" column="MEMBER_REPT_CATEGORY"/>
+		<result property="reportId" column="REPORTER_ID"/>
+		<result property="reportGNo" column="REPORTER_GROUP_NO"/>
+		<result property="responId" column="RESPONDENT_ID"/>
+		<result property="responGNo" column="RESPONDENT_GROUP_NO"/>
+		<result property="rStatus" column="MEMBER_REPT_STATUS"/>
+		<result property="rDate" column="REPORT_DATE"/>
+		<result property="rStatusDate" column="REPT_STATUS_DATE"/>
+	</resultMap>
+	
+	<!-- 모임 회원 신고글 목록 조회 -->
+	<select id="selectbList" resultMap="groupMemReportResultSet">
+		SELECT MEMBER_REPT_NO, REPORTER_ID, RESPONDENT_ID, MEMBER_REPT_CATEGORY, REPORT_DATE
+		FROM GROUP_MEMBER_REPORT
+		ORDER BY MEMBER_REPT_NO DESC
+	</select>
+	
+	<select id="searchBList" parameterType="Search" resultMap="groupMemReportResultSet">
+		<bind name="sv" value="'%'+ _parameter.getSearchText() +'%'"/>
+		
+		SELECT * 
+		FROM groupMemReportResultSet
+		<where>
+			<choose>
+				<when test="searchSel == rept">
+					AND REPORTER_ID LIKE #{sv}
+				</when>
+				<when test="searchSel == resp">
+					AND REPORTER_ID LIKE #{sv}
+				</when>
+				<when test="searchSel == category">
+					AND REPORTER_ID LIKE #{sv}
+				</when>
+				<otherwise>
+					AND (REPORTER_ID LIKE #{sv}
+						OR REPORTER_ID LIKE #{sv}
+						OR REPORTER_ID LIKE #{sv})
+				</otherwise>
+			</choose>
+		</where>
+		
+	</select>
+	
+	
+	
+
+</mapper>
