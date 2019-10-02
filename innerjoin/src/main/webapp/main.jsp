@@ -5,6 +5,7 @@
 <html lnag = "ko">
     <head>
     <meta charset = "UTF-8">
+    
         <title></title>
         
         <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -119,6 +120,14 @@
 								
 								location.href="albumListView.ij";
 							} 
+						</script>
+						
+						<button onclick="goBoard();">게시판</button>
+						<script>
+							function goBoard(){
+								location.href="blist.ij";
+							}
+							
 						</script>
                         </div>
                     </div>

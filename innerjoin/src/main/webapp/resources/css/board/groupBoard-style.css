@@ -5,20 +5,14 @@
 	color: rgb(50, 50, 50);
 }
 
-div {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-.btn {
+#board-container .btn {
 	outline: none;
 	border: none;
 	margin: 0;
 	padding: 0;
 }
 
-.btn:focus {
+#board-container .btn:focus {
 	box-shadow: none !important;
 }
 
@@ -28,9 +22,15 @@ div {
 	height: 100%;
 }
 
-h1 {
-	margin: 0 0 50px 0;
-	font-weight: bold;
+#board-container div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#board-container h1 {
+	margin: 0 0 50px 0 !important;
+	font-weight: bold !important;
 }
 
 #board-part {
@@ -53,7 +53,7 @@ h1 {
 	border-bottom: 2px solid rgb(190, 190, 190);
 }
 
-#board-td-title {
+.board-td-title {
 	padding-left: 30px;
 }
 

@@ -11,13 +11,13 @@ public class Board {
 	private char boardStatus;
 	private int boardCount;
 	private int boardTypeCode;
-	private String memberId;
+	private String boardWriter;
 	private int groupNo;
 	
 	public Board() {}
 
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate, Date boardModifyDate,
-			char boardStatus, int boardCount, int boardTypeCode, String memberId, int groupNo) {
+			char boardStatus, int boardCount, int boardTypeCode, String boardWriter, int groupNo) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -27,7 +27,7 @@ public class Board {
 		this.boardStatus = boardStatus;
 		this.boardCount = boardCount;
 		this.boardTypeCode = boardTypeCode;
-		this.memberId = memberId;
+		this.boardWriter = boardWriter;
 		this.groupNo = groupNo;
 	}
 
@@ -95,12 +95,12 @@ public class Board {
 		this.boardTypeCode = boardTypeCode;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getboardWriter() {
+		return boardWriter;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setboardWriter(String boardWriter) {
+		this.boardWriter = boardWriter;
 	}
 
 	public int getGroupNo() {
@@ -115,7 +115,7 @@ public class Board {
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", boardCreateDate=" + boardCreateDate + ", boardModifyDate=" + boardModifyDate + ", boardStatus="
-				+ boardStatus + ", boardTypeCode=" + boardTypeCode + ", memberId=" + memberId + ", groupNo=" + groupNo
+				+ boardStatus + ", boardTypeCode=" + boardTypeCode + ", boardWriter=" + boardWriter + ", groupNo=" + groupNo
 				+ "]";
 	}
 	

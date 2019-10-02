@@ -24,11 +24,11 @@
 		<div id="board-part">
 			<div id="board-check">
 				<input type="checkbox" name="check" id="check" value="" disabled>
-				<label for="check">공지글</label>
+				<label for="check"></label>
 			</div>
 
 			<div id="board-writer">
-				<span id="writer">박재식</span>
+				<span id="writer"></span>
 			</div>
 
 			<div id="board-title">

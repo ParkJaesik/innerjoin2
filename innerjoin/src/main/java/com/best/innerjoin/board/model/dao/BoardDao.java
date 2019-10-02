@@ -37,4 +37,27 @@ public class BoardDao {
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.boardList", null, rowBounds);
 	}
+
+	/** 게시글 조회수 증가 DAO
+	 * @param boardNo
+	 */
+	public void addBoardCount(int boardNo) {
+		sqlSession.update("boardMapper.addBoardCount", boardNo);
+	}
+
+	/** 게시글 상세 조회 DAO
+	 * @param boardNo
+	 * @return board
+	 */
+	public Board boardDetail(int boardNo) {
+		return sqlSession.selectOne("boardMapper.boardDetail", boardNo);
+	}
+
+	/** 게시글 등록 DAO
+	 * @param board
+	 * @return result
+	 */
+	public int boardInsert(Board board) {
+		return sqlSession.insert("boardMapper.boardInsert", board);
+	}
 }

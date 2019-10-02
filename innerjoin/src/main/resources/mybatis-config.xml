@@ -15,6 +15,7 @@
 	<typeAliases>
 		<typeAlias type="com.best.innerjoin.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.best.innerjoin.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.best.innerjoin.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.best.innerjoin.event.model.vo.Event" alias="Event"/>
 		<typeAlias type="com.best.innerjoin.group.model.vo.Group" alias="Group"/>		
 	</typeAliases>

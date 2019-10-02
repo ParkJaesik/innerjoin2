@@ -168,27 +168,27 @@ h1 {
 	border-bottom: 2px dotted rgb(190, 190, 190);
 }
 
-#reply-writer {
+.reply-writer {
 	width: 500px;
 	font-size: 16px;
 	font-weight: bold;
 }
 
-#reply-button {
+.reply-button {
 	width: 200px;
 	font-size: 13px;
 	text-align: center;
 }
 
-#reply-button a {
+.reply-button a {
 	color: rgb(50, 50, 50);
 }
 
-#reply-content {
+.reply-content {
 	font-size: 13px;
 }
 
-#reply-date {
+.reply-date {
 	font-size: 13px;
 	text-align: center;
 }
