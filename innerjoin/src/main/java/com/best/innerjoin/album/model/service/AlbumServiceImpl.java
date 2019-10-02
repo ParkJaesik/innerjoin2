@@ -103,7 +103,6 @@ public class AlbumServiceImpl implements AlbumService {
 				for(int i = 0; i < photoList.size();i++) {
 					photoResult = aDao.insertPhoto(photoList.get(i));
 					if(photoResult == 1) {
-						System.out.println("앨범 등록 및 사진 등록 성공");
 						for(MultipartFile mf : files) {
 							if(mf.getOriginalFilename().equals(photoList.get(i).getPhotoOriginName())) {
 								photoResult = saveFile(photoList.get(i).getPhotoRename(), mf, request); 
@@ -153,12 +152,10 @@ public class AlbumServiceImpl implements AlbumService {
 			// 파일 저장 성공 여부(성공 1, 실패 0)
 			int result = 0;
 			
-			System.out.println("filePath"+filePath);
 			try {
 				uploadFile.transferTo(new File(filePath));
 				// 업로드 된 파일을 filePath에 지정된 경로  + 파일명으로 저장하겠다.
 				// -> IOException 예외 처리 필요 -> 정상실행으로 간주 하여 rollback이 실행되지 않음.
-				System.out.println("파일 저장 성공!");
 				result = 1;
 			} catch(Exception e) {
 				System.out.println("파일 전송 에러 : " + e.getMessage());
