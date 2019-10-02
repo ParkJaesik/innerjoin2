@@ -114,8 +114,6 @@
                 console.log(files);
                 
                 
-                
-                
                 $("#preview .preview-box[value=" + imgNum + "]").remove();
                 //console.log(files[imgNum-1]);
                 console.log(Object.keys(files).length);
@@ -159,7 +157,15 @@
                         formData.append('files',files[index]);
                     }  */
                   
-                  
+                  if(title.length <= 5){
+                	  alert('제목을 입력해주세요');
+                	  return false;
+                  }
+                    
+                  if(Object.keys(files).length == 0){
+                	  alert('이미지를 업로드 해주세요');
+                	  return false;
+                  }
                   for(var index in files){
                 	  console.log(files[index]);
                       formData.append('files',files[index]);
@@ -202,6 +208,7 @@
 	                        } else {
 	                            alert('이미지 업로드 성공');
 	                            // 이후 동작 ...
+	                            
 	                           goList();
 	                        }
 	                    }
