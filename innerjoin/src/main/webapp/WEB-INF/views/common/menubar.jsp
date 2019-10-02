@@ -44,6 +44,15 @@
 		
 	<!-- </div> -->
 </section>
+
+<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+			<script src="${contextPath}/resources/assets/js/jquery.dropotron.min.js"></script>
+			<script src="${contextPath}/resources/assets/js/browser.min.js"></script>
+			<script src="${contextPath}/resources/assets/js/breakpoints.min.js"></script>
+			<script src="${contextPath}/resources/assets/js/util.js"></script>
+			<script src="${contextPath}/resources/assets/js/main.js"></script>
+
+
 <div id="alarmTable">
 	<div id="alaram">
 				
@@ -104,6 +113,7 @@
     ws.onerror = function(event){console.log("Error :' connection closed");};
 }
 </script>
+
 
 </body>
 </html>

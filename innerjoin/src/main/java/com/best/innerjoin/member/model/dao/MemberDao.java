@@ -17,11 +17,28 @@ public class MemberDao {
 		
 		return sqlSession.selectOne("memberMapper.loginMember",member);
 	}
+	
+//	public Member loginMember(Member member) {
+//		Member loginUser = sqlSession.selectOne("memberMapper.loginMember",member);
+//		return loginUser;
+//	}
 
 
+	// 회원가입
 	public int insertMember(Member member) {
 		
 		return sqlSession.insert("memberMapper.insertMember",member);
+	}
+
+	// email 중복 체크
+	public int checkIdDup(String id) {
+		return sqlSession.selectOne("memberMapper.checkIdDup", id);
+	}
+
+	
+	// 닉네임 중복 체크
+	public int checkNameDup(String name) {
+		return sqlSession.selectOne("memberMapper.checkNameDup", name);
 	}
 
 	

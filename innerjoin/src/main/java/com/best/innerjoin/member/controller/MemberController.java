@@ -1,5 +1,6 @@
 package com.best.innerjoin.member.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -67,6 +69,24 @@ public class MemberController {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
+	}
+	
+	// 이메일  중복 검사
+	@RequestMapping(value="dupId.ij", method=RequestMethod.POST)
+	@ResponseBody
+	public String DuplicateIdCheck(String id) {
+		System.out.println(id);
+		boolean isUsable = mService.checkIdDup(id) == 0 ? true : false;
+		System.out.println(isUsable);
+		return isUsable+"";
+	}
+	
+	// 닉네임 중복검사
+	@RequestMapping(value="dupName.ij", method=RequestMethod.POST)
+	@ResponseBody
+	public String DuplicateNameCheck(String name) {
+		boolean isUsable = mService.checkNameDup(name) == 0 ? true : false;
+		return isUsable+"";
 	}
 	
 	// 비밀번호 찾기 폼으로 가기

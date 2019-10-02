@@ -27,13 +27,43 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.loginMember(member);
 	}
 	
-	@Override
-//	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class)
-	public int insertMember(Member member) {
-//		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+//	@Override
+//	public Member loginMember(Member member) {
+//		Member loginUser = mDao.loginMember(member);
 //		
-//		member.setMemberPwd(encPwd);
+//		if(!bCryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
+//			loginUser = null;
+//		}
+//		return loginUser;
+//	}
+	
+	
+	@Override
+
+	public int insertMember(Member member) {
+
 		
 		return mDao.insertMember(member);
+	}
+	
+//	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class)
+//	public int insertMember(Member member) {
+//		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+//		return mDao.insertMember(member);
+//	}
+	
+	
+	
+	
+	// email 중복 검사
+	@Override
+	public int checkIdDup(String id) {
+		return mDao.checkIdDup(id);
+	}
+
+	// name 중복 검사
+	@Override
+	public int checkNameDup(String name) {
+		return mDao.checkNameDup(name);
 	}
 }
