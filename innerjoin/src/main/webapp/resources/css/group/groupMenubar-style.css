@@ -5,14 +5,14 @@
 	color: rgb(50, 50, 50);
 }
 
-.btn {
+#group-index-container .btn {
 	outline: none;
 	border: none;
 	margin: 0;
 	padding: 0;
 }
 
-.btn:focus {
+#group-index-container .btn:focus {
 	box-shadow: none !important;
 }
 
