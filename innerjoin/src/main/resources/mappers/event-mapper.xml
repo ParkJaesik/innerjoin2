@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="eventMapper">
+
+	<insert id="insertOne" parameterType="Event">
+		INSERT INTO GROUP_EVENT VALUES(
+			SEQ_EID.NEXTVAL, #{eTitle}, #{eContent}, #{eStart}, #{eEnd}, #{gno}, #{eLimit}
+		)
+	</insert>
+	
+	<insert id="attendOne" parameterType="map">
+		INSERT INTO MEMBER_EVENT VALUES(
+			#{memberId}, #{eno}
+		)
+	</insert>
+	
+	<select id="eventsList" parameterType="map" resultType="_int">
+		SELECT EVENT_NO
+		FROM GROUP_EVENT USING(EVENT_NO)
+		WHERE GNO = #{gno} 
+			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
+			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
+	</select>
+</mapper>

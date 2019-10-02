@@ -117,10 +117,9 @@
 						<script>
 							function goAlbum(){
 								
-								location.href="addAlbumForm.ij";
+								location.href="albumListView.ij";
 							} 
 							 
-						</script> 
                         </div>
                     </div>
 
@@ -368,12 +367,17 @@
         </div>
 
         <button id="button" class="btn btn-warning" >click!!</button>
-
+        
+        <%@ include file="/WEB-INF/views/chat/chat.jsp" %>   <!-- 이후 모임 메인페이지로 이동 -->
+	
+		<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
         <script>
             $('.carousel').carousel({
                 interval: false
             });
         </script>
+        
+
 
     </body>
 </html>

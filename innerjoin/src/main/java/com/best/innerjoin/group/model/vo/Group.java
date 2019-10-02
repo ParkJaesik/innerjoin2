@@ -4,185 +4,169 @@ import java.util.Date;
 
 public class Group { // group VO
 	
-	private int groupNo;
-	private String groupHost;
-	private String groupOpenStatus;
-	private String groupName;
-	private int groupLimit;
-	private String groupInfo;
-	private int groupMemCount;
-	private String groupThumbNailPath;
-	private Date groupEnrollDate;
+	private int gNo;
+	private String gHost;
+	private String gOpenStatus;
+	private String gName;
+	private int gLimit;
+	private String gInfo;
+	private int gMemCount;
+	private Date gEnrollDate;
 	private int localCode;
-	private int groupStatusName;
-	private int groupCategoryCode;
-	private int groupReptCount;
-	
+	private int gStatus;
+	private int gCategoryCode;
+	private int gReptCount;
+	private String gOriginFileName;
+	private String gRenameFileName;
+
 	
 	public Group() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Group(int groupNo, String groupHost, String groupOpenStatus, String groupName, int groupLimit,
-			String groupInfo, int groupMemCount, String groupThumbNailPath, Date groupEnrollDate, int localCode,
-			int groupStatusName, int groupCategoryCode, int groupReptCount) {
+	public Group(int gNo, String gHost, String gOpenStatus, String gName, int gLimit, String gInfo, int gMemCount,
+			Date gEnrollDate, int localCode, int gStatus, int gCategoryCode, int gReptCount, String gOriginFileName,
+			String gRenameFileName) {
 		super();
-		this.groupNo = groupNo;
-		this.groupHost = groupHost;
-		this.groupOpenStatus = groupOpenStatus;
-		this.groupName = groupName;
-		this.groupLimit = groupLimit;
-		this.groupInfo = groupInfo;
-		this.groupMemCount = groupMemCount;
-		this.groupThumbNailPath = groupThumbNailPath;
-		this.groupEnrollDate = groupEnrollDate;
+		this.gNo = gNo;
+		this.gHost = gHost;
+		this.gOpenStatus = gOpenStatus;
+		this.gName = gName;
+		this.gLimit = gLimit;
+		this.gInfo = gInfo;
+		this.gMemCount = gMemCount;
+		this.gEnrollDate = gEnrollDate;
 		this.localCode = localCode;
-		this.groupStatusName = groupStatusName;
-		this.groupCategoryCode = groupCategoryCode;
-		this.groupReptCount = groupReptCount;
+		this.gStatus = gStatus;
+		this.gCategoryCode = gCategoryCode;
+		this.gReptCount = gReptCount;
+		this.gOriginFileName = gOriginFileName;
+		this.gRenameFileName = gRenameFileName;
 	}
 
-
-	public int getGroupNo() {
-		return groupNo;
+	public int getgNo() {
+		return gNo;
 	}
 
-
-	public void setGroupNo(int groupNo) {
-		this.groupNo = groupNo;
+	public void setgNo(int gNo) {
+		this.gNo = gNo;
 	}
 
-
-	public String getGroupHost() {
-		return groupHost;
+	public String getgHost() {
+		return gHost;
 	}
 
-
-	public void setGroupHost(String groupHost) {
-		this.groupHost = groupHost;
+	public void setgHost(String gHost) {
+		this.gHost = gHost;
 	}
 
-
-	public String getGroupOpenStatus() {
-		return groupOpenStatus;
+	public String getgOpenStatus() {
+		return gOpenStatus;
 	}
 
-
-	public void setGroupOpenStatus(String groupOpenStatus) {
-		this.groupOpenStatus = groupOpenStatus;
+	public void setgOpenStatus(String gOpenStatus) {
+		this.gOpenStatus = gOpenStatus;
 	}
 
-
-	public String getGroupName() {
-		return groupName;
+	public String getgName() {
+		return gName;
 	}
 
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setgName(String gName) {
+		this.gName = gName;
 	}
 
-
-	public int getGroupLimit() {
-		return groupLimit;
+	public int getgLimit() {
+		return gLimit;
 	}
 
-
-	public void setGroupLimit(int groupLimit) {
-		this.groupLimit = groupLimit;
+	public void setgLimit(int gLimit) {
+		this.gLimit = gLimit;
 	}
 
-
-	public String getGroupInfo() {
-		return groupInfo;
+	public String getgInfo() {
+		return gInfo;
 	}
 
-
-	public void setGroupInfo(String groupInfo) {
-		this.groupInfo = groupInfo;
+	public void setgInfo(String gInfo) {
+		this.gInfo = gInfo;
 	}
 
-
-	public int getGroupMemCount() {
-		return groupMemCount;
+	public int getgMemCount() {
+		return gMemCount;
 	}
 
-
-	public void setGroupMemCount(int groupMemCount) {
-		this.groupMemCount = groupMemCount;
+	public void setgMemCount(int gMemCount) {
+		this.gMemCount = gMemCount;
 	}
 
-
-	public String getGroupThumbNailPath() {
-		return groupThumbNailPath;
+	public Date getgEnrollDate() {
+		return gEnrollDate;
 	}
 
-
-	public void setGroupThumbNailPath(String groupThumbNailPath) {
-		this.groupThumbNailPath = groupThumbNailPath;
+	public void setgEnrollDate(Date gEnrollDate) {
+		this.gEnrollDate = gEnrollDate;
 	}
-
-
-	public Date getGroupEnrollDate() {
-		return groupEnrollDate;
-	}
-
-
-	public void setGroupEnrollDate(Date groupEnrollDate) {
-		this.groupEnrollDate = groupEnrollDate;
-	}
-
 
 	public int getLocalCode() {
 		return localCode;
 	}
 
-
 	public void setLocalCode(int localCode) {
 		this.localCode = localCode;
 	}
 
-
-	public int getGroupStatusName() {
-		return groupStatusName;
+	public int getgStatus() {
+		return gStatus;
 	}
 
-
-	public void setGroupStatusName(int groupStatusName) {
-		this.groupStatusName = groupStatusName;
+	public void setgStatus(int gStatus) {
+		this.gStatus = gStatus;
 	}
 
-
-	public int getGroupCategoryCode() {
-		return groupCategoryCode;
+	public int getgCategoryCode() {
+		return gCategoryCode;
 	}
 
-
-	public void setGroupCategoryCode(int groupCategoryCode) {
-		this.groupCategoryCode = groupCategoryCode;
+	public void setgCategoryCode(int gCategoryCode) {
+		this.gCategoryCode = gCategoryCode;
 	}
 
-
-	public int getGroupReptCount() {
-		return groupReptCount;
+	public int getgReptCount() {
+		return gReptCount;
 	}
 
-
-	public void setGroupReptCount(int groupReptCount) {
-		this.groupReptCount = groupReptCount;
+	public void setgReptCount(int gReptCount) {
+		this.gReptCount = gReptCount;
 	}
 
+	public String getgOriginFileName() {
+		return gOriginFileName;
+	}
+
+	public void setgOriginFileName(String gOriginFileName) {
+		this.gOriginFileName = gOriginFileName;
+	}
+
+	public String getgRenameFileName() {
+		return gRenameFileName;
+	}
+
+	public void setgRenameFileName(String gRenameFileName) {
+		this.gRenameFileName = gRenameFileName;
+	}
 
 	@Override
 	public String toString() {
-		return "Group [groupNo=" + groupNo + ", groupHost=" + groupHost + ", groupOpenStatus=" + groupOpenStatus
-				+ ", groupName=" + groupName + ", groupLimit=" + groupLimit + ", groupInfo=" + groupInfo
-				+ ", groupMemCount=" + groupMemCount + ", groupThumbNailPath=" + groupThumbNailPath
-				+ ", groupEnrollDate=" + groupEnrollDate + ", localCode=" + localCode + ", groupStatusName="
-				+ groupStatusName + ", groupCategoryCode=" + groupCategoryCode + ", groupReptCount=" + groupReptCount
-				+ "]";
+		return "Group [gNo=" + gNo + ", gHost=" + gHost + ", gOpenStatus=" + gOpenStatus + ", gName=" + gName
+				+ ", gLimit=" + gLimit + ", gInfo=" + gInfo + ", gMemCount=" + gMemCount + ", gEnrollDate="
+				+ gEnrollDate + ", localCode=" + localCode + ", gStatus=" + gStatus + ", gCategoryCode="
+				+ gCategoryCode + ", gReptCount=" + gReptCount + ", gOriginFileName=" + gOriginFileName
+				+ ", gRenameFileName=" + gRenameFileName + "]";
 	}
+
+	
+	
 	
 	
 	

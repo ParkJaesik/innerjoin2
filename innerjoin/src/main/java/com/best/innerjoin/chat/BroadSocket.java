@@ -5,11 +5,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import com.best.innerjoin.member.model.vo.Member;
+
 
 @ServerEndpoint("/broadcasting")
 public class BroadSocket {
@@ -18,6 +22,7 @@ public class BroadSocket {
     
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
+    	
         System.out.println(message);
         synchronized(clients) {
             for(Session client : clients) {
@@ -38,4 +43,6 @@ public class BroadSocket {
     public void onClose(Session session) {
         clients.remove(session);
     }
+    
+    
 }
