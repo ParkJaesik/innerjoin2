@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,7 @@ public class GroupController {
 		
 	}
 	
-	@RequestMapping("ginsert.ij")
+	@RequestMapping(value="ginsert.ij", method=RequestMethod.POST)
 	public String groupInsert(Group group, HttpServletRequest request, MultipartFile uploadFile, Model model) {
 		
 		int result = gService.insertGroup(group, uploadFile, request);
@@ -39,6 +40,8 @@ public class GroupController {
 			path = "common/errorPage";
 		}
 		return path;
+		
+		
 		
 	}
 	
