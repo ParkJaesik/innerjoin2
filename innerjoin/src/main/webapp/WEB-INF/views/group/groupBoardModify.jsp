@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/groupBoardModify-style.css"
+	href="${contextPath}/resources/css/board/groupBoardModify-style.css"
 	type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"

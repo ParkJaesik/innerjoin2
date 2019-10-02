@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/groupBoard-style.css"
+	href="${contextPath}/resources/css/board/groupBoard-style.css"
 	type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
@@ -18,7 +18,7 @@
 <title>Group Board</title>
 </head>
 <body>
-	<c:import url="" />
+	<jsp:include page=""/>
 	<!-- 메뉴바, 모임 메뉴바 import -->
 
 	<div id="board-container">
@@ -33,27 +33,35 @@
 					<td align="center" id="board-th-date">작성일</td>
 					<td align="center" id="board-th-count">조회수</td>
 				</tr>
-
+				
+				<c:forEach var="b" items="${ list }">
 				<tr>
-					<td align="center" id="board-td-no">1</td>
-					<td align="left" id="board-td-title">첫 번째 테스트 글입니다</td>
-					<td align="center" id="board-td-writer">박재식</td>
-					<td align="center" id="board-td-date">2019-09-24</td>
-					<td align="center" id="board-td-count">31</td>
+					<td align="center" id="bo4ard-td-no">${ b.boardNo }</td>
+					<td align="left" id="board-td-title">
+						<c:url var="boardDetail" value="bdetail.ij">
+							<c:param name="boardNo" value="${ b.boardNo }"/>
+							<c:param name="page" value="${ pi.currentPage }"/>
+						</c:url>
+						<a href="boardDetail">${ b.boardTitle }</a>
+					</td>
+					<td align="center" id="board-td-writer">${ b.memberId }</td>
+					<td align="center" id="board-td-date">${ b.boardCreateDate }</td>
+					<td align="center" id="board-td-count">${ b.boardCount }</td>
 				</tr>
+				</c:forEach>
 			</table>
 		</div>
 
 		<div id="button-part">
-			<button type="button" class="btn btn-primary" id="board-btn-write">글쓰기</button>
+			<button onclick="location.href='binsertView.ij';" type="button" class="btn btn-primary" id="board-btn-write">글쓰기</button>
 		</div>
 
 		<div id="pagination-part">
-			<a href=""><</a>&nbsp;
+			<a href="">&lt;</a>&nbsp;
 			<a href="">1</a>&nbsp;
 			<a href="">2</a>&nbsp;
 			<a href="">3</a>&nbsp;
-			<a href="">></a>
+			<a href="">&rt;</a>
 		</div>
 	</div>
 </body>
