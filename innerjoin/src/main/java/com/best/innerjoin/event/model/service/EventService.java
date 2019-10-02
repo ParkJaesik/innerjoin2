@@ -1,5 +1,6 @@
 package com.best.innerjoin.event.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.best.innerjoin.event.model.vo.Event;
@@ -19,10 +20,16 @@ public interface EventService {
 	 */
 	int attendEvent(String eno, String memberId);
 
-	/** 회원 event 목록 Service 
+	/** 회원 event 목록 조회 Service 
 	 * @param memberId
-	 * @return
+	 * @return event list
 	 */
-	List<Integer> attendEventsList(String date, String memberId, int gno); 
+	List<Integer> attendEventList(String date, String memberId, int gno);
+
+	/** 그룹페이지 이벤트 목록 조회 Service
+	 * @param date
+	 * @return event list
+	 */
+	ArrayList<Event> groupEventList(String date, String gno); 
 	
 }

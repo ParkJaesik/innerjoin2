@@ -2,9 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="eventMapper">
 
+	<resultMap id="eventResultSet" type="Event">
+		<id property="eno" column="EVENT_NO"/>
+		<result property="eTitle" column="EVENT_TITLE"/>
+		<result property="eContent" column="EVENT_CONTENT"/>
+		<result property="eStart" column="EVENT_START_DAY"/>
+		<result property="eEnd" column="EVENT_END_DAY"/>
+		<result property="gno" column="GROUP_NO"/>
+		<result property="eMemCount" column="EVENT_MEM_COUNT"/>
+		<result property="eLimit" column="EVENT_LIMIT"/>
+	</resultMap>
+
+
 	<insert id="insertOne" parameterType="Event">
 		INSERT INTO GROUP_EVENT VALUES(
-			SEQ_EID.NEXTVAL, #{eTitle}, #{eContent}, #{eStart}, #{eEnd}, #{gno}, #{eLimit}
+			SEQ_EID.NEXTVAL, #{eTitle}, #{eContent}, 
+			TO_DATE(#{eStart}, 'YYYY-MM-DD"T"HH24:MI:SS'),
+			TO_DATE(#{eEnd}, 'YYYY-MM-DD"T"HH24:MI:SS'), #{gno}, #{eLimit}
 		)
 	</insert>
 	
@@ -14,10 +28,21 @@
 		)
 	</insert>
 	
-	<select id="eventsList" parameterType="map" resultType="_int">
+	<select id="attendEventList" parameterType="map" resultType="_int">
 		SELECT EVENT_NO
 		FROM GROUP_EVENT USING(EVENT_NO)
 		WHERE GNO = #{gno} 
+			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
+			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
+	</select>
+	
+	<select id="groupEventList" parameterType="String" resultMap="eventResultSet">
+		SELECT EVENT_NO, EVENT_TITLE, 
+				TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD"T"HH24:MI:SS') EVENT_START_DAY,
+				TO_DATE(EVENT_END_DAY, 'YYYY-MM-DD"T"HH24:MI:SS') EVENT_END_DAY,
+				EVENT_LIMIT, EVENT_MEM_COUNT 
+		FROM GROUP_EVENT
+		WHERE GROUP_NO = #{gno} 
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
 	</select>

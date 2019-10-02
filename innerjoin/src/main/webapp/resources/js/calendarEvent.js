@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // 하루에 기본으로 보여지는 이벤트 개수는 최대 2 (3미만)
       eventLimit: 3, 
           // allow "more" link when too many events
-      eventColor: '#ed4c4ad5',
-      // 이벤트 클릭했을 때 실행할 액션
+      eventColor: '#ed4c4a66',
+      eventBorderColor: '#ed4c4a00',
+      // 이벤트 클릭했을 때 실행할 액션. 이벤트 상세정보 DB에서 가져와 하단에 div 생성.
       eventClick: function(info) {
 
     	  console.log(info);
@@ -81,26 +82,28 @@ document.addEventListener('DOMContentLoaded', function() {
        }   
    });
 
-   assignEvent(calendar.getDate().getMonth());
+   assignEvent(calendar.getDate());
    
    // 달력 렌더링(화면에 출력)
    calendar.render();
    
-   attendEventsList(calendar.getDate());
+//   console.log("calendar.getDate: " + calendar.getDate());
+   getAttendEventList(calendar.getDate());
    
    // 다음달, 이전달 버튼을 클릭했을 때 해당하는 이벤트 표시하기
    $(".fc-button").click(function() {
       
-      var month = calendar.getDate().getMonth();
+      var date = calendar.getDate();
       
-      assignEvent(month);
+      assignEvent(date);
       
    }); 
    
    // 현재 달력에 표시되는 월에 해당하는 이벤트 등록하기
-   function assignEvent(month) {
+   function assignEvent(date) {
       var events;
-      
+      date = moment(date).format('YYYY-MM');
+      console.log("assignEvent: " + date);
       // 달력에 표시된 이벤트들 지우기
       $.each(calendar.getEvents(), function(i, v) {
          v.remove();
@@ -111,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
          url: "ajaxTest.ij",
          type: "get",
          dataType: "JSON",
-         data: {month: month},
+         data: {date: date, gno: 1},
          success: function(data) {
             console.log(data);
             
@@ -129,22 +132,21 @@ document.addEventListener('DOMContentLoaded', function() {
       //return events;
    }
    
-   var attendEventsList = [];
+   var attendEventList = [];
    // 회원 참석 모임 리스트 
-   function attendEventsList(dateInfo) {
-	   var memberId = '${member.memberId}';
+   function getAttendEventList(dateInfo) {
 //	   var date = moment(dateInfo).format('YYYY-MM-DD hh:mm:ss.s');
 	   var date = moment(dateInfo).format('YYYY-MM');
-	   console.log(date);
-	   
+	   console.log("date: " +date);
+	   var gno = '1';
 	   $.ajax({
-		  url: 'attendEventsList.ij',
-		  data: {date: date, memberId: memberId, gno: 0},
+		  url: 'getAttendEventList.ij',
+		  data: {date: date, gno : gno},
 		  type: 'get',
 		  dataType: 'json',
 		  success: function(res) {
 			  console.log("result : " + JSON.stringify(res));
-			  attendEventsList = res;
+			  attendEventList = res;
 		  },
 		  error: function(err) {
 			  console.log(err);
@@ -333,6 +335,12 @@ $(function() {
       // 폼의 데이터를 쿼리스트링으로 받음.
       var formData = $("form[name=eventForm]").serialize();
       
+      // 이벤트 시작일이 종료일보다 값이 크면 포커스 주고 제출 취소
+      if($("#eStart").val() > $("#eEnd").val()) {
+    	  $("#eEnd").focus();
+    	  return false;
+      }
+      console.log("formData : " + formData);
       $.ajax({
          url: 'addEvent.ij',
          data: formData,
@@ -357,19 +365,6 @@ $(function() {
       closeEventForm();
    });
    
-   /* $(".eventDay input").on("change", function() {
-      console.log("날짜 입력 ");
-      console.log("시작일 : " + $("#eStart").val());
-      if($("#eStart").val() == "" && $("#eEnd").val() != "") {
-         $("#eEnd").val($("#eStart").val());
-         
-      }
-
-      if($("#eStart").val() != "" && $("#eEnd").val() == "") {
-         $("#eStart").val($("#eEnd").val());
-      
-      }
-   });  */
    
    // 이벤트 등록 폼의 제출버튼이나 취소버튼이 눌릴 때 폼의 데이터를 초기화하고 폼을 닫는다.
 	function closeEventForm() {
