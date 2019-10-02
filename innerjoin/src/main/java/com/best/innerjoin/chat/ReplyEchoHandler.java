@@ -48,31 +48,42 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		//protocol : cmd,댓글작성자,게시글작성자,bno(ex : reply,user2,user1,234)
 		
 		String msg = message.getPayload();
-		System.out.println(msg);
-		
 		
 		if(!StringUtils.isEmpty(msg)) {
 			String[] strs = msg.split(",");
 			if(strs != null && strs.length==4) {
 				String cmd = strs[0];
-				String replyWriter = strs[1];
-				String boardWriter = strs[2];
-				String bId =  strs[3];
-				
-				WebSocketSession boardWriterSession =  userSessions.get(boardWriter);
 				
 				
-				 for(WebSocketSession sess:sessions) {
-					  
-					  sess.sendMessage(new TextMessage(senderId + ":" +message.getPayload()));
-					  
-				 }
+				if(cmd.equals("reply")) {
+					
+					String replyWriter = strs[1];
+					String boardWriter = strs[2];
+					String bId =  strs[3];
+					
+					WebSocketSession boardWriterSession =  userSessions.get(boardWriter);
+					//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
+					//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
+					if(boardWriterSession !=null) {
+						TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + "," +
+								"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
+						boardWriterSession.sendMessage(tmpMsg);
+					}
+					
+				}else if(cmd.equals("chat")) {
+					
+					String sender = strs[1];
+					String senderName = strs[2];
+					String inputmsg =  strs[3];
 				
-				
-				if(boardWriterSession !=null) {
-					TextMessage tmpMsg = new TextMessage(replyWriter + " 님이 " +
-							"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
-					boardWriterSession.sendMessage(tmpMsg);
+					TextMessage tmpMsg = new TextMessage("chat,"+senderName + "," + inputmsg);
+					System.out.println("tmpMsg : " + tmpMsg);
+					 
+					for(WebSocketSession sess:sessions) {
+						if(!sess.equals(session)) {
+		                    sess.sendMessage(tmpMsg);
+		                }
+					}
 				}
 			}
 		}
@@ -98,5 +109,9 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		System.out.println("afterConnectionClosed : " + session);
+		
+		String senderId = getId(session);
+		userSessions.remove(senderId);
+		sessions.remove(session);
 	}
 }
