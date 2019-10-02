@@ -20,9 +20,11 @@
 	type="text/css">
 
 <title>Group Menubar</title>
-
 </head>
 <body>
+
+<c:set var="groupNo" value="1"/>
+<c:set var="memberId" value="gp@gmail.com"/>
 	<div id="group-index-container">
 		<div id="group-info-container">
 			<div id="group-thumbnail">

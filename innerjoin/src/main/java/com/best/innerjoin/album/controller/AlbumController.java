@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.album.model.service.AlbumService;
+import com.best.innerjoin.album.model.vo.Album;
 
 @Controller
 public class AlbumController {
@@ -35,10 +36,12 @@ public class AlbumController {
 	 */
 	@ResponseBody
     @RequestMapping(value="addPhoto.ij", method=RequestMethod.POST)
-    public int addPhoto(@RequestParam("files")List<MultipartFile> files,String title) {
+    public int addPhoto(HttpServletRequest request, @RequestParam("files")List<MultipartFile> files,Album album) {
 		
 		System.out.println("==============================");
-		System.out.println("title : " + title);
+		System.out.println("title : " + album.getAlbumTitle());
+		System.out.println("gno : " + album.getGroupNo());
+		System.out.println("memberId : " + album.getMemberId());
 		System.out.println("files : " + files.size());
 	    for (MultipartFile mf : files) {
 	            String originFileName = mf.getOriginalFilename(); // ���� ���� ��
@@ -48,18 +51,17 @@ public class AlbumController {
 	            System.out.println("fileSize : " + fileSize);
 	    }
 	    
-	    int result = aService.multiImageUpload(files,title);
-	    
+		/* int result = aService.multiImageUpload(files,title); */
 	
-	    System.out.println(result);
-		return result;
+	    int result = aService.insertAlbum(request,files,album);
+		return 1;
 	}
 	
 	/** 앨범 리스트 이동 컨트롤러
 	 * @return
 	 */
 	@RequestMapping("albumListView.ij")
-	public String albumListView() {
+	public String albumListView(String gno) {
 		return "album/albumListView";
 	}
 	
