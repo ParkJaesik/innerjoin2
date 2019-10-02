@@ -109,5 +109,5 @@
 
 #group-btn-index, #group-btn-schedule, #group-btn-board,
 	#group-btn-member {
-	margin-right: 120px;
+	margin-right: 120px !important;
 }
