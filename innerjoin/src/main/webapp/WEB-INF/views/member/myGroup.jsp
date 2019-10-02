@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/menubar.css"/>
+
 
 
 <title>마이페이지</title>
@@ -42,55 +40,8 @@
 <div id="page-wrapper">
 
 			<!-- Header -->
-			<section id="header">
-				<div class="container" id="profile" >
-					<nav id="nav">
-						<ul>
-							<a href="#"><img id="ij-logo" src="${contextPath }/resources/images/innerJoin.png"></a>
-							<li class="menu"><a class="icon solid fa-search" href="left-sidebar.html"><span>Search</span></a></li>
-							<li class="menu"><a class="icon solid fa-envelope" href="right-sidebar.html"><span>News</span></a></li>
-                            <li class="menu"><a class="icon solid fa-home" href="index.html"><span>MyPage</span></a></li>
-						</ul>
-					</nav>
-					<div>
-
-						<form action="">
-							<div>
-								
-								<div>
-									<!-- 달력 -->
-									<img class="img-circle" src="images/pic01.jpg" style="border: 1px solid slateblue;">
-								</div>
-
-								<div>자기소개란</div>
-								<ul class="actions">
-									<li><a href="profileUpdateForm.ij" class="button icon solid mMenu">프로필 수정</a></li>
-									<!-- 로그인 회원과 정보 다를 때  -->
-									<li><a href="#" class="button icon solid mMenu">신고하기</a></li>
-								</ul>
-							</div>
-						</form>
 			
-						<div>
-							캘린더
-						</div>
-							
-					</div>
-
-				
-
-				</div>
-			</section>
-			<div class="container">
-				<header>
-					<ul class="sub-menu actions">
-						<li><a href="" class="form-button-submit button icon solid mMenu" >내 모임</a></li>
-						<li><a href="myNoteForm.ij" class="form-button-submit button icon solid mMenu" >쪽지함</a></li>
-						<li><a href="myNewsForm.ij" class="form-button-submit button icon solid mMenu" >알림함</a></li>
-						<li><a href="infoUpdateForm.ij" class="form-button-submit button icon solid mMenu" >정보수정</a></li>
-					</ul>
-				</header> 
-			</div>
+			<jsp:include page="myPageHeader.jsp"/>
 			
 			<!-- Main -->
 			<section id="main">
@@ -102,21 +53,39 @@
 								
 
 					<!-- 2째 줄 시 반복 -->
+						
 					<div class="row aln-center">
-						<div class="col-4 col-6-medium col-12-small">
-							<br>
-							<!-- Feature -->
-							<section>
-								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-								<header>
-									<h3>모임 이름~</h3>
-								</header>
-								<p> 모임소개</p>
-							</section>
-						</div>
+					<c:forEach var="myGroup" item="${list}" varStatus="status">
+							<div class="col-4 col-6-medium col-12-small">
+								<br>
+								<!-- Feature -->
+								<section>
+									<a href="#" class="image featured">${ myGroup.groupOriginFileName }</a>
+									<header>
+									<!-- loginUser에 값 있을 시 -->
+									<c:if test="${ !empty loginUser }">
+										<c:url var="" value="">
+											<c:param name="" value="${ myGroup.groupNo }"/>
+										</c:url>
+										<h3><a href=""> ${ group.groupTitle }</a></h3> 
+									</c:if>
 									
-					<!-- 반복 -->
-					<!-- ------------------------------------------ -->
+									</header>
+									<p><a href="">${ group.groupInfo }</a></p>
+								</section>
+							</div>
+						<c:if test="${status.index}%3 == 2 ">
+							</div>
+							<div class="row aln-center">
+						</c:if>
+						<c:if test="${status.last}">
+							</div>
+						</c:if>
+						</c:forEach>
+							
+									
+						
+					
 						
 
 						<div class="col-4 col-6-medium col-12-small">
@@ -189,13 +158,7 @@
 
 	</div>
 
-		<!-- Scripts -->
-		<script src="${contextPath}/resources/js/jquery.min.js"></script>
-		<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
-		<script src="${contextPath}/resources/js/browser.min.js"></script>
-		<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
-		<script src="${contextPath}/resources/js/util.js"></script>
-		<script src="${contextPath}/resources/js/main.js"></script>
+		
 
 	</body>
 </html>

@@ -37,6 +37,8 @@
 			<ul>
 				<a href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a>
 				<li class="menu"><a class="icon solid fa-search" href="#"><span>Search</span></a></li>
+				
+				<!-- 로그인 시 사용 가능 -->				
 				<li class="menu"><a class="icon solid fa-envelope" onclick="showAlarm();"><span>News</span></a></li>
                 <li class="menu"><a class="icon solid fa-home" href="myGroupForm.ij"><span>MyPage</span></a></li>
 			</ul>
@@ -45,12 +47,12 @@
 	<!-- </div> -->
 </section>
 
-<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/jquery.dropotron.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/browser.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/breakpoints.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/util.js"></script>
-			<script src="${contextPath}/resources/assets/js/main.js"></script>
+			<script src="${contextPath}/resources/js/jquery.min.js"></script>
+			<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
+			<script src="${contextPath}/resources/js/browser.min.js"></script>
+			<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
+			<script src="${contextPath}/resources/js/util.js"></script>
+			<script src="${contextPath}/resources/js/main.js"></script>
 
 
 <div id="alarmTable">

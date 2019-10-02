@@ -52,53 +52,7 @@
 		<div id="page-wrapper">
 
 			<!-- Header -->
-			<section id="header">
-				<div class="container" id="profile" >
-					<nav id="nav">
-						<ul>
-							<a href="#"><img id="ij-logo" src="${contextPath }/resources/images/innerJoin.png"></a>
-							<li class="menu"><a class="icon solid fa-search" href="#"><span>Search</span></a></li>
-							<li class="menu"><a class="icon solid fa-envelope" href="#"><span>News</span></a></li>
-                            <li class="menu"><a class="icon solid fa-home" href="myGroupForm.ij"><span>MyPage</span></a></li>
-						</ul>
-					</nav>
-					<div>
-
-						<form action="">
-							<div>
-								
-								<div>
-									<!-- 달력 -->
-									
-								</div>
-
-								<div>자기소개란</div>
-								<ul class="actions">
-									<li><a href="profileUpdateForm.ij" class="button icon solid mMenu">프로필 수정</a></li>
-								</ul>
-							</div>
-						</form>
-			
-						<div>
-							캘린더
-						</div>
-							
-					</div>
-
-				<!-- 메뉴바 -->
-
-				</div>
-			</section>
-			<div class="container">
-				<header>
-					<ul class="sub-menu actions">
-						<li><a href="myGroupForm.ij" class="form-button-submit button icon solid mMenu" >내 모임</a></li>
-						<li><a href=" " class="form-button-submit button icon solid mMenu" >쪽지함</a></li>
-						<li><a href="myNoteForm.ij" class="form-button-submit button icon solid mMenu" >알림함</a></li>
-						<li><a href="infoUpdateForm.ij" class="form-button-submit button icon solid mMenu" >정보수정</a></li>
-					</ul>
-				</header> 
-			</div>
+			<jsp:include page="myPageHeader.jsp"></jsp:include>
 			
 			<!-- Main -->
 			<section id="main">

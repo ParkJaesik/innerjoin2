@@ -60,40 +60,39 @@
 								</div>
 							</div>
 						</div>
-								<!-- <div>
-									<div class="col-half">
-										<h4>Date of Birth</h4>
-										<div class="input-group">
-											<div class="col-third">
-												<input type="text" placeholder="YYYY" maxlength="4"/>
-											</div>
-											<div class="col-third">
-												<input type="text" placeholder="MM" maxlength="2"/>
-											</div>
-											<div class="col-third">
-												<input type="text" placeholder="DD" maxlength="2"/>
-											</div>
-										</div>
+						<div>
+							<h2>추가 정보</h2>
+							<div class="col-half">
+								<h4>Date of Birth</h4>
+								<div class="input-group">
+									<div class="col-third">
+										<input type="text" placeholder="YYYY" maxlength="4"/>
 									</div>
-									<div class="col-half">
-										<h4>Gender</h4>
-										<div class="input-group">
-											<input type="radio" name="gender" value="male" id="gender-male"/>
-											<label for="gender-male">Male</label>
-											<input type="radio" name="gender" value="female" id="gender-female"/>
-											<label for="gender-female">Female</label>
-										</div>
+									<div class="col-third">
+										<input type="text" placeholder="MM" maxlength="2"/>
 									</div>
-								</div> -->
-											
-								
-								<button id="submit-btn" style="float: right;"> 수정</button>
-								<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
-							</form>
+									<div class="col-third">
+										<input type="text" placeholder="DD" maxlength="2"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-half">
+								<h4>Gender</h4>
+									<div class="input-group">
+										<input type="radio" name="gender" value="male" id="gender-male"/>
+										<label for="gender-male">Male</label>
+										<input type="radio" name="gender" value="female" id="gender-female"/>
+										<label for="gender-female">Female</label>
+									</div>
+								</div>
+							</div>
+							<button id="submit-btn" style="float: right;"> 수정</button>
+							<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
+						</form>
 
-						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 			
 		</div>
 

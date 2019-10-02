@@ -65,12 +65,13 @@
 						</ul>
 					</nav>
 					<div>
+						
 
-						<form action="">
+						<form action="profileUpdate.ij">
 							<div>
 								
 								<div>
-									<img class="img-circle" src="images/pic01.jpg" style="border: 1px solid slateblue;">
+									${loginUser.memberProPath}
 								</div>
 								<div class="inputFile">
 									<input type="file">
@@ -78,14 +79,15 @@
 								<div class="row aln-center">
 									<div class="col-5 col-12-small">
 										<div>
-											<textarea name="" id="" cols="30" rows="10" style="resize: none;" placeholder="간단한 자기소개를 입력해주세요."></textarea>
+											<textarea name="memberIntroduce" id="memberIntroduce" cols="30" rows="10" 
+											style="resize: none;" placeholder="간단한 자기소개를 입력해주세요.">자기소개</textarea>
 										</div>
 									</div>
 								</div>
 								
 								<ul class="actions">
 									<li><a href="#" class="button icon solid mMenu" id="goBack">취소</a></li>
-									<li><a href="#" class="form-button-submit button icon solid mMenu">수정</a></li>
+									<li><a href="updateProfile.ij" class="form-button-submit button icon solid mMenu">수정</a></li>
 								</ul>
 							</div>
 						</form>
@@ -93,7 +95,6 @@
 							
 					</div>
 
-				<!-- 메뉴바 -->
 
 				</div>
 			</section>

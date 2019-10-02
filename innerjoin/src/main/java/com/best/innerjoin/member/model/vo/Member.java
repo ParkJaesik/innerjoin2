@@ -13,12 +13,18 @@ public class Member {
     private int memberReptCount; 
     private String memberProPath;
     private int memberStatusCode;
+    private String memberIntroduce;
+    private String memberBirthday;
+    private String memberGender;
+    private String memberOpenStatus;
 	public Member() {
 		super();
 	}
+	
 	public Member(String memberId, String memberPwd, String memberName, String loginWay, String memberModifyDate,
 			String memberEnrollDate, int memberHostCount, int memberJoinCount, int memberReptCount,
-			String memberProPath, int memberStatusCode) {
+			String memberProPath, int memberStatusCode, String memberIntroduce, String memberBirthday,
+			String memberGender, String memberOpenStatus) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -31,7 +37,12 @@ public class Member {
 		this.memberReptCount = memberReptCount;
 		this.memberProPath = memberProPath;
 		this.memberStatusCode = memberStatusCode;
+		this.memberIntroduce = memberIntroduce;
+		this.memberBirthday = memberBirthday;
+		this.memberGender = memberGender;
+		this.memberOpenStatus = memberOpenStatus;
 	}
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -98,14 +109,49 @@ public class Member {
 	public void setMemberStatusCode(int memberStatusCode) {
 		this.memberStatusCode = memberStatusCode;
 	}
+	
+	public String getMemberIntroduce() {
+		return memberIntroduce;
+	}
+
+	public void setMemberIntroduce(String memberIntroduce) {
+		this.memberIntroduce = memberIntroduce;
+	}
+
+	public String getMemberBirthday() {
+		return memberBirthday;
+	}
+
+	public void setMemberBirthday(String memberBirthday) {
+		this.memberBirthday = memberBirthday;
+	}
+
+	public String getMemberGender() {
+		return memberGender;
+	}
+
+	public void setMemberGender(String memberGender) {
+		this.memberGender = memberGender;
+	}
+
+	public String getMemberOpenStatus() {
+		return memberOpenStatus;
+	}
+
+	public void setMemberOpenStatus(String memberOpenStatus) {
+		this.memberOpenStatus = memberOpenStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", loginWay=" + loginWay + ", memberModifyDate=" + memberModifyDate + ", memberEnrollDate="
 				+ memberEnrollDate + ", memberHostCount=" + memberHostCount + ", memberJoinCount=" + memberJoinCount
 				+ ", memberReptCount=" + memberReptCount + ", memberProPath=" + memberProPath + ", memberStatusCode="
-				+ memberStatusCode + "]";
+				+ memberStatusCode + ", memberIntroduce=" + memberIntroduce + ", memberBirthday=" + memberBirthday
+				+ ", memberGender=" + memberGender + ", memberOpenStatus=" + memberOpenStatus + "]";
 	}
+
 	
     
 

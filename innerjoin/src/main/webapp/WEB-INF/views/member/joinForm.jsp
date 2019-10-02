@@ -43,27 +43,65 @@
 								<div>
 								<!-- <h4>회원가입</h4> -->
 									<div class="input-group input-group-icon">
+										<h4>Email</h4>
 										<input type="email" placeholder="(*)Email" name="memberId" id="memberId" required/>
 										<span aling="center" id="emailCheck">&nbsp;</span>
 										<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
 									</div>
 									<div class="input-group input-group-icon">
+										<h4>NickName</h4>
 										<input type="text" placeholder="(*)NickName" name="memberName" id="memberName" required/>
 										<span style="text-aling:center;" id="nameCheck">&nbsp;</span>
 										<input type="hidden" name="nameDuplicateCheck" id="nameDuplicateCheck" value="0">
 									</div>
 									<div>
+										<h4>PassWord</h4>
 										<div class="input-group input-group-icon">
 											<input type="password" placeholder="(*)Password" name="memberPwd" id="memberPwd" required/>
 											<span id="pwdCheck1">&nbsp;</span>
 										</div>
 									</div>
 									<div>
+										<h4>PassWord Check</h4>
 										<div class="input-group input-group-icon">
 											<input type="password" placeholder="(*)Password Check" name="memberPwd2" id="memberPwd2" required/>
 											<span id="pwdCheck2">&nbsp;</span>
 										</div>
 									</div>
+									<div>
+									<h2>추가 정보</h2>
+									<div class="col-half">
+										<h4>Date of Birth</h4>
+										<div class="input-group">
+											<div class="col-third">
+												<input type="text" placeholder="YYYY" maxlength="4"/>
+											</div>
+											<div class="col-third">
+												<input type="text" placeholder="MM" maxlength="2"/>
+											</div>
+											<div class="col-third">
+												<input type="text" placeholder="DD" maxlength="2"/>
+											</div>
+										</div>
+									</div>
+									<div class="col-half">
+										<h4>Gender</h4>
+										<div class="input-group">
+											<input type="radio" name="gender" value="male" id="gender-male"/>
+											<label for="gender-male">Male</label>
+											<input type="radio" name="gender" value="female" id="gender-female"/>
+											<label for="gender-female">Female</label>
+										</div>
+									</div>
+								</div>
+											
+								<div class="row">
+									<h4>Terms and Conditions</h4>
+									<div class="input-group">
+										<input type="checkbox" id="terms"/>
+										<label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
+									</div>
+								</div>
 								</div>
 								
 								<button id="button" onclick="validate();" style="float: right;"> 가입</button>
@@ -134,7 +172,7 @@
 					$("#pwdCheck1").html("특수문자, 문자, 숫자 포함 8~15 자리로 입력해주세요.");
 					pwdCheck = false;
 				}else{
-					$("#pwdCheck1").html(" ");
+					$("#pwdCheck1").html("  ");
 					pwdCheck = true;
 				}
 						
