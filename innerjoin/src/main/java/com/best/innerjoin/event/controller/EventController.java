@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.best.innerjoin.event.model.service.EventService;
 import com.best.innerjoin.event.model.vo.Event;
+import com.best.innerjoin.member.model.vo.Member;
 import com.google.gson.Gson;
 
 @Controller
@@ -25,9 +28,9 @@ public class EventController {
  * @return
  */
 @RequestMapping("calendar.ij")
-   public String calendarView() {
-      return "event/calendar";
-   }
+	public String calendarView() {
+		return "event/calendar";
+	}
    
    /** 일정 추가 Controller
  * @param event
@@ -36,22 +39,19 @@ public class EventController {
 @ResponseBody
    @RequestMapping("addEvent.ij")
    public int insertEvent(Event event) {
-      event.setGno("0");
-      //int result = eService.insertEvent(event);
-      int result = 1;
       System.out.println(event);
+      int result = eService.insertEvent(event);
       return result;
    }
    
    
    @ResponseBody
    @RequestMapping("ajaxTest.ij")
-   public String renderEvent(Integer month) {
+   public String renderEvent(String date, String gno) {
 //      JSONArray array = new JSONArray();
 //      JSONObject obj = new JSONObject();
-      
+//      System.out.println("ajaxTest" + month);
       SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-      
       
       Map<Integer, List> map = new HashMap();
       
@@ -85,8 +85,12 @@ public class EventController {
       map.put(7, events);
       map.put(8, events1);
       
-      
-      return new Gson().toJson(map.get(month));
+      System.out.println("eventList / date: " + date + " gno: " + gno);
+      ArrayList<Event> eventList = eService.groupEventList(date, gno);
+      String list = new Gson().toJson(eventList);
+      System.out.println(list);
+//      return new Gson().toJson(map.get(date));
+      return list;
    }
    
    /** 이벤트 상세정보 조회 Controller
@@ -113,16 +117,32 @@ public class EventController {
 		return 1;
 	}
 	
+	/** 멤버가 참석하는 이벤트 리스트 조회 Controller
+	 * @param date
+	 * @param memberId
+	 * @param gno
+	 * @return event list
+	 */
 	@ResponseBody
-	@RequestMapping("attendEventsList.ij") 
-	public List<Integer> attendEventsList(String date, String memberId, int gno) {
+	@RequestMapping("getAttendEventList.ij") 
+	public List<Integer> getAttendEventList(String date, Integer gno, HttpSession session) {
 		System.out.println(date);
-//		List<Integer> list = eService.attendEventsList(date, memberId, gno);
+		String memberId = "admin";
+//		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+//		List<Integer> list = eService.attendEventList(date, memberId, gno);
 		List<Integer> list = new ArrayList();
 		list.add(10);
 		list.add(20);
 		return list;
 		
+	}
+	
+	/** 멤버페이지 일정관리 뷰로 이동
+	 * @return
+	 */
+	@RequestMapping("memberCalendar.ij")
+	public String memberCalender() {
+		return "event/memberCalendar";
 	}
 
 

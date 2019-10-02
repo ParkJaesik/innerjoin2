@@ -1,5 +1,6 @@
 package com.best.innerjoin.event.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +31,20 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<Integer> attendEventsList(String date, String memberId, int gno) {
-		Map<String, String> monthMember = new HashMap();
-		monthMember.put("date", ""+date);
-		monthMember.put("memberId", memberId);
-		monthMember.put("gno", "" + gno);
-		return eDao.attendEventsList(monthMember);
+	public List<Integer> attendEventList(String date, String memberId, int gno) {
+		Map<String, String> dateMember = new HashMap();
+		dateMember.put("date", date);
+		dateMember.put("memberId", memberId);
+		dateMember.put("gno", "" + gno);
+		return eDao.attendEventList(dateMember);
+	}
+
+	@Override
+	public ArrayList<Event> groupEventList(String date, String gno) {
+		Map<String, String> dateGroup = new HashMap();
+		dateGroup.put("date", date);
+		dateGroup.put("gno",  gno);
+		return eDao.groupEventList(dateGroup);
 	}
 
 }
