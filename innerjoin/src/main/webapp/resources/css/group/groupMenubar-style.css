@@ -5,21 +5,14 @@
 	color: rgb(50, 50, 50);
 }
 
-div {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	border: 1px solid;
-}
-
-.btn {
+#group-index-container .btn {
 	outline: none;
 	border: none;
 	margin: 0;
 	padding: 0;
 }
 
-.btn:focus {
+#group-index-container .btn:focus {
 	box-shadow: none !important;
 }
 
@@ -32,6 +25,9 @@ div {
 
 #group-index-container div {
 	margin: auto;
+	padding: 0;
+	box-sizing: border-box;
+	border: 1px solid;
 }
 
 #group-info-container {
@@ -113,5 +109,5 @@ div {
 
 #group-btn-index, #group-btn-schedule, #group-btn-board,
 	#group-btn-member {
-	margin-right: 120px;
+	margin-right: 120px !important;
 }

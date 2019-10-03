@@ -3,23 +3,28 @@
  * 일정등록폼
  */
 
+
 // 달력 렌더링 이벤트 등록
 document.addEventListener('DOMContentLoaded', function() {
-	   
-   var detailViewNum = 0;
-   var detailViewList = [];
+	// 일정관리에 필요한 변수 초기화
+	// 1. detail이 나오는 eno 리스트. detail이 중복으로 보여지지 않기 위해.
+	// 2. 현재 달력에 표시되는 이벤트들의 정보 리스트
+	// 3. 회원이 참석하는 모임 리스트 담을 변수;
+	var detailViewSet = new Set();
+	var eventInfoList; 
+	var attendEventList = [];
    
-   var calendarEl = document.getElementById('calendar');
-   var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-        height: "auto",
-        contentHeight: 550,
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+		height: "auto",
+		contentHeight: 450,
         /*locale: 'ko',*/
-      header: {
-         left: 'prev,next today',
-         center: 'title',
-         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+		},
 //      titleFormat: {
 //    	  month: "yyyy년 MMMM",
 //    	  week: "[yyyy] MMM dd일{ [yyyy] MMM dd일}",
@@ -37,70 +42,92 @@ document.addEventListener('DOMContentLoaded', function() {
 //      },
 //      timeFormat : "HH:mm",
 
-      defaultView: 'dayGridMonth',
-      // 달력에 기본으로 보이는 날짜는 현재날짜
-      defaultDate: moment().format('YYYY-MM-DD'),
-      navLinks: true, 
-          // can click day/week names to navigate views
-      // 달력화면에서 이벤트 수정 불가
-      editable: false,
-      // 하루에 기본으로 보여지는 이벤트 개수는 최대 2 (3미만)
-      eventLimit: 3, 
-          // allow "more" link when too many events
-      eventColor: '#ed4c4ad5',
-      // 이벤트 클릭했을 때 실행할 액션
-      eventClick: function(info) {
-
-    	  console.log(info);
-          var eno = info.event.classNames[info.event.classNames.length-1].split('_')[1];
-          
-          if (!detailViewList.includes(eno)) {
-         	 
-   	         $.ajax({
-   	        	 url: 'showDetail.ij?eno=' + eno,
-   	        	 type: 'get',
-   	        	 dataType: 'json',
-   	        	 success: function(res) {
-   	        		 var member = [{'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user01'},
+		defaultView: 'dayGridMonth',
+		// 달력에 기본으로 보이는 날짜는 현재날짜
+		defaultDate: moment().format('YYYY-MM-DD'),
+		navLinks: true, 
+		// can click day/week names to navigate views
+		// 달력화면에서 이벤트 수정 불가
+		editable: false,
+		// 하루에 기본으로 보여지는 이벤트 개수는 최대 2 (3미만)
+		eventLimit: 3, 
+		// allow "more" link when too many events
+//		eventColor: '#ed4c4a66',
+		eventColor: '#ed776a55',
+		eventBorderColor: '#ed776a22',
+		// 이벤트 클릭했을 때 실행할 액션. 이벤트 상세정보 DB에서 가져와 하단에 div 생성.
+		eventClick: function(info) {
+			console.log(info);
+			var eno = info.event.classNames[info.event.classNames.length-1].split('_')[1];
+			if (!detailViewSet.has(eno)) {
+				var event;
+				$.each(eventInfoList, function(i, v) {
+					if(v.eno == eno) event = v;
+				});
+				$.ajax({
+					url: 'attendMember.ij',
+					type: 'get',
+					data: {eno: eno},
+					dataType: 'json',
+					success: function(mList) {
+						var member = [{'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user01'},
    	        			 {'path':'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg', 'id':'user02'}];
-   	        		 console.log(member);
+						console.log('mList: ');
+						console.log(mList);
+						if(mList==null) mList = member;
+						console.log(mList);
 
-   	        		 var showView = showDetail(res, member);
-   	        		 $('div>.detailView_'+eno).attr('tabindex', -1).focus();
-   	        		 $('div>.detailView_'+eno).removeAttr('tabindex');
-   	        	 },
-   	        	 error: function(err) {
-   	        		 console.log(err);
-   	        	 }
-   	         });
-          }
+						var showView = showDetail(event, mList);
+						$('div>.detailView_'+eno).attr('tabindex', -1).focus();
+						$('div>.detailView_'+eno).removeAttr('tabindex');
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
           
-          console.log("focus호출");
-          $('div>.detailView_'+eno).attr('tabindex', -1).focus();
-          $('div>.detailView_'+eno).removeAttr('tabindex');
-       }   
-   });
+			console.log("focus호출");
+			$('div>.detailView_'+eno).attr('tabindex', -1).focus();
+			$('div>.detailView_'+eno).removeAttr('tabindex');
+		},
+		eventTimeFormat: { // like '14:30:00'
+			hour: '2-digit',
+			minute: '2-digit',
+			meridiem: false
+		}
+	});
 
-   assignEvent(calendar.getDate().getMonth());
+	eventSetting();
    
    // 달력 렌더링(화면에 출력)
    calendar.render();
    
-   attendEventsList(calendar.getDate());
+   // console.log("calendar.getDate: " + calendar.getDate());
+   getAttendEventList(calendar.getDate());
    
    // 다음달, 이전달 버튼을 클릭했을 때 해당하는 이벤트 표시하기
    $(".fc-button").click(function() {
       
-      var month = calendar.getDate().getMonth();
+      var date = calendar.getDate();
       
-      assignEvent(month);
+      eventSetting();
       
    }); 
    
+   // 달력 액션시 새로 세팅되어야 하는 함수들
+   function eventSetting() {
+	   var date = moment(calendar.getDate()).format('YYYY-MM');
+	   // 해당 모임의 gno값 가져오기
+	   var gno = 1;
+	   assignEvent(date, gno);
+	   getAttendEventList(date, gno);
+   }
+   
    // 현재 달력에 표시되는 월에 해당하는 이벤트 등록하기
-   function assignEvent(month) {
+   function assignEvent(date, gno) {
       var events;
-      
+      console.log("assignEvent: " + date);
       // 달력에 표시된 이벤트들 지우기
       $.each(calendar.getEvents(), function(i, v) {
          v.remove();
@@ -108,18 +135,21 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // DB에서 해당 이벤트 가져오기
       $.ajax({
-         url: "ajaxTest.ij",
+         url: "renderEvent.ij",
          type: "get",
          dataType: "JSON",
-         data: {month: month},
+         data: {date: date, gno: gno},
          success: function(data) {
-            console.log(data);
+            eventInfoList = data;
+            console.log("eventInfoList: ");
+            console.log(eventInfoList);
             
             // 이벤트 리스트를 달력에 추가
             $.each(data, function(i, v) {
                var event =   {title: v.eTitle, start: v.eStart, end: v.eEnd, classNames: 'showDetail_'+v.eno}; 
                calendar.addEvent(event);
-               console.log("event: " + event);
+               console.log("event: ");
+               console.log(event);
             });
          },
          error: function(err) {
@@ -127,24 +157,21 @@ document.addEventListener('DOMContentLoaded', function() {
          }
       });
       //return events;
-   }
-   
-   var attendEventsList = [];
-   // 회원 참석 모임 리스트 
-   function attendEventsList(dateInfo) {
-	   var memberId = '${member.memberId}';
-//	   var date = moment(dateInfo).format('YYYY-MM-DD hh:mm:ss.s');
-	   var date = moment(dateInfo).format('YYYY-MM');
-	   console.log(date);
-	   
+	}
+
+
+   // loginUser의 참석 모임 리스트 
+   function getAttendEventList(date, gno) {
+	   console.log("date: " +date);
+	   // loginUser의 memberId값은 controller에서 세팅.
 	   $.ajax({
-		  url: 'attendEventsList.ij',
-		  data: {date: date, memberId: memberId, gno: 0},
+		  url: 'getAttendEventList.ij',
+		  data: {date: date, gno : gno},
 		  type: 'get',
 		  dataType: 'json',
 		  success: function(res) {
 			  console.log("result : " + JSON.stringify(res));
-			  attendEventsList = res;
+			  attendEventList = res;
 		  },
 		  error: function(err) {
 			  console.log(err);
@@ -153,11 +180,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	   });
    }
    
+   // 달력 이벤트 클릭했을 때 detail 보여주기. 동적으로 태그 추가
    function showDetail(event, member) {
       console.log("show detail 시작");
       // 최종 생성 요소 추가할 부분
       
-      detailViewList.push(String(event.eno));
+      detailViewSet.add(String(event.eno));
       var detailWrapperCol = $(".detailWrapper>div:nth-child(1)");
       
       var $eventDetail = $('<div>');
@@ -184,7 +212,9 @@ document.addEventListener('DOMContentLoaded', function() {
       var $closeImg = $('<img>');
       $closeImg.addClass('closeBtn detailView_' + event.eno).attr('alt', '닫기').attr('src', 'resources/images/close.png');
       var $checkImg = $('<img>');
-      $checkImg.addClass('checkBtn detailView_' + event.eno).attr('alt', '참석').attr('src', 'resources/images/check.jpg');
+      $checkImg.addClass('checkBtn detailView_' + event.eno).attr('alt', '참석')
+      			.attr('src', 'resources/images/check.jpg')
+      			.attr('data-toggle', 'tooltip');
       $eventLabelClose.append($closeImg).append($checkImg);
       $eventClose.append($eventLabelClose);
       $eventTitle.append($eventTitleCol1).append($eventClose);
@@ -279,23 +309,31 @@ document.addEventListener('DOMContentLoaded', function() {
       $eventDetail.append($eventDetailCol);
       detailWrapperCol.append($eventDetail);
       
+      // 참석버튼 툴팁 실행
+      $('[data-toggle="tooltip"]').tooltip(); 
+      
+      
+
    }
+   
    
    // eventDetailView에서 체크버튼 누르면 member_event table에 데이터 삽입.
    $(document).on('click', '.checkBtn', function(event) {
+	   console.log(this.parentNode);
 	   var eno = Number(event.target.className.split(' ')[1].split('_')[1]);
 	   console.log("eno: " + eno);
 //	   var memberId = ${member.memberId};
-	   console.log("리스트 : " + attendEventsList);
-	   console.log("포함: " + attendEventsList.includes(eno));
-	   if(attendEventsList.includes(eno)) {
+	   console.log("리스트 : " + attendEventList);
+	   console.log("포함: " + attendEventList.includes(eno));
+	   if(attendEventList.includes(eno)) {
+		   $('.detailView_'+eno).tooltip('show');
 		   console.log("이미 참석버튼 누름");
 		   return;
 	   }
 	   var memberId = 'admin';
 	   $.ajax({
 		  url: 'attendEvent.ij',
-		  data: {eno: eno, memberId: memberId},
+		  data: {eno: eno, memberId: memberId},  
 		  type: 'post',
 		  success: function(res) {
 			  console.log(res);
@@ -307,25 +345,66 @@ document.addEventListener('DOMContentLoaded', function() {
 	   console.log("참석되었음");
    });
    
+   $(".checkBtn").tooltip({
+ 		content: function() {
+ 			console.log("className: ");
+ 			console.log(this.className);
+ 			console.log('split className');
+ 			var className = this.className[1].split('_')[1]
+ 			console.log(className);
+ 			return className;
+ 		},
+ 		placement: 'top',
+ 		container: 'body',
+ 	});
+   
+
+   
+   
+  
+   
    
    // eventDetailView에서 닫기버튼 누르면 해당요소 삭제
 	$(document).on('click', '.closeBtn', function(event) {
 		var className = event.target.className.split(' ')[1];
-      
+		console.log("className: " + className);
 		$('.'+className).animate({opacity: 0});
       
 		setTimeout(function() {
 			$('.eventDetail:has(.'+className+')').remove();
 		}, 400);
       
-		detailViewList.pop(className.split('_')[1]);
+		detailViewSet.delete(className.split('_')[1]);
 	});
+	
 });   
 
 
+
+
+
+
+
+
+
+
+
+// ================================================================================
+
+
+
+
+
+
+
+
+
+// 이벤트 등록에 관한 function
 $(function() {
+	
+	
    // 현재시간 저장. 이벤트 등록폼의 시작일, 종료일에 디폴트로 설정.
-   var defaultTime = moment().format('YYYY-MM-DDTHH:mm:ss');
+   var defaultTime = moment().add('1', 'hours').set({minute:0,second:0,millisecond:0}).format('YYYY-MM-DDTHH:mm:ss');
    $('.eventDay input').val(defaultTime);
    
    // 이벤트 등록 버튼을 클릭하면 ajax로 데이터 전송.
@@ -333,6 +412,12 @@ $(function() {
       // 폼의 데이터를 쿼리스트링으로 받음.
       var formData = $("form[name=eventForm]").serialize();
       
+      // 이벤트 시작일이 종료일보다 값이 크면 포커스 주고 제출 취소
+      if($("#eStart").val() > $("#eEnd").val()) {
+    	  $("#eEnd").focus();
+    	  return false;
+      }
+      console.log("formData : " + formData);
       $.ajax({
          url: 'addEvent.ij',
          data: formData,
@@ -357,19 +442,6 @@ $(function() {
       closeEventForm();
    });
    
-   /* $(".eventDay input").on("change", function() {
-      console.log("날짜 입력 ");
-      console.log("시작일 : " + $("#eStart").val());
-      if($("#eStart").val() == "" && $("#eEnd").val() != "") {
-         $("#eEnd").val($("#eStart").val());
-         
-      }
-
-      if($("#eStart").val() != "" && $("#eEnd").val() == "") {
-         $("#eStart").val($("#eEnd").val());
-      
-      }
-   });  */
    
    // 이벤트 등록 폼의 제출버튼이나 취소버튼이 눌릴 때 폼의 데이터를 초기화하고 폼을 닫는다.
 	function closeEventForm() {

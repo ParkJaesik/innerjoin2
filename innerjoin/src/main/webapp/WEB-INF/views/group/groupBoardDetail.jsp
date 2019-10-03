@@ -24,31 +24,23 @@
 		<h1 align="center">게시판</h1>
 		<div id="board-part">
 			<div id="board-count">
-				<span id="count">VIEW </span>
+				<span id="count">VIEW ${ board.boardCount }</span>
 			</div>
 
 			<div id="board-date">
-				<span id="date">2019.09.26</span>
+				<span id="date">${ board.boardCreateDate }</span>
 			</div>
 
 			<div id="board-writer">
-				<span id="writer">박재식</span>
+				<span id="writer">${ board.memberId }</span>
 			</div>
 
 			<div id="board-title">
-				<span id="title">첫 번째 테스트 글입니다</span>
+				<span id="title">${ board.boardTitle }</span>
 			</div>
 
 			<div id="board-content">
-				<span id="content">흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야 스쳐지나간건가? 뒤돌아보지만
-					그냥 사람들만 보이는거야 다와가는 집근처에서 괜히 핸드폰만 만지는거야 한번 연락해 볼까? 용기내 보지만 그냥 내 마음만
-					아쉬운 거야 걷다가 보면 항상 이렇게 너를 바라만 보던 너를 기다린다고 말할까? 지금 집앞에 계속 이렇게 너를 아쉬워
-					하다 너를 연락했다 할까? 지나치는 꽃들 속에서 네 샴푸향만 보이는거야 스쳐지나간건가? 뒤돌아보지만 그냥 내 마음만
-					바빠진거야 걷다가 보면 항상 이렇게 너를 바라만 보던 너를 기다린다고 말할까? 지금 집앞에 계속 이렇게 너를 아쉬워 하다
-					너를 연락했다 할까? 어떤 계절이 너를 우연히라도 너를 마주치게 할까? 난 이대로 아쉬워하다 너를 바라만 보던 너를
-					기다리면서 아무말 못하고 그리워만 할까 걷다가 보면 항상 이렇게 너를 바라만 보던 너를 생각한다고 말할까? 지금 집앞에
-					기다리고 때론 지나치고 다시 기다리는 꽃이 피는 거리에 보고파라 이밤에 걷다가 보면 항상 이렇게 너를 아쉬워 하다 너를
-					기다린다고 말할까? 지금 집앞에 계속 이렇게 너를 아쉬워 하다 너를 연락했다 할까? </span>
+				<span id="content">${ board.boardContent }</span>
 			</div>
 		</div>
 
@@ -60,16 +52,36 @@
 
 		<div id="button-part">
 			<div id="board-button">
-				<button type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
-				<button type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
-				<button type="button" class="btn btn-primary" id="board-btn-list">목록</button>
+			
+				<c:url var="boardModify" value="bmodifyView.ij">
+					<c:param name="boardNo" value="${ board.boardNo }"/>
+					<c:param name="page" value="${ currentPage }"/>
+				</c:url>
+				
+				<c:url var="boardDelete" value="bdelete.ij">
+					<c:param name="boardNo" value="${ board.boardNo }"/>
+				</c:url>
+				
+				<c:url var="boardList" value="blist.ij">
+					<c:param name="page" value="${ currentPage }"/>
+				</c:url>
+				
+				<c:if test="${ loginUser.id eq board.memberId }">
+					<button onclick="location.href='bmodifyView.ij';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
+				</c:if>
+				
+				<c:if test="${ loginUser.id eq board.memberId }">
+					<button onclick="location.href='bdelete.ij';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
+				</c:if>
+				
+				<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
 			</div>
 		</div>
 
 		<div id="reply-part">
 			<div id="reply-input-part">
 				<div id="reply-input-text">
-					<textarea name="" id="text"></textarea>
+					<textarea id="reply"></textarea>
 				</div>
 
 				<div id="reply-input-button">
@@ -78,37 +90,60 @@
 			</div>
 
 			<div id="reply-count">
-				<span id="replyCount">댓글 </span>
+				<span id="replyCount"></span>
 			</div>
 
 			<div id="reply-view">
 				<table align="center">
 					<tr>
-						<td id="reply-writer">정승화</td>
-						<td id="reply-button"><a href="">수정</a> <a href="">삭제</a></td>
+						<td id="reply-writer"></td>
+						<td id="reply-button">
+							<a href="">수정</a>
+							<a href="">삭제</a>
+						</td>
 					</tr>
 
 					<tr>
-						<td id="reply-content">재식오빠 완전 이상해</td>
-						<td id="reply-date">2019.09.30 10:30</td>
-					</tr>
-				</table>
-			</div>
-			
-			<div id="reply-view">
-				<table align="center">
-					<tr>
-						<td id="reply-writer">정승화</td>
-						<td id="reply-button"><a href="">수정</a> <a href="">삭제</a></td>
-					</tr>
-
-					<tr>
-						<td id="reply-content">재식오빠 완전 이상해</td>
-						<td id="reply-date">2019.09.30 10:30</td>
+						<td id="reply-content"></td>
+						<td id="reply-date"></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		replyList();
+		
+		$("#reply-btn-input").on("click", function(){
+			var replyContent = $("#reply").val();
+			var boardNo = ${ board.boardNo };
+			
+			$.ajax({
+				url : "rinsert.ij",
+				data : {replyContent : replyContent, boardNo : boardNo},
+				type : "post",
+				success : function(data) {
+					if (data == "success") {
+						$("#reply").val("");
+						replyList();
+					}
+				}
+			});
+		});
+		
+		function replyList() {
+			var boardNo = ${ board.boardNo };
+			
+			$.ajax({
+				url : "rlist.ij",
+				data : {boardNo : boardNo},
+				dataType : "json",
+				success : function(list) {
+					var 
+				}
+			});
+		}
+	</script>
 </body>
 </html>

@@ -56,6 +56,10 @@
     .active{
         cursor: initial;
     }
+    
+    #guSel, #detailsel,
+    
+    
 </style>
 </head>
 <body>
@@ -100,8 +104,8 @@
                             </div>
                             <div class="div2">
                                 <select id="citysel" name="citysel">
-                                    <option>시</option>
-                                    <option>서울특별시</option>
+                                    <option value="city">시</option>
+                                    <option value="seoul">서울특별시</option>
                                 </select>
                                 <select id="guSel" name="guSel">
                                     <option value="">구</option>
@@ -138,6 +142,7 @@
                                 </select>
                                 <input type="text" id="detailtext" name="detailtext">
                             </div>
+                        
                         </div>
                         <div class="row">
                             <div class="div1">

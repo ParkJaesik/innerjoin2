@@ -17,6 +17,12 @@
 		<typeAlias type="com.best.innerjoin.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.best.innerjoin.event.model.vo.Event" alias="Event"/>
 		<typeAlias type="com.best.innerjoin.group.model.vo.Group" alias="Group"/>		
+
+		<typeAlias type="com.best.innerjoin.report.model.vo.GroupMemberReport" alias="GroupMemberReport"/>		
+
+		<typeAlias type="com.best.innerjoin.album.model.vo.Album" alias="Album"/>		
+		<typeAlias type="com.best.innerjoin.album.model.vo.AlbumPhoto" alias="AlbumPhoto"/>		
+
 	</typeAliases>
 	
 	<!-- mapper 파일 등록 부분 -->
@@ -25,6 +31,11 @@
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/event-mapper.xml"/>
 		<mapper resource="mappers/group-mapper.xml"/>
+
+		<mapper resource="mappers/report-mapper.xml"/>
+
+		<mapper resource="mappers/album-mapper.xml"/>
+
  	</mappers>
  	
 </configuration>

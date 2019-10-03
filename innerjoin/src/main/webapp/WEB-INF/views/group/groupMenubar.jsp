@@ -16,13 +16,15 @@
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/groupMenubar-style.css"
+	href="${contextPath}/resources/css/group/groupMenubar-style.css"
 	type="text/css">
 
 <title>Group Menubar</title>
-
 </head>
 <body>
+
+<c:set var="groupNo" value="1"/>
+<c:set var="memberId" value="gp@gmail.com"/>
 	<div id="group-index-container">
 		<div id="group-info-container">
 			<div id="group-thumbnail">
@@ -48,7 +50,8 @@
 			</div>
 
 			<div id="group-button">
-				<button type="button" class="btn btn-primary" id="group-btn-manage">모임관리</button>
+				<c:url var="secession" value="rblist.ij"/>
+				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
 				<button type="button" class="btn btn-primary" id="group-btn-join">INNER
 					JOIN하기</button>
 				<button type="button" class="btn btn-primary"

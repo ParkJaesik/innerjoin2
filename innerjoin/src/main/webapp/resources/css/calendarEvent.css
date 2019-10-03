@@ -7,7 +7,7 @@
    
    #calendar-container {
       max-width: 1000px;
-      min-width: 800px;
+      min-width: 700px;
       /* height: 650px; */
       margin: 0 auto;
       margin-bottom: 20px;
@@ -57,10 +57,14 @@
    }
 
    #addEventForm .eventDay {
-       width: 50% !important;
-       float : left;
+       width: 100% !important;
+      /*  float : left; */
        height: calc(1.5em + 2rem + 4px);
-       padding-top : 0 !important;
+       padding-top: 0 !important;
+       padding-left: 0 !important;
+       padding-rig: 0 !important;
+       border: none;
+       
    }
 
    #addEventForm .eventDay label {
@@ -70,9 +74,9 @@
        display: block !important;
    }
    
-   .closeBtn, .checkBtn, .fc-content {
-         cursor: pointer;
-   }
+	.closeBtn, .checkBtn, .fc-content {
+		cursor: pointer;
+	}
    
    .detailWrapper {
       max-width: 1000px;
@@ -82,7 +86,7 @@
    }
    
    .eventDetail{
-      height: 330px;
+      height: 280px;
       min-width: 820px;
       border: 1px solid lightgray;
       border-radius: 0.5em;
@@ -98,14 +102,17 @@
    .eventDetail>div:nth-child(0) {
       padding-top: 0;
    }
-   
+   .eventInfo {
+   		margin-bottom: 0 !important;
+   }
    .eventInfo>div{
       width: 33%;
    /*           margin-bottom: 10px; */
    }
    
    .eventDetail>div{
-      padding: 10px;
+      padding: 0 10px 0 10px;
+      
    }
    
    .eventLabel {
@@ -117,7 +124,7 @@
    
    .eventContent textarea {
        width: 100%;
-       height: 12rem;
+       height: 10.5rem;
        resize: none; 
        overflow: auto;
    }
@@ -139,18 +146,19 @@
       margin-top: 0 !important;
    }
    
-   .eventClose>eventLabel {
-      display: block;
-      float: right;
-      padding-right: 0;
-   }
+	.eventClose>eventLabel {
+		display: block;
+		float: right;
+		padding-right: 0;
+	}
    
-   .closeBtn, .checkBtn {
-      max-width: 1em;
-      margin-left: 0.8em;
-      display: block;
-      float: right;
-   }
+	 .closeBtn, .checkBtn {
+		max-width: 1em;
+		margin-top: 0.4em;
+		margin-left: 0.8em;
+		display: block;
+		float: right;
+	 }
    
    .checkBtn {
    	max-width: 1.2em;

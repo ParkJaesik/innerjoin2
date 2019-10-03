@@ -100,8 +100,22 @@
     
 	    ws.onmessage = function(event){
 	    	console.log("ReceiveMessage : ",event.data+'\n');
-	    	$("#alaram").html(event.data);
-	    	$("#alarmTable").css("display","block");
+	        var data = event.data;
+	        
+	        var dataArray = data.split(",");
+	        
+	        console.log(dataArray);
+	        
+	        
+	        if(dataArray[0]=="chat"){
+	        
+	        	$("#messageWindow").append(dataArray[1] + " : " + dataArray[2]);
+	        	$("#messageWindow").append("<br>");
+	        }else if(dataArray[0]=="reply"){
+	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2]);
+	        	$("#alaram").append("<br>");
+	        	$("#alarmTable").css("display","block");
+	        }
     	
     }
     
