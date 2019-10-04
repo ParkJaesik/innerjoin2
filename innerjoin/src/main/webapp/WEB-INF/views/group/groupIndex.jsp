@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
+	<%@ include file="/WEB-INF/views/group/groupMenubar.jsp" %>
 
 </body>
 </html>
