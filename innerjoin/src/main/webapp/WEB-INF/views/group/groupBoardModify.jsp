@@ -25,6 +25,7 @@
 			<h1 align="center">게시글 수정</h1>
 	
 			<div id="board-part">
+				<input type="hidden" name="boardNo" value="${ board.boardNo }">
 				<div id="board-check">
 					<c:if test="${ board.boardTypeCode eq 0 }">
 						<input type="checkbox" name="boardTypeCheck" value="1" id="check" checked="checked">

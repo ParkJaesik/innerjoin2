@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.best.innerjoin.board.model.dao.BoardDao;
 import com.best.innerjoin.board.model.vo.Board;
 import com.best.innerjoin.board.model.vo.PageInfo;
+import com.best.innerjoin.board.model.vo.Reply;
 import com.best.innerjoin.common.Pagination;
 
 @Service("bService")
@@ -51,7 +52,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardModify(Board board, MultipartFile reloadFile, HttpServletRequest request) {
+	public int boardModify(Board board) {
 		board.setBoardContent(board.getBoardContent().replace("\n", "<br>"));
 		
 		// 파일 수정 영역
@@ -61,5 +62,27 @@ public class BoardServiceImpl implements BoardService {
 		// 파일 서버 저장 영역
 		
 		return result;
+	}
+
+	@Override
+	public int boardDelete(int boardNo) {
+		return bDao.boardDelete(boardNo);
+	}
+
+	@Override
+	public ArrayList<Reply> replyList(int boardNo) {
+		return bDao.replyList(boardNo);
+	}
+
+	@Override
+	public int replyInsert(Reply reply) {
+		reply.setReplyContent(reply.getReplyContent().replace("\n", "<br>"));
+		
+		return bDao.replyInsert(reply);
+	}
+
+	@Override
+	public String idToName(String replyWriter) {
+		return bDao.idToName(replyWriter);
 	}
 }

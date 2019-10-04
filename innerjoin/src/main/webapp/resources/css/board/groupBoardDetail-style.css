@@ -11,14 +11,14 @@ div {
 	box-sizing: border-box;
 }
 
-.btn {
+#board-container button {
 	outline: none;
 	border: none;
 	margin: 0;
 	padding: 0;
 }
 
-.btn:focus {
+#board-container button:focus {
 	box-shadow: none !important;
 }
 
@@ -133,14 +133,14 @@ h1 {
 	height: 100%;
 }
 
-#text {
+#reply {
 	width: 100%;
 	height: 100%;
 	resize: none;
 	font-size: 14px;
 }
 
-#text:focus {
+#reply:focus {
 	outline: none;
 }
 
@@ -162,7 +162,7 @@ h1 {
 	height: 25px;
 }
 
-#reply-view {
+.reply-view {
 	width: 800px;
 	height: 55px;
 	border-bottom: 2px dotted rgb(190, 190, 190);
@@ -191,4 +191,9 @@ h1 {
 #reply-date {
 	font-size: 13px;
 	text-align: center;
+}
+
+#reply-view-container td{
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(50, 50, 50);
 }

@@ -10,17 +10,68 @@
   		<result property="boardModifyDate" column="BOARD_MODIFY_DATE"/>
   		<result property="boardStatus" column="BOARD_STATUS"/>
   		<result property="boardTypeCode" column="BOARD_TYPE_CODE"/>
-  		<result property="boardCount" column="BOARD_COUNT"/>
-  		<result property="memberId" column="MEMBER_ID"/>
+  		<result property="boardWriter" column="MEMBER_ID"/>
   		<result property="groupNo" column="GROUP_NO"/>
+  		<result property="boardCount" column="BOARD_COUNT"/>
+  	</resultMap>
+  	
+  	<resultMap type="Reply" id="replyResultSet">
+  		<id property="replyNo" column="REPLY_NO"/>
+  		<result property="replyContent" column="REPLY_CONTENT"/>
+  		<result property="replyCreateDate" column="REPLY_CREATE_DATE"/>
+  		<result property="replyModifyDate" column="REPLY_MODIFY_DATE"/>
+  		<result property="replyStatus" column="REPLY_STATUS"/>
+  		<result property="boardNo" column="BOARD_NO"/>
+  		<result property="replyWriter" column="MEMBER_ID"/>
   	</resultMap>
   
-  
+
+	<!-- 전체 게시글 수 조회 쿼리 -->
 	<select id="boardListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD WHERE BOARD_STATUS = 'Y'
 	</select>
 	
+	<!-- 게시글 목록 조회 쿼리 -->
 	<select id="boardList" resultMap="boardResultSet">
 		SELECT * FROM BOARD WHERE BOARD_STATUS = 'Y' ORDER BY BOARD_NO DESC
 	</select>
+	
+	<!-- 게시글 조회수 증가 쿼리 -->
+	<update id="addBoardCount" parameterType="_int">
+		UPDATE BOARD SET BOARD_COUNT = BOARD_COUNT + 1 WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 게시글 상세 조회 쿼리 -->
+	<select id="boardDetail" parameterType="_int" resultMap="boardResultSet">
+		SELECT * FROM BOARD WHERE BOARD_NO = #{boardNo} AND BOARD_STATUS = 'Y'
+	</select>
+	
+	<!-- 게시글 등록 쿼리 -->
+	<insert id="boardInsert" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES(SEQ_BNO.NEXTVAL, #{boardTitle}, #{boardContent}, SYSDATE, SYSDATE, DEFAULT, #{boardTypeCode}, #{boardWriter}, 1, DEFAULT)
+	</insert>
+	
+	<!-- 게시글 수정 쿼리 -->
+	<update id="boardModify" parameterType="Board">
+		UPDATE BOARD SET
+		BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, BOARD_MODIFY_DATE = SYSDATE, BOARD_TYPE_CODE = #{boardTypeCode}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 게시글 삭제 쿼리 -->
+	<update id="boardDelete" parameterType="_int">
+		UPDATE BOARD SET BOARD_STATUS = 'N' WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 댓글 조회 쿼리 -->
+	<select id="replyList" parameterType="_int" resultMap="replyResultSet">
+		SELECT * FROM REPLY WHERE BOARD_NO = #{boardNo} AND REPLY_STATUS = 'Y'
+	</select>
+	
+	<!-- 댓글 등록 쿼리 -->
+	<insert id="replyInsert" parameterType="Reply">
+		INSERT INTO REPLY VALUES
+		(SEQ_RNO.NEXTVAL, #{replyContent}, SYSDATE, SYSDATE, DEFAULT, #{boardNo}, #{replyWriter})
+	</insert>
 </mapper>

@@ -117,6 +117,23 @@
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>
                         
+
+
+                        
+                        <button onclick="goAlbum();">앨범</button>
+						<script>
+							function goAlbum(){
+								
+								location.href="albumListView.ij";
+							} 
+						</script>
+						
+						<c:url var="board" value="blist.ij"/>
+				<button type="button" class="btn btn-primary" onclick="location.href='${board}'">게시판</button>
+						
+						<c:url var="secession" value="rblist.ij"/>
+				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
+
                         <c:url var="goAlbum" value="/albumListView.ij">
 							<c:param name="groupNo" value="1" />
 						</c:url>
