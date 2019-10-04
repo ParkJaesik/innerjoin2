@@ -35,8 +35,9 @@
 	
 	<select id="attendEventList" parameterType="map" resultType="_int">
 		SELECT EVENT_NO
-		FROM GROUP_EVENT USING(EVENT_NO)
-		WHERE GNO = #{gno} 
+		FROM GROUP_EVENT 
+		 JOIN MEMBER_EVENT USING(EVENT_NO)
+		WHERE GROUP_NO = #{gno} 
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
 	</select>

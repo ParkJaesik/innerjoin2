@@ -103,9 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 달력 렌더링(화면에 출력)
 	calendar.render();
    
-	// console.log("calendar.getDate: " + calendar.getDate());
-	getAttendEventList(calendar.getDate());
-   
 	// 다음달, 이전달 버튼을 클릭했을 때 해당하는 이벤트 표시하기
 	$(".fc-button").click(function() {
       
@@ -117,16 +114,22 @@ document.addEventListener('DOMContentLoaded', function() {
    
 	// 달력 액션시 새로 세팅되어야 하는 함수들
 	function eventSetting() {
-		var date = moment(calendar.getDate()).format('YYYY-MM');
+		var calDate = getCalDate();
 		// 해당 모임의 gno값 가져오기
 		var gno = 1;
-		assignEvent(date, gno);
-		getAttendEventList(date, gno);
+		assignEvent(calDate);
+		getAttendEventList(calDate);
+	}
+	
+	// 현재 달력 날짜 'YYYY-MM' 포맷으로 리턴
+	function getCalDate() {
+		return moment(calendar.getDate()).format('YYYY-MM');
 	}
    
 	// 현재 달력에 표시되는 월에 해당하는 이벤트 등록하기
-	function assignEvent(date, gno) {
+	function assignEvent(date) {
 		var events;
+		var gno = 1;
 		console.log("assignEvent: " + date);
 		// 달력에 표시된 이벤트들 지우기
 		$.each(calendar.getEvents(), function(i, v) {
@@ -160,8 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	// loginUser의 참석 모임 리스트 
-	function getAttendEventList(date, gno) {
+	function getAttendEventList(date) {
 		console.log("date: " +date);
+//		var gno = ${gno};
+		var gno = 1;
 		// loginUser의 memberId값은 controller에서 세팅.
 		$.ajax({
 			url: 'getAttendEventList.ij',
@@ -332,36 +337,34 @@ document.addEventListener('DOMContentLoaded', function() {
 		console.log("포함: " + attendEventList.includes(eno));
 		if(attendEventList.includes(eno)) {
 	
-	var thisBtn = this;
-	$(thisBtn).tooltip('show');
-	setTimeout(function() {
-	$(thisBtn).tooltip('hide');}, 1500);
-		  
-	return;
-	}
-	   var memberId = 'admin';
-	   $.ajax({
-		  url: 'attendEvent.ij',
-		  data: {eno: eno, memberId: memberId},  
-		  type: 'post',
-		  success: function(res) {
-			  if(res > 0) {
-				  Swal.fire({
-					text: '참석 취소되었습니다.',
-					timer: 1500,
-					showConfirmButton: false,
-					padding: '0.8rem',
-					width: '15rem'
-				});
-			  }
-			  console.log(res);
-		  },
-		  error: function(err) {
-			  console.log(err);
-		  }
-	   });
-	   console.log("참석되었음");
-   });
+			var thisBtn = this;
+			$(thisBtn).tooltip('show');
+			setTimeout(function() {
+			$(thisBtn).tooltip('hide');}, 1500);
+				  
+			return;
+		}
+		var memberId = 'admin';
+		$.ajax({
+			url: 'attendEvent.ij',
+			data: {eno: eno, memberId: memberId},  
+			type: 'post',
+			success: function(res) {
+				if(res > 0) {
+					alertMessage('참석되었습니다.');
+					eventSetting();
+				} else {
+					alertMessage('다시 시도해주세요.');
+				}
+				console.log(res);
+			},
+			error: function(err) {
+				console.log(err);
+				alertMessage('다시 시도해주세요.');
+			}
+		});
+	});
+	
    
    // eventDetailView에서 닫기버튼 누르면 해당요소 삭제
 	$(document).on('click', '.closeBtn', function(event) {
@@ -397,14 +400,23 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// 이벤트 등록 버튼을 클릭하면 ajax로 데이터 전송.
 	$("#addEventBtn").click(function() {
-		// 폼의 데이터를 쿼리스트링으로 받음.
-		var formData = $("form[name=eventForm]").serialize();
+		if($("#eTitle").val().trim().length==0) {
+			$("#eTitle").focus();
+			return;
+		}
+		if($("#eContent").val().trim().length==0) {
+			$("#eContent").focus();
+			return;
+		}
 		
 		// 이벤트 시작일이 종료일보다 값이 크면 포커스 주고 제출 취소
 		if($("#eStart").val() > $("#eEnd").val()) {
 			$("#eEnd").focus();
 			return false;
 		}
+
+		// 폼의 데이터를 쿼리스트링으로 받음.
+		var formData = $("form[name=eventForm]").serialize();
 		console.log("formData : " + formData);
 		$.ajax({
 			url: 'addEvent.ij',
@@ -416,14 +428,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				// 등록이 성공적으로 이루어질 경우 등록모달폼 초기화하고 숨기기.
 				if(result > 0) {
 					closeEventForm();
-					
-					
+					alertMessage('새 일정이 등록되었습니다.');
 					// 일정등록 성공 시 소켓 처리
 					
-					
+					eventSetting();
 					
 				}
-				eventSetting();
 			},
 			error: function(err) {
 				console.log(err);
@@ -443,6 +453,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		$("form[name=eventForm]")[0].reset();
 		$('.eventDay input').val(defaultTime);
 		$("#addEventForm").modal('hide');
+	}
+	
+	// 동작 성공 / 실패 알림창
+	function alertMessage(msg) {
+		Swal.fire({
+			text: msg,
+			timer: 1500,
+			showConfirmButton: false,
+			padding: '0.8rem',
+			width: '15rem'
+		});
 	}
 	
 	

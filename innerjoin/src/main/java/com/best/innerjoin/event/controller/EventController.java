@@ -77,8 +77,8 @@ public class EventController {
 	@RequestMapping("attendEvent.ij")
 	public int attendEvent(String eno, HttpSession session) {
 		//String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-//		return eService.attendEvent(eno, memberId);
-		return 1;
+		String memberId = "admin";
+		return eService.attendEvent(eno, memberId);
 	}
 	
 	/** 그룹에서 로그인유저가 참석하는  이벤트 리스트 조회 Controller
@@ -89,14 +89,13 @@ public class EventController {
 	 */
 	@ResponseBody
 	@RequestMapping("getAttendEventList.ij") 
-	public List<Integer> getAttendEventList(String date, Integer gno, HttpSession session) {
+	public List<Integer> getAttendEventList(String date, int gno, HttpSession session) {
 		System.out.println(date);
 		String memberId = "admin";
+		gno = 1;
 //		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-//		List<Integer> list = eService.attendEventList(date, memberId, gno);
-		List<Integer> list = new ArrayList();
-		list.add(10);
-		list.add(20);
+		List<Integer> list = eService.attendEventList(date, memberId, gno);
+		System.out.println("참석 목록 : " + list);
 		return list;
 		
 	}
@@ -126,7 +125,7 @@ public class EventController {
 //		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 		String memberId = "admin";
 		ArrayList<Event> eventList = eService.memberEventList(date, memberId);
-		return null;
+		return new Gson().toJson(eventList);
 	}
 
 	
