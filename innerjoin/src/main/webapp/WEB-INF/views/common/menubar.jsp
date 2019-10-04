@@ -9,25 +9,11 @@
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/menubar.css"/>
-
+<link rel="stylesheet" href="${contextPath}/resources/css/common/menubar.css">
 <style>
 
 	
 
-	#alarmTable{
-		border:1px solid black;
-		display:none;
-		z-index: 1000;
-		text-align: left;
-	    width: 30%;
-	    height: 60px;
-	    position:absolute;
-	    right:0;
-	    
-		
-		
-	}
 </style>
 </head>
 <body>
@@ -35,22 +21,25 @@
 	<!-- <div class="container" id="profile" > -->
 		<nav id="nav">
 			<ul>
-				<a href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a>
-				<li class="menu"><a class="icon solid fa-search" href="#"><span>Search</span></a></li>
-				<li class="menu"><a class="icon solid fa-envelope" onclick="showAlarm();"><span>News</span></a></li>
-                <li class="menu"><a class="icon solid fa-home" href="myGroupForm.ij"><span>MyPage</span></a></li>
+				<li id="logo-part"><a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
+				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
+				<li class="menu"><a class="icon solid fa-search" href="#"><span class="menu-detail">Search</span></a></li>
+				
+				<!-- 로그인 시 사용 가능 -->				
+				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="showAlarm();"><span class="menu-detail">News</span></a></li>
+                <li class="menu"><a class="icon solid fa-home menu-a" href="myGroupForm.ij"><span class="menu-detail">MyPage</span></a></li>
 			</ul>
 		</nav>
 		
 	<!-- </div> -->
 </section>
 
-<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/jquery.dropotron.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/browser.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/breakpoints.min.js"></script>
-			<script src="${contextPath}/resources/assets/js/util.js"></script>
-			<script src="${contextPath}/resources/assets/js/main.js"></script>
+			<%-- <script src="${contextPath}/resources/js/jquery.min.js"></script>
+			<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
+			<script src="${contextPath}/resources/js/browser.min.js"></script>
+			<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
+			<script src="${contextPath}/resources/js/util.js"></script>
+			<script src="${contextPath}/resources/js/main.js"></script> --%>
 
 
 <div id="alarmTable">
