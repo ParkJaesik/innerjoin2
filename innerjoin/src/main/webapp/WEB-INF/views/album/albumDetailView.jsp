@@ -13,14 +13,15 @@
 	
 </head>
 <body>
+<%@ include file="../group/groupMenubar.jsp" %>
         <div class="container-fluid al-wrapper">
             <div class="row al-header">
                 <div class="col-md-3 al-info">
-                    <h5>2019-09-24, 16:39 pm</h5>
-                    <h5>by. user01</h5>
+                    <h5>${album.albumModifyDate}</h5>
+                    <h6>by. ${album.memberId}</h6>
                 </div>
                 <div class="col-md-4 al-title">
-                    <h1 align="right">album 01</h1>
+                    <h1 align="right">${album.albumTitle}</h1>
                 </div>
                 <div class="col-md-5 al-list">
                     <div style="width: 50px; height: 50px; overflow: hidden">
@@ -32,27 +33,26 @@
                 <div class="col-md-12 al-photo" style="/* width: 100%; min-height: 500px;  */overflow: hidden">
 								<div class="carousel slide" id="carousel-744270">
 									<ol class="carousel-indicators">
-										<li data-slide-to="0" data-target="#carousel-744270">
+										<c:forEach begin="0" end="${fn:length(list) -1}">
+											<li data-target="#carousel-744270">
+											</li>
+										</c:forEach>
+										
+<!-- 									<li data-slide-to="0" data-target="#carousel-744270">
 										</li>
 										<li data-slide-to="1" data-target="#carousel-744270">
 										</li>
 										<li data-slide-to="2" data-target="#carousel-744270" class="active">
-										</li>
+										</li> -->
 									</ol>
 									<div class="carousel-inner">
+										<c:forEach var="p" items="${ list }">
 										<div class="carousel-item">
-											<img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-1.jpg" />
-											<div class="carousel-caption">
-												<h4>
-													First Thumbnail label
-												</h4>
-												<p>
-													Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-												</p>
-											</div>
+											<img alt="Carousel Bootstrap First" src="resources/auploadFiles/${p.photoRename}" />
 										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100" alt="Carousel Bootstrap Second" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
+										</c:forEach>
+										<!-- <div class="carousel-item">
+											<img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
 											<div class="carousel-caption">
 												<h4>
 													Second Thumbnail label
@@ -72,7 +72,7 @@
 													Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
 												</p>
 											</div>
-										</div>
+										</div> -->
 									</div> <a class="carousel-control-prev" href="#carousel-744270" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-744270" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
 								</div>
                 </div>
@@ -109,7 +109,7 @@
                                 <hr>
                                 <div class="row re-content">
                                     <div class="col-md-12">
-                                        <textarea rows="3" cols="128" readonly>dfdsfdhaksehfuiwehihhefiu</textarea>
+                                        <textarea rows="3" cols="110" readonly></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +173,7 @@
             });
             
             $(".al-list img").click(function(){
-            	location.href="albumListView.ij";
+            	location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + {pi.currentPage};
             });
         </script>
                

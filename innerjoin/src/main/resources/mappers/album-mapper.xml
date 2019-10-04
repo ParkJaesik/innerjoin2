@@ -23,7 +23,7 @@
 	
 	<insert id="insertAlbum" parameterType="Album">
 		INSERT INTO ALBUM
-		VALUES(SEQ_ANO.NEXTVAL, DEFAULT, #{memberId}, #{groupNo},DEFAULT, DEFAULT, #{albumTitle})
+		VALUES(SEQ_ANO.NEXTVAL, DEFAULT, #{memberId}, #{groupNo},DEFAULT, DEFAULT, #{albumTitle}, #{albumThumbnail})
 	</insert>
 
 	<insert id="insertPhoto" parameterType="AlbumPhoto">
@@ -32,5 +32,27 @@
 		
 	</insert>
 	
+	<select id="selectListCount" parameterType="String" resultType="_int">
+		SELECT COUNT(*)
+		FROM ALBUM
+		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y'
+	</select>
 	
+	<select id="selectAlbumList" parameterType="String" resultMap="albumResultSet">
+		SELECT *
+		FROM ALBUM
+		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y'
+	</select>
+	
+	<select id="selectAlbum" parameterType="_int" resultMap="albumResultSet">
+		SELECT *
+		FROM ALBUM
+		WHERE ALBUM_NO = #{albumNo}
+	</select>
+	
+	<select id="selectPhotoList" parameterType="_int" resultMap="photoResultSet">
+		SELECT *
+		FROM ALBUM_PHOTO
+		WHERE ALBUM_NO = #{albumNo}
+	</select>
 </mapper>

@@ -222,7 +222,7 @@
             });
             
             function goList(){
-            	 location.href="albumListView.ij";
+            	 location.href="albumListView.ij?groupNo="+${groupNo};
             }
         </script>
 </body>

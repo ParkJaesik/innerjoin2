@@ -113,7 +113,7 @@
                         	<a href="gochat.ij">채팅창</a>
                         
                         <c:url var="goAlbum" value="/albumListView.ij">
-							<c:param name="gno" value="1" />
+							<c:param name="groupNo" value="1" />
 						</c:url>
                         <a href="${goAlbum}">앨범</a>
 

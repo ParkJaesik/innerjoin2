@@ -16,6 +16,8 @@ import com.best.innerjoin.album.model.dao.AlbumDao;
 import com.best.innerjoin.album.model.exception.AlbumException;
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
+import com.best.innerjoin.album.model.vo.Pagination;
+import com.best.innerjoin.common.PageInfo;
 
 @Service("aService")
 public class AlbumServiceImpl implements AlbumService {
@@ -166,5 +168,33 @@ public class AlbumServiceImpl implements AlbumService {
 			}
 			
 			return result;
+		}
+
+		@Override
+		public ArrayList<Album> selectList(String gno, int currentPage) {
+			// 전체 게시물 수 조회
+			int listCount = aDao.getListCount(gno);
+			
+			// 게시물 목록 조회(페이징 처리)
+			// 1) 페이지 정보 저장
+			PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
+			// 2) 목록 조회 후 리턴
+			return aDao.selectAlbumList(gno, pi);
+		}
+
+		@Override
+		public Album selectAlbum(int albumNo) {
+			// 1) 조회수 증가
+		/* aDao.addReadCount(albumNo); */
+			System.out.println("service albumNo 확인 : " +albumNo);
+			// 2) 게시글 상세 데이터 조회
+			Album album = aDao.selectAlbum(albumNo);
+			System.out.println("service album 확인"+album.toString());
+			return album;
+		}
+
+		@Override
+		public ArrayList<AlbumPhoto> selectPhoto(int albumNo) {
+			return aDao.selectPhoto(albumNo);
 		}
 }
