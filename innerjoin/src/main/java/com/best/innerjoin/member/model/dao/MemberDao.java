@@ -1,5 +1,7 @@
 package com.best.innerjoin.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,15 +15,15 @@ public class MemberDao {
 	private SqlSessionTemplate sqlSession;
 	
 	
-	public Member loginMember(Member member) {
-		
-		return sqlSession.selectOne("memberMapper.loginMember",member);
-	}
-	
 //	public Member loginMember(Member member) {
-//		Member loginUser = sqlSession.selectOne("memberMapper.loginMember",member);
-//		return loginUser;
+//		
+//		return sqlSession.selectOne("memberMapper.loginMember",member);
 //	}
+	
+	public Member loginMember(Member member) {
+		Member loginUser = sqlSession.selectOne("memberMapper.loginMember",member);
+		return loginUser;
+	}
 
 
 	// 회원가입
@@ -41,6 +43,22 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.checkNameDup", name);
 	}
 
+
+	// 내 모임 갯수
+	public int groupCount(Member loginUser) {
+		
+		return sqlSession.selectOne("memberMapper.groupCount", loginUser);
+	}
+
+	// 내모임 목록 조회
+	
+	public ArrayList<Member> selectList(Member loginUser) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectList", loginUser);
+	}
+
 	
 	
 }
+
+

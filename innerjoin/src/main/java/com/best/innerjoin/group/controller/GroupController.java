@@ -45,6 +45,18 @@ public class GroupController {
 		
 	}
 	
+	@RequestMapping("tempGoGroup.ij")
+	public String tempGoGroup(HttpServletRequest request) {
+		 request.getSession().setAttribute("groupName", "가나다");
+		return "group/groupIndex";
+	}
+	
+	@RequestMapping("tempGoGroup2.ij")
+	public String tempGoGroup2(HttpServletRequest request) {
+		 request.getSession().setAttribute("groupName", "라라라라");
+		return "group/groupIndex";
+	}
+	
 	
 	
 

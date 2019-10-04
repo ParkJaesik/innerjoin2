@@ -20,13 +20,33 @@
   </resultMap>
   
   
+  <resultMap type="Group" id="groupResultSet">
+		<id property="gNo" column="GROUP_NO"/>
+		<result property="gHost" column="GROUP_HOST"/>
+		<result property="gOpenStatus" column="GROUP_OPEN_STATUS"/>
+		<result property="gName" column="GROUP_NAME"/>
+		<result property="gLimit" column="GROUP_LIMIT"/>
+		<result property="gInfo" column="GROUP_INFO"/>
+		<result property="gMemCount" column="GROUP_MEM_COUNT"/>
+		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
+		<result property="localCode" column="LOCAL_CODE"/>
+		<result property="gStatus" column="GROUP_STATUS"/>
+		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
+		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
+		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
+		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+	</resultMap>
+  
+  
+  
+  
+  
   <select id="loginMember" parameterType="Member" 
 			resultMap="memberResultSet">
 			
 	SELECT * FROM MEMBER
-	WHERE MEMBER_ID = #{memberId}
-	AND MEMBER_PWD = #{memberPwd}
-	AND MEMBER_STATUS_CODE != 4
+	WHERE MEMBER_ID = #{memberId} 
+	AND MEMBER_STATUS_CODE != 4 
 
   
   </select>
@@ -55,8 +75,28 @@
   	WHERE MEMBER_NAME = #{memberName}
   </select>
   
+
   <!-- 해당 아이디의 이름 조회 쿼리 : 승화 필요 -->
   <select id="idToName" parameterType="string" resultType="string">
 	SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_ID = #{replyWriter}
   </select>
+
+  <!-- 내 모임 목록 갯수 -->
+  <select id="groupCount" parameterType="Member"  resultType="_int">
+  	SELECT MEMBER_JOIN_COUNT
+  	FROM MEMBER
+  	WHERE MEMBER_ID= #{memberId}
+  	<!-- AND 모임상태 != 탈퇴나  폐쇄  -->
+  </select>
+  
+  <!-- 내 목록 조회 -->
+  <select id="selectList" parameterType="Member" resultMap="groupResultSet">
+  	SELECT GROUP_NAME,GROUP_INFO, GROUP_ORIGIN_FILENAME
+	FROM GROUP_MEMBER
+	JOIN "GROUP" USING(GROUP_NO) 
+	WHERE MEMBER_ID = #{memberId}
+  	
+  	
+  </select>
+  
 </mapper>

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -109,9 +110,14 @@
                         	<a href="logout.ij">로그아웃</a>
                         	<br>
                         	<a href="myGroupForm.ij">마이페이지</a>
+
+                        	<a href="tempGoGroup.ij">임시 모임 페이지로 이동</a>
+                        	<a href="tempGoGroup2.ij">임시 모임2 페이지로 이동</a>
+
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>
                         
+
 
                         
                         <button onclick="goAlbum();">앨범</button>
@@ -129,10 +135,9 @@
 				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
 
                         <c:url var="goAlbum" value="/albumListView.ij">
-							<c:param name="gno" value="1" />
+							<c:param name="groupNo" value="1" />
 						</c:url>
                         <a href="${goAlbum}">앨범</a>
-
 
                         </div>
                     </div>
@@ -394,4 +399,5 @@
 
 
     </body>
+
 </html>

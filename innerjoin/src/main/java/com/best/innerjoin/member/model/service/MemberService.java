@@ -1,5 +1,11 @@
 package com.best.innerjoin.member.model.service;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.best.innerjoin.member.model.vo.Member;
 
 public interface MemberService {
@@ -15,4 +21,9 @@ public interface MemberService {
 	// 닉네임 중복 검사
 	public abstract int checkNameDup(String name);
 
+	// 마이페이지 - 내 모임 목록
+	public abstract ArrayList<Member> selectList(Member loginUser);
+
+	
+	
 }

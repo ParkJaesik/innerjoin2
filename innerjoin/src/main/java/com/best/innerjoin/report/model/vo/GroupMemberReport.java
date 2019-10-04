@@ -6,7 +6,7 @@ public class GroupMemberReport {
 	
 	private int rNo;
 	private String rContent;
-	private int rCategory;
+	private String rCategory;
 	private String reportId;
 	private int reportGNo;
 	private String responId;
@@ -14,13 +14,14 @@ public class GroupMemberReport {
 	private String rStatus;
 	private Date rDate;
 	private Date rStatusDate;
+	private String rBoardStatus;
 	
 	public GroupMemberReport() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GroupMemberReport(int rNo, String rContent, int rCategory, String reportId, int reportGNo, String responId,
-			int responGNo, String rStatus, Date rDate, Date rStatusDate) {
+	public GroupMemberReport(int rNo, String rContent, String rCategory, String reportId, int reportGNo, String responId,
+			int responGNo, String rStatus, Date rDate, Date rStatusDate, String rBoardStatus) {
 		super();
 		this.rNo = rNo;
 		this.rContent = rContent;
@@ -32,6 +33,7 @@ public class GroupMemberReport {
 		this.rStatus = rStatus;
 		this.rDate = rDate;
 		this.rStatusDate = rStatusDate;
+		this.rBoardStatus = rBoardStatus;
 	}
 
 	public int getrNo() {
@@ -50,11 +52,11 @@ public class GroupMemberReport {
 		this.rContent = rContent;
 	}
 
-	public int getrCategory() {
+	public String getrCategory() {
 		return rCategory;
 	}
 
-	public void setrCategory(int rCategory) {
+	public void setrCategory(String rCategory) {
 		this.rCategory = rCategory;
 	}
 
@@ -114,12 +116,23 @@ public class GroupMemberReport {
 		this.rStatusDate = rStatusDate;
 	}
 
+	public String getrBoardStatus() {
+		return rBoardStatus;
+	}
+
+	public void setrBoardStatus(String rBoardStatus) {
+		this.rBoardStatus = rBoardStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupMemberReport [rNo=" + rNo + ", rContent=" + rContent + ", rCategory=" + rCategory + ", reportId="
 				+ reportId + ", reportGNo=" + reportGNo + ", responId=" + responId + ", responGNo=" + responGNo
-				+ ", rStatus=" + rStatus + ", rDate=" + rDate + ", rStatusDate=" + rStatusDate + "]";
+				+ ", rStatus=" + rStatus + ", rDate=" + rDate + ", rStatusDate=" + rStatusDate + ", rBoardStatus="
+				+ rBoardStatus + "]";
 	}
+
+	
 
 
 	
