@@ -32,8 +32,6 @@
 </head>
 <body>
 
-
-<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
 <c:set var="groupNo" value="1"/>
 <c:set var="memberId" value="gp@gmail.com"/>
 	<div id="group-index-container">
