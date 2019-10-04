@@ -18,7 +18,7 @@
 <title>Group Board List</title>
 </head>
 <body>
-	<c:import url="" />
+	<%-- <c:import url="" /> --%>
 
 	<div id="board-container">
 		<h1 align="center">게시판</h1>
@@ -32,7 +32,7 @@
 			</div>
 
 			<div id="board-writer">
-				<span id="writer">${ board.memberId }</span>
+				<span id="writer">${ board.boardWriter }</span>
 			</div>
 
 			<div id="board-title">
@@ -66,13 +66,9 @@
 					<c:param name="page" value="${ currentPage }"/>
 				</c:url>
 				
-				<c:if test="${ loginUser.id eq board.memberId }">
-					<button onclick="location.href='bmodifyView.ij';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
-				</c:if>
+				<button onclick="location.href='${ boardModify }';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
 				
-				<c:if test="${ loginUser.id eq board.memberId }">
-					<button onclick="location.href='bdelete.ij';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
-				</c:if>
+				<button onclick="location.href='bdelete.ij';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
 				
 				<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
 			</div>
@@ -96,16 +92,17 @@
 			<div id="reply-view">
 				<table align="center">
 					<tr>
-						<td id="reply-writer"></td>
-						<td id="reply-button">
-							<a href="">수정</a>
+						<td class="reply-writer"></td>
+						<td class="reply-button">
+							<a href="javascript:update();">수정</a>
 							<a href="">삭제</a>
 						</td>
 					</tr>
 
 					<tr>
-						<td id="reply-content"></td>
-						<td id="reply-date"></td>
+						<td class="reply-content">
+						</td>
+						<td class="reply-date"></td>
 					</tr>
 				</table>
 			</div>
@@ -140,10 +137,16 @@
 				data : {boardNo : boardNo},
 				dataType : "json",
 				success : function(list) {
-					var 
 				}
 			});
 		}
+		
+		function update() {
+			$(this).parent().parent().next().children().
+			console.log(this);
+			this.parentNode.parentNode.nextSibling.childNodes[0].
+		}
+		
 	</script>
 </body>
 </html>

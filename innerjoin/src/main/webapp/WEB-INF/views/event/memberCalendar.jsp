@@ -118,10 +118,9 @@
 					var title = this.getElementsByClassName("fc-title")[0].textContent;
 					return title;
 				},
-				content: function(e) {
-					console.log("팝오버 this: " + this);
+				content: function() {
+					console.log("팝오버 this: ");
 					console.log(this);
-					console.log("팝오버 e: " + e);
 					var groupBtn = "<a role='button' class='btn btn-primary groupBtn' href='calendar.ij'>모임으로</a>";
 					var cancelBtn = "<a type='button' class='btn btn-secondary cancelBtn' onclick='cancel(0)'>취소하기</a>";
 					//var link = "<a href='http://www.naver.com'>네이버</a>";

@@ -1,5 +1,7 @@
 package com.best.innerjoin.member.controller;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
@@ -96,11 +100,22 @@ public class MemberController {
 	}
 	
 	
-	
 	// 마이페이지로 이동
 	@RequestMapping("myGroupForm.ij")
-	public String myGroup() {
-		return "member/myGroup";
+	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
+		
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		System.out.println(loginUser);
+		ArrayList<Member> list = mService.selectList(loginUser);
+		
+		System.out.println(list);
+		
+		if(list != null) {
+			mv.addObject("list", list).setViewName("member/myGroup");
+		} else {
+			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 	
 	// 프로필 수정으로 이동
@@ -109,10 +124,17 @@ public class MemberController {
 		return "member/profileUpdate";
 	}
 	
+	
 	// 쪽지함으로 이동
 	@RequestMapping("myNoteForm.ij")
 	public String myNoteForm() {
 		return "member/myNote";
+	}
+	
+	// 알림함으로 이동
+	@RequestMapping("myNewsForm.ij")
+	public String myNewsForm() {
+		return "member/myNews";
 	}
 	
 	// 정보수정으로 이동
