@@ -7,20 +7,20 @@ public class Reply {
 	private String replyContent;
 	private Date replyCreateDate;
 	private Date replyModifyDate;
-	private char replyStauts;
+	private char replyStatus;
 	private int boardNo;
 	private String replyWriter;
 	
 	public Reply() {}
 
-	public Reply(int replyNo, String replyContent, Date replyCreateDate, Date replyModifyDate, char replyStauts,
+	public Reply(int replyNo, String replyContent, Date replyCreateDate, Date replyModifyDate, char replyStatus,
 			int boardNo, String replyWriter) {
 		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
 		this.replyCreateDate = replyCreateDate;
 		this.replyModifyDate = replyModifyDate;
-		this.replyStauts = replyStauts;
+		this.replyStatus = replyStatus;
 		this.boardNo = boardNo;
 		this.replyWriter = replyWriter;
 	}
@@ -57,12 +57,12 @@ public class Reply {
 		this.replyModifyDate = replyModifyDate;
 	}
 
-	public char getReplyStauts() {
-		return replyStauts;
+	public char getreplyStatus() {
+		return replyStatus;
 	}
 
-	public void setReplyStauts(char replyStauts) {
-		this.replyStauts = replyStauts;
+	public void setreplyStatus(char replyStatus) {
+		this.replyStatus = replyStatus;
 	}
 
 	public int getBoardNo() {
@@ -84,7 +84,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
-				+ ", replyModifyDate=" + replyModifyDate + ", replyStauts=" + replyStauts + ", boardNo=" + boardNo
+				+ ", replyModifyDate=" + replyModifyDate + ", replyStatus=" + replyStatus + ", boardNo=" + boardNo
 				+ ", replyWriter=" + replyWriter + "]";
 	}
 	

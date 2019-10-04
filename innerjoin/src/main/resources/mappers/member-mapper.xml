@@ -54,4 +54,9 @@
   	FROM MEMBER
   	WHERE MEMBER_NAME = #{memberName}
   </select>
+  
+  <!-- 해당 아이디의 이름 조회 쿼리 : 승화 필요 -->
+  <select id="idToName" parameterType="string" resultType="string">
+	SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_ID = #{replyWriter}
+  </select>
 </mapper>

@@ -5,22 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${contextPath}/resources/css/board/groupBoard-style.css"
-	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="${contextPath}/resources/css/board/groupBoard-style.css" type="text/css">
 <title>Group Board</title>
 </head>
 <body>
 <%-- <jsp:include page="${contextPath}/WEB-INF/views/common/menubar.jsp"></jsp:include> --%>
-<%-- <jsp:include page="${contextPath}/WEB-INF/views/group/groupMenubar.jsp"></jsp:include> --%>
-
+<%@ include file="../group/groupMenubar.jsp" %>
 	<div id="board-container">
 		<h1 align="center">게시판</h1>
 

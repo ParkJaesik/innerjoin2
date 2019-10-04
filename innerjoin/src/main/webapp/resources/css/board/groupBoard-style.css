@@ -11,14 +11,14 @@ div {
 	box-sizing: border-box;
 }
 
-.btn {
+#board-container button {
 	outline: none;
 	border: none;
 	margin: 0;
 	padding: 0;
 }
 
-.btn:focus {
+#board-container button:foucs {
 	box-shadow: none !important;
 }
 

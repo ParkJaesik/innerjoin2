@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.board.model.vo.Board;
 import com.best.innerjoin.board.model.vo.PageInfo;
+import com.best.innerjoin.board.model.vo.Reply;
 
 @Repository("bDao")
 public class BoardDao {
@@ -23,7 +24,7 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.boardListCount");
 	}
 
-	/** 게시글 조회 DAO
+	/** 게시글 목록 조회 DAO
 	 * @param pi
 	 * @return list
 	 */
@@ -66,6 +67,39 @@ public class BoardDao {
 	 * @return result
 	 */
 	public int boardModify(Board board) {
+		System.out.println(board);
 		return sqlSession.update("boardMapper.boardModify", board);
+	}
+
+	/** 게시글 삭제 DAO
+	 * @param boardNo
+	 * @return result
+	 */
+	public int boardDelete(int boardNo) {
+		return sqlSession.update("boardMapper.boardDelete", boardNo);
+	}
+
+	/** 댓글 조회 DAO
+	 * @param boardNo
+	 * @return rList
+	 */
+	public ArrayList<Reply> replyList(int boardNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.replyList", boardNo);
+	}
+
+	/** 댓글 등록 DAO
+	 * @param reply
+	 * @return result
+	 */
+	public int replyInsert(Reply reply) {
+		return sqlSession.insert("boardMapper.replyInsert", reply);
+	}
+
+	/** 아이디를 이름으로 변경하는 DAO
+	 * @param replyWriter
+	 * @return 
+	 */
+	public String idToName(String replyWriter) {
+		return sqlSession.selectOne("memberMapper.idToName", replyWriter);
 	}
 }

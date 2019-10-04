@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.board.model.vo.Board;
+import com.best.innerjoin.board.model.vo.Reply;
 
 @Service
 public interface BoardService {
@@ -39,6 +40,30 @@ public interface BoardService {
 	 * @param request
 	 * @return result
 	 */
-	public abstract int boardModify(Board board, MultipartFile reloadFile, HttpServletRequest request);
+	public abstract int boardModify(Board board);
+
+	/** 게시글 삭제 Service
+	 * @param boardNo
+	 * @return result
+	 */
+	public abstract int boardDelete(int boardNo);
+
+	/** 댓글 조회 Service
+	 * @param boardNo
+	 * @return rList
+	 */
+	public abstract ArrayList<Reply> replyList(int boardNo);
+
+	/** 댓글 등록 Service
+	 * @param reply
+	 * @return result
+	 */
+	public abstract int replyInsert(Reply reply);
+
+	/** 아이디를 이름으로 변경하는 Service
+	 * @param replyWriter
+	 * @return 
+	 */
+	public abstract String idToName(String replyWriter);
 
 }

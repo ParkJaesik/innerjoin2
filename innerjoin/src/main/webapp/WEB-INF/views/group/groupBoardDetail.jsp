@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/board/groupBoardDetail-style.css"
 	type="text/css">
@@ -68,50 +70,62 @@
 				
 				<button onclick="location.href='${ boardModify }';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
 				
-				<button onclick="location.href='bdelete.ij';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
+				<button onclick="location.href='${ boardDelete }';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
 				
 				<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
 			</div>
 		</div>
-
+		
 		<div id="reply-part">
-			<div id="reply-input-part">
-				<div id="reply-input-text">
-					<textarea id="reply"></textarea>
+				<div id="reply-input-part">
+					<div id="reply-input-text">
+						<textarea id="reply"></textarea>
+					</div>
+	
+					<div id="reply-input-button">
+						<button type="button" class="btn btn-primary" id="reply-btn-input">댓글등록</button>
+					</div>
 				</div>
-
-				<div id="reply-input-button">
-					<button class="btn btn-primary" id="reply-btn-input">댓글등록</button>
+	
+				<div id="reply-count">
+					<span id="replyCount"></span>
 				</div>
-			</div>
-
-			<div id="reply-count">
-				<span id="replyCount"></span>
-			</div>
-
-			<div id="reply-view">
-				<table align="center">
-					<tr>
-						<td class="reply-writer"></td>
-						<td class="reply-button">
-							<a href="javascript:update();">수정</a>
-							<a href="">삭제</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td class="reply-content">
-						</td>
-						<td class="reply-date"></td>
-					</tr>
-				</table>
-			</div>
+	
+				<div id="reply-view-container">
+					
+				</div>
 		</div>
 	</div>
 	
 	<script>
+		function replyList() {
+			var boardNo = ${ board.boardNo };
+			$wrapper = $("#reply-view-container");
+			$wrapper.empty();
+			$content = "";
+			$.ajax({
+				url : "rlist.ij",
+				data : {boardNo : boardNo},
+				dataType : "json",
+				success : function(list) {
+					if(list.length>0){
+						$.each(list, function(i){
+							$content = '<div class="reply-view" align="center"><table><tr>';
+							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].replyWriter+'</td>';
+							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
+							$content += '<a href="javascript:update('+list[i].replyNo+');">수정</a>&nbsp;&nbsp;';
+							$content += '<a href="">삭제</a></td></tr>';
+							$content += '<tr>';
+							$content += '<td class="reply-content" style="font-weight:bold">'+list[i].replyContent+'</td>';
+							$content += '<td class="reply-date" style="text-align:center; font-size:12px;">'+list[i].replyCreateDate+'</td></tr>';
+							$content += '</table></div>';
+							$wrapper.append($content);
+						});
+					}
+				}
+			});
+		}
 		replyList();
-		
 		$("#reply-btn-input").on("click", function(){
 			var replyContent = $("#reply").val();
 			var boardNo = ${ board.boardNo };
@@ -129,22 +143,12 @@
 			});
 		});
 		
-		function replyList() {
-			var boardNo = ${ board.boardNo };
-			
-			$.ajax({
-				url : "rlist.ij",
-				data : {boardNo : boardNo},
-				dataType : "json",
-				success : function(list) {
-				}
-			});
-		}
+		
 		
 		function update() {
 			$(this).parent().parent().next().children().
 			console.log(this);
-			this.parentNode.parentNode.nextSibling.childNodes[0].
+			this.parentNode.parentNode.nextSibling.childNodes[0];
 		}
 		
 	</script>
