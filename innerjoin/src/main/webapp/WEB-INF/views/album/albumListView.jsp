@@ -15,6 +15,7 @@
 </head>
 
 <body>
+<jsp:include page="/WEB-INF/views/common/menubar.jsp"></jsp:include>
 <%@ include file="../group/groupMenubar.jsp" %>
  <script>
  	console.log('gno:'+'${gno}'); 

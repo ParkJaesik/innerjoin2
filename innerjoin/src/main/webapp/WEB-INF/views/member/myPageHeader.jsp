@@ -45,14 +45,7 @@
 			<section id="header">
 				<div class="container" id="profile" >
 					
-					<nav id="nav">
-						<ul>
-							<a href="#"><img id="ij-logo" src="${contextPath }/resources/images/innerJoin.png"></a>
-							<li class="menu"><a class="icon solid fa-search" href="left-sidebar.html"><span>Search</span></a></li>
-							<li class="menu"><a class="icon solid fa-envelope" href="myNewsForm.ij"><span>News</span></a></li>
-                            <li class="menu"><a class="icon solid fa-home" href=""><span>MyPage</span></a></li>
-						</ul>
-					</nav> 
+					<jsp:include page="/WEB-INF/views/common/menubar.jsp"></jsp:include>
 					<div>
 
 						<form action="">

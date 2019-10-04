@@ -22,7 +22,7 @@ public interface MemberService {
 	public abstract int checkNameDup(String name);
 
 	// 마이페이지 - 내 모임 목록
-	public abstract ArrayList<Member> selectList();
+	public abstract ArrayList<Member> selectList(Member loginUser);
 
 	
 	

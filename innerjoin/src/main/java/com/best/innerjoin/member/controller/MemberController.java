@@ -102,8 +102,13 @@ public class MemberController {
 	
 	// 마이페이지로 이동
 	@RequestMapping("myGroupForm.ij")
-	public ModelAndView myGroup(Member member, ModelAndView mv, HttpServletRequest request) {
-		ArrayList<Member> list = mService.selectList();
+	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
+		
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		System.out.println(loginUser);
+		ArrayList<Member> list = mService.selectList(loginUser);
+		
+		System.out.println(list);
 		
 		if(list != null) {
 			mv.addObject("list", list).setViewName("member/myGroup");

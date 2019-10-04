@@ -101,9 +101,10 @@ public class MemberServiceImpl implements MemberService{
 
 	// 내 모임 목록
 	@Override
-	public ArrayList<Member> selectList() {
-		int groupCount = mDao.groupCount();
-		return mDao.selectList();
+	public ArrayList<Member> selectList(Member logingUser) {
+		System.out.println("서비스" + logingUser);
+		int groupCount = mDao.groupCount(logingUser);
+		return mDao.selectList(logingUser);
 	}
 	
 	

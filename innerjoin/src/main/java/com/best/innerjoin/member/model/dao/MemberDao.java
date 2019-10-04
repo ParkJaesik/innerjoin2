@@ -45,16 +45,16 @@ public class MemberDao {
 
 
 	// 내 모임 갯수
-	public int groupCount() {
+	public int groupCount(Member loginUser) {
 		
-		return sqlSession.selectOne("memberMapper.groupCount");
+		return sqlSession.selectOne("memberMapper.groupCount", loginUser);
 	}
 
 	// 내모임 목록 조회
 	
-	public ArrayList<Member> selectList() {
+	public ArrayList<Member> selectList(Member loginUser) {
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.selectlist");
+		return (ArrayList)sqlSession.selectList("memberMapper.selectList", loginUser);
 	}
 
 	

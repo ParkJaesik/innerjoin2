@@ -33,6 +33,13 @@
 			.invite-name{
 				border-bottom: 1px dashed #7777767e;
 			}
+			.groupList{
+				float: left !important;
+			}
+			.group-Image{
+				width: 20em !important;
+				height: 13em;
+			}
 			
 		</style>
 </head>
@@ -41,7 +48,7 @@
 
 			<!-- Header -->
 			
-			<jsp:include page="myPageHeader.jsp"/>
+			<jsp:include page="/WEB-INF/views/member/myPageHeader.jsp"/>
 			
 			<!-- Main -->
 			<section id="main">
@@ -54,34 +61,36 @@
 
 					<!-- 2째 줄 시 반복 -->
 						
-					<div class="row aln-center">
+					<div class="row">
 					<c:forEach var="myGroup" item="${list}" varStatus="status">
-							<div class="col-4 col-6-medium col-12-small">
-								<br>
-								<!-- Feature -->
-								<section>
-									<a href="#" class="image featured">${ myGroup.groupOriginFileName }</a>
-									<header>
-									<!-- loginUser에 값 있을 시 -->
+						<div class="col-4">
+							<br>
+							<!-- Feature -->
+							<section>
+								<a href="#" class="image featured"><img class="group-Image" src="${contextPath}/resources/images/1.jpg"></a>
+									
+								<!-- ${ myGroup.groupOriginFileName } -->
+								<header>
+								<!-- loginUser에 값 있을 시 -->
 									<c:if test="${ !empty loginUser }">
 										<c:url var="" value="">
-											<c:param name="" value="${ myGroup.groupNo }"/>
+											<c:param name="gNo" value="${ myGroup.gNo }"/>
 										</c:url>
-										<h3><a href=""> ${ group.groupTitle }</a></h3> 
+										<h3><a href=""> ${ myGroup.gName }</a></h3> 
 									</c:if>
 									
-									</header>
-									<p><a href="">${ group.groupInfo }</a></p>
-								</section>
-							</div>
+								</header>
+								<p><a href="">${ myGroup.gInfo }</a></p>
+							</section>
+						</div>
 						<c:if test="${status.index}%3 == 2 ">
-							</div>
-							<div class="row aln-center">
-						</c:if>
-						<c:if test="${status.last}">
-							</div>
-						</c:if>
-						</c:forEach>
+					</div>
+					<div class="row aln-center">
+				</c:if>
+					<c:if test="${status.last}">
+					</div>
+					</c:if>
+				</c:forEach>
 							
 									
 						
