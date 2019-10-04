@@ -38,7 +38,7 @@
 								<c:param name="page" value="${ pi.currentPage }"/>
 							</c:url>
 							<div class="img-box">
-								<img src="resources/auploadFiles/${ a.albumThumbnail}" onclick="goDetail(${a.albumNo})">
+								<img src="resources/auploadFiles/${ a.albumThumbnail}" onclick="goDetail(${a.albumNo});">
 							</div>
 							<c:choose>
 								<c:when test="${ fn:length(a.albumTitle) gt 15}">
@@ -122,11 +122,11 @@
 		}
 	
         $(".al-list img").click(function(){
-        	location.href="albumListView.ij";
+        	location.href="albumListView.ij?page=" + ${currentPage} +"&groupNo=" + ${groupNo};
         });
         
         $(".footer img").click(function(){
-        	location.href="addAlbumForm.ij";
+        	location.href="addAlbumForm.ij?page=" + ${pi.currentPage};
         });
 		/* $(".section img").click(function(){
 			location.href="albumDetailView.ij";

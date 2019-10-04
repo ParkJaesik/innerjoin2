@@ -173,7 +173,7 @@
             });
             
             $(".al-list img").click(function(){
-            	location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + {pi.currentPage};
+            	location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + ${currentPage};
             });
         </script>
                

@@ -41,7 +41,7 @@
 							</div>
 							<div class="col-md-4">
 								<button class="submit float_right btn btn-warning">앨범등록</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">등록취소</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page}">등록취소</button>
 							</div>
 						</div>
 					</div>
