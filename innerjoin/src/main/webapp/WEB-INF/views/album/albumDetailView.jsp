@@ -168,6 +168,7 @@
                 }
             }
 
+            
             $(".carousel").carousel({
             	interval:false
             });

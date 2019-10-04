@@ -116,6 +116,7 @@
 	<script>
  
     
+
 		function goDetail(albumNo){
 			console.log(albumNo);
 			location.href="albumDetailView.ij?albumNo="+albumNo + "&page=" + ${pi.currentPage}; 
