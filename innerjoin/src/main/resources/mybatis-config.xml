@@ -21,7 +21,8 @@
 		<typeAlias type="com.best.innerjoin.report.model.vo.GroupMemberReport" alias="GroupMemberReport"/>		
 
 		<typeAlias type="com.best.innerjoin.album.model.vo.Album" alias="Album"/>		
-		<typeAlias type="com.best.innerjoin.album.model.vo.AlbumPhoto" alias="AlbumPhoto"/>		
+		<typeAlias type="com.best.innerjoin.album.model.vo.AlbumPhoto" alias="AlbumPhoto"/>
+		<typeAlias type="com.best.innerjoin.report.model.vo.Search" alias="Search"/>
 
 	</typeAliases>
 	

@@ -18,7 +18,7 @@
 <title>Group Board</title>
 </head>
 <body>
-	<jsp:include page=""/>
+	<%-- <jsp:include page=""/> --%>
 	<!-- 메뉴바, 모임 메뉴바 import -->
 
 	<div id="board-container">
