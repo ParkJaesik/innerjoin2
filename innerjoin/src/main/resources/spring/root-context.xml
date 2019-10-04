@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource"
@@ -14,6 +18,36 @@
 	   <property name="password" value="innerjoin"/>
 	   <property name="defaultAutoCommit" value="false"/>
 	</bean>
+	
+	<!-- 트랜잭션 처리(commit/rollback) -->
+	<!--  
+		JDBC : Connection 객체
+		MyBatis : SqlSession
+		Spring : TransactionManager 객체(자동)
+	-->
+	<!-- 트랜잭션 처리는 DB 관련 설정이므로 root-context.xml에 작성 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:annotation-driven/>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="select*" read-only="true" rollback-for="Exception"/>
+			<tx:method name="insert*" rollback-for="Exception"/>
+			<tx:method name="update*" rollback-for="Exception"/>
+			<tx:method name="delete*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 트랜잭션 처리 AOP 추가 (시점 적용 필요하지 않음 -> 메소드 수행 내내 적용) -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut 
+			expression="execution(* com.kh.spring..*Impl.*(..))" id="serviceMethod"/>
+		<aop:advisor id="transactionAdvisor" pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
+		
+	</aop:config>
 	
 	<!-- 마이바티스 SqlSession 등록하기 -->
 	<bean id="sqlSession" 

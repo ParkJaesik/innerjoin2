@@ -62,6 +62,7 @@ public class AlbumController {
 	 */
 	@RequestMapping("albumListView.ij")
 	public String albumListView(String gno) {
+		
 		return "album/albumListView";
 	}
 	
