@@ -122,6 +122,8 @@
 							} 
 						</script>
 						
+						<c:url var="board" value="b"/>
+				<button type="button" class="btn btn-primary" onclick="location.href='${board}'">게시판</button>
 						
 						<c:url var="secession" value="rblist.ij"/>
 				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
