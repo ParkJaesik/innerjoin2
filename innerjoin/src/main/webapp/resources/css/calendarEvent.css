@@ -5,6 +5,12 @@
       box-sizing: border-box;
    }
    
+   	#swal2-content {
+		font-size: 1em;
+		font-weight: bold;
+	}
+   
+   
    #calendar-container {
       max-width: 1000px;
       min-width: 700px;

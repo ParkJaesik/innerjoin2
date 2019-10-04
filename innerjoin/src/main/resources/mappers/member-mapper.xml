@@ -5,7 +5,7 @@
   <!-- type , id 반대로 씀 -->
   
   <!-- 수정본 -->
-  <resultMap type="Member" id="memberResultSet">
+  <resultMap id="memberResultSet"  type="Member">
   	<id property="memberId" column="MEMBER_ID"/>
   	<result property="memberPwd" column="MEMBER_PWD"/>
   	<result property="memberName" column="MEMBER_NAME"/>
@@ -39,4 +39,19 @@
   		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 2
   	)
   </insert>
+  
+  
+  <!-- email 중복체크 -->
+  <select id="checkIdDup" parameterType="string" resultType="_int">
+  	SELECT COUNT(*)
+  	FROM MEMBER
+  	WHERE MEMBER_ID = #{memberId}
+  </select>
+  
+  <!-- 닉네임 중복 체크 -->
+  <select id="checkNameDup" parameterType="string" resultType="_int">
+  	SELECT COUNT(*)
+  	FROM MEMBER
+  	WHERE MEMBER_NAME = #{memberName}
+  </select>
 </mapper>

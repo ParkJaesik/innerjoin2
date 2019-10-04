@@ -33,10 +33,30 @@ public interface EventService {
 	 */
 	ArrayList<Event> groupEventList(String date, String gno);
 
-	/** 이벤트 상세정보 조회용 Service
+	/** 이벤트 참석 멤버리스트 조회 Service
 	 * @param eno
-	 * @return event, memberList
+	 * @return memberList
 	 */
-	ArrayList<Member> selectMem(String eno); 
+	ArrayList<Member> selectMem(String eno);
+
+	
+	
+	
+//	=================================================================================
+	
+	
+	
+	
+	/** 멤버 참석 이벤트 목록 조회 Service
+	 * @param memberId
+	 * @return eventList
+	 */
+	ArrayList<Event> memberEventList(String date, String memberId);
+
+	/** 이벤트 참석 취소 Service
+	 * @param eno
+	 * @return result
+	 */
+	int cancelEvent(int eno); 
 	
 }

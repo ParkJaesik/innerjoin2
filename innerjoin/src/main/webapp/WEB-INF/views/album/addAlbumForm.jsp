@@ -1,83 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+        <link rel="stylesheet" href="resources/css/album/album-add.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <title>Insert title here</title>
-	<style>
-		.wrapper{
-			max-width: 1020px;
-		}
-		.wrapper div{
-			margin-top: 10px;
-			margin-bottom:0;
-		}
-		.float_right{
-			float:right;
-			margin:auto;
-			margin-right:10px;
-		}
-		#preview img {
-		max-width: 100%;
-		max-height:90%;
-		margin-left:auto;
-		margin-right:auto;
-		}
-	
-		#preview p {
-			/*  text-overflow: ellipsis;*/
-			overflow: hidden;
-			bottom:0;
-		}
-		#preview a {
-			/*  text-overflow: ellipsis;*/
-			padding-left:15px;
-		}
-		
-		.preview-box {
-			padding: 5px;
-			border-radius: 2px;
-			margin-right:10px;
-			margin-bottom: 10px;
-			float:left;
-			width:320px;
-			height:300px;
-			
-		}
 
-	</style>
 </head>
 <body>
-
-	<div class="container-fluid wrapper">
-		<div class="row">
+<%@ include file="../group/groupMenubar.jsp" %>
+<script>
+	console.log('addAlbum groupNo:'+'${groupNo}');
+	console.log('addAlbum memberId:'+'${memberId}');
+</script>  
+	<div class="container-fluid add-wrapper">
+		<!-- <div class="row"> -->
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 align="center">¾Ù¹ü Ãß°¡</h1>
+						<h1 align="center">ì•¨ë²” ì¶”ê°€</h1>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="row">
 							<div id="album_attach" class="col-md-8">
-								<h2 display="inline-block">¾Ù¹üÀÌ¸§</h2>
-								<input type="text" class="form-control" name="albumTitle" maxlength="50"><br>
-								<h2 display="inline-block">»çÁøÃß°¡</h2>
+								<h2 display="inline-block">ì•¨ë²”ì´ë¦„</h2>
+								<input type="text" class="form-control" name="albumTitle" maxlength="50" required><br>
+								<h2 display="inline-block">ì‚¬ì§„ì¶”ê°€</h2>
 								<div class="custom-file">
 									<input id="uploadInputBox" class="custom-file-input"  aria-describedby="inputGroupFileAddon01"  type="file" name="filedata" multiple />	
 									<label class="custom-file-label" for="uploadInputBox">Choose file</label>
 								</div>
 							</div>
 							<div class="col-md-4">
-								<button class="submit float_right btn btn-warning">¾Ù¹üµî·Ï</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">µî·ÏÃë¼Ò</button>
+								<button class="submit float_right btn btn-warning">ì•¨ë²”ë“±ë¡</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">ë“±ë¡ì·¨ì†Œ</button>
 							</div>
 						</div>
 					</div>
@@ -85,60 +49,76 @@
 				<div class="row">
 					<div id="preview" class="col-md-12">
 					</div>
-					<!-- multipart ¾÷·Îµå½Ã ¿µ¿ª -->
+					<!-- multipart ì—…ë¡œë“œì‹œ ì˜ì—­ -->
                 	<form id="uploadForm" action="addPhoto.ij" method="post" style="display: none;" enctype="multipart/form-data"/>
 				</div>
 			</div>
-		</div>
+		<!-- </div> -->
 	</div>
 	
 	          <script>
-            //ÀÓÀÇÀÇ file object¿µ¿ª
+            //ì„ì˜ì˜ file objectì˜ì—­
             var files = {};
             var previewIndex = 0;
      
-            // image preview ±â´É ±¸Çö
+            // image preview ê¸°ëŠ¥ êµ¬í˜„
             // input = file object[]
-            function addPreview(input) {
-                if (input[0].files) {
-                    //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
-                    for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-                        var file = input[0].files[fileIndex];
-     
-                        if (validation(file.name))
-                            continue;
-     
-                        var reader = new FileReader();
-                        reader.onload = function(img) {
-                            //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-                            //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
-                            var imgNum = previewIndex++;
-                            $("#preview")
-                                    .append(
-                                            "<div class=\"preview-box\" value=\"" + imgNum +"\">"
-                                                    + "<img class=\"thumbnail\" src=\"" + img.target.result + "\"\/>"
-                                                    + "<p>"
-                                                    + file.name
-                                                    + "<a href=\"#\" value=\""
-                                                    + imgNum
-                                                    + "\" onclick=\"deletePreview(this)\">"
-                                                    + "»èÁ¦" + "</a>" 
-                                                    + "</p>"
-                                                    + "</div>");
-                            files[imgNum] = file;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                } else
-                    alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
-            }
-     
-            //preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦
+	        function addPreview(input) {
+	            if (input[0].files) {
+	                //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
+	                for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+	                    var file = input[0].files[fileIndex];
+	                    if(validation(file.name)) continue;
+	                    setPreviewForm(file);
+	                }
+	            } else
+	                alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
+	        }
+	        
+	        function setPreviewForm(file, img){
+	            var reader = new FileReader();
+	            
+	            //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	            //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
+	            reader.onload = function(img) {
+	                var imgNum = previewIndex++;
+	                $("#preview").append(
+	                        "<div class=\"preview-box\" value=\"" + imgNum +"\">" +
+	                        "<div><img class=\"thumbnail\" src=\"" + img.target.result + "\"\/></div>" +
+	                        "<p>" + file.name + "</p>" +
+	                        "<a href=\"#\" value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">" +
+	                        "ì‚­ì œ" + "</a>"
+	                        +
+	                        "</div>"
+	                );
+	                //resizeHeight();
+	                files[imgNum] = file;
+	                
+	                console.log(files[imgNum]);
+	            };
+	            
+	            reader.readAsDataURL(file);
+	        }
+
+            //preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ
             function deletePreview(obj) {
                 var imgNum = obj.attributes['value'].value;
-                delete files[imgNum];
+                console.log("ì‚­ì œí•˜ë ¤ëŠ” ìš”ì†Œ")
+                console.log(files[imgNum]);
+                
+                console.log("ì‚­ì œ ì „ files ê°ì²´")
+				console.log(files);
+               
+                console.log("ì‚­ì œ í›„ files ê°ì²´")
+				delete files[imgNum];	
+                console.log(files);
+                
+                
                 $("#preview .preview-box[value=" + imgNum + "]").remove();
-                resizeHeight();
+                //console.log(files[imgNum-1]);
+                console.log(Object.keys(files).length);
+                //console.log(--previewIndex);
+                //resizeHeight();
             }
      
             //client-side validation
@@ -148,9 +128,9 @@
                 var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
                 var fileNameExtension = fileName.toLowerCase().substring(
                         fileNameExtensionIndex, fileName.length);
-                if (!((fileNameExtension === 'jpg')
+                if (!((fileNameExtension === 'jpg') || (fileNameExtension === 'jpeg')
                         || (fileNameExtension === 'gif') || (fileNameExtension === 'png'))) {
-                    alert('jpg, gif, png È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+                    alert('jpg, gif, png í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
                     return true;
                 } else {
                     return false;
@@ -158,75 +138,92 @@
             }
      
             $(document).ready(function() {
-                //submit µî·Ï. ½ÇÁ¦·Î submit typeÀº ¾Æ´Ï´Ù.
+                //submit ë“±ë¡. ì‹¤ì œë¡œ submit typeì€ ì•„ë‹ˆë‹¤.
                 $('.submit').on('click',function() {                        
                     var form = $('#uploadForm')[0];
                     var formData = new FormData(form);
         
+                    var title = $("input[name=albumTitle]").val();
                     console.log(form);
+                    console.log(title);
+                    console.log(formData.get("files"));
                     
-                    for (var index = 0; index < Object.keys(files).length; index++) {
-                        //formData °ø°£¿¡ files¶ó´Â ÀÌ¸§À¸·Î ÆÄÀÏÀ» Ãß°¡ÇÑ´Ù.
-                        //µ¿ÀÏ¸íÀ¸·Î °è¼Ó Ãß°¡ÇÒ ¼ö ÀÖ´Ù.
+                    
+                  /* for (var index = 0; index < Object.keys(files).length; index++) {
+                        //formData ê³µê°„ì— filesë¼ëŠ” ì´ë¦„ìœ¼ë¡œ íŒŒì¼ì„ ì¶”ê°€í•œë‹¤.
+                        //ë™ì¼ëª…ìœ¼ë¡œ ê³„ì† ì¶”ê°€í•  ìˆ˜ ìˆë‹¤.
+                        console.log(files[index]);
+                        alert(files[index]);
                         formData.append('files',files[index]);
-                    }
+                    }  */
+                  
+                  if(title.length <= 5){
+                	  alert('ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”');
+                	  return false;
+                  }
+                    
+                  if(Object.keys(files).length == 0){
+                	  alert('ì´ë¯¸ì§€ë¥¼ ì—…ë¡œë“œ í•´ì£¼ì„¸ìš”');
+                	  return false;
+                  }
+                  for(var index in files){
+                	  console.log(files[index]);
+                      formData.append('files',files[index]);
+                  }
+                  
       
-                    formData.append("title","Á¦¸ñ");
-			        for (var value of formData.values()) {
+                    formData.append("albumTitle",title);
+                    formData.append("groupNo",parseInt('${groupNo}'));
+                    formData.append("memberId",'${memberId}');
+/* 			        for (var value of formData.get("files")) {
 
                     	  console.log(value);
 
-                    }
+                    } */
 			        
-			        
+			        console.log(formData.get("title"));
+			        /* console.log(formData.get("files")); */
          
-                    //form.setAttribute("method", "Post"); 
-                   // form.setAttribute("enctype","multipart/form-data");
-                   // form.setAttribute("action","addPhoto.ij");
-                    
-                    //return false;
-                    form.submit();
-                    //document.frm.encoding = "multipart/form-data";
-
-                    //$form.prop("enctype","multipart/form-data");
-                    //$form.prop("action","location.href='addPhoto.ij'");
-
-                    //$form.submit();
-                    //document.frm.action="location.href='addPhoto.ij";         // ¸¸¾à ´Ù¸¥ ÁÖ¼Ò·Î Àü¼Û ÇÒ °æ¿ì
-
-                    //document.frm.submit(); 
-
-                    
-                    
-                    //ajax Åë½ÅÀ¸·Î multipart formÀ» Àü¼ÛÇÑ´Ù.
-/*                      $.ajax({
-                        type : 'POST',
-                        enctype : 'multipart/form-data',
-                        processData : false,
-                        contentType : false,
-                        cache : false,
-                        timeout : 600000,
-                        url : 'addPhoto.ij',
-                        dataType : 'JSON',
-                        data : formData,
-                        success : function(result) {
-                            //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ´Ù¾çÇÑ Çàµ¿À» ÇÒ ¼ö ÀÖÀ¸¸ç,
-                            //¿©±â¼­´Â µ¥ÀÌÅÍ¸¦ Àü¼Û¹Ş¾Ò´Ù¸é ¼ø¼öÇÏ°Ô OK ¸¸À» º¸³»±â·Î ÇÏ¿´´Ù.
-                            //-1 = Àß¸øµÈ È®ÀåÀÚ ¾÷·Îµå, -2 = ¿ë·®ÃÊ°ú, ±×¿Ü = ¼º°ø(1)
-                           alert("¼º°ø");
-                            $("#preview").empty();
-
-                        }
-                        //Àü¼Û½ÇÆĞ¿¡´ëÇÑ ÇÚµé¸µÀº °í·ÁÇÏÁö ¾ÊÀ½
-                    }); */
-                    
-                    //return false;
+		              //ajax í†µì‹ ìœ¼ë¡œ multipart formì„ ì „ì†¡í•œë‹¤.
+  	                $.ajax({
+	                    type : 'POST',
+	                    enctype : 'multipart/form-data',
+	                    processData : false,
+	                    contentType : false,
+	                    cache : false,
+	                    timeout : 600000,
+	                    url : 'addPhoto.ij',
+	                    dataType : 'JSON',
+	                    data : formData,
+	                    success : function(result) {
+	                        //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ë‹¤ì–‘í•œ í–‰ë™ì„ í•  ìˆ˜ ìˆìœ¼ë©°,
+	                        //ì—¬ê¸°ì„œëŠ” ë°ì´í„°ë¥¼ ì „ì†¡ë°›ì•˜ë‹¤ë©´ ìˆœìˆ˜í•˜ê²Œ OK ë§Œì„ ë³´ë‚´ê¸°ë¡œ í•˜ì˜€ë‹¤.
+	                        //-1 = ì˜ëª»ëœ í™•ì¥ì ì—…ë¡œë“œ, -2 = ìš©ëŸ‰ì´ˆê³¼, ê·¸ì™¸ = ì„±ê³µ(1)
+	                        if (result === -1) {
+	                            alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+	                            // ì´í›„ ë™ì‘ ...
+	                        } else if (result === -2) {
+	                            alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+	                            // ì´í›„ ë™ì‘ ...
+	                        } else {
+	                            alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
+	                            // ì´í›„ ë™ì‘ ...
+	                            
+	                           goList();
+	                        }
+	                    }
+	                    //ì „ì†¡ì‹¤íŒ¨ì—ëŒ€í•œ í•¸ë“¤ë§ì€ ê³ ë ¤í•˜ì§€ ì•ŠìŒ
+	                });  
                 }); 
-                // <input type=file> ÅÂ±× ±â´É ±¸Çö
+                // <input type=file> íƒœê·¸ ê¸°ëŠ¥ êµ¬í˜„
                 $('#uploadInputBox').change(function() {
-                    addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+                    addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
                 });
             });
+            
+            function goList(){
+            	 location.href="albumListView.ij";
+            }
         </script>
 </body>
 </html>

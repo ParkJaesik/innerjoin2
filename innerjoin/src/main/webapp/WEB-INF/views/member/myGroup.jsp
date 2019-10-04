@@ -10,7 +10,6 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/menubar.css"/>
 
-
 <title>마이페이지</title>
 <style>
 			#profile{
@@ -72,7 +71,7 @@
 						</form>
 			
 						<div>
-							캘린더
+
 						</div>
 							
 					</div>
@@ -97,7 +96,7 @@
 				<div class="container">
 					<header class="name-line">
 						<h2 class="detail-name" style="display: inline;"> 내 모임 </h2>
-						<a href="#" class="form-button-submit button icon solid mMenu">모임 생성</a></span>
+						<a href="ginsertForm.ij" class="form-button-submit button icon solid mMenu">모임 생성</a></span>
 					</header>
 								
 

@@ -37,4 +37,14 @@ public class EventDao {
 		return (ArrayList)sqlSession.selectOne("eventMapper.selectMem", eno);
 	}
 
+	public ArrayList<Event> memberEventList(Map<String, String> dateMember) {
+		return (ArrayList)sqlSession.selectList("eventMapper.memberEventList", dateMember);
+	}
+
+	public int cancelEvent(int eno) {
+		return sqlSession.delete("eventMapper.cancelEvent", eno);
+	}
+	
+	
+
 }

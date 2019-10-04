@@ -112,6 +112,7 @@
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>
                         
+
                         
                         <button onclick="goAlbum();">앨범</button>
 						<script>
@@ -119,8 +120,18 @@
 								
 								location.href="albumListView.ij";
 							} 
-							 
-						</script> 
+						</script>
+						
+						
+						<c:url var="secession" value="rblist.ij"/>
+				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
+
+                        <c:url var="goAlbum" value="/albumListView.ij">
+							<c:param name="gno" value="1" />
+						</c:url>
+                        <a href="${goAlbum}">앨범</a>
+
+
                         </div>
                     </div>
 
@@ -368,16 +379,19 @@
         </div>
 
         <button id="button" class="btn btn-warning" >click!!</button>
-
+        
+        <%@ include file="/WEB-INF/views/chat/chat.jsp" %>   <!-- 이후 모임 메인페이지로 이동 -->
+	
 		<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
         <script>
             $('.carousel').carousel({
                 interval: false
             });
         </script>
-
+        
         <button id="groupCalender" class="btn btn-warning" onclick="location.href='calendar.ij'">모임일정</button>
         <button id="memberCalender" class="btn btn-warning" onclick="location.href='memberCalendar.ij'">개인일정</button>
+
 
     </body>
 </html>

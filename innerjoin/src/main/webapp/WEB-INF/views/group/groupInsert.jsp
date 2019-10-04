@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <style>
     div{
         box-sizing: border-box;
@@ -53,12 +56,16 @@
     .active{
         cursor: initial;
     }
+    
+    #guSel, #detailsel,
+    
+    
 </style>
 </head>
 <body>
 	<div class="content">
             <div class="content-wrap">
-                <form action="">
+                <form action="ginsert.ij" method="post" enctype="multipart/form-data">
                     <div class="btn active" style="width: 900px; height:50px; background-color: purple;"></div>
                     <div class="gWrap">
                         <div class="row">
@@ -66,7 +73,7 @@
                                 <label>모임장</label>
                             </div>
                             <div class="div2">
-                                <input type="text" id="userId" name="userId" readonly="readonly" value="#{loginUser.id }">
+                                <input type="text" id="userId" name="userId" readonly value="${loginUser.memberName}">
                             </div>
                         </div>
                         <div class="row">
@@ -97,10 +104,10 @@
                             </div>
                             <div class="div2">
                                 <select id="citysel" name="citysel">
-                                    <option>시</option>
-                                    <option>서울특별시</option>
+                                    <option value="city">시</option>
+                                    <option value="seoul">서울특별시</option>
                                 </select>
-                                <select id="gusel" name="gusel">
+                                <select id="guSel" name="guSel">
                                     <option value="">구</option>
                                     <option value="">강남구</option>
                                     <option value="">강동구</option>
@@ -135,6 +142,7 @@
                                 </select>
                                 <input type="text" id="detailtext" name="detailtext">
                             </div>
+                        
                         </div>
                         <div class="row">
                             <div class="div1">
@@ -170,12 +178,12 @@
                             </div>
                             <div class="div2">
                                 <img id="titleImg" style="max-width: 100%">
-                                <input type="file" id="imgUpload">
+                                <input type="file" name="uploadFile">
                             </div>
                         </div>
                         <div class="row">
                             <div class="button-wrap">
-                                <button type="button" id="cancel">취소</button>
+                                <button type="reset" id="cancel">취소</button>
                                 <button type="submit" id="submit">등록</button>
                             </div>
                         </div>

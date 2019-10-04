@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(50, 50, 50);
+}
+
+#group-index-container .btn {
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+#group-index-container .btn:focus {
+	box-shadow: none !important;
+}
+
+#group-index-container {
+	margin-top: 50px !important;
+	margin: auto;
+	width: 100%;
+	height: 550px;
+}
+
+#group-index-container div {
+	margin: auto;
+	padding: 0;
+	box-sizing: border-box;
+	border: 1px solid;
+}
+
+#group-info-container {
+	margin: auto;
+	width: 1200px;
+	height: 450px;
+	border-bottom: 2px solid rgb(190, 190, 190);
+}
+
+#group-info-container div {
+	float: left !important;
+}
+
+#group-thumbnail {
+	width: 50%;
+	height: 400px;
+}
+
+#thumbnail {
+	width: 100%;
+	height: 100%;
+}
+
+#group-info {
+	width: 50%;
+	height: 400px;
+	background-color: rgb(230, 230, 230);
+}
+
+#group-info-name {
+	padding-left: 30px;
+	width: 100%;
+	height: 70px;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#group-info-area, #group-info-member, #group-info-leader {
+	width: 100%;
+	height: 40px;
+	padding-left: 40px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#group-inquiry {
+	color: rgb(50, 50, 50);
+}
+
+#group-button {
+	width: 100%;
+	height: 50px;
+	text-align: right;
+}
+
+#group-button button {
+	background-color: #E74C3C;
+	width: 100px;
+	height: 35px;
+	font-size: 12px;
+}
+
+#group-menu-container {
+	margin: auto;
+	width: 1200px;
+	height: 80px;
+	text-align: center;
+}
+
+#group-menu-container button {
+	width: 100px;
+	height: 40px;
+	color: rgb(50, 50, 50);
+	background-color: rgb(230, 230, 230);
+	font-size: 12px;
+	font-weight: bold;
+	margin-top: 20px !important;
+}
+
+#group-btn-index, #group-btn-schedule, #group-btn-board,
+	#group-btn-member {
+	margin-right: 120px !important;
+}

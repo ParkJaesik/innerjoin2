@@ -58,4 +58,33 @@
 		JOIN MEMBER_EVENT USING(MEMBER_ID)
 		WHERE EVENT_NO = #{eno}
 	</select>
+	
+	
+	
+	<!-- ====================================================================== -->
+	
+	
+	
+	
+	<select id="memberEventList" parameterType="map" resultMap="eventResultSet">
+		SELECT EVENT_NO, EVENT_TITLE, 
+			TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD HH24:MI') EVENT_START_DAY,
+			TO_CHAR(EVENT_END_DAY, 'YYYY-MM-DD HH24:MI') EVENT_END_DAY,
+			GROUP_NO
+		FROM MEMBER_EVENT
+		JOIN GROUP_EVENT USING(EVENT_NO)
+		WHERE MEMBER_ID = #{memberId} AND (
+			TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date} OR
+			TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date}
+		)
+	
+	</select>
+	
+	<delete id="cancelEvent" parameterType="_int">
+		DELETE FROM MEMBER_EVENT
+		WHERE EVENT_NO = #{eno}
+	</delete>
+
+
+
 </mapper>

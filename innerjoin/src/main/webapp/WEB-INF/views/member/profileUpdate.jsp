@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/menubar.css"/>
-<link rel="stylesheet" href="${contextPath}/resources/css/join.css"/>
+
 
 <title>프로필 수정</title>
 <style>

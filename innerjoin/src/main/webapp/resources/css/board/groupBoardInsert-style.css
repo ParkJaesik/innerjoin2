@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(50, 50, 50);
+}
+
+div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.btn {
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.btn:focus {
+	box-shadow: none !important;
+}
+
+#board-container {
+	margin: auto;
+	width: 1000px;
+	height: 100%;
+}
+
+#board-container div {
+	margin: auto;
+}
+
+h1 {
+	margin: 0 0 50px 0;
+	font-weight: bold;
+}
+
+#board-part {
+	width: 900px;
+	height: 600px;
+}
+
+#board-check {
+	width: 900px;
+	height: 25px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#board-writer {
+	width: 900px;
+	height: 35px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#board-title {
+	width: 900px;
+	height: 55px;
+	font-size: 32px;
+	font-weight: bold;
+	border-bottom: 2px solid rgb(190, 190, 190);
+}
+
+#title {
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	border: none;
+}
+
+#title:focus {
+	border: none;
+	outline: none;
+}
+
+#board-content {
+	margin-top: 50px !important;
+	width: 900px;
+	height: 400px;
+	font-size: 14px;
+}
+
+#content {
+	width: 100%;
+	height: 100%;
+	resize: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+#content:focus {
+	outline: none;
+}
+
+#attachment-part {
+	width: 900px;
+	height: 25px;
+}
+
+#board-attachment {
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#button-part {
+	width: 900px;
+	height: 40px;
+}
+
+#board-button {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+#board-button button {
+	width: 80px;
+	height: 40px;
+	background-color: rgb(90, 90, 90);
+	font-size: 12px;
+}
+
+#board-btn-cancel {
+	background-color: rgb(190, 190, 190) !important;
+	color: rgb(50, 50, 50);
+}

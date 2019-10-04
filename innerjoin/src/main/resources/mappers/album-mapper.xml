@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="albumMapper">
+
+	<resultMap id="albumResultSet" type="Album">
+		<id property="albumNo" column="ALBUM_NO"/>
+		<result property="albumTitle" column="ALBUM_TITLE"/>
+		<result property="albumStatus" column="ALBUM_STATUS"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="albumCreateDate" column="ALBUM_CREATE_DATE"/>
+		<result property="albumModifyDate" column="ALBUM_MODIFY_DATE"/>
+	</resultMap>
+
+	<resultMap id="photoResultSet" type="AlbumPhoto">
+		<id property="photoNo" column="PHOTO_NO"/>
+		<result property="photoCreateDate" column="PHOTO_CREATE_DATE"/>
+		<result property="photoModifyDate" column="PHOTO_MODIFY_DATE"/>
+		<result property="photoOriginName" column="PHOTO_ORIGIN_NAME"/>
+		<result property="photoRename" column="PHOTO_RENAME"/>
+		<result property="albumNo" column="ALBUM_NO"/>
+	</resultMap>
+	
+	<insert id="insertAlbum" parameterType="Album">
+		INSERT INTO ALBUM
+		VALUES(SEQ_ANO.NEXTVAL, DEFAULT, #{memberId}, #{groupNo},DEFAULT, DEFAULT, #{albumTitle})
+	</insert>
+
+	<insert id="insertPhoto" parameterType="AlbumPhoto">
+		
+		INSERT INTO ALBUM_PHOTO VALUES (SEQ_PNO.NEXTVAL, DEFAULT, DEFAULT, #{photoOriginName},#{photoRename}, SEQ_ANO.CURRVAL)
+		
+	</insert>
+	
+	
 </mapper>

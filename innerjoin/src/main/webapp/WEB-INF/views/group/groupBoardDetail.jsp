@@ -1,54 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${contextPath}/resources/css/groupBoardDetail-style.css" type="text/css">
-<title>Insert title here</title>
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/board/groupBoardDetail-style.css"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<title>Group Board List</title>
 </head>
 <body>
-	<h1 align="center">게시판</h1>
-	<div id="board-detail-container">
+	<c:import url="" />
+
+	<div id="board-container">
+		<h1 align="center">게시판</h1>
 		<div id="board-part">
-			<div id="board-viewCount">
-				<span id="viewCount">VIEW </span>
+			<div id="board-count">
+				<span id="count">VIEW ${ board.boardCount }</span>
+			</div>
+
+			<div id="board-date">
+				<span id="date">${ board.boardCreateDate }</span>
 			</div>
 
 			<div id="board-writer">
-				<span id="writer">박재식</span>
-			</div>
-
-			<div id="board-writeDate">
-				<span id="writeDate">2019.09.26</span>
+				<span id="writer">${ board.memberId }</span>
 			</div>
 
 			<div id="board-title">
-				<span id="title">여보세요 나야 거기 잘 지내니</span>
+				<span id="title">${ board.boardTitle }</span>
 			</div>
 
 			<div id="board-content">
-				<textarea name="" id="content" cols="" rows="" readonly></textarea>
+				<span id="content">${ board.boardContent }</span>
 			</div>
+		</div>
 
-			<div id="board-attach">
+		<div id="attachment-part">
+			<div id="board-attachment">
 				<span id="attachment">첨부파일 : </span>
 			</div>
+		</div>
 
+		<div id="button-part">
 			<div id="board-button">
-				<button class="btn btn-primary" id="btn-board-modify">수정</button>
-				<button class="btn btn-primary" id="btn-board-delete">삭제</button>
-				<button class="btn btn-primary" id="btn-board-list">목록</button>
+			
+				<c:url var="boardModify" value="bmodifyView.ij">
+					<c:param name="boardNo" value="${ board.boardNo }"/>
+					<c:param name="page" value="${ currentPage }"/>
+				</c:url>
+				
+				<c:url var="boardDelete" value="bdelete.ij">
+					<c:param name="boardNo" value="${ board.boardNo }"/>
+				</c:url>
+				
+				<c:url var="boardList" value="blist.ij">
+					<c:param name="page" value="${ currentPage }"/>
+				</c:url>
+				
+				<c:if test="${ loginUser.id eq board.memberId }">
+					<button onclick="location.href='bmodifyView.ij';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
+				</c:if>
+				
+				<c:if test="${ loginUser.id eq board.memberId }">
+					<button onclick="location.href='bdelete.ij';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
+				</c:if>
+				
+				<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
 			</div>
 		</div>
 
 		<div id="reply-part">
-			<div id="reply-insert">
-				<div id="reply-insert-text">
-					<textarea name="" id="replyInsert" cols="" rows=""></textarea>
+			<div id="reply-input-part">
+				<div id="reply-input-text">
+					<textarea id="reply"></textarea>
 				</div>
-				<div id="reply-insert-button">
-					<button class="btn btn-primary" id="btn-reply-insert">댓글등록</button>
+
+				<div id="reply-input-button">
+					<button class="btn btn-primary" id="reply-btn-input">댓글등록</button>
 				</div>
 			</div>
 
@@ -56,10 +93,57 @@
 				<span id="replyCount"></span>
 			</div>
 
-			<div id="reply-list">
-				<table></table>
+			<div id="reply-view">
+				<table align="center">
+					<tr>
+						<td id="reply-writer"></td>
+						<td id="reply-button">
+							<a href="">수정</a>
+							<a href="">삭제</a>
+						</td>
+					</tr>
+
+					<tr>
+						<td id="reply-content"></td>
+						<td id="reply-date"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		replyList();
+		
+		$("#reply-btn-input").on("click", function(){
+			var replyContent = $("#reply").val();
+			var boardNo = ${ board.boardNo };
+			
+			$.ajax({
+				url : "rinsert.ij",
+				data : {replyContent : replyContent, boardNo : boardNo},
+				type : "post",
+				success : function(data) {
+					if (data == "success") {
+						$("#reply").val("");
+						replyList();
+					}
+				}
+			});
+		});
+		
+		function replyList() {
+			var boardNo = ${ board.boardNo };
+			
+			$.ajax({
+				url : "rlist.ij",
+				data : {boardNo : boardNo},
+				dataType : "json",
+				success : function(list) {
+					var 
+				}
+			});
+		}
+	</script>
 </body>
 </html>

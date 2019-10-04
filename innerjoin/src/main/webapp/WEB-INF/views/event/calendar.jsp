@@ -25,8 +25,8 @@
 
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- 테마 sketch -->
    <!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp" crossorigin="anonymous">
@@ -35,8 +35,12 @@
    <!--  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     -->
 
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 </head>
 <body>
+
 
 	<div class="container-fluid group-schedule">
 
@@ -178,6 +182,7 @@
    </div>
    
 	<script>
+	
 		console.log("levelCode: ${levelCode}");
 	</script>
    

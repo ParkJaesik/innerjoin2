@@ -17,7 +17,8 @@
 <body>
 	<!-- 로그인한 상태일 경우와 비로그인 상태일 경우의 chat_id설정 -->
     <c:if test="${(loginUser.memberName ne '') and !(empty loginUser.memberName)}">
-        <input type="hidden" value='${loginUser.memberName }' id='chat_id' />
+        <input type="hidden" value='${loginUser.memberName }' id='chat_nick' />
+        <input type="hidden" value='${loginUser.memberId }' id='chat_id' />
     </c:if>
     <c:if test="${(loginUser.memberName eq '') or (empty loginUser.memberName)}">
         <input type="hidden" value='<%=session.getId().substring(0, 6)%>'
@@ -35,6 +36,8 @@
 
 
 <script>
+	
+	
     $(".chat").on({
         "click" : function() {
             if ($(this).attr("src") == "${contextPath }/resources/images/chat.png") {
@@ -48,9 +51,26 @@
     });
 </script>
 <script type="text/javascript">
-    var textarea = document.getElementById("messageWindow");
-    var webSocket = new WebSocket('ws://192.168.10.74:8080/innerjoin/broadcasting');
     var inputMessage = document.getElementById('inputMessage');
+    var loginUserName = "${loginUser.memberName }";
+    var loginUserId = "${loginUser.memberId }";
+    
+    function send() {
+        if (inputMessage.value == "") {
+        } else {
+            $("#messageWindow").html($("#messageWindow").html()
+                + "나 : " + inputMessage.value + "</br>");
+        }
+        socket.send("chat,"+loginUserId+","+loginUserName+","+inputMessage.value);
+        
+        //socket.send($("#chat_nick").val() + "|" + inputMessage.value);
+        inputMessage.value = "";
+    }
+    
+    /* var webSocket = new WebSocket('ws://192.168.10.74:8080/innerjoin/broadcasting');
+    
+    var inputMessage = document.getElementById('inputMessage');
+    
     webSocket.onerror = function(event) {
         onError(event)
     };
@@ -102,7 +122,7 @@
         }
         webSocket.send($("#chat_id").val() + "|" + inputMessage.value);
         inputMessage.value = "";
-    }
+    } */
     //     엔터키를 통해 send함
     function enterkey() {
         if (window.event.keyCode == 13) {

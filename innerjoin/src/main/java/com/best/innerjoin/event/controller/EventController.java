@@ -81,7 +81,7 @@ public class EventController {
 		return 1;
 	}
 	
-	/** 로그인유저가 참석하는 이벤트 리스트 조회 Controller
+	/** 그룹에서 로그인유저가 참석하는  이벤트 리스트 조회 Controller
 	 * @param date
 	 * @param memberId
 	 * @param gno
@@ -101,6 +101,14 @@ public class EventController {
 		
 	}
 	
+	
+	
+	
+//	===========================================================================
+	
+	
+	
+	
 	/** 멤버페이지 일정관리 뷰로 이동
 	 * @return
 	 */
@@ -108,6 +116,29 @@ public class EventController {
 	public String memberCalender() {
 		return "event/memberCalendar";
 	}
+	
+	/** 멤버가 참석하는 이벤트 리스트 조회
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("memberEventList.ij")
+	public String memberEventList(String date) {
+//		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		String memberId = "admin";
+		ArrayList<Event> eventList = eService.memberEventList(date, memberId);
+		return null;
+	}
 
+	
+	/** 이벤트 참석 취소
+	 * @param eno
+	 * @return result
+	 */
+	@ResponseBody
+	@RequestMapping("cancelEvent.ij")
+	public int cancelEvent(int eno) {
+		return 1;
+//		return eService.cancelEvent(eno);
+	}
 
 }
