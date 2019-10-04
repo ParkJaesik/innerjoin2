@@ -18,11 +18,22 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/group/groupMenubar-style.css"
 	type="text/css">
-
+<style>
+	#groupChatWrapper{
+		bottom:0;
+		right:50px;
+		position:fixed;
+		z-index:20;
+		
+		
+	}
+</style>
 <title>Group Menubar</title>
 </head>
 <body>
 
+
+<%@ include file="/WEB-INF/views/common/menubar.jsp" %>
 <c:set var="groupNo" value="1"/>
 <c:set var="memberId" value="gp@gmail.com"/>
 	<div id="group-index-container">
@@ -67,5 +78,16 @@
 			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>
 		</div>
 	</div>
+	<div id="groupChatWrapper">
+		<%@ include file="/WEB-INF/views/chat/chat.jsp" %>
+		
+	</div>
+	<script>
+		$(function(){
+		    // 스크롤하면 따라오는 flaotingMenu
+		   
+		});
+		
+	</script>
 </body>
 </html>
