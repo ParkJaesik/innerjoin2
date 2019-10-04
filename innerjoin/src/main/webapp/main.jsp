@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -109,31 +110,13 @@
                         	<a href="logout.ij">로그아웃</a>
                         	<br>
                         	<a href="myGroupForm.ij">마이페이지</a>
-                        	<a href="tempGoGroup.ij">임시 모임 페이지로 이동</a>
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>
                         
-
-                        
-                        <button onclick="goAlbum();">앨범</button>
-						<script>
-							function goAlbum(){
-								
-								location.href="albumListView.ij";
-							} 
-						</script>
-						
-						<c:url var="board" value="b"/>
-				<button type="button" class="btn btn-primary" onclick="location.href='${board}'">게시판</button>
-						
-						<c:url var="secession" value="rblist.ij"/>
-				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
-
                         <c:url var="goAlbum" value="/albumListView.ij">
-							<c:param name="gno" value="1" />
+							<c:param name="groupNo" value="1" />
 						</c:url>
                         <a href="${goAlbum}">앨범</a>
-
 
                         </div>
                     </div>
@@ -383,7 +366,7 @@
 
         <button id="button" class="btn btn-warning" >click!!</button>
         
-       
+        <%@ include file="/WEB-INF/views/chat/chat.jsp" %>   <!-- 이후 모임 메인페이지로 이동 -->
 	
 		<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
         <script>
@@ -395,4 +378,5 @@
 
 
     </body>
+
 </html>
