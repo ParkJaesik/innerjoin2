@@ -110,6 +110,10 @@
                         	<a href="logout.ij">로그아웃</a>
                         	<br>
                         	<a href="myGroupForm.ij">마이페이지</a>
+
+                        	<a href="tempGoGroup.ij">임시 모임 페이지로 이동</a>
+                        	<a href="tempGoGroup2.ij">임시 모임2 페이지로 이동</a>
+
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>
                         
