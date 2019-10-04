@@ -4,9 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.album.model.dao.AlbumDao;
+import com.best.innerjoin.album.model.exception.AlbumException;
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
 
@@ -73,11 +72,13 @@ public class AlbumServiceImpl implements AlbumService {
 			ArrayList<AlbumPhoto> photoList = new ArrayList<AlbumPhoto>();
 		    AlbumPhoto aPhoto = null;
 			for (MultipartFile mf : files) {
-	            String originFileName = mf.getOriginalFilename(); // ���� ���� ��
-	            long fileSize = mf.getSize(); // ���� ������
-
-	            System.out.println("originFileName : " + originFileName);
-	            System.out.println("fileSize : " + fileSize);
+			/*
+			 * String originFileName = mf.getOriginalFilename(); // ���� ���� �� long
+			 * fileSize = mf.getSize(); // ���� ������
+			 * 
+			 * System.out.println("originFileName : " + originFileName);
+			 * System.out.println("fileSize : " + fileSize);
+			 */
 		    
 	    		// 업로드 된 파일이 있을 경우 파일명을 변경
 	    		if(!mf.getOriginalFilename().equals("")) { // uploadFile이 없을 때 원본 파일 명이 null이 아니라 빈문자열이 넘어오게 됨.
@@ -87,16 +88,16 @@ public class AlbumServiceImpl implements AlbumService {
 	    			aPhoto.setPhotoOriginName(mf.getOriginalFilename());
 	    			
 	    			aPhoto.setPhotoRename(renameFileName);
-	    			aPhoto.setAlbumNo(album.getAlbumNo());
 	    			System.out.println(aPhoto.toString());
 	    		} 
 	    		photoList.add(aPhoto);
 		    }
+		
+			// 앨범 썸네일 지정
+			album.setAlbumThumbnail(photoList.get(0).getPhotoRename());
 			
-		
-		
-		 
 			System.out.println("photoList.isEmpty() : "+photoList.isEmpty());
+			
 			int albumResult = aDao.insertAlbum(album);
 			int photoResult = 0;
 			if(albumResult == 1) {
@@ -113,6 +114,7 @@ public class AlbumServiceImpl implements AlbumService {
 					}
 				}
 			}
+			
 			return photoResult;
 		}
 	
@@ -159,7 +161,7 @@ public class AlbumServiceImpl implements AlbumService {
 				result = 1;
 			} catch(Exception e) {
 				System.out.println("파일 전송 에러 : " + e.getMessage());
-			/* throw new BoardException("파일 전송 에러 : "+e.getMessage()); */
+				throw new AlbumException("파일 전송 에러 : "+e.getMessage()); 
 				// unchecked Exception을 던져줌으로써 aop에서 예외를 잡아서 rollback가능해짐
 			}
 			
