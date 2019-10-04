@@ -38,6 +38,7 @@
     }
     .div4{
         min-height: 100px;
+        
     }
 
 
@@ -113,8 +114,46 @@
                 </form>
                 
             </div>
+            
+            <!-- 페이징 처리 -->
             <div class="div4">
-                
+            	<c:if test="${pi.currentPage <= 1 }">
+            		 &lt; &nbsp;
+            	</c:if>
+            	
+            	<!-- 이전 -->
+            	<c:if test="${pi.currentPage >1 }">
+            		<c:url var="before" value="rblist.ij">
+            			<c:param name="page" value="${pi.currentPage-1 }"/>
+            		</c:url>
+            		<a href="${before }">&lt;</a> &nbsp;                                                                                 
+            	</c:if>
+            	
+            	<!-- 페이지 -->
+            	<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+            		<c:if test="${ p eq currentPage }">
+            			<font size="4"><b>${p }</b></font>
+            		</c:if>
+            		
+            		<c:if test="${p ne currentPage }">
+            			<c:url var="paginaion" value="rblist.ij">
+            				<c:param name="page" value="${p }"/>
+            			</c:url>
+            			<a href="${pagination }">${p }</a> &nbsp;
+            		</c:if>
+        		</c:forEach>
+            	
+            	
+            	<!-- 다음 -->
+            	<c:if test="${pi.currentPage >= pi.maxPage }">
+            		&gt;
+            	</c:if>
+            	<c:if test="${pi.currentPage < pi.maxPage }">
+            		<c:url var="after" value="rblist.ij">
+            			<c:param name="page" value="${pi.currentPage + 1}"/>
+            		</c:url>
+            		<a href="${after }">></a>
+            	</c:if>
             </div>
         </div>
     </div>
