@@ -73,7 +73,7 @@
                 + "나 : " + inputMessage.value + "</br>");
             $("#messageWindow").scrollTop(99999999);
         }
-        socket.send("chat,"+loginUserId+","+loginUserName+","+gName+","+inputMessage.value);
+        socket.send("chat,"+loginUserId+","+loginUserName+","+inputMessage.value+","+gName);
         
         //socket.send($("#chat_nick").val() + "|" + inputMessage.value);
         inputMessage.value = "";

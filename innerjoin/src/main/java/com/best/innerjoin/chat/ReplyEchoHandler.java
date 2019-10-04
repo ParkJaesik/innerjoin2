@@ -17,7 +17,7 @@ import com.best.innerjoin.member.model.vo.Member;
 public class ReplyEchoHandler extends TextWebSocketHandler{
 	List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	Map<String, WebSocketSession> userSessions = new HashMap<String, WebSocketSession>();
-	Map<String,WebSocketSession> groupList = new HashMap<String,WebSocketSession>();
+	Map<WebSocketSession,String> groupList = new HashMap<WebSocketSession,String>();
 	
 	
 	
@@ -28,6 +28,13 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		sessions.add(session);
 		String senderId = getId(session);
 		userSessions.put(senderId,session);
+		String gName = getGroupName(session);
+		if(gName != null) {
+			groupList.put(session,gName);
+		}
+		
+		
+		
 		
 		
 		
@@ -37,7 +44,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	 @Override
 	 public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("handleTextMessage : " + session + " : " + message);
-		String senderId = getId(session);
+		
 		
 		
 		/*
@@ -53,9 +60,10 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		
 		String msg = message.getPayload();
 		
+		
 		if(!StringUtils.isEmpty(msg)) {
 			String[] strs = msg.split(",");
-			if(strs != null && strs.length>4) {
+			if(strs != null && strs.length>=4) {
 				String cmd = strs[0];
 				
 				
@@ -78,15 +86,19 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 					
 					String sender = strs[1];
 					String senderName = strs[2];
-					String gName = strs[3];
-					String inputmsg =  strs[4];
-				
-					TextMessage tmpMsg = new TextMessage("chat,"+senderName + "," + inputmsg);
-					System.out.println("tmpMsg : " + tmpMsg);
+					String inputMsg =  strs[3];
+					String gName = strs[4];
+					
+					TextMessage tmpMsg = new TextMessage("chat,"+senderName + ","+ inputMsg);
+					
 					 
 					for(WebSocketSession sess:sessions) {
-						if(!sess.equals(session)) {
+						
+						
+						if(!sess.equals(session) && groupList.get(sess).equals(gName)) {
+							
 		                    sess.sendMessage(tmpMsg);
+		                   
 		                }
 					}
 				}
@@ -110,7 +122,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		
 	}
 	
-	private String getGroupName(WebSocketSession session) {
+	public String getGroupName(WebSocketSession session) {
 		Map<String,Object> httpSession = session.getAttributes();
 		String gName = (String) httpSession.get("groupName");
 		
@@ -121,7 +133,11 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		System.out.println("afterConnectionClosed : " + session);
-		
+		String gName = getGroupName(session);
+		if(gName != null) {
+			groupList.remove(gName, session);
+			
+		}
 		String senderId = getId(session);
 		userSessions.remove(senderId);
 		sessions.remove(session);
