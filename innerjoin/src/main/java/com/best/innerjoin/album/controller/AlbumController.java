@@ -29,6 +29,7 @@ public class AlbumController {
 	 */
 	@RequestMapping("addAlbumForm.ij")
 	public String addPhotoForm() {
+		
 		return "album/addAlbumForm";
 	}
 
