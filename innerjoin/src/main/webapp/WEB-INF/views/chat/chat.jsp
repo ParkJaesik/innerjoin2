@@ -15,12 +15,53 @@
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <style>
 	#_chatbox{
+		width:100%;
+		border: 1px solid grey;
+	    border-radius: 5px;
+	    padding: 10px;
+		background-color: rgb(230,230,230);	
 	
 	}
+	#roomName{
+	
+		text-align: center;
+	}
 	#messageWindow{
-	    height: 250px;
+	    height: 650px;
+	    width:100%;
     	overflow-y: auto;
 	}
+	.chatMessage_mine{
+		
+		background-color:rgb(255,235,51);
+		max-width: 60%;
+	    border-radius: 20px;
+	    padding: 10px;
+	    text-align: left;
+	    float: right;
+	   
+	    word-break: break-all;
+	    margin-top: 5px;
+	    display: block;
+	    clear: both
+		
+	}
+	.chatMessage_others{
+		
+		background-color:white;
+		max-width: 60%;
+	    border-radius: 20px;
+	    padding: 10px;
+	    text-align: left;
+	    float:left;
+	    /* right: 0; */
+	    word-break: break-all;
+	    margin-top: 5px;
+	    display: block;
+	    clear: both
+		
+	}
+	
 </style>
 </head>
 <body>
@@ -34,15 +75,16 @@
             id='chat_id' />
     </c:if>
     <!--     채팅창 -->
-    
     <div id="_chatbox" style="display: none">
-        <fieldset>
+    <div id="roomName">${groupName}</div>
+        
             <div id="messageWindow"></div>
-            <br /> <input id="inputMessage" type="text" onkeyup="enterkey()" />
-            <input type="submit" value="send" onclick="send()" />
-        </fieldset>
+            <br /> <input id="inputMessage" type="text" size="20" onkeyup="enterkey();" />
+            <button type="submit" id="submitBtn" onclick="send();">보내기</button>
+            
+        
     </div>
-    <img class="chat" style="width:50px; height:50px; float:right" src="${contextPath }/resources/images/chat.png" />
+    <img class="chat" style="width:50px; height:50px; float:right; cursor:pointer;" src="${contextPath }/resources/images/chat.png" />
 
 
 <script>
@@ -69,8 +111,9 @@
     function send() {
         if (inputMessage.value == "") {
         } else {
-            $("#messageWindow").html($("#messageWindow").html()
-                + "나 : " + inputMessage.value + "</br>");
+            /* $("#messageWindow").html($("#messageWindow").html()
+                + "나 : " + inputMessage.value + "</br>"); */
+            $("#messageWindow").append("<span class='chatMessage_mine'>"+ inputMessage.value + "</span>"+"<br><br>");
             $("#messageWindow").scrollTop(99999999);
         }
         socket.send("chat,"+loginUserId+","+loginUserName+","+inputMessage.value+","+gName);
@@ -85,6 +128,14 @@
             send();
         }
     }
+    /* $(function(){
+    	
+    	$("#messageWindow").on("change",function(){
+    		
+    		$("#messageWindow").scrollTop(99999999);
+    	});
+    	
+    }); */
     //  채팅이 많아져 스크롤바가 넘어가더라도 자동적으로 스크롤바가 내려가게함
     /* window.setInterval(function() {
         var elem = document.getElementById('messageWindow');

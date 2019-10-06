@@ -96,8 +96,8 @@
 	        
 	        if(dataArray[0]=="chat"){
 	        
-	        	$("#messageWindow").append(dataArray[1] + " : " + dataArray[2]);
-	        	$("#messageWindow").append("<br>");
+	        	$("#messageWindow").append("<span class='chatMessage_others'>" +dataArray[1] + " : " + dataArray[2] + "</span><br><br>");
+	        	$("#messageWindow").scrollTop(99999999);
 	        }else if(dataArray[0]=="reply"){
 	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2]);
 	        	$("#alaram").append("<br>");
