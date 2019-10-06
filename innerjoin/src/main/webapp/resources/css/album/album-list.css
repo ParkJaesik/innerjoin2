@@ -29,6 +29,9 @@
 			
 		}
 
+		i{
+			box-sizing:border-box !important;
+		}
 		.footer img{
 			max-width:100%;
 			max-height:100%;
@@ -90,4 +93,21 @@
 		}
 		.padding_top{
 			padding-top:25px;
+		}
+
+		a:link{
+			text-decoration:none;
+			color:black;
+		}
+		a:visited{
+			text-decoration:none;
+			color:gray;
+		}
+		a:active{
+			text-decoration:underline;
+			color:gray;
+		}
+		a:hover{
+			text-decoration:none;
+			color:black;
 		}

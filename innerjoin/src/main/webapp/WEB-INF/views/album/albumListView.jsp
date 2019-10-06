@@ -11,7 +11,8 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 </head>
 
@@ -63,14 +64,14 @@
 							
 								<!-- [이전] -->
 								<c:if test="${ pi.currentPage <= 1 }">
-									[이전] &nbsp;
+									<i class="material-icons">keyboard_arrow_left</i> &nbsp;
 								</c:if>
 								<c:if test="${ pi.currentPage > 1 }">
 									<c:url var="before" value="albumListView.ij">
 										<c:param name="page" value="${ pi.currentPage - 1 }"/>
 										<c:param name="groupNo" value="${groupNo}" />
 									</c:url>
-									<a href="${ before }">[이전]</a> &nbsp;
+									<a href="${ before }"><i class="material-icons">keyboard_arrow_left</i></a> &nbsp;
 								</c:if>
 								
 								<!-- 페이지 -->
@@ -90,14 +91,14 @@
 								
 								<!-- [다음] -->
 								<c:if test="${ pi.currentPage >= pi.maxPage }">
-									[다음]
+									<i class="material-icons">keyboard_arrow_right</i>
 								</c:if>
 								<c:if test="${ pi.currentPage < pi.maxPage }">
 									<c:url var="after" value="albumListView.ij">
 										<c:param name="page" value="${ pi.currentPage + 1 }"/>
 										<c:param name="groupNo" value="${groupNo}" />
 									</c:url> 
-									<a href="${ after }">[다음]</a>
+									<a href="${ after }"><i class="material-icons">keyboard_arrow_right</i></a>
 								</c:if>
 							</td>
 						</tr>
