@@ -25,6 +25,16 @@
 	
 
 <title>Group Menubar</title>
+<style>
+	#groupChatWrapper{
+		position: absolute;
+	    right: 20px;
+	    bottom: 20px;
+	    z-index: 10;
+        width: 16%;
+        
+	}
+</style>
 </head>
 <body>
 
@@ -77,10 +87,7 @@
 		
 	</div>
 	<script>
-		$(function(){
-		    // 스크롤하면 따라오는 flaotingMenu
-		   
-		});
+		
 		
 	</script>
 </body>
