@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var $checkImg = $('<img>');
       $checkImg.addClass('checkBtn detailView_' + event.eno).attr('alt', '참석')
       			.attr('src', 'resources/images/check.jpg')
-      			.attr('data-toggle', 'tooltip');
+      			.attr('data-toggle', '');
       $eventLabelClose.append($closeImg).append($checkImg);
       $eventClose.append($eventLabelClose);
       $eventTitle.append($eventTitleCol1).append($eventClose);
@@ -308,10 +308,6 @@ document.addEventListener('DOMContentLoaded', function() {
       $eventDetailCol.append($eventTitle).append($eventInfo);
       $eventDetail.append($eventDetailCol);
       detailWrapperCol.append($eventDetail);
-      
-      // 참석버튼 툴팁 실행
-      $('[data-toggle="tooltip"]').tooltip(); 
-      
       
 
    }
