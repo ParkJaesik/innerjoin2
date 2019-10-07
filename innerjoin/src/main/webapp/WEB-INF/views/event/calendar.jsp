@@ -8,20 +8,20 @@
 <title>Insert title here</title>
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
-<link href='${contextPath }/resources/css/core.css' rel='stylesheet' />
-<link href='${contextPath }/resources/css/daygrid.css' rel='stylesheet' />
-<link href='${contextPath }/resources/css/list.css' rel='stylesheet' />
-<link href='${contextPath }/resources/css/timegrid.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/core.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/daygrid.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/list.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/timegrid.css' rel='stylesheet' />
 
-<link href='${contextPath }/resources/css/calendarEvent.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/calendarEvent.css' rel='stylesheet' />
 
-<script src='${contextPath }/resources/js/core.js'></script>
-<script src='${contextPath }/resources/js/daygrid.js'></script>
-<script src='${contextPath }/resources/js/timegrid.js'></script>
-<script src='${contextPath }/resources/js/list.js'></script>
-<script src='${contextPath }/resources/js/interaction.js'></script>
+<script src='${contextPath }/resources/js/event/core.js'></script>
+<script src='${contextPath }/resources/js/event/daygrid.js'></script>
+<script src='${contextPath }/resources/js/event/timegrid.js'></script>
+<script src='${contextPath }/resources/js/event/list.js'></script>
+<script src='${contextPath }/resources/js/event/interaction.js'></script>
 
-<script src='${contextPath }/resources/js/moment.js'></script>
+<script src='${contextPath }/resources/js/event/moment.js'></script>
 
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 
@@ -35,8 +35,16 @@
    <!--  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     -->
 
+
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+
 </head>
 <body>
+
+	<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../group/groupMenubar.jsp"/>
 
 	<div class="container-fluid group-schedule">
 
@@ -51,6 +59,7 @@
 		<c:set var="levelCode" value="0"/>
 		<!-- 현재 그룹의 번호 받아오기. 가데이터 세팅 -->
 		<c:set var="gno" value="1"/>
+		
 		<c:if test="${levelCode == 0}" >
 			<div class="row">
 	            <!-- modal -->
@@ -157,17 +166,6 @@
 			</div>
 	    </c:if>
        
-      <!--    
-      <div class="row detailWrapper">
-         <div class="col-md-12">
-            <div class="row eventDetail">
-               <div class="col-md-6 eventThumbnail"></div>
-               <div class="col-md-6 eventInfo"></div>
-            </div>
-         </div>
-      </div>
-       -->
-      
       <!-- 이벤트 상세보기 영역 -->
        <div class="row detailWrapper" style="align:center">
          <div class="col-md-12">
@@ -182,7 +180,7 @@
 	</script>
    
    <!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
-   <script src='${contextPath }/resources/js/calendarEvent.js'></script>
+   <script src='${contextPath }/resources/js/event/calendarEvent.js'></script>
     
     <!-- bootstrap js -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->

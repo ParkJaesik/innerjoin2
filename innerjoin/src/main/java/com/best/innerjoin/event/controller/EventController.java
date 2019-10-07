@@ -1,12 +1,8 @@
 package com.best.innerjoin.event.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +29,7 @@ public class EventController {
 		return "event/calendar";
 	}
    
-   	/** 일정 추가 Controller
+   	/** 모임에 일정 추가 Controller
     * @param event
     * @return result
     */
@@ -61,9 +57,11 @@ public class EventController {
 	* @return member list
 	*/
 	@ResponseBody
-	@RequestMapping("attendMember.ij")
+	@RequestMapping(value="attendMember.ij", produces="text/plain;charset=UTF-8")
 	public String attendMember(String eno) {
 		ArrayList<Member> mList = eService.selectMem(eno);
+		System.out.println("eno: " + eno);
+		System.out.println(mList);
 		return new Gson().toJson(mList);
 	}
    
@@ -76,12 +74,15 @@ public class EventController {
 	@ResponseBody
 	@RequestMapping("attendEvent.ij")
 	public int attendEvent(String eno, HttpSession session) {
-		//String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-//		return eService.attendEvent(eno, memberId);
-		return 1;
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		int result;
+		if (memberId == null)
+			result = 0;
+		result = eService.attendEvent(eno, memberId);
+		return result;
 	}
 	
-	/** 로그인유저가 참석하는 이벤트 리스트 조회 Controller
+	/** 그룹에서 로그인유저가 참석하는  이벤트 리스트 조회 Controller
 	 * @param date
 	 * @param memberId
 	 * @param gno
@@ -89,17 +90,22 @@ public class EventController {
 	 */
 	@ResponseBody
 	@RequestMapping("getAttendEventList.ij") 
-	public List<Integer> getAttendEventList(String date, Integer gno, HttpSession session) {
+	public List<Integer> getAttendEventList(String date, int gno, HttpSession session) {
 		System.out.println(date);
-		String memberId = "admin";
-//		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-//		List<Integer> list = eService.attendEventList(date, memberId, gno);
-		List<Integer> list = new ArrayList();
-		list.add(10);
-		list.add(20);
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		List<Integer> list = eService.attendEventList(date, memberId, gno);
+		System.out.println("참석 목록 : " + list);
 		return list;
 		
 	}
+	
+	
+	
+	
+//	===========================================================================
+	
+	
+	
 	
 	/** 멤버페이지 일정관리 뷰로 이동
 	 * @return
@@ -108,6 +114,28 @@ public class EventController {
 	public String memberCalender() {
 		return "event/memberCalendar";
 	}
+	
+	/** 멤버가 참석하는 이벤트 리스트 조회
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="memberEventList.ij", produces="text/plain;charset=UTF-8")
+	public String memberEventList(String date, HttpSession session) {
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		ArrayList<Event> eventList = eService.memberEventList(date, memberId);
+		return new Gson().toJson(eventList);
+	}
 
+	
+	/** 이벤트 참석 취소
+	 * @param eno session
+	 * @return result
+	 */
+	@ResponseBody
+	@RequestMapping("cancelEvent.ij")
+	public int cancelEvent(int eno, HttpSession session) {
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		return eService.cancelEvent(memberId, eno);
+	}
 
 }

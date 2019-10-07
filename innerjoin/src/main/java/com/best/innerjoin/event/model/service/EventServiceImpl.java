@@ -55,4 +55,21 @@ public class EventServiceImpl implements EventService{
 		return eDao.selectMem(eno);
 	}
 
+	@Override
+	public ArrayList<Event> memberEventList(String date, String memberId) {
+		
+		Map<String, String> dateMember = new HashMap();
+		dateMember.put("date", date);
+		dateMember.put("memberId", memberId);
+		return eDao.memberEventList(dateMember);
+	}
+
+	@Override
+	public int cancelEvent(String memberId, int eno) {
+		Map<String, String> memberEno = new HashMap();
+		memberEno.put("memberId", memberId);
+		memberEno.put("eno", ""+eno);
+		return eDao.cancelEvent(memberEno);
+	}
+
 }
