@@ -18,5 +18,6 @@ public interface ReportService {
 	 * @return
 	 */
 	ArrayList<GroupMemberReport> searchBList(Search search);
+	
 
 }

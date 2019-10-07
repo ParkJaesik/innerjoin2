@@ -41,6 +41,7 @@
 			             <input type="radio" name="rept"> 기타 
 			         </div>
 			         <div>
+			     
 			             
 			         </div>
 			     </div>
