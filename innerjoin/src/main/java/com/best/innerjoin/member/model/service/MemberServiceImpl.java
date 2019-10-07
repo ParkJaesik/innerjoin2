@@ -106,6 +106,13 @@ public class MemberServiceImpl implements MemberService{
 		int groupCount = mDao.groupCount(logingUser);
 		return mDao.selectList(logingUser);
 	}
+
+	// 탈퇴하기
+	@Override
+	public int deleteMember(Member loginUser) {
+		
+		return mDao.deletMember(loginUser);
+	}
 	
 	
 	
