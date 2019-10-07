@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-        <link rel="stylesheet" href="resources/css/album/album-add.css"/>
+        <!-- <link rel="stylesheet" href="resources/css/album/album-add.css"/> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
@@ -18,6 +18,7 @@
 <script>
 	console.log('addAlbum groupNo:'+'${groupNo}');
 	console.log('addAlbum memberId:'+'${memberId}');
+	console.log('addAlbum memberId:'+'${param.page}');
 </script>  
 	<div class="container-fluid add-wrapper">
 		<!-- <div class="row"> -->
@@ -41,7 +42,7 @@
 							</div>
 							<div class="col-md-4">
 								<button class="submit float_right btn btn-warning">앨범등록</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page}">등록취소</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page} + '&groupNo='+${groupNo}">등록취소</button>
 							</div>
 						</div>
 					</div>
@@ -236,7 +237,7 @@
             });
             
             function goList(){
-            	 location.href="albumListView.ij?groupNo="+${groupNo};
+            	 location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + ${currentPage};
             }
         </script>
 </body>
