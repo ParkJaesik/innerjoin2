@@ -20,6 +20,7 @@
 <%@ include file="../group/groupMenubar.jsp" %>
  <script>
  	console.log('groupNo:'+'${groupNo}'); 
+ 	console.log('currentPage:'+'${pi.currentPage}'); 
  </script>
 	<div class="container-fluid wrapper">
 		<!-- <div class="row">

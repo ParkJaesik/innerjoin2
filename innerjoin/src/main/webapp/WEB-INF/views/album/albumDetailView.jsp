@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="resources/css/album/album-detail.css"/>
+	<!-- <link rel="stylesheet" href="resources/css/album/album-detail.css"/> -->
 	<script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
@@ -21,14 +21,21 @@
                     <h1 align="right">${album.albumTitle}</h1>
                 </div>
                 <div class="col-md-5 al-list">
-                    <div style="width: 50px; height: 50px; overflow: hidden">
+                    <div style="width: 50px; height: 50px; overflow: hidden; float:right; margin-left:10px;padding-right:0;">
                         <img src="resources/images/album/list.png" onclick="goList();">
+                    </div>
+                    <div style="width: 30px; height: 30px; overflow: hidden; float:right; padding:5px;">
+                        <img src="resources/images/album/delete.png" onclick="goList();">
+                    </div>
+                    <div style="width: 30px; height: 30px; overflow: hidden;float:right; padding:5px;">
+                        <img src="resources/images/album/edit.png" onclick="goList();">
                     </div>
                 </div>
             </div>
             <div class="row photo">
                 <div class="col-md-12 al-photo" style="/* width: 100%; min-height: 500px;  */overflow: hidden">
 								<div class="carousel slide" id="carousel-744270">
+								
 									<ol class="carousel-indicators">
 										<c:forEach var="p" begin="0" end="${fn:length(list)}" step="1" varStatus="status">
 											<c:choose>
@@ -42,51 +49,25 @@
 												</c:otherwise>
 											</c:choose>
 										</c:forEach> 
-										
-<!-- 									<li data-slide-to="0" data-target="#carousel-744270">
-										</li>
-										<li data-slide-to="1" data-target="#carousel-744270">
-										</li>
-										<li data-slide-to="2" data-target="#carousel-744270" class="active">
-										</li> -->
 									</ol>
+									
 									<div class="carousel-inner">
-									<c:forEach var="p" items="${list}" begin="0" end="${fn:length(list)}" step="1" varStatus="status">
-										<c:choose>
-											<c:when test="${status.first}">
-												<div class="carousel-item active">
-													<img alt="Carousel Bootstrap First" src="resources/auploadFiles/${p.photoRename}" />
-												</div>
-											</c:when>
-											<c:otherwise>
-												<div class="carousel-item">
-													<img alt="Carousel Bootstrap First" src="resources/auploadFiles/${p.photoRename}" />
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-										<!-- <div class="carousel-item">
-											<img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
-											<div class="carousel-caption">
-												<h4>
-													Second Thumbnail label
-												</h4>
-												<p>
-													Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-												</p>
-											</div>
-										</div>
-										<div class="carousel-item active">
-											<img class="d-block w-100" alt="Carousel Bootstrap Third" src="https://www.layoutit.com/img/sports-q-c-1600-500-3.jpg" />
-											<div class="carousel-caption">
-												<h4>
-													Third Thumbnail label
-												</h4>
-												<p>
-													Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-												</p>
-											</div>
-										</div> -->
+									
+										<c:forEach var="p" items="${list}" begin="0" end="${fn:length(list)}" step="1" varStatus="status">
+											<c:choose>
+												<c:when test="${status.first}">
+													<div class="carousel-item active">
+														<img alt="Carousel Bootstrap First" src="resources/auploadFiles/${p.photoRename}" />
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="carousel-item">
+														<img alt="Carousel Bootstrap First" src="resources/auploadFiles/${p.photoRename}" />
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									
 									</div> <a class="carousel-control-prev" href="#carousel-744270" data-slide="prev" ><span class="carousel-control-prev-icon" style="color:black;"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-744270" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
 								</div>
                 </div>

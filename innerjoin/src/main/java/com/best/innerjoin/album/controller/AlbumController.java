@@ -28,9 +28,15 @@ public class AlbumController {
 	 * @return
 	 */
 	@RequestMapping("addAlbumForm.ij")
-	public String addPhotoForm() {
+	public ModelAndView addPhotoForm(String groupNo, ModelAndView mv, Integer page) {
+		// page == null -> 1page
+		// page != null -> 모든 page 중 하나
+		int currentPage = page == null ? 1 : page;
 		
-		return "album/addAlbumForm";
+		
+		mv.addObject("currentPage", currentPage).addObject("groupNo", groupNo).setViewName("album/groupIndex+addAlbumForm");
+		
+		return mv;
 	}
 
 	/** 앨범 등록 컨트롤러
@@ -99,7 +105,7 @@ public class AlbumController {
 		System.out.println("포토 리스트 : "+photoList.size());
 		System.out.println(album.toString());
 		if(album != null) {
-			mv.addObject("album", album).addObject("list", photoList).addObject("currentPage", currentPage).setViewName("album/albumDetailView");
+			mv.addObject("album", album).addObject("list", photoList).addObject("currentPage", currentPage).setViewName("album/groupIndex+albumDetailView");
 		} else {
 			mv.addObject("msg", "앨범 상세 조회 실패").setViewName("common/errorPage");
 		}
