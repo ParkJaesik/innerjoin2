@@ -117,4 +117,21 @@ button:active,
 .line{
     border-bottom: 1px solid rgba(133, 132, 132, 0.582);
 }
+
+#content{
+	margin-left: 10em;
+	margin-right: 10em;
+}
+.g-img{
+	position: relative;
+}
+.g-title{
+	position: absolute;
+	float: left;
+	}
+       
+       
+.myG-info{
+	display: inline;
+}
    

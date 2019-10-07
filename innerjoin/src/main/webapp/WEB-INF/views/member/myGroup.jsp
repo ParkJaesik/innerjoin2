@@ -33,6 +33,7 @@
             </div>
            
         </section>
+        <div class="margin"></div>
         <section id="content">
             <div>
                 <h4>초대받은 모임</h4>
