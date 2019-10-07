@@ -95,7 +95,7 @@
                     <div class="col-md-12">
                         <div class="row re-input">
                             <div class="col-md-12 re-txtarea">
-                                <textarea rows="3" cols="128" placeholder="comment..."></textarea>
+                                <textarea rows="3" cols="110" placeholder="comment..."></textarea>
                             </div>
                             <div class="col-md-1 re-submit-btn">
                                 <button class="submit-btn">submit</button>
