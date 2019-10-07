@@ -37,6 +37,7 @@
 							<c:param name="groupNo" value="1" />
 						</c:url>
                         <a href="${goAlbum}">앨범</a>
+                  <a href="tempGoGroup.ij">임시 모임 페이지로 이동</a>
 
 			</div>
 			<div class="col-md-1 aside">
