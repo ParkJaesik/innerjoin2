@@ -10,6 +10,8 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/common/menubar.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <style>
 
 	
@@ -27,7 +29,13 @@
 				
 				<!-- 로그인 시 사용 가능 -->				
 				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="showAlarm();"><span class="menu-detail">News</span></a></li>
+				<c:if test="${ empty sessionScope.loginUser }">
+				<li class="menu"><a class="icon solid fa-home menu-a" href="loginForm.ij"><span class="menu-detail">Login</span></a></li>
+				</c:if>
+				<c:if test="${ !empty sessionScope.loginUser }">
                 <li class="menu"><a class="icon solid fa-home menu-a" href="myGroupForm.ij"><span class="menu-detail">MyPage</span></a></li>
+                <li class="menu"><a class="icon solid fa-home menu-a" href="logout.ij"><span class="menu-detail">Logout</span></a></li>
+                </c:if>
 			</ul>
 		</nav>
 		
@@ -96,10 +104,14 @@
 	        
 	        if(dataArray[0]=="chat"){
 	        
-	        	$("#messageWindow").append(dataArray[1] + " : " + dataArray[2]);
-	        	$("#messageWindow").append("<br>");
+	        	$("#messageWindow").append("<span class='chatMessage_others'>" +dataArray[1] + " : " + dataArray[2] + "</span><br><br>");
+	        	$("#messageWindow").scrollTop(99999999);
 	        }else if(dataArray[0]=="reply"){
 	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2]);
+	        	$("#alaram").append("<br>");
+	        	$("#alarmTable").css("display","block");
+	        }else if(dataArray[0]=="albumInsert"){
+	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다.");
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }

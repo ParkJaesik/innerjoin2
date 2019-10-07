@@ -15,6 +15,7 @@
 	
 	<resultMap id="eventMemberSet" type="Member">
 		<id property="memberId" column="MEMBER_ID"/>
+		<result property="memberName" column="MEMBER_NAME"/>
 		<result property="memberProPath" column="MEMBER_PRO_PATH"/>
 	</resultMap>
 
@@ -35,8 +36,9 @@
 	
 	<select id="attendEventList" parameterType="map" resultType="_int">
 		SELECT EVENT_NO
-		FROM GROUP_EVENT USING(EVENT_NO)
-		WHERE GNO = #{gno} 
+		FROM GROUP_EVENT 
+		 JOIN MEMBER_EVENT USING(EVENT_NO)
+		WHERE GROUP_NO = #{gno} 
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
 	</select>
@@ -53,9 +55,36 @@
 	</select>
 	
 	<select id="selectMem" parameterType="String" resultMap="eventMemberSet">
-		SELECT MEMBER_ID, MEMBER_PRO_PATH
+		SELECT MEMBER_NAME, MEMBER_PRO_PATH
 		FROM MEMBER
 		JOIN MEMBER_EVENT USING(MEMBER_ID)
 		WHERE EVENT_NO = #{eno}
 	</select>
+	
+	
+	
+	<!-- ====================================================================== -->
+	
+	
+	
+	
+	<select id="memberEventList" parameterType="map" resultMap="eventResultSet">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_CONTENT,
+			TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD HH24:MI') EVENT_START_DAY,
+			TO_CHAR(EVENT_END_DAY, 'YYYY-MM-DD HH24:MI') EVENT_END_DAY,
+			GROUP_NO
+		FROM MEMBER_EVENT
+		JOIN GROUP_EVENT USING(EVENT_NO)
+		WHERE MEMBER_ID = #{memberId} AND (
+			TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date} OR
+			TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date}
+		)
+	
+	</select>
+	
+	<delete id="cancelEvent" parameterType="_int">
+		DELETE FROM MEMBER_EVENT
+		WHERE EVENT_NO = #{eno} AND MEMBER_ID = #{memberId}
+	</delete>
+
 </mapper>

@@ -113,6 +113,9 @@
 
                         	<a href="tempGoGroup.ij">임시 모임 페이지로 이동</a>
                         	<a href="tempGoGroup2.ij">임시 모임2 페이지로 이동</a>
+                        	<br>
+                        	<a href="calendar.ij">임시 모임일정</a>
+                        	<a href="memberCalendar.ij">임시 멤버일정</a>
 
                         </c:if>
                         	<a href="gochat.ij">채팅창</a>

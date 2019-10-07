@@ -29,6 +29,7 @@ public class AlbumController {
 	 */
 	@RequestMapping("addAlbumForm.ij")
 	public String addPhotoForm() {
+		
 		return "album/addAlbumForm";
 	}
 
@@ -78,7 +79,7 @@ public class AlbumController {
 		
 		if(list != null) {
 			// 메소드 체이닝 (Method Chaining)
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("groupNo", groupNo).setViewName("album/albumListView");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("groupNo", groupNo).setViewName("group/groupIndex");
 		}else {
 			mv.addObject("msg", "게시물 목록 조회 실패").setViewName("common/errorPage");
 		}
