@@ -183,7 +183,17 @@
 			        
 			        console.log(formData.get("title"));
 			        /* console.log(formData.get("files")); */
-         
+			        
+			        
+			        /* websocket 관련 필요 코드 */
+         			var loginUserId = "${loginUser.memberId}";
+         			var loginUserName = "${loginUser.memberName}";
+         			var gName = "${gName}";
+         			
+         			
+         			
+         			
+         			
 		              //ajax 통신으로 multipart form을 전송한다.
   	                $.ajax({
 	                    type : 'POST',
@@ -208,6 +218,10 @@
 	                        } else {
 	                            alert('이미지 업로드 성공');
 	                            // 이후 동작 ...
+	                            // 알람을 위한 채팅 동작.
+	                            
+	                            /* websocket 관련 필요 코드 */
+	                            socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName);
 	                            
 	                           goList();
 	                        }
