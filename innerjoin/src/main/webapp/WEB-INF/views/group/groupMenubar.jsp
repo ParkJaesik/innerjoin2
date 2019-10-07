@@ -7,12 +7,12 @@
 <head>
 <meta charset="UTF-8">
 
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet"
+<!-- <script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<!-- <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> -->
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
@@ -20,20 +20,13 @@
 	href="${contextPath}/resources/css/group/groupMenubar-style.css"
 	type="text/css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 	
 
 <title>Group Menubar</title>
 <style>
-	#groupChatWrapper{
-		position: absolute;
-	    right: 20px;
-	    bottom: 20px;
-	    z-index: 10;
-        width: 16%;
-        
-	}
+	
 </style>
 </head>
 <body>
@@ -82,13 +75,6 @@
 			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>
 		</div>
 	</div>
-	<div id="groupChatWrapper">
-		<%@ include file="/WEB-INF/views/chat/chat.jsp" %>
-		
-	</div>
-	<script>
-		
-		
-	</script>
+
 </body>
 </html>
