@@ -99,4 +99,13 @@ public class AlbumDao {
 		return sqlSession.insert("albumMapper.insertReply", aReply);
 	}
 
+	/** 댓글 출력 DAO
+	 * @param albumNo
+	 * @return
+	 */
+	public ArrayList<AlbumReply> selectReply(int albumNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("albumMapper.selectReply", albumNo);
+	}
+
 }

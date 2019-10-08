@@ -89,7 +89,7 @@
                             <div class="col-md-12" style="padding:10px !important;">
                                 <p style="font-size:20px; font-weight:500">Comment</p>
                                 <hr>
-                                <div class="row re-info">
+                                <div class="row" id="re-info">
                                     <div class="col-md-3">
                                         user01
                                     </div>
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row re-content">
+                                <div class="row" id="re-content">
                                     <div class="col-md-12">
                                         sdjfhsdoifsdjfdjdddddddddddddddddddsssssssffffssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                                     </div>
@@ -196,34 +196,39 @@
     		// 댓글 리스트 조회 함수
     		function getReplyList(albumNo){
     			$.ajax({
-    				url : "rList.kh",
-    				data : {refBid : refBid},
+    				url : "rList.ij",
+    				data : {albumNo : albumNo},
     				dataType : "json",
     				success : function(list){
-    					var $tableBody = $("#rtb tbody");
-    					$tableBody.html("");
+    					var $reInfo = $("#re-info");
+    					var $reContent = $("#re-content");
     					
-    					$("#rCount").text("댓글("+ list.length +")");
+    					/* $("#rCount").text("댓글("+ list.length +")"); */
     					
-    					var $tr;
-    					var $rWriter;
-    					var $rContent;
+    					var $arWriter;
     					var $rCreateDate;
+    					var $edit-box = $("<div class='col-md-1'>");
+    					var $edit = $("<img src='resources/images/album/edit.png'>");
+    					var $delete-box = $("<div class='col-md-1'>");
+    					var $delete = $("<img src='resources/images/album/delete.png'>");
+    					var $arContent;
     					
     					if(list.length > 0){
     						// 댓글 목록 출력
     						// rWriter -> width=100px
     						// rCreateDate -> width=100px
     						$.each(list,function(i,v){
-    							$tr = $("<tr>");
-    							$rWriter = $("<td width='100px'>").text(list[i].rWriter);
-    							if ('${loginUser.id}' == list[i].rWriter){
-    								$rWriter.css("color","red");
+    							$arWriter = $("<div class='col-md-3'>").text(list[i].arWriter);
+    							$arCreateDate = $("<div align='right' class='col-md-7'>").text(list[i].arCreateDate);
+    							$edit-box.append($edit);
+    							$delete-box.append($delete);
+    							$arContent = $("<div class='col-md-12'>").text(list[i].arContent);
+    							if ('${loginUser.id}' == list[i].arWriter){
+    								$arWriter.css("color","red");
     							}
-    							$rContent = $("<td>").text(list[i].rContent);
-    							$rCreateDate = $("<td width='100px'>").text(list[i].rCreateDate);
-    							$tr.append($rWriter).append($rContent).append($rCreateDate);
-    							$tableBody.append($tr);
+    							$reInfo.append($arWriter).append($arCreateDate).append($edit-box).append($delete-box).append("<hr>");
+    							$reContent.append($arContent);
+    							$('.re-list').children('.col-md-12').append($reInfo).append($reContent);
     						});
     					}else{ // 댓글이 없는 경우
     						$tr = $("<tr>");

@@ -208,4 +208,10 @@ public class AlbumServiceImpl implements AlbumService {
 		public int insertReply(AlbumReply aReply) {
 			return aDao.insertReply(aReply);
 		}
+
+		@Override
+		public ArrayList<AlbumReply> selectReply(int albumNo) {
+			// TODO Auto-generated method stub
+			return aDao.selectReply(albumNo);
+		}
 }
