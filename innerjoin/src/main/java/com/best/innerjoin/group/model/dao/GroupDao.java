@@ -12,8 +12,7 @@ public class GroupDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	
-	
+	// 모임 만들기
 	public int insertGroup(Group group) {
 		
 		return sqlSession.insert("groupMapper.insertGroup", group);
