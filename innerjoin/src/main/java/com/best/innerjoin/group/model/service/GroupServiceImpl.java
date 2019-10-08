@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.omg.CORBA.portable.RemarshalException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ import com.best.innerjoin.group.model.vo.Group;
 @Service("gService")
 public class GroupServiceImpl implements GroupService{
 	
+	@Autowired
 	private GroupDao gDao;
 	
 
@@ -90,6 +92,16 @@ public class GroupServiceImpl implements GroupService{
 		String renameFileName = sdf.format(new Date())+ "." + originFileName.substring(originFileName.lastIndexOf(".")+1);
 		
 		return renameFileName;
+	}
+
+	
+//	클릭한 그룹 페이지로 이동하는 메소드
+	@Override
+	public Group goGroupPage(int gNo) {
+		
+		Group temp = gDao.goGroupPage(gNo);
+		
+		return temp;
 	}
 
 	

@@ -58,6 +58,20 @@ public class GroupController {
 	}
 	
 	
+//	클릭한 그룹 페이지로 이동하는 메소드
+	@RequestMapping("goGroupPage.ij")
+	public String goGroupPage(HttpServletRequest request,Group group,Model model) {
+		
+		int gNo = group.getgNo();
+		
+		Group tempGroup = gService.goGroupPage(gNo);
+		
+		model.addAttribute("group", tempGroup);
+		request.getSession().setAttribute("group", tempGroup);
+		request.getSession().setAttribute("gName", tempGroup.getgName());
+		return "group/groupIndex";
+	}
+	
 	
 
 }

@@ -5,6 +5,14 @@ import java.util.Date;
 public class Group { // group VO
 	
 	private int gNo;
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
 	private String gHost;
 	private String gOpenStatus;
 	private String gName;
@@ -18,6 +26,7 @@ public class Group { // group VO
 	private int gReptCount;
 	private String gOriginFileName;
 	private String gRenameFileName;
+	private String districtName;
 
 	
 	public Group() {
@@ -26,7 +35,7 @@ public class Group { // group VO
 
 	public Group(int gNo, String gHost, String gOpenStatus, String gName, int gLimit, String gInfo, int gMemCount,
 			Date gEnrollDate, int localCode, int gStatus, int gCategoryCode, int gReptCount, String gOriginFileName,
-			String gRenameFileName) {
+			String gRenameFileName,String districtName) {
 		super();
 		this.gNo = gNo;
 		this.gHost = gHost;
@@ -42,6 +51,8 @@ public class Group { // group VO
 		this.gReptCount = gReptCount;
 		this.gOriginFileName = gOriginFileName;
 		this.gRenameFileName = gRenameFileName;
+		this.districtName = districtName;
+		
 	}
 
 	public int getgNo() {

@@ -27,8 +27,8 @@
 		<div class="row" id="body-wrapper">
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
-				<%-- <%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%> --%>
-				<jsp:include page="/WEB-INF/views/album/albumListView.jsp"></jsp:include>
+				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
+				<%-- <jsp:include page="/WEB-INF/views/album/albumListView.jsp"></jsp:include> --%>
 
 			</div>
 			<div class="col-md-1 aside">
