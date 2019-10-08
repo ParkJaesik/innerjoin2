@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
  --%><!DOCTYPE html>
 <html>
@@ -91,7 +92,10 @@
 			
 			<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
 			<button type="button" class="btn btn-primary" id="group-btn-member">회원</button>
-			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>
+			<c:url var="goAlbum" value="albumListView.ij">
+				<c:param name="groupNo" value="1" />
+			</c:url>
+			<button type="button" class="btn btn-primary" id="group-btn-gallery" onclick="location.href='${goAlbum}'">사진</button>
 		</div>
 	</div>
 

@@ -31,6 +31,7 @@
   		<result property="memberName" column="MEMBER_NAME"/>
   	</resultMap>
   	
+
 	<!-- 전체 게시글 수 조회 쿼리 -->
 	<select id="boardListCount" resultType="_int" parameterType="_int">
 		SELECT COUNT(*) FROM BOARD WHERE BOARD_STATUS = 'Y' AND GROUP_NO = #{groupNo}
