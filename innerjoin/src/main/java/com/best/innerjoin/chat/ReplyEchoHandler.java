@@ -11,6 +11,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 
 
@@ -26,8 +27,12 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		
 		System.out.println("afterConnectionEstablished : " + session);
 		sessions.add(session);
+		
 		String senderId = getId(session);
+		
 		userSessions.put(senderId,session);
+		
+		
 		String gName = getGroupName(session);
 		if(gName != null) {
 			groupList.put(session,gName);
@@ -138,9 +143,16 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	
 	public String getGroupName(WebSocketSession session) {
 		Map<String,Object> httpSession = session.getAttributes();
-		String gName = (String) httpSession.get("groupName");
 		
-		return gName;
+		
+		String gName = (String) httpSession.get("gName");
+		
+		if(gName != null) {
+			return gName;
+		}else {
+			return null;
+		}
+		
 	}
 
 

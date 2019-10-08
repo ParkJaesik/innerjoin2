@@ -41,19 +41,19 @@
 
 			<div id="group-info">
 				<div id="group-info-name">
-					<span id="group-name">DEVELOPER STUDY</span>
+					<span id="group-name">${group.gName }</span>
 				</div>
 
 				<div id="group-info-area">
-					<span id="group-area">지역 : 서울 중구</span>
+					<span id="group-area">지역 : 서울 ${group.districtName }</span>
 				</div>
 
 				<div id="group-info-member">
-					<span id="group-member">회원 : 35명</span>
+					<span id="group-member">회원 : ${group.gMemCount }명</span>
 				</div>
 
 				<div id="group-info-leader">
-					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">박재식</a>
+					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">${group.gHost }</a>
 				</div>
 			</div>
 

@@ -76,7 +76,7 @@
     </c:if>
     <!--     채팅창 -->
     <div id="_chatbox" style="display: none">
-    <div id="roomName">${groupName}</div>
+    <div id="roomName">${group.gName}</div>
         
             <div id="messageWindow"></div>
             <br /> <input id="inputMessage" type="text" size="20" onkeyup="enterkey();" />
@@ -106,7 +106,7 @@
     var inputMessage = document.getElementById('inputMessage');
     var loginUserName = "${loginUser.memberName }";
     var loginUserId = "${loginUser.memberId }";
-    var gName = "${groupName}";
+    var gName = "${gName}";
     
     function send() {
         if (inputMessage.value == "") {
