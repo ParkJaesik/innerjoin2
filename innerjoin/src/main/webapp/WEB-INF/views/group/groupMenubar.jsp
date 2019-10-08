@@ -63,15 +63,18 @@
 			<div id="group-button">
 				<c:if test="${ loginUser.memberId eq group.gHost }"> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
 					<c:url var="secession" value="rblist.ij"/>
-					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
+					<button type="button" class="btn btn-primary" id="group-btn-manage">모임관리</button>
 				 </c:if>
+				<c:set var="groupMemberCode" value = "${groupMemberCode }" scope="session"/>
 				
-				<c:if test="${groupMemberCode ne 0 or groupMemberCode  ne 1 or groupMemberCode  ne 2}">
+				<c:if test="${groupMemberCode eq 3 or groupMemberCode eq 4 or groupMemberCode eq -1}">
 				<button type="button" class="btn btn-primary" id="group-btn-join" data-toggle="modal" data-target="#exampleModalCenter">INNER JOIN하기</button>
 				</c:if>
+				
 				<c:if test="${groupMemberCode eq 1 or groupMemberCode  eq 2}">
 				<button type="button" class="btn btn-primary" id="group-btn-withdraw">모임에서 나가기</button>
 				</c:if>
+				
 			</div>
 		</div>
 
@@ -109,11 +112,24 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='insertGroupMember.ij'">확인</button>
+        <button type="button" class="btn btn-primary"  id="applyGroupBtn">확인</button>
       </div>
     </div>
   </div>
 </div>
 
+<script>
+	
+	$("#applyGroupBtn").click(function(){
+		var groupMemberCode = "${groupMemberCode }";
+		if(groupMemberCode == 4){
+			$(location).attr('href','insertGroupMember.ij');
+			
+		}else{
+			alert("모임 가입 신청을 이미 하셨습니다.");
+		}
+		
+	});
+</script>
 </body>
 </html>

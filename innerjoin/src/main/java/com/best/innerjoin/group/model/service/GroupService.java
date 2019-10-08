@@ -17,4 +17,7 @@ public interface GroupService {
 
 	Integer selectCode(String memberId, int gNo);
 
+
+	int applyInsertGroup(String memberId, int gNo);
+
 }
