@@ -171,12 +171,12 @@
             });
             
             $(".submit-btn").click(function(){
-            	var reply = $("#rContent").val();
+            	var arContent = $("#rContent").val();
             	var albumNo = ${album.albumNo};
             	
     			$.ajax({
     				url: "addReply.ij",
-    				data : {rContent : rContent, albumNo : albumNo},
+    				data : {arContent : arContent, albumNo : albumNo},
     				type : "post",
     				success : function(data){
     					if(data == 'success'){
@@ -184,7 +184,7 @@
     						// 댓글 작성 부분 초기화
     						alert("댓글 등록 성공!");
     						$("#rContent").val("");
-    						getReplyList(refBid);
+    						getReplyList(albumNo);
     					}
     				},
     				error : function(e){
@@ -193,6 +193,47 @@
     			});
             });
             
+    		// 댓글 리스트 조회 함수
+    		function getReplyList(albumNo){
+    			$.ajax({
+    				url : "rList.kh",
+    				data : {refBid : refBid},
+    				dataType : "json",
+    				success : function(list){
+    					var $tableBody = $("#rtb tbody");
+    					$tableBody.html("");
+    					
+    					$("#rCount").text("댓글("+ list.length +")");
+    					
+    					var $tr;
+    					var $rWriter;
+    					var $rContent;
+    					var $rCreateDate;
+    					
+    					if(list.length > 0){
+    						// 댓글 목록 출력
+    						// rWriter -> width=100px
+    						// rCreateDate -> width=100px
+    						$.each(list,function(i,v){
+    							$tr = $("<tr>");
+    							$rWriter = $("<td width='100px'>").text(list[i].rWriter);
+    							if ('${loginUser.id}' == list[i].rWriter){
+    								$rWriter.css("color","red");
+    							}
+    							$rContent = $("<td>").text(list[i].rContent);
+    							$rCreateDate = $("<td width='100px'>").text(list[i].rCreateDate);
+    							$tr.append($rWriter).append($rContent).append($rCreateDate);
+    							$tableBody.append($tr);
+    						});
+    					}else{ // 댓글이 없는 경우
+    						$tr = $("<tr>");
+    						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+    						$tr.append($rContent);
+    						$tableBody.append($tr);
+    					}
+    					
+    				}
+    			});
           
             function goList(){
             	
