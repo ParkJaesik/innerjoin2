@@ -27,10 +27,10 @@
                         <img src="resources/images/album/list.png" onclick="goList();">
                     </div>
                     <div style="width: 30px; height: 30px; overflow: hidden; float:right; padding:5px;">
-                        <img src="resources/images/album/delete.png" onclick="goList();">
+                        <img src="resources/images/album/delete.png" onclick="goDelete();">
                     </div>
                     <div style="width: 30px; height: 30px; overflow: hidden;float:right; padding:5px;">
-                        <img src="resources/images/album/edit.png" onclick="goList();">
+                        <img src="resources/images/album/edit.png" onclick="goEdit();">
                     </div>
                 </div>
             </div>
@@ -170,12 +170,22 @@
             	interval:false
             });
             
+          
             function goList(){
             	
             	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
             }
-            /* $(".al-list img").click(function(){
-            }); */
+            
+            function goEdit(){
+            	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
+            	
+            }
+            
+            function goDelete(){
+            	if(window.confirm("정말 삭제 하시겠습니까?")){
+            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=${album.albumNo}";
+            	}
+            }
         </script>
                
 </body>
