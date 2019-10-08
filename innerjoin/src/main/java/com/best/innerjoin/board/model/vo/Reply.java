@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Reply {
 	private int replyNo;
 	private String replyContent;
-	private Date replyCreateDate;
+	private String replyCreateDate;
 	private Date replyModifyDate;
 	private char replyStatus;
 	private int boardNo;
@@ -14,7 +14,7 @@ public class Reply {
 	
 	public Reply() {}
 
-	public Reply(int replyNo, String replyContent, Date replyCreateDate, Date replyModifyDate, char replyStatus,
+	public Reply(int replyNo, String replyContent, String replyCreateDate, Date replyModifyDate, char replyStatus,
 			int boardNo, String memberId, String memberName) {
 		super();
 		this.replyNo = replyNo;
@@ -43,11 +43,11 @@ public class Reply {
 		this.replyContent = replyContent;
 	}
 
-	public Date getReplyCreateDate() {
+	public String getReplyCreateDate() {
 		return replyCreateDate;
 	}
 
-	public void setReplyCreateDate(Date replyCreateDate) {
+	public void setReplyCreateDate(String replyCreateDate) {
 		this.replyCreateDate = replyCreateDate;
 	}
 

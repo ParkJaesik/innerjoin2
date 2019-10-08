@@ -33,9 +33,9 @@ public class BoardController {
 	// 게시판 조회
 	@RequestMapping("blist.ij")
 	public ModelAndView boardList(ModelAndView mv, Integer page, HttpServletRequest request) {
-		int currentPage = page == null ? 1 : page;
+		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
 		
-		int groupNo = 1;
+		int currentPage = page == null ? 1 : page;
 		
 		ArrayList<Board> list = bService.boardList(currentPage, groupNo);
 		
@@ -44,7 +44,7 @@ public class BoardController {
 		
 		if (list != null) {
 			
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("listCount", listCount).setViewName("group/groupBoard");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("listCount", listCount).setViewName("group/groupIndex+groupBoard");
 				
 		} else {
 			mv.addObject("msg", "게시판을 불러오는데 실패하였습니다").setViewName("common/errorPage");
@@ -61,7 +61,7 @@ public class BoardController {
 		Board board = bService.boardDetail(boardNo);
 		
 		if (board != null) {
-			mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupBoardDetail");
+			mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupIndex+groupBoardDetail");
 			
 		} else {
 			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
@@ -72,14 +72,13 @@ public class BoardController {
 	// 게시글 작성 화면 이동
 	@RequestMapping("binsertView.ij")
 	public String boardInsertView() {
-		return "group/groupBoardInsert";
+		return "group/groupIndex+groupBoardInsert";
 	}
 	
 	// 게시글 작성
 	@RequestMapping(value="binsert.ij", method=RequestMethod.POST)
 	public String boardInsert(Board board, HttpServletRequest request, MultipartFile uploadFile, Model model) {
-		// board.setGroupNo(request.getSession("group.groupNo"));
-		board.setGroupNo(1);
+		board.setGroupNo(((Group)request.getSession().getAttribute("group")).getgNo());
 		
 		int result = bService.boardInsert(board, uploadFile, request);
 		
@@ -103,7 +102,7 @@ public class BoardController {
 		
 		Board board = bService.boardDetail(boardNo);
 		
-		mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupBoardModify");
+		mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupIndex+groupBoardModify");
 		
 		return mv;
 	}
@@ -150,7 +149,7 @@ public class BoardController {
 	public String replyList(int boardNo) {
 		ArrayList<Reply> list = bService.replyList(boardNo);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd,HH:mm").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm").create();
 		
 		return gson.toJson(list);
 	}

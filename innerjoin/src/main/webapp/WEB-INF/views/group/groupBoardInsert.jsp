@@ -11,25 +11,23 @@
 <title>Group Board Insert</title>
 </head>
 <body>
-<%@ include file="../common/menubar.jsp" %>
-<%@ include file="../group/groupMenubar.jsp" %>
 	<form action="binsert.ij" method="post" id="binsertForm" enctype="multipart/form-data">
 		<div id="board-container">
 			<h1 align="center">게시글 등록</h1>
 
 			<div id="board-part">
 				<div id="board-check">
-					<%-- <c:if test="${ loginUser.memberName eq group.gHost }"> --%>
+					<c:if test="${ loginUser.memberId eq group.gHost }">
 						<input type="checkbox" name="boardTypeCheck" value="1" id="check">
 						<label for="check">공지글</label>
 						<input type="hidden" name="boardTypeCode" id="code">			
-					<%-- </c:if> --%>
+					</c:if>
 					
-					<%-- <c:if test="${ !loginUser.memberName eq group.gHost }"> --%>
+					<c:if test="${ !loginUser.memberId eq group.gHost }"> --%>
 						<input type="checkbox" name="boardTypeCheck" value="1" id="check" disabled="disabled">
 						<label for="check">공지글</label>
 						<input type="hidden" name="boardTypeCode" id="code">			
-					<%-- </c:if> --%>
+					</c:if>
 				</div>
 
 				<div id="board-writer">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
  --%><!DOCTYPE html>
 <html>
@@ -88,8 +89,8 @@
 			<button type="button" class="btn btn-primary" id="group-btn-index">정보</button>
 
 			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
-
-			<button type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
+			
+			<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
 			<button type="button" class="btn btn-primary" id="group-btn-member">회원</button>
 			<c:url var="goAlbum" value="albumListView.ij">
 				<c:param name="groupNo" value="1" />
