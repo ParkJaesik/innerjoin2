@@ -30,4 +30,9 @@ public class GroupDao {
 		return sqlSession.selectOne("groupMapper.selectCode",codeMap);
 	}
 
+	public int applyInsertGroup(Map codeMap) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

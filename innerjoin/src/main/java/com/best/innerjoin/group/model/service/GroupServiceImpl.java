@@ -116,6 +116,14 @@ public class GroupServiceImpl implements GroupService{
 		return gDao.selectCode(codeMap);
 	}
 
+	@Override
+	public int applyInsertGroup(String memberId, int gNo) {
+		Map codeMap = new HashMap<>();
+		codeMap.put("memberId", memberId);
+		codeMap.put("gNo", gNo);
+		return gDao.applyInsertGroup(codeMap);
+	}
+
 	
 	
 }

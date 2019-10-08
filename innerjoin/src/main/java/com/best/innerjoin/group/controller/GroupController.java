@@ -66,7 +66,7 @@ public class GroupController {
 		
 		int gNo = group.getgNo();
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		Integer groupMemberCode = 4;  
+		Integer groupMemberCode = -1;  
 			if(loginUser!=null) {
 			String memberId = loginUser.getMemberId();
 			
@@ -74,7 +74,7 @@ public class GroupController {
 			if(memberId != null) {
 				groupMemberCode = gService.selectCode(memberId,gNo);
 				if(groupMemberCode ==null) {
-					groupMemberCode = -1;
+					groupMemberCode = 4;
 					
 				}
 			}
@@ -95,5 +95,19 @@ public class GroupController {
 	}
 	
 	
+	@RequestMapping("insertGroupMember.ij")
+	public String applyInsertGroup(HttpServletRequest request,Model model) {
+		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int gNo  = ((Group)request.getSession().getAttribute("group")).getgNo();
+		String memberId = loginUser.getMemberId();
+		
+		int result = gService.applyInsertGroup(memberId,gNo);
+		
+		
+		
+		return null;
+		
+	}
 
 }
