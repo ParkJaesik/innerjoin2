@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
@@ -123,6 +124,25 @@ public class MemberController {
 	public String profileUpdateForm() {
 		return "member/profileUpdate";
 	}
+
+	// 탈퇴하기
+	@RequestMapping("mLeave.ij")
+	public String memberDelete(SessionStatus status, RedirectAttributes rdAttr, Model model, HttpServletRequest request) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int result = mService.deleteMember(loginUser);
+			
+		if(result > 0) {
+			rdAttr.addFlashAttribute("leaveMsg", "탈퇴되셨습니다.");
+			status.setComplete();
+			System.out.println("2adfadfa");
+				
+			return "redirect:/";
+		}else {
+			model.addAttribute("msg", "회원탈퇴 도중 오류가 발생했습니다.");
+			return "common/errorPage";
+		}
+	}
+
 	
 	
 	// 쪽지함으로 이동

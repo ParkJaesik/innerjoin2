@@ -28,9 +28,15 @@ public class AlbumController {
 	 * @return
 	 */
 	@RequestMapping("addAlbumForm.ij")
-	public String addPhotoForm() {
+	public ModelAndView addPhotoForm(String groupNo, ModelAndView mv, Integer page) {
+		// page == null -> 1page
+		// page != null -> 모든 page 중 하나
+		int currentPage = page == null ? 1 : page;
+		System.out.println("addAlbumForm groupNo : "+ groupNo);
 		
-		return "album/addAlbumForm";
+		mv.addObject("currentPage", currentPage).addObject("groupNo", groupNo).setViewName("album/groupIndex+addAlbumForm");
+		
+		return mv;
 	}
 
 	/** 앨범 등록 컨트롤러
@@ -74,12 +80,11 @@ public class AlbumController {
 		// page == null -> 1page
 		// page != null -> 모든 page 중 하나
 		int currentPage = page == null ? 1 : page;
-		
 		ArrayList<Album> list = aService.selectList(groupNo,currentPage);
 		
 		if(list != null) {
 			// 메소드 체이닝 (Method Chaining)
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("groupNo", groupNo).setViewName("group/groupIndex");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("groupNo", groupNo).setViewName("album/groupIndex+albumListView");
 		}else {
 			mv.addObject("msg", "게시물 목록 조회 실패").setViewName("common/errorPage");
 		}
@@ -99,7 +104,7 @@ public class AlbumController {
 		System.out.println("포토 리스트 : "+photoList.size());
 		System.out.println(album.toString());
 		if(album != null) {
-			mv.addObject("album", album).addObject("list", photoList).addObject("currentPage", currentPage).setViewName("album/albumDetailView");
+			mv.addObject("album", album).addObject("list", photoList).addObject("currentPage", currentPage).setViewName("album/groupIndex+albumDetailView");
 		} else {
 			mv.addObject("msg", "앨범 상세 조회 실패").setViewName("common/errorPage");
 		}

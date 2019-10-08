@@ -57,6 +57,17 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", loginUser);
 	}
 
+
+	/** 회원 탈퇴
+	 * @param loginUser
+	 * @return result
+	 */
+	public int deletMember(Member loginUser) {
+		
+		return sqlSession.update("memberMapper.deleteMember", loginUser);
+
+	}
+
 	
 	
 }

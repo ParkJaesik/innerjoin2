@@ -27,7 +27,7 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public int attendEvent(String eno, String memberId) {
 		Map<String, String> memberEvent = new HashMap();
-		memberEvent.put("eno", eno);
+		memberEvent.put("eno", ""+eno);
 		memberEvent.put("memberId", memberId);
 		return eDao.attendEvent(memberEvent);
 	}
@@ -50,6 +50,13 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
+	public Event selectEvent(String eno) {
+		return eDao.selectEvent(eno);
+	}
+	
+	
+	
+	@Override
 	public ArrayList<Member> selectMem(String eno) {
 
 		return eDao.selectMem(eno);
@@ -65,11 +72,13 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public int cancelEvent(String memberId, int eno) {
+	public int cancelEvent(String memberId, String eno) {
 		Map<String, String> memberEno = new HashMap();
 		memberEno.put("memberId", memberId);
-		memberEno.put("eno", ""+eno);
+		memberEno.put("eno", eno);
 		return eDao.cancelEvent(memberEno);
 	}
+
+	
 
 }

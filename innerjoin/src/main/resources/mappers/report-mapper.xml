@@ -60,13 +60,6 @@
 	</select>
 	
 	
-	<!-- 회원 신고글 작성 -->
-	<insert id="insertReport" parameterType="GroupMemberReport">
-		INSERT INTO GROUP_MEMBER_REPORT(SEQ_MEMBER_REPT_NO.NEXTVAL, #{reportId}, 
-									#{respondId}, #{rCategory}, #{rContent}, SYSDATE)
-	</insert>
-	
-	
 	
 
 </mapper>

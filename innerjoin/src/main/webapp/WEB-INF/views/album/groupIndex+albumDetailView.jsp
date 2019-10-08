@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +11,12 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <title>Insert title here</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
- <link rel="stylesheet"
+<link rel="stylesheet" href="resources/css/album/album-detail.css"/>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <body>
 
@@ -25,8 +29,8 @@
 		<div class="row" id="body-wrapper">
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
-				<%-- <%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%> --%>
-				<%@ include file="/WEB-INF/views/event/memCalendar.jsp" %>
+				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
+				<jsp:include page="/WEB-INF/views/album/albumDetailView.jsp"></jsp:include>
 
 			</div>
 			<div class="col-md-1 aside">

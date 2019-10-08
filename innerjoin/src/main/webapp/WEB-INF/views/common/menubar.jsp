@@ -23,7 +23,7 @@
 	<!-- <div class="container" id="profile" > -->
 		<nav id="nav">
 			<ul>
-				<li id="logo-part"><a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
+				<li id="logo-part"><a class="menu-a" href="index.jsp"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
 				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
 				<li class="menu"><a class="icon solid fa-search" href="#"><span class="menu-detail">Search</span></a></li>
 				

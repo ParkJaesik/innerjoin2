@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE html>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+ --%><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -31,8 +30,8 @@
 </head>
 <body>
 
-<c:set var="groupNo" value="1"/>
-<c:set var="memberId" value="gp@gmail.com"/>
+<%-- <c:set var="groupNo" value="1"/>
+<c:set var="memberId" value="gp@gmail.com"/> --%>
 	<div id="group-index-container">
 		<div id="group-info-container">
 			<div id="group-thumbnail">
@@ -41,19 +40,19 @@
 
 			<div id="group-info">
 				<div id="group-info-name">
-					<span id="group-name">DEVELOPER STUDY</span>
+					<span id="group-name">${group.gName }</span>
 				</div>
 
 				<div id="group-info-area">
-					<span id="group-area">지역 : 서울 중구</span>
+					<span id="group-area">지역 : 서울 ${group.districtName }</span>
 				</div>
 
 				<div id="group-info-member">
-					<span id="group-member">회원 : 35명</span>
+					<span id="group-member">회원 : ${group.gMemCount }명</span>
 				</div>
 
 				<div id="group-info-leader">
-					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">박재식</a>
+					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">${group.gHost }</a>
 				</div>
 			</div>
 
@@ -69,7 +68,7 @@
 
 		<div id="group-menu-container">
 			<button type="button" class="btn btn-primary" id="group-btn-index">정보</button>
-			<button type="button" class="btn btn-primary" id="group-btn-schedule">일정</button>
+			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
 			<button type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
 			<button type="button" class="btn btn-primary" id="group-btn-member">회원</button>
 			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>

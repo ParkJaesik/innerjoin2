@@ -31,6 +31,7 @@
     <!-- 테마 sketch -->
    <!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp" crossorigin="anonymous">
  -->
+ <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-ciphE0NCAlD2/N6NUApXAN2dAs/vcSAOTzyE202jJx3oS8n4tAQezRgnlHqcJ59C" crossorigin="anonymous">
     <!-- 한글글씨체 : sandoll -->
    <!--  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     -->
@@ -43,8 +44,6 @@
 </head>
 <body>
 
-	<jsp:include page="../common/menubar.jsp"/>
-	<jsp:include page="../group/groupMenubar.jsp"/>
 
 	<div class="container-fluid group-schedule">
 
@@ -58,13 +57,13 @@
 		<!-- 그룹멤버의 레벨 받아오기. 그룹페이지 기본정보 jsp에서 받아올 것. 현재 가데이터 세팅 -->
 		<c:set var="levelCode" value="0"/>
 		<!-- 현재 그룹의 번호 받아오기. 가데이터 세팅 -->
-		<c:set var="gno" value="1"/>
+		<%-- <c:set var="gno" value="1"/> --%>
 		
 		<c:if test="${levelCode == 0}" >
 			<div class="row">
 	            <!-- modal -->
 	            <div class="col-md-12" id="addEventWrapper">
-	                <a id="openFormBtn" href="#addEventForm" role="button" class="btn btn-warning" data-toggle="modal">
+	                <a id="openFormBtn" href="#addEventForm" role="button" class="btn btn-primary" data-toggle="modal">
 	                   <img src="${contextPath }/resources/images/add_basic.png">
 	                </a>
 	                
@@ -82,7 +81,7 @@
 	                            <div class="modal-body">
 	                                <form role="form" name="eventForm" method="post">
 	                                	<!-- gno 함께 넘겨줌. -->
-										<input type='hidden' name='gno' value='${gno }'>
+										<input type='hidden' name='gno' value='${group.gNo }'>
 	                                    <div class="row">
 	                                        <div class="col-md-12">
 	                                            <h5>
@@ -165,7 +164,7 @@
 	            </div>
 			</div>
 	    </c:if>
-       
+       	<input type="hidden" value="${group.gNo }" id="gNo">
       <!-- 이벤트 상세보기 영역 -->
        <div class="row detailWrapper" style="align:center">
          <div class="col-md-12">
@@ -178,14 +177,13 @@
 	<script>
 		console.log("levelCode: ${levelCode}");
 	</script>
-   
-   <!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
-   <script src='${contextPath }/resources/js/event/calendarEvent.js'></script>
+   <%-- 
+	<!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
+	<script src='${contextPath }/resources/js/event/calendarEvent.js'></script> --%>
     
     <!-- bootstrap js -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    
 
 </body>

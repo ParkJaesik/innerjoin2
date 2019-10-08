@@ -46,7 +46,7 @@
 			
 	SELECT * FROM MEMBER
 	WHERE MEMBER_ID = #{memberId} 
-	AND MEMBER_STATUS_CODE != 4 
+	AND MEMBER_STATUS_CODE != 3 
 
   
   </select>
@@ -95,8 +95,12 @@
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
-  	
-  	
   </select>
+  
+  <update id="deleteMember" parameterType="Member">
+  	UPDATE MEMBER
+  	SET MEMBER_STATUS_CODE = 3
+  	WHERE MEMBER_ID = #{memberId}
+  </update>
   
 </mapper>

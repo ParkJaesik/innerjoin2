@@ -37,12 +37,4 @@ public class ReportServiceImpl implements ReportService{
 		return rDao.searchBList(search);
 	}
 
-	// 회원 신고글 작성
-	@Override
-	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
-		
-		report.setrContent(report.getrContent().replace("\n", "<br>"));
-		return rDao.insertReport(report);
-	}
-
 }

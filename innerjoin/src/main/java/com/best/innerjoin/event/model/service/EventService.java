@@ -6,6 +6,14 @@ import java.util.List;
 import com.best.innerjoin.event.model.vo.Event;
 import com.best.innerjoin.member.model.vo.Member;
 
+/**
+ * @author user1
+ *
+ */
+/**
+ * @author user1
+ *
+ */
 public interface EventService {
 	
 	/** event 삽입 Service
@@ -33,6 +41,14 @@ public interface EventService {
 	 */
 	ArrayList<Event> groupEventList(String date, String gno);
 
+	
+	/** 이벤트 디테일 조회 Service
+	 * @param eno
+	 * @return event
+	 */
+	Event selectEvent(String eno); 
+	
+	
 	/** 이벤트 참석 멤버리스트 조회 Service
 	 * @param eno
 	 * @return memberList
@@ -57,6 +73,8 @@ public interface EventService {
 	 * @param eno
 	 * @return result
 	 */
-	int cancelEvent(String memberId, int eno); 
+	int cancelEvent(String memberId, String eno);
+
+
 	
 }

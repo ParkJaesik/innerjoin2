@@ -9,17 +9,6 @@
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
-<!--summerNote  -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<link href="summernote.css">
-
-
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-
 <style>
     div{
         box-sizing: border-box;
@@ -74,6 +63,7 @@
 </style>
 </head>
 <body>
+<%@ include file="../group/groupMenubar.jsp" %>
 	<div class="content">
             <div class="content-wrap">
                 <form action="ginsert.ij" method="post" enctype="multipart/form-data">
@@ -174,9 +164,8 @@
                             <div class="div1">
                                 <label>모임 소개</label>
                             </div>
-                            <div class="div2">
-                            	<textarea name="content" id="summernote" value=""></textarea>
-
+                            <div class="summernote">
+                                
                             </div>
                         </div>
                         <div class="row">
@@ -186,7 +175,6 @@
                             <div class="div2">
                                 <img id="titleImg" style="max-width: 100%">
                                 <input type="file" name="uploadFile">
-                                <input type="image">
                             </div>
                         </div>
                         
@@ -210,21 +198,11 @@
                 $(this).next().slideDown();
                 $(".btn:not(.active)").next().slideUp();
             });
-        	
         });
         
-        $(document).ready(function() {
-        	  $('#summernote').summernote({
-        		  height: 300,                 
-                  minHeight: null,            
-                  maxHeight: null,            
-                  focus: true
-		  	});
-		});
-
-        
-        
+        $('.summernote').summernote({
+      	  
+   	 	});
     </script>
-    <script src="summernote.js"></script>
 </body>
 </html>

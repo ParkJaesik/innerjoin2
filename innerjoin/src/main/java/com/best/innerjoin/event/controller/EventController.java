@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.best.innerjoin.event.model.service.EventService;
@@ -26,7 +27,7 @@ public class EventController {
  	*/
    @RequestMapping("calendar.ij")
 	public String calendarView() {
-		return "event/calendar";
+		return "event/groupCalendar";
 	}
    
    	/** 모임에 일정 추가 Controller
@@ -35,7 +36,7 @@ public class EventController {
     */
 	@ResponseBody
 	@RequestMapping("addEvent.ij")
-	public int insertEvent(Event event) {
+	public int insertEvent( Event event) {
 		System.out.println("event : " + event);
 		int result = eService.insertEvent(event);
 		return result;
@@ -44,7 +45,7 @@ public class EventController {
    
 	@ResponseBody
 	@RequestMapping(value="renderEvent.ij", produces="text/plain;charset=UTF-8")
-	public String renderEvent(String date, String gno) {
+	public String renderEvent(@RequestParam String date, @RequestParam String gno) {
       
 		ArrayList<Event> eventList = eService.groupEventList(date, gno);
 		String list = new Gson().toJson(eventList);
@@ -52,6 +53,19 @@ public class EventController {
 		return list;
 	}
    
+	/** 이벤트 상세정보  Controller
+	 * @param eno
+	 * @return event
+	 */
+	@ResponseBody
+	@RequestMapping(value="eventDetail.ij", produces="text/plain;charset=UTF-8")
+	public String selectEvent(String eno) {
+		Event event = eService.selectEvent(eno);
+		System.out.println("eno: " + eno);
+		System.out.println(event);
+		return new Gson().toJson(event);
+	}
+	
 	/** 이벤트 상세정보. 참석 멤버 조회 Controller
     * @param eno
 	* @return member list
@@ -90,9 +104,10 @@ public class EventController {
 	 */
 	@ResponseBody
 	@RequestMapping("getAttendEventList.ij") 
-	public List<Integer> getAttendEventList(String date, int gno, HttpSession session) {
+	public List<Integer> getAttendEventList(@RequestParam String date, @RequestParam int gno, HttpSession session) {
 		System.out.println(date);
 		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		System.out.println("로그인 멤버 아이디: " + memberId);
 		List<Integer> list = eService.attendEventList(date, memberId, gno);
 		System.out.println("참석 목록 : " + list);
 		return list;
@@ -120,7 +135,7 @@ public class EventController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="memberEventList.ij", produces="text/plain;charset=UTF-8")
-	public String memberEventList(String date, HttpSession session) {
+	public String memberEventList(@RequestParam String date, HttpSession session) {
 		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 		ArrayList<Event> eventList = eService.memberEventList(date, memberId);
 		return new Gson().toJson(eventList);
@@ -133,8 +148,10 @@ public class EventController {
 	 */
 	@ResponseBody
 	@RequestMapping("cancelEvent.ij")
-	public int cancelEvent(int eno, HttpSession session) {
+	public int cancelEvent(@RequestParam String eno, HttpSession session) {
 		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		System.out.println("memberId : " + memberId);
+		System.out.println("eno : " + eno);
 		return eService.cancelEvent(memberId, eno);
 	}
 
