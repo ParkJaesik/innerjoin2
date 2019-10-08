@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.member.model.vo.Member;
 
 
 @Controller
@@ -64,12 +65,32 @@ public class GroupController {
 	public String goGroupPage(HttpServletRequest request,Group group,Model model) {
 		
 		int gNo = group.getgNo();
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		Integer groupMemberCode = 4;  
+			if(loginUser!=null) {
+			String memberId = loginUser.getMemberId();
+			
+			
+			if(memberId != null) {
+				groupMemberCode = gService.selectCode(memberId,gNo);
+				if(groupMemberCode ==null) {
+					groupMemberCode = -1;
+					
+				}
+			}
+		}
+		
+		
 		
 		Group tempGroup = gService.goGroupPage(gNo);
+		System.out.println(groupMemberCode);
 		
 		model.addAttribute("group", tempGroup);
+		model.addAttribute("groupMemberCode", groupMemberCode);
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
+		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+		
 		return "group/groupIndex";
 	}
 	

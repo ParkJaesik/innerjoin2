@@ -1,5 +1,7 @@
 package com.best.innerjoin.group.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,8 +22,12 @@ public class GroupDao {
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	public Group goGroupPage(int gNo) {
-		System.out.println("GDAO 에서 GNO :" + gNo);
+		
 		return sqlSession.selectOne("groupMapper.selectGroup", gNo);
+	}
+
+	public Integer selectCode(Map codeMap) {
+		return sqlSession.selectOne("groupMapper.selectCode",codeMap);
 	}
 
 }

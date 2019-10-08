@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
  --%><!DOCTYPE html>
 <html>
@@ -40,21 +41,6 @@
 
 			<div id="group-info">
 				<div id="group-info-name">
-
-					<span id="group-name">모임 제목</span>
-				</div>
-
-				<div id="group-info-area">
-					<span id="group-area">지역 : 모임 지역</span>
-				</div>
-
-				<div id="group-info-member">
-					<span id="group-member">회원 : 회원 수</span>
-				</div>
-
-				<div id="group-info-leader">
-					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">모임장 이름</a>
-
 					<span id="group-name">${group.gName }</span>
 				</div>
 
@@ -73,13 +59,17 @@
 			</div>
 
 			<div id="group-button">
-				<%-- <c:if test="${ loginUser.memberName eq group.gHost }"> --%> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
+				<c:if test="${ loginUser.memberId eq group.gHost }"> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
 					<c:url var="secession" value="rblist.ij"/>
 					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
-				<%-- </c:if> --%>
+				 </c:if>
 				
+				<c:if test="${groupMemberCode ne 0 or groupMemberCode  ne 1 or groupMemberCode  ne 2}">
 				<button type="button" class="btn btn-primary" id="group-btn-join" data-toggle="modal" data-target="#exampleModalCenter">INNER JOIN하기</button>
+				</c:if>
+				<c:if test="${groupMemberCode eq 1 or groupMemberCode  eq 2}">
 				<button type="button" class="btn btn-primary" id="group-btn-withdraw">모임에서 나가기</button>
+				</c:if>
 			</div>
 		</div>
 
@@ -102,6 +92,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
+      	
         <h5 class="modal-title" id="exampleModalCenterTitle">Inner Join</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

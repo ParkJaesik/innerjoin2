@@ -3,6 +3,8 @@ package com.best.innerjoin.group.model.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -102,6 +104,16 @@ public class GroupServiceImpl implements GroupService{
 		Group temp = gDao.goGroupPage(gNo);
 		
 		return temp;
+	}
+
+	@Override
+	public Integer selectCode(String memberId, int gNo) {
+		
+		Map codeMap = new HashMap<>();
+		codeMap.put("memberId", memberId);
+		codeMap.put("gNo", gNo);
+		
+		return gDao.selectCode(codeMap);
 	}
 
 	

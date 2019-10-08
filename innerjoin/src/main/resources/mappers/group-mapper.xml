@@ -36,5 +36,11 @@
 		WHERE GROUP_NO= #{gNo}
   	
   	</select>
+  	
+  	<select id="selectCode" parameterType="map" resultType="_int">
+  	
+  		SELECT LEVEL_CODE FROM GROUP_MEMBER WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
+  	
+  	</select>
 </mapper>
 
