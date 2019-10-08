@@ -21,7 +21,7 @@
 	
 	<!-- 모임 등록 쿼리 -->
 	<insert id="insertGroup" parameterType="Group">
-		INSERT INTO VALUES(SEQ_GNO.NEXTVAL, #{gHost}, #{gOpenStatus}, 
+		INSERT INTO "GROUP" VALUES(SEQ_GNO.NEXTVAL, #{gHost}, #{gOpenStatus}, 
 						#{gName}, #{gLimit}, #{gInfo}, #{gMemCount}, 
 						#{localCode}, DEFAULT, #{gCategoryCode}, 
 						DEFAULT, #{gOriginFileName}, #{gRenameFileName}, SYSDATE, SYSDATE)
