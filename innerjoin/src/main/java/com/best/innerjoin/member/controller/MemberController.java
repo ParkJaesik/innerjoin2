@@ -37,7 +37,7 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping("login.ij")
-	public String loginMember(Member member,Model model,HttpServletRequest request) {
+	public String loginMember(Member member,Model model,HttpServletRequest request, RedirectAttributes rd) {
 		
 		Member loginUser = mService.loginMember(member);
 		
@@ -46,8 +46,8 @@ public class MemberController {
 			//return "home"; // forward 방식
 			return "redirect:/"; //
 		}else {
-			
-			return "common/errorPage";
+			rd.addFlashAttribute("msg", "아이디 또는 비밀번호를 다시 확인하세요.");
+			return "redirect:loginForm.ij";
 		}
 		
 	}
@@ -62,8 +62,10 @@ public class MemberController {
 
 	// 회원가입
 	@RequestMapping(value="join.ij", method=RequestMethod.POST)
-	public String insertMember(Member member, Model model) {
+	public String insertMember(Member member, Model model, String memberBirthday1, String memberBirthday2, String memberBirthday3) {
 		System.out.println(member);
+		
+		member.setMemberBirthday(memberBirthday1 + memberBirthday2 + memberBirthday3);
 		
 		int result = mService.insertMember(member);
 		
@@ -94,12 +96,6 @@ public class MemberController {
 		return isUsable+"";
 	}
 	
-	// 비밀번호 찾기 폼으로 가기
-	@RequestMapping("findPwdForm.ij")
-	public String findPwd() {
-		return "member/findPwd";
-	}
-	
 	
 	// 마이페이지로 이동
 	@RequestMapping("myGroupForm.ij")
@@ -107,16 +103,44 @@ public class MemberController {
 		
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		System.out.println(loginUser);
+		
+		// 내 모임 목록
 		ArrayList<Member> list = mService.selectList(loginUser);
+		
+		// 초대받은 모임 목록
+		ArrayList<Member> invList = mService.selectInvList(loginUser);
+		
+		// 신청 목록
+		ArrayList<Member> waitList = mService.selectWaitList(loginUser); 
 		
 		System.out.println(list);
 		
-		if(list != null) {
+		// 내 모임 목록
+		if(list != null) { // 내 모임 목록이 있을 때
 			mv.addObject("list", list).setViewName("member/myGroup");
 		} else {
 			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
 		}
+		
+		// 초대받은 모임 목록
+		if(invList != null) {
+			mv.addObject("invList", invList).setViewName("member/myGroup");
+		} else {
+			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+		}
+		
+		// 신청 모임 목록
+		if(invList != null) {
+			mv.addObject("invList", invList).setViewName("member/myGroup");
+		} else {
+			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+		}
+		
 		return mv;
+		
+		
+		
+		
 	}
 	
 	// 프로필 수정으로 이동
@@ -125,25 +149,6 @@ public class MemberController {
 		return "member/profileUpdate";
 	}
 
-	// 탈퇴하기
-	@RequestMapping("mLeave.ij")
-	public String memberDelete(SessionStatus status, RedirectAttributes rdAttr, Model model, HttpServletRequest request) {
-		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		int result = mService.deleteMember(loginUser);
-			
-		if(result > 0) {
-			rdAttr.addFlashAttribute("leaveMsg", "탈퇴되셨습니다.");
-			status.setComplete();
-			System.out.println("2adfadfa");
-				
-			return "redirect:/";
-		}else {
-			model.addAttribute("msg", "회원탈퇴 도중 오류가 발생했습니다.");
-			return "common/errorPage";
-		}
-	}
-
-	
 	
 	// 쪽지함으로 이동
 	@RequestMapping("myNoteForm.ij")
@@ -157,6 +162,34 @@ public class MemberController {
 		return "member/myNews";
 	}
 	
+	// 비밀번호 찾기 폼으로 가기
+	@RequestMapping("findPwdForm.ij")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
+	// 정보수정 시 비밀번호 입력 폼으로 이동
+	@RequestMapping("checkPwdForm.ij")
+	public String checkPwdFrom() {
+		return "member/checkPwd";
+	}
+	
+	// 비밀번호 확인
+	@RequestMapping(value="checkPwd.ij", method=RequestMethod.POST)
+	public String checkPwd(Member loginUser, String memberPwd, Model model ) {
+		String loginUserPwd = loginUser.getMemberPwd();
+		
+		int result = mService.checkPwd(loginUserPwd, memberPwd);
+		
+		if(result > 0) {
+			return "redirect:infoUpdateForm.ij";
+		}else{
+			model.addAttribute("msg", "일치하지않습니다. 다시 입력해 주세요.");
+			return "redirect:checkPwdForm.ij";
+		}
+
+		
+	}
 	// 정보수정으로 이동
 	@RequestMapping("infoUpdateForm.ij")
 	public String infoUpdateForm() {
@@ -176,6 +209,24 @@ public class MemberController {
 		status.setComplete();
 		//session.invalidate();
 		return "redirect:/";
+	}
+	
+	// 탈퇴하기
+	@RequestMapping("mLeave.ij")
+	public String memberDelete(SessionStatus status, RedirectAttributes rdAttr, Model model, HttpServletRequest request) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int result = mService.deleteMember(loginUser);
+				
+		if(result > 0) {
+			rdAttr.addFlashAttribute("leaveMsg", "탈퇴되셨습니다.");
+			status.setComplete();
+			System.out.println("2adfadfa");
+					
+			return "redirect:/";
+		}else {
+			model.addAttribute("msg", "회원탈퇴 도중 오류가 발생했습니다.");
+			return "common/errorPage";
+		}
 	}
 	
 	
