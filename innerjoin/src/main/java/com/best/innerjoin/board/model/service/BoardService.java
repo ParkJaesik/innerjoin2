@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.board.model.vo.Board;
+import com.best.innerjoin.board.model.vo.BoardAttachment;
 import com.best.innerjoin.board.model.vo.Reply;
 
 @Service
@@ -18,7 +19,7 @@ public interface BoardService {
 	 * @param currentPage
 	 * @return list
 	 */
-	public abstract ArrayList<Board> boardList(int currentPage);
+	public abstract ArrayList<Board> boardList(int currentPage, int groupNo);
 
 	/** 게시글 상세 조회 Service
 	 * @param boardNo
@@ -40,7 +41,7 @@ public interface BoardService {
 	 * @param request
 	 * @return result
 	 */
-	public abstract int boardModify(Board board);
+	public abstract int boardModify(Board board, MultipartFile reloadFile, HttpServletRequest request);
 
 	/** 게시글 삭제 Service
 	 * @param boardNo
@@ -59,11 +60,4 @@ public interface BoardService {
 	 * @return result
 	 */
 	public abstract int replyInsert(Reply reply);
-
-	/** 아이디를 이름으로 변경하는 Service
-	 * @param replyWriter
-	 * @return 
-	 */
-	public abstract String idToName(String replyWriter);
-
 }

@@ -2,6 +2,10 @@ package com.best.innerjoin.board.model.vo;
 
 import java.sql.Date;
 
+/**
+ * @author user1
+ *
+ */
 public class Board {
 	private int boardNo;
 	private String boardTitle;
@@ -11,13 +15,18 @@ public class Board {
 	private char boardStatus;
 	private int boardCount;
 	private int boardTypeCode;
-	private String boardWriter;
+	private String memberId;
 	private int groupNo;
+	private String memberName;
+	private int boardAtta;
+	private String boardAttaOrigin;
+	private String boardAttaRename;
+	private char boardAttaStatus;
 	
 	public Board() {}
 
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate, Date boardModifyDate,
-			char boardStatus, int boardCount, int boardTypeCode, String boardWriter, int groupNo) {
+			char boardStatus, int boardCount, int boardTypeCode, String memberId, int groupNo, String memberName) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -27,8 +36,30 @@ public class Board {
 		this.boardStatus = boardStatus;
 		this.boardCount = boardCount;
 		this.boardTypeCode = boardTypeCode;
-		this.boardWriter = boardWriter;
+		this.memberId = memberId;
 		this.groupNo = groupNo;
+		this.memberName = memberName;
+	}
+	
+	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate, Date boardModifyDate,
+			char boardStatus, int boardCount, int boardTypeCode, String memberId, int groupNo, String memberName,
+			int boardAtta, String boardAttaOrigin, String boardAttaRename, char boardAttaStatus) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardStatus = boardStatus;
+		this.boardCount = boardCount;
+		this.boardTypeCode = boardTypeCode;
+		this.memberId = memberId;
+		this.groupNo = groupNo;
+		this.memberName = memberName;
+		this.boardAtta = boardAtta;
+		this.boardAttaOrigin = boardAttaOrigin;
+		this.boardAttaRename = boardAttaRename;
+		this.boardAttaStatus = boardAttaStatus;
 	}
 
 	public int getBoardNo() {
@@ -95,12 +126,12 @@ public class Board {
 		this.boardTypeCode = boardTypeCode;
 	}
 
-	public String getboardWriter() {
-		return boardWriter;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setboardWriter(String boardWriter) {
-		this.boardWriter = boardWriter;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public int getGroupNo() {
@@ -111,12 +142,52 @@ public class Board {
 		this.groupNo = groupNo;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	
+	public int getBoardAtta() {
+		return boardAtta;
+	}
+
+	public void setBoardAtta(int boardAtta) {
+		this.boardAtta = boardAtta;
+	}
+
+	public String getBoardAttaOrigin() {
+		return boardAttaOrigin;
+	}
+
+	public void setBoardAttaOrigin(String boardAttaOrigin) {
+		this.boardAttaOrigin = boardAttaOrigin;
+	}
+
+	public String getBoardAttaRename() {
+		return boardAttaRename;
+	}
+
+	public void setBoardAttaRename(String boardAttaRename) {
+		this.boardAttaRename = boardAttaRename;
+	}
+
+	public char getBoardAttaStatus() {
+		return boardAttaStatus;
+	}
+
+	public void setBoardAttaStatus(char boardAttaStatus) {
+		this.boardAttaStatus = boardAttaStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", boardCreateDate=" + boardCreateDate + ", boardModifyDate=" + boardModifyDate + ", boardStatus="
-				+ boardStatus + ", boardTypeCode=" + boardTypeCode + ", boardWriter=" + boardWriter + ", groupNo=" + groupNo
-				+ "]";
+				+ boardStatus + ", boardCount=" + boardCount + ", boardTypeCode=" + boardTypeCode + ", memberId="
+				+ memberId + ", groupNo=" + groupNo + ", memberName=" + memberName + "]";
 	}
-	
+
 }

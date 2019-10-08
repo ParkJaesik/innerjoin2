@@ -40,6 +40,21 @@
 
 			<div id="group-info">
 				<div id="group-info-name">
+
+					<span id="group-name">모임 제목</span>
+				</div>
+
+				<div id="group-info-area">
+					<span id="group-area">지역 : 모임 지역</span>
+				</div>
+
+				<div id="group-info-member">
+					<span id="group-member">회원 : 회원 수</span>
+				</div>
+
+				<div id="group-info-leader">
+					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">모임장 이름</a>
+
 					<span id="group-name">${group.gName }</span>
 				</div>
 
@@ -53,22 +68,30 @@
 
 				<div id="group-info-leader">
 					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">${group.gHost }</a>
+
 				</div>
 			</div>
 
 			<div id="group-button">
-				<c:url var="secession" value="rblist.ij"/>
-				<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
-				<button type="button" class="btn btn-primary" id="group-btn-join">INNER
-					JOIN하기</button>
-				<button type="button" class="btn btn-primary"
-					id="group-btn-withdraw">모임에서 나가기</button>
+				<%-- <c:if test="${ loginUser.memberName eq group.gHost }"> --%> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
+					<c:url var="secession" value="rblist.ij"/>
+					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
+				<%-- </c:if> --%>
+				
+				<button type="button" class="btn btn-primary" id="group-btn-join">INNER JOIN하기</button>
+				<button type="button" class="btn btn-primary" id="group-btn-withdraw">모임에서 나가기</button>
 			</div>
 		</div>
 
 		<div id="group-menu-container">
 			<button type="button" class="btn btn-primary" id="group-btn-index">정보</button>
+
+			<button type="button" class="btn btn-primary" id="group-btn-schedule">일정</button>
+			
+			
+
 			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
+
 			<button type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
 			<button type="button" class="btn btn-primary" id="group-btn-member">회원</button>
 			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>

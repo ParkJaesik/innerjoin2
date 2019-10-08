@@ -5,27 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/board/groupBoardModify-style.css"
 	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
 <title>Group Board Modify</title>
 </head>
 <body>
+<%@ include file="../common/menubar.jsp" %>
+<%@ include file="../group/groupMenubar.jsp" %>
 	<form action="bmodify.ij" method="post" id="bmodifyForm" enctype="multipart/form-data">
 		<div id="board-container">
 			<h1 align="center">게시글 수정</h1>
 	
 			<div id="board-part">
 				<input type="hidden" name="boardNo" value="${ board.boardNo }">
+				<input type="hidden" name="page" value="${ currentPage }">
+				<input type="hidden" name="boardAttaRename" value="${ board.boardAttaRename }">
 				<div id="board-check">
 					<c:if test="${ board.boardTypeCode eq 0 }">
 						<input type="checkbox" name="boardTypeCheck" value="1" id="check" checked="checked">
@@ -41,8 +36,8 @@
 				</div>
 	
 				<div id="board-writer">
-					<span id="writer">${ board.boardWriter }</span>
-					<input type="hidden" name="boardWriter" value="${ board.boardWriter }">
+					<span id="writer">${ board.memberName }</span>
+					<input type="hidden" name="boardWriter" value="${ board.memberId }">
 				</div>
 	
 				<div id="board-title">
@@ -57,6 +52,10 @@
 			<div id="attachment-part">
 				<div id="board-attachment">
 					<span id="attachment">첨부파일 : </span>
+					<input type="file" name="reloadFile">
+					<c:if test="${ !empty board.boardAttaOrigin }">
+						<a href="${ contextPath }/resources/buploadFiles/${ board.boardAttaRename }" download>${ board.boardAttaOrigin }</a>
+					</c:if>
 				</div>
 			</div>
 	

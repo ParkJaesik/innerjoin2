@@ -5,22 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/board/groupBoardDetail-style.css"
 	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
 <title>Group Board List</title>
 </head>
 <body>
-	<%-- <c:import url="" /> --%>
+<%@ include file="../common/menubar.jsp" %>
+<%@ include file="../group/groupMenubar.jsp" %>
 
 	<div id="board-container">
 		<h1 align="center">게시판</h1>
@@ -34,7 +26,7 @@
 			</div>
 
 			<div id="board-writer">
-				<span id="writer">${ board.boardWriter }</span>
+				<span id="writer">${ board.memberName }</span>
 			</div>
 
 			<div id="board-title">
@@ -49,6 +41,9 @@
 		<div id="attachment-part">
 			<div id="board-attachment">
 				<span id="attachment">첨부파일 : </span>
+				<c:if test="${ !empty board.boardAttaOrigin }">
+					<a href="${ contextPath }/resources/buploadFiles/${ board.boardAttaRename }" download>${ board.boardAttaOrigin }</a>
+				</c:if>
 			</div>
 		</div>
 
@@ -111,7 +106,7 @@
 					if(list.length>0){
 						$.each(list, function(i){
 							$content = '<div class="reply-view" align="center"><table><tr>';
-							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].replyWriter+'</td>';
+							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
 							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
 							$content += '<a href="javascript:update('+list[i].replyNo+');">수정</a>&nbsp;&nbsp;';
 							$content += '<a href="">삭제</a></td></tr>';
@@ -142,15 +137,6 @@
 				}
 			});
 		});
-		
-		
-		
-		function update() {
-			$(this).parent().parent().next().children().
-			console.log(this);
-			this.parentNode.parentNode.nextSibling.childNodes[0];
-		}
-		
 	</script>
 </body>
 </html>

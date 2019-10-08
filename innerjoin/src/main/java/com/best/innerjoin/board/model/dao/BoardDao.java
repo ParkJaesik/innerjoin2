@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.board.model.vo.Board;
+import com.best.innerjoin.board.model.vo.BoardAttachment;
 import com.best.innerjoin.board.model.vo.PageInfo;
 import com.best.innerjoin.board.model.vo.Reply;
 
@@ -20,15 +21,15 @@ public class BoardDao {
 	/** 전체 게시글 수 조회 DAO
 	 * @return listCount
 	 */
-	public int boardListCount() {
-		return sqlSession.selectOne("boardMapper.boardListCount");
+	public int boardListCount(int groupNo) {
+		return sqlSession.selectOne("boardMapper.boardListCount", groupNo);
 	}
 
 	/** 게시글 목록 조회 DAO
 	 * @param pi
 	 * @return list
 	 */
-	public ArrayList<Board> boardList(PageInfo pi) {
+	public ArrayList<Board> boardList(PageInfo pi, int groupNo) {
 		// 페이징 처리가 적용된 목록 조회
 		// -> Mybatis RowBounds 사용
 		
@@ -36,7 +37,7 @@ public class BoardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		
-		return (ArrayList)sqlSession.selectList("boardMapper.boardList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.boardList", groupNo, rowBounds);
 	}
 
 	/** 게시글 조회수 증가 DAO
@@ -60,6 +61,14 @@ public class BoardDao {
 	 */
 	public int boardInsert(Board board) {
 		return sqlSession.insert("boardMapper.boardInsert", board);
+	}
+	
+	/** 첨부파일 등록 DAO
+	 * @param board
+	 * @return
+	 */
+	public int boardAttachInsert(Board board) {
+		return sqlSession.insert("boardMapper.boardAttachInsert", board);
 	}
 
 	/** 게시글 수정 DAO
@@ -95,11 +104,16 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.replyInsert", reply);
 	}
 
-	/** 아이디를 이름으로 변경하는 DAO
-	 * @param replyWriter
-	 * @return 
+
+	/** 첨부파일 조회 DAO
+	 * @param boardNo
+	 * @return
 	 */
-	public String idToName(String replyWriter) {
-		return sqlSession.selectOne("memberMapper.idToName", replyWriter);
+	public BoardAttachment boardAttachDetail(int boardNo) {
+		return sqlSession.selectOne("boardMapper.boardAttachDetail", boardNo);
+	}
+
+	public int boardAttachModify(Board board) {
+		return sqlSession.update("boardMapper.boardAttachModify", board);
 	}
 }

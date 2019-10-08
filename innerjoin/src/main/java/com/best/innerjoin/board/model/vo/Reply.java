@@ -9,12 +9,13 @@ public class Reply {
 	private Date replyModifyDate;
 	private char replyStatus;
 	private int boardNo;
-	private String replyWriter;
+	private String memberId;
+	private String memberName;
 	
 	public Reply() {}
 
 	public Reply(int replyNo, String replyContent, Date replyCreateDate, Date replyModifyDate, char replyStatus,
-			int boardNo, String replyWriter) {
+			int boardNo, String memberId, String memberName) {
 		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
@@ -22,7 +23,8 @@ public class Reply {
 		this.replyModifyDate = replyModifyDate;
 		this.replyStatus = replyStatus;
 		this.boardNo = boardNo;
-		this.replyWriter = replyWriter;
+		this.memberId = memberId;
+		this.memberName = memberName;
 	}
 
 	public int getReplyNo() {
@@ -57,11 +59,11 @@ public class Reply {
 		this.replyModifyDate = replyModifyDate;
 	}
 
-	public char getreplyStatus() {
+	public char getReplyStatus() {
 		return replyStatus;
 	}
 
-	public void setreplyStatus(char replyStatus) {
+	public void setReplyStatus(char replyStatus) {
 		this.replyStatus = replyStatus;
 	}
 
@@ -73,19 +75,27 @@ public class Reply {
 		this.boardNo = boardNo;
 	}
 
-	public String getReplyWriter() {
-		return replyWriter;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setReplyWriter(String replyWriter) {
-		this.replyWriter = replyWriter;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
 				+ ", replyModifyDate=" + replyModifyDate + ", replyStatus=" + replyStatus + ", boardNo=" + boardNo
-				+ ", replyWriter=" + replyWriter + "]";
+				+ ", memberId=" + memberId + ", memberName=" + memberName + "]";
 	}
 	
 }
