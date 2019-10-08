@@ -27,7 +27,7 @@
         margin: auto;
     }
 
-    
+     
     .div1{
         width: 30%;
         min-height: 100px;
