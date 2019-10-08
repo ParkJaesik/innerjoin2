@@ -15,7 +15,7 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 
-  
+   
 </head>
 <body>
 	<div class="container-fluid" id="all-wrapper">
