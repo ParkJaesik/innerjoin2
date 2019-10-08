@@ -13,9 +13,36 @@ public class Member {
     private int memberReptCount; 
     private String memberProPath;
     private int memberStatusCode;
+	private String memberIntoroduce;
+	private String memberBirthday;
+	private char memberGender;
+	private char memberOpenStatus;
 	public Member() {
 		super();
 	}
+	
+	public Member(String memberId, String memberPwd, String memberName, String loginWay, String memberModifyDate,
+			String memberEnrollDate, int memberHostCount, int memberJoinCount, int memberReptCount,
+			String memberProPath, int memberStatusCode, String memberIntoroduce, String memberBirthday,
+			char memberGender, char memberOpenStatus) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.loginWay = loginWay;
+		this.memberModifyDate = memberModifyDate;
+		this.memberEnrollDate = memberEnrollDate;
+		this.memberHostCount = memberHostCount;
+		this.memberJoinCount = memberJoinCount;
+		this.memberReptCount = memberReptCount;
+		this.memberProPath = memberProPath;
+		this.memberStatusCode = memberStatusCode;
+		this.memberIntoroduce = memberIntoroduce;
+		this.memberBirthday = memberBirthday;
+		this.memberGender = memberGender;
+		this.memberOpenStatus = memberOpenStatus;
+	}
+
 	public Member(String memberId, String memberPwd, String memberName, String loginWay, String memberModifyDate,
 			String memberEnrollDate, int memberHostCount, int memberJoinCount, int memberReptCount,
 			String memberProPath, int memberStatusCode) {
@@ -31,6 +58,7 @@ public class Member {
 		this.memberReptCount = memberReptCount;
 		this.memberProPath = memberProPath;
 		this.memberStatusCode = memberStatusCode;
+	
 	}
 	public String getMemberId() {
 		return memberId;
@@ -98,13 +126,47 @@ public class Member {
 	public void setMemberStatusCode(int memberStatusCode) {
 		this.memberStatusCode = memberStatusCode;
 	}
+	
+	public String getMemberIntoroduce() {
+		return memberIntoroduce;
+	}
+
+	public void setMemberIntoroduce(String memberIntoroduce) {
+		this.memberIntoroduce = memberIntoroduce;
+	}
+
+	public String getMemberBirthday() {
+		return memberBirthday;
+	}
+
+	public void setMemberBirthday(String memberBirthday) {
+		this.memberBirthday = memberBirthday;
+	}
+
+	public char getMemberGender() {
+		return memberGender;
+	}
+
+	public void setMemberGender(char memberGender) {
+		this.memberGender = memberGender;
+	}
+
+	public char getMemberOpenStatus() {
+		return memberOpenStatus;
+	}
+
+	public void setMemberOpenStatus(char memberOpenStatus) {
+		this.memberOpenStatus = memberOpenStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", loginWay=" + loginWay + ", memberModifyDate=" + memberModifyDate + ", memberEnrollDate="
 				+ memberEnrollDate + ", memberHostCount=" + memberHostCount + ", memberJoinCount=" + memberJoinCount
 				+ ", memberReptCount=" + memberReptCount + ", memberProPath=" + memberProPath + ", memberStatusCode="
-				+ memberStatusCode + "]";
+				+ memberStatusCode + ", memberIntoroduce=" + memberIntoroduce + ", memberBirthday=" + memberBirthday
+				+ ", memberGender=" + memberGender + ", memberOpenStatus=" + memberOpenStatus + "]";
 	}
 	
     

@@ -57,7 +57,9 @@
 		WHERE ALBUM_NO = #{albumNo}
 	</select>
 	
-<!-- 	<update id="deleteAlbum" parameterType="_int">
-		
-	</update> -->
+	<update id="deleteAlbum" parameterType="_int">
+		UPDATE ALBUM
+		SET ALBUM_STATUS = 'N'
+		WHERE ALBUM_NO = #{albumNo}
+	</update>
 </mapper>

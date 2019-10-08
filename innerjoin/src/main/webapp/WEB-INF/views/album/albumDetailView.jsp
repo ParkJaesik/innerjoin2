@@ -183,7 +183,7 @@
             
             function goDelete(){
             	if(window.confirm("정말 삭제 하시겠습니까?")){
-            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=${album.albumNo}";
+            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
             	}
             }
         </script>

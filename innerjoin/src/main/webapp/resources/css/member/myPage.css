@@ -3,6 +3,9 @@
     /* border: 1px solid black; */
     box-sizing: border-box;
 }
+bpdy{
+	padding: 0 !important;
+}
 .row{
 	margin: 0 !important;
 }

@@ -99,6 +99,28 @@
 			                
 			            </div>
 			        </section>
+			        
+			        <div class="margin" style="margin: 30px;"></div>
+			        <section id="content">
+			            <div>
+			            	<div class="mgTitle">
+				           		<h3>가입대기 모임</h3>
+			                </div>
+			                <br>
+			                <div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
+			                	<div class="col-4" style="width: 100%;"><img src=""></div>
+			                	<div class="col-8">
+			                		<h5>가입대기  모임 이름</h5>
+			                		<br>
+			                		<p>초대한 모임의 어필</p>
+			                		<a class="btn cancel">신청 취소</a>
+			                		
+			                	</div>
+			           		</div>
+			           		
+			                
+			            </div>
+			        </section>
 
 			</div>
 			<div class="col-md-1 aside">

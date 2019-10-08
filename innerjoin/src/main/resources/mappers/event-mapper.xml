@@ -78,7 +78,6 @@
 	
 	
 	
-	
 	<select id="memberEventList" parameterType="map" resultMap="eventResultSet">
 		SELECT EVENT_NO, EVENT_TITLE, EVENT_CONTENT,
 			TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD HH24:MI') EVENT_START_DAY,
@@ -90,7 +89,6 @@
 			TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date} OR
 			TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date}
 		)
-	
 	</select>
 	
 	<delete id="cancelEvent" parameterType="map">

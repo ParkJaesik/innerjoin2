@@ -21,14 +21,43 @@ public interface MemberService {
 	// 닉네임 중복 검사
 	public abstract int checkNameDup(String name);
 
-	// 마이페이지 - 내 모임 목록
+	
+	/** 내 모임 목록
+	 * @param loginUser
+	 * @return 
+	 */
 	public abstract ArrayList<Member> selectList(Member loginUser);
+	
+	/** 초대 모임 목록
+	 * @param loginUser
+	 * @return 
+	 */
+	public abstract ArrayList<Member> selectInvList(Member loginUser);
+	
+	/** 신청 목록
+	 * @param loginUser
+	 * @return
+	 */
+	public abstract ArrayList<Member> selectWaitList(Member loginUser);
+	
+	/** 비밀번호 확인
+	 * @param loginUserPwd
+	 * @param memberPwd 
+	 * @return result
+	 */
+	public abstract int checkPwd(String loginUserPwd, String memberPwd);
 
 	/** 탈퇴하기
 	 * @param loginUser
 	 * @return result
 	 */
 	public abstract int deleteMember(Member loginUser);
+
+	
+	
+	
+
+
 
 	
 	
