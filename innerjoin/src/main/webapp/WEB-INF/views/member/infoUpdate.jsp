@@ -40,55 +40,62 @@
 						<div>
 					<!-- <h4>회원가입</h4> -->
 							<div class="input-group input-group-icon">
-									<input type="text" placeholder="Nick Name"/>
-									<span class="check-messagealing-center">출력메세지</span>
-							</div>
-							<div class="input-group input-group-icon">
-								<input type="email" readonly="readonly"/>
+								<input type="email" name="memberId" value="${ loginUser.memberId }" readonly="readonly"/>
 							</div>
 							<br>
+							<div class="input-group input-group-icon">
+								<input type="text" value="${ loginUser.memberName }"/>
+								<input type="hidden" name="memberNaem" value="${ loginUser.memberName }">
+								&nbsp;<span style="text-aling:center;" id="nameCheck">&nbsp;</span>
+							</div>
 							<div>
 								<div class="input-group input-group-icon">
 									<input type="password" placeholder="Password"/>
-									<span aling="center">출력메세지</span>
+									<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }">
+									&nbsp;<span id="pwdCheck1">&nbsp;</span>
 								</div>
 							</div>
 							<div>
 								<div class="input-group input-group-icon">
 									<input type="password" placeholder="Password Check"/>
-									<span aling="center">출력메세지</span>
+									<input type="hidden" name="memberPwd2" value="${ loginUser.memberPwd }">
+									&nbsp;<span id="pwdCheck2">&nbsp;</span>
 								</div>
 							</div>
 						</div>
-								<!-- <div>
-									<div class="col-half">
-										<h4>Date of Birth</h4>
-										<div class="input-group">
-											<div class="col-third">
-												<input type="text" placeholder="YYYY" maxlength="4"/>
-											</div>
-											<div class="col-third">
-												<input type="text" placeholder="MM" maxlength="2"/>
-											</div>
-											<div class="col-third">
-												<input type="text" placeholder="DD" maxlength="2"/>
-											</div>
-										</div>
+						<div>
+							<div class="col-half">
+								<h4>Date of Birth</h4>
+								<div class="input-group">
+									<div class="col-third">
+										<input type="text" placeholder="YYYY" maxlength="4"/>
 									</div>
-									<div class="col-half">
-										<h4>Gender</h4>
-										<div class="input-group">
-											<input type="radio" name="gender" value="male" id="gender-male"/>
-											<label for="gender-male">Male</label>
-											<input type="radio" name="gender" value="female" id="gender-female"/>
-											<label for="gender-female">Female</label>
-										</div>
+									<div class="col-third">
+										<input type="text" placeholder="MM" maxlength="2"/>
 									</div>
-								</div> -->
-											
+									<div class="col-third">
+										<input type="text" placeholder="DD" maxlength="2"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-half">
+								<h4>Gender</h4>
+									<div class="input-group">
+										<input type="radio" name="gender" value="male" id="gender-male"/>
+										<label for="gender-male">Male</label>
+										<input type="radio" name="gender" value="female" id="gender-female"/>
+										<label for="gender-female">Female</label>
+									</div>
+								</div>
+							</div>	
 								
 								<button id="submit-btn" style="float: right;"> 수정</button>
 								<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
+								<c:url var="mLeave" value="mLeave.ij">
+									<c:param name="memberId" value="${ loginUser.memberId }"/>
+								</c:url>
+							
+								<a href="${ mLeave }"> 탈퇴하기</a>
 							</form>
 
 						</div>
