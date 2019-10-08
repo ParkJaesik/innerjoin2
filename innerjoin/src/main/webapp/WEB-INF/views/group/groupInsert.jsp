@@ -39,7 +39,7 @@
     .div2{
         width: 70%;
         min-height: 100px;
-        display: inline-block;
+        display: inline-block; 
     }
 
     .temp{
