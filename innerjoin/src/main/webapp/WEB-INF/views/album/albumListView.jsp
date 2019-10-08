@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-<%@ include file="../group/groupMenubar.jsp" %>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
  <script>
  	console.log('groupNo:'+'${groupNo}'); 
  	console.log('currentPage:'+'${pi.currentPage}'); 
@@ -129,7 +130,7 @@
         });
         
         $(".footer img").click(function(){
-        	location.href="addAlbumForm.ij?page=" + ${pi.currentPage};
+        	location.href="addAlbumForm.ij?page=" + ${pi.currentPage} +"&groupNo=" + ${groupNo};
         });
 		/* $(".section img").click(function(){
 			location.href="albumDetailView.ij";
