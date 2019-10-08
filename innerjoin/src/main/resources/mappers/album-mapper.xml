@@ -74,7 +74,8 @@
 		WHERE ALBUM_NO = #{albumNo}
 	</update>
 	
-<!-- 	<insert id="insertReply">
-	
-	</insert> -->
+ 	<insert id="insertReply">
+		INSERT INTO ALBUM_REPLY
+		VALUES(SEQ_ARNO.NEXTVAL,#{arContent},DEFAULT, DEFAULT, DEFAULT, #{arWriter},#{groupNo})
+	</insert>
 </mapper>
