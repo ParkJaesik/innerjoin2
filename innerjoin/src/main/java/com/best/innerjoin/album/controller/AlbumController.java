@@ -23,6 +23,8 @@ import com.best.innerjoin.album.model.vo.AlbumPhoto;
 import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
 import com.best.innerjoin.member.model.vo.Member;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class AlbumController {
@@ -170,6 +172,18 @@ public class AlbumController {
 		}else {
 			return "fail";
 		}
+	}
+	
+	// 댓글 목록 출력	
+	@ResponseBody
+	@RequestMapping(value="rList.ij", produces="application/json; charset=utf-8")
+	public String getReplyList(int albumNo){
+		
+		ArrayList<AlbumReply> list = aService.selectReply(albumNo);
+		
+		// gson 생성시 형식 지정
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		return gson.toJson(list);
 	}
 	
 }

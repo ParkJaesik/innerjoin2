@@ -53,5 +53,11 @@ public interface AlbumService {
 	 */
 	public abstract int insertReply(AlbumReply aReply);
 
+	/** 댓글 출력 Service
+	 * @param albumNo
+	 * @return
+	 */
+	public abstract ArrayList<AlbumReply> selectReply(int albumNo);
+
 
 }
