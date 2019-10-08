@@ -111,4 +111,34 @@ public class AlbumController {
 		
 		return mv;
 	}
+	
+	/** 앨범 수정 폼
+	 * @param albumNo
+	 * @param groupNo
+	 * @param mv
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping("updateAlbumForm.ij")
+	public ModelAndView updateAlbumForm(int albumNo, int groupNo, ModelAndView mv, Integer page) {
+		int currentPage = page == null ? 1 : page;
+		
+		Album album = aService.selectAlbum(albumNo); 
+		ArrayList<AlbumPhoto> photoList = aService.selectPhoto(albumNo);
+		
+		if(album !=null) {
+		mv.addObject("album", album).addObject("photoList", photoList).addObject("currentPage", currentPage).setViewName("album/updateAlbumForm");
+		}else {
+			mv.addObject("msg", "앨범 상세 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("deleteAlbum.ij")
+	public String deleteAlbum(int albumNo, int groupNo, ModelAndView mv) {
+		int result = aService.deleteAlbum(albumNo);
+		
+		return null;
+	}
+	
 }

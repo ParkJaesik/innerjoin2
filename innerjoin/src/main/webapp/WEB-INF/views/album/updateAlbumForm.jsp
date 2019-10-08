@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-        <!-- <link rel="stylesheet" href="resources/css/album/album-add.css"/> -->
+        <link rel="stylesheet" href="resources/css/album/album-add.css"/>
+        <!-- 임시 css 추가 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
@@ -34,7 +35,7 @@
 						<div class="row">
 							<div id="album_attach" class="col-md-8">
 								<h2 display="inline-block">앨범이름</h2>
-								<input type="text" class="form-control" name="albumTitle" maxlength="50" required><br>
+								<input type="text" class="form-control" name="albumTitle" maxlength="50" value="${album.albumTitle }" required><br>
 								<h2 display="inline-block">사진추가</h2>
 								<div class="custom-file">
 									<input id="uploadInputBox" class="custom-file-input"  aria-describedby="inputGroupFileAddon01"  type="file" name="filedata" multiple />	
@@ -62,6 +63,22 @@
             //임의의 file object영역
             var files = {};
             var previewIndex = 0;
+            var previewIndex2 = 0;
+            var photoList = ${photoList};
+            $(function(){
+            	$.each(photoList,function(index, photoRename){
+            		var imgNum2 = previewIndex2++;
+	                $("#preview").append(
+	                        "<div class=\"preview-box\" value=\"" + imgNum +"\">" +
+	                        "<div><img class=\"thumbnail\" src=\"" + img.target.result + "\"\/></div>" +
+	                        "<p>" + file.name + "</p>" +
+	                        "<a href=\"#\" value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">" +
+	                        "삭제" + "</a>"
+	                        +
+	                        "</div>"
+	                );
+            	}
+            });
      
             // image preview 기능 구현
             // input = file object[]
@@ -84,7 +101,7 @@
 	            //div id="preview" 내에 동적코드추가.
 	            //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
 	            reader.onload = function(img) {
-	                var imgNum = previewIndex++;
+	            	var imgNum = previewIndex++;
 	                $("#preview").append(
 	                        "<div class=\"preview-box\" value=\"" + imgNum +"\">" +
 	                        "<div><img class=\"thumbnail\" src=\"" + img.target.result + "\"\/></div>" +
