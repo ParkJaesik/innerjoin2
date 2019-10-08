@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.best.innerjoin.album.model.service.AlbumService;
 import com.best.innerjoin.album.model.vo.Album;
@@ -67,7 +69,7 @@ public class AlbumController {
 	    int result = aService.insertAlbum(request,files,album);
 	    
 	    
-		return 1;
+		return result;
 	}
 	
 	/** 앨범 리스트 이동 컨트롤러
@@ -135,10 +137,17 @@ public class AlbumController {
 	}
 	
 	@RequestMapping("deleteAlbum.ij")
-	public String deleteAlbum(int albumNo, int groupNo, ModelAndView mv) {
+	public String deleteAlbum(int albumNo, int groupNo,RedirectAttributes redirect,Model model) {
 		int result = aService.deleteAlbum(albumNo);
-		
-		return null;
+		String path = null;
+		if(result > 0) {
+			redirect.addAttribute("msg", "앨범 삭제 성공!").addAttribute("groupNo", groupNo);
+			path = "redirect:albumListView.ij";
+		}else {
+			model.addAttribute("msg", "앨범 삭제 실패");
+			path = "common/errorPage";
+		}
+		return path;
 	}
 	
 }
