@@ -78,18 +78,13 @@
 					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='${secession}'">모임관리</button>
 				<%-- </c:if> --%>
 				
-				<button type="button" class="btn btn-primary" id="group-btn-join">INNER JOIN하기</button>
+				<button type="button" class="btn btn-primary" id="group-btn-join" data-toggle="modal" data-target="#exampleModalCenter">INNER JOIN하기</button>
 				<button type="button" class="btn btn-primary" id="group-btn-withdraw">모임에서 나가기</button>
 			</div>
 		</div>
 
 		<div id="group-menu-container">
 			<button type="button" class="btn btn-primary" id="group-btn-index">정보</button>
-
-			<button type="button" class="btn btn-primary" id="group-btn-schedule">일정</button>
-			
-			
-
 			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
 
 			<button type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
@@ -97,6 +92,31 @@
 			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>
 		</div>
 	</div>
+	
+<!-- 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Inner Join</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                   이 모임에 Inner Join 하겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='insertGroupMember.ij'">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
