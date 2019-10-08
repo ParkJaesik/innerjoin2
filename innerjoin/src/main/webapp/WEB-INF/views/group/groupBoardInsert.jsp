@@ -5,35 +5,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/board/groupBoardInsert-style.css"
 	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
 <title>Group Board Insert</title>
 </head>
 <body>
+<%@ include file="../common/menubar.jsp" %>
+<%@ include file="../group/groupMenubar.jsp" %>
 	<form action="binsert.ij" method="post" id="binsertForm" enctype="multipart/form-data">
 		<div id="board-container">
 			<h1 align="center">게시글 등록</h1>
 
 			<div id="board-part">
 				<div id="board-check">
-					<input type="checkbox" name="boardTypeCheck" value="1" id="check">
-					<label for="check">공지글</label>
-					<input type="hidden" name="boardTypeCode" id="code">			
+					<%-- <c:if test="${ loginUser.memberName eq group.gHost }"> --%>
+						<input type="checkbox" name="boardTypeCheck" value="1" id="check">
+						<label for="check">공지글</label>
+						<input type="hidden" name="boardTypeCode" id="code">			
+					<%-- </c:if> --%>
+					
+					<%-- <c:if test="${ !loginUser.memberName eq group.gHost }"> --%>
+						<input type="checkbox" name="boardTypeCheck" value="1" id="check" disabled="disabled">
+						<label for="check">공지글</label>
+						<input type="hidden" name="boardTypeCode" id="code">			
+					<%-- </c:if> --%>
 				</div>
 
 				<div id="board-writer">
-					<span id="writer">작성자</span>
-					<input type="hidden" name="boardWriter" value="gp@gmail.com"> <!-- 차후 변경 요망 -->
+					<span id="writer">${ loginUser.memberName }</span>
+					<input type="hidden" name="memberId" value="${ loginUser.memberId }"> <!-- 차후 변경 요망 -->
 				</div>
 
 				<div id="board-title">
@@ -48,6 +49,7 @@
 			<div id="attachment-part">
 				<div id="board-attachment">
 					<span id="attachment">첨부파일 : </span>
+					<input type="file" name="uploadFile">
 				</div>
 			</div>
 
