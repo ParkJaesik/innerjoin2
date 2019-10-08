@@ -105,7 +105,7 @@
                         <div class="col-md-12 info_area" >
                         <c:if test="${ empty sessionScope.loginUser }">
                            <a href="loginForm.ij">로그인</a>
-                        </c:if>
+                        <c:if test="${ empty sessionScope.loginUser }">
                         <c:if test="${ !empty sessionScope.loginUser }">
                         	<a href="logout.ij">로그아웃</a>
                         	<br>

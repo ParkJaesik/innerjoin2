@@ -39,6 +39,7 @@
 		FROM GROUP_EVENT 
 		 JOIN MEMBER_EVENT USING(EVENT_NO)
 		WHERE GROUP_NO = #{gno} 
+			AND MEMBER_ID = #{memberId}
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
 	</select>
@@ -53,6 +54,16 @@
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
 	</select>
+	
+	<select id="selectEvent" parameterType="String" resultMap="eventResultSet">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_CONTENT,
+			TO_CHAR(EVENT_START_DAY, 'YYYY-MM-DD HH24:MI') EVENT_START_DAY,
+			TO_CHAR(EVENT_END_DAY, 'YYYY-MM-DD HH24:MI') EVENT_END_DAY,
+			EVENT_LIMIT, EVENT_MEM_COUNT 
+		FROM GROUP_EVENT
+		WHERE EVENT_NO = #{eno} 
+	</select>
+	
 	
 	<select id="selectMem" parameterType="String" resultMap="eventMemberSet">
 		SELECT MEMBER_NAME, MEMBER_PRO_PATH
@@ -82,7 +93,7 @@
 	
 	</select>
 	
-	<delete id="cancelEvent" parameterType="_int">
+	<delete id="cancelEvent" parameterType="map">
 		DELETE FROM MEMBER_EVENT
 		WHERE EVENT_NO = #{eno} AND MEMBER_ID = #{memberId}
 	</delete>
