@@ -27,7 +27,7 @@
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 align="center">앨범 추가</h1>
+						<h1 align="center">앨범 수정</h1>
 					</div>
 				</div>
 				<div class="row">
@@ -43,8 +43,8 @@
 								</div>
 							</div>
 							<div class="col-md-4">
-								<button class="submit float_right btn btn-warning">앨범등록</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page} + '&groupNo='+${groupNo}">등록취소</button>
+								<button class="submit float_right btn btn-warning">앨범수정</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page} + '&groupNo='+${groupNo}">수정취소</button>
 							</div>
 						</div>
 					</div>
@@ -65,21 +65,42 @@
             var previewIndex = 0;
             var previewIndex2 = 0;
             var photoList = ${photoList};
+            	console.log(Object.keys(photoList).length)
             $(function(){
             	$.each(photoList,function(index, photoRename){
             		var imgNum2 = previewIndex2++;
 	                $("#preview").append(
 	                        "<div class=\"preview-box\" value=\"" + imgNum +"\">" +
-	                        "<div><img class=\"thumbnail\" src=\"" + img.target.result + "\"\/></div>" +
+	                        "<div><img class=\"thumbnail\" src=\"" + index.photoRename + "\"\/></div>" +
 	                        "<p>" + file.name + "</p>" +
-	                        "<a href=\"#\" value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">" +
+	                        "<a href=\"#\" value=\"" + imgNum2 + "\" onclick=\"deletePreview2(this)\">" +
 	                        "삭제" + "</a>"
 	                        +
 	                        "</div>"
 	                );
-            	}
+            	});
             });
      
+                //preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
+            function deletePreview2(obj) {
+                    var imgNum = obj.attributes['value'].value;
+                    console.log("삭제하려는 요소")
+                    console.log(files[imgNum]);
+                    
+                    console.log("삭제 전 files 객체")
+    				console.log(files);
+                   
+                    console.log("삭제 후 files 객체")
+    				delete photoList[imgNum];	
+                    console.log(files);
+                    
+                    
+                    $("#preview .preview-box[value=" + imgNum + "]").remove();
+                    //console.log(files[imgNum-1]);
+                    console.log(Object.keys(files).length);
+                    //console.log(--previewIndex);
+                    //resizeHeight();
+                }	
             // image preview 기능 구현
             // input = file object[]
 	        function addPreview(input) {

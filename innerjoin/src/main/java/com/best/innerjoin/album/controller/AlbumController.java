@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.best.innerjoin.album.model.service.AlbumService;
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
+import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Controller
 public class AlbumController {
@@ -148,6 +151,25 @@ public class AlbumController {
 			path = "common/errorPage";
 		}
 		return path;
+	}
+	
+	// 댓글 등록
+	@ResponseBody
+	@RequestMapping("addReply.ij")
+	public String addReply(AlbumReply aReply, HttpSession session) {
+		
+		// 댓글 작성자 정보(ID) 저장
+		// String rWriter = ((Member)session.getAttribute("loginUser")).getId();
+		aReply.setArWriter(((Member)session.getAttribute("loginUser")).getMemberId());
+		
+		int result = aService.insertReply(aReply);
+		
+		if(result > 0) {
+			/* aService.updateRcount(reply.getRefBid()); */
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 }

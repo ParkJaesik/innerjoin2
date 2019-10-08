@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
+import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.group.model.vo.Group;
 
 public interface AlbumService {
@@ -45,6 +46,12 @@ public interface AlbumService {
 	 * @return
 	 */
 	public abstract int deleteAlbum(int albumNo);
+
+	/** 댓글 등록 Service
+	 * @param aReply
+	 * @return
+	 */
+	public abstract int insertReply(AlbumReply aReply);
 
 
 }
