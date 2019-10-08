@@ -63,7 +63,7 @@
 			<div class="row">
 	            <!-- modal -->
 	            <div class="col-md-12" id="addEventWrapper">
-	                <a id="openFormBtn" href="#addEventForm" role="button" class="btn btn-primary disabled" data-toggle="modal">
+	                <a id="openFormBtn" href="#addEventForm" role="button" class="btn btn-primary" data-toggle="modal">
 	                   <img src="${contextPath }/resources/images/add_basic.png">
 	                </a>
 	                

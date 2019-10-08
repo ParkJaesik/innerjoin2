@@ -176,17 +176,17 @@ document.addEventListener('DOMContentLoaded', function() {
 			type: 'get',
 			data: {eno: eno},
 			dataType: 'json',
+			async : false,
 			success: function(result) {
 				console.log(eno + ' event detail: ');
 				console.log(result);
-				event = JSON.stringify(result);
+				event = result;
 			},
 			error: function(err) {
 				console.log(err);
 				event = null;
 			}
 		});
-		console.log(event);
 		return event;
 	}
 	// 해당 이벤트의 참석자 정보
@@ -197,23 +197,25 @@ document.addEventListener('DOMContentLoaded', function() {
 			type: 'get',
 			data: {eno: eno},
 			dataType: 'json',
+			async : false,
 			success: function(mList) {
 				console.log('mList: ');
 				console.log(mList);
-				member =  JSON.stringify(mList);
+				member = mList;
 			},
 			error: function(err) {
 				console.log(err);
 				member = null;
 			}
 		});
-		console.log(member);
 		return member;
 	}
    
 	// 달력 이벤트 클릭했을 때 detail 보여주기. 동적으로 태그 추가
 	function detailView(event, member) {
 		console.log("show detail 시작");
+		console.log(event);
+		console.log(member);
 		// 최종 생성 요소 추가할 부분
 		console.log("detailView: ");
 		detailViewSet.add(String(event.eno));
@@ -301,6 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		$eventDetail.append($eventDetailCol);
 		detailWrapperCol.append($eventDetail);
       
+		
 	}
 	
 	function eventMemberDetail(event, member) {
@@ -391,7 +394,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				if(res > 0) {
 					alertMessage('참석되었습니다.');
 					console.log('참석되었음. res: 1');
-					eventSetting();
 				} else {
 					alertMessage('다시 시도해주세요.');
 				}
@@ -403,7 +405,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 		getAttendEventList(getCalDate());
-		$('.eventDetail:has(.detailView_'+eno+')').remove();
 		var event = eventDetail(eno);
 		var member = eventMemberList(eno)
 		var $eventMember = eventMemberDetail(event, member);
