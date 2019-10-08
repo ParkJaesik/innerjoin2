@@ -16,7 +16,11 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <title>마이페이지</title>
-
+<style type="text/css">
+	/*  *{
+	 	 border: 1px solid black;
+	 } */ 
+</style>
 </head>
 <body>
 
@@ -36,30 +40,62 @@
 			<div class="col-md-10" id="body-content">
 				<!-- 메인페이지 content 부분 -->
 				 <jsp:include page="/WEB-INF/views/member/myPageHeaber.jsp"/>
+				 
+				  
        
 			        <section id="content">
 			            <div class="myG-Info">
-			                <h4>내 모임</h4>
-			                <div class="row">
-			                    <div class="col-4 g-img"><img src="images/bg.jpg"></div>
-			                    <div class="g-title"><p>모임 이름</p></div>
-			                
-			               
-			                    <div class="col-4 g-img"><img src="images/bg.jpg"></div>
-			                    <div class="g-title"><p>가나다</p></div>
-			                    
-			                    
-			                    <div class="col-4 g-img"><img src="images/bg.jpg"></div>
-			                    <div class="g-title"><p>모임 이름</p></div>
-			                    
+			            	<div class="mgTitle">
+				                <h3 id="mg">내 모임</h3> 
+				                <a href="ginsertForm.ij" class="createG">모임생성 <span> ▶</span></a>
 			                </div>
-			            </div>
-			           
-			        </section>
-			        <div class="margin"></div>
+			                <div class="row">
+			                	<c:forEach var="myGroup" items="${list}" varStatus="status"> 
+			                		<div class="col-md-4">
+					                	<br>
+								        <div class="basic-padding">
+								            <div class="image-hover">
+								              	<img src="resources/images/sky_min.jpeg" class="img-responsive"> <!-- 그룹 썸네일 이미지 -->
+								            <div class="overlay">
+								                <h2>${ myGroup.gName }</h2>
+								                <c:if test="${ !empty loginUser }">
+								                	<c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
+										                <c:param name="gNo" value="${ myGroup.gNo }"/>
+										            </c:url>
+								                	<a href="" class="btn-hover">Show More</a>
+								                </c:if>
+								            </div>
+										</div>
+								       </div>
+									</div>
+									<c:if test="${ status.index }%3 == 2">
+										<div class="row">
+									</c:if>
+									<c:if test="${ status.last }">
+										</div>
+									</c:if>
+								</c:forEach>
+						      	
+				      	</div>
+			   		</section>
+			        <div class="margin" style="margin: 30px;"></div>
 			        <section id="content">
 			            <div>
-			                <h4>초대받은 모임</h4>
+			            	<div class="mgTitle">
+				           		<h3>초대받은 모임</h3>
+			                </div>
+			                <br>
+			                <div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
+			                	<div class="col-4" style="width: 100%;"><img src=""></div>
+			                	<div class="col-8">
+			                		<h5>초대받은  모임 이름</h5>
+			                		<br>
+			                		<p>초대한 모임의 어필</p>
+			                		<a class="btn cancel">거절</a>
+			                		<a class="btn">수락</a>
+			                	</div>
+			           		</div>
+			           		
 			                
 			            </div>
 			        </section>
@@ -71,18 +107,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
-    
-
-    
-
-
-
-
-
-			
-
-		
 
 	</body>
 </html>

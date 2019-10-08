@@ -101,6 +101,20 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		                   
 		                }
 					}
+				}else if(cmd.equals("albumInsert")) {
+					String loginUserId = strs[1];
+					String loginUserName = strs[2];
+					String gName =  strs[3];
+					TextMessage tmpMsg = new TextMessage("albumInsert,"+loginUserName + ","+ gName);
+					for(WebSocketSession sess:sessions) {
+						
+						
+						if(!sess.equals(session) && groupList.get(sess).equals(gName)) {
+							
+		                    sess.sendMessage(tmpMsg);
+		                   
+		                }
+					}
 				}
 			}
 		}

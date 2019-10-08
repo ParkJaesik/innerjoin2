@@ -23,7 +23,7 @@
 	<!-- <div class="container" id="profile" > -->
 		<nav id="nav">
 			<ul>
-				<li id="logo-part"><a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
+				<li id="logo-part"><a class="menu-a" href="index.jsp"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
 				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
 				<li class="menu"><a class="icon solid fa-search" href="#"><span class="menu-detail">Search</span></a></li>
 				
@@ -108,6 +108,10 @@
 	        	$("#messageWindow").scrollTop(99999999);
 	        }else if(dataArray[0]=="reply"){
 	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2]);
+	        	$("#alaram").append("<br>");
+	        	$("#alarmTable").css("display","block");
+	        }else if(dataArray[0]=="albumInsert"){
+	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다.");
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }

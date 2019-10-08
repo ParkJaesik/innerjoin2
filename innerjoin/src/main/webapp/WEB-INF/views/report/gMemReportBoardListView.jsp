@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <style>
 
-    div{
+    /* div{
         border: 1px solid black;
     }
     .content{
@@ -67,11 +67,72 @@
         display: inline-block;
        
     }
+ */
+ 
+ * {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(50, 50, 50);
+}
 
+div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+
+.content {
+	margin: auto;
+	width: 1000px;
+	height: 100%;
+}
+
+h3 {
+	margin: 0 0 50px 0;
+	font-weight: bold;
+}
+
+.div2 {
+	margin: auto;
+	width: 100%;
+	height: 500px;
+}
+
+#report-th-no, #report-th, #respond-th, #report-th-date {
+	width: 100px;
+}
+
+#report-th-content {
+	width: 500px;
+}
+
+.div2 td {
+	height: 30px;
+	font-size: 12px;
+	border-bottom: 2px solid rgb(190, 190, 190);
+}
+
+#report-td-content {
+	padding-left: 30px;
+}
+
+
+.div4 {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+}
+.div4 a {
+	color: rgb(50, 50, 50);
+	font-size: 12px;
+}
     
 </style>
 </head>
 <body>
+<%@ include file="../group/groupMenubar.jsp" %>
 	<div class="content">
         <div class="content-wrap">
             <div class="div1">
@@ -79,29 +140,29 @@
             </div>
             
             <div class="div2">
-                <table>
+                <table align="center">
                     <tr>
-                        <th>no</th>
-                        <th>신고자</th>
-                        <th>신고받은 사람</th>
-                        <th>신고내용</th>
-                        <th>날짜</th>
+                        <th align="center" id="report-th- no">no</th>
+                        <th align="center" id="report-th">신고자</th>
+                        <th align="center" id="respond-th">신고받은 사람</th>
+                        <th align="center" id="report-th-content">신고내용</th>
+                        <th align="center" id="report-th-date">날짜</th>
                     </tr>
                     
                     <c:forEach var="r" items="${blist }">
 	                    <tr>
-	                        <td>${r.rNo }</td>
-	                        <td>${r.reportId }</td>
-	                        <td>${r.responId }</td>
-	                        <td><a href="#">${r.rCategory }</a></td>
-	                        <td>${r.rDate }</td>
+	                        <td align="center" id="report-td-no">${r.rNo }</td>
+	                        <td align="center" id="report-td">${r.reportId }</td>
+	                        <td align="center" id="respond-td">${r.responId }</td>
+	                        <td align="center" id="report-td-content"><a href="#">${r.rCategory }</a></td>
+	                        <td align="center" id="report-td-date">${r.rDate }</td>
 	                    </tr>
                     </c:forEach>
                 </table>
             </div>
             
             <!-- 게시물 검색하기 -->
-            <div class="div3">
+            <div class="div3" align="center">
                 <form action="bsearch.ij" name="searchForm" method="get">
                     <select id="searchSel">
                         <option value="all" <c:if test="${search.searchSel == 'all' }" >selected</c:if>>전체</option>

@@ -39,7 +39,7 @@ public class ReportController {
 		
 	}
 	
-	
+	// 검색
 	@RequestMapping("bsearch.ij")
 	public ModelAndView boardSearch(Search search, ModelAndView mv) {
 		

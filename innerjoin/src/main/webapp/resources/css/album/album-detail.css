@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 .al-wrapper {
+	margin-top:50px !important;
 	max-width: 1020px;
 	min-width: 360px;
 	margin: auto;
@@ -39,7 +40,7 @@
 
 
 .al-list div {
-	margin-right: 0;
+	margin-right: 10px;
 }
 
 .al-list img {
