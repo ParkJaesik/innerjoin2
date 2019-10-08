@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,6 @@
 <title>Group Board Modify</title>
 </head>
 <body>
-<%@ include file="../common/menubar.jsp" %>
-<%@ include file="../group/groupMenubar.jsp" %>
 	<form action="bmodify.ij" method="post" id="bmodifyForm" enctype="multipart/form-data">
 		<div id="board-container">
 			<h1 align="center">게시글 수정</h1>
@@ -21,17 +20,20 @@
 				<input type="hidden" name="boardNo" value="${ board.boardNo }">
 				<input type="hidden" name="page" value="${ currentPage }">
 				<input type="hidden" name="boardAttaRename" value="${ board.boardAttaRename }">
+				<input type="hidden" name="boardAttaOrigin" value="${ board.boardAttaOrigin }">
 				<div id="board-check">
-					<c:if test="${ board.boardTypeCode eq 0 }">
-						<input type="checkbox" name="boardTypeCheck" value="1" id="check" checked="checked">
-						<label for="check">공지글</label>
-						<input type="hidden" name="boardTypeCode" id="code" value="0">
-					</c:if>
-					
-					<c:if test="${ board.boardTypeCode eq 1 }">
-						<input type="checkbox" name="boardTypeCheck" value="1" id="check">
-						<label for="check">공지글</label>
-						<input type="hidden" name="boardTypeCode" id="code" value="1">
+					<c:if test="${ loginUser.memberId eq group.gHost }">
+						<c:if test="${ board.boardTypeCode eq 0 }">
+							<input type="checkbox" name="boardTypeCheck" value="1" id="check" checked="checked">
+							<label for="check">공지글</label>
+							<input type="hidden" name="boardTypeCode" id="code" value="0">
+						</c:if>
+						
+						<c:if test="${ board.boardTypeCode eq 1 }">
+							<input type="checkbox" name="boardTypeCheck" value="1" id="check">
+							<label for="check">공지글</label>
+							<input type="hidden" name="boardTypeCode" id="code" value="1">
+						</c:if>
 					</c:if>
 				</div>
 	
@@ -45,7 +47,8 @@
 				</div>
 	
 				<div id="board-content">
-					<textarea id="content" name="boardContent" placeholder="내용">${ board.boardContent }</textarea>
+					<c:set var="boardContent" value="${fn:replace(board.boardContent,'<br>','') }"/>
+					<textarea id="content" name="boardContent" placeholder="내용">${ boardContent }</textarea>
 				</div>
 			</div>
 	

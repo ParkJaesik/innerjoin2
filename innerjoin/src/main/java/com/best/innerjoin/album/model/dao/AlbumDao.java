@@ -86,7 +86,7 @@ public class AlbumDao {
 	 */
 	public int deleteAlbum(int albumNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("albumMapper.deleteAlbum", albumNo);
+		return sqlSession.update("albumMapper.deleteAlbum", albumNo);
 	}
 
 }
