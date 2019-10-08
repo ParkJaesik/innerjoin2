@@ -2,6 +2,7 @@ package com.best.innerjoin.report.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,17 @@ public class ReportController {
 		return mv;
 	}
 	
+	
+//	// 회원신고 게시글 작성
+//	@RequestMapping("rboard.ij")
+//	public ModelAndView memberReport(GroupMemberReport report, ModelAndView mv, HttpServletRequest request) {
+//		
+//		int result = rService.insertReport(report, request);
+//		return mv;
+//		
+//		
+//	}
+//	
  
 	
 	

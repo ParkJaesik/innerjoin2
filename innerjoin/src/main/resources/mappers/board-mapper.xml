@@ -101,3 +101,10 @@
 		(SEQ_RNO.NEXTVAL, #{replyContent}, SYSDATE, SYSDATE, DEFAULT, #{boardNo}, #{memberId})
 	</insert>
 </mapper>
+
+
+
+
+
+
+
