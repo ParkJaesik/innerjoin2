@@ -10,8 +10,6 @@
 <title>Group Board</title>
 </head>
 <body>
-<%@ include file="../common/menubar.jsp" %>
-<%@ include file="../group/groupMenubar.jsp" %>
 	<div id="board-container">
 		<h1 align="center">게시판</h1>
 

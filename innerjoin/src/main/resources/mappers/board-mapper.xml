@@ -31,15 +31,6 @@
   		<result property="memberName" column="MEMBER_NAME"/>
   	</resultMap>
   	
-  	<resultMap type="BoardAttachment" id="boardAttachmentResultSet">
-  		<id property="boardAtta" column="BOARD_ATTA"/>
-  		<result property="boardNo" column="BOARD_NO"/>
-  		<result property="boardAttaOrigin" column="BOARD_ATTA_ORIGIN"/>
-  		<result property="boardAttaRename" column="BOARD_ATTA_RENAME"/>
-  		<result property="boardAttaStatus" column="BOARD_ATTA_STATUS"/>
-  	</resultMap>
-  
-
 	<!-- 전체 게시글 수 조회 쿼리 -->
 	<select id="boardListCount" resultType="_int" parameterType="_int">
 		SELECT COUNT(*) FROM BOARD WHERE BOARD_STATUS = 'Y' AND GROUP_NO = #{groupNo}
@@ -99,8 +90,9 @@
 	
 	<!-- 댓글 조회 쿼리 -->
 	<select id="replyList" parameterType="_int" resultMap="replyResultSet">
-		SELECT REPLY_NO, REPLY_CONTENT, REPLY_CREATE_DATE, REPLY_MODIFY_DATE, REPLY_STATUS, BOARD_NO, MEMBER_ID, MEMBER_NAME
-		FROM REPLY JOIN MEMBER USING(MEMBER_ID)
+		SELECT REPLY_NO, REPLY_CONTENT, TO_CHAR(REPLY_CREATE_DATE, 'YYYY.MM.DD HH:MI') REPLY_CREATE_DATE, REPLY_MODIFY_DATE, REPLY_STATUS, BOARD_NO, MEMBER_ID, MEMBER_NAME
+		FROM REPLY
+		JOIN MEMBER USING(MEMBER_ID)
 		WHERE BOARD_NO = #{boardNo} AND REPLY_STATUS = 'Y' ORDER BY REPLY_NO DESC
 	</select>
 	
