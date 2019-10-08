@@ -97,10 +97,32 @@
 	WHERE MEMBER_ID = #{memberId}
   </select>
   
+  <!-- 초대받은 모임 목록 -->
+  <select id="selectInvList" parameterType="Member" resultMap="groupResultSet">
+  	SELECT GROUP_NAME,GROUP_INFO, GROUP_ORIGIN_FILENAME
+	FROM GROUP_MEMBER
+	JOIN "GROUP" USING(GROUP_NO) 
+	WHERE MEMBER_ID = #{memberId}
+    AND LEVEL_CODE = 3
+  </select>
+  
+  <!-- 신청 목록 -->
+  <select id="selectWaitList" parameterType="Member" resultMap="groupResultSet">
+  	SELECT GROUP_NAME,GROUP_INFO, GROUP_ORIGIN_FILENAME
+	FROM GROUP_MEMBER
+	JOIN "GROUP" USING(GROUP_NO) 
+	WHERE MEMBER_ID = #{memberId}
+    AND LEVEL_CODE = 4
+  </select>
+  
+  <!-- 회원 탈퇴 -->
   <update id="deleteMember" parameterType="Member">
   	UPDATE MEMBER
   	SET MEMBER_STATUS_CODE = 3
   	WHERE MEMBER_ID = #{memberId}
   </update>
+  
+  
+  
   
 </mapper>

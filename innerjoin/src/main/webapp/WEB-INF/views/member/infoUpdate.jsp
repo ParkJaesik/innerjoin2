@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/join.css"/>
 <title>마이페이지</title>
 </head>
-<body class="no-sidebar is-preload">
+<body>
 	<div id="page-wrapper">
 		<section id="header">
 			<div class="container" id="profile" > 

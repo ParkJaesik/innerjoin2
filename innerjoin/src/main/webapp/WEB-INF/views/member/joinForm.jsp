@@ -73,22 +73,22 @@
 										<h4>Date of Birth</h4>
 										<div class="input-group">
 											<div class="col-third">
-												<input type="text" placeholder="YYYY" maxlength="4"/>
+												<input type="number" name="memberBirthday1" id="memberBirthday1" placeholder="YYYY" maxlength="4"/>
 											</div>
 											<div class="col-third">
-												<input type="text" placeholder="MM" maxlength="2"/>
+												<input type="number" name="memberBirthday2" id="memberBirthday2" placeholder="MM" maxlength="2"/>
 											</div>
 											<div class="col-third">
-												<input type="text" placeholder="DD" maxlength="2"/>
+												<input type="number" name="memberBirthday3" id="memberBirthday3" placeholder="DD" maxlength="2"/>
 											</div>
 										</div>
 									</div>
 									<div class="col-half">
 										<h4>Gender</h4>
 										<div class="input-group">
-											<input type="radio" name="gender" value="male" id="gender-male"/>
+											<input type="radio" name="gender" value="M" id="gender-male"/>
 											<label for="gender-male">Male</label>
-											<input type="radio" name="gender" value="female" id="gender-female"/>
+											<input type="radio" name="gender" value="F" id="gender-female"/>
 											<label for="gender-female">Female</label>
 										</div>
 									</div>
@@ -96,7 +96,7 @@
 								
 								<button id="button" onclick="validate();" style="float: right;"> 가입</button>
 								
-								<button type="button" onclick="" style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
+								<button type="button" onclick="index.jsp" style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
 								
 							</form>
 
