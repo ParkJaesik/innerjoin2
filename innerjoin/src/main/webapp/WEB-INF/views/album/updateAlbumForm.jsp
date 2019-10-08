@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +10,12 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 <title>Insert title here</title>
  
 </head>
 <body>
-<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
+<%@ include file="../group/groupMenubar.jsp" %>
 <script>
 	console.log('addAlbum groupNo:'+'${groupNo}');
 	console.log('addAlbum memberId:'+'${memberId}');
@@ -43,7 +43,7 @@
 							</div>
 							<div class="col-md-4">
 								<button class="submit float_right btn btn-warning">앨범등록</button>
-								<button id="cancel" class="float_right btn btn-warning">등록취소</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page} + '&groupNo='+${groupNo}">등록취소</button>
 							</div>
 						</div>
 					</div>
@@ -66,6 +66,7 @@
             // image preview 기능 구현
             // input = file object[]
 	        function addPreview(input) {
+            	console.log(input.value);
 	            if (input[0].files) {
 	                //파일 선택이 여러개였을 시의 대응
 	                for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
@@ -237,13 +238,9 @@
                 });
             });
             
-            $(function(){
-	            $("#cancel").click(function(){
-	            	 location.href="albumListView.ij?groupNo=${groupNo} + &page=${currentPage}";
-	            	 console.log('groupNo : +${groupNo}');
-	            	 console.log('currentPage : +${currentPage}');
-	            });
-            });
+            function goList(){
+            	 location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + ${currentPage};
+            }
         </script>
 </body>
 </html>

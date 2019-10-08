@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
 		<div class="row" id="body-wrapper">
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
-				<%-- <%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%> --%>
+				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
 				<jsp:include page="/WEB-INF/views/album/albumDetailView.jsp"></jsp:include>
 
 			</div>

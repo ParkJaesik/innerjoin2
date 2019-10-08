@@ -32,7 +32,7 @@ public class AlbumController {
 		// page == null -> 1page
 		// page != null -> 모든 page 중 하나
 		int currentPage = page == null ? 1 : page;
-		
+		System.out.println("addAlbumForm groupNo : "+ groupNo);
 		
 		mv.addObject("currentPage", currentPage).addObject("groupNo", groupNo).setViewName("album/groupIndex+addAlbumForm");
 		
@@ -80,12 +80,11 @@ public class AlbumController {
 		// page == null -> 1page
 		// page != null -> 모든 page 중 하나
 		int currentPage = page == null ? 1 : page;
-		
 		ArrayList<Album> list = aService.selectList(groupNo,currentPage);
 		
 		if(list != null) {
 			// 메소드 체이닝 (Method Chaining)
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("groupNo", groupNo).setViewName("group/groupIndex");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("groupNo", groupNo).setViewName("album/groupIndex+albumListView");
 		}else {
 			mv.addObject("msg", "게시물 목록 조회 실패").setViewName("common/errorPage");
 		}
