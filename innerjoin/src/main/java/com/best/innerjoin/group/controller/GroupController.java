@@ -27,6 +27,7 @@ public class GroupController {
 		
 	}
 	
+	// 그룹 만들기
 	@RequestMapping(value="ginsert.ij", method=RequestMethod.POST)
 	public String groupInsert(Group group, HttpServletRequest request, MultipartFile uploadFile, Model model) {
 		
