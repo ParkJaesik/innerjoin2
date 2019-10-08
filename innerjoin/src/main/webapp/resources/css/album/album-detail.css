@@ -1,11 +1,26 @@
 @charset "UTF-8";
 
 .al-wrapper {
+	margin-top:50px !important;
 	max-width: 1020px;
 	min-width: 360px;
 	margin: auto;
 }
+.al-header {
+	max-width: 100%;
+	max-height: 5%;
+}
+.photo {
 
+	max-width: 100%;
+	min-height: 600px;
+ 
+ }
+.reply{
+	
+	max-width: 100%;
+	min-height: 40%;
+}
 .row{
 	margin-left:0 !important;
 	margin-right:0 !important;
@@ -16,28 +31,16 @@
 	margin: auto;
 }
 
-.al-header {
-	max-width: 100%;
-	max-height: 80px;
-}
 
 .al-title {
 	padding-right: 0;
 }
 
-.photo {
 
-	max-width: 100%;
-	min-height: 500px;
- 
- }
 
-.al-photo {
-	/* padding-top: 130px; */
-}
 
 .al-list div {
-	margin-right: 0;
+	margin-right: 10px;
 }
 
 .al-list img {
@@ -49,9 +52,8 @@
 }
 
 .al-photo img {
-	min-width:80%;
-	max-width:100%;
-	min-height: 100%;
+	max-width:80%; 
+	max-height:100%; 
 	border-radius:10px;
 	display: block;
 	margin: 0px auto;

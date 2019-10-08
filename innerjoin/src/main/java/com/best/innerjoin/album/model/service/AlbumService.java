@@ -40,5 +40,11 @@ public interface AlbumService {
 	 */
 	public abstract ArrayList<AlbumPhoto> selectPhoto(int albumNo);
 
+	/** 앨범 삭제 Service
+	 * @param albumNo
+	 * @return
+	 */
+	public abstract int deleteAlbum(int albumNo);
+
 
 }

@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
-   div {
-      /* border : 1px solid red; */
-      box-sizing: border-box;
-   }
+	div {
+		/* border : 1px solid red; */
+		box-sizing: border-box;
+	}
    
    #calendar-container {
-      max-width: 1000px;
-      min-width: 700px;
+      max-width: 1200px;
+      min-width: 900px;
       /* height: 650px; */
       margin: 0 auto;
       margin-bottom: 20px;
@@ -35,7 +35,7 @@
       margin-bottom: 20px;
    }
    #addEventWrapper {
-      max-width: 1050px;
+      max-width: 1250px;
       margin: 0 auto;
    }
    
@@ -79,7 +79,7 @@
 	}
    
    .detailWrapper {
-      max-width: 1000px;
+      max-width: 1200px;
       min-width: 850px;
       margin: 0 auto !important;
       margin-bottom: 10px;
@@ -114,6 +114,10 @@
       padding: 0 10px 0 10px;
       
    }
+   
+	.eventDetail span {
+   		font-size: .8em;
+	}
    
    .eventLabel {
       margin-top: 0.8em;
@@ -163,6 +167,12 @@
    .checkBtn {
    	max-width: 1.2em;
    }
+   
+	.eventMemberLabel {
+		display: block;
+		float: right;
+		margin: 0;
+	}
    
    .eventMember .member {
       padding-left: 10px !important;

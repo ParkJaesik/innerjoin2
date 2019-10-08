@@ -1,23 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-        <link rel="stylesheet" href="resources/css/album/album-add.css"/>
+        <!-- <link rel="stylesheet" href="resources/css/album/album-add.css"/> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <title>Insert title here</title>
-
+ 
 </head>
 <body>
-<%@ include file="../group/groupMenubar.jsp" %>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
 <script>
 	console.log('addAlbum groupNo:'+'${groupNo}');
 	console.log('addAlbum memberId:'+'${memberId}');
+	console.log('addAlbum memberId:'+'${param.page}');
 </script>  
 	<div class="container-fluid add-wrapper">
 		<!-- <div class="row"> -->
@@ -41,7 +43,7 @@
 							</div>
 							<div class="col-md-4">
 								<button class="submit float_right btn btn-warning">앨범등록</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij'">등록취소</button>
+								<button id="cancel" class="float_right btn btn-warning">등록취소</button>
 							</div>
 						</div>
 					</div>
@@ -183,7 +185,17 @@
 			        
 			        console.log(formData.get("title"));
 			        /* console.log(formData.get("files")); */
-         
+			        
+			        
+			        /* websocket 관련 필요 코드 */
+         			var loginUserId = "${loginUser.memberId}";
+         			var loginUserName = "${loginUser.memberName}";
+         			var gName = "${gName}";
+         			
+         			
+         			
+         			
+         			
 		              //ajax 통신으로 multipart form을 전송한다.
   	                $.ajax({
 	                    type : 'POST',
@@ -208,6 +220,10 @@
 	                        } else {
 	                            alert('이미지 업로드 성공');
 	                            // 이후 동작 ...
+	                            // 알람을 위한 채팅 동작.
+	                            
+	                            /* websocket 관련 필요 코드 */
+	                            socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName);
 	                            
 	                           goList();
 	                        }
@@ -221,9 +237,13 @@
                 });
             });
             
-            function goList(){
-            	 location.href="albumListView.ij?groupNo="+${groupNo};
-            }
+            $(function(){
+	            $("#cancel").click(function(){
+	            	 location.href="albumListView.ij?groupNo=${groupNo} + &page=${currentPage}";
+	            	 console.log('groupNo : +${groupNo}');
+	            	 console.log('currentPage : +${currentPage}');
+	            });
+            });
         </script>
 </body>
 </html>

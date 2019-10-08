@@ -27,7 +27,7 @@
         margin: auto;
     }
 
-    
+     
     .div1{
         width: 30%;
         min-height: 100px;
@@ -39,7 +39,7 @@
     .div2{
         width: 70%;
         min-height: 100px;
-        display: inline-block;
+        display: inline-block; 
     }
 
     .temp{
@@ -63,6 +63,7 @@
 </style>
 </head>
 <body>
+<%@ include file="../group/groupMenubar.jsp" %>
 	<div class="content">
             <div class="content-wrap">
                 <form action="ginsert.ij" method="post" enctype="multipart/form-data">
@@ -135,12 +136,7 @@
                                     <option value="">중구</option>
                                     <option value="">중랑구</option>
                                 </select>
-                                <select id="detailsel" name="detailsel">
-                                    <option value="0">상세 위치를 결정하세요</option>
-                                    <option value="1">협의 후 결정</option>
-                                    <option value="2">직접입력</option>
-                                </select>
-                                <input type="text" id="detailtext" name="detailtext">
+                               
                             </div>
                         
                         </div>
@@ -168,8 +164,8 @@
                             <div class="div1">
                                 <label>모임 소개</label>
                             </div>
-                            <div class="div2">
-                                <textarea rows="12" cols="50"></textarea>
+                            <div class="summernote">
+                                
                             </div>
                         </div>
                         <div class="row">
@@ -181,12 +177,12 @@
                                 <input type="file" name="uploadFile">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="button-wrap">
-                                <button type="reset" id="cancel">취소</button>
-                                <button type="submit" id="submit">등록</button>
-                            </div>
-                        </div>
+                        
+						<div class="button-wrap" align="center">
+						    <button type="reset" id="cancel">취소</button>
+						    <button type="submit" id="submit">등록</button>
+						</div>
+                    
                     </div>
                 </form>
                 <div class="temp">
@@ -203,6 +199,10 @@
                 $(".btn:not(.active)").next().slideUp();
             });
         });
+        
+        $('.summernote').summernote({
+      	  
+   	 	});
     </script>
 </body>
 </html>

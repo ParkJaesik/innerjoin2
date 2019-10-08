@@ -80,4 +80,13 @@ public class AlbumDao {
 		return (ArrayList)sqlSession.selectList("albumMapper.selectPhotoList", albumNo);
 	}
 
+	/** 앨범 삭제 DAO
+	 * @param albumNo
+	 * @return
+	 */
+	public int deleteAlbum(int albumNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("albumMapper.deleteAlbum", albumNo);
+	}
+
 }

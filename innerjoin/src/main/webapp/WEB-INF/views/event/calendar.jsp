@@ -8,20 +8,20 @@
 <title>Insert title here</title>
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
-<link href='${contextPath }/resources/css/core.css' rel='stylesheet' />
-<link href='${contextPath }/resources/css/daygrid.css' rel='stylesheet' />
-<link href='${contextPath }/resources/css/list.css' rel='stylesheet' />
-<link href='${contextPath }/resources/css/timegrid.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/core.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/daygrid.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/list.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/timegrid.css' rel='stylesheet' />
 
-<link href='${contextPath }/resources/css/calendarEvent.css' rel='stylesheet' />
+<link href='${contextPath }/resources/css/event/calendarEvent.css' rel='stylesheet' />
 
-<script src='${contextPath }/resources/js/core.js'></script>
-<script src='${contextPath }/resources/js/daygrid.js'></script>
-<script src='${contextPath }/resources/js/timegrid.js'></script>
-<script src='${contextPath }/resources/js/list.js'></script>
-<script src='${contextPath }/resources/js/interaction.js'></script>
+<script src='${contextPath }/resources/js/event/core.js'></script>
+<script src='${contextPath }/resources/js/event/daygrid.js'></script>
+<script src='${contextPath }/resources/js/event/timegrid.js'></script>
+<script src='${contextPath }/resources/js/event/list.js'></script>
+<script src='${contextPath }/resources/js/event/interaction.js'></script>
 
-<script src='${contextPath }/resources/js/moment.js'></script>
+<script src='${contextPath }/resources/js/event/moment.js'></script>
 
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 
@@ -31,12 +31,19 @@
     <!-- 테마 sketch -->
    <!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp" crossorigin="anonymous">
  -->
+ <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-ciphE0NCAlD2/N6NUApXAN2dAs/vcSAOTzyE202jJx3oS8n4tAQezRgnlHqcJ59C" crossorigin="anonymous">
     <!-- 한글글씨체 : sandoll -->
    <!--  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     -->
 
+
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+
 </head>
 <body>
+
 
 	<div class="container-fluid group-schedule">
 
@@ -50,12 +57,13 @@
 		<!-- 그룹멤버의 레벨 받아오기. 그룹페이지 기본정보 jsp에서 받아올 것. 현재 가데이터 세팅 -->
 		<c:set var="levelCode" value="0"/>
 		<!-- 현재 그룹의 번호 받아오기. 가데이터 세팅 -->
-		<c:set var="gno" value="1"/>
+		<%-- <c:set var="gno" value="1"/> --%>
+		
 		<c:if test="${levelCode == 0}" >
 			<div class="row">
 	            <!-- modal -->
 	            <div class="col-md-12" id="addEventWrapper">
-	                <a id="openFormBtn" href="#addEventForm" role="button" class="btn btn-warning" data-toggle="modal">
+	                <a id="openFormBtn" href="#addEventForm" role="button" class="btn btn-primary" data-toggle="modal">
 	                   <img src="${contextPath }/resources/images/add_basic.png">
 	                </a>
 	                
@@ -73,7 +81,7 @@
 	                            <div class="modal-body">
 	                                <form role="form" name="eventForm" method="post">
 	                                	<!-- gno 함께 넘겨줌. -->
-										<input type='hidden' name='gno' value='${gno }'>
+										<input type='hidden' name='gno' value='${group.gNo }'>
 	                                    <div class="row">
 	                                        <div class="col-md-12">
 	                                            <h5>
@@ -156,18 +164,7 @@
 	            </div>
 			</div>
 	    </c:if>
-       
-      <!--    
-      <div class="row detailWrapper">
-         <div class="col-md-12">
-            <div class="row eventDetail">
-               <div class="col-md-6 eventThumbnail"></div>
-               <div class="col-md-6 eventInfo"></div>
-            </div>
-         </div>
-      </div>
-       -->
-      
+       	<input type="hidden" value="${group.gNo }" id="gNo">
       <!-- 이벤트 상세보기 영역 -->
        <div class="row detailWrapper" style="align:center">
          <div class="col-md-12">
@@ -180,14 +177,13 @@
 	<script>
 		console.log("levelCode: ${levelCode}");
 	</script>
-   
-   <!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
-   <script src='${contextPath }/resources/js/calendarEvent.js'></script>
+   <%-- 
+	<!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
+	<script src='${contextPath }/resources/js/event/calendarEvent.js'></script> --%>
     
     <!-- bootstrap js -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    
 
 </body>

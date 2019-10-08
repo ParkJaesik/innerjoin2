@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +12,16 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 </head>
 
 <body>
-<%@ include file="../group/groupMenubar.jsp" %>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
  <script>
  	console.log('groupNo:'+'${groupNo}'); 
+ 	console.log('currentPage:'+'${pi.currentPage}'); 
  </script>
 	<div class="container-fluid wrapper">
 		<!-- <div class="row">
@@ -38,7 +41,7 @@
 								<c:param name="page" value="${ pi.currentPage }"/>
 							</c:url>
 							<div class="img-box">
-								<img src="resources/auploadFiles/${ a.albumThumbnail}" onclick="goDetail(${a.albumNo})">
+								<img src="resources/auploadFiles/${ a.albumThumbnail}" onclick="goDetail(${a.albumNo});">
 							</div>
 							<c:choose>
 								<c:when test="${ fn:length(a.albumTitle) gt 15}">
@@ -63,14 +66,14 @@
 							
 								<!-- [이전] -->
 								<c:if test="${ pi.currentPage <= 1 }">
-									[이전] &nbsp;
+									<i class="material-icons">keyboard_arrow_left</i> &nbsp;
 								</c:if>
 								<c:if test="${ pi.currentPage > 1 }">
 									<c:url var="before" value="albumListView.ij">
 										<c:param name="page" value="${ pi.currentPage - 1 }"/>
 										<c:param name="groupNo" value="${groupNo}" />
 									</c:url>
-									<a href="${ before }">[이전]</a> &nbsp;
+									<a href="${ before }"><i class="material-icons">keyboard_arrow_left</i></a> &nbsp;
 								</c:if>
 								
 								<!-- 페이지 -->
@@ -90,14 +93,14 @@
 								
 								<!-- [다음] -->
 								<c:if test="${ pi.currentPage >= pi.maxPage }">
-									[다음]
+									<i class="material-icons">keyboard_arrow_right</i>
 								</c:if>
 								<c:if test="${ pi.currentPage < pi.maxPage }">
 									<c:url var="after" value="albumListView.ij">
 										<c:param name="page" value="${ pi.currentPage + 1 }"/>
 										<c:param name="groupNo" value="${groupNo}" />
 									</c:url> 
-									<a href="${ after }">[다음]</a>
+									<a href="${ after }"><i class="material-icons">keyboard_arrow_right</i></a>
 								</c:if>
 							</td>
 						</tr>
@@ -116,17 +119,18 @@
 	<script>
  
     
+
 		function goDetail(albumNo){
 			console.log(albumNo);
 			location.href="albumDetailView.ij?albumNo="+albumNo + "&page=" + ${pi.currentPage}; 
 		}
 	
         $(".al-list img").click(function(){
-        	location.href="albumListView.ij";
+        	location.href="albumListView.ij?page=" + ${currentPage} +"&groupNo=" + ${groupNo};
         });
         
         $(".footer img").click(function(){
-        	location.href="addAlbumForm.ij";
+        	location.href="addAlbumForm.ij?page=" + ${pi.currentPage} +"&groupNo=" + ${groupNo};
         });
 		/* $(".section img").click(function(){
 			location.href="albumDetailView.ij";

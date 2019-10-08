@@ -25,7 +25,6 @@ public class ReportDao {
 		return sqlSession.selectOne("reportMapper.getListCount");
 	}
 
-	
 	/** 모임 회원 신고 게시글 목록 조회 DAO
 	 * 
 	 * @return

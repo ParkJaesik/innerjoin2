@@ -10,6 +10,7 @@
 		<result property="groupNo" column="GROUP_NO"/>
 		<result property="albumCreateDate" column="ALBUM_CREATE_DATE"/>
 		<result property="albumModifyDate" column="ALBUM_MODIFY_DATE"/>
+		<result property="albumThumbnail" column="ALBUM_THUMBNAIL"/>
 	</resultMap>
 
 	<resultMap id="photoResultSet" type="AlbumPhoto">
@@ -55,4 +56,8 @@
 		FROM ALBUM_PHOTO
 		WHERE ALBUM_NO = #{albumNo}
 	</select>
+	
+<!-- 	<update id="deleteAlbum" parameterType="_int">
+		
+	</update> -->
 </mapper>

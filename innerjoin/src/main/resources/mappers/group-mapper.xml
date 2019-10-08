@@ -16,6 +16,7 @@
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
 		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
 		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+		<result property="districtName" column="DISTRICT_NAME"/>
 	</resultMap>
 	
 	<!-- 모임 등록 쿼리 -->
@@ -25,6 +26,15 @@
 						#{localCode}, DEFAULT, #{gCategoryCode}, 
 						DEFAULT, #{gOriginFileName}, #{gRenameFileName}, SYSDATE, SYSDATE)
 	</insert>
-  
+  	
+  	
+  	<select id="selectGroup" parameterType="_int" resultMap="groupResultSet">
+  		SELECT GROUP_NO,GROUP_HOST,GROUP_OPEN_STATUS,GROUP_NAME,GROUP_LIMIT,GROUP_INFO,GROUP_MEM_COUNT,
+		LOCAL_CODE,GROUP_STATUS,GROUP_CATEGORY_CODE,GROUP_ORIGIN_FILENAME,GROUP_ENROLL_DATE,GROUP_MODIFY_DATE,DISTRICT_NAME
+		FROM "GROUP"  
+		JOIN LOCAL_DISTRICT_CATEGORY ON "GROUP".GROUP_CATEGORY_CODE = LOCAL_DISTRICT_CATEGORY.DISTRICT_CODE
+		WHERE GROUP_NO= #{gNo}
+  	
+  	</select>
 </mapper>
 

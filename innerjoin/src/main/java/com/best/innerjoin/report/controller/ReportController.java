@@ -39,7 +39,7 @@ public class ReportController {
 		
 	}
 	
-	
+	// 검색
 	@RequestMapping("bsearch.ij")
 	public ModelAndView boardSearch(Search search, ModelAndView mv) {
 		
@@ -52,6 +52,8 @@ public class ReportController {
 		mv.addObject("blist", bSearchList).addObject("search", search).setViewName("report/gMemReportBoardListView");
 		return mv;
 	}
+	
+ 
 	
 	
 	

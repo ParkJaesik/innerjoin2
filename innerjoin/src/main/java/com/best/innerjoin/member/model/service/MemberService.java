@@ -24,6 +24,12 @@ public interface MemberService {
 	// 마이페이지 - 내 모임 목록
 	public abstract ArrayList<Member> selectList(Member loginUser);
 
+	/** 탈퇴하기
+	 * @param loginUser
+	 * @return result
+	 */
+	public abstract int deleteMember(Member loginUser);
+
 	
 	
 }

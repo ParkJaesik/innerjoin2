@@ -11,6 +11,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 
 
@@ -24,10 +25,14 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
 		
-		System.out.println("afterConnectionEstablished : " + session);
+		/* System.out.println("afterConnectionEstablished : " + session); */
 		sessions.add(session);
+		
 		String senderId = getId(session);
+		
 		userSessions.put(senderId,session);
+		
+		
 		String gName = getGroupName(session);
 		if(gName != null) {
 			groupList.put(session,gName);
@@ -43,7 +48,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 
 	 @Override
 	 public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("handleTextMessage : " + session + " : " + message);
+		/* System.out.println("handleTextMessage : " + session + " : " + message); */
 		
 		
 		
@@ -101,6 +106,20 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		                   
 		                }
 					}
+				}else if(cmd.equals("albumInsert")) {
+					String loginUserId = strs[1];
+					String loginUserName = strs[2];
+					String gName =  strs[3];
+					TextMessage tmpMsg = new TextMessage("albumInsert,"+loginUserName + ","+ gName);
+					for(WebSocketSession sess:sessions) {
+						
+						
+						if(!sess.equals(session) && groupList.get(sess).equals(gName)) {
+							
+		                    sess.sendMessage(tmpMsg);
+		                   
+		                }
+					}
 				}
 			}
 		}
@@ -124,15 +143,22 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	
 	public String getGroupName(WebSocketSession session) {
 		Map<String,Object> httpSession = session.getAttributes();
-		String gName = (String) httpSession.get("groupName");
 		
-		return gName;
+		
+		String gName = (String) httpSession.get("gName");
+		
+		if(gName != null) {
+			return gName;
+		}else {
+			return null;
+		}
+		
 	}
 
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
-		System.out.println("afterConnectionClosed : " + session);
+		/* System.out.println("afterConnectionClosed : " + session); */
 		String gName = getGroupName(session);
 		if(gName != null) {
 			groupList.remove(gName, session);
