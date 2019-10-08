@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	function eventSetting() {
 		var calDate = getCalDate();
 		// 해당 모임의 gno값 가져오기
-		var gno = 1;
+		var gno = $("#gNo").val();
 		assignEvent(calDate);
 		getAttendEventList(calDate);
 	}
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 현재 달력에 표시되는 월에 해당하는 이벤트 등록하기
 	function assignEvent(date) {
 		var events;
-		var gno = 1;
+		var gno = $("#gNo").val();
 		console.log("assignEvent: " + date);
 		// 달력에 표시된 이벤트들 지우기
 		$.each(calendar.getEvents(), function(i, v) {
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	function getAttendEventList(date) {
 		console.log("date: " +date);
 		//var gno = ${gno};
-		var gno = 1;
+		var gno = $("#gNo").val();
 		// loginUser의 memberId값은 controller에서 세팅.
 		$.ajax({
 			url: 'getAttendEventList.ij',

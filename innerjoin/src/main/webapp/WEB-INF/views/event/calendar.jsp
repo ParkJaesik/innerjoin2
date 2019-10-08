@@ -57,7 +57,7 @@
 		<!-- 그룹멤버의 레벨 받아오기. 그룹페이지 기본정보 jsp에서 받아올 것. 현재 가데이터 세팅 -->
 		<c:set var="levelCode" value="0"/>
 		<!-- 현재 그룹의 번호 받아오기. 가데이터 세팅 -->
-		<c:set var="gno" value="1"/>
+		<%-- <c:set var="gno" value="1"/> --%>
 		
 		<c:if test="${levelCode == 0}" >
 			<div class="row">
@@ -81,7 +81,7 @@
 	                            <div class="modal-body">
 	                                <form role="form" name="eventForm" method="post">
 	                                	<!-- gno 함께 넘겨줌. -->
-										<input type='hidden' name='gno' value='${gno }'>
+										<input type='hidden' name='gno' value='${group.gNo }'>
 	                                    <div class="row">
 	                                        <div class="col-md-12">
 	                                            <h5>
@@ -164,7 +164,7 @@
 	            </div>
 			</div>
 	    </c:if>
-       
+       	<input type="hidden" value="${group.gNo }" id="gNo">
       <!-- 이벤트 상세보기 영역 -->
        <div class="row detailWrapper" style="align:center">
          <div class="col-md-12">

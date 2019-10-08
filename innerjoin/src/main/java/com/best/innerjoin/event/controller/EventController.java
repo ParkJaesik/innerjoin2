@@ -36,7 +36,7 @@ public class EventController {
     */
 	@ResponseBody
 	@RequestMapping("addEvent.ij")
-	public int insertEvent(@RequestParam Event event) {
+	public int insertEvent( Event event) {
 		System.out.println("event : " + event);
 		int result = eService.insertEvent(event);
 		return result;

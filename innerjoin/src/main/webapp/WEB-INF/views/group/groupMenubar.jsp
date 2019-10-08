@@ -68,7 +68,7 @@
 
 		<div id="group-menu-container">
 			<button type="button" class="btn btn-primary" id="group-btn-index">정보</button>
-			<button type="button" class="btn btn-primary" id="group-btn-schedule">일정</button>
+			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
 			<button type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
 			<button type="button" class="btn btn-primary" id="group-btn-member">회원</button>
 			<button type="button" class="btn btn-primary" id="group-btn-gallery">사진</button>

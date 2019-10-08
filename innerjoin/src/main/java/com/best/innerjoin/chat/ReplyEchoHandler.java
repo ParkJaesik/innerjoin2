@@ -25,7 +25,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
 		
-		System.out.println("afterConnectionEstablished : " + session);
+		/* System.out.println("afterConnectionEstablished : " + session); */
 		sessions.add(session);
 		
 		String senderId = getId(session);
@@ -48,7 +48,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 
 	 @Override
 	 public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("handleTextMessage : " + session + " : " + message);
+		/* System.out.println("handleTextMessage : " + session + " : " + message); */
 		
 		
 		
@@ -158,7 +158,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
-		System.out.println("afterConnectionClosed : " + session);
+		/* System.out.println("afterConnectionClosed : " + session); */
 		String gName = getGroupName(session);
 		if(gName != null) {
 			groupList.remove(gName, session);
