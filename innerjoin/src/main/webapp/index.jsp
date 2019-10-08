@@ -37,6 +37,11 @@
 							<c:param name="groupNo" value="1" />
 						</c:url>
                         <a href="${goAlbum}">앨범</a>
+                        
+                        <c:if test="${ !empty sessionScope.loginUser }">
+                        	<a href="calendar.ij">임시모임일정</a>
+                        	<a href="memberCalendar.ij">임시멤버일정</a>
+                        </c:if>
 
 			</div>
 			<div class="col-md-1 aside">

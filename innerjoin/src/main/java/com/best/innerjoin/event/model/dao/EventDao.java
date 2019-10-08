@@ -32,6 +32,11 @@ public class EventDao {
 	public ArrayList<Event> groupEventList(Map<String, String> dateGroup) {
 		return (ArrayList)sqlSession.selectList("eventMapper.groupEventList", dateGroup);
 	}
+	
+	public Event selectEvent(String eno) {
+		return sqlSession.selectOne("eventMapper.selectEvent", eno);
+	}
+	
 
 	public ArrayList<Member> selectMem(String eno) {
 		return (ArrayList)sqlSession.selectList("eventMapper.selectMem", eno);
@@ -44,5 +49,7 @@ public class EventDao {
 	public int cancelEvent(Map<String, String> memberEno) {
 		return sqlSession.delete("eventMapper.cancelEvent", memberEno);
 	}
+
+	
 
 }
