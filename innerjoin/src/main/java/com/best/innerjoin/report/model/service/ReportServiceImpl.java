@@ -2,6 +2,8 @@ package com.best.innerjoin.report.model.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,14 @@ public class ReportServiceImpl implements ReportService{
 	public ArrayList<GroupMemberReport> searchBList(Search search) {
 
 		return rDao.searchBList(search);
+	}
+
+	// 회원 신고글 작성
+	@Override
+	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
+		
+		report.setrContent(report.getrContent().replace("\n", "<br>"));
+		return rDao.insertReport(report);
 	}
 
 }

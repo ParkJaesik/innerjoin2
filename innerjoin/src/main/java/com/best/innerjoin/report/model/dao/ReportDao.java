@@ -47,6 +47,15 @@ public class ReportDao {
 		return (ArrayList)sqlSession.selectList("reportMapper.searchbList", search);
 	}
 
+	/** 모임 회원 신고게시글 작성DAO
+	 * @param report
+	 * @return
+	 */
+	public int insertReport(GroupMemberReport report) {
+
+		return sqlSession.insert("reportMapper.insertReport", report);
+	}
+
 
 
 

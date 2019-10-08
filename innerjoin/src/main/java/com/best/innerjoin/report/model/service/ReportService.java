@@ -2,6 +2,8 @@ package com.best.innerjoin.report.model.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -18,6 +20,13 @@ public interface ReportService {
 	 * @return
 	 */
 	ArrayList<GroupMemberReport> searchBList(Search search);
+
+	/** 회원 신고글
+	 * @param report
+	 * @param request
+	 * @return
+	 */
+	int insertReport(GroupMemberReport report, HttpServletRequest request);
 	
 
 }

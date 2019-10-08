@@ -2,7 +2,9 @@ package com.best.innerjoin.report.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +53,16 @@ public class ReportController {
 		
 		mv.addObject("blist", bSearchList).addObject("search", search).setViewName("report/gMemReportBoardListView");
 		return mv;
+	}
+	
+	// 모임회원 신고글 작성
+	@RequestMapping("rboard.ij")
+	public ModelAndView reportInsert(ModelAndView mv, GroupMemberReport report, HttpServletRequest request) {
+		
+		int result = rService.insertReport(report, request);
+		
+		return mv;
+		
 	}
 	
  
