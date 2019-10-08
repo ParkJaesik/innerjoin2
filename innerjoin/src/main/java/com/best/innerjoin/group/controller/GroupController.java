@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.member.model.vo.Member;
 
 
 @Controller
@@ -30,12 +31,13 @@ public class GroupController {
 	// 그룹 만들기
 	@RequestMapping(value="ginsert.ij", method=RequestMethod.POST)
 	public String groupInsert(Group group, HttpServletRequest request, MultipartFile uploadFile, Model model) {
+		System.out.println(group.getgOpenStatus());
 		
 		int result = gService.insertGroup(group, uploadFile, request);
-		
+
 		String path= null;
 		if(result>0) {
-			path="redirect:myPageForm.ij";
+			path="group/groupIndex";
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");
 			path = "common/errorPage";
