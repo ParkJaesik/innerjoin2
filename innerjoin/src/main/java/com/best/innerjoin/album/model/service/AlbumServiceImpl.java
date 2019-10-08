@@ -197,4 +197,9 @@ public class AlbumServiceImpl implements AlbumService {
 		public ArrayList<AlbumPhoto> selectPhoto(int albumNo) {
 			return aDao.selectPhoto(albumNo);
 		}
+
+		@Override
+		public int deleteAlbum(int albumNo) {
+			return aDao.deleteAlbum(albumNo);
+		}
 }
