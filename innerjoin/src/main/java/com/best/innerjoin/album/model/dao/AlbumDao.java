@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
+import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.common.PageInfo;
 
 @Repository("aDao")
@@ -87,6 +88,15 @@ public class AlbumDao {
 	public int deleteAlbum(int albumNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("albumMapper.deleteAlbum", albumNo);
+	}
+
+	/** 댓글 등록 DAO
+	 * @param aReply
+	 * @return
+	 */
+	public int insertReply(AlbumReply aReply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("albumMapper.insertReply", aReply);
 	}
 
 }

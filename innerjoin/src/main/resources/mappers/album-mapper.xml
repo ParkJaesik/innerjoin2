@@ -21,6 +21,17 @@
 		<result property="photoRename" column="PHOTO_RENAME"/>
 		<result property="albumNo" column="ALBUM_NO"/>
 	</resultMap>
+
+	<resultMap id="replyResultSet" type="AlbumReply">
+		<id property="arNo" column="AR_NO"/>
+		<result property="arContent" column="AR_CONTENT"/>
+		<result property="arCreateDate" column="AR_CREATE_DATE"/>
+		<result property="arModifyDate" column="AR_MODIFY_DATE"/>
+		<result property="arStatus" column="AR_STATUS"/>
+		<result property="albumNo" column="ALBUM_NO"/>
+		<result property="arWriter" column="AR_WRITER"/>
+		<result property="groupNo" column="GROUP_NO"/>
+	</resultMap>
 	
 	<insert id="insertAlbum" parameterType="Album">
 		INSERT INTO ALBUM
@@ -62,4 +73,8 @@
 		SET ALBUM_STATUS = 'N'
 		WHERE ALBUM_NO = #{albumNo}
 	</update>
+	
+<!-- 	<insert id="insertReply">
+	
+	</insert> -->
 </mapper>

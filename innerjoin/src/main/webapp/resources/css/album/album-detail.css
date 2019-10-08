@@ -122,7 +122,12 @@
 }
 .re-content textarea{
 	border:none;
+	user-select:none;
+}
+
+.re-content{
 	
+	word-break:break-all;
 }
 
 /* 

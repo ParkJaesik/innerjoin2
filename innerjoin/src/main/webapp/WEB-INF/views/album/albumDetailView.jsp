@@ -78,7 +78,7 @@
                     <div class="col-md-12">
                         <div class="row re-input">
                             <div class="col-md-12 re-txtarea">
-                                <textarea rows="3" cols="110" placeholder="comment..."></textarea>
+                                <textarea id="rContent" rows="3" cols="110" placeholder="comment..."></textarea>
                             </div>
                             <div class="col-md-1 re-submit-btn">
                                 <button class="submit-btn">submit</button>
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="row re-list">
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="padding:10px !important;">
                                 <p style="font-size:20px; font-weight:500">Comment</p>
                                 <hr>
                                 <div class="row re-info">
@@ -106,7 +106,7 @@
                                 <hr>
                                 <div class="row re-content">
                                     <div class="col-md-12">
-                                        <textarea rows="3" cols="110" readonly></textarea>
+                                        sdjfhsdoifsdjfdjdddddddddddddddddddsssssssffffssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                                     </div>
                                 </div>
                             </div>
@@ -168,6 +168,29 @@
             
             $(".carousel").carousel({
             	interval:false
+            });
+            
+            $(".submit-btn").click(function(){
+            	var reply = $("#rContent").val();
+            	var albumNo = ${album.albumNo};
+            	
+    			$.ajax({
+    				url: "addReply.ij",
+    				data : {rContent : rContent, albumNo : albumNo},
+    				type : "post",
+    				success : function(data){
+    					if(data == 'success'){
+    						
+    						// 댓글 작성 부분 초기화
+    						alert("댓글 등록 성공!");
+    						$("#rContent").val("");
+    						getReplyList(refBid);
+    					}
+    				},
+    				error : function(e){
+    					console.log("Ajax 통신 실패");
+    				}
+    			});
             });
             
           
