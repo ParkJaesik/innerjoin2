@@ -53,7 +53,7 @@
 	<select id="selectAlbumList" parameterType="String" resultMap="albumResultSet">
 		SELECT *
 		FROM ALBUM
-		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y'
+		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y' ORDER BY DESC
 	</select>
 	
 	<select id="selectAlbum" parameterType="_int" resultMap="albumResultSet">
@@ -76,7 +76,7 @@
 	
  	<insert id="insertReply">
 		INSERT INTO ALBUM_REPLY
-		VALUES(SEQ_ARNO.NEXTVAL,#{arContent},DEFAULT, DEFAULT, DEFAULT, #{arWriter},#{groupNo})
+		VALUES(SEQ_ARNO.NEXTVAL,#{arContent},DEFAULT, DEFAULT, DEFAULT,#{albumNo}, #{arWriter},#{groupNo})
 	</insert>
 	
 	<select id="selectReply" parameterType="_int" resultMap="replyResultSet">
