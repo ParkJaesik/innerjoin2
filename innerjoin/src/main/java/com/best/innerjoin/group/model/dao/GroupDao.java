@@ -1,6 +1,10 @@
 package com.best.innerjoin.group.model.dao;
 
+
+import java.util.ArrayList;
+
 import java.util.HashMap;
+
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 
 @Repository("gDao")
 public class GroupDao {
@@ -35,6 +40,10 @@ public class GroupDao {
 		return sqlSession.insert("groupMapper.applyInsertGroup", codeMap);
 	}
 
+
+	public ArrayList<GroupMember> groupMemberList(int groupNo) {
+		return (ArrayList)sqlSession.selectList("groupMapper.groupMemberList", groupNo);
+
 	public int insertAlarm(String memberId, String host) {
 		Map<String,String> alarmMap = new HashMap<>();
 		alarmMap.put("memberId", memberId);
@@ -42,6 +51,7 @@ public class GroupDao {
 		System.out.println(alarmMap.get("memberId"));
 		System.out.println(alarmMap.get("host"));
 		return sqlSession.insert("alarmMapper.insertAlarm", alarmMap);
+
 	}
 
 }

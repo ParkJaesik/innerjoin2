@@ -29,7 +29,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bService;
-	
+	//
 	// 게시판 조회
 	@RequestMapping("blist.ij")
 	public ModelAndView boardList(ModelAndView mv, Integer page, HttpServletRequest request) {
@@ -39,12 +39,9 @@ public class BoardController {
 		
 		ArrayList<Board> list = bService.boardList(currentPage, groupNo);
 		
-		int listCount = Pagination.getPageInfo().getListCount();
-		
-		
 		if (list != null) {
 			
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("listCount", listCount).setViewName("group/groupIndex+groupBoard");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).setViewName("group/groupIndex+groupBoard");
 				
 		} else {
 			mv.addObject("msg", "게시판을 불러오는데 실패하였습니다").setViewName("common/errorPage");

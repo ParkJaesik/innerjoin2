@@ -2,6 +2,7 @@ package com.best.innerjoin.group.model.service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.best.innerjoin.group.model.dao.GroupDao;
 import com.best.innerjoin.group.model.exception.GroupException;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 
 @Service("gService")
 public class GroupServiceImpl implements GroupService{
@@ -125,10 +127,15 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
+
+	public ArrayList<GroupMember> groupMemberList(int groupNo) {
+		return gDao.groupMemberList(groupNo);
+
 	public int insertAlarm(String memberId, String host) {
 		
 		
 		return gDao.insertAlarm(memberId,host);
+
 	}
 
 	

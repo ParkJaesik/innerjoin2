@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(50, 50, 50);
+}
+
+div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#member-container {
+	margin: auto;
+	width: 1000px;
+	height: 100%;
+}
+
+#member-container div {
+	margin: auto;
+}
+
+#member-container button {
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+#member-container button:focus {
+	box-shadow: none !important;
+}
+
+#member-container h1 {
+	margin: 0 0 50px 0;
+	font-weight: bold;
+}
+
+#member-part {
+	width: 900px;
+	height: 150px;
+	position: relative;
+	background-color: rgb(230, 230, 230);
+	border-radius: 10px;
+}
+
+#member {
+	width: 800px;
+	height: 100px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#member-image {
+	width: 100px;
+	height: 100%;
+	float: left;
+	background-color: rgb(90, 90, 90);
+}
+
+#member-image img {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(230, 230, 230);
+}
+
+#member-name {
+	width: 100px;
+	height: 100%;
+	float: left;
+	text-align: center;
+	padding-top: 30px;
+}
+
+#member-name span {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#member-level {
+	width: 100px;
+	height: 100%;
+	float: left;
+	text-align: center;
+	padding-top: 30px;
+}
+
+#member-level span {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#member-button {
+	width: 500px;
+	height: 100%;
+	float: left;
+	text-align: right;
+}
+
+#member button {
+	background-color: rgb(90, 90, 90);
+	width: 100px;
+	height: 40px;
+	font-size: 12px;
+	margin-top: 30px;
+}

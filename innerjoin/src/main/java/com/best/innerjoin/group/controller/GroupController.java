@@ -1,5 +1,7 @@
 package com.best.innerjoin.group.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.alarm.model.service.AlarmService;
 import com.best.innerjoin.group.model.service.GroupService;
@@ -129,6 +132,25 @@ public class GroupController {
 		
 		
 	}
+
+
+	// 그룹 회원 조회
+	@RequestMapping("gmlist.ij")
+	public ModelAndView groupMemberList(ModelAndView mv, HttpServletRequest request) {
+		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		
+		ArrayList<GroupMember> list = gService.groupMemberList(groupNo);
+		
+		if (list != null) {
+			mv.addObject("list", list).setViewName("group/groupIndex+groupMember");
+			
+		} else {
+			mv.addObject("msg", "회원 목록 조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+
 	
 	
 //	// 회원 등급 수정
@@ -137,4 +159,5 @@ public class GroupController {
 //		
 //		int result = gService.updateMlevel(request, gMember);
 //	}
+
 }

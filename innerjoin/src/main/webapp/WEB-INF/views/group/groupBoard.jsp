@@ -22,11 +22,14 @@
 					<td align="center" id="board-th-date">작성일</td>
 					<td align="center" id="board-th-count">조회수</td>
 				</tr>
+				<!--  -->
+				<c:set var="boardCount" value="${ pi.listCount }"/>
+				<c:set var="limit" value="${ pi.limit }"/>
+				<c:set var="currentPage" value="${ pi.currentPage }"/>
 				
 				<c:forEach var="b" items="${ list }" varStatus="status">
 					<tr>
-						<c:set var="no" value="${fn:length(list)-status.count}"></c:set>
-						<td align="center" class="board-td-no">${ no+1 }</td>
+						<td align="center" class="board-td-no">${ (boardCount - ((currentPage - 1) * limit)) - status.index }</td>
 						<td align="left" class="board-td-title">
 							<c:url var="boardDetail" value="bdetail.ij">
 								<c:param name="boardNo" value="${ b.boardNo }"/>
@@ -39,6 +42,7 @@
 						<td align="center" class="board-td-count">${ b.boardCount }</td>
 					</tr>
 				</c:forEach>
+				
 			</table>
 		</div>
 
@@ -54,12 +58,12 @@
 				<c:url var="before" value="blist.ij">
 					<c:param name="page" value="${ pi.currentPage - 1 }"/>
 				</c:url>
-				<a href="${ before }">이전</a>&nbsp;
+				<a href="${ before }">&lt;</a>&nbsp;
 			</c:if>
 			
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<c:if test="${ p eq currentPage }">
-					<font color="red" size="10"><b>${ p }</b>&nbsp;</font>
+					<font color="red" size="5"><b>${ p }</b>&nbsp;</font>
 				</c:if>
 				
 				<c:if test="${ p ne currentPage }">
