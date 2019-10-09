@@ -55,16 +55,28 @@ public class ReportController {
 	}
 	
 	
-//	// 회원신고 게시글 작성
-//	@RequestMapping("rboard.ij")
-//	public ModelAndView memberReport(GroupMemberReport report, ModelAndView mv, HttpServletRequest request) {
-//		
-//		int result = rService.insertReport(report, request);
-//		return mv;
-//		
-//		
-//	}
-//	
+	
+	@RequestMapping("rboardInsertForm.ij")
+	public String rboardInsertForm() {
+		return "report/gMemReportBoardInsert";
+	}
+	
+	// 회원신고 게시글 작성
+	@RequestMapping("rboard.ij")
+	public ModelAndView memberReport(GroupMemberReport report, ModelAndView mv, HttpServletRequest request) {
+		
+		int result = rService.insertReport(report, request);
+		
+		if(result > 0) {
+			mv.addObject("report", report).setViewName("group/groupIndex");
+		}else {
+			mv.addObject("msg", "신고글 작성 실패").setViewName("common/errorPage");
+		}
+		return mv;
+		
+		
+	}
+	
  
 	
 	

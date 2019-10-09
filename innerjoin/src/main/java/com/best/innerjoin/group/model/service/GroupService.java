@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 
 public interface GroupService {
 
@@ -19,6 +20,8 @@ public interface GroupService {
 
 
 	int applyInsertGroup(String memberId, int gNo);
+
+
 
 
 	int insertAlarm(String memberId, String host);

@@ -13,20 +13,20 @@ public interface ReportService {
 	 * @param currentPage 
 	 * @return
 	 */
-	public abstract         ArrayList<GroupMemberReport> selectBList(int currentPage);
+	public abstract ArrayList<GroupMemberReport> selectBList(int currentPage);
 
 	/** 모임 회원 신고글 검색
 	 * @param search
 	 * @return
 	 */
-	ArrayList<GroupMemberReport> searchBList(Search search);
+	public abstract ArrayList<GroupMemberReport> searchBList(Search search);
 
-	/**
+	/** 모임 회원 신고 게시글 작성
 	 * @param report
 	 * @param request
 	 * @return
 	 */
-//	int insertReport(GroupMemberReport report, HttpServletRequest request);
+	public abstract int insertReport(GroupMemberReport report, HttpServletRequest request);
 	
 
 }
