@@ -31,8 +31,7 @@ public class GroupDao {
 	}
 
 	public int applyInsertGroup(Map codeMap) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("groupMapper.applyInsertGroup", codeMap);
 	}
 
 }

@@ -48,7 +48,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 
 	 @Override
 	 public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		/* System.out.println("handleTextMessage : " + session + " : " + message); */
+		System.out.println("handleTextMessage : " + session + " : " + message); 
 		
 		
 		
@@ -120,6 +120,21 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		                   
 		                }
 					}
+				}else if(cmd.equals("apply")) {
+					String loginUserId = strs[1];
+					String gName = strs[2];
+					String host = strs[3];
+					
+					
+						WebSocketSession boardWriterSession =  userSessions.get(host);
+						System.out.println(boardWriterSession);
+						//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
+						//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
+						if(boardWriterSession !=null) {
+							TextMessage tmpMsg = new TextMessage("apply,"+loginUserId + ","+ gName + "," + host);
+							boardWriterSession.sendMessage(tmpMsg);
+						}
+					
 				}
 			}
 		}

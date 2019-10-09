@@ -114,6 +114,10 @@
 	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다.");
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
+	        }else if(dataArray[0]=="apply"){
+	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다.");
+	        	$("#alaram").append("<br>");
+	        	$("#alarmTable").css("display","block");
 	        }
     	
     }
