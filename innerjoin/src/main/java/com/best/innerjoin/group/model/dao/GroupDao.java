@@ -1,5 +1,6 @@
 package com.best.innerjoin.group.model.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,8 +32,16 @@ public class GroupDao {
 	}
 
 	public int applyInsertGroup(Map codeMap) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("groupMapper.applyInsertGroup", codeMap);
+	}
+
+	public int insertAlarm(String memberId, String host) {
+		Map<String,String> alarmMap = new HashMap<>();
+		alarmMap.put("memberId", memberId);
+		alarmMap.put("host", host);
+		System.out.println(alarmMap.get("memberId"));
+		System.out.println(alarmMap.get("host"));
+		return sqlSession.insert("alarmMapper.insertAlarm", alarmMap);
 	}
 
 }

@@ -9,10 +9,145 @@
 <title>Insert title here</title>
 	<!-- <link rel="stylesheet" href="resources/css/album/album-detail.css"/> -->
 	<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	
+	        <script type="text/javascript">
+        // Get the modal
+        
+        	
+            var modal = document.getElementById('myModal');
+            
+            // Get the button that opens the modal
+            //var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];                                          
+
+            // When the user clicks on the button, open the modal 
+            $(".al-photo img").click(function() {
+                console.log($(this).attr('src'));
+                var modalSrc = $(this).attr('src');
+                $(".modal-img-wrapper img").attr("src",modalSrc)
+                modal.style.display = "block";
+            });
+
+            // When the user clicks on <span> (x), close the modal
+            $(".modal-content img, .close").click( function() {
+                modal.style.display = "none";
+            })
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+/*             
+            $(".carousel").carousel({
+            	interval:false
+            }); */
+            
+        	
+        
+            function goList(){
+            	
+            	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
+            }
+            
+            function goEdit(){
+            	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
+            	
+            }
+            
+            function goDelete(){
+            	if(window.confirm("정말 삭제 하시겠습니까?")){
+            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
+            	}
+            }
+            
+  
+            $(function(){
+                $("#submit-btn").click(function(){
+                	var arContent = $("#rContent").val();
+                	var albumNo = ${album.albumNo};
+                	var groupNo = ${album.groupNo}
+                	alert(arContent + ", "+ albumNo + ", " + groupNo);
+        			$.ajax({
+        				url: "addReply.ij",
+        				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo},
+        				type : "post",
+        				success : function(data){
+        					if(data == 'success'){
+        						
+        						// 댓글 작성 부분 초기화
+        						alert("댓글 등록 성공!");
+        						$("#rContent").val("");
+        						getReplyList(albumNo);
+        					}
+        				},
+        				error : function(e){
+        					console.log("Ajax 통신 실패");
+        				}
+        			});
+                });
+                
+        		// 댓글 리스트 조회 함수
+        		function getReplyList(albumNo){
+        			$.ajax({
+        				url : "rList.ij",
+        				data : {albumNo : albumNo},
+        				dataType : "json",
+        				success : function(list){
+        					var $reInfo = $("#re-info");
+        					var $reContent = $("#re-content");
+        					
+        					/* $("#rCount").text("댓글("+ list.length +")"); */
+        					
+        					var $arWriter;
+        					var $rCreateDate;
+        					var $editBox = $("<div class=\"col-md-1\">");
+        					var $edit = $("<img src=\"resources/images/album/edit.png\">");
+        					var $deleteBox = $("<div class=\"col-md-1\">");
+        					var $delete = $("<img src=\"resources/images/album/delete.png\">");
+        					var $arContent;
+        					
+        					if(list.length > 0){
+        						// 댓글 목록 출력
+        						// rWriter -> width=100px
+        						// rCreateDate -> width=100px
+        						$.each(list,function(i,v){
+        							$arWriter = $("<div class=\"col-md-3\">").text(list[i].arWriter);
+        							$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
+        							$editBox.append($edit);
+        							$deleteBox.append($delete);
+        							$arContent = $("<div class=\"col-md-12\">").text(list[i].arContent);
+        							if ('${loginUser.memberId}' == list[i].arWriter){
+        								$arWriter.css("color","red");
+        							}
+        							$reInfo.append($arWriter).append($arCreateDate).append($editBox).append($deleteBox).append("<hr>");
+        							$reContent.append($arContent);
+        							$('.re-list').children('.col-md-12').append($reInfo).append($reContent);
+        						});
+        					}else{ // 댓글이 없는 경우
+        						$tr = $("<tr>");
+        						$rContent = $("<td colspan=\"3\">").text("등록된 댓글이 없습니다.");
+        						$tr.append($rContent);
+        						$tableBody.append($tr);
+        					}
+        					
+        				}
+        			});
+        		}
+            });
+ 
+        </script>
 </head>
 <body>
 <%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
+
+
+
         <div class="container-fluid al-wrapper">
             <div class="row al-header">
                 <div class="col-md-3 al-info">
@@ -81,7 +216,7 @@
                                 <textarea id="rContent" rows="3" cols="110" placeholder="comment..."></textarea>
                             </div>
                             <div class="col-md-1 re-submit-btn">
-                                <button class="submit-btn">submit</button>
+                                <button id="submit-btn" class="submit-btn">submit</button>
                             </div>
                         </div>
 
@@ -135,127 +270,7 @@
        
         </div>
       
-        <script type="text/javascript">
-        // Get the modal
-            var modal = document.getElementById('myModal');
-            
-            // Get the button that opens the modal
-            //var btn = document.getElementById("myBtn");
 
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];                                          
-
-            // When the user clicks on the button, open the modal 
-            $(".al-photo img").click(function() {
-                console.log($(this).attr('src'));
-                var modalSrc = $(this).attr('src');
-                $(".modal-img-wrapper img").attr("src",modalSrc)
-                modal.style.display = "block";
-            });
-
-            // When the user clicks on <span> (x), close the modal
-            $(".modal-content img, .close").click( function() {
-                modal.style.display = "none";
-            })
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
-            
-            $(".carousel").carousel({
-            	interval:false
-            });
-            
-            $(".submit-btn").click(function(){
-            	var arContent = $("#rContent").val();
-            	var albumNo = ${album.albumNo};
-            	
-    			$.ajax({
-    				url: "addReply.ij",
-    				data : {arContent : arContent, albumNo : albumNo},
-    				type : "post",
-    				success : function(data){
-    					if(data == 'success'){
-    						
-    						// 댓글 작성 부분 초기화
-    						alert("댓글 등록 성공!");
-    						$("#rContent").val("");
-    						getReplyList(albumNo);
-    					}
-    				},
-    				error : function(e){
-    					console.log("Ajax 통신 실패");
-    				}
-    			});
-            });
-            
-    		// 댓글 리스트 조회 함수
-    		function getReplyList(albumNo){
-    			$.ajax({
-    				url : "rList.ij",
-    				data : {albumNo : albumNo},
-    				dataType : "json",
-    				success : function(list){
-    					var $reInfo = $("#re-info");
-    					var $reContent = $("#re-content");
-    					
-    					/* $("#rCount").text("댓글("+ list.length +")"); */
-    					
-    					var $arWriter;
-    					var $rCreateDate;
-    					var $edit-box = $("<div class='col-md-1'>");
-    					var $edit = $("<img src='resources/images/album/edit.png'>");
-    					var $delete-box = $("<div class='col-md-1'>");
-    					var $delete = $("<img src='resources/images/album/delete.png'>");
-    					var $arContent;
-    					
-    					if(list.length > 0){
-    						// 댓글 목록 출력
-    						// rWriter -> width=100px
-    						// rCreateDate -> width=100px
-    						$.each(list,function(i,v){
-    							$arWriter = $("<div class='col-md-3'>").text(list[i].arWriter);
-    							$arCreateDate = $("<div align='right' class='col-md-7'>").text(list[i].arCreateDate);
-    							$edit-box.append($edit);
-    							$delete-box.append($delete);
-    							$arContent = $("<div class='col-md-12'>").text(list[i].arContent);
-    							if ('${loginUser.id}' == list[i].arWriter){
-    								$arWriter.css("color","red");
-    							}
-    							$reInfo.append($arWriter).append($arCreateDate).append($edit-box).append($delete-box).append("<hr>");
-    							$reContent.append($arContent);
-    							$('.re-list').children('.col-md-12').append($reInfo).append($reContent);
-    						});
-    					}else{ // 댓글이 없는 경우
-    						$tr = $("<tr>");
-    						$rContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-    						$tr.append($rContent);
-    						$tableBody.append($tr);
-    					}
-    					
-    				}
-    			});
-          
-            function goList(){
-            	
-            	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
-            }
-            
-            function goEdit(){
-            	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
-            	
-            }
-            
-            function goDelete(){
-            	if(window.confirm("정말 삭제 하시겠습니까?")){
-            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
-            	}
-            }
-        </script>
                
 </body>
 </html>

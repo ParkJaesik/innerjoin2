@@ -23,6 +23,7 @@
 		<typeAlias type="com.best.innerjoin.album.model.vo.AlbumPhoto" alias="AlbumPhoto"/>
 		<typeAlias type="com.best.innerjoin.album.model.vo.AlbumReply" alias="AlbumReply"/>
 		<typeAlias type="com.best.innerjoin.report.model.vo.Search" alias="Search"/>
+		<typeAlias type="com.best.innerjoin.alarm.model.vo.Alarm" alias="Alarm"/>
 		
 
 	</typeAliases>
@@ -35,6 +36,7 @@
 		<mapper resource="mappers/group-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml"/>
 		<mapper resource="mappers/album-mapper.xml"/>
+		<mapper resource="mappers/alarm-mapper.xml"/>
  	</mappers>
  	
 </configuration>

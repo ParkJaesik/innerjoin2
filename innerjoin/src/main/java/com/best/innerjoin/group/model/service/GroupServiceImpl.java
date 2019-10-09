@@ -124,6 +124,13 @@ public class GroupServiceImpl implements GroupService{
 		return gDao.applyInsertGroup(codeMap);
 	}
 
+	@Override
+	public int insertAlarm(String memberId, String host) {
+		
+		
+		return gDao.insertAlarm(memberId,host);
+	}
+
 	
 	
 }

@@ -34,7 +34,7 @@
 						<div class="row">
 							<div id="album_attach" class="col-md-8">
 								<h2 display="inline-block">앨범이름</h2>
-								<input type="text" class="form-control" name="albumTitle" maxlength="50" required><br>
+								<input type="text" class="form-control" name="albumTitle" maxlength="50" placeholder="title" required><br>
 								<h2 display="inline-block">사진추가</h2>
 								<div class="custom-file">
 									<input id="uploadInputBox" class="custom-file-input"  aria-describedby="inputGroupFileAddon01"  type="file" name="filedata" multiple />	
@@ -159,7 +159,7 @@
                         formData.append('files',files[index]);
                     }  */
                   
-                  if(title.length <= 5){
+                  if(title.length < 1){
                 	  alert('제목을 입력해주세요');
                 	  return false;
                   }
@@ -176,7 +176,7 @@
       
                     formData.append("albumTitle",title);
                     formData.append("groupNo",parseInt('${groupNo}'));
-                    formData.append("memberId",'${memberId}');
+                    formData.append("memberId",'${loginUser.memberId}');
 /* 			        for (var value of formData.get("files")) {
 
                     	  console.log(value);
@@ -237,6 +237,11 @@
                 });
             });
             
+            function goList(){
+            	
+            	location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + ${currentPage};
+            }
+            
             $(function(){
 	            $("#cancel").click(function(){
 	            	 location.href="albumListView.ij?groupNo=${groupNo} + &page=${currentPage}";
@@ -244,6 +249,8 @@
 	            	 console.log('currentPage : +${currentPage}');
 	            });
             });
+            
+            
         </script>
 </body>
 </html>

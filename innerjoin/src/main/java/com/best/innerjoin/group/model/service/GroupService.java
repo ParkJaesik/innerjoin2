@@ -23,4 +23,7 @@ public interface GroupService {
 
 
 
+
+	int insertAlarm(String memberId, String host);
+
 }

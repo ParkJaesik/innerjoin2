@@ -67,7 +67,7 @@
 				 </c:if>
 				<c:set var="groupMemberCode" value = "${groupMemberCode }" scope="session"/>
 				
-				<c:if test="${groupMemberCode eq 3 or groupMemberCode eq 4 or groupMemberCode eq -1}">
+				<c:if test="${groupMemberCode eq 3 or groupMemberCode eq 5 or groupMemberCode eq -1 or groupMemberCode eq 4}">
 				<button type="button" class="btn btn-primary" id="group-btn-join" data-toggle="modal" data-target="#exampleModalCenter">INNER JOIN하기</button>
 				</c:if>
 				
@@ -122,13 +122,27 @@
 	
 	$("#applyGroupBtn").click(function(){
 		var groupMemberCode = "${groupMemberCode }";
-		if(groupMemberCode == 4){
-			$(location).attr('href','insertGroupMember.ij');
-			
-		}else{
-			alert("모임 가입 신청을 이미 하셨습니다.");
-		}
+		var gMemCount = "${group.gMemCount}";
+		var gLimit = "${group.gLimit}";
+		console.log(gMemCount);
+		console.log(gLimit);
 		
+		if(gMemCount != gLimit){
+			if(groupMemberCode == 5){
+				$(location).attr('href','insertGroupMember.ij');
+				var loginUserId = "${loginUser.memberId}";
+				var gName = "${group.gName}";
+				var host =  "${group.gHost}";
+				socket.send("apply"+"," + loginUserId + "," + gName + "," + host );
+				
+				
+			}else{
+				alert("모임 가입 신청을 이미 하셨습니다.");
+			}
+		}else{
+			alert("모임인원이 가득찼습니다.");
+		}
+	
 	});
 </script>
 </body>

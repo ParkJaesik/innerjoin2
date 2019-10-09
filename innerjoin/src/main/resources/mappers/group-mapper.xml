@@ -40,7 +40,12 @@
   	<select id="selectCode" parameterType="map" resultType="_int">
   	
   		SELECT LEVEL_CODE FROM GROUP_MEMBER WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
-  	
   	</select>
+  	
+  	<insert id="applyInsertGroup" parameterType="map">
+  	
+  		INSERT INTO GROUP_MEMBER VALUES(#{memberId},#{gNo},4,DEFAULT)
+  	
+  	</insert>
 </mapper>
 

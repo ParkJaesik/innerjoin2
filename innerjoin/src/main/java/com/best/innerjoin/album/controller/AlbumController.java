@@ -157,7 +157,7 @@ public class AlbumController {
 	
 	// 댓글 등록
 	@ResponseBody
-	@RequestMapping("addReply.ij")
+	@RequestMapping(value="addReply.ij", method=RequestMethod.POST)
 	public String addReply(AlbumReply aReply, HttpSession session) {
 		
 		// 댓글 작성자 정보(ID) 저장
