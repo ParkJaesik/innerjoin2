@@ -37,10 +37,16 @@ public class ReportServiceImpl implements ReportService{
 		return rDao.searchBList(search);
 	}
 
-//	@Override
-//	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	// 신고 게시글 작성
+	@Override
+	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
+
+		report.setrContent(report.getrContent().replace("\n", "<br>"));
+		
+		int result = rDao.insertReport(report);
+		
+		return result;
+
+	}
 
 }

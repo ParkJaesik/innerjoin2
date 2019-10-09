@@ -61,5 +61,12 @@
 	
 	
 	
+	<!-- 신고글 작성 -->
+	<insert id="insertReport">
+		INSERT INTO REPORT VALUES(#{rContent}, #{rCategory}, #{reportId}, #{responId}, SYSDATE)
+	</insert>
+	
+	
+	
 
 </mapper>

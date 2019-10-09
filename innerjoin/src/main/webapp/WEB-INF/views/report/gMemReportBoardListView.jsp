@@ -142,7 +142,7 @@ h3 {
             <div class="div2">
                 <table align="center">
                     <tr>
-                        <th align="center" id="report-th- no">no</th>
+                        <!-- <th align="center" id="report-th- no">no</th> -->
                         <th align="center" id="report-th">신고자</th>
                         <th align="center" id="respond-th">신고받은 사람</th>
                         <th align="center" id="report-th-content">신고내용</th>
@@ -151,7 +151,7 @@ h3 {
                     
                     <c:forEach var="r" items="${blist }">
 	                    <tr>
-	                        <td align="center" id="report-td-no">${r.rNo }</td>
+	                        <%-- <td align="center" id="report-td-no">${r.rNo }</td> --%>
 	                        <td align="center" id="report-td">${r.reportId }</td>
 	                        <td align="center" id="respond-td">${r.responId }</td>
 	                        <td align="center" id="report-td-content"><a href="#">${r.rCategory }</a></td>

@@ -2,6 +2,8 @@ package com.best.innerjoin.report.model.dao;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class ReportDao {
 	public int getListCount() {
 		return sqlSession.selectOne("reportMapper.getListCount");
 	}
+	
 
 	/** 모임 회원 신고 게시글 목록 조회 DAO
 	 * 
@@ -45,6 +48,16 @@ public class ReportDao {
 	 */
 	public ArrayList<GroupMemberReport> searchBList(Search search) {
 		return (ArrayList)sqlSession.selectList("reportMapper.searchbList", search);
+	}
+
+	
+	/** 모임 회원 신고글 작성
+	 * @param report
+	 * @return
+	 */
+	public int insertReport(GroupMemberReport report) {
+
+		return sqlSession.insert("reportMapper.insertReport", report);
 	}
 
 
