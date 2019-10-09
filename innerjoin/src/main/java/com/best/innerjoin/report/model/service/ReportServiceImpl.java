@@ -37,4 +37,10 @@ public class ReportServiceImpl implements ReportService{
 		return rDao.searchBList(search);
 	}
 
+//	@Override
+//	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+
 }

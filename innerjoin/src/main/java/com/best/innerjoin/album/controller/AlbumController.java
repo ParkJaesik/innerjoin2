@@ -4,20 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.best.innerjoin.album.model.service.AlbumService;
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
+import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
+import com.best.innerjoin.member.model.vo.Member;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class AlbumController {
@@ -67,7 +74,7 @@ public class AlbumController {
 	    int result = aService.insertAlbum(request,files,album);
 	    
 	    
-		return 1;
+		return result;
 	}
 	
 	/** 앨범 리스트 이동 컨트롤러
@@ -135,10 +142,48 @@ public class AlbumController {
 	}
 	
 	@RequestMapping("deleteAlbum.ij")
-	public String deleteAlbum(int albumNo, int groupNo, ModelAndView mv) {
+	public String deleteAlbum(int albumNo, int groupNo,RedirectAttributes redirect,Model model) {
 		int result = aService.deleteAlbum(albumNo);
+		String path = null;
+		if(result > 0) {
+			redirect.addAttribute("msg", "앨범 삭제 성공!").addAttribute("groupNo", groupNo);
+			path = "redirect:albumListView.ij";
+		}else {
+			model.addAttribute("msg", "앨범 삭제 실패");
+			path = "common/errorPage";
+		}
+		return path;
+	}
+	
+	// 댓글 등록
+	@ResponseBody
+	@RequestMapping(value="addReply.ij", method=RequestMethod.POST)
+	public String addReply(AlbumReply aReply, HttpSession session) {
 		
-		return null;
+		// 댓글 작성자 정보(ID) 저장
+		// String rWriter = ((Member)session.getAttribute("loginUser")).getId();
+		aReply.setArWriter(((Member)session.getAttribute("loginUser")).getMemberId());
+		
+		int result = aService.insertReply(aReply);
+		
+		if(result > 0) {
+			/* aService.updateRcount(reply.getRefBid()); */
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	// 댓글 목록 출력	
+	@ResponseBody
+	@RequestMapping(value="rList.ij", produces="application/json; charset=utf-8")
+	public String getReplyList(int albumNo){
+		
+		ArrayList<AlbumReply> list = aService.selectReply(albumNo);
+		
+		// gson 생성시 형식 지정
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		return gson.toJson(list);
 	}
 	
 }

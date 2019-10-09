@@ -49,12 +49,15 @@
 								<!-- <h4>회원가입</h4> -->
 									<div class="input-group input-group-icon">
 										<input type="text" placeholder="Email Adress" name="memberId"/>
-										<span aling="center">출력메세지</span>
+										<br>
+										<!-- <span aling="center">출력메세지</span> -->
 									</div>
 									<div>
 										<div class="input-group input-group-icon">
 											<input type="password" placeholder="Password" name="memberPwd"/>
-											<span aling="center">출력메세지</span>
+											<c:if test="${ !empty msg }">
+											<span  aling="center" style="color: #df5849;">${ msg }</span>
+											</c:if>
 										</div>
 									</div>
 									

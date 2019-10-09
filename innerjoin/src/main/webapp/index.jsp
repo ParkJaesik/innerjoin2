@@ -37,7 +37,8 @@
 							<c:param name="groupNo" value="1" />
 						</c:url>
                         <a href="${goAlbum}">앨범</a>
-
+        
+       
                         
                         <c:if test="${ !empty sessionScope.loginUser }">
                         	<a href="calendar.ij">임시모임일정</a>
@@ -51,6 +52,8 @@
                   	<a href="${insertGroup }">모임 만들기</a>
                   
 				  <a href="goGroupPage.ij?gNo=8">식샤를합시다 모임페이지로 이동</a>
+				  <br>
+				  <a href="googleLogin.ij">구글</a>
 
 			</div>
 			<div class="col-md-1 aside">

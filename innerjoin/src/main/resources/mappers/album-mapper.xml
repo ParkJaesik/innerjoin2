@@ -21,6 +21,17 @@
 		<result property="photoRename" column="PHOTO_RENAME"/>
 		<result property="albumNo" column="ALBUM_NO"/>
 	</resultMap>
+
+	<resultMap id="replyResultSet" type="AlbumReply">
+		<id property="arNo" column="AR_NO"/>
+		<result property="arContent" column="AR_CONTENT"/>
+		<result property="arCreateDate" column="AR_CREATE_DATE"/>
+		<result property="arModifyDate" column="AR_MODIFY_DATE"/>
+		<result property="arStatus" column="AR_STATUS"/>
+		<result property="albumNo" column="ALBUM_NO"/>
+		<result property="arWriter" column="AR_WRITER"/>
+		<result property="groupNo" column="GROUP_NO"/>
+	</resultMap>
 	
 	<insert id="insertAlbum" parameterType="Album">
 		INSERT INTO ALBUM
@@ -42,7 +53,7 @@
 	<select id="selectAlbumList" parameterType="String" resultMap="albumResultSet">
 		SELECT *
 		FROM ALBUM
-		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y'
+		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y' ORDER BY DESC
 	</select>
 	
 	<select id="selectAlbum" parameterType="_int" resultMap="albumResultSet">
@@ -57,7 +68,21 @@
 		WHERE ALBUM_NO = #{albumNo}
 	</select>
 	
-<!-- 	<update id="deleteAlbum" parameterType="_int">
-		
-	</update> -->
+	<update id="deleteAlbum" parameterType="_int">
+		UPDATE ALBUM
+		SET ALBUM_STATUS = 'N'
+		WHERE ALBUM_NO = #{albumNo}
+	</update>
+	
+ 	<insert id="insertReply">
+		INSERT INTO ALBUM_REPLY
+		VALUES(SEQ_ARNO.NEXTVAL,#{arContent},DEFAULT, DEFAULT, DEFAULT,#{albumNo}, #{arWriter},#{groupNo})
+	</insert>
+	
+	<select id="selectReply" parameterType="_int" resultMap="replyResultSet">
+		SELECT *
+		FROM ALBUM_REPLY
+		WHERE ALBUM_NO = #{albumNo}
+		AND AR_STATUS = 'Y'
+	</select>
 </mapper>

@@ -26,7 +26,10 @@ public class AdminController {
 		return "admin/manageMember";
 	}
 	
-	
+	@RequestMapping("googleLogin.ij")
+	public String googleLogin() {
+		return "member/loginTest";
+	}
 
 
 }

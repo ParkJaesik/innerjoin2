@@ -110,19 +110,24 @@
 	width: 100%;
 }
 
-.re-info{
+#re-info{
 	font-weight:500;
 	margin:auto;
 }
 
-.re-info img{
+#re-info img{
 	max-width:40%;
 	max-height:40%;
 	cursor:pointer;
 }
-.re-content textarea{
+#re-content textarea{
 	border:none;
+	user-select:none;
+}
+
+#re-content{
 	
+	word-break:break-all;
 }
 
 /* 

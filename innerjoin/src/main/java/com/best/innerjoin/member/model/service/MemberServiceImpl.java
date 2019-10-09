@@ -99,12 +99,26 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
-	// 내 모임 목록
+	// 마이페이지 -내 모임 목록
 	@Override
 	public ArrayList<Member> selectList(Member logingUser) {
 		System.out.println("서비스" + logingUser);
 		int groupCount = mDao.groupCount(logingUser);
 		return mDao.selectList(logingUser);
+	}
+	
+	// 마이페이지 - 초대 목록
+	@Override
+	public ArrayList<Member> selectInvList(Member loginUser) {
+		/* int invCount = mDao.invCount(loginUser); */
+		return mDao.selectInvList(loginUser);
+	}
+	
+	// 마이페이지 - 신청목록
+	@Override
+	public ArrayList<Member> selectWaitList(Member loginUser) {
+
+		return mDao.selectWaitList(loginUser);
 	}
 
 	// 탈퇴하기
@@ -113,7 +127,25 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mDao.deletMember(loginUser);
 	}
+
+	// 비밀번호 확인
+	@Override
+	public int checkPwd(String loginUserPwd, String memberPwd) {
+		System.out.println("user" + loginUserPwd);
+		System.out.println("입력" + memberPwd);
+		int result = 0;
+		if( memberPwd == loginUserPwd) {
+			result = 1;
+		}else {
+			result = 0;
+		}
+		return result;
+	}
+
 	
+
+	
+
 	
 	
 

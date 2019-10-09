@@ -20,41 +20,79 @@ public class MemberDao {
 //		return sqlSession.selectOne("memberMapper.loginMember",member);
 //	}
 	
+	/** 로그인
+	 * @param member
+	 * @return loginUser
+	 */
 	public Member loginMember(Member member) {
 		Member loginUser = sqlSession.selectOne("memberMapper.loginMember",member);
 		return loginUser;
 	}
 
 
-	// 회원가입
+	
+	/** 회원가입
+	 * @param member
+	 * @return
+	 */
 	public int insertMember(Member member) {
 		
 		return sqlSession.insert("memberMapper.insertMember",member);
 	}
 
-	// email 중복 체크
+	/** email 중복체크
+	 * @param id
+	 * @return
+	 */
 	public int checkIdDup(String id) {
 		return sqlSession.selectOne("memberMapper.checkIdDup", id);
 	}
 
 	
-	// 닉네임 중복 체크
+	/** 닉네임 중복체크
+	 * @param name
+	 * @return 
+	 */
 	public int checkNameDup(String name) {
 		return sqlSession.selectOne("memberMapper.checkNameDup", name);
 	}
 
 
-	// 내 모임 갯수
+	/** 내 모임 갯수
+	 * @param loginUser
+	 * @return 
+	 */
 	public int groupCount(Member loginUser) {
 		
 		return sqlSession.selectOne("memberMapper.groupCount", loginUser);
 	}
 
-	// 내모임 목록 조회
 	
+	/** 내 모임 목록
+	 * @param loginUser
+	 * @return 
+	 */
 	public ArrayList<Member> selectList(Member loginUser) {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", loginUser);
+	}
+	
+	/** 초대받은 모임 목록
+	 * @param loginUser
+	 * @return
+	 */
+	public ArrayList<Member> selectInvList(Member loginUser) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectInvList", loginUser);
+	}
+	
+	/** 신청 목록 
+	 * @param loginUser
+	 * @return 
+	 */
+	public ArrayList<Member> selectWaitList(Member loginUser) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectWaitList", loginUser);
 	}
 
 
@@ -67,6 +105,15 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", loginUser);
 
 	}
+
+
+
+	
+
+
+	
+
+
 
 	
 	

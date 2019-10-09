@@ -9,11 +9,20 @@
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<!-- 써머노트 -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <style>
-    div{
+    /* div{
         box-sizing: border-box;
         border: 1px solid black;
-    }
+    } */
 
 
 	.content{
@@ -57,13 +66,14 @@
         cursor: initial;
     }
     
-    #guSel, #detailsel,
+    #guSel{
+    	display: none;
+    }
     
     
 </style>
 </head>
 <body>
-<%@ include file="../group/groupMenubar.jsp" %>
 	<div class="content">
             <div class="content-wrap">
                 <form action="ginsert.ij" method="post" enctype="multipart/form-data">
@@ -74,7 +84,7 @@
                                 <label>모임장</label>
                             </div>
                             <div class="div2">
-                                <input type="text" id="userId" name="userId" readonly value="${loginUser.memberName}">
+                                <input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}">
                             </div>
                         </div>
                         <div class="row">
@@ -82,13 +92,18 @@
                                 <label>모임 카테고리</label>
                             </div>
                             <div class="div2">
-                                <select id="categorysel" name="categorysel">
+                                <select id="categorysel" name="gCategoryCode">
                                     <option value="all">카테고리를 선택하세요.</option>	
-                                    <option value="">친목</option>
-                                    <option value="language">언어</option>
-                                    <option value="">운동</option>
-                                    <option value="it">IT</option>
+                                    <option value="0">학습</option>
+                                    <option value="1">운동</option>
+                                    <option value="2">문화예술</option>
+                                    <option value="3">친목</option>
+                                    <option value="4">봉사</option>
+                                    <option value="5">음식</option>
                                 </select>
+                                
+                            
+                            	    
                             </div>
                         </div>
                         <div class="row">
@@ -96,7 +111,7 @@
                                 <label>모임명</label>
                             </div>
                             <div class="div2">
-                                <input type="text" name="groupName">
+                                <input type="text" name="gName">
                             </div>
                         </div>
                         <div class="row">
@@ -104,39 +119,50 @@
                                 <label>장소</label>
                             </div>
                             <div class="div2">
-                                <select id="citysel" name="citysel">
-                                    <option value="city">시</option>
-                                    <option value="seoul">서울특별시</option>
+                                <select id="citysel" name="localCode">
+                                    <option value="city">도시를 선택해주세요.</option>
+                                    <option value="0">서울특별시</option>
                                 </select>
-                                <select id="guSel" name="guSel">
-                                    <option value="">구</option>
-                                    <option value="">강남구</option>
-                                    <option value="">강동구</option>
-                                    <option value="">강북구</option>
-                                    <option value="">강서구</option>
-                                    <option value="">관악구</option>
-                                    <option value="">광진구</option>
-                                    <option value="">구로구</option>
-                                    <option value="">금천구</option>
-                                    <option value="">노원구</option>
-                                    <option value="">도봉구</option>
-                                    <option value="">동대문구</option>
-                                    <option value="">동작구</option>
-                                    <option value="">마포구</option>
-                                    <option value="">서대문구구</option>
-                                    <option value="">서초구</option>
-                                    <option value="">성동구</option>
-                                    <option value="">성북구</option>
-                                    <option value="">송파구</option>
-                                    <option value="">양천구</option>
-                                    <option value="">영등포구</option>
-                                    <option value="">용산구</option>
-                                    <option value="">은평구</option>
-                                    <option value="">종로구</option>
-                                    <option value="">중구</option>
-                                    <option value="">중랑구</option>
+                                <select id="guSel" name="districtName">
+                                    <option value="gu">구를 선택해주세요.</option>
+                                    <option value="0">도봉구</option>
+                                    <option value="1">강북구</option>
+                                    <option value="2">노원구</option>
+                                    <option value="3">성북구</option>
+                                    <option value="4">은평구</option>
+                                    <option value="5">종로구</option>
+                                    <option value="6">동대문구</option>
+                                    <option value="7">중랑구</option>
+                                    <option value="8">서대문구</option>
+                                    <option value="9">중구</option>
+                                    <option value="10">성동구</option>
+                                    <option value="11">마포구</option>
+                                    <option value="12">용산구</option>
+                                    <option value="13">광진구</option>
+                                    <option value="14">강서구</option>
+                                    <option value="15">영등포구</option>
+                                    <option value="16">동작구</option>
+                                    <option value="17">서초구</option>
+                                    <option value="18">강남구</option>
+                                    <option value="19">송파구</option>
+                                    <option value="20">강동구</option>
+                                    <option value="21">양천구</option>
+                                    <option value="22">구로구</option>
+                                    <option value="23">금천구</option>
+                                    <option value="24">관악구</option>
                                 </select>
-                               
+                          		<script type="text/javascript">
+                          			$("#citysel").on("input", function () {
+                          				var citysel = $("#citysel").val();
+                          				
+                          				if(citysel == 0){
+                          					$("#guSel").show();
+                          				}else{
+                          					$("#guSel").hide();
+                          				}
+										
+									});
+                          		</script>
                             </div>
                         
                         </div>
@@ -145,8 +171,8 @@
                                 <label>공개 여부</label>
                             </div>
                             <div class="div2">
-				                                공개<input type="radio" name="yn">
-				                                비공개<input type="radio" name="yn">
+				                                공개<input type="radio" name="gOpenStatus" value="Y">
+				                                비공개<input type="radio" name="gOpenStatus" value="N">
                             </div>
                         </div>
                         <div class="row">
@@ -154,7 +180,7 @@
                                 <label>최대정원</label>
                             </div>
                             <div class="div2">
-                                <input type="number" max="100">명
+                                <input type="number" max="100" name="gMemCount">명
                             </div>
                         </div>
                     </div>
@@ -164,7 +190,8 @@
                             <div class="div1">
                                 <label>모임 소개</label>
                             </div>
-                            <div class="summernote">
+                            <div class="div2">
+                            	<textarea name="gInfo" id="summernote" value=""></textarea>
                                 
                             </div>
                         </div>
@@ -173,7 +200,7 @@
                                 <label>대표 사진</label>
                             </div>
                             <div class="div2">
-                                <img id="titleImg" style="max-width: 100%">
+                                <img id="gOriginFileName" style="max-width: 100%">
                                 <input type="file" name="uploadFile">
                             </div>
                         </div>
@@ -200,9 +227,15 @@
             });
         });
         
-        $('.summernote').summernote({
-      	  
-   	 	});
+        $(document).ready(function() {
+            $("#summernote").summernote({
+                    height: 300,
+                    minHeight: null,             
+                    maxHeight: null,             
+                    focus: true                  
+			});
+       });
+
     </script>
 </body>
 </html>

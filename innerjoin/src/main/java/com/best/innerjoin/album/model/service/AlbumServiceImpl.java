@@ -16,6 +16,7 @@ import com.best.innerjoin.album.model.dao.AlbumDao;
 import com.best.innerjoin.album.model.exception.AlbumException;
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
+import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
 import com.best.innerjoin.common.PageInfo;
 
@@ -201,5 +202,16 @@ public class AlbumServiceImpl implements AlbumService {
 		@Override
 		public int deleteAlbum(int albumNo) {
 			return aDao.deleteAlbum(albumNo);
+		}
+
+		@Override
+		public int insertReply(AlbumReply aReply) {
+			return aDao.insertReply(aReply);
+		}
+
+		@Override
+		public ArrayList<AlbumReply> selectReply(int albumNo) {
+			// TODO Auto-generated method stub
+			return aDao.selectReply(albumNo);
 		}
 }

@@ -154,5 +154,10 @@ public class EventController {
 		System.out.println("eno : " + eno);
 		return eService.cancelEvent(memberId, eno);
 	}
+	
+	@RequestMapping("memCalendar.ij")
+	public String memCalender() {
+		return "event/memCalendar";
+	}
 
 }
