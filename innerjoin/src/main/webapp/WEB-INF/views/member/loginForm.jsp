@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<c:set var="clientId" value="474309519585-p4jv3ahraoefv61aaou6s7idiruq4rra.apps.googleusercontent.com"/>
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -9,13 +10,101 @@
 -->
 <html>
 	<head>
+	
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	
+		<meta name="google-signin-client_id" content="${clientId }">
+		<meta name="google-signin-scope" content="profile email">
+		
 		<title>login</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+		
 		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+		
 		<link rel="stylesheet" href="${contextPath}/resources/css/main.css"/>
 		<link rel="stylesheet" href="${contextPath}/resources/css/join.css"/>
+		
+		<style type="text/css">
+			#customBtn {
+			  display: inline-block;
+			  margin-top: 15px;
+				background: #4285F4;
+			  color: white;
+			  width: 100%;
+			  height: 50px;
+			  border-radius: 5px;
+			  border: thin solid #4285F4;
+			  box-shadow: 1px 1px 1px grey;
+			  white-space: nowrap;
+			  padding: 0;
+			}
+			#customBtn:hover {
+			  cursor: pointer;
+			}
+			span.label {
+			  font-family: serif;
+			  font-weight: normal;
+			}
+			span.icon {
+			 /*  background: white; */
+			  display: inline-block;
+			  vertical-align: middle;
+			  width: 48px;
+			  height: 48px;
+			  padding: 0;
+			  margin: 0;
+			}
+			span.icon img{
+				width: 100%;
+				height: 100%;
+			}
+			span.buttonText {
+			  display: inline-block;
+			  width: 20rem;
+			  height: 100%;
+			  padding-top: 10px;
+			  padding-left: 9rem;
+			  padding-right: 42px;
+			  font-size: 14px;
+			  font-weight: bold;
+			  /* Use the Roboto font that is loaded in the <head> */
+			  font-family: 'Roboto', sans-serif;
+			  margin: 0 auto;
+			}
+  		</style>
+  		
+  		     
+     		<script>
+			var googleUser = {};
+			var startApp = function() {
+			  gapi.load('auth2', function(){
+			    // Retrieve the singleton for the GoogleAuth library and set up the client.
+			    auth2 = gapi.auth2.init({
+			      client_id: '${clientId }',
+			      cookiepolicy: 'single_host_origin',
+			      // Request scopes in addition to 'profile' and 'email'
+			      scope: 'profile email'
+			    });
+			    attachSignin(document.getElementById('customBtn'));
+			  });
+			};
+
+			function attachSignin(element) {
+			  console.log(element.id);
+			  auth2.attachClickHandler(element, {},
+			      function(googleUser) {
+			        document.getElementById('name').innerText = "Signed in: " +
+			            googleUser.getBasicProfile().getName();
+			      },
+			      function(error) {
+			        alert(JSON.stringify(error, undefined, 2));
+			      }
+			   );
+			}
+		</script>
+
 		
 	</head>
 	<body class="no-sidebar is-preload">
@@ -64,7 +153,25 @@
 								</div>
 								
 								<button id="submit-btn" style="float: right; padding: 15px 20px 15px 20px; width: 100%;"><div class="col-4">로그인</button>
+								<!-- <button id="google-btn" style="float: right; padding: 15px 20px 15px 20px; width: 100%; margin-top: 15px;"><div class="col-4">구글</button>
+								 -->
+								<div id="gSignInWrapper">
+									<div id="customBtn" class="customGPlusSignIn">
+										<span class="icon">
+											<img src='resources/images/btn_google_icon.svg'>
+										</span>
+										<span class="buttonText" >구글로 로그인</span>
+									</div>
+								</div>
+								<div id="name"></div>
+								<script>startApp();</script>
+							
+										
+		 <!--    
+    <div class="g-signin2" data-width="300" data-height="50" data-onsuccess="onSignIn" data-theme="dark"></div> 
+    -->
 								
+							
 							</form>
 							
 							<div>
@@ -77,6 +184,36 @@
 				</section>
 			
 		</div>
+		
+		
+   
+     <script>
+       function onSignIn(googleUser) {
+         // Useful data for your client-side scripts:
+         var profile = googleUser.getBasicProfile();
+         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+         console.log('Full Name: ' + profile.getName());
+         console.log('Given Name: ' + profile.getGivenName());
+         console.log('Family Name: ' + profile.getFamilyName());
+         console.log("Image URL: " + profile.getImageUrl());
+         console.log("Email: " + profile.getEmail());
+
+         // The ID token you need to pass to your backend:
+         var id_token = googleUser.getAuthResponse().id_token;
+         console.log("ID Token: " + id_token);
+       }
+       
+       function signOut() {
+           var auth2 = gapi.auth2.getAuthInstance();
+           auth2.signOut().then(function () {
+              console.log('User signed out.');
+           });
+           auth2.disconnect();
+        } 
+        
+        
+     
+     </script>
 
 		<!-- Scripts -->
 		<script src="${contextPath}/resources/js/jquery.min.js"></script>

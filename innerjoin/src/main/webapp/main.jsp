@@ -121,6 +121,7 @@
                         	<a href="gochat.ij">채팅창</a>
                         
 
+						<button onclick="">로그인</button>
 
                         
                         <button onclick="goAlbum();">앨범</button>
