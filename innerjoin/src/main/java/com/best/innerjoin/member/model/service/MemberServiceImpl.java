@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -125,7 +127,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteMember(Member loginUser) {
 		
-		return mDao.deletMember(loginUser);
+		return mDao.deleteMember(loginUser);
 	}
 
 	// 비밀번호 확인
@@ -140,6 +142,26 @@ public class MemberServiceImpl implements MemberService{
 			result = 0;
 		}
 		return result;
+	}
+
+	// 초대 거절
+	@Override
+	public int deleteInv(Member loginUser, int gNo) {
+		Map gMem = new HashMap<>();
+		
+		gMem.put("memberId", loginUser.getMemberId());
+		gMem.put("gNo", gNo);
+		
+		return mDao.deleteInv(gMem);
+	}
+
+	@Override
+	public int updateInv(Member loginUser, int gNo) {
+		Map gMem = new HashMap<>();
+		
+		gMem.put("memberId", loginUser.getMemberId());
+		gMem.put("gNo", gNo);
+		return mDao.updateInv(gMem);
 	}
 
 	

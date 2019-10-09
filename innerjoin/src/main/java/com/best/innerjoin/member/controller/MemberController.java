@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
 
@@ -130,18 +131,47 @@ public class MemberController {
 		}
 		
 		// 신청 모임 목록
-		if(invList != null) {
-			mv.addObject("invList", invList).setViewName("member/myGroup");
+		if(waitList != null) {
+			mv.addObject("waitList", waitList).setViewName("member/myGroup");
 		} else {
 			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
 		}
 		
 		return mv;
-		
-		
-		
-		
 	}
+	
+	// 모임 초대 거절
+	@RequestMapping("invDeny.ij")
+	public String deleteInv(HttpServletRequest request, int gNo, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+
+		int result = mService.deleteInv(loginUser, gNo);
+		
+				
+		if(result > 0) {
+			return "redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg", "초대 거절  도중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+	
+	// 모임 초대 수락
+	@RequestMapping("invAccept.ij")
+	public String updateInv(HttpServletRequest request, int gNo, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		int result = mService.updateInv(loginUser, gNo);
+			
+		if(result > 0) {
+			return "redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg", "초대 수락 도중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+
 	
 	// 프로필 수정으로 이동
 	@RequestMapping("profileUpdateForm.ij")
