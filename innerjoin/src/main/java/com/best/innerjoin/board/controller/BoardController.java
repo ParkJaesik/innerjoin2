@@ -29,7 +29,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bService;
-	
+	//
 	// 게시판 조회
 	@RequestMapping("blist.ij")
 	public ModelAndView boardList(ModelAndView mv, Integer page, HttpServletRequest request) {

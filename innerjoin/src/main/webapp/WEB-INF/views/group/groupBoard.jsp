@@ -22,7 +22,7 @@
 					<td align="center" id="board-th-date">작성일</td>
 					<td align="center" id="board-th-count">조회수</td>
 				</tr>
-				
+				<!--  -->
 				<c:set var="boardCount" value="${ pi.listCount }"/>
 				<c:set var="limit" value="${ pi.limit }"/>
 				<c:set var="currentPage" value="${ pi.currentPage }"/>
