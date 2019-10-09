@@ -22,7 +22,7 @@
             <div class="div3">
                 <table>
                     <tr>
-                    	
+                    	<th>회원번호</th>
                         <th>아이디</th>
                         <th>신고받은 횟수</th>
                         <th>처리 상태</th>
@@ -37,8 +37,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="div4">
-                
+            <div class="div4">      
                 <div class="div4-1">
                     <select id="searchSel">
                         <option value="all">전체</option>

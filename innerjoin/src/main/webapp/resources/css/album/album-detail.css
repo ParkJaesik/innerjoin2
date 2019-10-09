@@ -53,7 +53,7 @@
 
 .al-photo img {
 	max-width:80%; 
-	max-height:100%; 
+	max-height:500px; 
 	border-radius:10px;
 	display: block;
 	margin: 0px auto;
@@ -152,7 +152,8 @@
 	margin: 10% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	min-width: 80%; /* Could be more or less, depending on screen size */
+	max-width: 95% !important; /* Could be more or less, depending on screen size */
+	height: 70%;
 }
 /* The Close Button */
 .close {

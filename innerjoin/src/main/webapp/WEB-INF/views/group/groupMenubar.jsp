@@ -38,7 +38,7 @@
 	<div id="group-index-container">
 		<div id="group-info-container">
 			<div id="group-thumbnail">
-				<img src="style_5d10844730af1.jpg" alt="" id="thumbnail">
+				<img src="style_5d10844730af1.jpg" alt="" id="thumbnail" name="gOriginFileName">
 			</div>
 
 			<div id="group-info">
@@ -134,6 +134,7 @@
 				var gName = "${group.gName}";
 				var host =  "${group.gHost}";
 				socket.send("apply"+"," + loginUserId + "," + gName + "," + host );
+				
 				
 			}else{
 				alert("모임 가입 신청을 이미 하셨습니다.");

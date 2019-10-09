@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,13 +34,13 @@
 			             <label>신고하는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <input type="text" name="reportId" value="${loginUser.memberName }">
+			             <input type="text" name="reportId" value="${loginUser.memberName }" readonly>
 			         </div>
 			         <div class="div3">
 			             <label>신고 받는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <input type="text" name="responId" value="">
+			             <input type="text" name="responId" value="wotlrdlekt6@naver.com" readonly>
 			         </div>
 			         <div class="div3">
 			             <label>신고 유형</label>

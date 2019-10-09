@@ -180,7 +180,7 @@
                                 <label>최대정원</label>
                             </div>
                             <div class="div2">
-                                <input type="number" max="100" name="gMemCount">명
+                                <input type="number" max="100" name="gLimit">명
                             </div>
                         </div>
                     </div>

@@ -34,21 +34,21 @@ public class GroupServiceImpl implements GroupService{
 		
 		
 		
-		String renameFileName = null;
+		String gRenameFileName = null;
 		
 		if(!!uploadFile.getOriginalFilename().equals("")) {
-			renameFileName = renameFile(uploadFile);
+			gRenameFileName = renameFile(uploadFile);
 			
 			group.setgOriginFileName(uploadFile.getOriginalFilename());
-			group.setgRenameFileName(renameFileName);
+			group.setgRenameFileName(gRenameFileName);
 			
 			
 		}
 		
 		int result = gDao.insertGroup(group);
 		
-		if(renameFileName != null && result ==1) {
-			result = saveFile(renameFileName, uploadFile, request);
+		if(gRenameFileName != null && result ==1) {
+			result = saveFile(gRenameFileName, uploadFile, request);
 		}
 		
 		
@@ -57,7 +57,7 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	// 파일 저장 메소드
-	private int saveFile(String renameFileName, MultipartFile uploadFile, HttpServletRequest request) {
+	private int saveFile(String gRenameFileName, MultipartFile uploadFile, HttpServletRequest request) {
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -69,7 +69,7 @@ public class GroupServiceImpl implements GroupService{
 			folder.mkdir();
 		}
 		
-		String filePath = folder + "\\" +renameFileName;
+		String filePath = folder + "\\" + gRenameFileName;
 		
 		int result = 0;
 		
@@ -91,11 +91,11 @@ public class GroupServiceImpl implements GroupService{
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		
-		String originFileName = file.getOriginalFilename();
+		String gOriginFileName = file.getOriginalFilename();
 		
-		String renameFileName = sdf.format(new Date())+ "." + originFileName.substring(originFileName.lastIndexOf(".")+1);
+		String gRenameFileName = sdf.format(new Date())+ "." + gOriginFileName.substring(gOriginFileName.lastIndexOf(".")+1);
 		
-		return renameFileName;
+		return gOriginFileName;
 	}
 
 	
@@ -127,8 +127,15 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
+
 	public ArrayList<GroupMember> groupMemberList(int groupNo) {
 		return gDao.groupMemberList(groupNo);
+
+	public int insertAlarm(String memberId, String host) {
+		
+		
+		return gDao.insertAlarm(memberId,host);
+
 	}
 
 	

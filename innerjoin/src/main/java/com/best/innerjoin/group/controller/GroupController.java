@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.best.innerjoin.alarm.model.service.AlarmService;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
@@ -25,6 +27,9 @@ public class GroupController {
 	
 	@Autowired
 	private GroupService gService;
+	private AlarmService aService;
+	
+	
 	
 	@RequestMapping("ginsertForm.ij")
 	public String groupInsertForm() {
@@ -32,10 +37,11 @@ public class GroupController {
 		
 	}
 	
-	// 그룹 만들기
+	// 모임 만들기
 	@RequestMapping(value="ginsert.ij", method=RequestMethod.POST)
-	public String groupInsert(Group group, HttpServletRequest request, MultipartFile uploadFile, Model model) {
-		System.out.println(group.getgOpenStatus());
+	public String groupInsert(Group group, HttpServletRequest request, Model model, MultipartFile uploadFile) {
+		
+		
 		
 		int result = gService.insertGroup(group, uploadFile, request);
 
@@ -106,18 +112,27 @@ public class GroupController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		int gNo  = ((Group)request.getSession().getAttribute("group")).getgNo();
 		String memberId = loginUser.getMemberId();
+		String host = ((Group)request.getSession().getAttribute("group")).getgHost();
 		
 		int result = gService.applyInsertGroup(memberId,gNo);
-		String path = null;
+		int result2 = 0;
+		
 		if(result>0) {
 			
-		}else {
+			result2 = gService.insertAlarm(memberId,host);
 			
+			if(result2>0) {
+				return "redirect:goGroupPage.ij?gNo="+gNo;
+			}else {
+				return "common/errorPage";
+			}
+		}else {	
+			return "common/errorPage";
 		}
 		
-		return "redirect:goGroupPage.ij?gNo="+gNo;
 		
 	}
+
 
 	// 그룹 회원 조회
 	@RequestMapping("gmlist.ij")
@@ -135,4 +150,14 @@ public class GroupController {
 		
 		return mv;
 	}
+
+	
+	
+//	// 회원 등급 수정
+//	@RequestMapping("memlevel.ij")
+//	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
+//		
+//		int result = gService.updateMlevel(request, gMember);
+//	}
+
 }
