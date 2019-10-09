@@ -108,4 +108,13 @@ public class AlbumDao {
 		return (ArrayList)sqlSession.selectList("albumMapper.selectReply", albumNo);
 	}
 
+	/** 댓글 삭제 DAO
+	 * @param aReply
+	 * @return
+	 */
+	public int deleteReply(AlbumReply aReply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("albumMapper.deleteReply", aReply);
+	}
+
 }
