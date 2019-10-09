@@ -127,10 +127,11 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-
 	public ArrayList<GroupMember> groupMemberList(int groupNo) {
 		return gDao.groupMemberList(groupNo);
-
+	}
+	
+	@Override
 	public int insertAlarm(String memberId, String host) {
 		
 		

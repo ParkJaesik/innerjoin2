@@ -43,6 +43,7 @@ public class GroupDao {
 
 	public ArrayList<GroupMember> groupMemberList(int groupNo) {
 		return (ArrayList)sqlSession.selectList("groupMapper.groupMemberList", groupNo);
+	}
 
 	public int insertAlarm(String memberId, String host) {
 		Map<String,String> alarmMap = new HashMap<>();
