@@ -135,6 +135,7 @@
 				var host =  "${group.gHost}";
 				socket.send("apply"+"," + loginUserId + "," + gName + "," + host );
 				
+				
 			}else{
 				alert("모임 가입 신청을 이미 하셨습니다.");
 			}

@@ -20,4 +20,7 @@ public interface GroupService {
 
 	int applyInsertGroup(String memberId, int gNo);
 
+
+	int insertAlarm(String memberId, String host);
+
 }
