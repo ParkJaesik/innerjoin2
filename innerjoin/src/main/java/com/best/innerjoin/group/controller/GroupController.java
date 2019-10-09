@@ -75,7 +75,7 @@ public class GroupController {
 			if(memberId != null) {
 				groupMemberCode = gService.selectCode(memberId,gNo);
 				if(groupMemberCode ==null) {
-					groupMemberCode = 4;
+					groupMemberCode = 5;
 					
 				}
 			}
@@ -104,10 +104,14 @@ public class GroupController {
 		String memberId = loginUser.getMemberId();
 		
 		int result = gService.applyInsertGroup(memberId,gNo);
+		String path = null;
+		if(result>0) {
+			
+		}else {
+			
+		}
 		
-		
-		
-		return null;
+		return "redirect:goGroupPage.ij?gNo="+gNo;
 		
 	}
 
