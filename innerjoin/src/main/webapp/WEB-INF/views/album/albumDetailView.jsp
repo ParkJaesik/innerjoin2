@@ -9,14 +9,11 @@
 <title>Insert title here</title>
 	<!-- <link rel="stylesheet" href="resources/css/album/album-detail.css"/> -->
 	<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-</head>
-<body>
-<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
-        <script type="text/javascript">
+	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	
+	        <script type="text/javascript">
         // Get the modal
         
-        $(function(){
         	
             var modal = document.getElementById('myModal');
             
@@ -52,85 +49,7 @@
             }); */
             
         	
-        	
-        	
-        	
-        	
-        	
-            $("#submit-btn").click(function(){
-            	var arContent = $("#rContent").val();
-            	var albumNo = ${album.albumNo};
-            	var groupNo = ${album.groupNo}
-            	alert(arContent + ", "+ albumNo + ", " + groupNo);
-    			$.ajax({
-    				url: "addReply.ij",
-    				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo},
-    				type : "post",
-    				success : function(data){
-    					if(data == 'success'){
-    						
-    						// 댓글 작성 부분 초기화
-    						alert("댓글 등록 성공!");
-    						$("#rContent").val("");
-    						getReplyList(albumNo);
-    					}
-    				},
-    				error : function(e){
-    					console.log("Ajax 통신 실패");
-    				}
-    			});
-            });
-            
-    		// 댓글 리스트 조회 함수
-    		function getReplyList(albumNo){
-    			$.ajax({
-    				url : "rList.ij",
-    				data : {albumNo : albumNo},
-    				dataType : "json",
-    				success : function(list){
-    					var $reInfo = $("#re-info");
-    					var $reContent = $("#re-content");
-    					
-    					/* $("#rCount").text("댓글("+ list.length +")"); */
-    					
-    					var $arWriter;
-    					var $rCreateDate;
-    					var $editBox = $("<div class=\"col-md-1\">");
-    					var $edit = $("<img src=\"resources/images/album/edit.png\">");
-    					var $deleteBox = $("<div class=\"col-md-1\">");
-    					var $delete = $("<img src=\"resources/images/album/delete.png\">");
-    					var $arContent;
-    					
-    					if(list.length > 0){
-    						// 댓글 목록 출력
-    						// rWriter -> width=100px
-    						// rCreateDate -> width=100px
-    						$.each(list,function(i,v){
-    							$arWriter = $("<div class=\"col-md-3\">").text(list[i].arWriter);
-    							$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
-    							$editBox.append($edit);
-    							$deleteBox.append($delete);
-    							$arContent = $("<div class=\"col-md-12\">").text(list[i].arContent);
-    							if ('${loginUser.memberId}' == list[i].arWriter){
-    								$arWriter.css("color","red");
-    							}
-    							$reInfo.append($arWriter).append($arCreateDate).append($editBox).append($deleteBox).append("<hr>");
-    							$reContent.append($arContent);
-    							$('.re-list').children('.col-md-12').append($reInfo).append($reContent);
-    						});
-    					}else{ // 댓글이 없는 경우
-    						$tr = $("<tr>");
-    						$rContent = $("<td colspan=\"3\">").text("등록된 댓글이 없습니다.");
-    						$tr.append($rContent);
-    						$tableBody.append($tr);
-    					}
-    					
-    				}
-    			});
-    		}
-    		
-    		
-    		  
+        
             function goList(){
             	
             	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
@@ -147,14 +66,86 @@
             	}
             }
             
-    		
-    		
-        });
-        
-
-           
+  
+            $(function(){
+                $("#submit-btn").click(function(){
+                	var arContent = $("#rContent").val();
+                	var albumNo = ${album.albumNo};
+                	var groupNo = ${album.groupNo}
+                	alert(arContent + ", "+ albumNo + ", " + groupNo);
+        			$.ajax({
+        				url: "addReply.ij",
+        				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo},
+        				type : "post",
+        				success : function(data){
+        					if(data == 'success'){
+        						
+        						// 댓글 작성 부분 초기화
+        						alert("댓글 등록 성공!");
+        						$("#rContent").val("");
+        						getReplyList(albumNo);
+        					}
+        				},
+        				error : function(e){
+        					console.log("Ajax 통신 실패");
+        				}
+        			});
+                });
+                
+        		// 댓글 리스트 조회 함수
+        		function getReplyList(albumNo){
+        			$.ajax({
+        				url : "rList.ij",
+        				data : {albumNo : albumNo},
+        				dataType : "json",
+        				success : function(list){
+        					var $reInfo = $("#re-info");
+        					var $reContent = $("#re-content");
+        					
+        					/* $("#rCount").text("댓글("+ list.length +")"); */
+        					
+        					var $arWriter;
+        					var $rCreateDate;
+        					var $editBox = $("<div class=\"col-md-1\">");
+        					var $edit = $("<img src=\"resources/images/album/edit.png\">");
+        					var $deleteBox = $("<div class=\"col-md-1\">");
+        					var $delete = $("<img src=\"resources/images/album/delete.png\">");
+        					var $arContent;
+        					
+        					if(list.length > 0){
+        						// 댓글 목록 출력
+        						// rWriter -> width=100px
+        						// rCreateDate -> width=100px
+        						$.each(list,function(i,v){
+        							$arWriter = $("<div class=\"col-md-3\">").text(list[i].arWriter);
+        							$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
+        							$editBox.append($edit);
+        							$deleteBox.append($delete);
+        							$arContent = $("<div class=\"col-md-12\">").text(list[i].arContent);
+        							if ('${loginUser.memberId}' == list[i].arWriter){
+        								$arWriter.css("color","red");
+        							}
+        							$reInfo.append($arWriter).append($arCreateDate).append($editBox).append($deleteBox).append("<hr>");
+        							$reContent.append($arContent);
+        							$('.re-list').children('.col-md-12').append($reInfo).append($reContent);
+        						});
+        					}else{ // 댓글이 없는 경우
+        						$tr = $("<tr>");
+        						$rContent = $("<td colspan=\"3\">").text("등록된 댓글이 없습니다.");
+        						$tr.append($rContent);
+        						$tableBody.append($tr);
+        					}
+        					
+        				}
+        			});
+        		}
+            });
  
         </script>
+</head>
+<body>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
+
 
 
         <div class="container-fluid al-wrapper">
