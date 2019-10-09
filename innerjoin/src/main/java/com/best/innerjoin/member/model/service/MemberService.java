@@ -52,6 +52,21 @@ public interface MemberService {
 	 * @return result
 	 */
 	public abstract int deleteMember(Member loginUser);
+	
+	
+	/** 초대 거절
+	 * @param loginUser
+	 * @param gNo
+	 * @return result
+	 */
+	public abstract int deleteInv(Member loginUser, int gNo);
+
+	/** 초대 수락
+	 * @param loginUser
+	 * @param gNo
+	 * @return
+	 */
+	public abstract int updateInv(Member loginUser, int gNo);
 
 	
 	

@@ -51,29 +51,30 @@
 			                </div>
 			                <div class="row">
 			                	<c:forEach var="myGroup" items="${list}" varStatus="status"> 
-			                		<div class="col-md-4">
-					                	<br>
-								        <div class="basic-padding">
-								            <div class="image-hover">
-								              	<img src="resources/images/sky_min.jpeg" class="img-responsive"> <!-- 그룹 썸네일 이미지 -->
+			                	<div class="col-md-4">
+					                <br>
+								    <div class="basic-padding">
+								    	<div class="image-hover">
+								    		${ myGroup.gOriginFileName }
+								    		<!-- <img src="resources/images/sky_min.jpeg" class="img-responsive"/> --> <!-- 그룹 썸네일 이미지 -->
 								            <div class="overlay">
 								                <h2>${ myGroup.gName }</h2>
-								                <c:if test="${ !empty loginUser }">
-								                	<c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
-										                <c:param name="gNo" value="${ myGroup.gNo }"/>
-										            </c:url>
-								                	<a href="" class="btn-hover">Show More</a>
-								                </c:if>
+									            <c:if test="${ !empty loginUser }">
+									            <c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
+											    <c:param name="gNo" value="${ myGroup.gNo }"/>
+											    </c:url>
+									            <a href="" class="btn-hover">Show More</a>
+									            </c:if>
 								            </div>
 										</div>
-								       </div>
-									</div>
-									<c:if test="${ status.index }%3 == 2">
-										<div class="row">
-									</c:if>
-									<c:if test="${ status.last }">
-										</div>
-									</c:if>
+								     </div>
+								</div>
+								<c:if test="${ status.index }%3 == 2"> 
+								<div class="row">
+								</c:if>
+								<c:if test="${ status.last }">
+								</div>
+								</c:if>
 								</c:forEach>
 						      	
 				      	</div>
@@ -84,19 +85,37 @@
 			            	<div class="mgTitle">
 				           		<h3>초대받은 모임</h3>
 			                </div>
+			                <c:forEach var="invite" items="${ invList }" varStatus="status">
 			                <br>
+			                <c:choose>
+			                <c:when test="${ !status.last }">
 			                <div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
-			                	<div class="col-4" style="width: 100%;"><img src=""></div>
+			                </c:when>
+			                <c:when test="${ status.last }">
+			                <div class="row invite">
+			                </c:when>
+			                </c:choose>
+			                	<div class="col-4" style="width: 100%;">${ invite.gOriginFileName }</div>
+			                	<c:if test="${ !empty loginUser }">
 			                	<div class="col-8">
-			                		<h5>초대받은  모임 이름</h5>
+			                	<c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
+			                	<c:param name="gNo" value="${ invite.gNo }"/>
+			                	</c:url>
+			                		<h5>${ invite.gName }</h5>
 			                		<br>
-			                		<p>초대한 모임의 어필</p>
-			                		<a class="btn cancel">거절</a>
-			                		<a class="btn">수락</a>
+			                		<p>${ invite.gInfo }</p>
+			                		<c:url var="invDeny" value="invDeny.ij">
+			                		<c:param name="gNo" value="${ invite.gNo }"/>
+			                		</c:url>
+			                		<c:url var="invAccept" value="invAccept.ij">
+			                		<c:param name="gNo" value="${ invite.gNo }"/>
+			                		</c:url>
+			                		<a href="${ invDeny }" class="btn cancel">거절</a>
+			                		<a href="${ invAccept }" class="btn">수락</a>
 			                	</div>
+			                	</c:if>
 			           		</div>
-			           		
-			                
+			           		</c:forEach>
 			            </div>
 			        </section>
 			        
@@ -106,28 +125,37 @@
 			            	<div class="mgTitle">
 				           		<h3>가입대기 모임</h3>
 			                </div>
+			                <c:forEach var="wait" items="${ waitList }" varStatus="status">
 			                <br>
+			                <c:choose>
+			                <c:when test="${ !status.last }">
 			                <div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
-			                	<div class="col-4" style="width: 100%;"><img src=""></div>
+			                </c:when>
+			                <c:when test="${ status.last }">
+			                <div class="row invite">
+			                </c:when>
+			                </c:choose>
+			                	<div class="col-4" style="width: 100%;">${ invite.gOriginFileName }</div>
+			                	<c:if test="${ !empty loginUser }">
 			                	<div class="col-8">
-			                		<h5>가입대기  모임 이름</h5>
+			                	<c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
+			                	<c:param name="gNo" value="${ wait.gNo }"/>
+			                	</c:url>
+			                		<h5>${ wait.gName }</h5>
 			                		<br>
-			                		<p>초대한 모임의 어필</p>
-			                		<a class="btn cancel">신청 취소</a>
-			                		
+			                		<p>${ wait.gInfo }</p>
+			                		<a href="waitCancel.ij " class="btn cancel">신청 취소</a>
 			                	</div>
+			                	</c:if>
 			           		</div>
-			           		
-			                
+			               </c:forEach>
 			            </div>
 			        </section>
-
-			</div>
-			<div class="col-md-1 aside">
-				
+				</div>
+				<div class="col-md-1 aside"></div>
 			</div>
 		</div>
-	</div>
+	<div class="margin" style="margin: 50px;"></div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</body>
