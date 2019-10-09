@@ -85,4 +85,11 @@
 		WHERE ALBUM_NO = #{albumNo}
 		AND AR_STATUS = 'Y'
 	</select>
+	
+	<update id="deleteReply" parameterType="AlbumReply">
+		UPDATE ALBUM_REPLY
+		SET AR_STATUS = 'N'
+		WHERE ALBUM_NO = #{albumNo} 
+		AND AR_NO = #{arNo}
+	</update>
 </mapper>

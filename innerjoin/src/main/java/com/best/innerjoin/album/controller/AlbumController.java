@@ -182,8 +182,23 @@ public class AlbumController {
 		ArrayList<AlbumReply> list = aService.selectReply(albumNo);
 		
 		// gson 생성시 형식 지정
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd', 'HH:mm:ss").create();
 		return gson.toJson(list);
+	}
+
+	// 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value="deleteReply.ij", produces="application/json; charset=utf-8")
+	public String deleteReply(AlbumReply aReply){
+		
+		int result = aService.deleteReply(aReply);
+		
+		if(result > 0) {
+			/* aService.updateRcount(reply.getRefBid()); */
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 }
