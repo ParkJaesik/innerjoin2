@@ -1,10 +1,13 @@
 package com.best.innerjoin.group.model.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 
 public interface GroupService {
 
@@ -19,5 +22,12 @@ public interface GroupService {
 
 
 	int applyInsertGroup(String memberId, int gNo);
+
+
+	/** 그룹 회원 목록 조회 Service
+	 * @param groupNo
+	 * @return list
+	 */
+	ArrayList<GroupMember> groupMemberList(int groupNo);
 
 }

@@ -19,6 +19,14 @@
 		<result property="districtName" column="DISTRICT_NAME"/>
 	</resultMap>
 	
+	<resultMap type="GroupMember" id="groupMemberResultSet">
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="levelCode" column="LEVEL_CODE"/>
+		<result property="groupMemReptCount" column="GROUP_MEM_REPT_COUNT"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+	</resultMap>
+	
 	<!-- 모임 등록 쿼리 -->
 	<insert id="insertGroup" parameterType="Group">
 		INSERT INTO "GROUP" VALUES(SEQ_GNO.NEXTVAL, #{gHost}, #{gOpenStatus}, 
@@ -47,5 +55,12 @@
   		INSERT INTO GROUP_MEMBER VALUES(#{memberId},#{gNo},4,DEFAULT)
   	
   	</insert>
+  	
+	<!-- 그룹 회원 목록 조회 쿼리 -->
+	<select id="groupMemberList" parameterType="_int" resultMap="groupMemberResultSet">
+		SELECT MEMBER_ID, GROUP_NO, LEVEL_CODE, GROUP_MEM_REPT_COUNT, MEMBER_NAME
+		FROM GROUP_MEMBER JOIN MEMBER USING(MEMBER_ID)
+		WHERE GROUP_NO = #{groupNo}
+	</select>  	
 </mapper>
 
