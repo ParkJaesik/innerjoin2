@@ -220,5 +220,11 @@ public class AlbumServiceImpl implements AlbumService {
 			// TODO Auto-generated method stub
 			return aDao.deleteReply(aReply);
 		}
+
+		@Override
+		public int updateReply(AlbumReply aReply) {
+			// TODO Auto-generated method stub
+			return aDao.updateReply(aReply);
+		}
 		
 }

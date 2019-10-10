@@ -92,4 +92,12 @@
 		WHERE ALBUM_NO = #{albumNo} 
 		AND AR_NO = #{arNo}
 	</update>
+
+	<update id="updateReply" parameterType="AlbumReply">
+		UPDATE ALBUM_REPLY
+		SET AR_CONTENT = #{arContent},
+		AR_MODIFY_DATE = SYSDATE
+		WHERE ALBUM_NO = #{albumNo} 
+		AND AR_NO = #{arNo}
+	</update>
 </mapper>

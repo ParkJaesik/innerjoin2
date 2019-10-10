@@ -204,5 +204,20 @@ public class AlbumController {
 			return "fail";
 		}
 	}
+
+	// 댓글 수정
+	@ResponseBody
+	@RequestMapping("updateReply.ij")
+	public String updateReply(AlbumReply aReply){
+		
+		int result = aService.updateReply(aReply);
+		
+		if(result > 0) {
+			/* aService.updateRcount(reply.getRefBid()); */
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 }
