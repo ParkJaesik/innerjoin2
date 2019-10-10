@@ -27,9 +27,11 @@
 			<div id="right-content">
 				<div id="group-main-event-container">
 					<h1>예정된 이벤트</h1>
+					<c:forEach var="e" items="${ event }">
 						<div id="group-main-event">
-							<span style="font-weight:bold">ㅎㅎㅎ</span>
+							<span style="font-weight:bold">${ e.eTitle }</span>
 						</div><br>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
