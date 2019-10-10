@@ -83,12 +83,20 @@
 		SELECT *
 		FROM ALBUM_REPLY
 		WHERE ALBUM_NO = #{albumNo}
-		AND AR_STATUS = 'Y'
+		AND AR_STATUS = 'Y' ORDER BY 1 DESC
 	</select>
 	
 	<update id="deleteReply" parameterType="AlbumReply">
 		UPDATE ALBUM_REPLY
 		SET AR_STATUS = 'N'
+		WHERE ALBUM_NO = #{albumNo} 
+		AND AR_NO = #{arNo}
+	</update>
+
+	<update id="updateReply" parameterType="AlbumReply">
+		UPDATE ALBUM_REPLY
+		SET AR_CONTENT = #{arContent},
+		AR_MODIFY_DATE = SYSDATE
 		WHERE ALBUM_NO = #{albumNo} 
 		AND AR_NO = #{arNo}
 	</update>

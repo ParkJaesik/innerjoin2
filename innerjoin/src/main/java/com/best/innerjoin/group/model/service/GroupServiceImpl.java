@@ -85,6 +85,11 @@ public class GroupServiceImpl implements GroupService{
 		
 		int result = gDao.updateLevel(gMember);
 		return 0;
+
+	@Override
+	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
+		return gDao.waitingGroupMemberList(groupNo);
+
 	}
 
 	

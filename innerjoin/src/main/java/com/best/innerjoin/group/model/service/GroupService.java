@@ -30,10 +30,25 @@ public interface GroupService {
 	public abstract int insertAlarm(String memberId, String host);
 
 
+
 	public abstract ArrayList<GroupMember> groupMemberList(int groupNo);
 
 	//  회원 등급 조정
 	public abstract int updateLevel(HttpServletRequest request, GroupMember gMember);
+
+	/** 그룹 회원 목록 조회 Service
+	 * @param groupNo
+	 * @return list
+	 */
+	ArrayList<GroupMember> groupMemberList(int groupNo);
+
+
+
+	/** 그룹 대기 회원 목록 조회 Service
+	 * @param groupNo
+	 * @return list
+	 */
+	ArrayList<GroupMember> waitingGroupMemberList(int groupNo);
 
 }
 
