@@ -20,6 +20,22 @@
 	<script type="text/javascript">
         // Get the modal
         
+/*             function goList(){
+            	
+            	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
+            } */
+            
+            var goEdit = function goEdit(){
+            	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
+            	
+            }
+            
+            var goDelete = function goDelete(){
+            	if(window.confirm("정말 삭제 하시겠습니까?")){
+            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
+            	}
+            }
+        
         	$(function(){
             var modal = document.getElementById('myModal');
             
@@ -57,73 +73,13 @@
             
         	
         
-            function goList(){
-            	
-            	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
-            }
-            
-            function goEdit(){
-            	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
-            	
-            }
-            
-            function goDelete(){
-            	if(window.confirm("정말 삭제 하시겠습니까?")){
-            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
-            	}
-            }
+
             
   
             $(function(){
-            	getReplyList(${album.albumNo});
+            	getReplyList('${album.albumNo}');
             	
-            	
-            	$(".delete").click(function(){
-                	var albumNo = ${album.albumNo};
-                	var albumNo = ${album.albumNo};
-                	var arNo = ${album.arNo}
-                	alert(albumNo + ", " + groupNo);
-        			$.ajax({
-        				url: "deleteReply.ij",
-        				data : {albumNo : albumNo,groupNo : groupNo,arNo:arNo},
-        				type : "post",
-        				success : function(data){
-        					if(data == 'success'){
-        						
-        						// 댓글 작성 부분 초기화
-        						alert("댓글 삭제 성공!");
-        						getReplyList(albumNo);
-        					}
-        				},
-        				error : function(e){
-        					console.log("Ajax 통신 실패");
-        				}
-        			});
-            	});
-            	
-                $("#submit-btn").click(function(){
-                	var arContent = $("#rContent").val();
-                	var albumNo = ${album.albumNo};
-                	var groupNo = ${album.groupNo}
-                	alert(arContent + ", "+ albumNo + ", " + groupNo);
-        			$.ajax({
-        				url: "addReply.ij",
-        				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo},
-        				type : "post",
-        				success : function(data){
-        					if(data == 'success'){
-        						
-        						// 댓글 작성 부분 초기화
-        						alert("댓글 등록 성공!");
-        						$("#rContent").val("");
-        						getReplyList(albumNo);
-        					}
-        				},
-        				error : function(e){
-        					console.log("Ajax 통신 실패");
-        				}
-        			});
-                });
+        
                 
         		// 댓글 리스트 조회 함수
         		function getReplyList(albumNo){
@@ -137,8 +93,7 @@
         					var $reContent;
         					var $arWriter;
 							var $arCreateDate;
- /*        					$reInfo.html("");
-        					$reContent.html(""); */
+        					$reBox.children('div').html("");
         					/* $("#rCount").text("댓글("+ list.length +")"); */
         					
  /*        					var $arWriter;
@@ -159,12 +114,14 @@
         							$arWriter = $("<div class=\"col-md-3\">").text(list[i].arWriter);
         							$arCreateDate = $("<div align=\"right\" class=\"col-md-9\">").text(list[i].arCreateDate);
 
-        							if('${loginUser}' != ''){
+        							
+        							if('${loginUser.memberId}' == list[i].arWriter){
+        								/* var rId = list[i].arNo; */
         								$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
 	        							var $editBox = $("<div class=\"col-md-1\">");
-	        							var $edit = $("<img class='edit' src=\"resources/images/album/edit.png\">");
+	        							var $edit = $("<img id=\""+list[i].arNo+"\" class='edit' src=\"resources/images/album/edit.png\">");
 	        							var $deleteBox = $("<div class=\"col-md-1\">");
-	        							var $delete = $("<img class='delete' src=\"resources/images/album/delete.png\">");
+	        							var $delete = $("<img id=\""+list[i].arNo+"\" class='delete' src=\"resources/images/album/delete.png\">");
 	        							
 	        							$editBox.append($edit);
 	        							$deleteBox.append($delete);
@@ -197,6 +154,58 @@
         				}
         			});
         		}
+        		
+                $("#submit-btn").click(function(){
+                	var arContent = $("#rContent").val();
+                	var albumNo = ${album.albumNo};
+                	var groupNo = ${album.groupNo};
+                	alert(arContent + ", "+ albumNo + ", " + groupNo);
+        			$.ajax({
+        				url: "addReply.ij",
+        				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo},
+        				type : "post",
+        				success : function(data){
+        					if(data == 'success'){
+        						
+        						// 댓글 작성 부분 초기화
+        						alert("댓글 등록 성공!");
+        						$("#rContent").val("");
+        						getReplyList(albumNo);
+        					}
+        				},
+        				error : function(e){
+        					console.log("Ajax 통신 실패");
+        				}
+        			});
+                });
+                
+                
+        		$(document).on("click",".delete",function(event){
+    				if(confirm("정말 삭제하시겠습니까?")){
+    			    	var albumNo = ${album.albumNo};
+    			    	var groupNo = ${album.groupNo};
+    			    	var arNo = $(this).attr('id');
+    			    
+    			    	alert(albumNo + ", " + groupNo + ", id = " + arNo);
+    					$.ajax({
+    						url: "deleteReply.ij",
+    						data : {albumNo : albumNo, groupNo : groupNo, arNo:arNo},
+							success: function(result){
+								console.log(result);
+	        					if(result == 'success'){
+	        						
+	        						// 댓글 작성 부분 초기화
+	        						alert("댓글 삭제 성공!");
+	        						getReplyList(albumNo);
+	        					}
+							},
+    						error: function(e){
+    							console.log(e);
+    						}
+    					});
+    				}
+    			});
+
             });
  
         </script>
@@ -324,6 +333,23 @@
         </div>
       
 
-               
+<script>
+function goList(){
+	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
+} 
+
+function goEdit(){
+	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
+	
+}
+
+function goDelete(){
+	if(window.confirm("정말 삭제 하시겠습니까?")){
+		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
+	}
+}
+
+
+</script>    
 </body>
 </html>
