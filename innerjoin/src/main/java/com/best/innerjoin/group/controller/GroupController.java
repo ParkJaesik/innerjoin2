@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.alarm.model.service.AlarmService;
+import com.best.innerjoin.event.model.service.EventService;
+import com.best.innerjoin.event.model.vo.Event;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
@@ -29,6 +31,8 @@ public class GroupController {
 	@Autowired
 	private GroupService gService;
 	private AlarmService aService;
+	@Autowired
+	private EventService eSerivce;
 	
 	
 	@RequestMapping("ginsertForm.ij")
@@ -150,6 +154,11 @@ public class GroupController {
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+		
+		String date = "2019-10";
+		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
+		
+		model.addAttribute("event", eList);
 		
 		return "group/groupIndex+groupInfo";
 	}
