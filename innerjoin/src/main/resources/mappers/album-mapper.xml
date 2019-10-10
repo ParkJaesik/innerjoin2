@@ -40,7 +40,15 @@
 
 	<insert id="insertPhoto" parameterType="AlbumPhoto">
 		
-		INSERT INTO ALBUM_PHOTO VALUES (SEQ_PNO.NEXTVAL, DEFAULT, DEFAULT, #{photoOriginName},#{photoRename}, SEQ_ANO.CURRVAL)
+		INSERT INTO ALBUM_PHOTO VALUES (SEQ_PNO.NEXTVAL, 
+		DEFAULT, DEFAULT, #{photoOriginName},#{photoRename}, 
+		<if test="albumNo == ''">
+		SEQ_ANO.CURRVAL
+		</if>
+		<if test="albumNo != ''">
+		#{albumNo}
+		</if>
+		)
 		
 	</insert>
 	
@@ -66,6 +74,7 @@
 		SELECT *
 		FROM ALBUM_PHOTO
 		WHERE ALBUM_NO = #{albumNo}
+		AND PHOTO_STATUS = 'Y'
 	</select>
 	
 	<update id="deleteAlbum" parameterType="_int">
@@ -99,5 +108,12 @@
 		AR_MODIFY_DATE = SYSDATE
 		WHERE ALBUM_NO = #{albumNo} 
 		AND AR_NO = #{arNo}
+	</update>
+	
+	<update id="deletePhoto" parameterType="AlbumPhoto">
+		UPDATE ALBUM_PHOTO
+		SET PHOTO_STATUS = 'N'
+		WHERE ALBUM_NO = #{albumNo} 
+		AND PHOTO_NO = #{photoNo}
 	</update>
 </mapper>

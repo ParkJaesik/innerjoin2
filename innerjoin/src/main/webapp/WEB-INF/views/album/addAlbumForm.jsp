@@ -108,10 +108,10 @@
                 console.log("삭제하려는 요소")
                 console.log(files[imgNum]);
                 
-                console.log("삭제 전 files 객체")
+                console.log("삭제 전 files 객체");
 				console.log(files);
                
-                console.log("삭제 후 files 객체")
+                console.log("삭제 후 files 객체");
 				delete files[imgNum];	
                 console.log(files);
                 
@@ -150,15 +150,7 @@
                     console.log(title);
                     console.log(formData.get("files"));
                     
-                    
-                  /* for (var index = 0; index < Object.keys(files).length; index++) {
-                        //formData 공간에 files라는 이름으로 파일을 추가한다.
-                        //동일명으로 계속 추가할 수 있다.
-                        console.log(files[index]);
-                        alert(files[index]);
-                        formData.append('files',files[index]);
-                    }  */
-                  
+                   
                   if(title.length < 1){
                 	  alert('제목을 입력해주세요');
                 	  return false;
@@ -168,6 +160,7 @@
                 	  alert('이미지를 업로드 해주세요');
                 	  return false;
                   }
+                  
                   for(var index in files){
                 	  console.log(files[index]);
                       formData.append('files',files[index]);
