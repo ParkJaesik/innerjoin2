@@ -171,6 +171,21 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
+	// 모임 가입신청 취소
+	@RequestMapping("waitCancel.ij")
+	public String waitCancel(HttpServletRequest request, int gNo, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		int result = mService.updateWait(loginUser, gNo);
+		
+		if(result > 0) {
+			return "redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg","취소 도중 오류 발생");
+			return "common/errorPage";
+		}
+	}
 
 	
 	// 프로필 수정으로 이동

@@ -155,6 +155,7 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.deleteInv(gMem);
 	}
 
+	// 초대 수락
 	@Override
 	public int updateInv(Member loginUser, int gNo) {
 		Map gMem = new HashMap<>();
@@ -162,6 +163,16 @@ public class MemberServiceImpl implements MemberService{
 		gMem.put("memberId", loginUser.getMemberId());
 		gMem.put("gNo", gNo);
 		return mDao.updateInv(gMem);
+	}
+
+	// 모임 가입 신청 취소
+	@Override
+	public int updateWait(Member loginUser, int gNo) {
+		Map gMem = new HashMap<>();
+		
+		gMem.put("memberId", loginUser.getMemberId());
+		gMem.put("gNo", gNo);
+		return mDao.updateWait(gMem);
 	}
 
 	

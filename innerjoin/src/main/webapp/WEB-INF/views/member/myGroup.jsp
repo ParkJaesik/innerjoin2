@@ -55,12 +55,11 @@
 					                <br>
 								    <div class="basic-padding">
 								    	<div class="image-hover">
-								    		${ myGroup.gOriginFileName }
-								    		<!-- <img src="resources/images/sky_min.jpeg" class="img-responsive"/> --> <!-- 그룹 썸네일 이미지 -->
+								    		${ myGroup.gOriginFileName }<!-- 그룹 썸네일 이미지 -->
 								            <div class="overlay">
 								                <h2>${ myGroup.gName }</h2>
 									            <c:if test="${ !empty loginUser }">
-									            <c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
+									            <c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
 											    <c:param name="gNo" value="${ myGroup.gNo }"/>
 											    </c:url>
 									            <a href="" class="btn-hover">Show More</a>
@@ -138,13 +137,16 @@
 			                	<div class="col-4" style="width: 100%;">${ invite.gOriginFileName }</div>
 			                	<c:if test="${ !empty loginUser }">
 			                	<div class="col-8">
-			                	<c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기 -->
+			                	<c:url var="mgDetail" value="mgdetail.ij"> <!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
 			                	<c:param name="gNo" value="${ wait.gNo }"/>
 			                	</c:url>
 			                		<h5>${ wait.gName }</h5>
 			                		<br>
 			                		<p>${ wait.gInfo }</p>
-			                		<a href="waitCancel.ij " class="btn cancel">신청 취소</a>
+			                		<c:url var="waitCancel" value="waitCancel.ij"> <!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
+			                		<c:param name="gNo" value="${ wait.gNo }"/>
+			                		</c:url>
+			                		<a href="${ waitCancel }" class="btn cancel">신청 취소</a>
 			                	</div>
 			                	</c:if>
 			           		</div>

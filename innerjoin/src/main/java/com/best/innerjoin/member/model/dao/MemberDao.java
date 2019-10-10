@@ -115,6 +115,15 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateInv", gMem);
 	}
 	
+	/** 모입가입 신청 취소
+	 * @param gMem
+	 * @return result
+	 */
+	public int updateWait(Map gMem) {
+
+		return sqlSession.update("memberMapper.updateWait", gMem);
+	}
+	
 	/** 회원 탈퇴
 	 * @param loginUser
 	 * @return result
@@ -124,6 +133,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", loginUser);
 
 	}
+
+
+
+	
 
 
 
