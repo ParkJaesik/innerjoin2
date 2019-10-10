@@ -30,7 +30,18 @@ public interface GroupService {
 	int insertAlarm(String memberId, String host);
 
 
+	/** 그룹 회원 목록 조회 Service
+	 * @param groupNo
+	 * @return list
+	 */
 	ArrayList<GroupMember> groupMemberList(int groupNo);
+
+
+	/** 그룹 대기 회원 목록 조회 Service
+	 * @param groupNo
+	 * @return list
+	 */
+	ArrayList<GroupMember> waitingGroupMemberList(int groupNo);
 
 }
 

@@ -37,6 +37,20 @@ div {
 	font-weight: bold;
 }
 
+#member-container h5 {
+	margin: 0 50px 50px 0;
+	font-weight: bold;
+}
+
+#member-container a {
+	color: rgb(50, 50, 50);
+}
+
+#member-container a:hover {
+	text-decoration: none;
+	color: #ED786A;
+}
+
 #member-part {
 	width: 900px;
 	height: 150px;
@@ -73,11 +87,11 @@ div {
 	height: 100%;
 	float: left;
 	text-align: center;
-	padding-top: 30px;
+	padding-top: 40px;
 }
 
 #member-name span {
-	font-size: 16px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -86,11 +100,11 @@ div {
 	height: 100%;
 	float: left;
 	text-align: center;
-	padding-top: 30px;
+	padding-top: 40px;
 }
 
 #member-level span {
-	font-size: 16px;
+	font-size: 12px;
 	font-weight: bold;
 }
 

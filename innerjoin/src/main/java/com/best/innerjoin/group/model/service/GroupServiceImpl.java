@@ -139,6 +139,11 @@ public class GroupServiceImpl implements GroupService{
 
 	}
 
+	@Override
+	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
+		return gDao.waitingGroupMemberList(groupNo);
+	}
+
 	
 	
 }
