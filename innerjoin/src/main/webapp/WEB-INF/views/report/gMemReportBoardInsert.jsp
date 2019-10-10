@@ -40,7 +40,7 @@
 			             <label>신고 받는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <input type="text" name="responId" value="wotlrdlekt6@naver.com" readonly>
+			             <input type="text" name="responId" value="" readonly>
 			         </div>
 			         <div class="div3">
 			             <label>신고 유형</label>

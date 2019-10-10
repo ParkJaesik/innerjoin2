@@ -54,5 +54,11 @@ public class GroupDao {
 		return sqlSession.insert("alarmMapper.insertAlarm", alarmMap);
 
 	}
+	
+	// 회원 등급 조정
+	public int updateLevel(GroupMember gMember) {
+		
+		return sqlSession.update("groupMapper.updateLevel", gMember);
+	}
 
 }

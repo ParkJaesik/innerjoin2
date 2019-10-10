@@ -14,8 +14,7 @@
 		<result property="gStatus" column="GROUP_STATUS"/>
 		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
-		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
-		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+		<result property="filePath" column="GROUP_FILE_PATH"/>
 		<result property="districtName" column="DISTRICT_NAME"/>
 	</resultMap>
 	
@@ -29,16 +28,17 @@
 	
 	<!-- 모임 등록 쿼리 -->
 	<insert id="insertGroup" parameterType="Group">
-		INSERT INTO "GROUP" VALUES(SEQ_GNO.NEXTVAL, #{gHost}, #{gOpenStatus}, 
-						#{gName}, #{gLimit}, #{gInfo}, #{gMemCount}, 
-						#{localCode}, DEFAULT, #{gCategoryCode}, 
-						DEFAULT, #{gOriginFileName}, #{gRenameFileName}, SYSDATE, SYSDATE)
+		INSERT INTO "GROUP" 
+		VALUES(SEQ_GNO.NEXTVAL, #{gHost}, #{gOpenStatus}, 
+				#{gName}, #{gLimit}, #{gInfo}, #{gMemCount}, 
+				#{localCode}, DEFAULT, #{gCategoryCode}, 
+				DEFAULT, #{filePath}, SYSDATE, SYSDATE)
 	</insert>
   	
   	
   	<select id="selectGroup" parameterType="_int" resultMap="groupResultSet">
   		SELECT GROUP_NO,GROUP_HOST,GROUP_OPEN_STATUS,GROUP_NAME,GROUP_LIMIT,GROUP_INFO,GROUP_MEM_COUNT,
-		LOCAL_CODE,GROUP_STATUS,GROUP_CATEGORY_CODE,GROUP_ORIGIN_FILENAME,GROUP_ENROLL_DATE,GROUP_MODIFY_DATE,DISTRICT_NAME
+		LOCAL_CODE,GROUP_STATUS,GROUP_CATEGORY_CODE,GROUP_FILE_PATH,GROUP_ENROLL_DATE,GROUP_MODIFY_DATE,DISTRICT_NAME
 		FROM "GROUP"  
 		JOIN LOCAL_DISTRICT_CATEGORY ON "GROUP".GROUP_CATEGORY_CODE = LOCAL_DISTRICT_CATEGORY.DISTRICT_CODE
 		WHERE GROUP_NO= #{gNo}
@@ -60,6 +60,17 @@
 	<select id="groupMemberList" parameterType="_int" resultMap="groupMemberResultSet">
 		SELECT MEMBER_ID, GROUP_NO, LEVEL_CODE, GROUP_MEM_REPT_COUNT, MEMBER_NAME
 		FROM GROUP_MEMBER JOIN MEMBER USING(MEMBER_ID)
+
+		WHERE GROUP_NO = #{groupNo}
+	</select> 
+	
+	<!-- 그릅 회원 등급 조정 -->
+	<update id="updateLevel" parameterType="GroupMember">
+		UPDATE GROUP_MEMBER
+		SET LEVEL_CODE = #{levelCode}
+		WHERE MEMBER_ID = #{memberId}
+	</update> 	
+
 		WHERE GROUP_NO = #{groupNo} AND (LEVEL_CODE = 0 OR LEVEL_CODE= 1 OR LEVEL_CODE = 2) ORDER BY LEVEL_CODE
 	</select>
 	
@@ -69,5 +80,6 @@
 		FROM GROUP_MEMBER JOIN MEMBER USING(MEMBER_ID)
 		WHERE GROUP_NO = #{groupNo} AND (LEVEL_CODE = 3 OR LEVEL_CODE= 4)
 	</select>
+
 </mapper>
 

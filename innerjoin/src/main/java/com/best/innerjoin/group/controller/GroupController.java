@@ -1,5 +1,6 @@
 package com.best.innerjoin.group.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,12 +39,19 @@ public class GroupController {
 	
 	// 모임 만들기
 	@RequestMapping(value="ginsert.ij", method=RequestMethod.POST)
-	public String groupInsert(Group group, HttpServletRequest request, Model model, MultipartFile uploadFile) {
+	public String groupInsert(Group group, HttpServletRequest request, Model model, @RequestParam(name="uploadFile", required=true) MultipartFile uploadFile) {
 		
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String filePath = saveFile(uploadFile, request);
+			
+			if(filePath != null) {
+				group.setfilePath(uploadFile.getOriginalFilename());
+			}
+		}
 		
-		
-		int result = gService.insertGroup(group, uploadFile, request);
+		int result = gService.insertGroup(group);
 
+		
 		String path= null;
 		if(result>0) {
 			path="group/groupIndex";
@@ -57,6 +65,49 @@ public class GroupController {
 		
 	}
 	
+	// 파일 저장 메소드
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\guploadFiles";
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		
+		String filePath = folder + "\\" + file.getOriginalFilename();
+		
+		try {
+			file.transferTo(new File(filePath));
+		}catch (Exception e) {
+			System.out.println("파일 전송 에러" + e.getMessage());
+		}
+		
+		return filePath;
+	}
+	
+	// 파일 삭제 메소드
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\guploadFiles";
+		
+		// 삭제할 파일 경로 + 파일명
+		File deleteFile = new File(savePath + "\\" + fileName);
+		
+		// 해당 파일이 존재할 경우 삭제
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
+	}
+	
+	
+
+
 	@RequestMapping("tempGoGroup.ij")
 	public String tempGoGroup(HttpServletRequest request) {
 		 request.getSession().setAttribute("groupName", "가나다");
@@ -168,11 +219,12 @@ public class GroupController {
 
 	
 	
-//	// 회원 등급 수정
-//	@RequestMapping("memlevel.ij")
-//	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
-//		
-//		int result = gService.updateMlevel(request, gMember);
-//	}
+	// 회원 등급 수정
+	@RequestMapping("memlevel.ij")
+	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
+		
+		int result = gService.updateLevel(request, gMember);
+		return null;
+	}
 
 }
