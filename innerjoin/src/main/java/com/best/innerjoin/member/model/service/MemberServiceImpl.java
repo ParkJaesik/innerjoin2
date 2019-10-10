@@ -48,12 +48,14 @@ public class MemberServiceImpl implements MemberService{
 		return loginUser;
 	}
 	
-	// 비번 암호화 저장
+	// 비번 암호화 저장 (회원가입)
 	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class)
 	public int insertMember(Member member) {
 		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
-		return mDao.insertMember(member);
+		int result = mDao.insertMember(member);
+		if(result>0) result = mDao.insertAdditional(member);
+		return result;
 	}
 	
 	
@@ -167,12 +169,12 @@ public class MemberServiceImpl implements MemberService{
 
 	// 모임 가입 신청 취소
 	@Override
-	public int updateWait(Member loginUser, int gNo) {
+	public int deleteWait(Member loginUser, int gNo) {
 		Map gMem = new HashMap<>();
 		
 		gMem.put("memberId", loginUser.getMemberId());
 		gMem.put("gNo", gNo);
-		return mDao.updateWait(gMem);
+		return mDao.deleteWait(gMem);
 	}
 
 	

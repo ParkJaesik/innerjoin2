@@ -1,48 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE HTML>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>회원가입</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-		<link rel="stylesheet" href="${contextPath}/resources/css/menubar.css" />
-		<link rel="stylesheet" href="${contextPath}/resources/css/join.css">
-	</head>
-	<body class="no-sidebar is-preload">
-		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<div id="page-wrapper">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>Insert title here</title>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/common/index.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<title>마이페이지</title>
+<style type="text/css">
+	/* *{
+	 	 border: 1px solid black;
+	 }  */
+</style>
+</head>
+<body>
 
-			<!-- Header -->
-				<section id="header">
-					<div class="container">
+<div class="container-fluid" id="all-wrapper">
 
-						<!-- Logo -->
-							<h1 id="logo"><a href="#">Inner Join</a></h1>
-							
+		<!-- 페이지 헤더부분 -->
+		<div class="row" id="header-wrapper">
+			<div class="col-md-12" id="all-hearder">
+				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+			</div>
+		</div>
 
-						<!-- Nav -->
-							
-
-					</div>
-				</section>
-
-			<!-- Main -->
-				<section id="main">
-					<div class="container" style="box-shadow: none;">
-						<div id="content">
-
-							<header>
-								<h2>회원가입 </h2>
-							</header>
-									
-							<form action="join.ij" method="post" id="joinMember" name="joinMember" onsubmit="return validate();">
-								<div>
-								<!-- <h4>회원가입</h4> -->
-									<div class="input-group input-group-icon">
+		<!-- 페이지 바디부분 -->
+		<div class="row" id="body-wrapper">
+			<div class="col-md-1 aside"></div>
+			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
+			<div class="col-md-10" id="body-content">
+				<!-- 메인페이지 content 부분 -->
+				
+				 
+				  <div class="row">
+				  	<div class="col-4"></div>
+				  	<div class="col-4">
+				  	
+		                <div class="margin" style="margin: 50px;"></div>
+				  		<form action="join.ij" method="post" id="joinMember" name="joinMember" onsubmit="return validate();">
+			             
+			                <div class="row">
+			                    <h3>회원가입</h3>
+			                    <div class="input-group input-group-icon">
 										<input type="email" placeholder="(*)Email" name="memberId" id="memberId" required/>
 										<span aling="center" id="emailCheck">&nbsp;</span>
 										<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
@@ -52,63 +61,71 @@
 										<span style="text-aling:center;" id="nameCheck">&nbsp;</span>
 										<input type="hidden" name="nameDuplicateCheck" id="nameDuplicateCheck" value="0">
 									</div>
-									<div>
-										<div class="input-group input-group-icon">
-											<input type="password" placeholder="(*)Password" name="memberPwd" id="memberPwd" required/>
-											<span id="pwdCheck1">&nbsp;</span>
-										</div>
+									
+									<div class="input-group input-group-icon">
+										<input type="password" placeholder="(*)Password" name="memberPwd" id="memberPwd" required/>
+										<span id="pwdCheck1">&nbsp;</span>
 									</div>
-									<div>
-										<div class="input-group input-group-icon">
-											<input type="password" placeholder="(*)Password Check" name="memberPwd2" id="memberPwd2" required/>
-											<span id="pwdCheck2">&nbsp;</span>
-										</div>
+									<div class="input-group input-group-icon">
+										<input type="password" placeholder="(*)Password Check" name="memberPwd2" id="memberPwd2" required/>
+										<span id="pwdCheck2">&nbsp;</span>
 									</div>
-								</div>
-								<header>
-									<h2>추가 정보 </h2>
-								</header>
-								<div>
-									<div class="col-half">
-										<h4>Date of Birth</h4>
-										<div class="input-group">
+			                    	
+									<br>
+									
+								
+								
+			                  <div class="row">
+			                  	<h3 class="info-title">추가 정보</h3>
+			                  	<br>
+			                  	<div class="row">
+			                    <div class="col-half">
+			                      	<h5>Date of Birth</h5>
+			                      	<div class="input-group">
 											<div class="col-third">
-												<input type="number" name="memberBirthday1" id="memberBirthday1" placeholder="YYYY" maxlength="4"/>
+												<input type="text" name="birthday1" id="birthday1" placeholder="YYYY" maxlength="4"/>
 											</div>
 											<div class="col-third">
-												<input type="number" name="memberBirthday2" id="memberBirthday2" placeholder="MM" maxlength="2"/>
+												<input type="text" name="birthday2" id="birthday2" placeholder="MM" maxlength="2"/>
 											</div>
 											<div class="col-third">
-												<input type="number" name="memberBirthday3" id="memberBirthday3" placeholder="DD" maxlength="2"/>
+												<input type="text" name="birthday3" id="birthday3" placeholder="DD" maxlength="2"/>
 											</div>
 										</div>
+			                    </div>
+			                    <div class="col-half">
+			                      	<h5>Gender</h5>
+			                      	<div class="input-group">
+										<input type="radio" name="memberGender" value="M" id="memberGender"/>
+										<label for="gender-male">Male</label>
+										<input type="radio" name="memberGender" value="F" id="memberGender"/>
+										<label for="gender-female">Female</label>
 									</div>
-									<div class="col-half">
-										<h4>Gender</h4>
-										<div class="input-group">
-											<input type="radio" name="gender" value="M" id="gender-male"/>
-											<label for="gender-male">Male</label>
-											<input type="radio" name="gender" value="F" id="gender-female"/>
-											<label for="gender-female">Female</label>
-										</div>
-									</div>
-								</div>
-								
-								<button id="button" onclick="validate();" style="float: right;"> 가입</button>
-								
-								<button type="button" onclick="index.jsp" style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
-								
-							</form>
-
-						</div>
-					</div>
-				</section>
-			
-		</div>
-		
-
-		<!-- Scripts -->
-		<script>
+			                    </div>
+			                  </div>
+			                  </div>
+			                  <!-- <div class="row">
+			                    <h5>Terms and Conditions</h5>
+			                    <div class="input-group">
+			                      <input type="checkbox" id="terms"/>
+			                      <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
+			                  	</div>
+			                	</div> -->
+			              	</div>
+			              	<button id="button" onclick="validate();" style="float: right;"> 가입</button>
+							<button type="button" onclick="index.jsp" class="btn cancel">취소</button>
+			              							
+						
+			            </form>
+				  	</div>
+				  	<div class="col-4"></div>
+				  </div>
+				</div>
+				<div class="col-md-1 aside"></div>
+			</div>
+	</div>
+	
+	<script>
 		$(function(){
 			
 		
@@ -219,12 +236,14 @@
 			
 			
 		</script>
-			<script src="${contextPath}/resources/js/jquery.min.js"></script>
-			<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
-			<script src="${contextPath}/resources/js/browser.min.js"></script>
-			<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
-			<script src="${contextPath}/resources/js/util.js"></script>
-			<script src="${contextPath}/resources/js/main.js"></script>
+			
+	
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</body>
 </html>
+
+
+
+

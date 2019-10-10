@@ -48,7 +48,7 @@
                     <div class="col-md-6 menu-detail" >
                     	<a href="myGroupForm.ij">내 모임</a>
                         <a href="myNoteForm.ij">쪽지함</a>
-                        <a href="myNews.ij">알림함</a>
+                        <a href="myNewsForm.ij">알림함</a>
                         <a href="checkPwdForm.ij">정보수정</a>
                     </div>
                     <div class="col-md-3"></div>

@@ -143,7 +143,7 @@
 			                		<h5>${ wait.gName }</h5>
 			                		<br>
 			                		<p>${ wait.gInfo }</p>
-			                		<c:url var="waitCancel" value="waitCancel.ij"> <!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
+			                		<c:url var="waitCancel" value="waitCancel.ij"> 
 			                		<c:param name="gNo" value="${ wait.gNo }"/>
 			                		</c:url>
 			                		<a href="${ waitCancel }" class="btn cancel">신청 취소</a>

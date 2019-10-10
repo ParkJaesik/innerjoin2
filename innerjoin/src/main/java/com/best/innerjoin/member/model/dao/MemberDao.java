@@ -38,8 +38,12 @@ public class MemberDao {
 	 * @return
 	 */
 	public int insertMember(Member member) {
-		
 		return sqlSession.insert("memberMapper.insertMember",member);
+	}
+	
+	public int insertAdditional(Member member) {
+		System.out.println(member.getMemberBirthday());
+		return sqlSession.insert("memberMapper.insertAdditional",member);
 	}
 
 	/** email 중복체크
@@ -119,9 +123,9 @@ public class MemberDao {
 	 * @param gMem
 	 * @return result
 	 */
-	public int updateWait(Map gMem) {
+	public int deleteWait(Map gMem) {
 
-		return sqlSession.update("memberMapper.updateWait", gMem);
+		return sqlSession.delete("memberMapper.deleteWait", gMem);
 	}
 	
 	/** 회원 탈퇴
@@ -133,6 +137,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", loginUser);
 
 	}
+
+
+
+
 
 
 

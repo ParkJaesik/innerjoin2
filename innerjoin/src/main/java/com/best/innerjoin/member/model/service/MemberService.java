@@ -73,7 +73,7 @@ public interface MemberService {
 	 * @param gNo
 	 * @return result
 	 */
-	public abstract int updateWait(Member loginUser, int gNo);
+	public abstract int deleteWait(Member loginUser, int gNo);
 
 	
 	
