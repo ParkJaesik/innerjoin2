@@ -65,5 +65,11 @@ public interface AlbumService {
 	 */
 	public abstract int deleteReply(AlbumReply aReply);
 
+	/** 댓글 수정 Service
+	 * @param aReply
+	 * @return
+	 */
+	public abstract int updateReply(AlbumReply aReply);
+
 
 }

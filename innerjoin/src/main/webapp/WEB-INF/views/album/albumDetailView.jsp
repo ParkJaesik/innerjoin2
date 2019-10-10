@@ -19,23 +19,7 @@
 
 	<script type="text/javascript">
         // Get the modal
-        
-/*             function goList(){
-            	
-            	location.href="albumListView.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage};
-            } */
-            
-            var goEdit = function goEdit(){
-            	location.href="updateAlbumForm.ij?groupNo="+${album.groupNo} + "&page=" + ${currentPage} +"&albumNo="+${album.albumNo};
-            	
-            }
-            
-            var goDelete = function goDelete(){
-            	if(window.confirm("정말 삭제 하시겠습니까?")){
-            		location.href="deleteAlbum.ij?groupNo=${album.groupNo}+&albumNo=+${album.albumNo}";
-            	}
-            }
-        
+
         	$(function(){
             var modal = document.getElementById('myModal');
             
@@ -78,9 +62,7 @@
   
             $(function(){
             	getReplyList('${album.albumNo}');
-            	
-        
-                
+            
         		// 댓글 리스트 조회 함수
         		function getReplyList(albumNo){
         			$.ajax({
@@ -94,15 +76,7 @@
         					var $arWriter;
 							var $arCreateDate;
         					$reBox.children('div').html("");
-        					/* $("#rCount").text("댓글("+ list.length +")"); */
         					
- /*        					var $arWriter;
-        					var $rCreateDate;
-        					var $editBox;
-        					var $edit;
-        					var $deleteBox;
-        					var $delete;
-        					var $arContent; */
         					
         					if(list.length > 0){
         						// 댓글 목록 출력
@@ -205,6 +179,68 @@
     					});
     				}
     			});
+        		
+        		$(document).on("click",".edit",function(event){
+    			    	var albumNo = ${album.albumNo};
+    			    	var groupNo = ${album.groupNo};
+    			    	var arNo = $(this).attr('id');
+    			    
+    			    	var $reBox = $("<div class=\"col-md-11\">");
+    			    	var $txtArea =$("<textarea id='rContent' rows='3' cols='100' placeholder='comment...'>");
+    			    	var $btnBox = $("<div class=\"col-md-1\">");
+    			    	var $editBtn = $("<button id=\""+arNo+"\" class=\"re-edit\">");
+    			    	var $cancelBtn = $("<button class=\"re-cancel\">");
+    			    	$editBtn.text("수정");
+    			    	$cancelBtn.text("취소");
+    			    	$reBox.append($txtArea);
+    			    	$btnBox.append($editBtn).append($cancelBtn);
+    			    	
+    			    	/* alert(albumNo + ", " + groupNo + ", id = " + arNo); */
+    			    	$(this).parent().parent().next().append($reBox).append($btnBox);
+    			    	var prevVal = $(this).parent().parent().next().children('.col-md-12').text();
+    			    	/* alert(prevVal); */
+    			    	$txtArea.html(prevVal);
+    			    	$(this).css("display","none");
+    			    	$(this).parent().parent().next().children('.col-md-12').css("display","none");
+    			    	$txtArea.focus(); 
+ 
+    				}
+    			);
+        		
+        		$(document).on("click",".re-cancel",function(event){
+        				$(this).parent().prev().prev().css("display","block");
+        				$(this).parent().parent().prev().children().children().css("display","block");
+ 						$(this).parent().parent().children('.col-md-11').remove();
+ 						$(this).parent().parent().children('.col-md-1').remove();
+    				}
+    			);
+        		
+        		$(document).on("click",".re-edit",function(event){
+        				var arContent = $(this).parent().prev().children().val();
+        				var arNo = $(this).attr("id");
+        				alert(arContent + ", id = " + arNo);
+                    	var albumNo = ${album.albumNo};
+                    	var groupNo = ${album.groupNo};
+             			$.ajax({
+            				url: "updateReply.ij",
+            				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo,arNo : arNo},
+            				type : "post",
+            				success : function(data){
+            					if(data == 'success'){
+            						
+            						// 댓글 작성 부분 초기화
+            						alert("댓글 수정 성공!");
+            						$(this).parent().parent().children('.col-md-11').remove();
+             						$(this).parent().parent().children('.col-md-1').remove();
+            						getReplyList(albumNo);
+            					}
+            				},
+            				error : function(e){
+            					console.log("Ajax 통신 실패");
+            				}
+            			}); 
+    				}
+    			);
 
             });
  
@@ -349,6 +385,9 @@ function goDelete(){
 	}
 }
 
+function reCancel(){
+	
+}
 
 </script>    
 </body>
