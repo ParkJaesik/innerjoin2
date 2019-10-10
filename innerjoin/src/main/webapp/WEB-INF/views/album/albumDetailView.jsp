@@ -8,13 +8,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<!-- <link rel="stylesheet" href="resources/css/album/album-detail.css"/> -->
-	<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- 	<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 	
-	        <script type="text/javascript">
+</head>
+<body>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
+
+
+
+	<script type="text/javascript">
         // Get the modal
         
-        	
+        	$(function(){
             var modal = document.getElementById('myModal');
             
             // Get the button that opens the modal
@@ -42,6 +48,7 @@
                     modal.style.display = "none";
                 }
             }
+            });
 
 /*             
             $(".carousel").carousel({
@@ -68,6 +75,32 @@
             
   
             $(function(){
+            	getReplyList(${album.albumNo});
+            	
+            	
+            	$(".delete").click(function(){
+                	var albumNo = ${album.albumNo};
+                	var albumNo = ${album.albumNo};
+                	var arNo = ${album.arNo}
+                	alert(albumNo + ", " + groupNo);
+        			$.ajax({
+        				url: "deleteReply.ij",
+        				data : {albumNo : albumNo,groupNo : groupNo,arNo:arNo},
+        				type : "post",
+        				success : function(data){
+        					if(data == 'success'){
+        						
+        						// 댓글 작성 부분 초기화
+        						alert("댓글 삭제 성공!");
+        						getReplyList(albumNo);
+        					}
+        				},
+        				error : function(e){
+        					console.log("Ajax 통신 실패");
+        				}
+        			});
+            	});
+            	
                 $("#submit-btn").click(function(){
                 	var arContent = $("#rContent").val();
                 	var albumNo = ${album.albumNo};
@@ -99,41 +132,66 @@
         				data : {albumNo : albumNo},
         				dataType : "json",
         				success : function(list){
-        					var $reInfo = $("#re-info");
-        					var $reContent = $("#re-content");
-        					
+         					var $reBox = $(".reBox");
+        					var $reInfo;
+        					var $reContent;
+        					var $arWriter;
+							var $arCreateDate;
+ /*        					$reInfo.html("");
+        					$reContent.html(""); */
         					/* $("#rCount").text("댓글("+ list.length +")"); */
         					
-        					var $arWriter;
+ /*        					var $arWriter;
         					var $rCreateDate;
-        					var $editBox = $("<div class=\"col-md-1\">");
-        					var $edit = $("<img src=\"resources/images/album/edit.png\">");
-        					var $deleteBox = $("<div class=\"col-md-1\">");
-        					var $delete = $("<img src=\"resources/images/album/delete.png\">");
-        					var $arContent;
+        					var $editBox;
+        					var $edit;
+        					var $deleteBox;
+        					var $delete;
+        					var $arContent; */
         					
         					if(list.length > 0){
         						// 댓글 목록 출력
         						// rWriter -> width=100px
         						// rCreateDate -> width=100px
         						$.each(list,function(i,v){
+        							$reInfo = $("<div class='row' id='re-info'>");
+                					$reContent = $("<div class='row' id='re-content'>");
         							$arWriter = $("<div class=\"col-md-3\">").text(list[i].arWriter);
-        							$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
-        							$editBox.append($edit);
-        							$deleteBox.append($delete);
-        							$arContent = $("<div class=\"col-md-12\">").text(list[i].arContent);
-        							if ('${loginUser.memberId}' == list[i].arWriter){
-        								$arWriter.css("color","red");
+        							$arCreateDate = $("<div align=\"right\" class=\"col-md-9\">").text(list[i].arCreateDate);
+
+        							if('${loginUser}' != ''){
+        								$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
+	        							var $editBox = $("<div class=\"col-md-1\">");
+	        							var $edit = $("<img class='edit' src=\"resources/images/album/edit.png\">");
+	        							var $deleteBox = $("<div class=\"col-md-1\">");
+	        							var $delete = $("<img class='delete' src=\"resources/images/album/delete.png\">");
+	        							
+	        							$editBox.append($edit);
+	        							$deleteBox.append($delete);
+	        							if ('${loginUser.memberId}' == list[i].arWriter){
+	        								$arWriter.css("color","red");
+	        							}
+	        							$reInfo.append($arWriter).append($arCreateDate).append($editBox).append($deleteBox).append($("<hr>"));
+        							}else{
+        								
+	        							$reInfo.append($arWriter).append($arCreateDate);
         							}
-        							$reInfo.append($arWriter).append($arCreateDate).append($editBox).append($deleteBox).append("<hr>");
+        							
+        							
+        							$reBox.append($reInfo);
+        							var $arContent = $("<div class=\"col-md-12\">").text(list[i].arContent);
         							$reContent.append($arContent);
-        							$('.re-list').children('.col-md-12').append($reInfo).append($reContent);
+        							console.log("info 등록");
+        							$reBox.append($reContent);
+        							console.log("content 등록");
         						});
         					}else{ // 댓글이 없는 경우
-        						$tr = $("<tr>");
+/*         						$tr = $("<tr>");
         						$rContent = $("<td colspan=\"3\">").text("등록된 댓글이 없습니다.");
         						$tr.append($rContent);
-        						$tableBody.append($tr);
+        						$tableBody.append($tr); */
+        						$reInfo = $("<div class='row' id='re-info' align='center'>").text("등록된 댓글이 없습니다.");
+        						$reBox.append($reInfo);
         					}
         					
         				}
@@ -142,12 +200,7 @@
             });
  
         </script>
-</head>
-<body>
-<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
-
-
-
+        
         <div class="container-fluid al-wrapper">
             <div class="row al-header">
                 <div class="col-md-3 al-info">
@@ -221,10 +274,10 @@
                         </div>
 
                         <div class="row re-list">
-                            <div class="col-md-12" style="padding:10px !important;">
+                            <div class="col-md-12 reBox" style="padding:10px !important;">
                                 <p style="font-size:20px; font-weight:500">Comment</p>
                                 <hr>
-                                <div class="row" id="re-info">
+<!-- 	                            <div class="row" id="re-info">
                                     <div class="col-md-3">
                                         user01
                                     </div>
@@ -243,7 +296,7 @@
                                     <div class="col-md-12">
                                         sdjfhsdoifsdjfdjdddddddddddddddddddsssssssffffssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                                     </div>
-                                </div>
+                                </div>  -->
                             </div>
                         </div>
                     </div>

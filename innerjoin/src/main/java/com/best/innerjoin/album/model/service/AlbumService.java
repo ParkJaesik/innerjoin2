@@ -59,5 +59,11 @@ public interface AlbumService {
 	 */
 	public abstract ArrayList<AlbumReply> selectReply(int albumNo);
 
+	/**  댓글 삭제 Service
+	 * @param aReply
+	 * @return
+	 */
+	public abstract int deleteReply(AlbumReply aReply);
+
 
 }
