@@ -9,12 +9,13 @@
 		<result property="gLimit" column="GROUP_LIMIT"/>
 		<result property="gInfo" column="GROUP_INFO"/>
 		<result property="gMemCount" column="GROUP_MEM_COUNT"/>
-		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
 		<result property="localCode" column="LOCAL_CODE"/>
 		<result property="gStatus" column="GROUP_STATUS"/>
 		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
 		<result property="filePath" column="GROUP_FILE_PATH"/>
+		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
+		<result property="gModifyDate" column="GROUP_MODIFY_DATE"/>
 		<result property="districtName" column="DISTRICT_NAME"/>
 	</resultMap>
 	
@@ -42,37 +43,29 @@
 		FROM "GROUP"  
 		JOIN LOCAL_DISTRICT_CATEGORY ON "GROUP".GROUP_CATEGORY_CODE = LOCAL_DISTRICT_CATEGORY.DISTRICT_CODE
 		WHERE GROUP_NO= #{gNo}
-  	
   	</select>
   	
   	<select id="selectCode" parameterType="map" resultType="_int">
-  	
   		SELECT LEVEL_CODE FROM GROUP_MEMBER WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
   	</select>
   	
   	<insert id="applyInsertGroup" parameterType="map">
-  	
   		INSERT INTO GROUP_MEMBER VALUES(#{memberId},#{gNo},4,DEFAULT)
-  	
   	</insert>
   	
-	<!-- 그룹 회원 목록 조회 쿼리 -->
-	<select id="groupMemberList" parameterType="_int" resultMap="groupMemberResultSet">
-		SELECT MEMBER_ID, GROUP_NO, LEVEL_CODE, GROUP_MEM_REPT_COUNT, MEMBER_NAME
-		FROM GROUP_MEMBER JOIN MEMBER USING(MEMBER_ID)
-
-		WHERE GROUP_NO = #{groupNo}
-	</select> 
-	
 	<!-- 그릅 회원 등급 조정 -->
 	<update id="updateLevel" parameterType="GroupMember">
 		UPDATE GROUP_MEMBER
 		SET LEVEL_CODE = #{levelCode}
 		WHERE MEMBER_ID = #{memberId}
 	</update> 	
-
+	
+	<!-- 그룹 회원 목록 조회 쿼리 -->
+	<select id="groupMemberList" parameterType="_int" resultMap="groupMemberResultSet">
+		SELECT MEMBER_ID, GROUP_NO, LEVEL_CODE, GROUP_MEM_REPT_COUNT, MEMBER_NAME
+		FROM GROUP_MEMBER JOIN MEMBER USING(MEMBER_ID)
 		WHERE GROUP_NO = #{groupNo} AND (LEVEL_CODE = 0 OR LEVEL_CODE= 1 OR LEVEL_CODE = 2) ORDER BY LEVEL_CODE
-	</select>
+	</select> 
 	
 	<!-- 대기 그룹 회원 목록 조회 쿼리 -->
 	<select id="waitingGroupMemberList" parameterType="_int" resultMap="groupMemberResultSet">

@@ -45,7 +45,7 @@ public class GroupController {
 			String filePath = saveFile(uploadFile, request);
 			
 			if(filePath != null) {
-				group.setfilePath(uploadFile.getOriginalFilename());
+				group.setFilePath(uploadFile.getOriginalFilename());
 			}
 		}
 		
