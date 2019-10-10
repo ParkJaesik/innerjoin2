@@ -163,7 +163,6 @@ public class AlbumController {
 		// 댓글 작성자 정보(ID) 저장
 		// String rWriter = ((Member)session.getAttribute("loginUser")).getId();
 		aReply.setArWriter(((Member)session.getAttribute("loginUser")).getMemberId());
-		
 		int result = aService.insertReply(aReply);
 		
 		if(result > 0) {
@@ -180,18 +179,38 @@ public class AlbumController {
 	public String getReplyList(int albumNo){
 		
 		ArrayList<AlbumReply> list = aService.selectReply(albumNo);
-		
+		for(AlbumReply r : list) {
+			System.out.println(r.toString());
+		}
 		// gson 생성시 형식 지정
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd', 'HH:mm:ss").create();
-		return gson.toJson(list);
+		/*
+		 * Gson gson = new
+		 * GsonBuilder().setDateFormat("yyyy-MM-dd', 'HH:mm:ss").create();
+		 */
+		return new Gson().toJson(list);
 	}
 
 	// 댓글 삭제
 	@ResponseBody
-	@RequestMapping(value="deleteReply.ij", produces="application/json; charset=utf-8")
+	@RequestMapping("deleteReply.ij")
 	public String deleteReply(AlbumReply aReply){
 		
 		int result = aService.deleteReply(aReply);
+		
+		if(result > 0) {
+			/* aService.updateRcount(reply.getRefBid()); */
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+
+	// 댓글 수정
+	@ResponseBody
+	@RequestMapping("updateReply.ij")
+	public String updateReply(AlbumReply aReply){
+		
+		int result = aService.updateReply(aReply);
 		
 		if(result > 0) {
 			/* aService.updateRcount(reply.getRefBid()); */
