@@ -96,15 +96,20 @@ public class AlbumServiceImpl implements AlbumService {
 	    		photoList.add(aPhoto);
 		    }
 		
-			// 앨범 썸네일 지정
-			album.setAlbumThumbnail(photoList.get(0).getPhotoRename());
 			
 			System.out.println("photoList.isEmpty() : "+photoList.isEmpty());
 			
-			int albumResult = aDao.insertAlbum(album);
+			int albumResult = 0;
+			if(album.getAlbumNo() == 0) {
+				// 앨범 썸네일 지정
+				album.setAlbumThumbnail(photoList.get(0).getPhotoRename());
+				albumResult = aDao.insertAlbum(album);
+			}
 			int photoResult = 0;
-			if(albumResult == 1) {
+			if(albumResult == 1 || album.getAlbumNo() != 0 ) {
 				for(int i = 0; i < photoList.size();i++) {
+					photoList.get(i).setAlbumNo(album.getAlbumNo());
+					System.out.println("insert service에서 사진 확인"+photoList.get(i).toString());
 					photoResult = aDao.insertPhoto(photoList.get(i));
 					if(photoResult == 1) {
 						for(MultipartFile mf : files) {
@@ -225,6 +230,12 @@ public class AlbumServiceImpl implements AlbumService {
 		public int updateReply(AlbumReply aReply) {
 			// TODO Auto-generated method stub
 			return aDao.updateReply(aReply);
+		}
+
+		@Override
+		public int deletePhoto(AlbumPhoto aPhoto) {
+			// TODO Auto-generated method stub
+			return aDao.deletePhoto(aPhoto);
 		}
 		
 }

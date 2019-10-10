@@ -10,14 +10,11 @@
 	<!-- <link rel="stylesheet" href="resources/css/album/album-detail.css"/> -->
 <!-- 	<script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-	
+	<%-- <script src='${contextPath }/resources/js/album/album-detail.js'></script> --%>
 </head>
 <body>
 <%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
-
-
-
-	<script type="text/javascript">
+<script>
         // Get the modal
 
         	$(function(){
@@ -244,8 +241,8 @@
 
             });
  
-        </script>
-        
+</script>
+
         <div class="container-fluid al-wrapper">
             <div class="row al-header">
                 <div class="col-md-3 al-info">
@@ -259,12 +256,14 @@
                     <div style="width: 50px; height: 50px; overflow: hidden; float:right; margin-left:10px;padding-right:0;">
                         <img src="resources/images/album/list.png" onclick="goList();">
                     </div>
-                    <div style="width: 30px; height: 30px; overflow: hidden; float:right; padding:5px;">
-                        <img src="resources/images/album/delete.png" onclick="goDelete();">
-                    </div>
-                    <div style="width: 30px; height: 30px; overflow: hidden;float:right; padding:5px;">
-                        <img src="resources/images/album/edit.png" onclick="goEdit();">
-                    </div>
+                    <c:if test="${ loginUser.memberId eq album.memberId }">
+	                    <div style="width: 30px; height: 30px; overflow: hidden; float:right; padding:5px;">
+	                        <img src="resources/images/album/delete.png" onclick="goDelete();">
+	                    </div>
+	                    <div style="width: 30px; height: 30px; overflow: hidden;float:right; padding:5px;">
+	                        <img src="resources/images/album/edit.png" onclick="goEdit();">
+	                    </div>
+                    </c:if>
                 </div>
             </div>
             <div class="row photo">
@@ -385,9 +384,6 @@ function goDelete(){
 	}
 }
 
-function reCancel(){
-	
-}
 
 </script>    
 </body>

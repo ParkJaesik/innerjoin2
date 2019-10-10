@@ -59,19 +59,21 @@ public class AlbumController {
 		System.out.println("==============================");
 		System.out.println("title : " + album.getAlbumTitle());
 		System.out.println("gno : " + album.getGroupNo());
+		System.out.println("getAlbumNo : " + album.getAlbumNo());
 		System.out.println("memberId : " + album.getMemberId());
 		System.out.println("files : " + files.size());
-	    for (MultipartFile mf : files) {
-	            String originFileName = mf.getOriginalFilename(); // ���� ���� ��
-	            long fileSize = mf.getSize(); // ���� ������
-
-	            System.out.println("originFileName : " + originFileName);
-	            System.out.println("fileSize : " + fileSize);
-	    }
+		
+		  for (MultipartFile mf : files) { 
+			  String originFileName = mf.getOriginalFilename(); // ���� ���� �� long fileSize = mf.getSize(); //
+			  long fileSize = mf.getSize();
+			  System.out.println("originFileName : " + originFileName);
+			  System.out.println("fileSize : " + fileSize); 
+		  }
+		 
 	    
 		/* int result = aService.multiImageUpload(files,title); */
 	
-	    int result = aService.insertAlbum(request,files,album);
+		int result = aService.insertAlbum(request,files,album);
 	    
 	    
 		return result;
@@ -107,6 +109,9 @@ public class AlbumController {
 		
 		Album album = aService.selectAlbum(albumNo); 
 		ArrayList<AlbumPhoto> photoList = aService.selectPhoto(albumNo);
+		for(AlbumPhoto a : photoList) {
+			System.out.println(a.toString());
+		}
 		/* System.out.println(albumNo); */
 		System.out.println("포토 리스트 : "+photoList.size());
 		System.out.println(album.toString());
@@ -132,6 +137,10 @@ public class AlbumController {
 		
 		Album album = aService.selectAlbum(albumNo); 
 		ArrayList<AlbumPhoto> photoList = aService.selectPhoto(albumNo);
+		
+		for(AlbumPhoto a : photoList) {
+			System.out.println(a.toString());
+		}
 		
 		if(album !=null) {
 		mv.addObject("album", album).addObject("photoList", photoList).addObject("currentPage", currentPage).setViewName("album/updateAlbumForm");
@@ -216,6 +225,39 @@ public class AlbumController {
 			/* aService.updateRcount(reply.getRefBid()); */
 			return "success";
 		}else {
+			return "fail";
+		}
+	}
+	
+	
+	// 사진 목록 출력	
+	@ResponseBody
+	@RequestMapping(value="pList.ij", produces="application/json; charset=utf-8")
+	public String getPhotoList(int albumNo){
+		
+		ArrayList<AlbumPhoto> list = aService.selectPhoto(albumNo);
+		for(AlbumPhoto p : list) {
+			System.out.println(p.toString());
+		}
+		// gson 생성시 형식 지정
+		/*
+		 * Gson gson = new
+		 * GsonBuilder().setDateFormat("yyyy-MM-dd', 'HH:mm:ss").create();
+		 */
+		return new Gson().toJson(list);
+	}
+	
+	// 사진 삭제
+	@ResponseBody
+	@RequestMapping("deletePhoto.ij")
+	public String deletePhoto(AlbumPhoto aPhoto) {
+
+		int result = aService.deletePhoto(aPhoto);
+
+		if (result > 0) {
+			/* aService.updateRcount(reply.getRefBid()); */
+			return "success";
+		} else {
 			return "fail";
 		}
 	}
