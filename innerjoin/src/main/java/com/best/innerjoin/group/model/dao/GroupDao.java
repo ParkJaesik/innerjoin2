@@ -55,4 +55,8 @@ public class GroupDao {
 
 	}
 
+	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
+		return (ArrayList)sqlSession.selectList("groupMapper.waitingGroupMemberList", groupNo);
+	}
+
 }
