@@ -1,6 +1,8 @@
 package com.best.innerjoin.member.model.dao;
 
+
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,17 +96,69 @@ public class MemberDao {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectWaitList", loginUser);
 	}
+	
+	/** 초대 거절
+	 * @param loginUser
+	 * @return result
+	 */
+	public int deleteInv(Map gMem) {
+		
+		return sqlSession.delete("memberMapper.deleteInv", gMem);
+	}
 
+	/** 초대 수락
+	 * @param gMem
+	 * @return
+	 */
+	public int updateInv(Map gMem) {
 
+		return sqlSession.update("memberMapper.updateInv", gMem);
+	}
+	
 	/** 회원 탈퇴
 	 * @param loginUser
 	 * @return result
 	 */
-	public int deletMember(Member loginUser) {
+	public int deleteMember(Member loginUser) {
 		
 		return sqlSession.update("memberMapper.deleteMember", loginUser);
 
 	}
+
+
+
+	/** 구글아이디로 가입이 되어 있는지 확인
+	 * @param memberId
+	 * @return result
+	 */
+	public String googleJoined(String memberId) {
+		return sqlSession.selectOne("memberMapper.googleJoined", memberId);
+	}
+
+	/** 구글로 회원가입
+	 * @param member
+	 * @return result
+	 */
+	public int googleJoin(Member member) {
+		return sqlSession.insert("memberMapper.googleJoin", member);
+	}
+	
+	/** 구글아이디로 로그인
+	 * @param member
+	 * @return loginUser
+	 */
+	public Member googleLogin(String memberId) {
+		return sqlSession.selectOne("memberMapper.googleLogin", memberId);
+	}
+
+
+
+
+	
+
+
+
+	
 
 
 

@@ -52,6 +52,34 @@ public interface MemberService {
 	 * @return result
 	 */
 	public abstract int deleteMember(Member loginUser);
+	
+	
+	/** 초대 거절
+	 * @param loginUser
+	 * @param gNo
+	 * @return result
+	 */
+	public abstract int deleteInv(Member loginUser, int gNo);
+
+	/** 초대 수락
+	 * @param loginUser
+	 * @param gNo
+	 * @return
+	 */
+	public abstract int updateInv(Member loginUser, int gNo);
+
+	/** 구글회원가입 여부
+	 * @param memberId
+	 * @return login_way
+	 */
+	public abstract String googleJoinedChk(String memberId);
+
+	/** 구글로그인
+	 * @param member
+	 * @return result
+	 */
+	public abstract Member googleLogin(Member member);
+
 
 	
 	

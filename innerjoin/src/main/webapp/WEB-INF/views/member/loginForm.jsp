@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<c:set var="clientId" value="474309519585-p4jv3ahraoefv61aaou6s7idiruq4rra.apps.googleusercontent.com"/>
+<c:set var="clientId" value="474309519585-p4jv3ahraoefv61aaou6s7idiruq4rra.apps.googleusercontent.com" scope="application" />
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -28,81 +28,145 @@
 		
 		<style type="text/css">
 			#customBtn {
-			  display: inline-block;
-			  margin-top: 15px;
+				display: inline-block;
+				margin-top: 15px;
 				background: #4285F4;
-			  color: white;
-			  width: 100%;
-			  height: 50px;
-			  border-radius: 5px;
-			  border: thin solid #4285F4;
-			  box-shadow: 1px 1px 1px grey;
-			  white-space: nowrap;
-			  padding: 0;
+				color: white;
+				width: 100%;
+				height: 50px;
+				border-radius: 5px;
+				border: thin solid #4285F4;
+				box-shadow: 1px 1px 1px grey;
+				white-space: nowrap;
+				padding: 0;
+				position: relative;
 			}
 			#customBtn:hover {
-			  cursor: pointer;
-			}
-			span.label {
-			  font-family: serif;
-			  font-weight: normal;
+				cursor: pointer;
 			}
 			span.icon {
-			 /*  background: white; */
-			  display: inline-block;
-			  vertical-align: middle;
-			  width: 48px;
-			  height: 48px;
-			  padding: 0;
-			  margin: 0;
+				/*  background: white; */
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				vertical-align: middle;
+				width: 48px;
+				height: 48px;
+				padding: 0;
+				margin: 0;
 			}
 			span.icon img{
 				width: 100%;
 				height: 100%;
 			}
 			span.buttonText {
-			  display: inline-block;
-			  width: 20rem;
-			  height: 100%;
-			  padding-top: 10px;
-			  padding-left: 9rem;
-			  padding-right: 42px;
-			  font-size: 14px;
-			  font-weight: bold;
-			  /* Use the Roboto font that is loaded in the <head> */
-			  font-family: 'Roboto', sans-serif;
-			  margin: 0 auto;
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				padding-top: 10px;
+				text-align: center;
+				font-size: 14px;
+				font-weight: bold;
+				/* Use the Roboto font that is loaded in the <head> */
+				font-family: 'Roboto', sans-serif;
+				margin: 0 auto;
 			}
-  		</style>
-  		
+		</style>
+		
   		     
-     		<script>
+		<script>
 			var googleUser = {};
 			var startApp = function() {
-			  gapi.load('auth2', function(){
-			    // Retrieve the singleton for the GoogleAuth library and set up the client.
-			    auth2 = gapi.auth2.init({
-			      client_id: '${clientId }',
-			      cookiepolicy: 'single_host_origin',
-			      // Request scopes in addition to 'profile' and 'email'
-			      scope: 'profile email'
-			    });
-			    attachSignin(document.getElementById('customBtn'));
-			  });
+				gapi.load('auth2', function(){
+					// Retrieve the singleton for the GoogleAuth library and set up the client.
+					auth2 = gapi.auth2.init({
+						client_id: '${clientId }',
+						cookiepolicy: 'single_host_origin',
+						// Request scopes in addition to 'profile' and 'email'
+						scope: 'profile email'
+					});
+					attachSignin(document.getElementById('customBtn'));
+				});
 			};
 
 			function attachSignin(element) {
-			  console.log(element.id);
-			  auth2.attachClickHandler(element, {},
-			      function(googleUser) {
-			        document.getElementById('name').innerText = "Signed in: " +
-			            googleUser.getBasicProfile().getName();
-			      },
-			      function(error) {
-			        alert(JSON.stringify(error, undefined, 2));
-			      }
-			   );
+				console.log(element.id);
+				auth2.attachClickHandler(element, {},
+					function(googleUser) {
+						var profile = googleUser.getBasicProfile();
+						var memberId = profile.getEmail();
+						var memberName = profile.getName();
+						var memberProPath = profile.getImageUrl();
+						
+						
+						// The ID token you need to pass to your backend:
+						var id_token = googleUser.getAuthResponse().id_token;
+						
+						var loginWay = googleJoinedChk(memberId);
+						console.log("loginWay : " +loginWay);
+						if(loginWay == undefined) loginWay = "";
+						if(loginWay=='E') {
+							alertMessage("일반 회원으로 가입된 메일입니다.");
+							$("#memberId").focus();
+							return false;
+						}
+						console.log("수정 " + loginWay);
+						var params = {"memberId": memberId, "memberName":memberName, 
+										"memberProPath": memberProPath, "loginWay":loginWay};
+						
+						postGoogleInfo(params);
+					},
+					function(error) {
+						alert(JSON.stringify(error, undefined, 2));
+						console.log("에러");
+					}
+				 );
 			}
+			
+			function postGoogleInfo(params) {
+			    
+			    var form = document.createElement("form");
+			    form.setAttribute("method", 'post');
+			    form.setAttribute("action", 'googleLogin.ij');
+			 
+			    //히든으로 값을 주입시킨다.
+			    for(var key in params) {
+			        var hiddenField = document.createElement("input");
+			        hiddenField.setAttribute("type", "hidden");
+			        hiddenField.setAttribute("name", key);
+			        hiddenField.setAttribute("value", params[key]);
+			 
+			        form.appendChild(hiddenField);
+			    }
+			 
+			    document.body.appendChild(form);
+				form.submit();
+			}
+			
+			function googleJoinedChk(memberId) {
+				var result;
+				$.ajax({
+					url: "googleJoinedChk.ij",
+					data: {memberId: memberId},
+					async: false, 
+					success: function(res) {
+						console.log("회원가입여부: " + res);
+						result = res;
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+				return result;
+			}
+			
+			function alertMessage(msg) {
+				Swal.fire({
+					text: msg,
+					width: '20rem'
+				});
+			}
+
 		</script>
 
 		

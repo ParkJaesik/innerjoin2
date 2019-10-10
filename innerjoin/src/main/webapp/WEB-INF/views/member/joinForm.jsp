@@ -9,7 +9,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-		<link rel="stylesheet" href="${contextPath}/resources/css/menubar.css" />
+		<link rel="stylesheet" href="${contextPath}/resources/css/common/menubar.css" />
 		<link rel="stylesheet" href="${contextPath}/resources/css/join.css">
 	</head>
 	<body class="no-sidebar is-preload">

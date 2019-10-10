@@ -2,7 +2,6 @@ package com.best.innerjoin.member.controller;
 
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -130,18 +128,47 @@ public class MemberController {
 		}
 		
 		// 신청 모임 목록
-		if(invList != null) {
-			mv.addObject("invList", invList).setViewName("member/myGroup");
+		if(waitList != null) {
+			mv.addObject("waitList", waitList).setViewName("member/myGroup");
 		} else {
 			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
 		}
 		
 		return mv;
-		
-		
-		
-		
 	}
+	
+	// 모임 초대 거절
+	@RequestMapping("invDeny.ij")
+	public String deleteInv(HttpServletRequest request, int gNo, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+
+		int result = mService.deleteInv(loginUser, gNo);
+		
+				
+		if(result > 0) {
+			return "redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg", "초대 거절  도중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+	
+	// 모임 초대 수락
+	@RequestMapping("invAccept.ij")
+	public String updateInv(HttpServletRequest request, int gNo, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		int result = mService.updateInv(loginUser, gNo);
+			
+		if(result > 0) {
+			return "redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg", "초대 수락 도중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+
 	
 	// 프로필 수정으로 이동
 	@RequestMapping("profileUpdateForm.ij")
@@ -230,5 +257,26 @@ public class MemberController {
 	}
 	
 	
-
+	// 구글회원가입 여부
+	@ResponseBody
+	@RequestMapping("googleJoinedChk.ij")
+	public String googleJoinedChk(String memberId) {
+		String isJoined = mService.googleJoinedChk(memberId);
+		System.out.println(isJoined);
+		return isJoined;
+	}
+	
+	// 구글로그인 
+	@RequestMapping("googleLogin.ij")
+	public String googleLogin(Member member, Model model, RedirectAttributes rd) {
+		Member loginUser = mService.googleLogin(member);
+		if(loginUser != null) {
+			model.addAttribute("loginUser", loginUser);
+			//return "home"; // forward 방식
+			return "redirect:/"; //
+		}else {
+			rd.addFlashAttribute("msg", "아이디 또는 비밀번호를 다시 확인하세요.");
+			return "redirect:loginForm.ij";
+		}
+	}
 }

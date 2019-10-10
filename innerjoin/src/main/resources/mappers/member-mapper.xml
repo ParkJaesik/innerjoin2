@@ -36,6 +36,8 @@
 		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
 		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
 	</resultMap>
+	
+	
   
   
   
@@ -46,7 +48,7 @@
 			
 	SELECT * FROM MEMBER
 	WHERE MEMBER_ID = #{memberId} 
-	AND MEMBER_STATUS_CODE != 3 
+	AND MEMBER_STATUS_CODE != 3 AND LOGIN_WAY = 'E'
 
   
   </select>
@@ -56,7 +58,7 @@
   	INSERT INTO MEMBER
   	VALUES(
   		#{memberId}, #{memberPwd}, #{memberName}, 'E'
-  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 2
+  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 1
   	)
   </insert>
   
@@ -80,20 +82,21 @@
   	SELECT MEMBER_JOIN_COUNT
   	FROM MEMBER
   	WHERE MEMBER_ID= #{memberId}
-  	<!-- AND 모임상태 != 탈퇴나  폐쇄  -->
   </select>
   
   <!-- 내 목록 조회 -->
   <select id="selectList" parameterType="Member" resultMap="groupResultSet">
-  	SELECT GROUP_NAME,GROUP_INFO, GROUP_ORIGIN_FILENAME
+  	SELECT *
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
+	AND LEVEL_CODE != 3
+	AND LEVEL_CODE != 4 
   </select>
   
   <!-- 초대받은 모임 목록 -->
   <select id="selectInvList" parameterType="Member" resultMap="groupResultSet">
-  	SELECT GROUP_NAME,GROUP_INFO, GROUP_ORIGIN_FILENAME
+  	SELECT *
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
@@ -102,12 +105,28 @@
   
   <!-- 신청 목록 -->
   <select id="selectWaitList" parameterType="Member" resultMap="groupResultSet">
-  	SELECT GROUP_NAME,GROUP_INFO, GROUP_ORIGIN_FILENAME
+  	SELECT *
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
     AND LEVEL_CODE = 4
   </select>
+  
+  <!-- 초대 거절 -->
+  <delete id="deleteInv" parameterType="map">
+  	DELETE FROM GROUP_MEMBER 
+    WHERE MEMBER_ID = #{memberId}
+    AND GROUP_NO = #{gNo}
+    AND LEVEL_CODE = 3
+  </delete>
+  
+  <!-- 초대 수락 -->
+  <update id="updateInv" parameterType="map">
+  	UPDATE GROUP_MEMBER 
+  	SET LEVEL_CODE = 2
+  	WHERE MEMBER_ID = #{memberId}
+  	AND GROUP_NO = #{gNo}
+  </update>
   
   <!-- 회원 탈퇴 -->
   <update id="deleteMember" parameterType="Member">
@@ -116,7 +135,29 @@
   	WHERE MEMBER_ID = #{memberId}
   </update>
   
+  <!-- 구글아이디 회원가입 여부 -->
+  <select id="googleJoined" parameterType="String" resultType="String">
+  	SELECT LOGIN_WAY
+  	FROM MEMBER
+  	WHERE MEMBER_ID = #{memberId}
+  </select>
   
+  <!-- 구글아이디 회원가입 -->
+  <insert id="googleJoin" parameterType="Member">
+   	INSERT INTO MEMBER
+  	VALUES(
+  		#{memberId}, '-1', #{memberName}, 'G'
+  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, #{memberProPath}, 1
+  	)
+  </insert>
+  
+  
+  <!-- 구글아이디로 로그인 -->
+  <select id="googleLogin" parameterType="String" resultMap="memberResultSet">
+  	SELECT * FROM MEMBER
+	WHERE MEMBER_ID = #{memberId} 
+	AND MEMBER_STATUS_CODE != 3 AND LOGIN_WAY = 'G'
+  </select>
   
   
 </mapper>
