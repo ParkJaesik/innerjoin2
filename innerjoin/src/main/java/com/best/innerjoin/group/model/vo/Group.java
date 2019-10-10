@@ -5,14 +5,6 @@ import java.util.Date;
 public class Group { // group VO
 	
 	private int gNo;
-	public String getDistrictName() {
-		return districtName;
-	}
-
-	public void setDistrictName(String districtName) {
-		this.districtName = districtName;
-	}
-
 	private String gHost;
 	private String gOpenStatus;
 	private String gName;
@@ -24,7 +16,7 @@ public class Group { // group VO
 	private int gStatus;
 	private int gCategoryCode;
 	private int gReptCount;
-	private String gOriginFileName;
+	private String filePath;
 	private String gRenameFileName;
 	private String districtName;
 
@@ -34,7 +26,7 @@ public class Group { // group VO
 	}
 
 	public Group(int gNo, String gHost, String gOpenStatus, String gName, int gLimit, String gInfo, int gMemCount,
-			Date gEnrollDate, int localCode, int gStatus, int gCategoryCode, int gReptCount, String gOriginFileName,
+			Date gEnrollDate, int localCode, int gStatus, int gCategoryCode, int gReptCount, String filePath,
 			String gRenameFileName,String districtName) {
 		super();
 		this.gNo = gNo;
@@ -49,11 +41,19 @@ public class Group { // group VO
 		this.gStatus = gStatus;
 		this.gCategoryCode = gCategoryCode;
 		this.gReptCount = gReptCount;
-		this.gOriginFileName = gOriginFileName;
+		this.filePath = filePath;
 		this.gRenameFileName = gRenameFileName;
 		this.districtName = districtName;
 		
 	}
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
 
 	public int getgNo() {
 		return gNo;
@@ -151,12 +151,12 @@ public class Group { // group VO
 		this.gReptCount = gReptCount;
 	}
 
-	public String getgOriginFileName() {
-		return gOriginFileName;
+	public String getfilePath() {
+		return filePath;
 	}
 
-	public void setgOriginFileName(String gOriginFileName) {
-		this.gOriginFileName = gOriginFileName;
+	public void setfilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
 	public String getgRenameFileName() {
@@ -172,7 +172,7 @@ public class Group { // group VO
 		return "Group [gNo=" + gNo + ", gHost=" + gHost + ", gOpenStatus=" + gOpenStatus + ", gName=" + gName
 				+ ", gLimit=" + gLimit + ", gInfo=" + gInfo + ", gMemCount=" + gMemCount + ", gEnrollDate="
 				+ gEnrollDate + ", localCode=" + localCode + ", gStatus=" + gStatus + ", gCategoryCode="
-				+ gCategoryCode + ", gReptCount=" + gReptCount + ", gOriginFileName=" + gOriginFileName
+				+ gCategoryCode + ", gReptCount=" + gReptCount + ", filePath=" + filePath
 				+ ", gRenameFileName=" + gRenameFileName + "]";
 	}
 

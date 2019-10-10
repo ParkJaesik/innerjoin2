@@ -28,74 +28,14 @@ public class GroupServiceImpl implements GroupService{
 
 	// 새로운 모임 생성
 	@Override
-	public int insertGroup(Group group, MultipartFile uploadFile, HttpServletRequest request) {
+	public int insertGroup(Group group) {
 	
 		group.setgInfo(group.getgInfo().replace("\n", "<br>"));
+		return gDao.insertGroup(group);
 		
 		
 		
-		String gRenameFileName = null;
 		
-		if(!!uploadFile.getOriginalFilename().equals("")) {
-			gRenameFileName = renameFile(uploadFile);
-			
-			group.setgOriginFileName(uploadFile.getOriginalFilename());
-			group.setgRenameFileName(gRenameFileName);
-			
-			
-		}
-		
-		int result = gDao.insertGroup(group);
-		
-		if(gRenameFileName != null && result ==1) {
-			result = saveFile(gRenameFileName, uploadFile, request);
-		}
-		
-		
-		return result ;
-
-	}
-
-	// 파일 저장 메소드
-	private int saveFile(String gRenameFileName, MultipartFile uploadFile, HttpServletRequest request) {
-		
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		
-		String savePath = root + "\\guploadFiles";
-		
-		File folder = new File(savePath);
-		
-		if(!folder.exists()) {
-			folder.mkdir();
-		}
-		
-		String filePath = folder + "\\" + gRenameFileName;
-		
-		int result = 0;
-		
-		try {
-			uploadFile.transferTo(new File(filePath));
-			
-			result = 0;
-			
-		}catch(Exception e) {
-			throw new GroupException("파일 전송 에러");
-			
-		}
-		
-		return result;
-	}
-
-	// 파일 변경 메소드
-	private String renameFile(MultipartFile file) {
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		
-		String gOriginFileName = file.getOriginalFilename();
-		
-		String gRenameFileName = sdf.format(new Date())+ "." + gOriginFileName.substring(gOriginFileName.lastIndexOf(".")+1);
-		
-		return gOriginFileName;
 	}
 
 	
@@ -137,6 +77,14 @@ public class GroupServiceImpl implements GroupService{
 		
 		return gDao.insertAlarm(memberId,host);
 
+	}
+
+	// 모임 회원 등급 조정
+	@Override
+	public int updateLevel(HttpServletRequest request, GroupMember gMember) {
+		
+		int result = gDao.updateLevel(gMember);
+		return 0;
 	}
 
 	

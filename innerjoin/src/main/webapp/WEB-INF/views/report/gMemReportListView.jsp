@@ -1,3 +1,6 @@
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -22,14 +25,14 @@
             <div class="div3">
                 <table>
                     <tr>
-                    	<th>회원번호</th>
+                    	<!-- <th>회원번호</th> -->
                         <th>아이디</th>
                         <th>신고받은 횟수</th>
                         <th>처리 상태</th>
                         <th>강퇴하기</th>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <!-- <td>1</td> -->
                         <td>qqq</td>
                         <td>2</td>
                         <td>처리</td>

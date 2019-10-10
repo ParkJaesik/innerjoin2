@@ -12,25 +12,28 @@ import com.best.innerjoin.group.model.vo.GroupMember;
 
 public interface GroupService {
 
-	int insertGroup(Group group, MultipartFile uploadFile, HttpServletRequest request);
+	public abstract int insertGroup(Group group);
 
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
-	Group goGroupPage(int gNo);
+	public abstract Group goGroupPage(int gNo);
 
 
-	Integer selectCode(String memberId, int gNo);
+	public abstract Integer selectCode(String memberId, int gNo);
 
 
-	int applyInsertGroup(String memberId, int gNo);
+	public abstract int applyInsertGroup(String memberId, int gNo);
 
 
 
 
-	int insertAlarm(String memberId, String host);
+	public abstract int insertAlarm(String memberId, String host);
 
 
-	ArrayList<GroupMember> groupMemberList(int groupNo);
+	public abstract ArrayList<GroupMember> groupMemberList(int groupNo);
+
+	//  회원 등급 조정
+	public abstract int updateLevel(HttpServletRequest request, GroupMember gMember);
 
 }
 
