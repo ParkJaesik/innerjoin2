@@ -79,7 +79,7 @@
 		</div>
 
 		<div id="group-menu-container">
-			<button type="button" class="btn btn-primary" id="group-btn-index">정보</button>
+			<button onclick="location.href='goGroupPage.ij?gNo=8';" type="button" class="btn btn-primary" id="group-btn-index">정보</button>
 
 			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
 			

@@ -6,15 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#group-btn-board {
+#group-btn-member {
 	background-color: #17A2B8 !important;
 	color: #FFFFFF !important;
 }
 </style>
 <title>Insert title here</title>
 </head>
-<c:set var="contextPath"
-	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 <title>Insert title here</title>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -34,7 +33,7 @@
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
 				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
-				<%@ include file="/WEB-INF/views/group/groupBoard.jsp" %>
+				<%@ include file="/WEB-INF/views/group/groupMemberWaiting.jsp" %>
 			</div>
 			<div class="col-md-1 aside">
 				<div id="groupChatWrapper">

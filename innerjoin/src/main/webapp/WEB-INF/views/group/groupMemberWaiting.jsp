@@ -13,11 +13,11 @@
 		<h1 align="center">회원</h1>
 		
 		<h5 align="right">
-			<a href="wgmlist.ij">대기중인 명단</a>
+			<a href="gmlist.ij">회원 명단</a>
 		</h5>
 		
 		<c:forEach var="m" items="${ list }">
-			<%-- <c:if test="${ m.levelCode eq 0 or m.levelCode eq 1 or m.levelCode eq 2 }"> --%>
+			<%-- <c:if test="${ m.levelCode eq 3 or m.levelCode eq 4 }"> --%>
 				<div id="member-part">
 					<div id="member">
 						<div id="member-image" class="rounded-circle">
@@ -29,14 +29,11 @@
 						</div>
 						
 						<div id="member-level">
-							<c:if test="${ m.levelCode == 0 }">
-								<c:set var="member" value="모임장"/>
+							<c:if test="${ m.levelCode == 3 }">
+								<c:set var="member" value="초대중인 회원"/>
 							</c:if>
-							<c:if test="${ m.levelCode == 1 }">
-								<c:set var="member" value="매니저"/>
-							</c:if>
-							<c:if test="${ m.levelCode == 2 }">
-								<c:set var="member" value="일반회원"/>
+							<c:if test="${ m.levelCode == 4 }">
+								<c:set var="member" value="가입 신청한 회원"/>
 							</c:if>
 							<span id="level">${ member }</span>
 						</div>

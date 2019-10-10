@@ -30,7 +30,6 @@ public class GroupController {
 	private AlarmService aService;
 	
 	
-	
 	@RequestMapping("ginsertForm.ij")
 	public String groupInsertForm() {
 		return "group/groupInsert";
@@ -91,10 +90,9 @@ public class GroupController {
 			}
 		}
 		
-		
-		
 		Group tempGroup = gService.goGroupPage(gNo);
 		System.out.println(groupMemberCode);
+		
 		
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
@@ -102,7 +100,7 @@ public class GroupController {
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
 		
-		return "group/groupIndex";
+		return "group/groupIndex+groupInfo";
 	}
 	
 	
@@ -134,7 +132,7 @@ public class GroupController {
 	}
 
 
-	// 그룹 회원 조회
+	// 그룹 회원 목록 조회
 	@RequestMapping("gmlist.ij")
 	public ModelAndView groupMemberList(ModelAndView mv, HttpServletRequest request) {
 		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
@@ -146,6 +144,23 @@ public class GroupController {
 			
 		} else {
 			mv.addObject("msg", "회원 목록 조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	// 대기중인 그룹 회원 목록 조회
+	@RequestMapping("wgmlist.ij")
+	public ModelAndView waitingGroupMemberList(ModelAndView mv, HttpServletRequest request) {
+		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		
+		ArrayList<GroupMember> list = gService.waitingGroupMemberList(groupNo);
+		
+		if (list != null) {
+			mv.addObject("list", list).setViewName("group/groupIndex+groupMemberWaiting");
+			
+		} else {
+			mv.addObject("msg", "대기중인 회원 목록 조회 실패").setViewName("common/errorPage");
 		}
 		
 		return mv;
