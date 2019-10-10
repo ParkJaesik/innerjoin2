@@ -233,7 +233,16 @@ public class GroupController {
 	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
 		
 		int result = gService.updateLevel(request, gMember);
-		return null;
+		
+		String path = null;
+		if(result > 0) {
+			path = "group/groupMember";
+		}else {
+			model.addAttribute("msg", "회원 등급 수정 실패");
+			path= "common/errorPage";
+		}
+		
+		return path;
 	}
 
 }
