@@ -9,13 +9,13 @@
 		<result property="gLimit" column="GROUP_LIMIT"/>
 		<result property="gInfo" column="GROUP_INFO"/>
 		<result property="gMemCount" column="GROUP_MEM_COUNT"/>
-		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
 		<result property="localCode" column="LOCAL_CODE"/>
 		<result property="gStatus" column="GROUP_STATUS"/>
 		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
-		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
-		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+		<result property="gFilePath" column="GROUP_FILE_PATH"/>
+		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
+		<result property="gModifyDate" column="GROUP_MODIFY_DATE"/>
 		<result property="districtName" column="DISTRICT_NAME"/>
 	</resultMap>
 	
@@ -37,23 +37,19 @@
   	
   	
   	<select id="selectGroup" parameterType="_int" resultMap="groupResultSet">
-  		SELECT GROUP_NO,GROUP_HOST,GROUP_OPEN_STATUS,GROUP_NAME,GROUP_LIMIT,GROUP_INFO,GROUP_MEM_COUNT,
-		LOCAL_CODE,GROUP_STATUS,GROUP_CATEGORY_CODE,GROUP_ORIGIN_FILENAME,GROUP_ENROLL_DATE,GROUP_MODIFY_DATE,DISTRICT_NAME
+  		SELECT GROUP_NO, GROUP_HOST, GROUP_OPEN_STATUS, GROUP_NAME, GROUP_LIMIT, GROUP_INFO, GROUP_MEM_COUNT,
+		LOCAL_CODE, GROUP_STATUS, GROUP_CATEGORY_CODE, GROUP_REPT_COUNT, GROUP_FILE_PATH, GROUP_ENROLL_DATE, GROUP_MODIFY_DATE, DISTRICT_NAME
 		FROM "GROUP"  
 		JOIN LOCAL_DISTRICT_CATEGORY ON "GROUP".GROUP_CATEGORY_CODE = LOCAL_DISTRICT_CATEGORY.DISTRICT_CODE
 		WHERE GROUP_NO= #{gNo}
-  	
   	</select>
   	
   	<select id="selectCode" parameterType="map" resultType="_int">
-  	
   		SELECT LEVEL_CODE FROM GROUP_MEMBER WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
   	</select>
   	
   	<insert id="applyInsertGroup" parameterType="map">
-  	
   		INSERT INTO GROUP_MEMBER VALUES(#{memberId},#{gNo},4,DEFAULT)
-  	
   	</insert>
   	
 	<!-- 그룹 회원 목록 조회 쿼리 -->

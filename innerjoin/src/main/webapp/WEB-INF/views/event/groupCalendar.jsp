@@ -5,6 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+#group-btn-schedule {
+	background-color: #17A2B8 !important;
+	color: #FFFFFF !important;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <c:set var="contextPath"
