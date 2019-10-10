@@ -24,22 +24,16 @@ public class GroupServiceImpl implements GroupService{
 	
 	@Autowired
 	private GroupDao gDao;
-	
 
 	// 새로운 모임 생성
 	@Override
 	public int insertGroup(Group group) {
-	
 		group.setgInfo(group.getgInfo().replace("\n", "<br>"));
+		
 		return gDao.insertGroup(group);
-		
-		
-		
-		
 	}
-
 	
-//	클릭한 그룹 페이지로 이동하는 메소드
+	// 클릭한 그룹 페이지로 이동하는 메소드
 	@Override
 	public Group goGroupPage(int gNo) {
 		
@@ -66,32 +60,28 @@ public class GroupServiceImpl implements GroupService{
 		return gDao.applyInsertGroup(codeMap);
 	}
 
+	
+	@Override
+	public int insertAlarm(String memberId, String host) {
+		return gDao.insertAlarm(memberId,host);
+	}
+
+	// 모임 회원 등급 조정
+	@Override
+	public int updateLevel(HttpServletRequest request, GroupMember gMember) {
+		int result = gDao.updateLevel(gMember);
+		
+		return 0;
+	}
+	
 	@Override
 	public ArrayList<GroupMember> groupMemberList(int groupNo) {
 		return gDao.groupMemberList(groupNo);
 	}
 	
 	@Override
-	public int insertAlarm(String memberId, String host) {
-		
-		
-		return gDao.insertAlarm(memberId,host);
-
-	}
-
-	// 모임 회원 등급 조정
-	@Override
-	public int updateLevel(HttpServletRequest request, GroupMember gMember) {
-		
-		int result = gDao.updateLevel(gMember);
-		return 0;
-
-	@Override
 	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
 		return gDao.waitingGroupMemberList(groupNo);
-
 	}
-
-	
 	
 }

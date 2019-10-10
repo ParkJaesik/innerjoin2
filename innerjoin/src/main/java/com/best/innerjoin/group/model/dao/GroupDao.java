@@ -40,11 +40,6 @@ public class GroupDao {
 		return sqlSession.insert("groupMapper.applyInsertGroup", codeMap);
 	}
 
-
-	public ArrayList<GroupMember> groupMemberList(int groupNo) {
-		return (ArrayList)sqlSession.selectList("groupMapper.groupMemberList", groupNo);
-	}
-
 	public int insertAlarm(String memberId, String host) {
 		Map<String,String> alarmMap = new HashMap<>();
 		alarmMap.put("memberId", memberId);
@@ -59,6 +54,16 @@ public class GroupDao {
 	public int updateLevel(GroupMember gMember) {
 		
 		return sqlSession.update("groupMapper.updateLevel", gMember);
+	}
+	
+	// 그룹 멤버 목록 조회 DAO
+	public ArrayList<GroupMember> groupMemberList(int groupNo) {
+		return (ArrayList)sqlSession.selectList("groupMapper.groupMemberList", groupNo);
+	}
+
+	// 그룹 가입 대기 멤버 목록 조회 DAO
+	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
+		return (ArrayList)sqlSession.selectList("groupMapper.waitingGroupMemberList", groupNo);
 	}
 
 }

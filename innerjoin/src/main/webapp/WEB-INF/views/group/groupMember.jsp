@@ -42,44 +42,9 @@
 						</div>
 		
 						<div id="member-button">
-
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">회원등급</button>
-							
-							<!-- 모달창 -->
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							  <div class="modal-dialog modal-dialog-centered" role="document">
-							    <div class="modal-content">
-							      <form action="memlevel.ij">
-								      <div class="modal-header">
-								        <h5 class="modal-title" id="exampleModalLongTitle" style="float: left;">Modal title</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right;">
-								          <span aria-hidden="true">&times;</span>
-								        </button>
-								      </div>
-								      <div class="modal-body">
-								        <div class="div1" >
-											<input type="text" readonly value="">							
-										</div>
-										<div class="div2" style="margin-top: 10%; margin-left: 0;">
-											모임장<input type="radio" name="levelCode">
-											매니저<input type="radio" name="levelCode">
-											일반회원<input type="radio" name="levelCode">
-										</div>
-								      </div>
-								      <div class="modal-footer">
-								        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								        <button type="submit" class="btn btn-primary">수정</button>
-								      </div>
-								 </form>
-							    </div>
-							  </div>
-							</div>
-
 						<c:if test="">
 						</c:if>
 							<button type="button" class="btn btn-primary" id="member-btn-level">회원등급</button>
-
 							<button type="button" class="btn btn-primary" id="member-btn-report">신고하기</button>
 						</div>
 					</div>

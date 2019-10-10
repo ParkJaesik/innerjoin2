@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#group-btn-schedule {
+#group-btn-index {
 	background-color: #17A2B8 !important;
 	color: #FFFFFF !important;
 }
@@ -16,9 +16,6 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <title>Insert title here</title>
-
-	<!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
-	<script src='${contextPath }/resources/js/event/calendarEvent.js'></script> 
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
@@ -26,7 +23,6 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <body>
-	
 
 	<div class="container-fluid" id="all-wrapper">
 		<div class="row" id="header-wrapper">
@@ -37,10 +33,8 @@
 		<div class="row" id="body-wrapper">
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
-				<%-- <%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%> --%>
-				<jsp:include page="/WEB-INF/views/group/groupMenubar.jsp"/>
-				<%@ include file="/WEB-INF/views/event/calendar.jsp" %>
-
+				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
+				<%@ include file="/WEB-INF/views/group/groupInfo.jsp" %>
 			</div>
 			<div class="col-md-1 aside">
 				<div id="groupChatWrapper">
