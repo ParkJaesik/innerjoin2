@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Repository("gDao")
 public class GroupDao {
@@ -64,6 +65,11 @@ public class GroupDao {
 	// 그룹 가입 대기 멤버 목록 조회 DAO
 	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
 		return (ArrayList)sqlSession.selectList("groupMapper.waitingGroupMemberList", groupNo);
+	}
+
+	public int insertGroupMemberAdmin(Member loginUser) {
+		String memberId = loginUser.getMemberId();
+		return sqlSession.insert("groupMapper.insertGroupMemberAdmin", memberId);
 	}
 
 }
