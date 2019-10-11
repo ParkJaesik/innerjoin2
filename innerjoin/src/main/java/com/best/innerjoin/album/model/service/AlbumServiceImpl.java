@@ -101,25 +101,26 @@ public class AlbumServiceImpl implements AlbumService {
 		 * System.out.println("photoList.isEmpty() : "+photoList.isEmpty());
 		 */			
 			int albumResult = 0;
+			// 앨범 썸네일 지정 및 앨범 등록
 			if(album.getAlbumNo() == 0) {
-				// 앨범 썸네일 지정
 				album.setAlbumThumbnail(photoList.get(0).getPhotoRename());
 				albumResult = aDao.insertAlbum(album);
-			}
-			int photoResult = 0;
-			
-			// 사진 수정인 경우
-			if(albumResult == 0) {
+			}else {
+				album.setAlbumThumbnail(photoList.get(0).getPhotoRename());
 				for(int i = 0; i < photoList.size();i++) {
 					photoList.get(i).setAlbumNo(album.getAlbumNo());
 				/*
 				 * System.out.println("insert service에서 사진 확인"+photoList.get(i).toString());
 				 */					
 				}
+				albumResult = aDao.updateAlbum(album);
 			}
 			
+			
+			int photoResult = 0;
+			
 			// 앨범 최초 등록이거나 앨범 수정일 때 사진 등록 수행
-			if(albumResult == 1 || album.getAlbumNo() != 0 ) {
+			if(albumResult == 1) {
 				for(int i = 0; i < photoList.size();i++) {
 					photoList.get(i).setAlbumNo(album.getAlbumNo());
 				/* System.out.println("insert service에서 사진 확인"+photoList.get(i).toString()); */

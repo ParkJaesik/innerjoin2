@@ -116,4 +116,13 @@
 		WHERE ALBUM_NO = #{albumNo} 
 		AND PHOTO_NO = #{photoNo}
 	</update>
+	
+	<update id="updateAlbum" parameterType="ALbum">
+		UPDATE ALBUM
+		SET ALBUM_TITLE = #{albumTitle},
+		ALBUM_MODIFY_DATE = SYSDATE,
+		ALBUM_THUMBNAIL =  #{albumThumbnail}
+		WHERE ALBUM_NO = #{albumNo}
+	</update>
+	
 </mapper>
