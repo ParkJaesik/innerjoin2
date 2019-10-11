@@ -32,13 +32,13 @@
 		<result property="gLimit" column="GROUP_LIMIT"/>
 		<result property="gInfo" column="GROUP_INFO"/>
 		<result property="gMemCount" column="GROUP_MEM_COUNT"/>
-		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
 		<result property="localCode" column="LOCAL_CODE"/>
 		<result property="gStatus" column="GROUP_STATUS"/>
 		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
-		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
-		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+		<result property="filePath" column="GROUP_FILE_PATH"/>
+		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
+		<result property="gModifyDate" column="GROUP_MODIFY_DATE"/>
 	</resultMap>
 	
 	
