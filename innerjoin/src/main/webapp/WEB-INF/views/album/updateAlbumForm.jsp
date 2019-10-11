@@ -93,7 +93,7 @@
 		<!-- </div> -->
 	</div>
 	
-	          <script>
+	<script>
             //임의의 file object영역
            
             var files = {};
@@ -292,7 +292,7 @@
                 	  return false;
                   }
                     
-                  if(Object.keys(files).length == 0 && $("#preview").children().length == 0){
+                  if(Object.keys(files).length == 0 || $("#preview").children().length == 0){
                 	  alert('이미지를 업로드 해주세요');
                 	  return false;
                   }

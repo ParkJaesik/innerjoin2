@@ -1,18 +1,18 @@
 package com.best.innerjoin.group.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -156,11 +156,13 @@ public class GroupController {
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
 		
 		String date = "2019-10";
+		
 		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
 		
+
 		model.addAttribute("event", eList);
 		
-		return "group/groupIndex+groupInfo";
+		return "group/groupInfo";
 	}
 	
 	
@@ -200,7 +202,7 @@ public class GroupController {
 		ArrayList<GroupMember> list = gService.groupMemberList(groupNo);
 		
 		if (list != null) {
-			mv.addObject("list", list).setViewName("group/groupIndex+groupMember");
+			mv.addObject("list", list).setViewName("group/groupMember");
 			
 		} else {
 			mv.addObject("msg", "회원 목록 조회 실패").setViewName("common/errorPage");
@@ -217,7 +219,7 @@ public class GroupController {
 		ArrayList<GroupMember> list = gService.waitingGroupMemberList(groupNo);
 		
 		if (list != null) {
-			mv.addObject("list", list).setViewName("group/groupIndex+groupMemberWaiting");
+			mv.addObject("list", list).setViewName("group/groupMemberWaiting");
 			
 		} else {
 			mv.addObject("msg", "대기중인 회원 목록 조회 실패").setViewName("common/errorPage");

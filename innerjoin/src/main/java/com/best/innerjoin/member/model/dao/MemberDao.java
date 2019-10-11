@@ -38,8 +38,12 @@ public class MemberDao {
 	 * @return
 	 */
 	public int insertMember(Member member) {
-		
 		return sqlSession.insert("memberMapper.insertMember",member);
+	}
+	
+	public int insertAdditional(Member member) {
+		System.out.println(member.getMemberBirthday());
+		return sqlSession.insert("memberMapper.insertAdditional",member);
 	}
 
 	/** email 중복체크
@@ -115,6 +119,15 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateInv", gMem);
 	}
 	
+	/** 모입가입 신청 취소
+	 * @param gMem
+	 * @return result
+	 */
+	public int deleteWait(Map gMem) {
+
+		return sqlSession.delete("memberMapper.deleteWait", gMem);
+	}
+	
 	/** 회원 탈퇴
 	 * @param loginUser
 	 * @return result
@@ -124,7 +137,6 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", loginUser);
 
 	}
-
 
 
 	/** 구글아이디로 가입이 되어 있는지 확인
@@ -150,6 +162,7 @@ public class MemberDao {
 	public Member googleLogin(String memberId) {
 		return sqlSession.selectOne("memberMapper.googleLogin", memberId);
 	}
+
 
 	
 

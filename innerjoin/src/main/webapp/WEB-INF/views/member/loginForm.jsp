@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <c:set var="clientId" value="474309519585-p4jv3ahraoefv61aaou6s7idiruq4rra.apps.googleusercontent.com" scope="application" />
 <!DOCTYPE HTML>
-<!--
-	Strongly Typed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 	
@@ -20,9 +16,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<link rel="stylesheet" href="${contextPath}/resources/css/main.css"/>
-		<link rel="stylesheet" href="${contextPath}/resources/css/join.css"/>
+    
+    <script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/common/index.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css">
 		
 				
 		<style type="text/css">
@@ -168,104 +170,74 @@
 
 		</script>
 		
-		
-		
-	</head>
-	<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
+</head>
+<body>
 
-			<!-- Header -->
-				<section id="header">
-					<div class="container">
+<div class="container-fluid" id="all-wrapper">
 
-						<!-- Logo -->
-							<h1 id="logo"><a href="index.html">Inner Join</a></h1>
-							
-
-						<!-- Nav -->
-							
-
-					</div>
-				</section>
-
-			<!-- Main -->
-				<section id="main">
-					<div class="container" style="box-shadow: none;">
-						<div id="content">
-
-							<header>
-								<h2>로그인 </h2>
-							</header>
-									
-							<form action="login.ij" method="post">
-								<div>
-								<!-- <h4>회원가입</h4> -->
-									<div class="input-group input-group-icon">
-										<input type="text" placeholder="Email Adress" name="memberId"/>
-										<br>
-										<!-- <span aling="center">출력메세지</span> -->
-									</div>
-									<div>
-										<div class="input-group input-group-icon">
-											<input type="password" placeholder="Password" name="memberPwd"/>
-											<c:if test="${ !empty msg }">
-											<span  aling="center" style="color: #df5849;">${ msg }</span>
-											</c:if>
-										</div>
-									</div>
-									
-								</div>
-								
-								<button id="submit-btn" style="float: right; padding: 15px 20px 15px 20px; width: 100%;"><div class="col-4">로그인</button>
-								
-								<div id="gSignInWrapper">
-									<div id="customBtn" class="customGPlusSignIn">
-										<span class="icon">
-											<img src='resources/images/btn_google_icon.svg'>
-										</span>
-										<span class="buttonText" >구글로 로그인</span>
-									</div>
-								</div>
-								
-							</form>
-							
-							<div>
-								<a href="joinForm.ij" style="margin-left: 50px; margin-top: 10px; float: left; ">회원가입</a>
-								
-								<a href="findPwdForm.ij" style="margin-right: 50px; margin-top: 10px; float: right;">비밀번호 찾기</a>
-							</div>
-						</div>
-					</div>
-				</section>
-			
+		<!-- 페이지 헤더부분 -->
+		<div class="row" id="header-wrapper">
+			<div class="col-md-12" id="all-hearder">
+				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+			</div>
 		</div>
-		
-				
-   
-     <script>
-   /*     function onSignIn(googleUser) {
-         // Useful data for your client-side scripts:
-         var profile = googleUser.getBasicProfile();
-         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-         console.log('Full Name: ' + profile.getName());
-         console.log('Given Name: ' + profile.getGivenName());
-         console.log('Family Name: ' + profile.getFamilyName());
-         console.log("Image URL: " + profile.getImageUrl());
-         console.log("Email: " + profile.getEmail());
 
-         // The ID token you need to pass to your backend:
-         var id_token = googleUser.getAuthResponse().id_token;
-         console.log("ID Token: " + id_token);
-       }
-       
-       function signOut() {
-           var auth2 = gapi.auth2.getAuthInstance();
-           auth2.signOut().then(function () {
-              console.log('User signed out.');
-           });
-           auth2.disconnect();
-        } 
-         */
+		<!-- 페이지 바디부분 -->
+		<div class="row" id="body-wrapper">
+			<div class="col-md-1 aside"></div>
+			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
+			<div class="col-md-10" id="body-content">
+				<!-- 메인페이지 content 부분 -->
+				 
+				  <div class="row">
+				  	<div class="col-4"></div>
+				  	<div class="col-4">
+				  		<div class="margin" style="margin: 50px;"></div>
+				  		<form action="login.ij" method="post">
+							<div class="input-group input-group-icon">
+								<input type="text" placeholder="Email Adress" name="memberId"/>
+								<br>
+								<!-- <span aling="center">출력메세지</span> -->
+
+							</div>
+							<div class="input-group input-group-icon">
+								<input type="password" placeholder="Password" name="memberPwd"/>
+								<c:if test="${ !empty msg }">
+								<span  aling="center" style="color: #df5849;">${ msg }</span>
+								</c:if>
+							</div>
+							<button id="submit-btn" style="float: right; padding: 15px 20px 15px 20px; width: 100%;" >
+								로그인
+							</button>    
+        
+						</form>
+               <div id="gSignInWrapper">
+                <div id="customBtn" class="customGPlusSignIn">
+                  <span class="icon">
+                    <img src='resources/images/btn_google_icon.svg'>
+                  </span>
+                  <span class="buttonText" >구글로 로그인</span>
+                </div>
+              </div>
+						<div>
+							<a href="joinForm.ij" style="margin-left: 50px; margin-top: 10px; float: left; ">회원가입</a>
+							<a href="findPwdForm.ij" style="margin-right: 50px; margin-top: 10px; float: right;">비밀번호 찾기</a>
+						</div>
+					</div>		
+			
+				  	</div>
+				  	<div class="col-4"></div>
+				  </div>
+				</div>
+				<div class="col-md-1 aside"></div>
+			</div>
+	</div>
+	<div class="margin" style="margin: 50px;"></div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+      
+         
+     <script>
+
        startApp();
      
      </script>
@@ -277,6 +249,7 @@
 		<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
 		<script src="${contextPath}/resources/js/util.js"></script>
 		<script src="${contextPath}/resources/js/main.js"></script>
+
 
 	</body>
 </html>

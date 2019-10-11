@@ -64,9 +64,10 @@ public interface MemberService {
 	/** 초대 수락
 	 * @param loginUser
 	 * @param gNo
-	 * @return
+	 * @return result
 	 */
 	public abstract int updateInv(Member loginUser, int gNo);
+
 
 
 	/** 구글회원가입 여부
@@ -81,6 +82,16 @@ public interface MemberService {
 	 */
 	public abstract Member googleLogin(Member member);
 
+
+
+	/** 모임가입 신청  취소
+	 * @param loginUser
+	 * @param gNo
+	 * @return result
+	 */
+	public abstract int deleteWait(Member loginUser, int gNo);
+
+	
 
 	
 	

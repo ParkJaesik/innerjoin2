@@ -1,79 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/main.css"/>
-<link rel="stylesheet" href="${contextPath}/resources/css/join.css"/>
-<title>비밀번호 찾기</title>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>정보 수정</title>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/common/index.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<title>정보수정</title>
+<style type="text/css">
+	/* *{
+	 	 border: 1px solid black;
+	 }  */
+</style>
 </head>
-<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
+<body>
 
-			<!-- Header -->
-				<section id="header">
-					<div class="container">
+<div class="container-fluid" id="all-wrapper">
 
-						<!-- Logo -->
-							<h1 id="logo"><a href="index.html">Inner Join</a></h1>
-							
-
-						<!-- Nav -->
-							
-
-					</div>
-				</section>
-
-			<!-- Main -->
-				<section id="main">
-					<div class="container" style="box-shadow: none;">
-						<div id="content">
-
-							<header>
-								<h2>비밀번호 찾기 </h2>
-							</header>
-									
-							<form action="findPwd.ij" method="post">
-								<div>
-								<!-- <h4>회원가입</h4> -->
-									<div class="input-group input-group-icon">
-										<input type="email" placeholder="Email Adress"/>
-										<span aling="center">출력메세지</span>
-									</div>
-									<!-- <div>
-										<div class="input-group input-group-icon">
-											<input type="password" placeholder="Password"/>
-											<span aling="center">출력메세지</span>
-										</div>
-									</div> -->
-									
-								</div>
-								
-								<button id="submit-btn" style="float: right; padding: 15px 20px 15px 20px; width: 100%;"><div class="col-4">비밀번호 찾기</button>
-								
-							</form>
-							<!-- <div>
-								<a href="#" style="margin-top: 10px; margin-left: 50px; float: left;">회원가입</a>
-								<a href="#" style="margin-right: 50px; margin-top: 10px; float: right;">비밀번호 찾기</a>
-							</div> -->
-						</div>
-					</div>
-				</section>
-			
+		<!-- 페이지 헤더부분 -->
+		<div class="row" id="header-wrapper">
+			<div class="col-md-12" id="all-hearder">
+				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+			</div>
 		</div>
 
-		<!-- Scripts -->
-		<script src="${contextPath}/resources/js/jquery.min.js"></script>
-		<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
-		<script src="${contextPath}/resources/js/browser.min.js"></script>
-		<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
-		<script src="${contextPath}/resources/js/util.js"></script>
-		<script src="${contextPath}/resources/js/main.js"></script>
+		<!-- 페이지 바디부분 -->
+		<div class="row" id="body-wrapper">
+			<div class="col-md-1 aside"></div>
+			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
+			<div class="col-md-10" id="body-content">
+				<!-- 메인페이지 content 부분 -->
+				
+				 
+				  <div class="row">
+				  	<div class="col-4"></div>
+				  	<div class="col-4">
+				  	
+		                <div class="margin" style="margin: 50px;"></div>
+				  		<form action="findPwd.ij" method="post">
+			             
+			                <div class="row">
+			                    <h3>비밀번호 확인</h3>
+			                    <div class="input-group input-group-icon">
+									<input type="password" placeholder="Password"/>
+									<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }">
+									&nbsp;<span id="pwdCheck1">&nbsp;</span>
+									
+								</div>
+			                    <div class="input-group input-group-icon">
+									<input type="password" placeholder="Email Adress"/>
+									<span aling="center">출력메세지</span>
+								</div>
+							</div>
+			              	<button id="submit-btn" style="width: 100%">확인</button>
+							
+							
+			            </form>
+				  	</div>
+				  	<div class="col-4"></div>
+				  </div>
+				</div>
+				<div class="col-md-1 aside"></div>
+			</div>
+	</div>
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</body>
 </html>
+
+
+
+
+
+
+
+

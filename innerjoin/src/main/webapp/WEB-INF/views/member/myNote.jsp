@@ -1,153 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/menubar.css"/>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>Insert title here</title>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/common/index.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
 
 <title>마이페이지</title>
 <style>
-			#profile{
-				padding-top: 150px !important; 
-				padding-bottom: 50px !important; 
-			}
+.nList{
+	 	width: 100% !important;
+	}
+	table {
+		width: 100%;
+		margin-bottom: 2em;
+		border-spacing: 0;
+	}
+	table tr{
+		border-bottom: 1px dotted #a2a2a2;
+	}
 
-			.mMenu{
-				padding : 5px 20px 5px 20px;
-			}
-
-			.name-line{
-				border-bottom: 2px solid rgba(151, 150, 150, 0.808);
-			}
-			.detail-name{
-				margin-bottom: 0;
-			}
-			.sub-menu{
-				text-align: center;
-			}
-			
-			.invite-name{
-				border-bottom: 1px dashed #7777767e;
-			}
-			.note{
-				margin-top: 40px;
-				font-size: 14px;
-			}
-			.note #send{
-				width: 15%;
-			}
-
-			.note #note-context{
-				width: 70%;
-			}
-			
-		</style>
+	table td {
+		padding: 0.75em 1em 0.75em 1em;
+	}
+	.send{
+		width: 13em;
+	}
+	.noteDate{
+		width: 10em;
+	}
+</style>
 </head>
-<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
+<body>
 
-			<!-- Header -->
-			<section id="header">
-				<div class="container" id="profile" >
-					<nav id="nav">
-						<ul>
-							<a href="#"><img id="ij-logo" src="${contextPath }/resources/images/innerJoin.png"></a>
-							<li class="menu"><a class="icon solid fa-search" href="#"><span>Search</span></a></li>
-							<li class="menu"><a class="icon solid fa-envelope" href="#"><span>News</span></a></li>
-                            <li class="menu"><a class="icon solid fa-home" href="myGroupForm.ij"><span>MyPage</span></a></li>
-						</ul>
-					</nav>
-					<div>
+<div class="container-fluid" id="all-wrapper">
 
-						<form action="">
-							<div>
-								
-								<div>
-									<!-- 달력 -->
-									
-								</div>
-
-								<div>자기소개란</div>
-								<ul class="actions">
-									<li><a href="profileUpdateForm.ij" class="button icon solid mMenu">프로필 수정</a></li>
-								</ul>
-							</div>
-						</form>
-			
-						<div>
-							캘린더
-						</div>
-							
-					</div>
-
-				<!-- 메뉴바 -->
-
-				</div>
-			</section>
-			<div class="container">
-				<header>
-					<ul class="sub-menu actions">
-						<li><a href="myGroupForm.ij" class="form-button-submit button icon solid mMenu" >내 모임</a></li>
-						<li><a href=" " class="form-button-submit button icon solid mMenu" >쪽지함</a></li>
-						<li><a href="myNoteForm.ij" class="form-button-submit button icon solid mMenu" >알림함</a></li>
-						<li><a href="infoUpdateForm.ij" class="form-button-submit button icon solid mMenu" >정보수정</a></li>
-					</ul>
-				</header> 
+		<!-- 페이지 헤더부분 -->
+		<div class="row" id="header-wrapper">
+			<div class="col-md-12" id="all-hearder">
+				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 			</div>
-			
-			<!-- Main -->
-			<section id="main">
-				<div class="container">
-					<header class="name-line">
-						<h2 class="detail-name" style="display: inline;"> 쪽지함 </h2>
-					</header>
-					
-					<div class="note">
-						<table class="note">
-							<tr>
-								<td id="send">보낸 사람</td>
-								<td id="note-context">내용</td>
-								<td>날짜</td>
-							</tr>
+		</div>
 
-						<!-- 받은 쪽지 목록  반복-->
-							<tr>
-								<td ><a href="">보낸 사람</a></td>
-								<td><a href="">내용</a></td>
-								<td>날짜</td>
-							</tr>
-						<!----------------- 반복-->
-
-						</table>
-					</div>
-
-								
-
-					
-						
-									
-						
+		<!-- 페이지 바디부분 -->
+		<div class="row" id="body-wrapper">
+			<div class="col-md-1 aside"></div>
+			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
+			<div class="col-md-10" id="body-content">
+				<!-- 메인페이지 content 부분 -->
+				  <jsp:include page="/WEB-INF/views/member/myPageHeaber.jsp"/>
+				 
+				  <div class="row">
+				  	<div class="col-1"></div>
+				  	<div class="col-10">
+		                <div class="margin" style="margin: 50px;"></div>
+				  	<div class="mgTitle">
+				           		<h3>쪽지함</h3>
+			                </div>
+		                <div class="nTable">
+							<table class="nList">
+								<tr>
+									<td class="send">보낸 사람</td>
+									<td class="note-context">내용</td>
+									<td class="noteDate">날짜</td>
+								</tr>
+	
+							<!-- 받은 쪽지 목록  반복-->
+								<tr>
+									<td><a href="">보낸 사람</a></td>
+									<td><a href="">내용</a></td>
+									<td>날짜</td>
+								</tr>
+							<!----------------- 반복-->
+	
+							</table>
+						</div>
+				  		
+				  	</div>
+				  	<div class="col-1"></div>
+				  </div>
 				</div>
-			</section>
-
-
-
-			
-
+				<div class="col-md-1 aside"></div>
+			</div>
 	</div>
-
-		<!-- Scripts -->
-		<script src="${contextPath}/resources/js/jquery.min.js"></script>
-		<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
-		<script src="${contextPath}/resources/js/browser.min.js"></script>
-		<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
-		<script src="${contextPath}/resources/js/util.js"></script>
-		<script src="${contextPath}/resources/js/main.js"></script>
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</body>
 </html>
+
+
+

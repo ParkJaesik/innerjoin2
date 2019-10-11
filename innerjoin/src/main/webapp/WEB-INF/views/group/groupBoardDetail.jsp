@@ -5,89 +5,122 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+	#group-btn-board {
+		background-color: #17A2B8 !important;
+		color: #FFFFFF !important;
+}
+</style>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/board/groupBoardDetail-style.css"
 	type="text/css">
 <title>Group Board List</title>
 </head>
 <body>
-	<div id="board-container">
-		<h1 align="center">게시판</h1>
-		<div id="board-part">
-			<div id="board-count">
-				<span id="count">VIEW ${ board.boardCount }</span>
-			</div>
-
-			<div id="board-date">
-				<span id="date">${ board.boardCreateDate }</span>
-			</div>
-
-			<div id="board-writer">
-				<span id="writer">${ board.memberName }</span>
-			</div>
-
-			<div id="board-title">
-				<span id="title">${ board.boardTitle }</span>
-			</div>
-
-			<div id="board-content">
-				<span id="content">${ board.boardContent }</span>
+	<div class="container-fluid" id="all-wrapper">
+		<div class="row" id="header-wrapper">
+			<div class="col-md-12" id="all-hearder">
+				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 			</div>
 		</div>
 
-		<div id="attachment-part">
-			<div id="board-attachment">
-				<span id="attachment">첨부파일 : </span>
-				<c:if test="${ !empty board.boardAttaOrigin }">
-					<a href="${ contextPath }/resources/buploadFiles/${ board.boardAttaRename }" download>${ board.boardAttaOrigin }</a>
-				</c:if>
-			</div>
-		</div>
+		<div class="row" id="body-wrapper">
+			<div class="col-md-1 aside"></div>
 
-		<div id="button-part">
-			<div id="board-button">
+			<div class="col-md-10" id="body-content">
+				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
+				
+				<div id="board-container">
+					<h1 align="center">게시판</h1>
+					<div id="board-part">
+						<div id="board-count">
+							<span id="count">VIEW ${ board.boardCount }</span>
+						</div>
 			
-				<c:url var="boardModify" value="bmodifyView.ij">
-					<c:param name="boardNo" value="${ board.boardNo }"/>
-					<c:param name="page" value="${ currentPage }"/>
-				</c:url>
+						<div id="board-date">
+							<span id="date">${ board.boardCreateDate }</span>
+						</div>
+			
+						<div id="board-writer">
+							<span id="writer">${ board.memberName }</span>
+						</div>
+			
+						<div id="board-title">
+							<span id="title">${ board.boardTitle }</span>
+						</div>
+			
+						<div id="board-content">
+							<span id="content">${ board.boardContent }</span>
+						</div>
+					</div>
+			
+					<div id="attachment-part">
+						<div id="board-attachment">
+							<span id="attachment">첨부파일 : </span>
+							<c:if test="${ !empty board.boardAttaOrigin }">
+								<a href="${ contextPath }/resources/buploadFiles/${ board.boardAttaRename }" download>${ board.boardAttaOrigin }</a>
+							</c:if>
+						</div>
+					</div>
+			
+					<div id="button-part">
+						<div id="board-button">
+							<c:url var="boardModify" value="bmodifyView.ij">
+								<c:param name="boardNo" value="${ board.boardNo }"/>
+								<c:param name="page" value="${ currentPage }"/>
+							</c:url>
+							
+							<c:url var="boardDelete" value="bdelete.ij">
+								<c:param name="boardNo" value="${ board.boardNo }"/>
+							</c:url>
+							
+							<c:url var="boardList" value="blist.ij">
+								<c:param name="page" value="${ currentPage }"/>
+							</c:url>
+							
+							<button onclick="location.href='${ boardModify }';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
+							
+							<button onclick="location.href='${ boardDelete }';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
+							
+							<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
+						</div>
+					</div>
+					
+					<div id="reply-part">
+						<div id="reply-input-part">
+							<div id="reply-input-text">
+								<textarea id="reply"></textarea>
+							</div>
 				
-				<c:url var="boardDelete" value="bdelete.ij">
-					<c:param name="boardNo" value="${ board.boardNo }"/>
-				</c:url>
+							<div id="reply-input-button">
+								<button type="button" class="btn btn-primary" id="reply-btn-input">댓글등록</button>
+							</div>
+						</div>
 				
-				<c:url var="boardList" value="blist.ij">
-					<c:param name="page" value="${ currentPage }"/>
-				</c:url>
+						<div id="reply-count">
+							<span id="replyCount"></span>
+						</div>
 				
-				<button onclick="location.href='${ boardModify }';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
+						<div id="reply-view-container">
+								
+						</div>
+					</div>
+				</div>
+			</div>
 				
-				<button onclick="location.href='${ boardDelete }';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
-				
-				<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
+			<div class="col-md-1 aside">
+				<div id="groupChatWrapper">
+					<%@ include file="/WEB-INF/views/chat/chat.jsp"%>
+				</div>
 			</div>
 		</div>
-		
-		<div id="reply-part">
-				<div id="reply-input-part">
-					<div id="reply-input-text">
-						<textarea id="reply"></textarea>
-					</div>
-	
-					<div id="reply-input-button">
-						<button type="button" class="btn btn-primary" id="reply-btn-input">댓글등록</button>
-					</div>
-				</div>
-	
-				<div id="reply-count">
-					<span id="replyCount"></span>
-				</div>
-	
-				<div id="reply-view-container">
-					
-				</div>
+
+		<div class="row" id="footer-wrapper">
+			<div class="col-md-12" id="all-footer"></div>
 		</div>
 	</div>
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
 	<script>
 		function replyList() {
