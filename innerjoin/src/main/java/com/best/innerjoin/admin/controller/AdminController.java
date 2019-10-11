@@ -25,11 +25,6 @@ public class AdminController {
 	public String manageMemberView() {
 		return "admin/manageMember";
 	}
-	
-	@RequestMapping("googleLogin.ij")
-	public String googleLogin() {
-		return "member/loginTest";
-	}
 
 
 }

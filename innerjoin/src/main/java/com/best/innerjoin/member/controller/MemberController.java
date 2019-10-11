@@ -260,5 +260,31 @@ public class MemberController {
 	}
 	
 	
+	
+	
+	// 구글회원가입 여부
+	@ResponseBody
+	@RequestMapping("googleJoinedChk.ij")
+	public String googleJoinedChk(String memberId) {
+		String isJoined = mService.googleJoinedChk(memberId);
+		System.out.println(isJoined);
+		return isJoined;
+	}
+	
+	// 구글로그인 
+	@RequestMapping("googleLogin.ij")
+	public String googleLogin(Member member, Model model, RedirectAttributes rd) {
+		Member loginUser = mService.googleLogin(member);
+		if(loginUser != null) {
+			model.addAttribute("loginUser", loginUser);
+			//return "home"; // forward 방식
+			return "redirect:/"; //
+		}else {
+			rd.addFlashAttribute("msg", "아이디 또는 비밀번호를 다시 확인하세요.");
+			return "redirect:loginForm.ij";
+		}
+	}
+	
+	
 
 }

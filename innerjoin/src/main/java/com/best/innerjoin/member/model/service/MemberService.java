@@ -68,7 +68,20 @@ public interface MemberService {
 	 */
 	public abstract int updateInv(Member loginUser, int gNo);
 
-	
+
+	/** 구글회원가입 여부
+	 * @param memberId
+	 * @return login_way
+	 */
+	public abstract String googleJoinedChk(String memberId);
+
+	/** 구글로그인
+	 * @param member
+	 * @return result
+	 */
+	public abstract Member googleLogin(Member member);
+
+
 	
 	
 
