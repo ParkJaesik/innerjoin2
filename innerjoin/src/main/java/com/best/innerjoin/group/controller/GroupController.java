@@ -1,18 +1,18 @@
 package com.best.innerjoin.group.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -156,8 +156,10 @@ public class GroupController {
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
 		
 		String date = "2019-10";
+		
 		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
 		
+
 		model.addAttribute("event", eList);
 		
 		return "group/groupIndex+groupInfo";
