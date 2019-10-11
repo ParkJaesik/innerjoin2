@@ -83,12 +83,12 @@
         							$reInfo = $("<div class='row' id='re-info'>");
                 					$reContent = $("<div class='row' id='re-content'>");
         							$arWriter = $("<div class=\"col-md-3\">").text(list[i].arWriter);
-        							$arCreateDate = $("<div align=\"right\" class=\"col-md-9\">").text(list[i].arCreateDate);
+        							$arCreateDate = $("<div align=\"right\" class=\"col-md-9\">").text(list[i].arModifyDate);
 
         							
         							if('${loginUser.memberId}' == list[i].arWriter){
         								/* var rId = list[i].arNo; */
-        								$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arCreateDate);
+        								$arCreateDate = $("<div align=\"right\" class=\"col-md-7\">").text(list[i].arModifyDate);
 	        							var $editBox = $("<div class=\"col-md-1\">");
 	        							var $edit = $("<img id=\""+list[i].arNo+"\" class='edit' src=\"resources/images/album/edit.png\">");
 	        							var $deleteBox = $("<div class=\"col-md-1\">");
@@ -157,12 +157,12 @@
     			    	var groupNo = ${album.groupNo};
     			    	var arNo = $(this).attr('id');
     			    
-    			    	alert(albumNo + ", " + groupNo + ", id = " + arNo);
+    			    	/* alert(albumNo + ", " + groupNo + ", id = " + arNo); */
     					$.ajax({
     						url: "deleteReply.ij",
     						data : {albumNo : albumNo, groupNo : groupNo, arNo:arNo},
 							success: function(result){
-								console.log(result);
+								/* console.log(result); */
 	        					if(result == 'success'){
 	        						
 	        						// 댓글 작성 부분 초기화
@@ -250,7 +250,6 @@
                     <h6>by. ${album.memberId}</h6>
                 </div>
                 <div class="col-md-4 al-title">
-                    <h1 align="right">${album.albumTitle}</h1>
                 </div>
                 <div class="col-md-5 al-list">
                     <div style="width: 50px; height: 50px; overflow: hidden; float:right; margin-left:10px;padding-right:0;">
@@ -265,6 +264,9 @@
 	                    </div>
                     </c:if>
                 </div>
+            </div>
+            <div class="row">
+            	<h1 align="center">${album.albumTitle}</h1>
             </div>
             <div class="row photo">
                 <div class="col-md-12 al-photo" style="/* width: 100%; min-height: 500px;  */overflow: hidden">

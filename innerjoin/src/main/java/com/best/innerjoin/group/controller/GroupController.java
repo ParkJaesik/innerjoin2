@@ -166,7 +166,7 @@ public class GroupController {
 		
 		model.addAttribute("event", eList);
 		
-		return "group/groupIndex+groupInfo";
+		return "group/groupInfo";
 	}
 	
 	
@@ -206,7 +206,7 @@ public class GroupController {
 		ArrayList<GroupMember> list = gService.groupMemberList(groupNo);
 		
 		if (list != null) {
-			mv.addObject("list", list).setViewName("group/groupIndex+groupMember");
+			mv.addObject("list", list).setViewName("group/groupMember");
 			
 		} else {
 			mv.addObject("msg", "회원 목록 조회 실패").setViewName("common/errorPage");
@@ -223,7 +223,7 @@ public class GroupController {
 		ArrayList<GroupMember> list = gService.waitingGroupMemberList(groupNo);
 		
 		if (list != null) {
-			mv.addObject("list", list).setViewName("group/groupIndex+groupMemberWaiting");
+			mv.addObject("list", list).setViewName("group/groupMemberWaiting");
 			
 		} else {
 			mv.addObject("msg", "대기중인 회원 목록 조회 실패").setViewName("common/errorPage");

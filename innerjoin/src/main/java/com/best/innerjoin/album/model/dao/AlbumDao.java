@@ -135,4 +135,15 @@ public class AlbumDao {
 		return sqlSession.update("albumMapper.deletePhoto", aPhoto);
 	}
 
+	/** 앨범 수정 DAO
+	 * @param album
+	 * @return
+	 */
+	public int updateAlbum(Album album) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("albumMapper.updateAlbum", album);
+	}
+
+
+
 }

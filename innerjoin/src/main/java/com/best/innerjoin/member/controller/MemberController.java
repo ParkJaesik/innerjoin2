@@ -1,6 +1,7 @@
 package com.best.innerjoin.member.controller;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -63,10 +64,11 @@ public class MemberController {
 
 	// 회원가입
 	@RequestMapping(value="join.ij", method=RequestMethod.POST)
-	public String insertMember(Member member, Model model, String memberBirthday1, String memberBirthday2, String memberBirthday3) {
-		System.out.println(member);
+	public String insertMember(Member member, Model model, String birthday1, String birthday2, String birthday3) {
 		
-		member.setMemberBirthday(memberBirthday1 + memberBirthday2 + memberBirthday3);
+		if(!birthday1.equals("") && !birthday2.equals("") && !birthday3.equals("")) {
+			member.setMemberBirthday(birthday1 + "/" + birthday2 + "/" + birthday3);
+		}
 		
 		int result = mService.insertMember(member);
 		
@@ -168,6 +170,21 @@ public class MemberController {
 			return "redirect:myGroupForm.ij";
 		}else {
 			model.addAttribute("msg", "초대 수락 도중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+	
+	// 모임 가입신청 취소
+	@RequestMapping("waitCancel.ij")
+	public String waitCancel(HttpServletRequest request, int gNo, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		int result = mService.deleteWait(loginUser, gNo);
+		
+		if(result > 0) {
+			return "redirect:myGroupForm.ij";
+		}else {
+			model.addAttribute("msg","취소 도중 오류 발생");
 			return "common/errorPage";
 		}
 	}
