@@ -17,6 +17,10 @@
   	<result property="memberReptCount" column="MEMBER_REPT_COUNT"/>
   	<result property="memberProPath" column="MEMBER_PRO_PATH"/>
   	<result property="memberStatusCode" column="MEMBER_STATUS_CODE"/>
+  	<result property="memberIntroduce" column="MEMBER_INTRODUCE"/>
+  	<result property="memberBirthday" column="MEMBER_BIRTHDAY"/>
+  	<result property="memberGender" column="MEMBER_GENDER"/>
+  	<result property="memberOpenStatus" column="MEMBER_OPEN_STATUS"/>
   </resultMap>
   
   
@@ -42,27 +46,36 @@
   
   
   
+	<!-- 		
+	SELECT * FROM MEMBER
+	WHERE MEMBER_ID = #{memberId} 
+	AND MEMBER_STATUS_CODE != 3  -->
   
   <select id="loginMember" parameterType="Member" 
 			resultMap="memberResultSet">
-			
-	SELECT * FROM MEMBER
+	SELECT *
+	FROM MEMBER
+	LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
 	WHERE MEMBER_ID = #{memberId} 
-	AND MEMBER_STATUS_CODE != 3 
-
-  
+    AND MEMBER_STATUS_CODE != 3
   </select>
   
   <!-- 회원가입  -->
   <insert id="insertMember" parameterType="Member" >
-  	INSERT INTO MEMBER
-  	VALUES(
-  		#{memberId}, #{memberPwd}, #{memberName}, 'E'
-  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 2
-  	)
+  	INSERT INTO 
+	  	MEMBER
+	  	VALUES(
+	  		#{memberId}, #{memberPwd}, #{memberName}, 'E'
+	  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 2
+	  	)
   </insert>
-  
-  
+  <insert id="insertAdditional" parameterType="Member">
+  	INSERT INTO
+  		MEMBER_ADD_INFO
+  		VALUES(
+  			#{memberId}, null, #{memberBirthday}, #{memberGender}, 'N'
+  		)
+  </insert>  
   <!-- email 중복체크 -->
   <select id="checkIdDup" parameterType="string" resultType="_int">
   	SELECT COUNT(*)
@@ -127,6 +140,16 @@
   	WHERE MEMBER_ID = #{memberId}
   	AND GROUP_NO = #{gNo}
   </update>
+  
+  <!-- 모임 신청 취소 -->
+  <delete id="deleteWait" parameterType="map">
+  	DELETE FROM GROUP_MEMBER 
+    WHERE MEMBER_ID = #{memberId}
+    AND GROUP_NO = #{gNo}
+    AND LEVEL_CODE = 4
+  </delete>
+  
+  
   
   <!-- 회원 탈퇴 -->
   <update id="deleteMember" parameterType="Member">

@@ -13,7 +13,7 @@ public class Member {
     private int memberReptCount; 
     private String memberProPath;
     private int memberStatusCode;
-	private String memberIntoroduce;
+	private String memberIntroduce;
 	private String memberBirthday;
 	private char memberGender;
 	private char memberOpenStatus;
@@ -23,7 +23,7 @@ public class Member {
 	
 	public Member(String memberId, String memberPwd, String memberName, String loginWay, String memberModifyDate,
 			String memberEnrollDate, int memberHostCount, int memberJoinCount, int memberReptCount,
-			String memberProPath, int memberStatusCode, String memberIntoroduce, String memberBirthday,
+			String memberProPath, int memberStatusCode, String memberIntroduce, String memberBirthday,
 			char memberGender, char memberOpenStatus) {
 		super();
 		this.memberId = memberId;
@@ -37,7 +37,7 @@ public class Member {
 		this.memberReptCount = memberReptCount;
 		this.memberProPath = memberProPath;
 		this.memberStatusCode = memberStatusCode;
-		this.memberIntoroduce = memberIntoroduce;
+		this.memberIntroduce = memberIntroduce;
 		this.memberBirthday = memberBirthday;
 		this.memberGender = memberGender;
 		this.memberOpenStatus = memberOpenStatus;
@@ -127,12 +127,12 @@ public class Member {
 		this.memberStatusCode = memberStatusCode;
 	}
 	
-	public String getMemberIntoroduce() {
-		return memberIntoroduce;
+	public String getmemberIntroduce() {
+		return memberIntroduce;
 	}
 
-	public void setMemberIntoroduce(String memberIntoroduce) {
-		this.memberIntoroduce = memberIntoroduce;
+	public void setmemberIntroduce(String memberIntroduce) {
+		this.memberIntroduce = memberIntroduce;
 	}
 
 	public String getMemberBirthday() {
@@ -165,7 +165,7 @@ public class Member {
 				+ ", loginWay=" + loginWay + ", memberModifyDate=" + memberModifyDate + ", memberEnrollDate="
 				+ memberEnrollDate + ", memberHostCount=" + memberHostCount + ", memberJoinCount=" + memberJoinCount
 				+ ", memberReptCount=" + memberReptCount + ", memberProPath=" + memberProPath + ", memberStatusCode="
-				+ memberStatusCode + ", memberIntoroduce=" + memberIntoroduce + ", memberBirthday=" + memberBirthday
+				+ memberStatusCode + ", memberIntroduce=" + memberIntroduce + ", memberBirthday=" + memberBirthday
 				+ ", memberGender=" + memberGender + ", memberOpenStatus=" + memberOpenStatus + "]";
 	}
 	

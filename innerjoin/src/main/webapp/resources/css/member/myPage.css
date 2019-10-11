@@ -58,6 +58,9 @@ div{
 	
 }
 
+
+
+
 /* 버튼 */
 input[type="button"],
 input[type="submit"],
@@ -274,4 +277,5 @@ button:active,
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-   
+
+
