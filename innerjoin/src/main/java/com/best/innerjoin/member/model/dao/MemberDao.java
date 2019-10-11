@@ -139,13 +139,29 @@ public class MemberDao {
 	}
 
 
+	/** 구글아이디로 가입이 되어 있는지 확인
+	 * @param memberId
+	 * @return result
+	 */
+	public String googleJoined(String memberId) {
+		return sqlSession.selectOne("memberMapper.googleJoined", memberId);
+	}
 
-
-
-
-
+	/** 구글로 회원가입
+	 * @param member
+	 * @return result
+	 */
+	public int googleJoin(Member member) {
+		return sqlSession.insert("memberMapper.googleJoin", member);
+	}
 	
-
+	/** 구글아이디로 로그인
+	 * @param member
+	 * @return loginUser
+	 */
+	public Member googleLogin(String memberId) {
+		return sqlSession.selectOne("memberMapper.googleLogin", memberId);
+	}
 
 
 	
