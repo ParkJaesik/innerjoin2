@@ -135,7 +135,7 @@
 				success : function(list) {
 					if(list.length>0){
 						$.each(list, function(i){
-							$content = '<div class="reply-view" align="center"><table><tr>';
+							$content = '<div class="reply-view" align="center" style="margin-top:10px;"><table><tr>';
 							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
 							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
 							$content += '<a href="javascript:update('+list[i].replyNo+');">수정</a>&nbsp;&nbsp;';
@@ -146,7 +146,7 @@
 							$content += '</table></div>';
 							$wrapper.append($content);
 						});
-					}
+					} 
 				}
 			});
 		}
