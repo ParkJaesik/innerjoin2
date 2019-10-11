@@ -18,6 +18,7 @@ import com.best.innerjoin.group.model.dao.GroupDao;
 import com.best.innerjoin.group.model.exception.GroupException;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Service("gService")
 public class GroupServiceImpl implements GroupService{
@@ -82,6 +83,11 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
 		return gDao.waitingGroupMemberList(groupNo);
+	}
+
+	@Override
+	public int insertGroupMemberAdmin(Member loginUser) {
+		return gDao.insertGroupMemberAdmin(loginUser);
 	}
 	
 }

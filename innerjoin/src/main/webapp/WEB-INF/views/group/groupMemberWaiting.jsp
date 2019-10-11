@@ -40,14 +40,18 @@
 		
 						<div id="member-button">
 						<c:if test="">
+							<button type="button" class="btn btn-primary" id="member-btn-accept">수락하기</button>
+							<button type="button" class="btn btn-primary" id="member-btn-reject">거절하기</button>
 						</c:if>
-							<button type="button" class="btn btn-primary" id="member-btn-level">회원등급</button>
-							<button type="button" class="btn btn-primary" id="member-btn-report">신고하기</button>
 						</div>
 					</div>
 				</div><br>
 			<%-- </c:if> --%>
 		</c:forEach>
 	</div>
+	
+	<script>
+		
+	</script>
 </body>
 </html>

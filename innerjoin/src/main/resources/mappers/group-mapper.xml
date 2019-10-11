@@ -73,6 +73,11 @@
 		FROM GROUP_MEMBER JOIN MEMBER USING(MEMBER_ID)
 		WHERE GROUP_NO = #{groupNo} AND (LEVEL_CODE = 3 OR LEVEL_CODE= 4)
 	</select>
+	
+	<!-- 모임생성 성공시 관리자로 로그인유저정보 등록 -->
+	<insert id="insertGroupMemberAdmin" parameterType="string">
+		INSERT INTO GROUP_MEMBER VALUES(#{memberId},SEQ_GNO.CURRVAL,0,DEFAULT)
+	</insert>
 
 </mapper>
 

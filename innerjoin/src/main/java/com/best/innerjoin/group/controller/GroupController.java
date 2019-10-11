@@ -53,11 +53,17 @@ public class GroupController {
 			}
 		}
 		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
 		int result = gService.insertGroup(group);
 
 		
 		String path= null;
 		if(result>0) {
+			
+			//모임 생성 성공시 group-member테이블에 관리자로 행추가 
+			int result2 = gService.insertGroupMemberAdmin(loginUser);
+			
 			path="group/groupIndex";
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");

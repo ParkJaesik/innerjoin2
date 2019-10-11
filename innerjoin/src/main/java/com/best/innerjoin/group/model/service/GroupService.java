@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 public interface GroupService {
 
@@ -37,5 +38,7 @@ public interface GroupService {
 	 * @return list
 	 */
 	public abstract ArrayList<GroupMember> waitingGroupMemberList(int groupNo);
+
+	public abstract int insertGroupMemberAdmin(Member loginUser);
 }
 
