@@ -106,6 +106,16 @@ public class AlbumServiceImpl implements AlbumService {
 				albumResult = aDao.insertAlbum(album);
 			}
 			int photoResult = 0;
+			
+			// 사진 수정인 경우
+			if(albumResult == 0) {
+				for(int i = 0; i < photoList.size();i++) {
+					photoList.get(i).setAlbumNo(album.getAlbumNo());
+					System.out.println("insert service에서 사진 확인"+photoList.get(i).toString());
+					
+				}
+			}
+			
 			if(albumResult == 1 || album.getAlbumNo() != 0 ) {
 				for(int i = 0; i < photoList.size();i++) {
 					photoList.get(i).setAlbumNo(album.getAlbumNo());

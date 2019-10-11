@@ -241,7 +241,7 @@
                 console.log(files);
                 
                 
-                $("#preview .preview-box[value=" + imgNum + "]").remove();
+                $("#preview .previewBox[value=" + imgNum + "]").remove();
                 //console.log(files[imgNum-1]);
                 console.log(Object.keys(files).length);
                 //console.log(--previewIndex);
