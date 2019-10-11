@@ -93,7 +93,7 @@
 		<!-- </div> -->
 	</div>
 	
-	          <script>
+	<script>
             //임의의 file object영역
            
             var files = {};

@@ -53,6 +53,7 @@
 		WHERE GROUP_NO = #{gno} 
 			AND (TO_CHAR(EVENT_START_DAY, 'YYYY-MM') = #{date}
 			OR TO_CHAR(EVENT_END_DAY, 'YYYY-MM') = #{date})
+		ORDER BY 1 DESC
 	</select>
 	
 	<select id="selectEvent" parameterType="String" resultMap="eventResultSet">
