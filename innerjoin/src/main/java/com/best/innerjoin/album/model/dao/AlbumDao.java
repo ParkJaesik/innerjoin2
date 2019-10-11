@@ -117,4 +117,22 @@ public class AlbumDao {
 		return sqlSession.update("albumMapper.deleteReply", aReply);
 	}
 
+	/** 댓글 수정 DAO
+	 * @param aReply
+	 * @return
+	 */
+	public int updateReply(AlbumReply aReply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("albumMapper.updateReply", aReply);
+	}
+
+	/** 사진 삭제 DAO
+	 * @param aPhoto
+	 * @return
+	 */
+	public int deletePhoto(AlbumPhoto aPhoto) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("albumMapper.deletePhoto", aPhoto);
+	}
+
 }

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-        <link rel="stylesheet" href="resources/css/album/album-add.css"/>
+        <link rel="stylesheet" href="resources/css/album/album-update.css"/>
         <!-- 임시 css 추가 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -13,15 +15,29 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <title>Insert title here</title>
- 
+<style>
+	#selectOption button{
+		float:left;
+		margin:10px;
+	}
+</style>
 </head>
 <body>
-<%@ include file="../group/groupMenubar.jsp" %>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
 <script>
 	console.log('addAlbum groupNo:'+'${groupNo}');
 	console.log('addAlbum memberId:'+'${memberId}');
 	console.log('addAlbum memberId:'+'${param.page}');
+	
+	$(function(){
+       	$("#new").click(function(){
+           	/* alert(".new 클릭!"); */
+           	$(".custom-file").css("display","block");
+        });
+	});
 </script>  
+
+
 	<div class="container-fluid add-wrapper">
 		<!-- <div class="row"> -->
 			<div class="col-md-12">
@@ -36,22 +52,40 @@
 							<div id="album_attach" class="col-md-8">
 								<h2 display="inline-block">앨범이름</h2>
 								<input type="text" class="form-control" name="albumTitle" maxlength="50" value="${album.albumTitle }" required><br>
-								<h2 display="inline-block">사진추가</h2>
-								<div class="custom-file">
+								<div class="row">
+									<div class="col-md-12" id="selectOption">
+									<!-- <button class="origin btn btn-warning">사진삭제</button> -->
+									<button id="new" class="btn btn-warning">사진추가</button>
+									</div>
+								</div>
+								<div class="custom-file" style="display:none">
 									<input id="uploadInputBox" class="custom-file-input"  aria-describedby="inputGroupFileAddon01"  type="file" name="filedata" multiple />	
 									<label class="custom-file-label" for="uploadInputBox">Choose file</label>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<button class="submit float_right btn btn-warning">앨범수정</button>
-								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page} + '&groupNo='+${groupNo}">수정취소</button>
+								<button class="float_right btn btn-warning" onclick="location.href='albumListView.ij?page='+${param.page} + '&groupNo='+${album.groupNo}">수정취소</button>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div id="preview" class="col-md-12">
-					</div>
+<%-- 					<c:forEach var="p" items="${photoList}" varStatus="status">
+						
+						<div class="preview-box" value="${p.photoNo}">
+							<div>
+								<img id="${p.photoNo}" class="thumbnail" src="${p.photoRename}">
+							</div>
+							<p>${p.photoOriginName }</p>
+							<a href="#" value="${p.photoNo}" onclick="deletePhoto(this)">삭제</a>
+						</div>
+						
+						
+					</c:forEach> --%>
+
+				</div>
 					<!-- multipart 업로드시 영역 -->
                 	<form id="uploadForm" action="addPhoto.ij" method="post" style="display: none;" enctype="multipart/form-data"/>
 				</div>
@@ -61,12 +95,13 @@
 	
 	          <script>
             //임의의 file object영역
+           
             var files = {};
             var previewIndex = 0;
             var previewIndex2 = 0;
-            var photoList = ${photoList};
-            	console.log(Object.keys(photoList).length)
-            $(function(){
+            /* var photoList = ${photoList};
+            	console.log(Object.keys(photoList).length) */
+           /*  $(function(){
             	$.each(photoList,function(index, photoRename){
             		var imgNum2 = previewIndex2++;
 	                $("#preview").append(
@@ -79,23 +114,77 @@
 	                        "</div>"
 	                );
             	});
-            });
+            }); */
      
-                //preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
-            function deletePreview2(obj) {
+            
+          	getPhotoList('${album.albumNo}');
+            
+    		// 사진 리스트 조회 함수
+    		function getPhotoList(albumNo){
+    			$.ajax({
+    				url : "pList.ij",
+    				data : {albumNo : albumNo},
+    				dataType : "json",
+    				success : function(list){
+     					var $preview = $("#preview");
+    					var $previewBox;
+    					var $div;
+    					var $img;
+						var $p;
+						var $a;
+    					$preview.empty();
+    					
+    						$.each(list,function(i,v){
+    							
+    							console.log(list[i]);
+    							$previewBox = $("<div class=\"previewBox\" value=\""+list[i].photoNo+"\">");
+    							$div = $("<div>");
+    							$img=$("<img id=\""+list[i].photoNo+"\" class='thumbnail' src=\"resources/auploadFiles/"+list[i].photoRename+"\">");
+    							$p = $("<p>");
+    							var originName = list[i].photoOriginName;
+    							$p.text(originName);
+    							$a = $("<a href='#' value=\""+list[i].photoNo+"\" onclick='deletePhoto(this)'>");
+    							$a.text("삭제");
+    							$div.append($img);
+    							$previewBox.append($div).append($p).append($a);
+    							
+    							$preview.append($previewBox);
+    						
+    						});
+    					
+    				}
+    			});
+    		}
+            
+            //기존 preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
+            function deletePhoto(obj) {
                     var imgNum = obj.attributes['value'].value;
-                    console.log("삭제하려는 요소")
-                    console.log(files[imgNum]);
+                    var albumNo = ${album.albumNo};
                     
-                    console.log("삭제 전 files 객체")
-    				console.log(files);
-                   
-                    console.log("삭제 후 files 객체")
-    				delete photoList[imgNum];	
-                    console.log(files);
+                    /* alert("imgNum : "+imgNum + ", albumNo : " + albumNo); */
+                    
+                    if(confirm("정말 삭제하시겠습니까?")){
+                    	$.ajax({
+            				url: "deletePhoto.ij",
+            				data : {albumNo : albumNo,photoNo : imgNum},
+            				type : "post",
+            				success : function(data){
+            					if(data == 'success'){
+            						
+            						// 댓글 작성 부분 초기화
+            						alert("사진 삭제 성공!");
+                        			$(".previewBox[value=" + imgNum + "]").remove();
+            					}
+            				},
+            				error : function(e){
+            					console.log("Ajax 통신 실패");
+            				}
+            			}); 
+                        
+                    	
+                    }
                     
                     
-                    $("#preview .preview-box[value=" + imgNum + "]").remove();
                     //console.log(files[imgNum-1]);
                     console.log(Object.keys(files).length);
                     //console.log(--previewIndex);
@@ -124,7 +213,7 @@
 	            reader.onload = function(img) {
 	            	var imgNum = previewIndex++;
 	                $("#preview").append(
-	                        "<div class=\"preview-box\" value=\"" + imgNum +"\">" +
+	                        "<div class=\"previewBox\" value=\"" + imgNum +"\">" +
 	                        "<div><img class=\"thumbnail\" src=\"" + img.target.result + "\"\/></div>" +
 	                        "<p>" + file.name + "</p>" +
 	                        "<a href=\"#\" value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">" +
@@ -155,7 +244,7 @@
                 console.log(files);
                 
                 
-                $("#preview .preview-box[value=" + imgNum + "]").remove();
+                $("#preview .previewBox[value=" + imgNum + "]").remove();
                 //console.log(files[imgNum-1]);
                 console.log(Object.keys(files).length);
                 //console.log(--previewIndex);
@@ -198,12 +287,12 @@
                         formData.append('files',files[index]);
                     }  */
                   
-                  if(title.length <= 5){
+                  if(title.length < 1){
                 	  alert('제목을 입력해주세요');
                 	  return false;
                   }
                     
-                  if(Object.keys(files).length == 0){
+                  if(Object.keys(files).length == 0 && $("#preview").children().length == 0){
                 	  alert('이미지를 업로드 해주세요');
                 	  return false;
                   }
@@ -213,9 +302,12 @@
                   }
                   
       
+                    if('${album.albumNo}' != ''){
+                    	formData.append("albumNo",parseInt('${album.albumNo}'));
+                    }
                     formData.append("albumTitle",title);
-                    formData.append("groupNo",parseInt('${groupNo}'));
-                    formData.append("memberId",'${memberId}');
+                    formData.append("groupNo",parseInt('${album.groupNo}'));
+                    formData.append("memberId",'${album.memberId}');
 /* 			        for (var value of formData.get("files")) {
 
                     	  console.log(value);
@@ -262,9 +354,9 @@
 	                            // 알람을 위한 채팅 동작.
 	                            
 	                            /* websocket 관련 필요 코드 */
-	                            socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName);
+	                            /* socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName); */
 	                            
-	                           goList();
+	                           goDetail();
 	                        }
 	                    }
 	                    //전송실패에대한 핸들링은 고려하지 않음
@@ -276,9 +368,11 @@
                 });
             });
             
-            function goList(){
-            	 location.href="albumListView.ij?groupNo="+${groupNo} + "&page=" + ${currentPage};
+            function goDetail(){
+            	 location.href="albumDetailView.ij?albumNo="+${album.albumNo} + "&page=" + ${currentPage};
             }
+            
+            
         </script>
 </body>
 </html>

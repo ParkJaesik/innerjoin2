@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,12 +121,12 @@
                                 <label>장소</label>
                             </div>
                             <div class="div2">
-                                <select id="citysel" name="localCode">
+                                <select id="citysel" name="">
                                     <option value="city">도시를 선택해주세요.</option>
                                     <option value="0">서울특별시</option>
                                 </select>
-                                <select id="guSel" name="districtName">
-                                    <option value="gu">구를 선택해주세요.</option>
+                                <select id="guSel" name="localCode">
+                                    <option value="-1">구를 선택해주세요.</option>
                                     <option value="0">도봉구</option>
                                     <option value="1">강북구</option>
                                     <option value="2">노원구</option>

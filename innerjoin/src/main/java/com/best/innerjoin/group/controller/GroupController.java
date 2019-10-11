@@ -1,5 +1,6 @@
 package com.best.innerjoin.group.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.alarm.model.service.AlarmService;
+import com.best.innerjoin.event.model.service.EventService;
+import com.best.innerjoin.event.model.vo.Event;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
@@ -28,7 +31,8 @@ public class GroupController {
 	@Autowired
 	private GroupService gService;
 	private AlarmService aService;
-	
+	@Autowired
+	private EventService eSerivce;
 	
 	
 	@RequestMapping("ginsertForm.ij")
@@ -39,12 +43,19 @@ public class GroupController {
 	
 	// 모임 만들기
 	@RequestMapping(value="ginsert.ij", method=RequestMethod.POST)
-	public String groupInsert(Group group, HttpServletRequest request, Model model, MultipartFile uploadFile) {
+	public String groupInsert(Group group, HttpServletRequest request, Model model, @RequestParam(name="uploadFile", required=true) MultipartFile uploadFile) {
 		
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String filePath = saveFile(uploadFile, request);
+			
+			if(filePath != null) {
+				group.setFilePath(uploadFile.getOriginalFilename());
+			}
+		}
 		
-		
-		int result = gService.insertGroup(group, uploadFile, request);
+		int result = gService.insertGroup(group);
 
+		
 		String path= null;
 		if(result>0) {
 			path="group/groupIndex";
@@ -58,6 +69,49 @@ public class GroupController {
 		
 	}
 	
+	// 파일 저장 메소드
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\guploadFiles";
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		
+		String filePath = folder + "\\" + file.getOriginalFilename();
+		
+		try {
+			file.transferTo(new File(filePath));
+		}catch (Exception e) {
+			System.out.println("파일 전송 에러" + e.getMessage());
+		}
+		
+		return filePath;
+	}
+	
+	// 파일 삭제 메소드
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\guploadFiles";
+		
+		// 삭제할 파일 경로 + 파일명
+		File deleteFile = new File(savePath + "\\" + fileName);
+		
+		// 해당 파일이 존재할 경우 삭제
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
+	}
+	
+	
+
+
 	@RequestMapping("tempGoGroup.ij")
 	public String tempGoGroup(HttpServletRequest request) {
 		 request.getSession().setAttribute("groupName", "가나다");
@@ -91,10 +145,9 @@ public class GroupController {
 			}
 		}
 		
-		
-		
 		Group tempGroup = gService.goGroupPage(gNo);
 		System.out.println(groupMemberCode);
+		
 		
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
@@ -102,7 +155,12 @@ public class GroupController {
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
 		
-		return "group/groupIndex";
+		String date = "2019-10";
+		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
+		
+		model.addAttribute("event", eList);
+		
+		return "group/groupIndex+groupInfo";
 	}
 	
 	
@@ -134,7 +192,7 @@ public class GroupController {
 	}
 
 
-	// 그룹 회원 조회
+	// 그룹 회원 목록 조회
 	@RequestMapping("gmlist.ij")
 	public ModelAndView groupMemberList(ModelAndView mv, HttpServletRequest request) {
 		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
@@ -150,14 +208,41 @@ public class GroupController {
 		
 		return mv;
 	}
+	
+	// 대기중인 그룹 회원 목록 조회
+	@RequestMapping("wgmlist.ij")
+	public ModelAndView waitingGroupMemberList(ModelAndView mv, HttpServletRequest request) {
+		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		
+		ArrayList<GroupMember> list = gService.waitingGroupMemberList(groupNo);
+		
+		if (list != null) {
+			mv.addObject("list", list).setViewName("group/groupIndex+groupMemberWaiting");
+			
+		} else {
+			mv.addObject("msg", "대기중인 회원 목록 조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
 
 	
 	
-//	// 회원 등급 수정
-//	@RequestMapping("memlevel.ij")
-//	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
-//		
-//		int result = gService.updateMlevel(request, gMember);
-//	}
+	// 회원 등급 수정
+	@RequestMapping("memlevel.ij")
+	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
+		
+		int result = gService.updateLevel(request, gMember);
+		
+		String path = null;
+		if(result > 0) {
+			path = "group/groupMember";
+		}else {
+			model.addAttribute("msg", "회원 등급 수정 실패");
+			path= "common/errorPage";
+		}
+		
+		return path;
+	}
 
 }

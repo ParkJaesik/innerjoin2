@@ -5,37 +5,27 @@ import java.util.Date;
 public class Group { // group VO
 	
 	private int gNo;
-	public String getDistrictName() {
-		return districtName;
-	}
-
-	public void setDistrictName(String districtName) {
-		this.districtName = districtName;
-	}
-
 	private String gHost;
 	private String gOpenStatus;
 	private String gName;
 	private int gLimit;
 	private String gInfo;
 	private int gMemCount;
-	private Date gEnrollDate;
 	private int localCode;
 	private int gStatus;
 	private int gCategoryCode;
 	private int gReptCount;
-	private String gOriginFileName;
-	private String gRenameFileName;
+	private String filePath;
+	private Date gEnrollDate;
+	private Date gModifyDate;
 	private String districtName;
 
-	
 	public Group() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Group(int gNo, String gHost, String gOpenStatus, String gName, int gLimit, String gInfo, int gMemCount,
-			Date gEnrollDate, int localCode, int gStatus, int gCategoryCode, int gReptCount, String gOriginFileName,
-			String gRenameFileName,String districtName) {
+			int localCode, int gStatus, int gCategoryCode, int gReptCount, String filePath, Date gEnrollDate,
+			Date gModifyDate, String districtName) {
 		super();
 		this.gNo = gNo;
 		this.gHost = gHost;
@@ -44,15 +34,14 @@ public class Group { // group VO
 		this.gLimit = gLimit;
 		this.gInfo = gInfo;
 		this.gMemCount = gMemCount;
-		this.gEnrollDate = gEnrollDate;
 		this.localCode = localCode;
 		this.gStatus = gStatus;
 		this.gCategoryCode = gCategoryCode;
 		this.gReptCount = gReptCount;
-		this.gOriginFileName = gOriginFileName;
-		this.gRenameFileName = gRenameFileName;
+		this.filePath = filePath;
+		this.gEnrollDate = gEnrollDate;
+		this.gModifyDate = gModifyDate;
 		this.districtName = districtName;
-		
 	}
 
 	public int getgNo() {
@@ -111,14 +100,6 @@ public class Group { // group VO
 		this.gMemCount = gMemCount;
 	}
 
-	public Date getgEnrollDate() {
-		return gEnrollDate;
-	}
-
-	public void setgEnrollDate(Date gEnrollDate) {
-		this.gEnrollDate = gEnrollDate;
-	}
-
 	public int getLocalCode() {
 		return localCode;
 	}
@@ -151,36 +132,44 @@ public class Group { // group VO
 		this.gReptCount = gReptCount;
 	}
 
-	public String getgOriginFileName() {
-		return gOriginFileName;
+	public String getFilePath() {
+		return filePath;
 	}
 
-	public void setgOriginFileName(String gOriginFileName) {
-		this.gOriginFileName = gOriginFileName;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
-	public String getgRenameFileName() {
-		return gRenameFileName;
+	public Date getgEnrollDate() {
+		return gEnrollDate;
 	}
 
-	public void setgRenameFileName(String gRenameFileName) {
-		this.gRenameFileName = gRenameFileName;
+	public void setgEnrollDate(Date gEnrollDate) {
+		this.gEnrollDate = gEnrollDate;
+	}
+
+	public Date getgModifyDate() {
+		return gModifyDate;
+	}
+
+	public void setgModifyDate(Date gModifyDate) {
+		this.gModifyDate = gModifyDate;
+	}
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
 	}
 
 	@Override
 	public String toString() {
 		return "Group [gNo=" + gNo + ", gHost=" + gHost + ", gOpenStatus=" + gOpenStatus + ", gName=" + gName
-				+ ", gLimit=" + gLimit + ", gInfo=" + gInfo + ", gMemCount=" + gMemCount + ", gEnrollDate="
-				+ gEnrollDate + ", localCode=" + localCode + ", gStatus=" + gStatus + ", gCategoryCode="
-				+ gCategoryCode + ", gReptCount=" + gReptCount + ", gOriginFileName=" + gOriginFileName
-				+ ", gRenameFileName=" + gRenameFileName + "]";
+				+ ", gLimit=" + gLimit + ", gInfo=" + gInfo + ", gMemCount=" + gMemCount + ", localCode=" + localCode
+				+ ", gStatus=" + gStatus + ", gCategoryCode=" + gCategoryCode + ", gReptCount=" + gReptCount
+				+ ", filePath=" + filePath + ", gEnrollDate=" + gEnrollDate + ", gModifyDate=" + gModifyDate
+				+ ", districtName=" + districtName + "]";
 	}
-
-	
-	
-	
-	
-	
-	
-
 }

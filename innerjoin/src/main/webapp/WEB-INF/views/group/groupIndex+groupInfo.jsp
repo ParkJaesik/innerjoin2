@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#group-btn-board {
+#group-btn-index {
 	background-color: #17A2B8 !important;
 	color: #FFFFFF !important;
 }
@@ -34,7 +34,7 @@
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
 				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
-				<%@ include file="/WEB-INF/views/group/groupBoard.jsp" %>
+				<%@ include file="/WEB-INF/views/group/groupInfo.jsp" %>
 			</div>
 			<div class="col-md-1 aside">
 				<div id="groupChatWrapper">
