@@ -38,7 +38,7 @@
 	<div id="group-index-container">
 		<div id="group-info-container">
 			<div id="group-thumbnail">
-				<img src="style_5d10844730af1.jpg" alt="" id="thumbnail" name="gOriginFileName">
+				<img src="${ contextPath }/resources/guploadFiles/${ group.filePath }" alt="" id="thumbnail" name="filePath">
 			</div>
 
 			<div id="group-info">

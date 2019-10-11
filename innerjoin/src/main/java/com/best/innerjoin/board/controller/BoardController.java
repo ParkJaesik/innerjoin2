@@ -29,7 +29,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bService;
-	//
+	
 	// 게시판 조회
 	@RequestMapping("blist.ij")
 	public ModelAndView boardList(ModelAndView mv, Integer page, HttpServletRequest request) {
@@ -41,7 +41,7 @@ public class BoardController {
 		
 		if (list != null) {
 			
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).setViewName("group/groupIndex+groupBoard");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).setViewName("group/groupBoard");
 				
 		} else {
 			mv.addObject("msg", "게시판을 불러오는데 실패하였습니다").setViewName("common/errorPage");
@@ -58,7 +58,7 @@ public class BoardController {
 		Board board = bService.boardDetail(boardNo);
 		
 		if (board != null) {
-			mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupIndex+groupBoardDetail");
+			mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupBoardDetail");
 			
 		} else {
 			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
@@ -69,7 +69,7 @@ public class BoardController {
 	// 게시글 작성 화면 이동
 	@RequestMapping("binsertView.ij")
 	public String boardInsertView() {
-		return "group/groupIndex+groupBoardInsert";
+		return "group/groupBoardInsert";
 	}
 	
 	// 게시글 작성
@@ -99,7 +99,7 @@ public class BoardController {
 		
 		Board board = bService.boardDetail(boardNo);
 		
-		mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupIndex+groupBoardModify");
+		mv.addObject("board", board).addObject("currentPage", currentPage).setViewName("group/groupBoardModify");
 		
 		return mv;
 	}
