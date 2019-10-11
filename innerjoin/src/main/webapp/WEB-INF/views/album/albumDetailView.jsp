@@ -157,12 +157,12 @@
     			    	var groupNo = ${album.groupNo};
     			    	var arNo = $(this).attr('id');
     			    
-    			    	alert(albumNo + ", " + groupNo + ", id = " + arNo);
+    			    	/* alert(albumNo + ", " + groupNo + ", id = " + arNo); */
     					$.ajax({
     						url: "deleteReply.ij",
     						data : {albumNo : albumNo, groupNo : groupNo, arNo:arNo},
 							success: function(result){
-								console.log(result);
+								/* console.log(result); */
 	        					if(result == 'success'){
 	        						
 	        						// 댓글 작성 부분 초기화

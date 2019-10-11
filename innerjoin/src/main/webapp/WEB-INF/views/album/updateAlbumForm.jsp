@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../group/groupMenubar.jsp" %>
+<%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
 <script>
 	console.log('addAlbum groupNo:'+'${groupNo}');
 	console.log('addAlbum memberId:'+'${memberId}');
@@ -31,7 +31,7 @@
 	
 	$(function(){
        	$("#new").click(function(){
-           	alert(".new 클릭!");
+           	/* alert(".new 클릭!"); */
            	$(".custom-file").css("display","block");
         });
 	});
@@ -161,25 +161,28 @@
                     var imgNum = obj.attributes['value'].value;
                     var albumNo = ${album.albumNo};
                     
-                    alert("imgNum : "+imgNum + ", albumNo : " + albumNo);
+                    /* alert("imgNum : "+imgNum + ", albumNo : " + albumNo); */
                     
-                    $.ajax({
-        				url: "deletePhoto.ij",
-        				data : {albumNo : albumNo,photoNo : imgNum},
-        				type : "post",
-        				success : function(data){
-        					if(data == 'success'){
-        						
-        						// 댓글 작성 부분 초기화
-        						alert("사진 삭제 성공!");
-                    			$(".previewBox[value=" + imgNum + "]").remove();
-        					}
-        				},
-        				error : function(e){
-        					console.log("Ajax 통신 실패");
-        				}
-        			}); 
-                    
+                    if(confirm("정말 삭제하시겠습니까?")){
+                    	$.ajax({
+            				url: "deletePhoto.ij",
+            				data : {albumNo : albumNo,photoNo : imgNum},
+            				type : "post",
+            				success : function(data){
+            					if(data == 'success'){
+            						
+            						// 댓글 작성 부분 초기화
+            						alert("사진 삭제 성공!");
+                        			$(".previewBox[value=" + imgNum + "]").remove();
+            					}
+            				},
+            				error : function(e){
+            					console.log("Ajax 통신 실패");
+            				}
+            			}); 
+                        
+                    	
+                    }
                     
                     
                     //console.log(files[imgNum-1]);

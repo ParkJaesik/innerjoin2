@@ -143,7 +143,7 @@ public class AlbumController {
 		}
 		
 		if(album !=null) {
-		mv.addObject("album", album).addObject("photoList", photoList).addObject("currentPage", currentPage).setViewName("album/updateAlbumForm");
+		mv.addObject("album", album).addObject("photoList", photoList).addObject("currentPage", currentPage).setViewName("album/groupIndex+updateAlbumForm");
 		}else {
 			mv.addObject("msg", "앨범 상세 조회 실패").setViewName("common/errorPage");
 		}

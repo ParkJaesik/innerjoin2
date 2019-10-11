@@ -91,14 +91,15 @@ public class AlbumServiceImpl implements AlbumService {
 	    			aPhoto.setPhotoOriginName(mf.getOriginalFilename());
 	    			
 	    			aPhoto.setPhotoRename(renameFileName);
-	    			System.out.println(aPhoto.toString());
+				/* System.out.println(aPhoto.toString()); */
 	    		} 
 	    		photoList.add(aPhoto);
 		    }
 		
 			
-			System.out.println("photoList.isEmpty() : "+photoList.isEmpty());
-			
+		/*
+		 * System.out.println("photoList.isEmpty() : "+photoList.isEmpty());
+		 */			
 			int albumResult = 0;
 			if(album.getAlbumNo() == 0) {
 				// 앨범 썸네일 지정
@@ -111,15 +112,17 @@ public class AlbumServiceImpl implements AlbumService {
 			if(albumResult == 0) {
 				for(int i = 0; i < photoList.size();i++) {
 					photoList.get(i).setAlbumNo(album.getAlbumNo());
-					System.out.println("insert service에서 사진 확인"+photoList.get(i).toString());
-					
+				/*
+				 * System.out.println("insert service에서 사진 확인"+photoList.get(i).toString());
+				 */					
 				}
 			}
 			
+			// 앨범 최초 등록이거나 앨범 수정일 때 사진 등록 수행
 			if(albumResult == 1 || album.getAlbumNo() != 0 ) {
 				for(int i = 0; i < photoList.size();i++) {
 					photoList.get(i).setAlbumNo(album.getAlbumNo());
-					System.out.println("insert service에서 사진 확인"+photoList.get(i).toString());
+				/* System.out.println("insert service에서 사진 확인"+photoList.get(i).toString()); */
 					photoResult = aDao.insertPhoto(photoList.get(i));
 					if(photoResult == 1) {
 						for(MultipartFile mf : files) {
@@ -202,10 +205,10 @@ public class AlbumServiceImpl implements AlbumService {
 		public Album selectAlbum(int albumNo) {
 			// 1) 조회수 증가
 		/* aDao.addReadCount(albumNo); */
-			System.out.println("service albumNo 확인 : " +albumNo);
+		/* System.out.println("service albumNo 확인 : " +albumNo); */
 			// 2) 게시글 상세 데이터 조회
 			Album album = aDao.selectAlbum(albumNo);
-			System.out.println("service album 확인"+album.toString());
+		/* System.out.println("service album 확인"+album.toString()); */
 			return album;
 		}
 

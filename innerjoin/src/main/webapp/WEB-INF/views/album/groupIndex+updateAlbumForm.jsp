@@ -11,7 +11,7 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/album/album-add.css"/>
+<link rel="stylesheet" href="resources/css/album/album-update.css"/>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
@@ -30,7 +30,7 @@
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
 				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
-				<jsp:include page="/WEB-INF/views/album/addAlbumForm.jsp"></jsp:include>
+				<jsp:include page="/WEB-INF/views/album/updateAlbumForm.jsp"></jsp:include>
 
 			</div>
 			<div class="col-md-1 aside">
