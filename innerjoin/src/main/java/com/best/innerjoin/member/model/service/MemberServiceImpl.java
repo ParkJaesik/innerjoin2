@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	
+	 
 	// 로그인
 	@Override
 	public Member loginMember(Member member) {

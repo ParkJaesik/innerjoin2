@@ -30,7 +30,7 @@ public class MemberController {
 	// 로그인 폼으로 가기
 	@RequestMapping("loginForm.ij")
 	public String loginMember() {
-		return "member/loginForm";
+		return "member/loginForm"; 
 	}
 	
 	// 로그인

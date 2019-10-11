@@ -15,7 +15,7 @@
   	<result property="memberHostCount" column="MEMBER_HOST_COUNT"/>
   	<result property="memberJoinCount" column="MEMBER_JOIN_COUNT"/>
   	<result property="memberReptCount" column="MEMBER_REPT_COUNT"/>
-  	<result property="memberProPath" column="MEMBER_PRO_PATH"/>
+  	<result property="memberProPath" column="MEMBER_PRO_PATH"/> 
   	<result property="memberStatusCode" column="MEMBER_STATUS_CODE"/>
   </resultMap>
   

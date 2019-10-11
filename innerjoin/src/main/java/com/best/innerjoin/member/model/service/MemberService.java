@@ -20,7 +20,7 @@ public interface MemberService {
 
 	// 닉네임 중복 검사
 	public abstract int checkNameDup(String name);
-
+ 
 	
 	/** 내 모임 목록
 	 * @param loginUser
