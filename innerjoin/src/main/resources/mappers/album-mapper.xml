@@ -48,7 +48,7 @@
 		<if test="albumNo != ''">
 		#{albumNo}
 		</if>
-		)
+		,DEFAULT)
 		
 	</insert>
 	
