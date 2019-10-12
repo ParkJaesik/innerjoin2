@@ -152,21 +152,37 @@ public class GroupController {
 		}
 		
 		Group tempGroup = gService.goGroupPage(gNo);
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM");
+		
+		Date time = new Date();
+				
+		String time1 = format1.format(time);
+		
+		ArrayList<Event> eList = eSerivce.groupEventList(time1, ""+gNo);
+		
+		ArrayList<Event> eList2 = null;
+		
+		// 이벤트 리스트 최신 3개 자르기
+		if(!eList.isEmpty()) {
+			eList2 = new ArrayList<Event>();
+			for(int i = 0; i < 3;i++) {
+				eList2.add(eList.get(i));
+			}
+		}
+		
 		System.out.println(groupMemberCode);
 		
 		
+		model.addAttribute("event", eList2);
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
-		
-		String date = "2019-10";
-		
-		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
-		
 
-		model.addAttribute("event", eList);
+		
 		
 		return "group/groupInfo";
 	}
