@@ -162,7 +162,7 @@
                       formData.append('files',files[index]);
                   }
                   
-      			var groupNo = ${group.gNo};
+                  var groupNo = ${group.gNo};
                     formData.append("albumTitle",title);
                     formData.append("groupNo",groupNo);
                     formData.append("memberId",'${loginUser.memberId}');
