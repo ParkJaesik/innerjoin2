@@ -18,6 +18,7 @@ import com.best.innerjoin.group.model.dao.GroupDao;
 import com.best.innerjoin.group.model.exception.GroupException;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Service("gService")
 public class GroupServiceImpl implements GroupService{
@@ -71,7 +72,7 @@ public class GroupServiceImpl implements GroupService{
 	public int updateLevel(HttpServletRequest request, GroupMember gMember) {
 		int result = gDao.updateLevel(gMember);
 		
-		return 0;
+		return result;
 	}
 	
 	@Override
@@ -82,6 +83,32 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public ArrayList<GroupMember> waitingGroupMemberList(int groupNo) {
 		return gDao.waitingGroupMemberList(groupNo);
+	}
+
+	@Override
+	public int insertGroupMemberAdmin(Member loginUser) {
+		return gDao.insertGroupMemberAdmin(loginUser);
+	}
+
+	@Override
+	public int acceptGroup(String memberId, int gNo) {
+		Map codeMap = new HashMap<>();
+		codeMap.put("memberId", memberId);
+		codeMap.put("gNo", gNo);
+		return gDao.acceptGroup(codeMap);
+	}
+
+	@Override
+	public int rejectGroup(String memberId, int gNo) {
+		Map codeMap = new HashMap<>();
+		codeMap.put("memberId", memberId);
+		codeMap.put("gNo", gNo);
+		return gDao.rejectGroup(codeMap);
+	}
+
+	@Override
+	public int updateGroupCount(int gNo) {
+		return gDao.updateGroupCount(gNo);
 	}
 	
 }

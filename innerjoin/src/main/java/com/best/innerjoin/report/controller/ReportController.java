@@ -77,12 +77,20 @@ public class ReportController {
 		
 	}
 	
- 
 	
+//	// 신고당한 회원 리스트
+//	@RequestMapping("rmlist.ij")
+//	public ModelAndView memberList(ModelAndView mv, Integer page) {
+//		
+//		int currentPage = page == null ? 1 : page;
+//		
+//		ArrayList<GroupMemberReport> mlist = rService.selectMList(currentPage);
+//		
+//		
+//		return mv;
+//		
+//	}
 	
-	
-	
-	
-	
+
 
 }

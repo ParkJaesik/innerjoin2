@@ -1,18 +1,19 @@
 package com.best.innerjoin.group.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,11 +54,17 @@ public class GroupController {
 			}
 		}
 		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
 		int result = gService.insertGroup(group);
 
 		
 		String path= null;
 		if(result>0) {
+			
+			//모임 생성 성공시 group-member테이블에 관리자로 행추가 
+			int result2 = gService.insertGroupMemberAdmin(loginUser);
+			
 			path="group/groupIndex";
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");
@@ -110,20 +117,6 @@ public class GroupController {
 	}
 	
 	
-
-
-	@RequestMapping("tempGoGroup.ij")
-	public String tempGoGroup(HttpServletRequest request) {
-		 request.getSession().setAttribute("groupName", "가나다");
-		return "group/groupIndex";
-	}
-	
-	@RequestMapping("tempGoGroup2.ij")
-	public String tempGoGroup2(HttpServletRequest request) {
-		 request.getSession().setAttribute("groupName", "라라라라");
-		return "group/groupIndex";
-	}
-	
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	@RequestMapping("goGroupPage.ij")
@@ -146,21 +139,39 @@ public class GroupController {
 		}
 		
 		Group tempGroup = gService.goGroupPage(gNo);
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM");
+		
+		Date time = new Date();
+				
+		String time1 = format1.format(time);
+		
+		ArrayList<Event> eList = eSerivce.groupEventList(time1, ""+gNo);
+		
+		ArrayList<Event> eList2 = null;
+		
+		// 이벤트 리스트 최신 3개 자르기
+		if(!eList.isEmpty()) {
+			eList2 = new ArrayList<Event>();
+			for(int i = 0; i < 3;i++) {
+				eList2.add(eList.get(i));
+			}
+		}
+		
 		System.out.println(groupMemberCode);
 		
 		
+		model.addAttribute("event", eList2);
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+
 		
-		String date = "2019-10";
-		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
 		
-		model.addAttribute("event", eList);
-		
-		return "group/groupIndex+groupInfo";
+		return "group/groupInfo";
 	}
 	
 	
@@ -200,7 +211,7 @@ public class GroupController {
 		ArrayList<GroupMember> list = gService.groupMemberList(groupNo);
 		
 		if (list != null) {
-			mv.addObject("list", list).setViewName("group/groupIndex+groupMember");
+			mv.addObject("list", list).setViewName("group/groupMember");
 			
 		} else {
 			mv.addObject("msg", "회원 목록 조회 실패").setViewName("common/errorPage");
@@ -217,7 +228,7 @@ public class GroupController {
 		ArrayList<GroupMember> list = gService.waitingGroupMemberList(groupNo);
 		
 		if (list != null) {
-			mv.addObject("list", list).setViewName("group/groupIndex+groupMemberWaiting");
+			mv.addObject("list", list).setViewName("group/groupMemberWaiting");
 			
 		} else {
 			mv.addObject("msg", "대기중인 회원 목록 조회 실패").setViewName("common/errorPage");
@@ -236,12 +247,48 @@ public class GroupController {
 		
 		String path = null;
 		if(result > 0) {
+			
 			path = "group/groupMember";
 		}else {
 			model.addAttribute("msg", "회원 등급 수정 실패");
 			path= "common/errorPage";
 		}
 		
+		return path;
+	}
+	
+	
+	//회원 수락 
+	@RequestMapping("acceptGroup.ij")
+	public String accpetGroup(HttpServletRequest request,Member member,Model model) {
+		String memberId = member.getMemberId();
+		int gNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		int result = gService.acceptGroup(memberId,gNo);
+		String path = null;
+		if(result>0) {
+			int result2 = gService.updateGroupCount(gNo);
+			
+			path = "redirect:wgmlist.ij"; 
+		}else {
+			model.addAttribute("msg", "가입 신청 수락 중 에러발생");
+			path= "common/errorPage";
+		}
+		return path;
+	}
+	
+	//모임신청 거절
+	@RequestMapping("rejectGroup.ij")
+	public String rejectGroup(HttpServletRequest request,Member member,Model model) {
+		String memberId = member.getMemberId();
+		int gNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		int result = gService.rejectGroup(memberId,gNo);
+		String path = null;
+		if(result>0) {
+			path = "redirect:wgmlist.ij"; 
+		}else {
+			model.addAttribute("msg", "가입 신청 거절 중 에러발생");
+			path= "common/errorPage";
+		}
 		return path;
 	}
 

@@ -180,6 +180,27 @@ public class MemberServiceImpl implements MemberService{
 	
 
 	
+	@Override
+	public String googleJoinedChk(String memberId) {
+		return mDao.googleJoined(memberId);
+	}
+
+	@Override
+	public Member googleLogin(Member member) {
+		Member loginUser = null;
+		int result = 0; 
+		String loginWay = member.getLoginWay();
+		if(loginWay == null || loginWay.equals("")) {
+			// 가입되어있지 않으면 회원가입
+			result = mDao.googleJoin(member);
+		} 
+		if(result > 0 || loginWay.equals("G"))
+		loginUser = mDao.googleLogin(member.getMemberId());
+		return loginUser;
+	}
+
+
+	
 
 	
 	

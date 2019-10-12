@@ -15,7 +15,7 @@
   	<result property="memberHostCount" column="MEMBER_HOST_COUNT"/>
   	<result property="memberJoinCount" column="MEMBER_JOIN_COUNT"/>
   	<result property="memberReptCount" column="MEMBER_REPT_COUNT"/>
-  	<result property="memberProPath" column="MEMBER_PRO_PATH"/>
+  	<result property="memberProPath" column="MEMBER_PRO_PATH"/> 
   	<result property="memberStatusCode" column="MEMBER_STATUS_CODE"/>
   	<result property="memberIntroduce" column="MEMBER_INTRODUCE"/>
   	<result property="memberBirthday" column="MEMBER_BIRTHDAY"/>
@@ -32,13 +32,13 @@
 		<result property="gLimit" column="GROUP_LIMIT"/>
 		<result property="gInfo" column="GROUP_INFO"/>
 		<result property="gMemCount" column="GROUP_MEM_COUNT"/>
+		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
 		<result property="localCode" column="LOCAL_CODE"/>
 		<result property="gStatus" column="GROUP_STATUS"/>
 		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
-		<result property="filePath" column="GROUP_FILE_PATH"/>
-		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
-		<result property="gModifyDate" column="GROUP_MODIFY_DATE"/>
+		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
+		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
 	</resultMap>
 	
 	
@@ -57,17 +57,20 @@
 	FROM MEMBER
 	LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
 	WHERE MEMBER_ID = #{memberId} 
-    AND MEMBER_STATUS_CODE != 3
+
+	AND MEMBER_STATUS_CODE != 3 AND LOGIN_WAY = 'E'
+
   </select>
   
   <!-- 회원가입  -->
   <insert id="insertMember" parameterType="Member" >
-  	INSERT INTO 
-	  	MEMBER
-	  	VALUES(
-	  		#{memberId}, #{memberPwd}, #{memberName}, 'E'
-	  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 2
-	  	)
+
+  	INSERT INTO MEMBER
+  	VALUES(
+  		#{memberId}, #{memberPwd}, #{memberName}, 'E'
+  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 1
+  	)
+
   </insert>
   <insert id="insertAdditional" parameterType="Member">
   	INSERT INTO
@@ -162,7 +165,29 @@
   	WHERE MEMBER_ID = #{memberId}
   </update>
   
+  <!-- 구글아이디 회원가입 여부 -->
+  <select id="googleJoined" parameterType="string" resultType="string">
+  	SELECT LOGIN_WAY
+  	FROM MEMBER
+  	WHERE MEMBER_ID = #{memberId}
+  </select>
   
+  <!-- 구글아이디 회원가입 -->
+  <insert id="googleJoin" parameterType="Member">
+   	INSERT INTO MEMBER
+  	VALUES(
+  		#{memberId}, '-1', #{memberName}, 'G'
+  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, #{memberProPath}, 1
+  	)
+  </insert>
+  
+  
+  <!-- 구글아이디로 로그인 -->
+  <select id="googleLogin" parameterType="String" resultMap="memberResultSet">
+  	SELECT * FROM MEMBER
+	WHERE MEMBER_ID = #{memberId} 
+	AND MEMBER_STATUS_CODE != 3 AND LOGIN_WAY = 'G'
+  </select>
   
   
 </mapper>
