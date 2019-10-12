@@ -94,7 +94,7 @@
 									  </div>
 									</div>
 									
-									<button type="button" class="btn btn-primary" id="member-btn-report">신고하기</button>
+									<button type="button" class="btn btn-primary" id="member-btn-report" onclick="location.href='rboardInsertForm.ij'">신고하기</button>
 								</div>
 							</div>
 						</div><br>
