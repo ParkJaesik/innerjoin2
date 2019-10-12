@@ -16,11 +16,7 @@
 </head>
 <body>
 <%-- <%@ include file="../group/groupMenubar.jsp" %> --%>
-<script>
-	console.log('addAlbum groupNo:'+'${groupNo}');
-	console.log('addAlbum memberId:'+'${memberId}');
-	console.log('addAlbum memberId:'+'${param.page}');
-</script>  
+
 	<div class="container-fluid add-wrapper">
 		<!-- <div class="row"> -->
 			<div class="col-md-12">
@@ -166,9 +162,9 @@
                       formData.append('files',files[index]);
                   }
                   
-      
+      			var groupNo = ${group.gNo};
                     formData.append("albumTitle",title);
-                    formData.append("groupNo",parseInt('${groupNo}'));
+                    formData.append("groupNo",groupNo);
                     formData.append("memberId",'${loginUser.memberId}');
 /* 			        for (var value of formData.get("files")) {
 
