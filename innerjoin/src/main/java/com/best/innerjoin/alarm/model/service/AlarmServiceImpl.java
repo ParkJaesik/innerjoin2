@@ -31,13 +31,18 @@ public class AlarmServiceImpl implements AlarmService{
 		int result=0;
 		
 		for(GroupMember gm : receiverList) {
-			if(senderId != gm.getMemberId()) {
+			if(!senderId.equals(gm.getMemberId())) {
 				result =aDao.insertAlbumAlarm(senderId,gm.getMemberId());
 
 			}
 		}
 		
 		return  result;
+	}
+
+	@Override
+	public int deleteAlarm(String alarmId) {
+		return aDao.deleteAlarm(alarmId);
 	}
 
 	

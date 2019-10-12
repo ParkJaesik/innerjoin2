@@ -81,9 +81,12 @@
 							<!-- 받은 쪽지 목록  반복-->
 								<c:forEach var="m" items="${ list }">
 								<tr>
-									<td><a href="">${m.senderId }</a></td>
-									<td><a href="">${m.alarmMsg }</a></td>
-									<td>날짜</td>
+									<td>${m.senderId }</td>
+									<td>${m.alarmMsg }</td>
+									<td><button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">읽음</button>
+										<button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">삭제</button>
+									</td>
+									
 								</tr>
 								</c:forEach>
 							<!----------------- 반복-->
