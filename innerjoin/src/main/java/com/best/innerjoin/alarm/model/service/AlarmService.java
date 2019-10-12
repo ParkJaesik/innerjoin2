@@ -13,5 +13,7 @@ public interface AlarmService {
 
 	int insertAlbumAlarm(String senderId, ArrayList<GroupMember> receiverList);
 
+	int deleteAlarm(String alarmId);
+
 
 }

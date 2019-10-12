@@ -39,4 +39,8 @@ public class AlarmDao {
 		return sqlSession.insert("alarmMapper.insertAlbumAlarm",alarmMap);
 	}
 
+	public int deleteAlarm(String alarmId) {
+		return sqlSession.delete("alarmMapper.deleteAlarm",alarmId);
+	}
+
 }
