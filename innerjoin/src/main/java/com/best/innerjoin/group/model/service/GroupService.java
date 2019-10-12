@@ -40,5 +40,11 @@ public interface GroupService {
 	public abstract ArrayList<GroupMember> waitingGroupMemberList(int groupNo);
 
 	public abstract int insertGroupMemberAdmin(Member loginUser);
+
+	public abstract int acceptGroup(String memberId, int gNo);
+
+	public abstract int rejectGroup(String memberId, int gNo);
+
+	public abstract int updateGroupCount(int gNo);
 }
 

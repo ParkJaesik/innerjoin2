@@ -89,5 +89,26 @@ public class GroupServiceImpl implements GroupService{
 	public int insertGroupMemberAdmin(Member loginUser) {
 		return gDao.insertGroupMemberAdmin(loginUser);
 	}
+
+	@Override
+	public int acceptGroup(String memberId, int gNo) {
+		Map codeMap = new HashMap<>();
+		codeMap.put("memberId", memberId);
+		codeMap.put("gNo", gNo);
+		return gDao.acceptGroup(codeMap);
+	}
+
+	@Override
+	public int rejectGroup(String memberId, int gNo) {
+		Map codeMap = new HashMap<>();
+		codeMap.put("memberId", memberId);
+		codeMap.put("gNo", gNo);
+		return gDao.rejectGroup(codeMap);
+	}
+
+	@Override
+	public int updateGroupCount(int gNo) {
+		return gDao.updateGroupCount(gNo);
+	}
 	
 }
