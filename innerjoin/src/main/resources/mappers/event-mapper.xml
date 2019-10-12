@@ -17,6 +17,7 @@
 		<id property="memberId" column="MEMBER_ID"/>
 		<result property="memberName" column="MEMBER_NAME"/>
 		<result property="memberProPath" column="MEMBER_PRO_PATH"/>
+		<result property="eno" column="EVENT_NO"/>
 	</resultMap>
 
 
@@ -67,7 +68,7 @@
 	
 	
 	<select id="selectMem" parameterType="String" resultMap="eventMemberSet">
-		SELECT MEMBER_NAME, MEMBER_PRO_PATH
+		SELECT EVENT_NO, MEMBER_NAME, MEMBER_PRO_PATH
 		FROM MEMBER
 		JOIN MEMBER_EVENT USING(MEMBER_ID)
 		WHERE EVENT_NO = #{eno}
