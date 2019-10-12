@@ -21,6 +21,10 @@
 /*  *{
 	 	 border: 1px solid black;
 	 } */
+	 
+	 a {
+	 	text-decoration: none;
+	 }
 </style>
 </head>
 <body>
@@ -61,11 +65,11 @@
 											<div class="overlay">
 												<h2>${ myGroup.gName }</h2>
 												<c:if test="${ !empty loginUser }">
-													<c:url var="mgDetail" value="mgdetail.ij">
+													<c:url var="goGorup" value="goGroupPage.ij">
 														<!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
 														<c:param name="gNo" value="${ myGroup.gNo }" />
 													</c:url>
-													<a href="" class="btn-hover">Show More</a>
+													<a href="${ goGroup }" class="btn-hover">Show More</a>
 												</c:if>
 											</div>
 										</div>
@@ -91,8 +95,7 @@
 							<br>
 							<c:choose>
 								<c:when test="${ !status.last }">
-									<div class="row invite"
-										style="border-bottom: 1px dotted #a2a2a2;">
+									<div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
 								</c:when>
 								<c:when test="${ status.last }">
 									<div class="row invite">
@@ -101,21 +104,21 @@
 							<div class="col-4" style="width: 100%;">${ invite.filePath }</div>
 							<c:if test="${ !empty loginUser }">
 								<div class="col-8">
-									<c:url var="mgDetail" value="mgdetail.ij">
+									<c:url var="goGorup" value="goGroupPage.ij">
 										<!-- 나중에 맞는 값 넣기 -->
 										<c:param name="gNo" value="${ invite.gNo }" />
 									</c:url>
-									<h5>${ invite.gName }</h5>
+									<h5><a href="${ goGroup }">${ invite.gName }</a></h5>
 									<br>
-									<p>${ invite.gInfo }</p>
+									<p><a href="${ goGroup }">${ invite.gInfo }</a></p>
 									<c:url var="invDeny" value="invDeny.ij">
 										<c:param name="gNo" value="${ invite.gNo }" />
 									</c:url>
 									<c:url var="invAccept" value="invAccept.ij">
 										<c:param name="gNo" value="${ invite.gNo }" />
 									</c:url>
-									<a href="${ invDeny }" class="btn cancel">거절</a> <a
-										href="${ invAccept }" class="btn">수락</a>
+									<a href="${ invDeny }" class="btn cancel">거절</a> 
+									<a href="${ invAccept }" class="btn">수락</a>
 								</div>
 							</c:if>
 					</div>
@@ -143,13 +146,13 @@
 						<div class="col-4" style="width: 100%;">${ invite.filePath }</div>
 						<c:if test="${ !empty loginUser }">
 							<div class="col-8">
-								<c:url var="mgDetail" value="mgdetail.ij">
+								<c:url var="goGorup" value="goGroupPage.ij">
 									<!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
 									<c:param name="gNo" value="${ wait.gNo }" />
 								</c:url>
-								<h5>${ wait.gName }</h5>
+								<h5><a href="${ goGroup }">${ wait.gName }</a></h5>
 								<br>
-								<p>${ wait.gInfo }</p>
+								<p><a href="${ goGroup }">${ wait.gInfo }</a></p>
 								<c:url var="waitCancel" value="waitCancel.ij">
 									<c:param name="gNo" value="${ wait.gNo }" />
 								</c:url>

@@ -53,7 +53,7 @@ public interface BoardService {
 	 * @param boardNo
 	 * @return rList
 	 */
-	public abstract ArrayList<Reply> replyList(int boardNo);
+	public abstract ArrayList<Reply> replyList(Reply reply);
 
 	/** 댓글 등록 Service
 	 * @param reply

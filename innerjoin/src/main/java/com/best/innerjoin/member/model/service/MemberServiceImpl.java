@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.best.innerjoin.alarm.model.vo.Alarm;
 import com.best.innerjoin.member.model.dao.MemberDao;
 import com.best.innerjoin.member.model.exception.MemberException;
 import com.best.innerjoin.member.model.vo.Member;
@@ -198,6 +199,8 @@ public class MemberServiceImpl implements MemberService{
 		loginUser = mDao.googleLogin(member.getMemberId());
 		return loginUser;
 	}
+
+	
 
 
 	

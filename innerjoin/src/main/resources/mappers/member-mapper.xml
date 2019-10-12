@@ -106,6 +106,7 @@
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
+	AND GROUP_STATUS != 2
 	AND LEVEL_CODE != 3
 	AND LEVEL_CODE != 4 
   </select>
@@ -116,6 +117,7 @@
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
+	AND GROUP_STATUS != 2
     AND LEVEL_CODE = 3
   </select>
   
@@ -125,6 +127,7 @@
 	FROM GROUP_MEMBER
 	JOIN "GROUP" USING(GROUP_NO) 
 	WHERE MEMBER_ID = #{memberId}
+	AND GROUP_STATUS != 2
     AND LEVEL_CODE = 4
   </select>
   
@@ -142,6 +145,7 @@
   	SET LEVEL_CODE = 2
   	WHERE MEMBER_ID = #{memberId}
   	AND GROUP_NO = #{gNo}
+  	AND GROUP_STATUS != 2
   </update>
   
   <!-- 모임 신청 취소 -->
@@ -150,8 +154,8 @@
     WHERE MEMBER_ID = #{memberId}
     AND GROUP_NO = #{gNo}
     AND LEVEL_CODE = 4
+    AND GROUP_STATUS != 2
   </delete>
-  
   
   
   <!-- 회원 탈퇴 -->

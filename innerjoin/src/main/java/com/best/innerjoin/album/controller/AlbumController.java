@@ -17,11 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.best.innerjoin.alarm.model.service.AlarmService;
 import com.best.innerjoin.album.model.service.AlbumService;
 import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
 import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
+import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,6 +32,8 @@ import com.google.gson.GsonBuilder;
 @Controller
 public class AlbumController {
 
+	@Autowired
+	private AlarmService alarmService;
 	@Autowired
 	private AlbumService aService;
 	/** 앨범 등록 뷰 컨트롤러
@@ -56,12 +61,16 @@ public class AlbumController {
     @RequestMapping(value="addPhoto.ij", method=RequestMethod.POST)
     public int addPhoto(HttpServletRequest request, @RequestParam("files")List<MultipartFile> files,Album album) {
 		
-		System.out.println("==============================");
-		System.out.println("title : " + album.getAlbumTitle());
-		System.out.println("gno : " + album.getGroupNo());
-		System.out.println("getAlbumNo : " + album.getAlbumNo());
-		System.out.println("memberId : " + album.getMemberId());
-		System.out.println("files : " + files.size());
+		/*
+		 * System.out.println("==============================");
+		 * System.out.println("title : " + album.getAlbumTitle());
+		 * System.out.println("gno : " + album.getGroupNo());
+		 * System.out.println("getAlbumNo : " + album.getAlbumNo());
+		 * System.out.println("memberId : " + album.getMemberId());
+		 * System.out.println("files : " + files.size());
+		 */
+		
+		
 		
 		  for (MultipartFile mf : files) { 
 			  String originFileName = mf.getOriginalFilename(); // ���� ���� �� long fileSize = mf.getSize(); //
@@ -75,6 +84,16 @@ public class AlbumController {
 	
 		int result = aService.insertAlbum(request,files,album);
 	    
+		
+		//앨범 등록 후 알람테이블에 내용 저장
+		int result2 = 0;
+		int gNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		String senderId = ((Member)request.getSession().getAttribute("loginUser")).getMemberId();
+		ArrayList<GroupMember> receiverList = aService.getGroupList(gNo);
+		
+		if(result>0) {
+			result2 = alarmService.insertAlbumAlarm(senderId,receiverList);
+		}
 	    
 		return result;
 	}

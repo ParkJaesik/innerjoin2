@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> 
+<!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>  -->
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <style>
 	#_chatbox{

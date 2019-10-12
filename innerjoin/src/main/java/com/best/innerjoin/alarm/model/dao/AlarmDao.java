@@ -1,11 +1,15 @@
 package com.best.innerjoin.alarm.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.best.innerjoin.alarm.model.vo.Alarm;
+import com.best.innerjoin.group.model.vo.GroupMember;
 
 @Repository
 public class AlarmDao {
@@ -21,6 +25,22 @@ public class AlarmDao {
 		System.out.println(alarmMap.get("host"));
 		return sqlSession.insert("alarmMapper.insertAlarm", alarmMap);
 		
+	}
+
+	public ArrayList<Alarm> selectMyAlarm(String receiveId) {
+		ArrayList<Alarm> list=(ArrayList)sqlSession.selectList("alarmMapper.selectMyAlarm", receiveId);
+		return list;
+	}
+
+	public int insertAlbumAlarm(String senderId, String receiverId) {
+		Map<String,String> alarmMap = new HashMap<>();
+		alarmMap.put("senderId", senderId);
+		alarmMap.put("receiverId", receiverId);
+		return sqlSession.insert("alarmMapper.insertAlbumAlarm",alarmMap);
+	}
+
+	public int deleteAlarm(String alarmId) {
+		return sqlSession.delete("alarmMapper.deleteAlarm",alarmId);
 	}
 
 }
