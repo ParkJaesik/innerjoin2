@@ -213,7 +213,7 @@
 	                            
 	                            /* websocket 관련 필요 코드 */
 	                            
-	                            socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName);
+	                            socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName+"," + groupNo);
 	                            
 	                           goList();
 	                        }

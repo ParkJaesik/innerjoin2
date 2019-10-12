@@ -23,6 +23,7 @@ import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
 import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
+import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
@@ -35,6 +36,10 @@ public class AlbumController {
 	private AlarmService alarmService;
 	@Autowired
 	private AlbumService aService;
+	@Autowired
+	private GroupService gService;
+	
+	
 	/** 앨범 등록 뷰 컨트롤러
 	 * @return
 	 */
@@ -91,7 +96,7 @@ public class AlbumController {
 		String senderId = ((Member)request.getSession().getAttribute("loginUser")).getMemberId();
 		ArrayList<GroupMember> receiverList = aService.getGroupList(gNo);
 		
-		String tmpMsg = "<a href='addAlbumForm.ij&groupNo="+gNo+"'>" + gName + "모임에 새 앨범이 등록되었습니다.";
+		String tmpMsg = "<a href='albumListView.ij?gNo="+gNo+"'>" + gName + "모임에 새 앨범이 등록되었습니다.";
 		
 		//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
 		//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
@@ -107,13 +112,47 @@ public class AlbumController {
 	 * @return
 	 */
 	@RequestMapping("albumListView.ij")
-	public ModelAndView albumListView(HttpServletRequest request, ModelAndView mv, Integer page) {
+	public ModelAndView albumListView(HttpServletRequest request, ModelAndView mv, Integer page,Integer gNo) {
 		// 커맨드 객체 사용 시 해당  파라미터가 없을 경우 커맨드 객체에 null 값이 저장됨. int(원시타입)로 커맨드 객체 선언시 null값을 저장할 수 없어 type mismatch exception이 발생하게 되므로 Integer wrapper class로 커맨드 객체를 선언
 		
 		// page == null -> 1page
 		// page != null -> 모든 page 중 하나
 		int currentPage = page == null ? 1 : page;
-		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		
+		
+		//알람을 타고 앨범페이지로 왔을경우
+		int groupNo = 0;
+		if(request.getSession().getAttribute("group")!=null) {
+			groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		}else {
+			groupNo = gNo;
+			Group tempGroup = gService.goGroupPage(groupNo);
+			
+			Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+			Integer groupMemberCode = -1;  
+			if(loginUser!=null) {
+			String memberId = loginUser.getMemberId();
+			
+			
+			if(memberId != null) {
+				groupMemberCode = gService.selectCode(memberId,gNo);
+				if(groupMemberCode ==null) {
+					groupMemberCode = 5;
+					
+				}
+			}
+			request.getSession().setAttribute("group",tempGroup );
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			}
+		
+		}
+		
+		/*
+		 * 예설이이가 작성한 원본 코드
+		 * int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		 * 
+		 * */
 		
 		ArrayList<Album> list = aService.selectList("" + groupNo,currentPage);
 		

@@ -166,9 +166,9 @@ public class GroupController {
 				}
 			}
 		}
-		
-		System.out.println(groupMemberCode);
-		
+		/*
+		 * System.out.println(groupMemberCode);
+		 */
 		
 		model.addAttribute("event", eList2);
 		model.addAttribute("member", memList);
