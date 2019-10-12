@@ -59,8 +59,9 @@
 								<div id="member-button">
 								<c:if test="">
 								</c:if>
-									<button type="button" class="btn btn-primary" id="member-btn-level">회원등급</button>
-									<button type="button" class="btn btn-primary" id="member-btn-report">신고하기</button>
+									
+									<button type="button" class="btn btn-primary" id="member-btn-level">수락하기</button>
+									<button type="button" class="btn btn-primary" id="member-btn-report">거절하기</button>
 								</div>
 							</div>
 						</div><br>
