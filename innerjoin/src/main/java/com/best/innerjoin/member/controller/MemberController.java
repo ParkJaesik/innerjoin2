@@ -243,7 +243,10 @@ public class MemberController {
 		return "member/infoUpdate";
 	}
 	
+	
 
+	// 비밀번호 찾기
+//	@RequestMapping()
 
 	@RequestMapping("logout.ij")
 	public String memberLogout(SessionStatus status,
