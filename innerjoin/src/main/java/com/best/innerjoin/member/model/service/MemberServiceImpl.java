@@ -200,6 +200,19 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	// 회원정보 수정 
+		@Override
+		public int updateInfo(Member member) {
+			String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+			
+			member.setMemberPwd(encPwd);
+			int result = mDao.updateInfo(member);
+			if(result > 0) {
+				result = mDao.updateAddInfo(member);
+			}
+			return result;
+		}
+
 	
 
 	

@@ -103,8 +103,8 @@ public class MemberController {
 	// 마이페이지로 이동
 	@RequestMapping("myGroupForm.ij")
 	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
-		
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		System.out.println("마이페이지" + loginUser.getMemberProPath() );
 		System.out.println(loginUser);
 		
 		// 내 모임 목록
@@ -243,11 +243,31 @@ public class MemberController {
 		return "member/infoUpdate";
 	}
 	
+	// 정보수정 
+		@RequestMapping(value="infoUpdate.ij", method=RequestMethod.POST)
+		public String infoUpdate(Member member, Model model, String birthday1, String birthday2, String birthday3){
+			
+			if(!birthday1.equals("") && !birthday2.equals("") && !birthday3.equals("") ) {
+				member.setMemberBirthday(birthday1 + "/" + birthday2 + "/" + birthday3);
+			}
+			
+			System.out.println("수정" + member);
+			
+			
+			
+			int result = mService.updateInfo(member);
+			
+			if(result > 0) {
+				return "redirect:infoUpdateForm.ij";
+			}else {
+				model.addAttribute("msg","정보 수정 중 오류 발생");
+				return "redirect:infoUpdateForm.ij";
+			}
+		}
+
 	
 
-	// 비밀번호 찾기
-//	@RequestMapping()
-
+	// 로그아웃
 	@RequestMapping("logout.ij")
 	public String memberLogout(SessionStatus status,
 								HttpSession session) {
@@ -304,6 +324,9 @@ public class MemberController {
 			return "redirect:loginForm.ij";
 		}
 	}
+	
+	
+	// 비밀번호 찾기
 	
 	
 

@@ -70,7 +70,7 @@
 							<div>
 								
 								<div>
-									<img class="img-circle" src="images/pic01.jpg" style="border: 1px solid slateblue;">
+									<img class="img-circle" src="${contextpath}/resources/images/member/${loginUser.memberProPath }" style="border: 1px solid slateblue;">
 								</div>
 								<div class="inputFile">
 									<input type="file">

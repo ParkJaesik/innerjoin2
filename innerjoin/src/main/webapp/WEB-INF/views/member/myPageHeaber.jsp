@@ -19,9 +19,8 @@
                             
                             <!-- form -->
 						<div class="col-md-4" align="center">
-                        	<div class="profile-img">프로필 사진
-                            	<img src="images/bg.jpg" class="img-rounded">
-                            </div>
+                        	<img class="img-circle" src="${contextPath}/resources/images/member/${loginUser.memberProPath }" style="border: 1px solid slateblue;">
+                            
                             <br>
                             <div class="myProfile">자기소개</div>
                             <br>
