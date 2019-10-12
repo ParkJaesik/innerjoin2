@@ -66,6 +66,13 @@
 		INSERT INTO REPORT VALUES(#{rContent}, #{rCategory}, #{reportId}, #{responId}, SYSDATE)
 	</insert>
 	
+	<!-- 신고글 상세조회 -->
+	<select id="selectReport" resultMap="groupMemReportResultSet" parameterType="_int">
+		SELECT *
+		FROM GROUP_MEMBER_REPORT
+		WHERE MEMBER_REPT_NO = #{rNo}
+		AND MEMBER_REPT_B_STATUS = 'Y'
+	</select>
 	
 	
 	<!-- 신고당한회원 리스트 -->
