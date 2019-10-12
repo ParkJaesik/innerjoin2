@@ -24,7 +24,7 @@
 	</select>
 	
 	<insert id="insertAlbumAlarm" parameterType="map">
-		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,'insertAlbumAlarm',#{senderId},3,#{receiverId})
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{senderId},3,#{receiverId})
 	</insert>
 	
 	

@@ -113,7 +113,8 @@
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }else if(dataArray[0]=="albumInsert"){
-	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다.");
+	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다."); */
+	        	$("#alaram").append(dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>");
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }else if(dataArray[0]=="apply"){

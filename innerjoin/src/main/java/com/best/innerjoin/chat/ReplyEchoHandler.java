@@ -113,7 +113,9 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 					String loginUserId = strs[1];
 					String loginUserName = strs[2];
 					String gName =  strs[3];
-					TextMessage tmpMsg = new TextMessage("albumInsert,"+loginUserName + ","+ gName);
+					String gNo = strs[4];
+					
+					TextMessage tmpMsg = new TextMessage("albumInsert,"+loginUserName + ","+ gName + "," + gNo);
 					for(WebSocketSession sess:sessions) {
 						
 						
