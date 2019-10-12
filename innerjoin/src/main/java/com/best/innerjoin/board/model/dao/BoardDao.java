@@ -92,8 +92,8 @@ public class BoardDao {
 	 * @param boardNo
 	 * @return rList
 	 */
-	public ArrayList<Reply> replyList(int boardNo) {
-		return (ArrayList)sqlSession.selectList("boardMapper.replyList", boardNo);
+	public ArrayList<Reply> replyList(Reply reply) {
+		return (ArrayList)sqlSession.selectList("boardMapper.replyList", reply);
 	}
 
 	/** 댓글 등록 DAO

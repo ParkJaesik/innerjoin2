@@ -78,6 +78,30 @@
 	<insert id="insertGroupMemberAdmin" parameterType="string">
 		INSERT INTO GROUP_MEMBER VALUES(#{memberId},SEQ_GNO.CURRVAL,0,DEFAULT)
 	</insert>
-
+	
+	<!-- 모임가입신청 대기중인 멤버 수락  -->
+	<insert id="acceptGroup" parameterType="map">
+		UPDATE GROUP_MEMBER SET LEVEL_CODE = 2 WHERE MEMBER_ID=#{memberId} AND GROUP_NO = #{gNo}		
+	</insert>
+	
+	<!-- 모임가입신청 대기중인 멤버 거절  -->
+	<insert id="rejectGroup" parameterType="map">
+		DELETE GROUP_MEMBER WHERE MEMBER_ID=#{memberId} AND GROUP_NO = #{gNo}		
+	</insert>
+	
+	<!-- 모임 인원 늘려주기 -->
+	<update id="updateGroupCount" parameterType="_int">
+		UPDATE "GROUP" SET GROUP_MEM_COUNT = GROUP_MEM_COUNT+1 WHERE GROUP_NO = #{gNo}
+	</update>
+	
+	<!-- 모임에 속한 전원의 아이디 구하기 -->
+	<select id="getGroupList" parameterType="_int" resultMap="groupMemberResultSet">
+	
+		SELECT *
+		FROM GROUP_MEMBER
+		WHERE GROUP_NO =#{gNo}
+		AND (LEVEL_CODE=0 OR LEVEL_CODE=1 OR LEVEL_CODE=2)
+	
+	</select>
 </mapper>
 

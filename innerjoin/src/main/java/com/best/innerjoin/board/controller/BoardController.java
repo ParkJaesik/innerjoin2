@@ -143,8 +143,8 @@ public class BoardController {
 	// 댓글 조회
 	@ResponseBody
 	@RequestMapping(value="rlist.ij", produces="application/json; charset=UTF-8")
-	public String replyList(int boardNo) {
-		ArrayList<Reply> list = bService.replyList(boardNo);
+	public String replyList(Reply reply) {
+		ArrayList<Reply> list = bService.replyList(reply);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm").create();
 		

@@ -12,6 +12,8 @@ import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
 import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Repository("aDao")
 public class AlbumDao {
@@ -63,7 +65,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public Album selectAlbum(int albumNo) {
-		// TODO Auto-generated method stub
 		/*
 		 * Album album = sqlSession.selectOne("albumMapper.selectAlbum", albumNo);
 		 * System.out.println("dao albumNo 확인 : " +albumNo);
@@ -77,7 +78,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public ArrayList<AlbumPhoto> selectPhoto(int albumNo) {
-		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("albumMapper.selectPhotoList", albumNo);
 	}
 
@@ -86,7 +86,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public int deleteAlbum(int albumNo) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("albumMapper.deleteAlbum", albumNo);
 	}
 
@@ -95,7 +94,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public int insertReply(AlbumReply aReply) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("albumMapper.insertReply", aReply);
 	}
 
@@ -104,7 +102,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public ArrayList<AlbumReply> selectReply(int albumNo) {
-		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("albumMapper.selectReply", albumNo);
 	}
 
@@ -113,7 +110,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public int deleteReply(AlbumReply aReply) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("albumMapper.deleteReply", aReply);
 	}
 
@@ -122,7 +118,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public int updateReply(AlbumReply aReply) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("albumMapper.updateReply", aReply);
 	}
 
@@ -131,7 +126,6 @@ public class AlbumDao {
 	 * @return
 	 */
 	public int deletePhoto(AlbumPhoto aPhoto) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("albumMapper.deletePhoto", aPhoto);
 	}
 
@@ -140,8 +134,11 @@ public class AlbumDao {
 	 * @return
 	 */
 	public int updateAlbum(Album album) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("albumMapper.updateAlbum", album);
+	}
+
+	public ArrayList<GroupMember> getGroupList(int gNo) {
+		return (ArrayList)sqlSession.selectList("groupMapper.getGroupList",gNo);
 	}
 
 

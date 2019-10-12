@@ -23,8 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-		},
+			right: 'dayGridMonth,listWeek'
+/*				right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+*/		},
 //      titleFormat: {
 //    	  month: "yyyy년 MMMM",
 //    	  week: "[yyyy] MMM dd일{ [yyyy] MMM dd일}",

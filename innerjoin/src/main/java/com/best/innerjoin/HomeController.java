@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,17 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	@RequestMapping("gohome.ij")
+	public String goHome(HttpServletRequest request){
+		
+		if(request.getSession().getAttribute("group")!=null) {
+			request.getSession().removeAttribute("group");
+			request.getSession().removeAttribute("gName");
+			request.getSession().removeAttribute("groupMemberCode");
+		}
+		
+		return "/index";
 	}
 	
 }

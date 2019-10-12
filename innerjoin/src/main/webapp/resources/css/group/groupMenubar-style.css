@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-* {
+#group-index-container * {
 	font-family: 'Noto Sans KR', sans-serif;
-	color: rgb(50, 50, 50);
+	/* color: rgb(50, 50, 50); */
 }
 
 #group-index-container .btn {

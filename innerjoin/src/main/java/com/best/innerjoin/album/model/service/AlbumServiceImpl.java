@@ -19,6 +19,8 @@ import com.best.innerjoin.album.model.vo.AlbumPhoto;
 import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.album.model.vo.Pagination;
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Service("aService")
 public class AlbumServiceImpl implements AlbumService {
@@ -230,26 +232,27 @@ public class AlbumServiceImpl implements AlbumService {
 
 		@Override
 		public ArrayList<AlbumReply> selectReply(int albumNo) {
-			// TODO Auto-generated method stub
 			return aDao.selectReply(albumNo);
 		}
 
 		@Override
 		public int deleteReply(AlbumReply aReply) {
-			// TODO Auto-generated method stub
 			return aDao.deleteReply(aReply);
 		}
 
 		@Override
 		public int updateReply(AlbumReply aReply) {
-			// TODO Auto-generated method stub
 			return aDao.updateReply(aReply);
 		}
 
 		@Override
 		public int deletePhoto(AlbumPhoto aPhoto) {
-			// TODO Auto-generated method stub
 			return aDao.deletePhoto(aPhoto);
+		}
+
+		@Override
+		public ArrayList<GroupMember> getGroupList(int gNo) {
+			return aDao.getGroupList(gNo);
 		}
 		
 }

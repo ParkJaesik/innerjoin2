@@ -12,9 +12,9 @@
 <link href='${contextPath }/resources/css/event/daygrid.css' rel='stylesheet' />
 <link href='${contextPath }/resources/css/event/list.css' rel='stylesheet' />
 <link href='${contextPath }/resources/css/event/timegrid.css' rel='stylesheet' />
-
+<%-- 
 <link href='${contextPath }/resources/css/event/calendarEvent.css' rel='stylesheet' />
-
+ --%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <script src='${contextPath }/resources/js/event/core.js'></script>
@@ -40,6 +40,31 @@
 		font-size: 1em;
 		font-weight: bold;
 	}
+	
+	.fc-left .fc-button-group {
+		width: 100px;
+	}
+	
+	.fc-right .fc-button-group {
+		width: 100px;
+		float: right;
+		margin-right: 30px;
+	}
+	
+	.fc-center h2 {
+		text-align: center;
+	}
+	
+	.popover-body .btn {
+		margin-left:10px;
+	}
+	.fc-content:hover {
+		cursor: pointer;
+	}
+	.fc-day-number:hover {
+		cursor: default;
+	}
+
 </style>
 </head>
 <body>
@@ -65,7 +90,8 @@
 		        header: {
 					left: 'prev,next today',
 					center: 'title',
-					right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+					right: 'dayGridMonth,listWeek'
+/* 					right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek' */
 				},
 				defaultView: 'dayGridMonth',
 				defaultDate: moment().format('YYYY-MM-DD'),
@@ -102,6 +128,11 @@
 					console.log($el);
 					$el.popover(popOverSettings);
 					$el.popover('show');
+				},
+				eventTimeFormat: { // like '14:30:00'
+					hour: '2-digit',
+					minute: '2-digit',
+					meridiem: false
 				}
 			});
 			
@@ -182,6 +213,8 @@
 				});	 
 			});	
 			
+			
+			
 
 		});
 	
@@ -232,7 +265,12 @@
 		}
 	
 	//	$('.fc-content').popover(popOverSettings);
-		
+		$(function() {
+			$(".fc-day-number").click(function(e) {
+				e.stopPropagation();
+				return false;
+			});
+		});
     </script>  
     
 </body>

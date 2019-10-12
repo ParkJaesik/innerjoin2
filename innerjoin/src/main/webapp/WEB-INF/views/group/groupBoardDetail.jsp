@@ -125,12 +125,13 @@
 	<script>
 		function replyList() {
 			var boardNo = ${ board.boardNo };
+			var groupNo = ${ group.gNo }
 			$wrapper = $("#reply-view-container");
 			$wrapper.empty();
 			$content = "";
 			$.ajax({
 				url : "rlist.ij",
-				data : {boardNo : boardNo},
+				data : {boardNo : boardNo , groupNo : groupNo},
 				dataType : "json",
 				success : function(list) {
 					if(list.length>0){
@@ -138,11 +139,11 @@
 							$content = '<div class="reply-view" align="center" style="margin-top:10px;"><table><tr>';
 							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
 							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
-							$content += '<a href="javascript:update('+list[i].replyNo+');">수정</a>&nbsp;&nbsp;';
-							$content += '<a href="">삭제</a></td></tr>';
+							$content += '<a id="reply-edit" href="javascript:update('+list[i].replyNo+');">수정</a>&nbsp;&nbsp;';
+							$content += '<a id="reply-delete" href="">삭제</a></td></tr>';
 							$content += '<tr>';
 							$content += '<td class="reply-content" style="font-weight:bold">'+list[i].replyContent+'</td>';
-							$content += '<td class="reply-date" style="text-align:center; font-size:12px;">'+list[i].replyCreateDate+'</td></tr>';
+							$content += '<td class="reply-date" style="text-align:center; font-size:12px;">'+list[i].replyModifyDate+'</td></tr>';
 							$content += '</table></div>';
 							$wrapper.append($content);
 						});
@@ -150,14 +151,16 @@
 				}
 			});
 		}
+		
 		replyList();
+		
 		$("#reply-btn-input").on("click", function(){
 			var replyContent = $("#reply").val();
 			var boardNo = ${ board.boardNo };
-			
+			var groupNo = ${ group.gNo }
 			$.ajax({
 				url : "rinsert.ij",
-				data : {replyContent : replyContent, boardNo : boardNo},
+				data : {replyContent : replyContent, boardNo : boardNo, groupNo : groupNo},
 				type : "post",
 				success : function(data) {
 					if (data == "success") {
@@ -166,6 +169,10 @@
 					}
 				}
 			});
+		});
+		
+		$("#reply-edit").on("click", function(){
+			
 		});
 	</script>
 </body>
