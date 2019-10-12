@@ -29,6 +29,7 @@
   		<result property="boardNo" column="BOARD_NO"/>
   		<result property="memberId" column="MEMBER_ID"/>
   		<result property="memberName" column="MEMBER_NAME"/>
+  		<result property="groupNo" column="GROUP_NO"/>
   	</resultMap>
   	
 	<!-- 전체 게시글 수 조회 쿼리 -->
@@ -89,10 +90,12 @@
 	</update>
 	
 	<!-- 댓글 조회 쿼리 -->
-	<select id="replyList" parameterType="_int" resultMap="replyResultSet">
-		SELECT REPLY_NO, REPLY_CONTENT, REPLY_CREATE_DATE, REPLY_MODIFY_DATE, REPLY_STATUS, BOARD_NO, MEMBER_ID, MEMBER_NAME
-		FROM REPLY JOIN MEMBER USING(MEMBER_ID)
-		WHERE BOARD_NO = #{boardNo} AND REPLY_STATUS = 'Y' ORDER BY REPLY_NO DESC
+	<select id="replyList" parameterType="Reply" resultMap="replyResultSet">
+		SELECT REPLY_NO, REPLY_CONTENT, TO_CHAR(REPLY_CREATE_DATE, 'YYYY.MM.DD HH:MI') REPLY_CREATE_DATE, TO_CHAR(REPLY_MODIFY_DATE, 'YYYY.MM.DD HH:MI') REPLY_MODIFY_DATE, REPLY_STATUS, R.MEMBER_ID, MEMBER_NAME, GROUP_NO
+		FROM REPLY R
+		JOIN MEMBER M ON(R.MEMBER_ID = M.MEMBER_ID)
+		JOIN BOARD USING(BOARD_NO)
+		WHERE BOARD_NO = #{boardNo} AND GROUP_NO = #{groupNo} AND REPLY_STATUS = 'Y' ORDER BY REPLY_NO DESC
 	</select>
 	
 	<!-- 댓글 등록 쿼리 -->

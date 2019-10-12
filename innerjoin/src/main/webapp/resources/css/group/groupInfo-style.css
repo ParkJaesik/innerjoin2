@@ -49,6 +49,7 @@ div {
 	width: 100%;
 	height: 200px;
 	background-color: rgb(230, 230, 230);
+	border-radius: 10px;
 }
 
 #group-main-new-container {
@@ -60,12 +61,17 @@ div {
 	width: 100%;
 	height: 200px;
 	background-color: rgb(230, 230, 230);
+	border-radius: 10px;
 }
 
 #group-main-event {
 	width: 100%;
 	height: 150px;
 	background-color: rgb(230, 230, 230);
+
+	border-radius: 10px;
+}
+
 }
 
 
@@ -176,3 +182,4 @@ div {
       display: block;
       text-align: center;
    }
+
