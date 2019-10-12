@@ -27,7 +27,6 @@ import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @Controller
 public class AlbumController {
@@ -102,13 +101,15 @@ public class AlbumController {
 	 * @return
 	 */
 	@RequestMapping("albumListView.ij")
-	public ModelAndView albumListView(String groupNo, ModelAndView mv, Integer page) {
+	public ModelAndView albumListView(HttpServletRequest request, ModelAndView mv, Integer page) {
 		// 커맨드 객체 사용 시 해당  파라미터가 없을 경우 커맨드 객체에 null 값이 저장됨. int(원시타입)로 커맨드 객체 선언시 null값을 저장할 수 없어 type mismatch exception이 발생하게 되므로 Integer wrapper class로 커맨드 객체를 선언
 		
 		// page == null -> 1page
 		// page != null -> 모든 page 중 하나
 		int currentPage = page == null ? 1 : page;
-		ArrayList<Album> list = aService.selectList(groupNo,currentPage);
+		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		
+		ArrayList<Album> list = aService.selectList("" + groupNo,currentPage);
 		
 		if(list != null) {
 			// 메소드 체이닝 (Method Chaining)
