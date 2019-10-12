@@ -6,16 +6,17 @@ public class Reply {
 	private int replyNo;
 	private String replyContent;
 	private String replyCreateDate;
-	private Date replyModifyDate;
+	private String replyModifyDate;
 	private char replyStatus;
 	private int boardNo;
 	private String memberId;
 	private String memberName;
+	private int groupNo;
 	
 	public Reply() {}
 
-	public Reply(int replyNo, String replyContent, String replyCreateDate, Date replyModifyDate, char replyStatus,
-			int boardNo, String memberId, String memberName) {
+	public Reply(int replyNo, String replyContent, String replyCreateDate, String replyModifyDate, char replyStatus,
+			int boardNo, String memberId, String memberName, int groupNo) {
 		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
@@ -25,6 +26,7 @@ public class Reply {
 		this.boardNo = boardNo;
 		this.memberId = memberId;
 		this.memberName = memberName;
+		this.groupNo = groupNo;
 	}
 
 	public int getReplyNo() {
@@ -51,11 +53,11 @@ public class Reply {
 		this.replyCreateDate = replyCreateDate;
 	}
 
-	public Date getReplyModifyDate() {
+	public String getReplyModifyDate() {
 		return replyModifyDate;
 	}
 
-	public void setReplyModifyDate(Date replyModifyDate) {
+	public void setReplyModifyDate(String replyModifyDate) {
 		this.replyModifyDate = replyModifyDate;
 	}
 
@@ -91,11 +93,19 @@ public class Reply {
 		this.memberName = memberName;
 	}
 
+	public int getGroupNo() {
+		return groupNo;
+	}
+
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
 				+ ", replyModifyDate=" + replyModifyDate + ", replyStatus=" + replyStatus + ", boardNo=" + boardNo
-				+ ", memberId=" + memberId + ", memberName=" + memberName + "]";
+				+ ", memberId=" + memberId + ", memberName=" + memberName + ", groupNo=" + groupNo + "]";
 	}
 	
 }

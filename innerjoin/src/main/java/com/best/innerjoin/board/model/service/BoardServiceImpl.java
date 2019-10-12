@@ -177,8 +177,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Reply> replyList(int boardNo) {
-		return bDao.replyList(boardNo);
+	public ArrayList<Reply> replyList(Reply reply) {
+		return bDao.replyList(reply);
 	}
 
 	@Override
