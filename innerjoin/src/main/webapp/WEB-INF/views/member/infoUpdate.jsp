@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+
 <title>마이페이지</title>
 <style type="text/css">
 	/* *{
@@ -47,28 +49,34 @@
 				  	<div class="col-4">
 				  	
 		                <div class="margin" style="margin: 50px;"></div>
-				  		<form action="" method="post">
+				  		<form action="infoUpdate.ij" method="post" onsubmit="return validate();" id="infoForm">
 			             
 			                <div class="row">
 			                    <h3>정보 수정</h3>
 			                    <div class="input-group input-group-icon">
-									<input type="email" name="memberId" value="${ loginUser.memberId }" readonly="readonly"/>
+									<input type="email" name="memberId" id="memberId" value="${ loginUser.memberId }" readonly="readonly"/>
 									&nbsp;<span></span>
 								</div>
 								<br>
 								<div class="input-group input-group-icon">
-									<input type="text" value="${ loginUser.memberName }"/>
-									<input type="hidden" name="memberName" value="${ loginUser.memberName }">
+									<input type="text" value="${ loginUser.memberName }" id="memberName" name="memberName"/>
+									<c:if test="${fn:trim(memberName.val())== null }">
+									<input type="hidden" name="memberName" id="memberName" value="${ loginUser.memberName }">
+									</c:if>
 									&nbsp;<span style="text-aling:center;" id="nameCheck">&nbsp;</span>
 								</div>
 								<div class="input-group input-group-icon">
-									<input type="password" placeholder="Password"/>
+									<input type="password" placeholder="Password" id="memberPwd" name="memberPwd"/>
+									
 									<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }">
+									
 									&nbsp;<span id="pwdCheck1">&nbsp;</span>
 								</div>
 								<div class="input-group input-group-icon">
-									<input type="password" placeholder="Password Check"/>
+									<input type="password" placeholder="Password Check" id="memberPwd2" name="memberPwd2"/>
+									
 									<input type="hidden" name="memberPwd2" value="${ loginUser.memberPwd }">
+									
 									&nbsp;<span id="pwdCheck2">&nbsp;</span>
 								</div>
 								
@@ -83,13 +91,13 @@
 			                      	<c:choose>
 				                      	<c:when test="${ empty loginUser.memberBirthday }">
 				                      	<div class="col-third">
-											<input type="text" placeholder="YYYY" maxlength="4"/>
+											<input type="text" placeholder="YYYY" maxlength="4" id="birthday1" name="birthday1"/>
 										</div>
 										<div class="col-third">
-											<input type="text" placeholder="MM" maxlength="2"/>
+											<input type="text" placeholder="MM" maxlength="2" name="birthday2" id="birthday2"/>
 										</div>
 										<div class="col-third">
-											<input type="text" placeholder="DD" maxlength="2"/>
+											<input type="text" placeholder="DD" maxlength="2" name="birthday3" id="birthday3"/>
 										</div>
 										</c:when>
 			                      	
@@ -97,17 +105,17 @@
 				                        <c:forTokens var="birthday" items="${ loginUser.memberBirthday }" delims="/" varStatus="status">
 				                        <c:if test="${ status.index eq 0 }">
 				                        <div class="col-third">
-											<input type="text" name="birthday1" id="birthday1" value="${ birthday }" maxlength="4"/>
+											<input type="text" name="birthday1" id="birthday1" value="${ birthday }" maxlength="4" readonly="readonly"/>
 										</div>
 										</c:if>
 										<c:if test="${ status.index eq 1 }">
 										<div class="col-third">
-											<input type="text" name="birthday2" id="birthday2" value="${ birthday }" maxlength="2"/>
+											<input type="text" name="birthday2" id="birthday2" value="${ birthday }" maxlength="2" readonly="readonly"/>
 										</div>
 										</c:if>
-										<c:if test="${ stauts.index eq 2}">
+										<c:if test="${ status.index eq 2}">
 										<div class="col-third">
-											<input type="text" name="birthday3" id="birthday3" value="${ birthday }" maxlength="2"/>
+											<input type="text" name="birthday3" id="birthday3" value="${ birthday }" maxlength="2" readonly="readonly"/>
 										</div>
 										</c:if>
 										</c:forTokens>
@@ -117,6 +125,7 @@
 			                    </div>
 			                    <div class="col-half">
 			                      <h5>Gender</h5>
+			                      <!-- 성별 있을 때 없을 때   -->
 			                      <div class="input-group">
 			                      	<input type="radio" name="gender" value="male" id="gender-male"/>
 									<label for="gender-male">Male</label>
@@ -126,15 +135,9 @@
 			                    </div>
 			                  </div>
 			                  </div>
-			                  <div class="row">
-			                    <h5>Terms and Conditions</h5>
-			                    <div class="input-group">
-			                      <input type="checkbox" id="terms"/>
-			                      <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
-			                  	</div>
-			                	</div>
+			                 
 			              	</div>
-			              	<button id="submit-btn" style="float: right;"> 수정</button>
+			              	<button id="submit-btn" style="float: right;" onclick="validate();"> 수정</button>
 							<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
 							<c:url var="mLeave" value="mLeave.ij">
 							<c:param name="memberId" value="${ loginUser.memberId }"/>
@@ -148,6 +151,91 @@
 				<div class="col-md-1 aside"></div>
 			</div>
 	</div>
+	<script>
+	$(function(){
+		
+		var nameCheck = false;
+		var pwdCheck = false;
+		var pwdCheck2 = false;
+		// 정규식 검사
+		/* var idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; */
+		
+			
+		/* 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식 */
+		var pwdRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		var memberName = $.trim($("#memberName").val());
+		var memberPwd = $.trim($("#memberPwd").val());
+		var memberPwd2 = $.trim($("#memberPWd2").val());
+		
+		// 닉네임 중복/형식 검사 
+		$("#memberName").on("input", function(){
+			var memberName = $.trim($("#memberName").val());
+			var nameRegExp = /^[0-9a-zA-z가-힣]{3,15}$/;
+			if(!nameRegExp.test(memberName)){
+				$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
+				$("#nameCheck").html("문자,숫자 3~15자리 이내로 입력해주세요.");
+				idCheck = false;
+			}else{
+				$.ajax({
+					url: "dupName.ij",
+					type: "POST",
+					data : {name:memberName},
+					success:function(result){
+						if(result == "true"){
+							$("#nameCheck").css({"color":"green","font-size":"13px"});
+							$("#nameCheck").html("사용가능한 닉네임입니다.");
+							nameCheck=true;
+						}else{
+							nameCheck = false;
+						}
+					}
+				});
+					
+			}
+		});
+		
+		// 비밀번호 정규식 검사
+		$("#memberPwd").on("input", function(){
+			var memberPwd = $.trim($("#memberPwd").val());
+			if(!pwdRegExp.test(memberPwd)){
+				$("#pwdCheck1").css({"color":"#df5b4dcb", "font-size":"13px"});
+				$("#pwdCheck1").html("특수문자, 문자, 숫자 포함 8~15 자리로 입력해주세요.");
+				pwdCheck = false;
+			}else{
+				$("#pwdCheck1").html(" ");
+				pwdCheck = true;
+			}
+					
+				
+		});
+			
+		$("#memberPwd, #memberPwd2").on("input", function(){
+			memberPwd = $.trim($("#memberPwd").val());
+			var memberPwd2 = $.trim($("#memberPwd2").val());
+			if(pwdCheck==true){
+				if(memberPwd == memberPwd2){
+					$("#pwdCheck2").css({"color":"green", "font-size":"13px"});
+					$("#pwdCheck2").html("비밀번호 일치");
+					pwdCheck2 = true;
+				}else{
+					$("#pwdCheck2").css({"color":"#df5b4dcb", "font-size":"13px"});
+					$("#pwdCheck2").html("비밀번호 불일치");
+					pwdCheck2 = false;
+				}	
+			}
+		});
+		
+		
+		$("#submit-btn").click(function(){
+			if($("#memberPwd").val() == null || $("#memberPwd2").val() ==null ){
+				$("#memberPwd").val("${loginUser.memberPwd}");
+				$("#memberPwd2").val("${loginUser.memberPwd}");
+			
+			}
+			$("#infoForm").submit();
+		});
+	});
+	</script>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

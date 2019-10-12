@@ -68,5 +68,12 @@
 	
 	
 	
+	<!-- 신고당한회원 리스트 -->
+	<!-- <select id="selectList" resultMap="groupMemReportResultSet">
+		SELECT MEMBER_REPT_NO, RESPONDENT_ID
+	</select>  -->
+	
+	
+	
 
 </mapper>

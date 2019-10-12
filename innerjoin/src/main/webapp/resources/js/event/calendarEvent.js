@@ -23,8 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-		},
+			right: 'dayGridMonth,listWeek'
+/*				right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+*/		},
 //      titleFormat: {
 //    	  month: "yyyy년 MMMM",
 //    	  week: "[yyyy] MMM dd일{ [yyyy] MMM dd일}",
@@ -485,7 +486,6 @@ document.addEventListener('DOMContentLoaded', function() {
 					closeEventForm();
 					alertMessage('새 일정이 등록되었습니다.');
 					// 일정등록 성공 시 소켓 처리
-					
 					eventSetting();
 					
 				}

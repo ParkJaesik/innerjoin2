@@ -17,4 +17,14 @@
 		
 	</insert>
 	
+	<select id="selectMyAlarm" parameterType="string" resultMap="alarmResultSet" >
+		SELECT *
+		FROM ALARM
+		WHERE RECEIVER_ID = #{receiveId}
+	</select>
+	
+	<insert id="insertAlbumAlarm" parameterType="map">
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,'insertAlbumAlarm',#{senderId},3,#{receiverId})
+	</insert>
+	
 </mapper>

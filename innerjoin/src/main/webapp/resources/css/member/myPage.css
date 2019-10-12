@@ -94,11 +94,11 @@ button,
 	background-color: rgba(141, 141, 140, 0.836); 
 }
 
-.btn{
+.menu-detail .btn{
 	float: right;
 	margin: 0.8em;
-	
 }
+
 .invite{
 	padding-bottom: 2em;
 	/* margin-left: 2em;

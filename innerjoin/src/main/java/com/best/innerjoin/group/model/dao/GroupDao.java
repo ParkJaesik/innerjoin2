@@ -72,4 +72,16 @@ public class GroupDao {
 		return sqlSession.insert("groupMapper.insertGroupMemberAdmin", memberId);
 	}
 
+	public int acceptGroup(Map codeMap) {
+		return sqlSession.insert("groupMapper.acceptGroup",codeMap);
+	}
+
+	public int rejectGroup(Map codeMap) {
+		return sqlSession.insert("groupMapper.rejectGroup",codeMap);
+	}
+
+	public int updateGroupCount(int gNo) {
+		return sqlSession.update("groupMapper.updateGroupCount", gNo);
+	}
+
 }

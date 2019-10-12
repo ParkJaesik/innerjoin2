@@ -22,19 +22,7 @@
 <script src='${contextPath }/resources/js/event/interaction.js'></script>
 
 <script src='${contextPath }/resources/js/event/moment.js'></script>
-
-<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- 테마 sketch -->
-   <!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp" crossorigin="anonymous">
- -->
- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-ciphE0NCAlD2/N6NUApXAN2dAs/vcSAOTzyE202jJx3oS8n4tAQezRgnlHqcJ59C" crossorigin="anonymous">
-    <!-- 한글글씨체 : sandoll -->
-   <!--  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-    -->
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-ciphE0NCAlD2/N6NUApXAN2dAs/vcSAOTzyE202jJx3oS8n4tAQezRgnlHqcJ59C" crossorigin="anonymous">
 
 
 <!-- sweet alert -->
@@ -149,10 +137,10 @@
 	                                    </div>
 	                                    <div class="modal-footer">
 	                                        
-	                                        <button type="button" id="addEventBtn" class="btn btn-warning">
+	                                        <button type="button" id="addEventBtn" class="btn btn-primary">
 												등록
 	                                        </button> 
-	                                        <button type="button" id="cancelEventBtn" class="btn btn-danger" data-dismiss="modal">
+	                                        <button type="button" id="cancelEventBtn" class="btn btn-default" data-dismiss="modal">
 												취소
 	                                        </button>
 	                                    </div>
@@ -177,14 +165,7 @@
 	<script>
 		console.log("levelCode: ${levelCode}");
 	</script>
-   <%-- 
-	<!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
-	<script src='${contextPath }/resources/js/event/calendarEvent.js'></script> --%>
-    
-    <!-- bootstrap js -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-   
+
 
 </body>
 </html>

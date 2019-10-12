@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 </head>
 <body>
+<%@ include file="../group/groupMenubar.jsp" %>
 	<div class="content">
         <div class="content-wrap">
             <div class="div1">
@@ -33,7 +34,7 @@
                     </tr>
                     <tr>
                         <!-- <td>1</td> -->
-                        <td>qqq</td>
+                        <td></td>
                         <td>2</td>
                         <td>처리</td>
                         <td><button id="delete">강퇴하기</button></td>

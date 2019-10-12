@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -116,20 +117,6 @@ public class GroupController {
 	}
 	
 	
-
-
-	@RequestMapping("tempGoGroup.ij")
-	public String tempGoGroup(HttpServletRequest request) {
-		 request.getSession().setAttribute("groupName", "가나다");
-		return "group/groupIndex";
-	}
-	
-	@RequestMapping("tempGoGroup2.ij")
-	public String tempGoGroup2(HttpServletRequest request) {
-		 request.getSession().setAttribute("groupName", "라라라라");
-		return "group/groupIndex";
-	}
-	
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	@RequestMapping("goGroupPage.ij")
@@ -152,21 +139,37 @@ public class GroupController {
 		}
 		
 		Group tempGroup = gService.goGroupPage(gNo);
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM");
+		
+		Date time = new Date();
+				
+		String time1 = format1.format(time);
+		
+		ArrayList<Event> eList = eSerivce.groupEventList(time1, ""+gNo);
+		
+		ArrayList<Event> eList2 = null;
+		
+		// 이벤트 리스트 최신 3개 자르기
+		if(!eList.isEmpty()) {
+			eList2 = new ArrayList<Event>();
+			for(int i = 0; i < 3;i++) {
+				eList2.add(eList.get(i));
+			}
+		}
+		
 		System.out.println(groupMemberCode);
 		
 		
+		model.addAttribute("event", eList2);
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
-		
-		String date = "2019-10";
-		
-		ArrayList<Event> eList = eSerivce.groupEventList(date, ""+gNo);
-		
 
-		model.addAttribute("event", eList);
+		
 		
 		return "group/groupInfo";
 	}
@@ -244,12 +247,48 @@ public class GroupController {
 		
 		String path = null;
 		if(result > 0) {
+			
 			path = "group/groupMember";
 		}else {
 			model.addAttribute("msg", "회원 등급 수정 실패");
 			path= "common/errorPage";
 		}
 		
+		return path;
+	}
+	
+	
+	//회원 수락 
+	@RequestMapping("acceptGroup.ij")
+	public String accpetGroup(HttpServletRequest request,Member member,Model model) {
+		String memberId = member.getMemberId();
+		int gNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		int result = gService.acceptGroup(memberId,gNo);
+		String path = null;
+		if(result>0) {
+			int result2 = gService.updateGroupCount(gNo);
+			
+			path = "redirect:wgmlist.ij"; 
+		}else {
+			model.addAttribute("msg", "가입 신청 수락 중 에러발생");
+			path= "common/errorPage";
+		}
+		return path;
+	}
+	
+	//모임신청 거절
+	@RequestMapping("rejectGroup.ij")
+	public String rejectGroup(HttpServletRequest request,Member member,Model model) {
+		String memberId = member.getMemberId();
+		int gNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		int result = gService.rejectGroup(memberId,gNo);
+		String path = null;
+		if(result>0) {
+			path = "redirect:wgmlist.ij"; 
+		}else {
+			model.addAttribute("msg", "가입 신청 거절 중 에러발생");
+			path= "common/errorPage";
+		}
 		return path;
 	}
 

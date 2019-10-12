@@ -27,6 +27,12 @@ public interface ReportService {
 	 * @return
 	 */
 	public abstract int insertReport(GroupMemberReport report, HttpServletRequest request);
+
+//	/** 신고당한 회원 리스트 
+//	 * @param currentPage
+//	 * @return
+//	 */
+//	public abstract ArrayList<GroupMemberReport> selectMList(int currentPage);
 	
 
 }

@@ -7,7 +7,7 @@
    
    #calendar-container {
       max-width: 1200px;
-      min-width: 900px;
+      min-width: 1000px;
       /* height: 650px; */
       margin: 0 auto;
       margin-bottom: 20px;
@@ -74,20 +74,28 @@
        display: block !important;
    }
    
+   #cancelEventBtn {
+		background-color: #999999;
+   }
+   
+   #cancelEventBtn:hover {
+		background-color: #838583;
+   }
+   
 	.closeBtn, .checkBtn, .fc-content {
 		cursor: pointer;
 	}
    
    .detailWrapper {
       max-width: 1200px;
-      min-width: 850px;
+      min-width: 950px;
       margin: 0 auto !important;
       margin-bottom: 10px;
    }
    
    .eventDetail{
       height: 280px;
-      min-width: 820px;
+      min-width: 920px;
       border: 1px solid lightgray;
       border-radius: 0.5em;
       padding: 10px;

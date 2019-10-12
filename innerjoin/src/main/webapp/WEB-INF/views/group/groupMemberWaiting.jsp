@@ -44,6 +44,7 @@
 								
 								<div id="member-name">
 									<span id="name">${ m.memberName }</span>
+									
 								</div>
 								
 								<div id="member-level">
@@ -59,15 +60,37 @@
 								<div id="member-button">
 								<c:if test="">
 								</c:if>
-									<button type="button" class="btn btn-primary" id="member-btn-level">회원등급</button>
-									<button type="button" class="btn btn-primary" id="member-btn-report">신고하기</button>
+									<button type="button" class="btn btn-primary" id="member-btn-level" onclick="location.href='acceptGroup.ij?memberId=${m.memberId }'">수락하기</button>
+									<button type="button" class="btn btn-primary" id="member-btn-report" onclick="location.href='rejectGroup.ij?memberId=${m.memberId }'">거절하기</button>
 								</div>
 							</div>
 						</div><br>
 					</c:forEach>
 				</div>				
 			</div>
+			<script>
+			function acceptGroup(memberId){
+				console.log(this);
 				
+				$.ajax({
+					
+					url:"",
+					type:"post",
+					data:{memberId:memberId},
+					success:function(result){
+							
+						if(result==1){
+							alert("모임신청 수락 성공");
+							
+						}
+					}
+					
+					
+				});
+				
+			}
+				
+			</script>
 
 			<div class="col-md-1 aside">
 				<div id="groupChatWrapper">
