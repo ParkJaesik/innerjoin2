@@ -17,16 +17,23 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	
+	<style>
+		#wrapperNav {
+			min-width: 900px !important;
+		}		
+	</style>
 </head>
 <body>
-	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+<div id="wrapperNav">
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" >
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<a class="navbar-brand" href="admin.ij"><span style="margin-right:10px">inner join</span>Admin</a>
 				<ul class="nav navbar-top-links navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 						<em class="fa fa-envelope"></em><span class="label label-danger">15</span>
@@ -103,8 +110,8 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li class="active"><a href="admin.ij"><em class="fa fa-dashboard">&nbsp;</em> 대시보드 </a></li>
-			<li><a href="manageMember.ij"><em class="fa fa-calendar">&nbsp;</em> 회원관리</a></li>
+			<li id="dashboard"><a href="admin.ij"><em class="fa fa-dashboard">&nbsp;</em> 대시보드 </a></li>
+			<li id="manageMember"><a href="manageMember.ij"><em class="fa fa-calendar">&nbsp;</em> 회원관리</a></li>
 			<li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
 			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
 			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
@@ -127,8 +134,7 @@
 		</ul>
 	</div><!--/.sidebar-->
 	
-	</div>	<!--/.main-->
-	
+</div>
 	<script src="resources/js/admin/jquery-1.11.1.min.js"></script>
 	<script src="resources/js/admin/bootstrap.min.js"></script>
 	<script src="resources/js/admin/chart.min.js"></script>
@@ -139,14 +145,14 @@
 	<script src="resources/js/admin/custom.js"></script>
 	<script>
 		window.onload = function () {
-	var chart1 = document.getElementById("line-chart").getContext("2d");
-	window.myLine = new Chart(chart1).Line(lineChartData, {
-	responsive: true,
-	scaleLineColor: "rgba(0,0,0,.2)",
-	scaleGridLineColor: "rgba(0,0,0,.05)",
-	scaleFontColor: "#c5c7cc"
-	});
-};
+			var chart1 = document.getElementById("line-chart").getContext("2d");
+			window.myLine = new Chart(chart1).Line(lineChartData, {
+			responsive: true,
+			scaleLineColor: "rgba(0,0,0,.2)",
+			scaleGridLineColor: "rgba(0,0,0,.05)",
+			scaleFontColor: "#c5c7cc"
+			});
+		};
 	</script>
 		
 </body>
