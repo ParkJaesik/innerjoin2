@@ -17,14 +17,27 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+<style type="text/css">
+	.content {
+	margin: auto;
+	width: 900px;
+	height: 100%;
+	}
+	
+	
+
+
+</style>
+
 </head>
 <body>
 <%@ include file="../group/groupMenubar.jsp" %>
 	<div class="content">
 		<div class="content-wrap">
-		    <div class="div1">
+		    <!-- <div class="div1">
 		        <h2>회원</h2>
-		    </div>
+		    </div> -->
 		    <div class="div2">
 		        <h3>회원 신고</h3>
 		    </div>
@@ -52,6 +65,13 @@
 			             <input type="radio" name="rCategory"> 선정적인 표현 &nbsp;
 			             <input type="radio" name="rCategory"> 부적절한 홍보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			             <input type="radio" name="rCategory"> 기타 
+			         </div>
+			         <div class="div3">
+			             <label>신고 내용</label>
+			             <p>
+			             	신고 내용을 상세하게 적어주셔야 신고처리가 됩니다.<br>
+			             	- 증거 사진 첨부
+			             </p>
 			         </div>
 			         <div class="div2">
                      	<textarea name="gInfo" id="summernote" value=""></textarea>

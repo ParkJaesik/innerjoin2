@@ -61,6 +61,19 @@ public class ReportDao {
 	}
 
 
+//	/** 신고당한 회원 리스트
+//	 * @param pi
+//	 * @return
+//	 */
+//	public ArrayList<GroupMemberReport> selectMList(PageInfo pi) {
+//		
+//		int offset = (pi.getCurrentPage() -1 ) * pi.getLimit();
+//		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+//		
+//		return (ArrayList)sqlSession.selectList("reportMapper.selectMList", null, rowBounds);
+//	}
+
+
 
 
 }
