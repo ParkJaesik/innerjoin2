@@ -56,7 +56,7 @@
 												<div class="col-md-12">
 													<div class="row eventTitle">
 														<div class="col-md-10">
-															<span class="eventLabel">{e.title}</span>
+															<span class="eventLabel">${e.eTitle}</span>
 														</div>
 														<div class="col-md-2 eventClose">
 															<span class="eventLabel">
@@ -79,7 +79,7 @@
 																</div>
 																<div class="col-md-4 eventContent">
 																	<span class="badge badge-default eventLabel">${e.eContent}</span>
-																	<textarea>.....</textarea>
+																	<!-- <textarea>.....</textarea> -->
 																</div>
 																<div class="col-md-4 eventMember"><span class="badge badge-default eventLabel">참석회원</span><span class="eventMemberLabel"><span class="badge badge-dark eventLabel">1</span>&nbsp; / &nbsp;<span class="badge badge-dark eventLabel">1</span></span>
 																<div class="col-md-12">
