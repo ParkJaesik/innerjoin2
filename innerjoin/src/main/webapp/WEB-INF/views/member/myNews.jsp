@@ -73,15 +73,19 @@
 		                <div class="nTable">
 							<table class="nList">
 								<tr>
+									<td class="send">보낸 사람</td>
 									<td class="note-context">내용</td>
 									<td class="noteDate">날짜</td>
 								</tr>
 	
 							<!-- 받은 쪽지 목록  반복-->
+								<c:forEach var="m" items="${ list }">
 								<tr>
-									<td><a href="">내용</a></td>
+									<td><a href="">${m.senderId }</a></td>
+									<td><a href="">${m.alarmMsg }</a></td>
 									<td>날짜</td>
 								</tr>
+								</c:forEach>
 							<!----------------- 반복-->
 	
 							</table>

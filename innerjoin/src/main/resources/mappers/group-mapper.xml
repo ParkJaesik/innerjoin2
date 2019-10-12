@@ -93,6 +93,15 @@
 	<update id="updateGroupCount" parameterType="_int">
 		UPDATE "GROUP" SET GROUP_MEM_COUNT = GROUP_MEM_COUNT+1 WHERE GROUP_NO = #{gNo}
 	</update>
-
+	
+	<!-- 모임에 속한 전원의 아이디 구하기 -->
+	<select id="getGroupList" parameterType="_int" resultMap="groupMemberResultSet">
+	
+		SELECT *
+		FROM GROUP_MEMBER
+		WHERE GROUP_NO =#{gNo}
+		AND (LEVEL_CODE=0 OR LEVEL_CODE=1 OR LEVEL_CODE=2)
+	
+	</select>
 </mapper>
 

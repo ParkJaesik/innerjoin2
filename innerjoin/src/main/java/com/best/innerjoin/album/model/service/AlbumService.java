@@ -11,6 +11,8 @@ import com.best.innerjoin.album.model.vo.Album;
 import com.best.innerjoin.album.model.vo.AlbumPhoto;
 import com.best.innerjoin.album.model.vo.AlbumReply;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.vo.Member;
 
 public interface AlbumService {
 
@@ -76,6 +78,13 @@ public interface AlbumService {
 	 * @return
 	 */
 	public abstract int deletePhoto(AlbumPhoto aPhoto);
+
+	
+	/** 사진등록시 알람테이블에 insert해줄 수신자 구하기
+	 * @param gNo
+	 * @return
+	 */
+	public abstract ArrayList<GroupMember> getGroupList(int gNo);
 
 
 }
