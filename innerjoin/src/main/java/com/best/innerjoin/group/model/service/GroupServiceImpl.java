@@ -72,7 +72,7 @@ public class GroupServiceImpl implements GroupService{
 	public int updateLevel(HttpServletRequest request, GroupMember gMember) {
 		int result = gDao.updateLevel(gMember);
 		
-		return 0;
+		return result;
 	}
 	
 	@Override

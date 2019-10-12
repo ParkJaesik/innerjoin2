@@ -116,20 +116,6 @@ public class GroupController {
 	}
 	
 	
-
-
-	@RequestMapping("tempGoGroup.ij")
-	public String tempGoGroup(HttpServletRequest request) {
-		 request.getSession().setAttribute("groupName", "가나다");
-		return "group/groupIndex";
-	}
-	
-	@RequestMapping("tempGoGroup2.ij")
-	public String tempGoGroup2(HttpServletRequest request) {
-		 request.getSession().setAttribute("groupName", "라라라라");
-		return "group/groupIndex";
-	}
-	
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	@RequestMapping("goGroupPage.ij")
@@ -268,5 +254,9 @@ public class GroupController {
 		
 		return path;
 	}
+	
+	
+	//회원 수락 
+	
 
 }
