@@ -55,47 +55,58 @@
 											<div class="row eventDetail detailView_127">
 												<div class="col-md-12">
 													<div class="row eventTitle">
-														<div class="col-md-10">
+														<div class="col-md-9">
 															<span class="eventLabel">${e.eTitle}</span>
 														</div>
-														<div class="col-md-2 eventClose">
+														<div class="col-md-3 eventClose">
 															<span class="eventLabel">
-																<img class="closeBtn detailView_127" alt="닫기" src="resources/images/close.png">
+																<!-- <img class="closeBtn detailView_127" alt="닫기" src="resources/images/close.png"> -->
 																<img class="checkBtn detailView_127" alt="참석" src="resources/images/check.jpg">
 															</span>
 														</div>
-														<div class="row eventInfo">
-															<div class="col-md-4">
+														
+													</div>
+													<div class="row">
+														<div class="col-md-8 eventContent">
+															<span class="badge badge-default eventLabel">내용</span><span class="eventLabel">${e.eContent}</span>
+																	<!-- <textarea>.....</textarea> -->
+														</div>
+														<div class="col-md-4 eventMember"><span class="badge badge-default eventLabel">참석회원</span><span class="eventMemberLabel"><span class="badge badge-dark eventLabel">1</span>&nbsp; / &nbsp;<span class="badge badge-dark eventLabel">1</span></span>
+													</div>
+													<div class="row eventInfo">
+															<div class="col-md-12">
 																<div class="eventDay">
 																	<span class="badge badge-default eventLabel">시간</span>
 																	<div>
 																		<span class="eventStart">${e.eStart}</span>
-																		" - "
+																		 - 
 																		<span class="eventEnd">${e.eEnd}</span>
 																	</div>
 																</div>
 																<div class="eventLocation"><span class="badge badge-default eventLabel">위치</span>
 																	<address></address>
 																</div>
-																<div class="col-md-4 eventContent">
-																	<span class="badge badge-default eventLabel">${e.eContent}</span>
-																	<!-- <textarea>.....</textarea> -->
-																</div>
-																<div class="col-md-4 eventMember"><span class="badge badge-default eventLabel">참석회원</span><span class="eventMemberLabel"><span class="badge badge-dark eventLabel">1</span>&nbsp; / &nbsp;<span class="badge badge-dark eventLabel">1</span></span>
-																<div class="col-md-12">
-																	<div class="row">
-																			<div class="col-md-3 member">
-																				<img alt="프로필">
-																				<span class="memberId">wkd</span>
-																			</div>
+																
+															</div>
+															
+															
+															
+															<div class="col-md-12">
+																<div class="row">
+																		<c:forEach var="m" items="${ member }">
+																		<div class="member">
+																			<c:if test="${e.eno eq m.eno}"></c:if>
+																			<img alt="프로필" src="resources/images/${m.memberProPath}">
+																			<span class="memberId">${m.memberName}</span>
+																		
 																		</div>
-																	</div>
+																		</c:forEach>
 																</div>
 															</div>
-														</div>
 													</div>
 												</div>
 											</div>
+										</div>
 										</div>
 									</div>
 								</c:forEach>
@@ -104,7 +115,7 @@
 					</div>
 				</div>
 			</div>
-				
+		
 			<div class="col-md-1 aside">
 				<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 or groupMemberCode  eq 2}">
 				<div id="groupChatWrapper">
