@@ -11,7 +11,7 @@ public interface AlarmService {
 
 	ArrayList<Alarm> selectMyAlarm(String receiveId);
 
-	int insertAlbumAlarm(String senderId, ArrayList<GroupMember> receiverList);
+	int insertAlbumAlarm(String senderId, ArrayList<GroupMember> receiverList, String tmpMsg);
 
 	int deleteAlarm(String alarmId);
 

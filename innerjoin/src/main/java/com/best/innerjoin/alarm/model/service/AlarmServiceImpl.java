@@ -27,12 +27,12 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public int insertAlbumAlarm(String senderId, ArrayList<GroupMember> receiverList) {
+	public int insertAlbumAlarm(String senderId, ArrayList<GroupMember> receiverList,String tmpMsg) {
 		int result=0;
 		
 		for(GroupMember gm : receiverList) {
 			if(!senderId.equals(gm.getMemberId())) {
-				result =aDao.insertAlbumAlarm(senderId,gm.getMemberId());
+				result =aDao.insertAlbumAlarm(senderId,gm.getMemberId(),tmpMsg);
 
 			}
 		}
@@ -44,6 +44,7 @@ public class AlarmServiceImpl implements AlarmService{
 	public int deleteAlarm(String alarmId) {
 		return aDao.deleteAlarm(alarmId);
 	}
+
 
 	
 }

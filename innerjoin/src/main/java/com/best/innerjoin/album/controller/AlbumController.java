@@ -87,11 +87,17 @@ public class AlbumController {
 		//앨범 등록 후 알람테이블에 내용 저장
 		int result2 = 0;
 		int gNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		String gName = ((Group)request.getSession().getAttribute("group")).getgName();
 		String senderId = ((Member)request.getSession().getAttribute("loginUser")).getMemberId();
 		ArrayList<GroupMember> receiverList = aService.getGroupList(gNo);
 		
+		String tmpMsg = "<a href='addAlbumForm.ij&groupNo="+gNo+"'>" + gName + "모임에 새 앨범이 등록되었습니다.";
+		
+		//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
+		//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
+		
 		if(result>0) {
-			result2 = alarmService.insertAlbumAlarm(senderId,receiverList);
+			result2 = alarmService.insertAlbumAlarm(senderId,receiverList,tmpMsg);
 		}
 	    
 		return result;
