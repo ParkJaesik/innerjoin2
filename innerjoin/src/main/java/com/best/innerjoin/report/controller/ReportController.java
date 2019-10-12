@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,7 +58,15 @@ public class ReportController {
 	
 	
 	@RequestMapping("rboardInsertForm.ij")
-	public String rboardInsertForm() {
+	public String rboardInsertForm(String memberId, Model model) {
+		
+		
+		
+		model.addAttribute("memberId", memberId);
+		
+		System.out.println(memberId);
+		
+		
 		return "report/gMemReportBoardInsert";
 	}
 	
@@ -75,6 +84,23 @@ public class ReportController {
 		return mv;
 		
 		
+	}
+	
+	// 신고 게시글 상세 조회
+	@RequestMapping("rdetail.kh")
+	public ModelAndView reportDetail(int rNo, ModelAndView mv, Integer page) {
+		
+		int currentPage = page == null ? 1 : page;
+		
+		GroupMemberReport report = rService.selectReport(rNo);
+		
+		if(report != null) {
+			mv.addObject("report", report).addObject("currentPage", currentPage).setViewName("report/gMemReportBoardDetail");
+			
+		}else {
+			mv.addObject("msg", "신고글 상세 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 	
 	

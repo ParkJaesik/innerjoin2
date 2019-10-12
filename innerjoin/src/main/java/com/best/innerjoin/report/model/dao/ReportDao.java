@@ -61,6 +61,15 @@ public class ReportDao {
 	}
 
 
+	/** 회원 신고게시글 상세
+	 * @param rNo
+	 * @return
+	 */
+	public GroupMemberReport selectReport(int rNo) {
+		return sqlSession.selectOne("reportMapper.selectReport", rNo);
+	}
+
+
 //	/** 신고당한 회원 리스트
 //	 * @param pi
 //	 * @return

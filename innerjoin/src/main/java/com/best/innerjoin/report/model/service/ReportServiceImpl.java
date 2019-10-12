@@ -3,11 +3,14 @@ package com.best.innerjoin.report.model.service;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.dao.ReportDao;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
@@ -41,12 +44,22 @@ public class ReportServiceImpl implements ReportService{
 	@Override
 	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
 
+		
+		
 		report.setrContent(report.getrContent().replace("\n", "<br>"));
 		
 		int result = rDao.insertReport(report);
 		
 		return result;
 
+	}
+
+	
+	// 신고 게시글 상세
+	@Override
+	public GroupMemberReport selectReport(int rNo) {
+		
+		return rDao.selectReport(rNo);
 	}
 
 //	// 신고 당한 회원 리스트
