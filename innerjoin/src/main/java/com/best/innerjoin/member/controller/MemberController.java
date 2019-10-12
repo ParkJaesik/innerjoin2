@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.best.innerjoin.alarm.model.service.AlarmService;
+import com.best.innerjoin.alarm.model.vo.Alarm;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
@@ -30,6 +32,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private AlarmService alarmService;
 	
 	// 로그인 폼으로 가기
 	@RequestMapping("loginForm.ij")
@@ -205,7 +209,14 @@ public class MemberController {
 	
 	// 알림함으로 이동
 	@RequestMapping("myNewsForm.ij")
-	public String myNewsForm() {
+	public String myNewsForm(HttpServletRequest request,Model model) {
+		String receiveId = ((Member)request.getSession().getAttribute("loginUser")).getMemberId();
+		
+		ArrayList<Alarm> list = alarmService.selectMyAlarm(receiveId);
+		
+		model.addAttribute("list", list);
+		
+		
 		return "member/myNews";
 	}
 	

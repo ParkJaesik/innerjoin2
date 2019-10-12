@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.best.innerjoin.alarm.model.vo.Alarm;
 import com.best.innerjoin.member.model.vo.Member;
 
 public interface MemberService {
@@ -90,6 +91,9 @@ public interface MemberService {
 	 * @return result
 	 */
 	public abstract int deleteWait(Member loginUser, int gNo);
+
+	
+	
 
 	
 

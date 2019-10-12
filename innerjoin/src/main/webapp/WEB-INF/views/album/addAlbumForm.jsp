@@ -216,6 +216,7 @@
 	                            // 알람을 위한 채팅 동작.
 	                            
 	                            /* websocket 관련 필요 코드 */
+	                            
 	                            socket.send("albumInsert,"+loginUserId+","+loginUserName+","+gName);
 	                            
 	                           goList();
