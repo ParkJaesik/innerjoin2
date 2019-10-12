@@ -57,6 +57,8 @@
 				  &nbsp;&nbsp;&nbsp;
 				  
 				  <a href="rboardInsertForm.ij">모임 회원 신고글 작성</a>
+					<br>
+				  <a href="admin.ij">관리자페이지</a>
 
 			</div>
 			<div class="col-md-1 aside">

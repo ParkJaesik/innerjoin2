@@ -16,20 +16,22 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <title>Insert title here</title>
+	
 
 	<!-- 달력렌더링과 이벤트등록폼에 적용할 js -->
 	<script src='${contextPath }/resources/js/event/calendarEvent.js'></script> 
-<script
+  
+<!-- <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <body>
 	
 
 	<div class="container-fluid" id="all-wrapper">
-		<div class="row" id="header-wrapper">
+		<div class="row" id="header-wrapper"  style="margin-bottom:0;">
 			<div class="col-md-12" id="all-hearder">
 				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 			</div>

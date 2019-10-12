@@ -16,7 +16,7 @@ public class AdminController {
 	@RequestMapping("admin.ij")
 	public String adminView() {
 		return "admin/admin";
-	}
+	}  
 
 	/** 회원관리페이지 이동
 	 * @return
