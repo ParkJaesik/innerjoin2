@@ -14,11 +14,7 @@
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<style>
 
-	
-
-</style>
 </head>
 <body>
 <section id="header">
@@ -54,9 +50,37 @@
 
 <div id="alarmTable">
 	<div id="alaram">
+	
 				
 	</div>	
 </div>
+
+<!-- <div class="position-absolute w-100 d-flex flex-column p-4" id="alarmTable">
+    <div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">
+        <div class="toast-header">
+            <strong class="mr-auto text-primary">알람</strong>
+            <small class="text-muted"></small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Hey, there! This is a Bootstrap 4 toast.
+        </div>
+    </div>
+    <div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">
+        <div class="toast-header">
+            <strong class="mr-auto text-primary">알람</strong>
+            <small class="text-muted"></small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Hey, there! This is a Bootstrap 4 toast.
+        </div>
+    </div>
+</div> -->
 
 <!-- websocket script -->
 <script type="text/javascript">
@@ -115,12 +139,33 @@
 	        }else if(dataArray[0]=="albumInsert"){
 	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다."); */
 	        	$("#alaram").append(dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>");
+
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }else if(dataArray[0]=="apply"){
 	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다.");
+	        	var tmpMsg = dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다.";
+	        	
+	        	/* $("#alaram").append(
+	        			'<div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">' +
+	        	        '<div class="toast-header">' +
+	        	            '<strong class="mr-auto text-primary">알람</strong>' +
+	        	            '<small class="text-muted"></small>' +
+	        	            '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">' +
+	        	                '<span aria-hidden="true">×</span>' +
+	        	            '</button>' +
+	        	        '</div>' +
+	        	        '<div class="toast-body">' +
+	        	          	tmpMsg +
+	        	        '</div>' +
+	        	    '</div>'
+	        	
+	        	) */
+	        	
+	        	
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
+	        	
 	        }
     	
     }
@@ -134,6 +179,8 @@
     
     ws.onerror = function(event){console.log("Error :' connection closed");};
 }
+	
+	
 </script>
 
 
