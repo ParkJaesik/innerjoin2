@@ -44,6 +44,7 @@
 								
 								<div id="member-name">
 									<span id="name">${ m.memberName }</span>
+									
 								</div>
 								
 								<div id="member-level">
@@ -93,14 +94,60 @@
 									    </div>
 									  </div>
 									</div>
-									
-									<button type="button" class="btn btn-primary" id="member-btn-report" onclick="location.href='rboardInsertForm.ij'">신고하기</button>
+									<input type="hidden" value="${m.memberId }">
+									<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
+									<input type="hidden" value="${m.memberName }">
 								</div>
 							</div>
 						</div><br>
 					</c:forEach>
 				</div>
 			</div>
+			
+			<script type="text/javascript">
+			      /* $(".reportBtn").click(function(e){
+			             console.log($(this).prev().val()); 
+			             
+			             var $reportForm = $("<form>");
+			             $reportForm.attr("action","rboardInsertForm.ij").attr("method","post");
+			             
+			             //var $inputTag = $("input").attr("type","hidden").attr("value", $(this).prev().val());
+			             
+			             $reportForm.append($(this).prev());
+			             
+			             $(this).after($reportForm);
+			             
+			             $reportForm.submit(); 
+			          });  
+					 */
+					 
+					 
+			 
+			      $(".reportBtn").click(function(e){
+			             //alert($(this).prev().val()); 
+			             
+			             var $reportForm = $("<form>");
+			             $reportForm.attr("action","rboardInsertForm.ij").attr("method","post");
+			             
+			             var memberId = $("<input name='memberId' value='" + $(this).prev().val()+"'>");
+			             $reportForm.append(memberId);
+			             console.log("아이디: " + $(this).prev().val());
+			             $(this).after($reportForm);
+			             
+			            $reportForm.submit();
+			            
+			            
+			         });  
+					 
+			      
+			         
+			  
+			         
+			         
+					 
+					 
+				
+			</script>
 
 			<div class="col-md-1 aside">
 				<div id="groupChatWrapper">

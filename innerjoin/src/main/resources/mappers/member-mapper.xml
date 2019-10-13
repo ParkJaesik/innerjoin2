@@ -72,6 +72,7 @@
   	)
 
   </insert>
+
   <insert id="insertAdditional" parameterType="Member">
   	INSERT INTO
   		MEMBER_ADD_INFO
@@ -79,6 +80,25 @@
   			#{memberId}, null, #{memberBirthday}, #{memberGender}, 'N'
   		)
   </insert>  
+  
+    <!-- 회원정보 수정 비밀번호 -->
+  <update id="updateInfo" parameterType="Member">
+  	UPDATE MEMBER
+  	SET 
+  	<if test='memberPwd.equals("")'>
+  	MEMBER_PWD = #{memberPwd},
+  	</if>
+  	MEMBER_NAME = #{memberName}
+  	WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <!-- 회원 정보수정 (생년월일, 성별 추가입력) -->
+  <update id="updateAddInfo" parameterType="map">
+	UPDATE MEMBER
+	SET MEMBER_BIRTHDAY= #{memberBirthday}
+	WHERE MEMBER_ID= #{memberId}
+  </update>
+  
   <!-- email 중복체크 -->
   <select id="checkIdDup" parameterType="string" resultType="_int">
   	SELECT COUNT(*)

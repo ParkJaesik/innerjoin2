@@ -2,6 +2,7 @@ package com.best.innerjoin.member.model.dao;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -61,6 +62,28 @@ public class MemberDao {
 	 */
 	public int checkNameDup(String name) {
 		return sqlSession.selectOne("memberMapper.checkNameDup", name);
+	}
+
+	/** 회원 정보 수정
+	 * @param member
+	 * @return
+	 */
+	public int updateInfo(Member member) {
+
+		return sqlSession.update("memberMapper.updateInfo", member);
+	}
+	
+	/** 회원 가입 시 추가정보 
+	 * @param member
+	 * @return result
+	 */
+	public int updateAddInfo(Member member) {
+		
+		Map info = new HashMap<>();
+		info.put("memberBirthday" ,member.getMemberBirthday());
+		info.put("memberId", member.getMemberId());
+		
+		return sqlSession.update("memberMapper.updateAddInfo", info);
 	}
 
 

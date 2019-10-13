@@ -19,9 +19,8 @@
                             
                             <!-- form -->
 						<div class="col-md-4" align="center">
-                        	<div class="profile-img">프로필 사진
-                            	<img src="images/bg.jpg" class="img-rounded">
-                            </div>
+                        	<img class="img-circle" src="${contextPath}/resources/images/member/${loginUser.memberProPath }" style="border: 1px solid slateblue;">
+                            
                             <br>
                             <div class="row">
                             	<div class="myProfile col-md-12">자기소개</div>
@@ -49,7 +48,7 @@
     	<div class="row">
         	<div class="col-md-12">
             	<div class="row">
-                	<div class="col-md-3"></div>
+                 	<div class="col-md-3"></div>
                     <div class="col-md-6 menu-detail" >
                     	<a href="myGroupForm.ij">내 모임</a>
                         <a href="myNoteForm.ij">쪽지함</a>

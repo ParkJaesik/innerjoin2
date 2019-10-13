@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 
 #group-main-container * {
@@ -49,7 +50,6 @@ div {
 	width: 100%;
 	height: 200px;
 	background-color: rgb(230, 230, 230);
-	border-radius: 10px;
 }
 
 #group-main-new-container {
@@ -61,17 +61,12 @@ div {
 	width: 100%;
 	height: 200px;
 	background-color: rgb(230, 230, 230);
-	border-radius: 10px;
 }
 
 #group-main-event {
 	width: 100%;
 	height: 150px;
 	background-color: rgb(230, 230, 230);
-
-	border-radius: 10px;
-}
-
 }
 
 
@@ -109,16 +104,22 @@ div {
    }
    
 	.eventDetail span {
-   		/* font-size: .8em; */
+   		font-size: .8em; 
 	}
    
    .eventLabel {
       margin-top: 0.8em;
-      margin-bottom: 0.8em;
+      /* margin-bottom: 0.8em; */
       display: inline-block;
       color: gray;
    }
-   
+   .eventContent{
+   		box-sizing:border-box;
+   		padding-left:0 !important; 
+   }
+   .eventContent span{
+   		font-weight: bold;
+   }
    .eventContent textarea {
        width: 100%;
        height: 10.5rem;
@@ -181,5 +182,15 @@ div {
    .eventMember .memberId {
       display: block;
       text-align: center;
+   }
+   
+   .eventDay label {
+       top:0 !important;
+       font-size: 0.8em;
+       margin-bottom: 0 !important;
+       display: block !important;
+   }
+   .member{
+   		float:left;
    }
 

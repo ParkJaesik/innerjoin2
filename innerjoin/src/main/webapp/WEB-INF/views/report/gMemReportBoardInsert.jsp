@@ -47,24 +47,24 @@
 			             <label>신고하는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <input type="text" name="reportId" value="${loginUser.memberName }" readonly>
+			             <p>${loginUser.memberName }</p>
 			         </div>
 			         <div class="div3">
 			             <label>신고 받는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <input type="text" name="responId" value="" readonly>
+			             <p>${memberId }</p>
 			         </div>
 			         <div class="div3">
 			             <label>신고 유형</label>
 			         </div>
 			         <div class="div5"></div>
-			             <input type="radio" name="rCategory"> 욕설 및 비방 &nbsp;&nbsp;&nbsp;
-			             <input type="radio" name="rCategory"> 유해하거나 위험한 행동 &nbsp;
-			             <input type="radio" name="rCategory"> 폭력적이거나 혐오 표현 <br> 
-			             <input type="radio" name="rCategory"> 선정적인 표현 &nbsp;
-			             <input type="radio" name="rCategory"> 부적절한 홍보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			             <input type="radio" name="rCategory"> 기타 
+			             <input type="radio" name="rCategory" value="욕설 및 비방"> 욕설 및 비방 &nbsp;&nbsp;&nbsp;
+			             <input type="radio" name="rCategory" value="유해하거나 위험한 행동"> 유해하거나 위험한 행동 &nbsp;
+			             <input type="radio" name="rCategory" value="폭력적이거나 혐오 표현"> 폭력적이거나 혐오 표현 <br> 
+			             <input type="radio" name="rCategory" value="선정적인 표현"> 선정적인 표현 &nbsp;
+			             <input type="radio" name="rCategory" value="부적절한 홍보"> 부적절한 홍보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			             <input type="radio" name="rCategory" value="기타"> 기타 
 			         </div>
 			         <div class="div3">
 			             <label>신고 내용</label>
@@ -74,7 +74,7 @@
 			             </p>
 			         </div>
 			         <div class="div2">
-                     	<textarea name="gInfo" id="summernote" value=""></textarea>
+                     	<textarea name="rContent" id="summernote" ></textarea>
                      </div>
 			     </div>
 			     <div class="btn" align="center">

@@ -68,14 +68,10 @@
 								<div class="input-group input-group-icon">
 									<input type="password" placeholder="Password" id="memberPwd" name="memberPwd"/>
 									
-									<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }">
-									
 									&nbsp;<span id="pwdCheck1">&nbsp;</span>
 								</div>
 								<div class="input-group input-group-icon">
 									<input type="password" placeholder="Password Check" id="memberPwd2" name="memberPwd2"/>
-									
-									<input type="hidden" name="memberPwd2" value="${ loginUser.memberPwd }">
 									
 									&nbsp;<span id="pwdCheck2">&nbsp;</span>
 								</div>
@@ -226,14 +222,14 @@
 		});
 		
 		
-		$("#submit-btn").click(function(){
-			if($("#memberPwd").val() == null || $("#memberPwd2").val() ==null ){
+		/* $("#submit-btn").click(function(){
+			if($("#memberPwd").val() == null || $("#memberPwd2").val() == null ){
 				$("#memberPwd").val("${loginUser.memberPwd}");
 				$("#memberPwd2").val("${loginUser.memberPwd}");
 			
 			}
 			$("#infoForm").submit();
-		});
+		}); */
 	});
 	</script>
 	

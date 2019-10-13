@@ -32,10 +32,11 @@ public class AlarmDao {
 		return list;
 	}
 
-	public int insertAlbumAlarm(String senderId, String receiverId) {
+	public int insertAlbumAlarm(String senderId, String receiverId, String tmpMsg) {
 		Map<String,String> alarmMap = new HashMap<>();
 		alarmMap.put("senderId", senderId);
 		alarmMap.put("receiverId", receiverId);
+		alarmMap.put("msg",tmpMsg);
 		return sqlSession.insert("alarmMapper.insertAlbumAlarm",alarmMap);
 	}
 

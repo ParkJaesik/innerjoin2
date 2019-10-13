@@ -33,7 +33,7 @@ public class GroupController {
 	private GroupService gService;
 	private AlarmService aService;
 	@Autowired
-	private EventService eSerivce;
+	private EventService eService;
 	
 	
 	@RequestMapping("ginsertForm.ij")
@@ -147,22 +147,31 @@ public class GroupController {
 				
 		String time1 = format1.format(time);
 		
-		ArrayList<Event> eList = eSerivce.groupEventList(time1, ""+gNo);
+		ArrayList<Event> eList = eService.groupEventList(time1, ""+gNo);
+		ArrayList<Member> memList = null;
 		
 		ArrayList<Event> eList2 = null;
 		
 		// 이벤트 리스트 최신 3개 자르기
 		if(!eList.isEmpty()) {
 			eList2 = new ArrayList<Event>();
+			memList = new ArrayList<Member>();
 			for(int i = 0; i < 3;i++) {
+				
 				eList2.add(eList.get(i));
+				ArrayList<Member> mList = eService.selectMem(""+eList2.get(i).getEno());
+				for(int j = 0; j < mList.size();j++ ) {
+					memList.add(mList.get(j));
+					System.out.println(memList.get(j).toString());
+				}
 			}
 		}
-		
-		System.out.println(groupMemberCode);
-		
+		/*
+		 * System.out.println(groupMemberCode);
+		 */
 		
 		model.addAttribute("event", eList2);
+		model.addAttribute("member", memList);
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
 		request.getSession().setAttribute("group", tempGroup);

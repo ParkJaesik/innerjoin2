@@ -17,6 +17,7 @@ public class Member {
 	private String memberBirthday;
 	private char memberGender;
 	private char memberOpenStatus;
+	private int eno;
 	public Member() {
 		super();
 	}
@@ -158,6 +159,14 @@ public class Member {
 	public void setMemberOpenStatus(char memberOpenStatus) {
 		this.memberOpenStatus = memberOpenStatus;
 	}
+	
+	public int getEno() {
+		return eno;
+	}
+
+	public void setEno(int eno) {
+		this.eno = eno;
+	}
 
 	@Override
 	public String toString() {
@@ -166,8 +175,10 @@ public class Member {
 				+ memberEnrollDate + ", memberHostCount=" + memberHostCount + ", memberJoinCount=" + memberJoinCount
 				+ ", memberReptCount=" + memberReptCount + ", memberProPath=" + memberProPath + ", memberStatusCode="
 				+ memberStatusCode + ", memberIntroduce=" + memberIntroduce + ", memberBirthday=" + memberBirthday
-				+ ", memberGender=" + memberGender + ", memberOpenStatus=" + memberOpenStatus + "]";
+				+ ", memberGender=" + memberGender + ", memberOpenStatus=" + memberOpenStatus + ", eno=" + eno + "]";
 	}
+
+	
 	
     
 

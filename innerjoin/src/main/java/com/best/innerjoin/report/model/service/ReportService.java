@@ -28,6 +28,12 @@ public interface ReportService {
 	 */
 	public abstract int insertReport(GroupMemberReport report, HttpServletRequest request);
 
+	/** 회원 신고 게시글 상세
+	 * @param rNo
+	 * @return
+	 */
+	public abstract GroupMemberReport selectReport(int rNo);
+
 //	/** 신고당한 회원 리스트 
 //	 * @param currentPage
 //	 * @return
