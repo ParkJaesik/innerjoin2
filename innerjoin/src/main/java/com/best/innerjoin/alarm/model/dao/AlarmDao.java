@@ -56,4 +56,8 @@ public class AlarmDao {
 		return sqlSession.insert("alarmMapper.insertNote", alarmMap);
 	}
 
+	public ArrayList<Alarm> selectMyNote(String receiverId) {
+		return (ArrayList)sqlSession.selectList("alarmMapper.selectMyNote",receiverId);
+	}
+
 }

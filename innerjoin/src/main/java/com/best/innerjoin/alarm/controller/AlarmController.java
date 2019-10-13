@@ -1,16 +1,21 @@
 package com.best.innerjoin.alarm.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.best.innerjoin.alarm.model.service.AlarmService;
 import com.best.innerjoin.alarm.model.vo.Alarm;
 import com.best.innerjoin.group.model.service.GroupService;
+import com.best.innerjoin.member.model.vo.Member;
 
 @Controller
 public class AlarmController {
@@ -40,7 +45,7 @@ public class AlarmController {
 	
 	@ResponseBody
 	@RequestMapping("insertNote.ij")
-	public int insertNote(String reciverName, String askMsg,String  senderId,String  gName) {
+	public String insertNote(String reciverName, String askMsg,String  senderId,String  gName) {
 		
 		
 		System.out.println(askMsg);
@@ -60,7 +65,23 @@ public class AlarmController {
 		int result = alarmService.insertNote(alarmMap);
 		
 		
-		return result;
+		return receiverId;
+	}
+	
+	@RequestMapping("myNoteForm.ij")
+	public String goMyNote(HttpServletRequest request,Model model) {
+		
+		String path= null;
+		
+		String receiverId = ((Member)request.getSession().getAttribute("loginUser")).getMemberId();
+		
+		ArrayList<Alarm>  list = alarmService.selectMyNote(receiverId);
+		
+		
+		model.addAttribute("list", list);
+		path = "member/myNote";
+		
+		return path;
 	}
 	
 	

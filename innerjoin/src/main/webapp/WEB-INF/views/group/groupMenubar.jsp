@@ -154,16 +154,17 @@
 			var askMsg = $("#askMsg").val();
 			var senderId = "${loginUser.memberId}";
 			var gName = "${gName}";
+			var gNo = "${group.gNo}"
 			
 			$.ajax({
 				
 				url : "insertNote.ij",
 				type : "post",
 				data : {reciverName : reciverName,askMsg:askMsg,senderId:senderId,gName:gName},
-				success : function(result){
+				success : function(receiverId){
 					
 					alert("가입문의 성공");
-					
+					socket.send("applyMessage" +"," + gName + "," + receiverId + "," +senderId +"," +gNo);
 					$('#exampleModalCenter2').modal('hide');
 					
 				}
