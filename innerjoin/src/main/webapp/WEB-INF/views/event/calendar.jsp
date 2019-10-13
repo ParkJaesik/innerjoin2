@@ -41,13 +41,7 @@
       
 		</div>
        
-		<%-- <c:if test="${groupMem.levelCode == 0}" > --%>
-		<!-- 그룹멤버의 레벨 받아오기. 그룹페이지 기본정보 jsp에서 받아올 것. 현재 가데이터 세팅 -->
-		<c:set var="levelCode" value="0"/>
-		<!-- 현재 그룹의 번호 받아오기. 가데이터 세팅 -->
-		<%-- <c:set var="gno" value="1"/> --%>
-		
-		<c:if test="${levelCode == 0}" >
+		<c:if test="${groupMemberCode == 0}" >
 			<div class="row">
 	            <!-- modal -->
 	            <div class="col-md-12" id="addEventWrapper">
@@ -162,10 +156,5 @@
       </div>
    </div>
    
-	<script>
-		console.log("levelCode: ${levelCode}");
-	</script>
-
-
 </body>
 </html>
