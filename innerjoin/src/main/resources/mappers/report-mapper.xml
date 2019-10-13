@@ -100,9 +100,10 @@
 	
 	<!-- 회원 신고 횟수 카운트 -->
 	<update id="updateReportCount" parameterType="GroupMemberReport">
-		UPDATE GROUP_MEMBER
+	UPDATE GROUP_MEMBER
 		SET GROUP_MEM_REPT_COUNT = GROUP_MEM_REPT_COUNT +1
 		WHERE MEMBER_ID = #{responId}
+		AND GROUP_NO = #{responGNo} 
 	</update>
 	
 	

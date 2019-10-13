@@ -1,6 +1,8 @@
 package com.best.innerjoin.report.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -86,6 +88,8 @@ public class ReportDao {
 	 */
 	public int updateReportCount(GroupMemberReport report) {
 		deleteReport(report.getrNo());
+		
+		System.out.println("dao_report : " + report);
 		return sqlSession.update("reportMapper.updateReportCount", report);
 	}
 
