@@ -44,7 +44,7 @@
     	<div class="row">
         	<div class="col-md-12">
             	<div class="row">
-                	<div class="col-md-3"></div>
+                 	<div class="col-md-3"></div>
                     <div class="col-md-6 menu-detail" >
                     	<a href="myGroupForm.ij">내 모임</a>
                         <a href="myNoteForm.ij">쪽지함</a>
