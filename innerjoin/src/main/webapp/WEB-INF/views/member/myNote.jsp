@@ -73,15 +73,21 @@
 								<tr>
 									<td class="send">보낸 사람</td>
 									<td class="note-context">내용</td>
-									<td class="noteDate">날짜</td>
+									<td class="noteDate"></td>
 								</tr>
 	
 							<!-- 받은 쪽지 목록  반복-->
+								<c:forEach var="m" items="${ list }">
 								<tr>
-									<td><a href="">보낸 사람</a></td>
-									<td><a href="">내용</a></td>
-									<td>날짜</td>
+									<td>${m.senderId }</td>
+									<td>${m.alarmMsg }</td>
+									<td>
+										<button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">읽음</button>
+										
+									</td>
+									
 								</tr>
+								</c:forEach>
 							<!----------------- 반복-->
 	
 							</table>

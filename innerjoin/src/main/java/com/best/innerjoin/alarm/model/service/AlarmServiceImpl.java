@@ -1,6 +1,7 @@
 package com.best.innerjoin.alarm.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,25 @@ public class AlarmServiceImpl implements AlarmService{
 	@Override
 	public int deleteAlarm(String alarmId) {
 		return aDao.deleteAlarm(alarmId);
+	}
+
+	@Override
+	public int insertAlbumReplyAlarm(String senderId, ArrayList<GroupMember> receiverList, String tmpMsg) {
+		int result=0;
+		
+		for(GroupMember gm : receiverList) {
+			if(!senderId.equals(gm.getMemberId())) {
+				result =aDao.insertAlbumAlarm(senderId,gm.getMemberId(),tmpMsg);
+
+			}
+		}
+		
+		return  result;
+	}
+
+	@Override
+	public int insertNote(Map<String, String> alarmMap) {
+		return aDao.insertNote(alarmMap);
 	}
 
 

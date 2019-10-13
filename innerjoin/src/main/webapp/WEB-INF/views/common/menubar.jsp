@@ -14,7 +14,15 @@
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+<style>
+	#newsCount{
+		
+		color:red;
+		top:2em;
+	
+	}
+	
+</style>
 </head>
 <body>
 <section id="header">
@@ -26,7 +34,7 @@
 				<li class="menu"><a class="icon solid fa-search" href="#"><span class="menu-detail">Search</span></a></li>
 				
 				<!-- 로그인 시 사용 가능 -->				
-				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="showAlarm();"><span class="menu-detail">News</span></a></li>
+				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span><span id="newsCount">5</span></a></li>
 				<c:if test="${ empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-home menu-a" href="loginForm.ij"><span class="menu-detail">Login</span></a></li>
 				</c:if>
@@ -40,47 +48,17 @@
 	<!-- </div> -->
 </section>
 
-			<%-- <script src="${contextPath}/resources/js/jquery.min.js"></script>
-			<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
-			<script src="${contextPath}/resources/js/browser.min.js"></script>
-			<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
-			<script src="${contextPath}/resources/js/util.js"></script>
-			<script src="${contextPath}/resources/js/main.js"></script> --%>
 
-
-<div id="alarmTable">
+<!-- <div id="alarmTable">
 	<div id="alaram">
 	
 				
 	</div>	
-</div>
-
-<!-- <div class="position-absolute w-100 d-flex flex-column p-4" id="alarmTable">
-    <div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">
-        <div class="toast-header">
-            <strong class="mr-auto text-primary">알람</strong>
-            <small class="text-muted"></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Hey, there! This is a Bootstrap 4 toast.
-        </div>
-    </div>
-    <div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">
-        <div class="toast-header">
-            <strong class="mr-auto text-primary">알람</strong>
-            <small class="text-muted"></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Hey, there! This is a Bootstrap 4 toast.
-        </div>
-    </div>
 </div> -->
+
+<div class="position-absolute w-30 d-flex flex-column p-4" id="alarmTable" style="z-index: 1000; right:0;width: 30%;">
+
+</div>
 
 <!-- websocket script -->
 <script type="text/javascript">
@@ -89,7 +67,7 @@
 	
 	$(document).ready(function(){
 		connectWS();
-		
+		$('.toast').toast('show');
 	});
 
 	function showAlarm(){
@@ -138,36 +116,21 @@
 	        	$("#alarmTable").css("display","block");
 	        }else if(dataArray[0]=="albumInsert"){
 	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다."); */
-	        	$("#alaram").append(dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>");
-
-	        	$("#alaram").append("<br>");
-	        	$("#alarmTable").css("display","block");
+	        	/* $("#alaram").append(dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>"); */
+	        	var tmpMsg = dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>";
+	        	toastMessage(tmpMsg);
+	        	
 	        }else if(dataArray[0]=="apply"){
-	        	$("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다.");
-	        	var tmpMsg = dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다.";
+	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	var tmpMsg = dataArray[1] + "님이 " + "<a href='wgmlist.ij?gNo="+dataArray[4] + "'>" +  dataArray[2] + " 모임에  가입신청을 했습니다."  +"</a>";
+	        	toastMessage(tmpMsg);
 	        	
-	        	/* $("#alaram").append(
-	        			'<div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">' +
-	        	        '<div class="toast-header">' +
-	        	            '<strong class="mr-auto text-primary">알람</strong>' +
-	        	            '<small class="text-muted"></small>' +
-	        	            '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">' +
-	        	                '<span aria-hidden="true">×</span>' +
-	        	            '</button>' +
-	        	        '</div>' +
-	        	        '<div class="toast-body">' +
-	        	          	tmpMsg +
-	        	        '</div>' +
-	        	    '</div>'
-	        	
-	        	) */
-	        	
-	        	
-	        	$("#alaram").append("<br>");
-	        	$("#alarmTable").css("display","block");
+	        }else if(dataArray[0]=="albumReply"){
+	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	var tmpMsg = dataArray[2] + "님이 " + "<a href='albumDetailView.ij?albumNo="+dataArray[3] + "&gNo=" + dataArray[5] +"'>" + dataArray[1]+"모임의" + dataArray[4] + " 앨범에  댓글을 달았습니다.."  +"</a>";
+	        	toastMessage(tmpMsg);
 	        	
 	        }
-    	
     }
     
     ws.onclose = function(event){
@@ -178,6 +141,26 @@
     };
     
     ws.onerror = function(event){console.log("Error :' connection closed");};
+    
+    function toastMessage(tmpMsg){
+    	$("#alarmTable").append(
+    			'<div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">' +
+    	        '<div class="toast-header">' +
+    	            '<strong class="mr-auto text-primary">알람</strong>' +
+    	            '<small class="text-muted"></small>' +
+    	            '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">' +
+    	                '<span aria-hidden="true">×</span>' +
+    	            '</button>' +
+    	        '</div>' +
+    	        '<div class="toast-body">' +
+    	          	tmpMsg +
+    	        '</div>' +
+    	    '</div>'
+    	
+    	) 
+    	$("#alaram").append("<br>");
+    	$('.toast').toast('show');
+    }
 }
 	
 	

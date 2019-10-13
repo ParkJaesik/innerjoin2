@@ -95,11 +95,9 @@ public class AlbumController {
 		String gName = ((Group)request.getSession().getAttribute("group")).getgName();
 		String senderId = ((Member)request.getSession().getAttribute("loginUser")).getMemberId();
 		ArrayList<GroupMember> receiverList = aService.getGroupList(gNo);
-		
 		String tmpMsg = "<a href='albumListView.ij?gNo="+gNo+"'>" + gName + "모임에 새 앨범이 등록되었습니다.";
 		
-		//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
-		//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
+		
 		
 		if(result>0) {
 			result2 = alarmService.insertAlbumAlarm(senderId,receiverList,tmpMsg);
@@ -169,7 +167,36 @@ public class AlbumController {
 	 * @return
 	 */
 	@RequestMapping("albumDetailView.ij")
-	public ModelAndView albumDetailView(int albumNo, ModelAndView mv, Integer page) {
+	public ModelAndView albumDetailView(HttpServletRequest request ,int albumNo, ModelAndView mv, Integer page,Integer gNo) {
+		
+		int groupNo = 0;
+		if(request.getSession().getAttribute("group")!=null) {
+			groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		}else {
+			groupNo = gNo;
+			Group tempGroup = gService.goGroupPage(groupNo);
+			
+			Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+			Integer groupMemberCode = -1;  
+			if(loginUser!=null) {
+			String memberId = loginUser.getMemberId();
+			
+			
+			if(memberId != null) {
+				groupMemberCode = gService.selectCode(memberId,gNo);
+				if(groupMemberCode ==null) {
+					groupMemberCode = 5;
+					
+				}
+			}
+			request.getSession().setAttribute("group",tempGroup );
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			}
+		
+		}
+	
+		
 		int currentPage = page == null ? 1 : page;
 		
 		Album album = aService.selectAlbum(albumNo); 
@@ -232,8 +259,8 @@ public class AlbumController {
 	// 댓글 등록
 	@ResponseBody
 	@RequestMapping(value="addReply.ij", method=RequestMethod.POST)
-	public String addReply(AlbumReply aReply, HttpSession session) {
-		
+	public String addReply(AlbumReply aReply, HttpSession session,String albumTitle) {
+
 		// 댓글 작성자 정보(ID) 저장
 		// String rWriter = ((Member)session.getAttribute("loginUser")).getId();
 		aReply.setArWriter(((Member)session.getAttribute("loginUser")).getMemberId());
@@ -241,6 +268,19 @@ public class AlbumController {
 		
 		if(result > 0) {
 			/* aService.updateRcount(reply.getRefBid()); */
+			
+			
+			//댓글 등록 성공시 알람등록
+			int gNo = ((Group)session.getAttribute("group")).getgNo();
+			int albumNo = aReply.getAlbumNo();
+			String gName = (String) session.getAttribute("gName");
+			String senderId = ((Member)session.getAttribute("loginUser")).getMemberId();
+			String senderName = ((Member)session.getAttribute("loginUser")).getMemberName();
+			ArrayList<GroupMember> receiverList = aService.getGroupList(gNo);
+			String tmpMsg = 
+			senderName + "님이 " + "<a href='albumDetailView.ij?albumNo="+albumNo + "&gNo=" + gNo +"'>" + gName+"모임의" + albumTitle + " 앨범에  댓글을 달았습니다.."  +"</a>";
+			int result2 = alarmService.insertAlbumReplyAlarm(senderId,receiverList,tmpMsg);
+			
 			return "success";
 		}else {
 			return "fail";

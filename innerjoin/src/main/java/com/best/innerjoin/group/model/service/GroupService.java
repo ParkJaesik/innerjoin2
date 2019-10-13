@@ -46,5 +46,7 @@ public interface GroupService {
 	public abstract int rejectGroup(String memberId, int gNo);
 
 	public abstract int updateGroupCount(int gNo);
+
+	public abstract String selectReceiverId(String reciverName);
 }
 

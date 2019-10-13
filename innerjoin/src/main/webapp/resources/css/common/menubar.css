@@ -1,5 +1,5 @@
 @charset "UTF-8";
-	#alarmTable{
+	/* #alarmTable{
 		border:1px solid black;
 		display:none;
 		z-index: 1000;
@@ -8,7 +8,7 @@
 	    height: 60px;
 	    position:absolute;
 	    right:0;
-    }
+    } */
     
 
     #nav {

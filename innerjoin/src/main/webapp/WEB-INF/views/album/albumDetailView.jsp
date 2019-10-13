@@ -126,17 +126,25 @@
         			});
         		}
         		
+        		
                 $("#submit-btn").click(function(){
                 	var arContent = $("#rContent").val();
+                	var albumTitle = "${album.albumTitle}";
                 	var albumNo = ${album.albumNo};
                 	var groupNo = ${album.groupNo};
                 	alert(arContent + ", "+ albumNo + ", " + groupNo);
         			$.ajax({
         				url: "addReply.ij",
-        				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo},
+        				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo,albumTitle:albumTitle},
         				type : "post",
         				success : function(data){
         					if(data == 'success'){
+        						
+        						//댓글부분 알람보내기 부분
+        						var gName = "${gName}";
+        						var rWriter = "${loginUser.memberName}";
+        						socket.send("albumReply" + "," + gName + "," + rWriter + "," + albumNo + "," +  albumTitle +"," + groupNo);
+        						
         						
         						// 댓글 작성 부분 초기화
         						alert("댓글 등록 성공!");
