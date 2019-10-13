@@ -23,7 +23,9 @@
                             	<img src="images/bg.jpg" class="img-rounded">
                             </div>
                             <br>
-                            <div class="myProfile">자기소개</div>
+                            <div class="row">
+                            	<div class="myProfile col-md-12">자기소개</div>
+                            </div>
                             <br>
                             <button>프로필 수정</button>
                         </div>
@@ -31,9 +33,12 @@
 					</div>
                     <br>
                     <div class="row">
-                    	<div class="col-md-2"></div>
+                    <!-- 	<div class="col-md-2"></div>
                         <div class="col-md-8">캘린더</div>
-                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div> -->
+                        <div class="col-md-12">
+                        	<%@ include file="../event/memCalendar.jsp"%>
+                        </div>
                     </div>
                     <br>
 				</div>
