@@ -43,7 +43,7 @@ public class ReportServiceImpl implements ReportService{
 
 	// 신고 게시글 작성
 	@Override
-	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
+	public int insertReport(GroupMemberReport report) {
 
 		
 		

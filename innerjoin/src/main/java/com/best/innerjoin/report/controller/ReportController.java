@@ -81,7 +81,7 @@ public class ReportController {
 		Group group = (Group)request.getSession().getAttribute("group");
 		report.setReportGNo(group.getgNo());
 		report.setResponGNo(group.getgNo());
-		int result = rService.insertReport(report, request);
+		int result = rService.insertReport(report);
 		
 		if(result > 0) {
 			return "redirect:rblist.ij";
@@ -137,8 +137,9 @@ public class ReportController {
 		
 		System.out.println(report.toString());
 		
-		int result = rService.updateReportCount(report);
 		
+		int result = rService.updateReportCount(report);
+		System.out.println("result : " + result);
 		if(result > 0) {
 			ArrayList<GroupMember> gmList = rService.selectGroupMember(report.getResponGNo(), currentPage);
 			model.addAttribute("gmList", gmList).addAttribute("currentPage", currentPage);
@@ -150,6 +151,9 @@ public class ReportController {
 		}
 		
 	}
+	
+	
+	
 	
 	
 	

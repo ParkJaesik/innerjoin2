@@ -27,7 +27,7 @@ public interface ReportService {
 	 * @param request
 	 * @return
 	 */
-	public abstract int insertReport(GroupMemberReport report, HttpServletRequest request);
+	public abstract int insertReport(GroupMemberReport report);
 
 	/** 회원 신고 게시글 상세
 	 * @param rNo
