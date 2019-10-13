@@ -97,7 +97,8 @@ h3 {
 .div2 {
 	margin: auto;
 	width: 100%;
-	height: 500px;
+	min-height: 100px;
+	margin-bottom: 5%;
 }
 
 #report-th-no, #report-th, #respond-th, #report-th-date {
@@ -119,10 +120,13 @@ h3 {
 }
 
 
+
 .div4 {
 	width: 100%;
 	height: 40px;
 	text-align: center;
+	margin-top: 5%;
+	
 }
 .div4 a {
 	color: rgb(50, 50, 50);
@@ -138,11 +142,14 @@ h3 {
             <div class="div1">
                 <h3>신고</h3>
             </div>
+            <div class="mreport">
+                <label><a href="#">신고 회원 보기</a></label>
+            </div>
             
             <div class="div2">
                 <table align="center">
                     <tr>
-                        <!-- <th align="center" id="report-th- no">no</th> -->
+                        <th align="center" id="report-th- no">no</th>
                         <th align="center" id="report-th">신고자</th>
                         <th align="center" id="respond-th">신고받은 사람</th>
                         <th align="center" id="report-th-content">신고내용</th>
@@ -151,10 +158,14 @@ h3 {
                     
                     <c:forEach var="r" items="${blist }">
 	                    <tr>
-	                        <%-- <td align="center" id="report-td-no">${r.rNo }</td> --%>
+	                        <td align="center" id="report-td-no">${r.rNo }</td>
 	                        <td align="center" id="report-td">${r.reportId }</td>
 	                        <td align="center" id="respond-td">${r.responId }</td>
-	                        <td align="center" id="report-td-content"><a href="#">${r.rCategory }</a></td>
+	                        <td align="center" id="report-td-content">
+	                        <c:url var="rdetail" value="rdetail.ij">
+	                        	<c:param name="rNo" value="${ r.rNo }"/> 
+	                        </c:url>
+	                        <a href="${rdetail}">${r.rCategory }</a></td>
 	                        <td align="center" id="report-td-date">${r.rDate }</td>
 	                    </tr>
                     </c:forEach>
