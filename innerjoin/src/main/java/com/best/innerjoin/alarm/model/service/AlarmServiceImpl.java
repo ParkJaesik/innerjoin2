@@ -65,6 +65,11 @@ public class AlarmServiceImpl implements AlarmService{
 		return aDao.insertNote(alarmMap);
 	}
 
+	@Override
+	public ArrayList<Alarm> selectMyNote(String receiverId) {
+		return aDao.selectMyNote(receiverId);
+	}
+
 
 	
 }

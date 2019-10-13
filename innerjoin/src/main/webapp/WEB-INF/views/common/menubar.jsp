@@ -130,6 +130,11 @@
 	        	var tmpMsg = dataArray[2] + "님이 " + "<a href='albumDetailView.ij?albumNo="+dataArray[3] + "&gNo=" + dataArray[5] +"'>" + dataArray[1]+"모임의" + dataArray[4] + " 앨범에  댓글을 달았습니다.."  +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
+	        }else if(dataArray[0]=="applyMessage"){
+	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	var tmpMsg = dataArray[2] + "모임에 " + dataArray[3] + "님이 가입 문의 쪽지를 보냈습니다.";
+	        	toastMessage(tmpMsg);
+	        	
 	        }
     }
     

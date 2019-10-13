@@ -158,6 +158,21 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		                   
 		                }
 					}
+				}else if(cmd.equals("applyMessage")) {
+					String gName = strs[1];
+					String receiverId = strs[2];
+					String senderId = strs[3];
+					String gNo = strs[4];
+					
+						WebSocketSession boardWriterSession =  userSessions.get(receiverId);
+						System.out.println(boardWriterSession);
+						//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
+						//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
+						if(boardWriterSession !=null) {
+							TextMessage tmpMsg = new TextMessage("applyMessage,"+gName + ","+ receiverId + "," + senderId + "," + gNo);
+							boardWriterSession.sendMessage(tmpMsg);
+						}
+					
 				}
 			}
 		}
