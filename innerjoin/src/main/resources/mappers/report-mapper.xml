@@ -18,19 +18,35 @@
 	</resultMap>
 	
 	
+	<!-- 모임 회원 -->
+	<resultMap id="groupMemResultSet" type="GroupMember">
+		<id property="memberId" column="MEMBER_ID"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="levelCode" column="LEVEL_CODE"/>
+		<result property="groupMemReptCount" column="GROUP_MEM_REPT_COUNT"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+	</resultMap>
+	
+	
+	
 	<!-- 모임 회원 신고글 전체수 조회 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM GROUP_MEMBER_REPORT
-		WHERE MEMBER_REPT_B_STATUS='Y'
+		WHERE MEMBER_REPT_B_STATUS='미처리'
 	</select>
 	
 	<!-- 모임 회원 신고글 목록 조회 -->
 	<select id="selectbList" resultMap="groupMemReportResultSet">
-		SELECT MEMBER_REPT_NO, REPORTER_ID, RESPONDENT_ID, MEMBER_REPT_CATEGORY, REPORT_DATE
-		FROM GROUP_MEMBER_REPORT
-		ORDER BY MEMBER_REPT_NO DESC
+		SELECT MEMBER_REPT_NO, a.MEMBER_NAME AS REPORTER_ID, b.MEMBER_NAME AS RESPONDENT_ID, MEMBER_REPT_CATEGORY, REPORT_DATE 
+		FROM GROUP_MEMBER_REPORT 
+		JOIN MEMBER a ON(REPORTER_ID = a.MEMBER_ID)  
+		JOIN MEMBER b ON(RESPONDENT_ID = b.MEMBER_ID)
+		WHERE MEMBER_REPT_B_STATUS='미처리'  
+		ORDER BY MEMBER_REPT_NO DESC 
 	</select>
+	
+
 	
 	
 	<!-- 검색용 쿼리 -->
@@ -63,7 +79,7 @@
 	
 	<!-- 신고글 작성 -->
 	<insert id="insertReport">
-		INSERT INTO REPORT VALUES(#{rContent}, #{rCategory}, #{reportId}, #{responId}, SYSDATE)
+		INSERT INTO GROUP_MEMBER_REPORT VALUES(SEQ_MEMBER_REPT_NO.NEXTVAL, #{rContent}, #{rCategory}, #{reportId}, #{reportGNo}, #{responId}, #{responGNo}, DEFAULT, DEFAULT, DEFAULT, SYSDATE)
 	</insert>
 	
 	<!-- 신고글 상세조회 -->
@@ -71,8 +87,43 @@
 		SELECT *
 		FROM GROUP_MEMBER_REPORT
 		WHERE MEMBER_REPT_NO = #{rNo}
-		AND MEMBER_REPT_B_STATUS = 'Y'
+		AND MEMBER_REPT_B_STATUS = '미처리'
 	</select>
+	
+	<!-- 신고글 거절 --><!-- 신고글 상태 처리로 바꿈(거절, 수락 둘다) -->
+	<update id="deleteReport" parameterType="_int">
+		UPDATE GROUP_MEMBER_REPORT
+		SET MEMBER_REPT_B_STATUS = '처리'
+		WHERE MEMBER_REPT_NO = #{rNo}
+	</update>
+	
+	
+	<!-- 회원 신고 횟수 카운트 -->
+	<update id="updateReportCount" parameterType="GroupMemberReport">
+		UPDATE GROUP_MEMBER
+		SET GROUP_MEM_REPT_COUNT = GROUP_MEM_REPT_COUNT +1
+		WHERE MEMBER_ID = #{responId}
+	</update>
+	
+	
+	<!-- 신고받은 그룹 회원  카운트 -->
+	<select id="selectReptMemberCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM GROUP_MEMBER
+		WHERE GROUP_NO = #{responGNo}
+		AND GROUP_MEM_REPT_COUNT > 0
+	</select>
+	
+	<!-- 신고 받은 그룹 회원 목록 -->
+	<select id="selectGroupMember" parameterType="_int">
+		SELECT GM.*, M.MEMBER_NAME
+		FROM GROUP_MEMBER GM
+		JOIN MEMBER M ON(M.MEMBER_ID = GM.MEMBER_ID)
+		WHERE GM.GROUP_NO = #{responGNo}
+		AND GM.GROUP_MEM_REPT_COUNT > 0
+	</select>
+	
+
 	
 	
 	<!-- 신고당한회원 리스트 -->
