@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.member.model.vo.Member;
 
+/**
+ * @author user1
+ *
+ */
 @Repository
 public class MemberDao {
 	
@@ -42,9 +46,9 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember",member);
 	}
 	
-	public int insertAdditional(Member member) {
+	public int insertAddInfo(Member member) {
 		System.out.println(member.getMemberBirthday());
-		return sqlSession.insert("memberMapper.insertAdditional",member);
+		return sqlSession.insert("memberMapper.insertAddInfo",member);
 	}
 
 	/** email 중복체크
@@ -185,6 +189,40 @@ public class MemberDao {
 	public Member googleLogin(String memberId) {
 		return sqlSession.selectOne("memberMapper.googleLogin", memberId);
 	}
+
+
+
+	public String getOriginFileName(String memberId) {
+		return sqlSession.selectOne("memberMapper.getOriginFileName",memberId);
+	}
+
+
+
+	/** 프로필 사진 수정
+	 * @param member
+	 * @return
+	 */
+	public int updateProfile(Member member) {
+		return sqlSession.update("memberMapper.updateProfile",member);
+	}
+
+
+	
+	/** 프로필 자기소개, 공개여부 수정
+	 * @param member
+	 * @return
+	 */
+	public int updateProfileAdd(Member member) {
+		
+		return sqlSession.update("memberMapper.updateProfileAdd",member);
+	}
+
+	
+	public Member getMember(Member member) {
+		return sqlSession.selectOne("memberMapper.getMember",member);
+	}
+
+
 
 
 	

@@ -92,7 +92,7 @@
         width: 1em;
         height: 1em;
         padding: 0;
-        content: "";
+        
         }
         input[type="checkbox"] + label:after {
         position: absolute;
@@ -189,7 +189,7 @@
         }
         .row:before,
         .row:after {
-        content: "";
+        /* content: ""; */
         display: table;
         }
         .row:after {

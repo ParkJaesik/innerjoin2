@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService{
 		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
 		int result = mDao.insertMember(member);
-		if(result>0) result = mDao.insertAdditional(member);
+		if(result>0) result = mDao.insertAddInfo(member);
 		return result;
 	}
 	
@@ -204,17 +204,44 @@ public class MemberServiceImpl implements MemberService{
 
 
 	// 회원정보 수정 
-		@Override
-		public int updateInfo(Member member) {
-			String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+	@Override
+	public int updateInfo(Member member) {
+		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
 			
-			member.setMemberPwd(encPwd);
-			int result = mDao.updateInfo(member);
-			if(result > 0) {
-				result = mDao.updateAddInfo(member);
-			}
-			return result;
+		member.setMemberPwd(encPwd);
+		int result = mDao.updateInfo(member);
+		if(result > 0) {
+			result = mDao.updateAddInfo(member);
 		}
+		return result;
+	}
+
+
+	@Override
+	public String getOriginFileName(String memberId) {
+			
+		return mDao.getOriginFileName(memberId);
+	}
+
+	// 프로필 사진 변경
+	@Override
+	public int updateProfile(Member member) {
+		
+		return mDao.updateProfile(member);
+	}
+
+	
+	@Override
+	public Member getMember(Member member) {
+		return mDao.getMember(member);
+	}
+	
+
+	// 프로필 자기소개, 공개여부 수정
+	@Override
+	public int updateProfileAdd(Member member) {
+		return mDao.updateProfileAdd(member);
+	}
 
 	
 
