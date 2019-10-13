@@ -129,17 +129,35 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 					String loginUserId = strs[1];
 					String gName = strs[2];
 					String host = strs[3];
-					
+					String gNo = strs[4];
 					
 						WebSocketSession boardWriterSession =  userSessions.get(host);
 						System.out.println(boardWriterSession);
 						//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
 						//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
 						if(boardWriterSession !=null) {
-							TextMessage tmpMsg = new TextMessage("apply,"+loginUserId + ","+ gName + "," + host);
+							TextMessage tmpMsg = new TextMessage("apply,"+loginUserId + ","+ gName + "," + host + "," + gNo);
 							boardWriterSession.sendMessage(tmpMsg);
 						}
 					
+				}
+				else if(cmd.equals("albumReply")) {
+					String gName = strs[1];
+					String rWriter = strs[2];
+					String albumNo =  strs[3];
+					String albumTilte = strs[4];
+					String groupNo = strs[5];
+					
+					TextMessage tmpMsg = new TextMessage("albumReply,"+gName + ","+ rWriter + "," + albumNo + "," +albumTilte + "," + groupNo);
+					for(WebSocketSession sess:sessions) {
+						
+						
+						if(!sess.equals(session) && groupList.get(sess).equals(gName)) {
+							
+		                    sess.sendMessage(tmpMsg);
+		                   
+		                }
+					}
 				}
 			}
 		}

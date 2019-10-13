@@ -110,5 +110,10 @@ public class GroupServiceImpl implements GroupService{
 	public int updateGroupCount(int gNo) {
 		return gDao.updateGroupCount(gNo);
 	}
+
+	@Override
+	public String selectReceiverId(String reciverName) {
+		return gDao.selectReceiverId(reciverName);
+	}
 	
 }

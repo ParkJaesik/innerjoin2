@@ -137,7 +137,7 @@ public class GroupController {
 				}
 			}
 		}
-		
+		System.out.println(groupMemberCode);
 		Group tempGroup = gService.goGroupPage(gNo);
 		
 		
@@ -231,8 +231,47 @@ public class GroupController {
 	
 	// 대기중인 그룹 회원 목록 조회
 	@RequestMapping("wgmlist.ij")
-	public ModelAndView waitingGroupMemberList(ModelAndView mv, HttpServletRequest request) {
-		int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+	public ModelAndView waitingGroupMemberList(ModelAndView mv, HttpServletRequest request,Integer gNo) {
+		
+		
+		int groupNo = 0;
+		if(request.getSession().getAttribute("group")!=null) {
+			groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		}else {
+			groupNo = gNo;
+			Group tempGroup = gService.goGroupPage(groupNo);
+			
+			Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+			Integer groupMemberCode = -1;  
+			if(loginUser!=null) {
+			String memberId = loginUser.getMemberId();
+			
+			
+			if(memberId != null) {
+				groupMemberCode = gService.selectCode(memberId,gNo);
+				if(groupMemberCode ==null) {
+					groupMemberCode = 5;
+					
+				}
+			}
+			request.getSession().setAttribute("group",tempGroup );
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			}
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		 * int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		 */
 		
 		ArrayList<GroupMember> list = gService.waitingGroupMemberList(groupNo);
 		

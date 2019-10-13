@@ -210,4 +210,14 @@
   </select>
   
   
+  <!-- 모임장이름으로 모임장아이디 가져오기 -->
+  
+  <select id="selectReceiverId" parameterType="String" resultType="String">
+  	
+  	SELECT MEMBER_ID
+  	FROM MEMBER
+  	WHERE MEMBER_NAME = #{reciverName}
+  
+  </select>
+  
 </mapper>

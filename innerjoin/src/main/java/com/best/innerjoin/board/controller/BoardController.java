@@ -82,6 +82,9 @@ public class BoardController {
 		String path = null;
 		
 		if (result > 0 ) { // 게시글 등록 성공한 경우
+			
+			
+			
 			path = "redirect:blist.ij";
 			
 		} else { // 게시글 등록 실패한 경우
