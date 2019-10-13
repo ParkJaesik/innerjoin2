@@ -68,12 +68,12 @@
   	INSERT INTO MEMBER
   	VALUES(
   		#{memberId}, #{memberPwd}, #{memberName}, 'E'
-  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, 'PATH', 1
+  		,SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1
   	)
 
   </insert>
 
-  <insert id="insertAdditional" parameterType="Member">
+  <insert id="insertAddInfo" parameterType="Member">
   	INSERT INTO
   		MEMBER_ADD_INFO
   		VALUES(
@@ -81,7 +81,7 @@
   		)
   </insert>  
   
-    <!-- 회원정보 수정 비밀번호 -->
+    <!-- 회원정보 수정-->
   <update id="updateInfo" parameterType="Member">
   	UPDATE MEMBER
   	SET 
@@ -94,8 +94,9 @@
   
   <!-- 회원 정보수정 (생년월일, 성별 추가입력) -->
   <update id="updateAddInfo" parameterType="map">
-	UPDATE MEMBER
-	SET MEMBER_BIRTHDAY= #{memberBirthday}
+	UPDATE MEMBER_ADD_INFO
+	SET MEMBER_BIRTHDAY= #{memberBirthday},
+	MEMBER_GENDER = #{memberGender}
 	WHERE MEMBER_ID= #{memberId}
   </update>
   
@@ -209,6 +210,31 @@
 	AND MEMBER_STATUS_CODE != 3 AND LOGIN_WAY = 'G'
   </select>
   
+  <select id="getOriginFileName" parameterType="String" resultType="String">
+  	SELECT MEMBER_PRO_PATH FROM MEMBER
+  	WHERE MEMBER_ID = #{memberId} 
+  </select>
+  
+  <update id="updateProfile" parameterType="Member">
+  	UPDATE MEMBER SET 
+  	<if test="memberProPath != null">
+  	MEMBER_PRO_PATH = #{memberProPath} 
+  	</if>
+	WHERE MEMBER_ID = #{memberId} 
+  </update>
+  
+  <update id="updateProfileAdd" parameterType="Member">
+  	UPDATE MEMBER_ADD_INFO SET
+	MEMBER_INTRODUCE = #{memberIntroduce}
+	<!-- MEMBER_OPEN_STATUS = #{memberOpenStatus} -->
+	WHERE MEMBER_ID = #{memberId}
+  </update>
+  
+  <select id="getMember" parameterType="Member" resultMap="memberResultSet">
+  	SELECT * FROM MEMBER 
+	LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
+  	WHERE MEMBER_ID = #{memberId} 
+  </select>
   
   <!-- 모임장이름으로 모임장아이디 가져오기 -->
   
