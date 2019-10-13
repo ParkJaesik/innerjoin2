@@ -97,7 +97,12 @@ public interface MemberService {
 
 	
 
-	
+	/**  회원정보 수정 
+	 * @param loginUser
+	 * @return
+	 */
+	public abstract int updateInfo(Member member);
+
 	
 
 
