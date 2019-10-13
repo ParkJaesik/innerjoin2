@@ -92,16 +92,38 @@ public interface MemberService {
 	 */
 	public abstract int deleteWait(Member loginUser, int gNo);
 
-	
-	
-
-	
 
 	/**  회원정보 수정 
 	 * @param loginUser
 	 * @return
 	 */
 	public abstract int updateInfo(Member member);
+
+	
+	/** 파일명 검사
+	 * @param memberId
+	 * @return
+	 */
+	public abstract String getOriginFileName(String memberId);
+
+	
+	/** 프로필 사진 변경
+	 * @param member
+	 * @return
+	 */
+	public abstract int updateProfile(Member member);
+
+	/** 수정된 값 세팅하는 부분
+	 * @param member
+	 * @return
+	 */
+	public abstract Member getMember(Member member);
+
+	/** 프로필 자기소개, 공개여부 수정
+	 * @param member
+	 * @return
+	 */
+	public abstract int updateProfileAdd(Member member);
 
 	
 

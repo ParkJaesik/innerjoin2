@@ -7,6 +7,19 @@
 <title>Insert title here</title>
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css">
+<style type="text/css">
+/* .profileP{
+	border-radius: 50em;
+	border: 1px solid #a2a2a2;
+	height: 11em; 
+} */
+
+.profileP img{
+	width: 13em;
+	height: 13em;
+	border-radius: 150px;
+}
+</style>
 </head>
 <body>
 <div class="margin"></div>
@@ -18,14 +31,19 @@
 						<div class="col-md-4"></div>
                             
                             <!-- form -->
-						<div class="col-md-4" align="center">
-                        	<img class="img-circle" src="${contextPath}/resources/images/member/${loginUser.memberProPath }" style="border: 1px solid slateblue;">
                             
-                            <br>
-                            <div class="myProfile">자기소개</div>
-                            <br>
-                            <button>프로필 수정</button>
-                        </div>
+							<div class="col-md-4" align="center">
+		                        <form action="profileUpdateForm.ij" method="post" >
+		                        	<input type="hidden" name="memberId" value="${loginUser.memberId }">
+									<div class="profileP" >
+		                        		<img class="img-circle" src="${contextPath}/resources/images/member/${loginUser.memberProPath }">
+	    	                        </div>
+	        	                    <br>
+	            	                <div class="myProfile">${ loginUser.memberIntroduce }</div>
+	                	            <br>
+	                    	        <button>프로필 수정</button>
+	                        	</form>
+                        	</div>
                         <div class="col-md-4"></div>
 					</div>
                     <br>
@@ -43,7 +61,7 @@
     	<div class="row">
         	<div class="col-md-12">
             	<div class="row">
-                	<div class="col-md-3"></div>
+                 	<div class="col-md-3"></div>
                     <div class="col-md-6 menu-detail" >
                     	<a href="myGroupForm.ij">내 모임</a>
                         <a href="myNoteForm.ij">쪽지함</a>

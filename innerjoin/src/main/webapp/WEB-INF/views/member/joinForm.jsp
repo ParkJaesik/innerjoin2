@@ -96,11 +96,12 @@
 			                    <div class="col-half">
 			                      	<h5>Gender</h5>
 			                      	<div class="input-group">
-										<input type="radio" name="memberGender" value="M" id="memberGender"/>
+										<input type="radio" name="memberGender" value="M" id="gender-male"/>
 										<label for="gender-male">Male</label>
-										<input type="radio" name="memberGender" value="F" id="memberGender"/>
+										<input type="radio" name="memberGender" value="F" id="gender-female"/>
 										<label for="gender-female">Female</label>
 									</div>
+									
 			                    </div>
 			                  </div>
 			                  </div>

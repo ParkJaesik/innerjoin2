@@ -1,16 +1,132 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${contextPath}/resources/css/menubar.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>Insert title here</title>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/common/index.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
 
 
-<title>프로필 수정</title>
-<style>
-			#profile{
+
+
+
+<title>마이페이지</title>
+<style type="text/css">
+	/* *{
+	 	 border: 1px solid black;
+	 }  */
+	 .profileP img{
+		width: 13em;
+		height: 13em;
+		border-radius: 150px;
+	}
+	
+	textarea {
+	width: 100%;
+}
+</style>
+</head>
+<body>
+
+<div class="container-fluid" id="all-wrapper">
+
+		<!-- 페이지 헤더부분 -->
+		<div class="row" id="header-wrapper">
+			<div class="col-md-12" id="all-hearder">
+				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
+			</div>
+		</div>
+
+		<!-- 페이지 바디부분 -->
+		<div class="row" id="body-wrapper">
+			<div class="col-md-1 aside"></div>
+			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
+			<div class="col-md-10" id="body-content">
+				<!-- 메인페이지 content 부분 -->
+				 
+				 
+				  <div class="row">
+				  	<div class="col-4"></div>
+				  	<div class="col-md-4" align="center">
+		            	<form action="profileUpdate.ij" method="post" enctype="Multipart/form-data">
+		            		<input type="hidden" name="memberId" value="${loginUser.memberId }">
+		            		<div class="margin" style="margin: 50px;"></div>
+							<div class="profileP" >
+							<c:if test="${ !empty member.memberProPath }">
+								<input type="hidden" value="${member.memberProPath }" name="memberProPath">
+		                    	<img class="img-circle" src="${contextPath}/resources/images/member/${member.memberProPath }">
+							</c:if>
+							<div class="margin" style="margin: 30px;"></div>
+							<input type="file" name="reloadFile">
+		                    	
+	    	                </div>
+	        	            <br>
+	            	        <div class="row aln-center">
+								<c:set var="memberIntroduce" value="${fn:replace(member.memberIntroduce, '<br>','') }"/>
+								<c:if test="${ member.memberIntroduce != null }">
+								<textarea name="memberIntroduce" id="memberIntroduce" cols="30" rows="10" style="resize: none;">${ member.memberIntroduce }</textarea>
+								</c:if>
+								<c:if test="${ member.memberIntroduce eq null }">
+								<textarea name="memberIntroduce" id="memberIntroduce" cols="30" rows="10" style="resize: none;" placeholder="간단한 자기 소개를 입력해 주세요."></textarea>
+								</c:if>
+	                	    <br>
+							<div class="col-half">
+			                      <h5>자기소개 공개여부</h5>
+			                      <div class="input-group">
+									<input type="radio" name="memberOpenStatus" value="Y" id="gender-male"/>
+									<label for="gender-male">공개</label>
+									<input type="radio" name="memberOpenStatus" value="N" id="gender-female"/>
+									<label for="gender-female">비공개</label>
+								</div>
+							</div>
+							<div>
+	                    	<a href="#" class="button icon solid mMenu" id="goBack">취소</a>
+	                    	<button>수정</button>
+	                    	</div>
+							
+	                   </form>
+                    </div>
+				  	<div class="col-4"></div>
+				  </div>
+				</div>
+				<div class="col-md-1 aside"></div>
+			</div>
+	</div>
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- #profile{
 				padding-top: 150px !important; 
 				padding-bottom: 50px !important; 
 			}
@@ -46,72 +162,5 @@
 			}
 			.updateProfile{
 				height: 2.5em;
-			}
+			} -->
 			
-</style>
-</head>
-<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-			<section id="header">
-				<div class="container" id="profile" >
-					<nav id="nav">
-						<ul>
-							<a href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a>
-							<li class="menu"><a class="icon solid fa-search" href="#"><span>Search</span></a></li>
-							<li class="menu"><a class="icon solid fa-envelope" href="#"><span>News</span></a></li>
-                            <li class="menu"><a class="icon solid fa-home" href="myGroupForm.ij"><span>MyPage</span></a></li>
-						</ul>
-					</nav>
-					<div>
-
-						<form action="">
-							<div>
-								
-								<div>
-									<img class="img-circle" src="${contextpath}/resources/images/member/${loginUser.memberProPath }" style="border: 1px solid slateblue;">
-								</div>
-								<div class="inputFile">
-									<input type="file">
-								</div>
-								<div class="row aln-center">
-									<div class="col-5 col-12-small">
-										<div>
-											<textarea name="" id="" cols="30" rows="10" style="resize: none;" placeholder="간단한 자기소개를 입력해주세요."></textarea>
-										</div>
-									</div>
-								</div>
-								
-								<ul class="actions">
-									<li><a href="#" class="button icon solid mMenu" id="goBack">취소</a></li>
-									<li><a href="#" class="form-button-submit button icon solid mMenu">수정</a></li>
-								</ul>
-							</div>
-						</form>
-			
-							
-					</div>
-
-				<!-- 메뉴바 -->
-
-				</div>
-			</section>
-			
-
-
-
-			
-
-	</div>
-
-		<!-- Scripts -->
-		<script src="${contextPath}/resources/js/jquery.min.js"></script>
-		<script src="${contextPath}/resources/js/jquery.dropotron.min.js"></script>
-		<script src="${contextPath}/resources/js/browser.min.js"></script>
-		<script src="${contextPath}/resources/js/breakpoints.min.js"></script>
-		<script src="${contextPath}/resources/js/util.js"></script>
-		<script src="${contextPath}/resources/js/main.js"></script>
-
-	</body>
-</html>

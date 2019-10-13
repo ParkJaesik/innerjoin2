@@ -94,11 +94,11 @@ button,
 	background-color: rgba(141, 141, 140, 0.836); 
 }
 
-.menu-detail .btn{
+.btn{
 	float: right;
 	margin: 0.8em;
+	
 }
-
 .invite{
 	padding-bottom: 2em;
 	/* margin-left: 2em;
@@ -221,7 +221,7 @@ button:active,
   text-align: left;
 }
 .image-hover .overlay::before {
-  content: '';
+  /* content: ''; */
   -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
   position: absolute;
   top: 20px;
