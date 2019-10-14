@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
+import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.Search;
 
 @Repository("rDao")
@@ -112,6 +113,26 @@ public class ReportDao {
 	 */
 	public int getGroupMemberListCount(int responGNo) {
 		return sqlSession.selectOne("reportMapper.selectReptMemberCount");
+	}
+
+
+	/** 그룹 신고 DAO
+	 * @param gReport
+	 * @return
+	 */
+	public int insertGroupReport(GroupReport gReport) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("reportMapper.insertGroupReport", gReport);
+	}
+
+
+	/** 신고받은 그룹 신고카운트 증가
+	 * @param gReport
+	 * @return
+	 */
+	public int updateGroupReptCount(GroupReport gReport) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("reportMapper.updateGroupReptCount", gReport);
 	}
 
 

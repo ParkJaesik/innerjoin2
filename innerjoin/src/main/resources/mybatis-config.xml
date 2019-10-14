@@ -25,8 +25,8 @@
 		<typeAlias type="com.best.innerjoin.album.model.vo.AlbumReply" alias="AlbumReply"/>
 		<typeAlias type="com.best.innerjoin.report.model.vo.Search" alias="Search"/>
 		<typeAlias type="com.best.innerjoin.alarm.model.vo.Alarm" alias="Alarm"/>
-		<typeAlias type="com.best.innerjoin.mgSearch.model.vo.MgSearch" alias="MgSearch"/>
-		
+		<typeAlias type="com.best.innerjoin.report.model.vo.GroupReport" alias="GroupReport"/>
+
 		
 
 	</typeAliases>
