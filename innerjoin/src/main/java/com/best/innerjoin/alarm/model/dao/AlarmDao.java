@@ -44,4 +44,20 @@ public class AlarmDao {
 		return sqlSession.delete("alarmMapper.deleteAlarm",alarmId);
 	}
 
+	public int insertAlbumReplyAlarm(String senderId, String receiverId, String tmpMsg) {
+		Map<String,String> alarmMap = new HashMap<>();
+		alarmMap.put("senderId", senderId);
+		alarmMap.put("receiverId", receiverId);
+		alarmMap.put("msg",tmpMsg);
+		return sqlSession.insert("alarmMapper.insertAlbumReplyAlarm",alarmMap);
+	}
+
+	public int insertNote(Map<String, String> alarmMap) {
+		return sqlSession.insert("alarmMapper.insertNote", alarmMap);
+	}
+
+	public ArrayList<Alarm> selectMyNote(String receiverId) {
+		return (ArrayList)sqlSession.selectList("alarmMapper.selectMyNote",receiverId);
+	}
+
 }

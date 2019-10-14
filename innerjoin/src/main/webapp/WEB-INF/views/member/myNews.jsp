@@ -75,7 +75,7 @@
 								<tr>
 									<td class="send">보낸 사람</td>
 									<td class="note-context">내용</td>
-									<td class="noteDate">날짜</td>
+									<td class="noteDate">  </td>
 								</tr>
 	
 							<!-- 받은 쪽지 목록  반복-->
@@ -83,8 +83,9 @@
 								<tr>
 									<td>${m.senderId }</td>
 									<td>${m.alarmMsg }</td>
-									<td><button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">읽음</button>
-										<button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">삭제</button>
+									<td>
+										<button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">읽음</button>
+										
 									</td>
 									
 								</tr>

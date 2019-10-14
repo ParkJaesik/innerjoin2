@@ -18,6 +18,8 @@
 	href="${contextPath}/resources/css/common/index.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
 
+
+
 <title>마이페이지</title>
 <style type="text/css">
 	/* *{
@@ -121,12 +123,24 @@
 			                    </div>
 			                    <div class="col-half">
 			                      <h5>Gender</h5>
-			                      <!-- 성별 있을 때 없을 때   -->
+			                      
+			                      <!-- 처리하기 -->
 			                      <div class="input-group">
-			                      	<input type="radio" name="gender" value="male" id="gender-male"/>
+			                      	<c:if test="${ loginUser.memberGender != ''}">
+			                      	<input type="radio" name="memberGender" value="M" id="gender-male"
+			                      	<% if("M".equals("${loginUser.memberGender}")){%>checked<%}%>/>
 									<label for="gender-male">Male</label>
-									<input type="radio" name="gender" value="female" id="gender-female"/>
+									<input type="radio" name="memberGender" value="F" id="gender-female"
+									<% if("F".equals("${loginUser.memberGender}")){%>checked<%}%>/>
 									<label for="gender-female">Female</label>
+			                      	</c:if>
+			                      	<c:if test="${ loginUser.memberGender == ''}">
+			                      	<input type="radio" name="memberGender" value="M" id="gender-male"/>
+									<label for="gender-male">Male</label>
+									<input type="radio" name="memberGender" value="F" id="gender-female"/>
+									<label for="gender-female">Female</label>
+			                      	</c:if>
+			                    
 			                      </div>
 			                    </div>
 			                  </div>
@@ -221,15 +235,14 @@
 			}
 		});
 		
+		if("${loginUser.memberGender}" == 'F'){
+			$("#gender-female").attr("checked", true);
+		} else{
+			$("#gender-male").attr("checked", true);
+		}
 		
-		/* $("#submit-btn").click(function(){
-			if($("#memberPwd").val() == null || $("#memberPwd2").val() == null ){
-				$("#memberPwd").val("${loginUser.memberPwd}");
-				$("#memberPwd2").val("${loginUser.memberPwd}");
-			
-			}
-			$("#infoForm").submit();
-		}); */
+		
+	
 	});
 	</script>
 	

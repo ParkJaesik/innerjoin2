@@ -81,6 +81,7 @@ div {
       padding: 10px;
       /* box-shadow: 2px 2px 10px 2px lightgray; */
       overflow: auto;
+      margin:5px;
    }
    
    .eventDetail>div{
@@ -194,3 +195,6 @@ div {
    		float:left;
    }
 
+.badge-dark{
+	color:#fff !important;
+}

@@ -84,4 +84,9 @@ public class GroupDao {
 		return sqlSession.update("groupMapper.updateGroupCount", gNo);
 	}
 
+	public String selectReceiverId(String reciverName) {
+		return sqlSession.selectOne("memberMapper.selectReceiverId", reciverName);
+		
+	}
+
 }

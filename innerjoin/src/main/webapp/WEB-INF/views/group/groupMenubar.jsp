@@ -19,7 +19,11 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/common/index.css">	
 <title>Group Menubar</title>
 <style>
+	#askMsg{
 	
+	    width: 100%;
+    	resize: none;
+    }
 </style>
 </head>
 <body>
@@ -46,13 +50,23 @@
 				</div>
 
 				<div id="group-info-leader">
-					<span id="group-leader">모임장 : </span> <a href="" id="group-inquiry">${group.gHost }</a>
-
+					<span id="group-leader">모임장 : </span> 
+					
+					<c:choose>
+					<c:when test="${groupMemberCode eq 3 or groupMemberCode eq 5 or groupMemberCode eq 4}">
+					<a href="#" id="group-inquiry" data-toggle="modal" data-target="#exampleModalCenter2">${group.gHost }</a>
+					</c:when>
+					<c:otherwise>
+					<a href="#" id="group-inquiry">${group.gHost }</a>
+					</c:otherwise>
+					</c:choose>
+					
+					
 				</div>
 			</div>
 
 			<div id="group-button">
-				<c:if test="${ loginUser.memberId eq group.gHost }"> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
+				<c:if test="${ loginUser.memberName eq group.gHost }"> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
 					<c:url var="secession" value="rblist.ij"/>
 					<button type="button" class="btn btn-primary" id="group-btn-manage">모임관리</button>
 				 </c:if>
@@ -109,7 +123,60 @@
   </div>
 </div>
 
+<!-- 가입문의 모달 -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">가입문의</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       	<div>${group.gHost }</div>
+       	<hr>
+       	<textarea rows="5" cols="20" id="askMsg"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" id="askMsgBtn">문의하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
+	$(function(){
+		
+		$("#askMsgBtn").click(function(){
+			
+			var reciverName = "${group.gHost }";
+			var askMsg = $("#askMsg").val();
+			var senderId = "${loginUser.memberId}";
+			var gName = "${gName}";
+			var gNo = "${group.gNo}"
+			
+			$.ajax({
+				
+				url : "insertNote.ij",
+				type : "post",
+				data : {reciverName : reciverName,askMsg:askMsg,senderId:senderId,gName:gName},
+				success : function(receiverId){
+					
+					alert("가입문의 성공");
+					socket.send("applyMessage" +"," + gName + "," + receiverId + "," +senderId +"," +gNo);
+					$('#exampleModalCenter2').modal('hide');
+					
+				}
+				
+				
+			});
+			
+		});
+		
+	});
+	
+	
 	
 	$("#applyGroupBtn").click(function(){
 		var groupMemberCode = "${groupMemberCode }";
@@ -122,9 +189,10 @@
 			if(groupMemberCode == 5){
 				$(location).attr('href','insertGroupMember.ij');
 				var loginUserId = "${loginUser.memberId}";
-				var gName = "${group.gName}";
+				var gName = "${group.gName}"
+				var gNo = "${group.gNo}";
 				var host =  "${group.gHost}";
-				socket.send("apply"+"," + loginUserId + "," + gName + "," + host );
+				socket.send("apply"+"," + loginUserId + "," + gName + "," + host +"," + gNo);
 				
 				
 			}else{
