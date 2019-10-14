@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.dao.ReportDao;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
+import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -42,7 +44,7 @@ public class ReportServiceImpl implements ReportService{
 
 	// 신고 게시글 작성
 	@Override
-	public int insertReport(GroupMemberReport report, HttpServletRequest request) {
+	public int insertReport(GroupMemberReport report) {
 
 		
 		
@@ -60,6 +62,38 @@ public class ReportServiceImpl implements ReportService{
 	public GroupMemberReport selectReport(int rNo) {
 		
 		return rDao.selectReport(rNo);
+	}
+
+	// 회원 신고 거절
+	@Override
+	public int deleteReport(int rNo) {
+		
+		return rDao.deleteReport(rNo);
+	}
+
+	//  회원 신고 횟수 카운트
+	@Override
+	public int updateReportCount(GroupMemberReport report) {
+		
+		
+		return rDao.updateReportCount(report);
+	}
+
+	// 신고 받은 회원 목록 
+	@Override
+	public ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage) {
+		
+		int listCount = rDao.getGroupMemberListCount(responGNo);
+		
+		PageInfo pi = ReportPagination.getPageInfo(currentPage, listCount);
+		
+		return rDao.selectGroupMember(responGNo, pi);
+	}
+
+	@Override
+	public int insertGroupReport(GroupReport gReport) {
+		rDao.insertGroupReport(gReport);
+		return rDao.updateGroupReptCount(gReport);
 	}
 
 //	// 신고 당한 회원 리스트

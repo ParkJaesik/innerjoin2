@@ -243,6 +243,7 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateProfileAdd(member);
 	}
 
+		
 	
 
 	

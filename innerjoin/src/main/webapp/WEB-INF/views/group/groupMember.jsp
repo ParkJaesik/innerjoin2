@@ -95,8 +95,8 @@
 									  </div>
 									</div>
 									<input type="hidden" value="${m.memberId }">
-									<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
 									<input type="hidden" value="${m.memberName }">
+									<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
 								</div>
 							</div>
 						</div><br>
@@ -129,8 +129,10 @@
 			             var $reportForm = $("<form>");
 			             $reportForm.attr("action","rboardInsertForm.ij").attr("method","post");
 			             
-			             var memberId = $("<input name='memberId' value='" + $(this).prev().val()+"'>");
+			             var memberId = $("<input name='memberId' value='" + $(this).prev().prev().val()+"'>");
+			             var memberName = $("<input name='memberName' value='" + $(this).prev().val()+"'>");
 			             $reportForm.append(memberId);
+			             $reportForm.append(memberName);
 			             console.log("아이디: " + $(this).prev().val());
 			             $(this).after($reportForm);
 			             

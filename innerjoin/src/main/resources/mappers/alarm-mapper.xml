@@ -13,14 +13,14 @@
 	
 	<insert id="insertAlarm" parameterType="map">
 		
-		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,'applyAlarm',#{memberId},0,#{host})
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{memberId},0,#{host})
 		
 	</insert>
 	
 	<select id="selectMyAlarm" parameterType="string" resultMap="alarmResultSet" >
 		SELECT *
 		FROM ALARM
-		WHERE RECEIVER_ID = #{receiveId} ORDER BY ALARM_ID ASC
+		WHERE RECEIVER_ID = #{receiveId} AND ALARM_CODE != 1 ORDER BY ALARM_ID ASC
 	</select>
 	
 	<insert id="insertAlbumAlarm" parameterType="map">
@@ -39,5 +39,20 @@
 	<insert id="insertNote" parameterType="map">
 		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{senderId},1,#{receiverId})
 	
+	</insert>
+	
+	<select id="selectMyNote" parameterType="string" resultMap="alarmResultSet">
+		SELECT *
+		FROM ALARM
+		WHERE RECEIVER_ID = #{receiveId} AND ALARM_CODE = 1 ORDER BY ALARM_ID ASC
+	</select>
+	
+	<insert id="replyNote" parameterType="map">
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{resposeMsg},#{senderId},1,#{receiverId})
+		
+	</insert>
+	
+	<insert id="insertReply" parameterType="map">
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{memberId},2,#{receiverId})
 	</insert>
 </mapper>

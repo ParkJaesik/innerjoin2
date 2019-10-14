@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/common/index.css">	
 <title>Group Menubar</title>
 <style>
-	#askMsg{
+	#askMsg,#reportMsg{
 	
 	    width: 100%;
     	resize: none;
@@ -76,6 +76,9 @@
 				<button type="button" class="btn btn-primary" id="group-btn-join" data-toggle="modal" data-target="#exampleModalCenter">INNER JOIN하기</button>
 				</c:if>
 				
+				<c:if test="${!empty loginUser and groupMemberCode ne 0}">
+					<button type="button" class="btn btn-primary" id="group-btn-report" data-toggle="modal" data-target="#exampleModalCenter3">모임 신고 하기</button>
+				</c:if>
 				<c:if test="${groupMemberCode eq 1 or groupMemberCode  eq 2}">
 				<button type="button" class="btn btn-primary" id="group-btn-withdraw">모임에서 나가기</button>
 				</c:if>
@@ -86,14 +89,13 @@
 		<div id="group-menu-container">
 			<button onclick="location.href='goGroupPage.ij?gNo=8';" type="button" class="btn btn-primary" id="group-btn-index">정보</button>
 
-			<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
-			
-			<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
-			<button onclick="location.href='gmlist.ij';" type="button" class="btn btn-primary" id="group-btn-member">회원</button>
-			<c:url var="goAlbum" value="albumListView.ij">
-				<c:param name="groupNo" value="1" />
-			</c:url>
-			<button type="button" class="btn btn-primary" id="group-btn-gallery" onclick="location.href='${goAlbum}'">사진</button>
+			<c:if test="${!empty loginUser and groupMemberCode eq 1 or groupMemberCode eq 0 or groupMemberCode  eq 2}">
+				<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>
+				
+				<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="group-btn-board">게시판</button>
+				<button onclick="location.href='gmlist.ij';" type="button" class="btn btn-primary" id="group-btn-member">회원</button>
+				<button type="button" class="btn btn-primary" id="group-btn-gallery" onclick="location.href='albumListView.ij'">사진</button>
+			</c:if>
 		</div>
 	</div>
 	
@@ -145,8 +147,54 @@
     </div>
   </div>
 </div>
+<!-- 신고 모달 -->
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">신고 하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       	<textarea rows="5" cols="20" id="reportMsg"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" id="reportBtn">신고하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 	$(function(){
+		
+		$("#exampleModalCenter3 .btn-primary").click(function(){
+			
+			var memberId = '${loginUser.memberId}';
+			var groupReptContent = $("#reportMsg").val();
+			var groupNo = "${group.gNo}";
+			
+			console.log("groupReptContent : "+groupReptContent);
+			console.log("memberId : "+memberId);
+			
+			$.ajax({
+				url : "insertGroupReport.ij",
+				type : "post",
+				data : {memberId : memberId,groupReptContent:groupReptContent,groupNo:groupNo},
+				success : function(result){
+					if(result=='success'){
+						alert("신고 성공");
+						$('#exampleModalCenter3').modal('hide');
+					}else{
+						alert("실패ㅜㅜ");
+					}
+				}
+				
+				
+			});
+		});
 		
 		$("#askMsgBtn").click(function(){
 			
@@ -154,16 +202,17 @@
 			var askMsg = $("#askMsg").val();
 			var senderId = "${loginUser.memberId}";
 			var gName = "${gName}";
+			var gNo = "${group.gNo}"
 			
 			$.ajax({
 				
 				url : "insertNote.ij",
 				type : "post",
 				data : {reciverName : reciverName,askMsg:askMsg,senderId:senderId,gName:gName},
-				success : function(result){
+				success : function(receiverId){
 					
 					alert("가입문의 성공");
-					
+					socket.send("applyMessage" +"," + gName + "," + receiverId + "," +senderId +"," +gNo);
 					$('#exampleModalCenter2').modal('hide');
 					
 				}
@@ -173,8 +222,11 @@
 			
 		});
 		
+		
+		
 	});
 	
+		
 	
 	
 	$("#applyGroupBtn").click(function(){
@@ -190,8 +242,8 @@
 				var loginUserId = "${loginUser.memberId}";
 				var gName = "${group.gName}"
 				var gNo = "${group.gNo}";
-				var host =  "${group.gHost}";
-				socket.send("apply"+"," + loginUserId + "," + gName + "," + host +"," + gNo);
+				var hostName =  "${group.gHost}";
+				socket.send("apply"+"," + loginUserId + "," + gName + "," + hostName +"," + gNo);
 				
 				
 			}else{
@@ -202,6 +254,8 @@
 		}
 	
 	});
+	
+		
 </script>
 </body>
 </html>

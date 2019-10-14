@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 
@@ -20,6 +22,9 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	Map<String, WebSocketSession> userSessions = new HashMap<String, WebSocketSession>();
 	Map<WebSocketSession,String> groupList = new HashMap<WebSocketSession,String>();
 	
+	
+	@Autowired
+	private GroupService gService;
 	
 	
 	@Override
@@ -40,12 +45,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		if(gName != null) {
 			groupList.put(session,gName);
 		}
-		
-		
-		
-		
-		
-		
+
 	}
 	
 
@@ -129,12 +129,11 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 					String loginUserId = strs[1];
 					String gName = strs[2];
 					String host = strs[3];
-					String gNo = strs[4];
 					
-						WebSocketSession boardWriterSession =  userSessions.get(host);
+					String hostId = gService.selectReceiverId(host);
+					String gNo = strs[4];
+						WebSocketSession boardWriterSession =  userSessions.get(hostId);
 						System.out.println(boardWriterSession);
-						//TextMessage tmpMsg = new TextMessage("reply,"+ replyWriter + " 님이 " +
-						//"<a href='bdetail.kh?bId=" + bId+ "'>" +bId +"</a>번 게시글에 댓글을 달았습니다.!");
 						if(boardWriterSession !=null) {
 							TextMessage tmpMsg = new TextMessage("apply,"+loginUserId + ","+ gName + "," + host + "," + gNo);
 							boardWriterSession.sendMessage(tmpMsg);
@@ -142,6 +141,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 					
 				}
 				else if(cmd.equals("albumReply")) {
+					
 					String gName = strs[1];
 					String rWriter = strs[2];
 					String albumNo =  strs[3];
@@ -158,6 +158,47 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		                   
 		                }
 					}
+				}else if(cmd.equals("applyMessage")) {
+					String gName = strs[1];
+					String receiverId = strs[2];
+					String senderId = strs[3];
+					String gNo = strs[4];
+					
+						WebSocketSession boardWriterSession =  userSessions.get(receiverId);
+						
+						if(boardWriterSession !=null) {
+							TextMessage tmpMsg = new TextMessage("applyMessage,"+gName + ","+ receiverId + "," + senderId + "," + gNo);
+							boardWriterSession.sendMessage(tmpMsg);
+						}
+						
+				}else if(cmd.equals("replyMsg")) {
+					String senderId = strs[1];
+					String receiverId = strs[2];
+					System.out.println("receiverId : " + receiverId);
+					String resposeMsg = strs[3];
+				
+					
+						WebSocketSession boardWriterSession =  userSessions.get(receiverId);
+						
+						if(boardWriterSession !=null) {
+							TextMessage tmpMsg = new TextMessage("replyMsg,"+senderId + ","+ receiverId + "," + resposeMsg);
+							boardWriterSession.sendMessage(tmpMsg);
+							
+						}
+				}else if(cmd.equals("boardReply")) {
+					String gName = strs[1];
+					String boardNo = strs[2];
+					String receiverId = strs[3];
+					String groupNo = strs[4];
+				
+					
+						WebSocketSession boardWriterSession =  userSessions.get(receiverId);
+						
+						if(boardWriterSession !=null) {
+							TextMessage tmpMsg = new TextMessage("boardReply,"+gName + ","+ boardNo + "," + receiverId + "," + groupNo);
+							boardWriterSession.sendMessage(tmpMsg);
+							
+						}
 				}
 			}
 		}

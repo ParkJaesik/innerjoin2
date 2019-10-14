@@ -276,10 +276,6 @@ public class MemberController {
 	}
 
 	// 쪽지함으로 이동
-	@RequestMapping("myNoteForm.ij")
-	public String myNoteForm() {
-		return "member/myNote";
-	}
 
 	// 알림함으로 이동
 	@RequestMapping("myNewsForm.ij")
