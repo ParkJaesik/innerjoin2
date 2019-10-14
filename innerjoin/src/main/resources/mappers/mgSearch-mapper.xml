@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mgSearchMapper">
+  <!-- 원본 :  <resultMap type="memberResultSet" id="Member"> -->
+  <!-- type , id 반대로 씀 -->
+  
+  <!-- 수정본 -->
+  <resultMap id="memberResultSet"  type="Member">
+  	<id property="memberId" column="MEMBER_ID"/>
+  	<result property="memberPwd" column="MEMBER_PWD"/>
+  	<result property="memberName" column="MEMBER_NAME"/>
+  	<result property="loginWay" column="LOGIN_WAY"/>
+  	<result property="memberModifyDate" column="MEMBER_MODIFY_DATE"/>
+  	<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+  	<result property="memberHostCount" column="MEMBER_HOST_COUNT"/>
+  	<result property="memberJoinCount" column="MEMBER_JOIN_COUNT"/>
+  	<result property="memberReptCount" column="MEMBER_REPT_COUNT"/>
+  	<result property="memberProPath" column="MEMBER_PRO_PATH"/> 
+  	<result property="memberStatusCode" column="MEMBER_STATUS_CODE"/>
+  	<result property="memberIntroduce" column="MEMBER_INTRODUCE"/>
+  	<result property="memberBirthday" column="MEMBER_BIRTHDAY"/>
+  	<result property="memberGender" column="MEMBER_GENDER"/>
+  	<result property="memberOpenStatus" column="MEMBER_OPEN_STATUS"/>
+  </resultMap>
+  
+  
+  <resultMap type="Group" id="groupResultSet">
+		<id property="gNo" column="GROUP_NO"/>
+		<result property="gHost" column="GROUP_HOST"/>
+		<result property="gOpenStatus" column="GROUP_OPEN_STATUS"/>
+		<result property="gName" column="GROUP_NAME"/>
+		<result property="gLimit" column="GROUP_LIMIT"/>
+		<result property="gInfo" column="GROUP_INFO"/>
+		<result property="gMemCount" column="GROUP_MEM_COUNT"/>
+		<result property="gEnrollDate" column="GROUP_ENROLL_DATE"/>
+		<result property="localCode" column="LOCAL_CODE"/>
+		<result property="gStatus" column="GROUP_STATUS"/>
+		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
+		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
+		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
+		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+	</resultMap>
+	
+	<!-- 공개인 유저 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
+		WHERE MEMBER_STATUS_CODE != 3 
+		AND MEMBER_OPEN_STATUS ='Y'
+	</select>
+	
+	<!-- 페이징처리 게시물 조회 -->
+	<select id="selectList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
+		WHERE MEMBER_STATUS_CODE != 3 
+		AND MEMBER_OPEN_STATUS ='Y'
+	</select>
+  
+  
+  
+  
+	
+</mapper>
