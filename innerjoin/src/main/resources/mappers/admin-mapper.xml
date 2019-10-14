@@ -41,6 +41,15 @@
 		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
 	</resultMap>
 	
+  	<resultMap type="GroupReport" id="groupReptResultSet">
+		<id property="groupReptNo" column="GROUP_REPT_NO"/>
+		<result property="groupReptContent" column="GROUP_REPT_CONTENT"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="groupReptStatus" column="GROUP_REPT_STATUS"/>
+		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
+	</resultMap>
+	
 	
 	<select id="memListCount" resultType="_int">
 		SELECT COUNT(*) 
@@ -71,5 +80,31 @@
   	</select>
   	
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  	<select id="getGroupReptListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM GROUP_REPORT
+		ORDER BY GROUP_REPT_DATE DESC
+	</select>
+  	
+  	
   
 </mapper>
