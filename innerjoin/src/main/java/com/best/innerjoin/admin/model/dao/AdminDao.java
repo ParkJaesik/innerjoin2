@@ -135,6 +135,25 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectGroupDetail", gNo);
 	}
 
+	/** 그룹 상태 업데이트
+	 * @param gNo
+	 * @param gStatus
+	 * @return
+	 */
+	public int updateGroupStatus(Group group) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminMapper.updateGroupStatus", group);
+	}
+ 
+	/** 신고 상태 처리 해주기
+	 * @param groupReptNo
+	 * @return
+	 */
+	public int updateReportStatus(Integer groupReptNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminMapper.updateReportStatus", groupReptNo);
+	}
+
 
 
 

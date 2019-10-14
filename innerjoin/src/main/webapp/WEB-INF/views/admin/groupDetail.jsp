@@ -85,8 +85,8 @@
 									<td class='basicInfoLabel'>그룹상태</td>
 									<td class='basicInfoContent'>
 										<c:if test="${group.gStatus eq 0}">일반</c:if>
-										<c:if test="${group.gStatus eq 1}">폐쇄</c:if>
-										<c:if test="${group.gStatus eq 2}">경고</c:if>
+										<c:if test="${group.gStatus eq 1}">경고</c:if>
+										<c:if test="${group.gStatus eq 2}">폐쇄</c:if>
 									</td>
 								</tr>
 							</table>
@@ -97,70 +97,138 @@
 							<div class="tabbable" id="tabs-267588">
 								<ul class="nav nav-tabs">
 									<li class="nav-item">
-										<a class="nav-link active show" href="#tab1" data-toggle="tab">Section 1</a>
+										<a class="nav-link active show" href="#tab1" data-toggle="tab">${group.gName }회원 보기</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#tab2" data-toggle="tab">Section 2</a>
+										<a class="nav-link" href="#tab2" data-toggle="tab">모임 관리하기</a>
 									</li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="tab1">
-										<p>
-											I'm in Section 1.
-										</p>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>회원이름</th>
+													<th>가입일</th>
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:if test="${!empty mList}">
+													<c:forEach var="m" items="${ mList }" varStatus="status">
+														<tr>
+															<td align="center">${ status.count }</td>
+
+															<td align="left"><c:url var="memDetail"
+																	value="memDetail.ij">
+																	<c:param name="memberId" value="${ m.memberId }" />
+																</c:url><a href="${memDetail}">${ m.memberId }</a></td>
+															<td align="center">${ m.levelCode }<c:if
+																	test="${m.levelCode eq 0}">개설자</c:if> <c:if
+																	test="${m.levelCode eq 1}">매니저</c:if> <c:if
+																	test="${m.levelCode eq 2}">일반</c:if>
+															</td>
+														</tr>
+													</c:forEach>
+
+												</c:if>
+											</tbody>
+										</table>
 									</div>
 									<div class="tab-pane" id="tab2">
-										<p>
-											Howdy, I'm in Section 2.
-										</p>
+										<button id="warning" class="btn btn-primary">경고주기</button>
+										<button id="close" class="btn btn-primary">폐쇄하기</button>
+										<button id="recover" class="btn btn-primary">회복하기</button>
 									</div>
 								</div>
 							</div>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>
-											#
-										</th>
-										<th>
-											회원이름
-										</th>
-										<th>
-											가입일
-										</th>
-										<th>
-											Status
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:if test="${!empty mList}">
-									<c:forEach var="m" items="${ mList }" varStatus="status">
-										<tr>
-											<td align="center">${ status.count }</td>
-
-											<td align="left">
-												<c:url var="memDetail" value="memDetail.ij">
-													<c:param name="memberId" value="${ m.memberId }"/>
-												</c:url><a href="${memDetail}">${ m.memberId }</a>
-											</td>
-											<td align="center">${ m.levelCode }
-												<c:if test="${m.levelCode eq 0}">개설자</c:if>
-												<c:if test="${m.levelCode eq 1}">매니저</c:if>
-												<c:if test="${m.levelCode eq 2}">일반</c:if>
-											</td>
-										</tr>
-									</c:forEach>
-
-									</c:if>
-								</tbody>
-							</table>
+							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<script>
+	var gStatus;
+	var gNo = ${group.gNo};
+	var groupReptNo = '${groupReptNo}';
+		$("#warning").click(function(){
+			if(confirm("경고를 주시겠습니까?")){
+				gStatus = 1;
+				$.ajax({
+    				url: "updateGroupStatus.ij",
+    				data : {gNo : gNo,gStatus:gStatus,groupReptNo:groupReptNo},
+    				type : "post",
+    				success : function(data){
+    					if(data == 1){
+    						
+    						alert("경고를 줬다!");
+    						location.href="groupDetail.ij?gNo="+gNo;
+    					} else if(data == 2){
+    						alert("신고상태처리완료");
+    						location.href="groupReport.ij";
+    					}else{
+    						alert("실패ㅠ");
+    					}
+    				},
+    				error : function(e){
+    					console.log("Ajax 통신 실패");
+    				}
+    			}); 
+			}
+		});
+		$("#close").click(function(){
+			if(confirm("폐쇄하시겠습니까?")){
+				gStatus = 2;
+				$.ajax({
+    				url: "updateGroupStatus.ij",
+    				data : {gNo : gNo,gStatus:gStatus,groupReptNo:groupReptNo},
+    				type : "post",
+    				success : function(data){
+						if(data == 1){
+    						
+    						alert("폐쇄했다!");
+    						location.href="groupDetail.ij?gNo="+gNo;
+    					} else if(data == 2){
+    						alert("신고상태처리완료");
+    						location.href="groupReport.ij";
+    					}else{
+    						alert("실패ㅠ");
+    					}
+    				},
+    				error : function(e){
+    					console.log("Ajax 통신 실패");
+    				}
+    			}); 
+			}
+		});
+		$("#recover").click(function(){
+			if(confirm("회복하시겠습니까?")){
+				gStatus = 0;
+				$.ajax({
+    				url: "updateGroupStatus.ij",
+    				data : {gNo : gNo,gStatus:gStatus,groupReptNo:groupReptNo},
+    				type : "post",
+    				success : function(data){
+						if(data == 1){
+    						
+    						alert("회복시켜줬다!");
+    						location.href="groupDetail.ij?gNo="+gNo;
+    					} else if(data == 2){
+    						alert("신고상태처리완료");
+    						location.href="groupReport.ij";
+    					}else{
+    						alert("실패ㅠ");
+    					}
+    				},
+    				error : function(e){
+    					console.log("Ajax 통신 실패");
+    				}
+    			}); 
+			}
+		});
+	</script>
 </body>
 </html>

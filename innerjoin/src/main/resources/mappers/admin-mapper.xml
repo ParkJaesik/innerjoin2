@@ -159,4 +159,15 @@
   		WHERE GROUP_NO = #{gNo}
   	</select>
   
+  	<update id="updateGroupStatus" parameterType="Group">
+  		UPDATE "GROUP"
+  		SET GROUP_STATUS = #{gStatus}
+  		WHERE GROUP_NO = #{gNo}
+  	</update>
+
+  	<update id="updateReportStatus" parameterType="Integer">
+  		UPDATE GROUP_REPORT
+  		SET GROUP_REPT_STATUS = '처리'
+  		WHERE GROUP_REPT_NO = #{groupReptNo}
+  	</update>
 </mapper>

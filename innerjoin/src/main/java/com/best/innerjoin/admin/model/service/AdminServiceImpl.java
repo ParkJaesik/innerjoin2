@@ -116,4 +116,17 @@ public class AdminServiceImpl implements AdminService {
 		return group;
 	}
 
+	@Override
+	public int updateGroupStatus(Integer groupReptNo, Group group) {
+		
+		
+		int result = adDao.updateGroupStatus(group);
+		
+		if(groupReptNo != null) {
+			result += adDao.updateReportStatus(groupReptNo);
+		}
+		
+		return result;
+	}
+
 }

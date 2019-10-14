@@ -69,5 +69,12 @@ public interface AdminService {
 	 */
 	Group selectGroupDetail(int gNo);
 
+	/** 그룹 상태 바꿔 주기
+	 * @param gNo
+	 * @param gStatus 
+	 * @return
+	 */
+	int updateGroupStatus(Integer groupReptNo,Group group);
+
 
 }
