@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -38,10 +39,21 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectMemDetail", memberId);
 	}
 
-
+	/** 회원이 가입, 개설한 모임 리스트 조회 DAO
+	 * @param memberId
+	 * @return
+	 */
+	public ArrayList<GroupMember> selectMemGroupList(String memberId) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectMemGroupList", memberId);
+	}
 	
-	
-	
+	/** 회원이 가입한 그룹 상세 정보 리스트
+	 * @param memberId
+	 * @return gList
+	 */
+	public ArrayList<Group> selectJoinGroupList(String memberId) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectJoinGroupList", memberId);
+	}
 	
 	
 	
@@ -122,5 +134,9 @@ public class AdminDao {
 	public Group selectGroupDetail(int gNo) {
 		return sqlSession.selectOne("adminMapper.selectGroupDetail", gNo);
 	}
+
+
+
+
 
 }

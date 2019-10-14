@@ -1,6 +1,8 @@
 package com.best.innerjoin.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
@@ -18,8 +20,12 @@ public interface AdminService {
 	 * @return
 	 */
 	Member selectMemDetail(String memberId);
-
 	
+	/** 멤버가 가입, 개설한 모임 리스트 가져오기
+	 * @param memberId
+	 * @return
+	 */
+	Map<String, List> memGroupInfo(String memberId);
 	
 	
 	
@@ -62,5 +68,6 @@ public interface AdminService {
 	 * @return
 	 */
 	Group selectGroupDetail(int gNo);
+
 
 }

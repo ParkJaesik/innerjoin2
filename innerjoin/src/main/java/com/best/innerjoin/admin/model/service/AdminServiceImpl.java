@@ -1,6 +1,9 @@
 package com.best.innerjoin.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import com.best.innerjoin.admin.model.dao.AdminDao;
 import com.best.innerjoin.admin.model.vo.Pagination;
 import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -26,7 +30,7 @@ public class AdminServiceImpl implements AdminService {
 		// 게시물 목록 조회(페이징 처리 적용)
 		// 1) 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-
+		// 2) 로우 바운드 적용한 멤버리스트 리턴
 		return adDao.selectMemList(pi);
 	}
 
@@ -42,9 +46,19 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return memInfo;
 	}
-
 	
-	
+	@Override
+	public Map<String, List> memGroupInfo(String memberId) {
+		ArrayList<GroupMember> mgList = adDao.selectMemGroupList(memberId);
+		System.out.println("mgList: " + mgList);
+		ArrayList<Group> gInfo = adDao.selectJoinGroupList(memberId);
+		
+		Map<String, List> mgInfo = new HashMap<>();
+		mgInfo.put("mgList", mgList);
+		mgInfo.put("gInfo", gInfo);
+		
+		return mgInfo;
+	}
 	
 	
 	
@@ -101,4 +115,5 @@ public class AdminServiceImpl implements AdminService {
 		Group group = adDao.selectGroupDetail(gNo);
 		return group;
 	}
+
 }
