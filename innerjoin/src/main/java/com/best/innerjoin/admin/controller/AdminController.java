@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.admin.model.service.AdminService;
 import com.best.innerjoin.admin.model.vo.Pagination;
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -56,8 +57,13 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("manageGroup.ij")
-	public String manageGroupView() {
-		return "admin/manageGroup";
+	public ModelAndView manageGroupView(ModelAndView mv, Integer page) {
+		int currentPage = (page == null) ? 1 : page;
+		
+		//그룹 신고 리스트 가져오기
+		ArrayList<Group> gList = adService.selectGroupList(currentPage);
+		mv.addObject("gList", gList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageGroup");
+		return mv;
 	}
 	
 	/** 회원신고관리페이지 이동
