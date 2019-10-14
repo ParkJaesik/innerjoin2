@@ -125,4 +125,10 @@
 		WHERE ALBUM_NO = #{albumNo}
 	</update>
 	
+	
+	<select id="selectPhotoForDelete" parameterType="_int" resultMap="photoResultSet">
+		SELECT *
+		FROM ALBUM_PHOTO
+		WHERE PHOTO_NO = #{photoNo}
+	</select>
 </mapper>

@@ -355,11 +355,11 @@ public class AlbumController {
 	// 사진 삭제
 	@ResponseBody
 	@RequestMapping("deletePhoto.ij")
-	public String deletePhoto(AlbumPhoto aPhoto) {
+	public String deletePhoto(AlbumPhoto aPhoto, HttpServletRequest request) {
 
-		int result = aService.deletePhoto(aPhoto);
+		int result = aService.deletePhoto(aPhoto, request);
 
-		if (result > 0) {
+		if (result > 1) {
 			/* aService.updateRcount(reply.getRefBid()); */
 			return "success";
 		} else {
