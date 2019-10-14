@@ -74,7 +74,7 @@ public class ReportDao {
 	}
 
 
-	/** 회원 신고 거절
+	/** 회원 신고 처리
 	 * @param rNo
 	 * @return
 	 */
@@ -88,7 +88,7 @@ public class ReportDao {
 	 * @return
 	 */
 	public int updateReportCount(GroupMemberReport report) {
-		deleteReport(report.getrNo());
+		//deleteReport(report.getrNo());
 		
 		System.out.println("dao_report : " + report);
 		return sqlSession.update("reportMapper.updateReportCount", report);
@@ -99,21 +99,29 @@ public class ReportDao {
 	 * @param responGNo
 	 * @return
 	 */
-	public ArrayList<GroupMember> selectGroupMember(int responGNo,PageInfo pi) {
+	public ArrayList<GroupMember> selectGroupMember(int responGNo, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		
 		return (ArrayList)sqlSession.selectList("reportMapper.selectGroupMember", responGNo , rowBounds);
 	}
+	
+	
+
 
 
 	/** 신고 받은 그룹회원 수
 	 * @return
 	 */
 	public int getGroupMemberListCount(int responGNo) {
-		return sqlSession.selectOne("reportMapper.selectReptMemberCount");
+		return sqlSession.selectOne("reportMapper.selectReptMemberCount", responGNo);
 	}
+	
+	
+	
+
+
 
 
 	/** 그룹 신고 DAO

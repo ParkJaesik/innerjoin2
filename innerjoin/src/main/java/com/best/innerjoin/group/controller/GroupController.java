@@ -58,7 +58,8 @@ public class GroupController {
 		}
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		
+		GroupMember gmember = (GroupMember)request.getSession().getAttribute("memberId");
+				
 		int result = gService.insertGroup(group);
 
 		

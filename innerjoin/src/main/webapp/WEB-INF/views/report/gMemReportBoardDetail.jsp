@@ -36,7 +36,7 @@
 					<label>신고받는 회원</label>
 				</div>
 				<div class="div3-2">
-					<input type="text" name="responId" value="${report.responId } " readonly="readonly"> 
+					<input type="text" name="responId" value="${report.responId }" readonly="readonly"> 
 					
 			</div>
 			<div class="div3">

@@ -79,6 +79,7 @@ public class ReportServiceImpl implements ReportService{
 		return rDao.updateReportCount(report);
 	}
 
+	
 	// 신고 받은 회원 목록 
 	@Override
 	public ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage) {
@@ -89,6 +90,16 @@ public class ReportServiceImpl implements ReportService{
 		
 		return rDao.selectGroupMember(responGNo, pi);
 	}
+
+
+	
+
+
+	
+	
+
+	
+	
 
 	@Override
 	public int insertGroupReport(GroupReport gReport) {

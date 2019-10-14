@@ -56,11 +56,16 @@ public interface ReportService {
 	 */
 	public abstract ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage);
 
+
+
+	
+
 	/** 그룹 신고 insert Service
 	 * @param gReport
 	 * @return
 	 */
 	public abstract int insertGroupReport(GroupReport gReport);
+
 
 //	/** 신고당한 회원 리스트 
 //	 * @param currentPage
