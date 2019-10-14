@@ -41,12 +41,13 @@ public class GroupDao {
 		return sqlSession.insert("groupMapper.applyInsertGroup", codeMap);
 	}
 
-	public int insertAlarm(String memberId, String host) {
+	public int insertAlarm(String memberId, String host, String msg) {
 		Map<String,String> alarmMap = new HashMap<>();
 		alarmMap.put("memberId", memberId);
 		alarmMap.put("host", host);
-		System.out.println(alarmMap.get("memberId"));
-		System.out.println(alarmMap.get("host"));
+		alarmMap.put("msg", msg);
+		
+		
 		return sqlSession.insert("alarmMapper.insertAlarm", alarmMap);
 
 	}

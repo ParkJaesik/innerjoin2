@@ -22,5 +22,7 @@ public interface AlarmService {
 
 	ArrayList<Alarm> selectMyNote(String receiverId);
 
+	int replyNote(Map<String, String> alarmMap);
+
 
 }

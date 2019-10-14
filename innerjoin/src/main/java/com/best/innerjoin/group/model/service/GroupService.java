@@ -22,7 +22,7 @@ public interface GroupService {
 
 	public abstract int applyInsertGroup(String memberId, int gNo);
 
-	public abstract int insertAlarm(String memberId, String host);
+	public abstract int insertAlarm(String memberId, String host, String msg);
 
 	//  회원 등급 조정
 	public abstract int updateLevel(HttpServletRequest request, GroupMember gMember);

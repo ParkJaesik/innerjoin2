@@ -63,8 +63,8 @@ public class GroupServiceImpl implements GroupService{
 
 	
 	@Override
-	public int insertAlarm(String memberId, String host) {
-		return gDao.insertAlarm(memberId,host);
+	public int insertAlarm(String memberId, String host,String msg) {
+		return gDao.insertAlarm(memberId,host,msg);
 	}
 
 	// 모임 회원 등급 조정

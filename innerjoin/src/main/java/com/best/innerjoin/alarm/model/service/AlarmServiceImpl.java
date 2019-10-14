@@ -70,6 +70,11 @@ public class AlarmServiceImpl implements AlarmService{
 		return aDao.selectMyNote(receiverId);
 	}
 
+	@Override
+	public int replyNote(Map<String, String> alarmMap) {
+		return aDao.replyNote(alarmMap);
+	}
+
 
 	
 }

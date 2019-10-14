@@ -191,8 +191,8 @@
 				var loginUserId = "${loginUser.memberId}";
 				var gName = "${group.gName}"
 				var gNo = "${group.gNo}";
-				var host =  "${group.gHost}";
-				socket.send("apply"+"," + loginUserId + "," + gName + "," + host +"," + gNo);
+				var hostName =  "${group.gHost}";
+				socket.send("apply"+"," + loginUserId + "," + gName + "," + hostName +"," + gNo);
 				
 				
 			}else{
