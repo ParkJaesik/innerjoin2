@@ -159,8 +159,9 @@ div {
 		float: right;
 	 }
    
-   .checkBtn {
+   .checkBtn:hover {
    	max-width: 1.2em;
+   	cursor: pointer;
    }
    
 	.eventMemberLabel {

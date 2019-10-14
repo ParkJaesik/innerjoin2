@@ -141,6 +141,15 @@ public class AlbumDao {
 		return (ArrayList)sqlSession.selectList("groupMapper.getGroupList",gNo);
 	}
 
+	/** 삭제할 사진 정보 가져오기
+	 * @param photoNo
+	 * @return
+	 */
+	public AlbumPhoto selectPhotoForDelete(int photoNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("albumMapper.selectPhotoForDelete", photoNo);
+	}
+
 
 
 }

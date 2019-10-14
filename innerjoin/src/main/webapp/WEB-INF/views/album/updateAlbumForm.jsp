@@ -171,9 +171,10 @@
             				success : function(data){
             					if(data == 'success'){
             						
-            						// 댓글 작성 부분 초기화
             						alert("사진 삭제 성공!");
                         			$(".previewBox[value=" + imgNum + "]").remove();
+            					} else{
+            						alert("사진 삭제 실패ㅜㅜ");
             					}
             				},
             				error : function(e){
