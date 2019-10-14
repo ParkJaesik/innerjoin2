@@ -51,4 +51,8 @@
 		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{resposeMsg},#{senderId},1,#{receiverId})
 		
 	</insert>
+	
+	<insert id="insertReply" parameterType="map">
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{memberId},2,#{receiverId})
+	</insert>
 </mapper>

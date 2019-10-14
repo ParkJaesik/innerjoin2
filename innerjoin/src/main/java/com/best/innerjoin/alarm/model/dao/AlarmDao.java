@@ -64,4 +64,8 @@ public class AlarmDao {
 		return sqlSession.insert("alarmMapper.replyNote", alarmMap);
 	}
 
+	public int insertReply(Map<String, String> tmpMap) {
+		return sqlSession.insert("alarmMapper.insertReply", tmpMap);
+	}
+
 }

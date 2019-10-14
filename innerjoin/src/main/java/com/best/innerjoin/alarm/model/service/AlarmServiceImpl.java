@@ -75,6 +75,12 @@ public class AlarmServiceImpl implements AlarmService{
 		return aDao.replyNote(alarmMap);
 	}
 
+	@Override
+	public int insertReply(Map<String, String> tmpMap) {
+		return aDao.insertReply(tmpMap);
+		
+	}
+
 
 	
 }

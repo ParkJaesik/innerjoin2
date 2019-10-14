@@ -26,6 +26,7 @@
 		<typeAlias type="com.best.innerjoin.report.model.vo.Search" alias="Search"/>
 		<typeAlias type="com.best.innerjoin.alarm.model.vo.Alarm" alias="Alarm"/>
 		<typeAlias type="com.best.innerjoin.report.model.vo.GroupReport" alias="GroupReport"/>
+
 		
 
 	</typeAliases>
@@ -39,6 +40,9 @@
 		<mapper resource="mappers/report-mapper.xml"/>
 		<mapper resource="mappers/album-mapper.xml"/>
 		<mapper resource="mappers/alarm-mapper.xml"/>
+
+		<mapper resource="mappers/mgSearch-mapper.xml"/>
+		
 		<mapper resource="mappers/admin-mapper.xml"/>
  	</mappers>
  	
