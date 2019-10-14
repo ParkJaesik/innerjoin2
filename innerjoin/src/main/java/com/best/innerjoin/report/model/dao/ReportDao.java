@@ -88,7 +88,7 @@ public class ReportDao {
 	 * @return
 	 */
 	public int updateReportCount(GroupMemberReport report) {
-		//deleteReport(report.getrNo());
+		deleteReport(report.getrNo());
 		
 		System.out.println("dao_report : " + report);
 		return sqlSession.update("reportMapper.updateReportCount", report);
@@ -120,19 +120,23 @@ public class ReportDao {
 	
 	
 	
-
-
-
-
 	/** 그룹 신고 DAO
 	 * @param gReport
 	 * @return
 	 */
 	public int insertGroupReport(GroupReport gReport) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("reportMapper.insertGroupReport", gReport);
 	}
 
+	
+	/** 신고된 회원 강퇴하기
+	 * @param memberId
+	 * @return
+	 */
+	public int deleteReptGroupMem(String memberId) {
+		return sqlSession.update("reportMapper.deleteReptGroupMem", memberId);
+	}
+	
 
 	/** 신고받은 그룹 신고카운트 증가
 	 * @param gReport
@@ -142,6 +146,8 @@ public class ReportDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("reportMapper.updateGroupReptCount", gReport);
 	}
+
+
 
 
 	

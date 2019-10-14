@@ -19,6 +19,10 @@
 	width: 900px;
 	height: 100%;
 	}
+	
+	#outBtn{
+	display: none;
+	}
 
 
 </style>
@@ -29,28 +33,38 @@
         <div class="content-wrap">
             <div class="div1">
                 <h3>신고</h3>
+                
+            </div>
+            <div class="div2">
+            	<c:url var="gorlist" value="rblist.ij"></c:url>
+                <label><a href="${gorlist}">신고 게시글 보기</a></label>
             </div>
             
             <div class="div3">
+            <form action="gmDrop.ij" name="dropForm" method="post">
                 <table>
                     <tr>
                         <th align="center" id="respond-th">아이디</th>
                         <th align="center" id="report-th-count">신고받은 횟수</th>
-                       <!--  <th align="center" id="report-th-status">처리 상태</th> -->
+                       	<!-- <th align="center" id="report-th-status">처리 상태</th>  -->
                         <th align="center" id="report-th-out">강퇴하기</th>
                     </tr>
                     
                     <c:forEach var="gmr" items="${gmList }">
 	                    <tr>
-	                        <td align="center" id="respond-td">${gmr.memebrId}</td>
+	                        <td align="center" id="respond-td">${gmr.memberId}</td>
 	                        <td align="center" id="report-td-count">${gmr.groupMemReptCount}</td>
-	                        <%-- <td align="center" id="report-td-status"><input type="hidden" name="rStatus" value="${rStatus }">${rStatus }</td> --%>
-	                       
-	                        <td align="center" id="report-td-out"><button id="delete">강퇴하기</button></td>
-	                        
+	                        <%-- <td align="center" id="report-td-status"><input type="hidden" name="rStatus" value="${rStatus }">${rStatus }</td>  --%>
+	                       	
+		                    <td align="center" id="report-td-out">
+		                       	<c:if test="${gmr.groupMemReptCount >= 5 }">
+				                    <button id="outBtn" name="outBtn" style="display: block;">강퇴하기</button>
+		                       	</c:if>
+			                </td>
 	                    </tr>
                     </c:forEach>
                 </table>
+            </form>
             </div>
             <!-- 게시글 검색 -->
             <div class="div4">      
@@ -59,12 +73,11 @@
                         <option value="all" <c:if test="${search.searchReptSel == 'all'}">selected</c:if>>전체</option>
                         <option value="rId" <c:if test="${search.searchReptSel == 'reportId'}">selected</c:if>>아이디</option>
                         <option value="rCount" <c:if test="${search.searchReptSel == 'rCount'}">selected</c:if>>신고받은횟수</option>
-                        <option value="rStatus" <c:if test="${search.searchReptSel == 'rStatus'}">selected</c:if>>처리상태</option>
+                        <%-- <option value="rStatus" <c:if test="${search.searchReptSel == 'rStatus'}">selected</c:if>>처리상태</option> --%>
                     </select>
                     <input type="text" name="searchReptText" id="search">
                     <button id="searchBtn">검색</button>
-                
-                
+                </form>
             </div>
             
             <!-- 페이징 처리 -->
@@ -108,6 +121,17 @@
         </div>
 
     </div>
+    
+    <script type="text/javascript">
+    	$("#outBtn").on("click", function () {
+			if(confirm("정말 강퇴하시겠습니까?")){
+				$("form").attr('action','gmDrop.ij');
+				$("form").submit();
+			}
+			
+		});
+    
+    </script>
 
 </body>
 </html>

@@ -86,7 +86,7 @@ public class ReportController {
 		int result = rService.insertReport(report);
 		
 		if(result > 0) {
-			return "redirect:rblist.ij";
+			return "group/groupMember";
 		}else {
 			model.addAttribute("msg", "신고글 작성 실패");
 			return "common/errorPage";
@@ -153,6 +153,28 @@ public class ReportController {
 		}
 		
 	}
+	
+	
+	// 강퇴하기
+	@RequestMapping("gmDrop.ij")
+	public String groupMemDelete(String memberId, GroupMemberReport report, Model model, HttpServletRequest request) {
+		
+		int result = rService.deleteReptGroupMem(memberId);
+		
+		String path = null;
+		if(result>0) {
+			model.addAttribute("report", report);
+			path = "report/gMemReportListView";
+		}else {
+			model.addAttribute("msg", "회원 강퇴 실패");
+			path = "common/errorPage";
+		}
+		
+		return path;
+		
+	}
+	
+	
 	
 
 	

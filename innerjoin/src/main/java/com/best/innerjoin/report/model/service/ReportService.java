@@ -58,6 +58,11 @@ public interface ReportService {
 
 
 
+	/** 신고된 회원 강퇴시키기
+	 * @param memberId
+	 * @return
+	 */
+	public abstract int deleteReptGroupMem(String memberId);
 	
 
 	/** 그룹 신고 insert Service
@@ -65,6 +70,7 @@ public interface ReportService {
 	 * @return
 	 */
 	public abstract int insertGroupReport(GroupReport gReport);
+
 
 
 //	/** 신고당한 회원 리스트 
