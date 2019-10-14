@@ -90,4 +90,12 @@ public class GroupDao {
 		
 	}
 
+	public ArrayList<Group> getHostGroup(String memberName) {
+		return (ArrayList)sqlSession.selectList("groupMapper.getHostGroup", memberName);
+	}
+
+	public int inviteGroupMember(Map<String, String> alarmMap) {
+		return sqlSession.insert("groupMapper.inviteGroupMember",alarmMap);
+	}
+
 }

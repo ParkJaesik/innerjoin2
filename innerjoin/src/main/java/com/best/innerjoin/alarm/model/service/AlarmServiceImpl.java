@@ -81,6 +81,12 @@ public class AlarmServiceImpl implements AlarmService{
 		
 	}
 
+	@Override
+	public int inviteGroup(Map<String, String> alarmMap) {
+		return aDao.inviteGroup(alarmMap);
+	}
+
+	
 
 	
 }

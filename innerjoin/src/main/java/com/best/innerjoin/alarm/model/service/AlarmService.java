@@ -26,5 +26,7 @@ public interface AlarmService {
 
 	int insertReply(Map<String, String> tmpMap);
 
+	int inviteGroup(Map<String, String> alarmMap);
+
 
 }

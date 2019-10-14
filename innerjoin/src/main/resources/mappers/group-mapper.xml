@@ -104,5 +104,22 @@
 	
 	</select>
 	
+	<!-- 모임장이 가지고 있는 모임리스트 -->
+	<select id="getHostGroup" parameterType="string" resultMap="groupResultSet">
+		
+		SELECT *
+		FROM "GROUP"
+		WHERE GROUP_HOST = #{memberName} AND GROUP_STATUS != 2
+		
+	</select>
+	
+	
+	<insert id="inviteGroupMember" parameterType="map">
+		
+		INSERT INTO GROUP_MEMBER
+		VALUES(#{receiverId},#{gNo},4,DEFAULT)
+	
+	</insert>
+	
 </mapper>
 

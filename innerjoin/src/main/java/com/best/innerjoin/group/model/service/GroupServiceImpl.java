@@ -115,5 +115,15 @@ public class GroupServiceImpl implements GroupService{
 	public String selectReceiverId(String reciverName) {
 		return gDao.selectReceiverId(reciverName);
 	}
+
+	@Override
+	public ArrayList<Group> getHostGroup(String memberName) {
+		return gDao.getHostGroup(memberName);
+	}
+
+	@Override
+	public int inviteGroupMember(Map<String, String> alarmMap) {
+		return gDao.inviteGroupMember(alarmMap);
+	}
 	
 }
