@@ -40,8 +40,10 @@
 		<mapper resource="mappers/report-mapper.xml"/>
 		<mapper resource="mappers/album-mapper.xml"/>
 		<mapper resource="mappers/alarm-mapper.xml"/>
+
 		<mapper resource="mappers/mgSearch-mapper.xml"/>
 		
+		<mapper resource="mappers/admin-mapper.xml"/>
  	</mappers>
  	
 </configuration>

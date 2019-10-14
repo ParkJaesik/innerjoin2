@@ -16,6 +16,8 @@ public class GroupMemberReport {
 	private Date rStatusDate;
 	private String rBoardStatus;
 	
+
+	
 	public GroupMemberReport() {
 		// TODO Auto-generated constructor stub
 	}
@@ -34,6 +36,7 @@ public class GroupMemberReport {
 		this.rDate = rDate;
 		this.rStatusDate = rStatusDate;
 		this.rBoardStatus = rBoardStatus;
+		
 	}
 
 	public int getrNo() {
@@ -124,6 +127,9 @@ public class GroupMemberReport {
 		this.rBoardStatus = rBoardStatus;
 	}
 
+	
+	
+	
 	@Override
 	public String toString() {
 		return "GroupMemberReport [rNo=" + rNo + ", rContent=" + rContent + ", rCategory=" + rCategory + ", reportId="
@@ -131,6 +137,7 @@ public class GroupMemberReport {
 				+ ", rStatus=" + rStatus + ", rDate=" + rDate + ", rStatusDate=" + rStatusDate + ", rBoardStatus="
 				+ rBoardStatus + "]";
 	}
+
 
 	
 

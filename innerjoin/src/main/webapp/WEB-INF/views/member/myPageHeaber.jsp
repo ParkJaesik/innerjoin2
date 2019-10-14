@@ -32,6 +32,7 @@
                             
                             <!-- form -->
                             
+
 							<div class="col-md-4" align="center">
 		                        <form action="profileUpdateForm.ij" method="post" >
 		                        	<input type="hidden" name="memberId" value="${loginUser.memberId }">
@@ -44,13 +45,17 @@
 	                    	        <button>프로필 수정</button>
 	                        	</form>
                         	</div>
+
                         <div class="col-md-4"></div>
 					</div>
                     <br>
                     <div class="row">
-                    	<div class="col-md-2"></div>
+                    <!-- 	<div class="col-md-2"></div>
                         <div class="col-md-8">캘린더</div>
-                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div> -->
+                        <div class="col-md-12">
+                        	<%@ include file="../event/memCalendar.jsp"%>
+                        </div>
                     </div>
                     <br>
 				</div>

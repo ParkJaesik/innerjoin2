@@ -99,6 +99,8 @@ public interface MemberService {
 	 */
 	public abstract int updateInfo(Member member);
 
+
+
 	
 	/** 파일명 검사
 	 * @param memberId

@@ -23,6 +23,7 @@ import com.best.innerjoin.event.model.vo.Event;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
 
 
@@ -34,6 +35,8 @@ public class GroupController {
 	private AlarmService aService;
 	@Autowired
 	private EventService eService;
+	@Autowired
+	private MemberService mService;
 	
 	
 	@RequestMapping("ginsertForm.ij")
@@ -190,14 +193,19 @@ public class GroupController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		int gNo  = ((Group)request.getSession().getAttribute("group")).getgNo();
 		String memberId = loginUser.getMemberId();
-		String host = ((Group)request.getSession().getAttribute("group")).getgHost();
+		String hostName = ((Group)request.getSession().getAttribute("group")).getgHost();
+		String hostId = gService.selectReceiverId(hostName);
+		String gName =  ((Group)request.getSession().getAttribute("group")).getgName();
+		String msg = memberId + "님이 " + "<a href='wgmlist.ij?gNo="+gNo + "'>" +  gName + " 모임에  가입신청을 했습니다."  +"</a>";
+		
+		
 		
 		int result = gService.applyInsertGroup(memberId,gNo);
 		int result2 = 0;
 		
 		if(result>0) {
 			
-			result2 = gService.insertAlarm(memberId,host);
+			result2 = gService.insertAlarm(memberId,hostId,msg);
 			
 			if(result2>0) {
 				return "redirect:goGroupPage.ij?gNo="+gNo;

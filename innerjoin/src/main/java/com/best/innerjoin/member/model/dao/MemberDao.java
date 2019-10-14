@@ -192,6 +192,7 @@ public class MemberDao {
 
 
 
+
 	public String getOriginFileName(String memberId) {
 		return sqlSession.selectOne("memberMapper.getOriginFileName",memberId);
 	}
@@ -221,7 +222,6 @@ public class MemberDao {
 	public Member getMember(Member member) {
 		return sqlSession.selectOne("memberMapper.getMember",member);
 	}
-
 
 
 

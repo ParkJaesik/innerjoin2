@@ -12,6 +12,16 @@
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<style type="text/css">
+	.content {
+	margin: auto;
+	width: 900px;
+	height: 100%;
+	}
+
+
+</style>
 </head>
 <body>
 <%@ include file="../group/groupMenubar.jsp" %>
@@ -20,20 +30,18 @@
             <div class="div1">
                 <h3>신고</h3>
             </div>
-            <div class="div2">
-                <label><a href="#">신고내역보기</a></label>
-            </div>
+            
             <div class="div3">
                 <table>
                     <tr>
-                    	<!-- <th>회원번호</th> -->
+                    	
                         <th>아이디</th>
                         <th>신고받은 횟수</th>
                         <th>처리 상태</th>
                         <th>강퇴하기</th>
                     </tr>
                     <tr>
-                        <!-- <td>1</td> -->
+                       
                         <td></td>
                         <td>2</td>
                         <td>처리</td>

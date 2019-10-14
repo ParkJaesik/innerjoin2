@@ -47,24 +47,26 @@
 			             <label>신고하는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <p>${loginUser.memberName }</p>
+			             <input type="hidden" name="reportId" value="${loginUser.memberId }">
+			             <input type="text" name="reporter" value="${loginUser.memberName }">
 			         </div>
 			         <div class="div3">
 			             <label>신고 받는 회원</label>
 			         </div>
 			         <div class="div4">
-			             <p>${memberId }</p>
+			          
+			             <input type="hidden" name="responId" value="${memberId }">
+			             <input type="text" name="respond" value="${memberName }">
 			         </div>
 			         <div class="div3">
 			             <label>신고 유형</label>
 			         </div>
 			         <div class="div5"></div>
-			             <input type="radio" name="rCategory" value="욕설 및 비방"> 욕설 및 비방 &nbsp;&nbsp;&nbsp;
-			             <input type="radio" name="rCategory" value="유해하거나 위험한 행동"> 유해하거나 위험한 행동 &nbsp;
-			             <input type="radio" name="rCategory" value="폭력적이거나 혐오 표현"> 폭력적이거나 혐오 표현 <br> 
-			             <input type="radio" name="rCategory" value="선정적인 표현"> 선정적인 표현 &nbsp;
-			             <input type="radio" name="rCategory" value="부적절한 홍보"> 부적절한 홍보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			             <input type="radio" name="rCategory" value="기타"> 기타 
+			             <input type="radio" name="rCategory" value="욕설 및 비방" <c:if test="${rCategory eq '욕설 및 비방'}">checked="checked"</c:if>> 욕설 및 비방 &nbsp;&nbsp;&nbsp;
+			             <input type="radio" name="rCategory" value="폭력적이거나 혐오 표현" <c:if test="${rCategory eq '폭력적이거나 혐오 표현'}">checked="checked"</c:if>> 폭력적이거나 혐오 표현 <br> 
+			             <input type="radio" name="rCategory" value="선정적인 표현" <c:if test="${rCategory eq '선정적인 표현'}">checked="checked"</c:if>> 선정적인 표현 &nbsp;
+			             <input type="radio" name="rCategory" value="부적절한 홍보" <c:if test="${rCategory eq '부적절한 홍보'}">checked="checked"</c:if>> 부적절한 홍보 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			             <input type="radio" name="rCategory" value="기타 " <c:if test="${rCategory eq '기타 '}">checked="checked"</c:if>> 기타 
 			         </div>
 			         <div class="div3">
 			             <label>신고 내용</label>
@@ -79,7 +81,7 @@
 			     </div>
 			     <div class="btn" align="center">
 			     	<button type="button">취소</button>
-			     	<button type="submit">등록</button>
+			     	<button type="submit" onclick="location.href='rblist.ij'">등록</button>
 			     </div>
 			</form>
 		</div>
