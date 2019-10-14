@@ -183,7 +183,21 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 						if(boardWriterSession !=null) {
 							TextMessage tmpMsg = new TextMessage("replyMsg,"+senderId + ","+ receiverId + "," + resposeMsg);
 							boardWriterSession.sendMessage(tmpMsg);
-							System.out.println("답장보내기 성공");
+							
+						}
+				}else if(cmd.equals("boardReply")) {
+					String gName = strs[1];
+					String boardNo = strs[2];
+					String receiverId = strs[3];
+					String groupNo = strs[4];
+				
+					
+						WebSocketSession boardWriterSession =  userSessions.get(receiverId);
+						
+						if(boardWriterSession !=null) {
+							TextMessage tmpMsg = new TextMessage("boardReply,"+gName + ","+ boardNo + "," + receiverId + "," + groupNo);
+							boardWriterSession.sendMessage(tmpMsg);
+							
 						}
 				}
 			}

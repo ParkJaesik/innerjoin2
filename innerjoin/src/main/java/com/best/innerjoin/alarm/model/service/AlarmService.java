@@ -24,5 +24,7 @@ public interface AlarmService {
 
 	int replyNote(Map<String, String> alarmMap);
 
+	int insertReply(Map<String, String> tmpMap);
+
 
 }
