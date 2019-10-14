@@ -3,6 +3,7 @@
 #group-index-container * {
 	font-family: 'Noto Sans KR', sans-serif;
 	/* color: rgb(50, 50, 50); */
+	border-radius:10px;
 }
 
 #group-index-container .btn {
@@ -54,6 +55,7 @@
 	width: 50%;
 	height: 400px;
 	background-color: rgb(230, 230, 230);
+	padding:20px !important;
 }
 
 #group-info-name {

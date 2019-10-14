@@ -62,7 +62,9 @@
 														<div class="col-md-3 eventClose">
 															<span class="eventLabel">
 																<!-- <img class="closeBtn detailView_127" alt="닫기" src="resources/images/close.png"> -->
+																<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 or groupMemberCode  eq 2}">
 																<img id="${e.eno }" class="checkBtn detailView_127" alt="참석" src="resources/images/check.jpg">
+																</c:if>
 															</span>
 														</div>
 														
@@ -92,18 +94,7 @@
 															
 															
 															
-															<div class="col-md-12">
-																<div class="row">
-																		<c:forEach var="m" items="${ member }">
-																		<div class="member">
-																			<c:if test="${e.eno eq m.eno}"></c:if>
-																			<img alt="프로필" src="resources/images/${m.memberProPath}">
-																			<span class="memberId">${m.memberName}</span>
-																		
-																		</div>
-																		</c:forEach>
-																</div>
-															</div>
+															
 													</div>
 												</div>
 											</div>
