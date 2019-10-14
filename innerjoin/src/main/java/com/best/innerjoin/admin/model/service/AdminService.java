@@ -25,7 +25,7 @@ public interface AdminService {
 	 * @param memberId
 	 * @return
 	 */
-	Map<String, List> memGroupInfo(String memberId);
+	Map<String, Map> memGroupInfo(String memberId);
 	
 	
 	

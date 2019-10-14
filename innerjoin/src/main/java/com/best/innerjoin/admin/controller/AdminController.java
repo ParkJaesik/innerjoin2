@@ -54,7 +54,7 @@ public class AdminController {
 	public ModelAndView memDetailView(Integer page, String memberId, ModelAndView mv) {
 		// 멤버 상세정보 조회
 		Member member = adService.selectMemDetail(memberId);
-		Map<String, List> mgInfo = adService.memGroupInfo(memberId);
+		Map<String, Map> mgInfo = adService.memGroupInfo(memberId);
 		mv.addObject("member", member).addObject("mgInfo", mgInfo).setViewName("admin/memberDetail");
 		
 		return mv;
