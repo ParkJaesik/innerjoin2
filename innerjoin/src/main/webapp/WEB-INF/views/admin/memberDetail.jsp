@@ -10,6 +10,9 @@
 <title>Insert title here</title>
 
 	<style>
+		*{
+			/* border: 1px solid red; */
+		}
 		.basicInfoTable td:not(.memProfile), .detailInfoTable td {
 			border: 1px solid lightgray;
 			font-size: 1em;
@@ -57,7 +60,7 @@
 		.tableLabel {
 			display: block;
 			font-wize: 0.8em;
-			font-weight: black;
+			font-weight: bold;
 			margin-bottom: 20px;
 		}
 		
@@ -87,6 +90,11 @@
 		
 		.introduce .detailInfoContent {
 			overflow: auto;
+		}
+		
+		.mdDiv {
+			margin: 20px;
+			border: 1px solid lightgray;
 		}
 	
 	</style>
@@ -198,126 +206,70 @@
 	                            </tr>
 	                        </table>
 		                </div>
+						
+						<div class="col-md-12 mdDiv"></div>
+						
+						<div class="col-md-12">
+							<span class="tableLabel"> >> &nbsp; 가입 모임 정보</span>
+							<div class="tabbable" id="memGroupTab">
+								<ul class="nav nav-tabs">
+									<li class="nav-item">
+										<a class="nav-link active show" href="#hostTap" data-toggle="tab">개설 모임</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#joinTab" data-toggle="tab">가입 모임</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="hostTap">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>
+														그룹네임
+													</th>
+													<th>
+														Product
+													</th>
+													<th>
+														Payment Taken
+													</th>
+													<th>
+														Status
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														TB - Monthly
+													</td>
+													<td>
+														01/04/2012
+													</td>
+													<td>
+														Default
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="tab-pane" id="joinTab">
+										<p>
+											Howdy, I'm in Section 2.
+										</p>
+									</div>
+								</div>
+							</div>
+							
+						</div>
 					</div>
 					
 				</div>
 				
-				<div class="row">
-					<div class="col-md-12">
-						<div class="tabbable" id="tabs-267588">
-							<ul class="nav nav-tabs">
-								<li class="nav-item">
-									<a class="nav-link active show" href="#tab1" data-toggle="tab">Section 1</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#tab2" data-toggle="tab">Section 2</a>
-								</li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane active" id="panel-595324">
-									<p>
-										I'm in Section 1.
-									</p>
-								</div>
-								<div class="tab-pane" id="tab2">
-									<p>
-										Howdy, I'm in Section 2.
-									</p>
-								</div>
-							</div>
-						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>
-										#
-									</th>
-									<th>
-										Product
-									</th>
-									<th>
-										Payment Taken
-									</th>
-									<th>
-										Status
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										1
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Default
-									</td>
-								</tr>
-								<tr class="table-active">
-									<td>
-										1
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Approved
-									</td>
-								</tr>
-								<tr class="table-success">
-									<td>
-										2
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										02/04/2012
-									</td>
-									<td>
-										Declined
-									</td>
-								</tr>
-								<tr class="table-warning">
-									<td>
-										3
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										03/04/2012
-									</td>
-									<td>
-										Pending
-									</td>
-								</tr>
-								<tr class="table-danger">
-									<td>
-										4
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										04/04/2012
-									</td>
-									<td>
-										Call in to confirm
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

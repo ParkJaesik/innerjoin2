@@ -54,6 +54,14 @@
 		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
 	</resultMap>
 	
+	<resultMap type="GroupMember" id="groupMemberResultSet">
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="levelCode" column="LEVEL_CODE"/>
+		<result property="groupMemReptCount" column="GROUP_MEM_REPT_COUNT"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+	</resultMap>
+	
 	
 	<select id="memListCount" resultType="_int">
 		SELECT COUNT(*) 
@@ -83,8 +91,21 @@
   		WHERE MEMBER_ID = #{memberId}
   	</select>
   	
+  	<select id="selectMemGroupList" parameterType="string" resultMap="groupMemberResultSet">
+  		SELECT GROUP_NO, LEVEL_CODE, GROUP_MEM_REPT_COUNT
+  		FROM GROUP_MEMBER
+  		WHERE MEMBER_ID = #{memberId}
+  	</select>
   
-  
+  	<select id="selectJoinGroupList" parameterType="string" resultMap="groupResultSet">
+  		SELECT GROUP_NO, GROUP_OPEN_STATUS, GROUP_NAME, DISTRICT_NAME, 
+  			GROUP_STATUS, GROUP_CATEGORY_NAME, GROUP_ENROLL_DATE
+  		FROM GROUP G
+  		JOIN LOCAL_DISTRICT_CATEGORY L ON(G.LOCAL_CODE = L.DISTRICT_CODE)
+  		JOIN CATEGORY USING(GROUP_CATEGORY_CODE)
+  		JOIN GROUP_MEMBER USING(GROUP_NO)
+  		WHERE MEMBER_ID = #{memberId}
+  	</select>
   
   
   

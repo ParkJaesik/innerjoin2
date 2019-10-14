@@ -1,6 +1,8 @@
 package com.best.innerjoin.admin.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,9 +48,10 @@ public class AdminController {
 	 */
 	@RequestMapping("memDetail.ij")
 	public ModelAndView memDetailView(Integer page, String memberId, ModelAndView mv) {
+		// 멤버 상세정보 조회
 		Member member = adService.selectMemDetail(memberId);
-		System.out.println(member);
-		mv.addObject("member", member).setViewName("admin/memberDetail");
+		Map<String, List> mgInfo = adService.memGroupInfo(memberId);
+		mv.addObject("member", member).addObject("mgInfo", mgInfo).setViewName("admin/memberDetail");
 		
 		return mv;
 	}
