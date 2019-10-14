@@ -277,8 +277,7 @@ public class AlbumController {
 			String senderId = ((Member)session.getAttribute("loginUser")).getMemberId();
 			String senderName = ((Member)session.getAttribute("loginUser")).getMemberName();
 			ArrayList<GroupMember> receiverList = aService.getGroupList(gNo);
-			String tmpMsg = 
-			senderName + "님이 " + "<a href='albumDetailView.ij?albumNo="+albumNo + "&gNo=" + gNo +"'>" + gName+"모임의" + albumTitle + " 앨범에  댓글을 달았습니다.."  +"</a>";
+			String tmpMsg = "<a href='albumDetailView.ij?albumNo="+albumNo + "&gNo=" + gNo +"'>" + senderName + "님이 " + gName+"모임의" + albumTitle + " 앨범에  댓글을 달았습니다.."  +"</a>";
 			int result2 = alarmService.insertAlbumReplyAlarm(senderId,receiverList,tmpMsg);
 			
 			return "success";

@@ -72,13 +72,7 @@
 
 	function showAlarm(){
 		
-		if($("#alarmTable").css("display")=="none"){
-			$("#alarmTable").css("display","block");
-		}else{
-			$("#alarmTable").css("display","none");
-			
-		}
-		
+	
 		
 	};
 
@@ -138,7 +132,12 @@
 			
 				var tmpMsg = dataArray[1] + "님이 가입 문의 쪽지에 대한 <a href='myNoteForm.ij'>답장 </a>을 를 보냈습니다.";
 	        	toastMessage(tmpMsg);
-    }
+	        }else if(dataArray[0]=="boardReply"){
+			
+				var tmpMsg = "<a href='bdetail.ij?boardNo=" + dataArray[2] + "&gNo=" + dataArray[4] + "'>"+ dataArray[1] + "모임 게시판에 게시하신 게시글에 댓글이 달렸습니다.</a>";
+	        	toastMessage(tmpMsg);
+	        }
+    };
     
     ws.onclose = function(event){
     	console.log("info : connection closed");
@@ -147,7 +146,9 @@
     	
     };
     
-    ws.onerror = function(event){console.log("Error :' connection closed");};
+    ws.onerror = function(event){
+    	console.log("Error :' connection closed");
+    };
     
     function toastMessage(tmpMsg){
     	$("#alarmTable").append(
@@ -167,8 +168,8 @@
     	) 
     	$("#alaram").append("<br>");
     	$('.toast').toast('show');
-    }
-	}
+    
+	};
 }
 	
 	

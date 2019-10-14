@@ -188,4 +188,9 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.replyInsert(reply);
 	}
 
+	@Override
+	public String getWriter(int boardNo) {
+		return bDao.getWriter(boardNo);
+	}
+
 }
