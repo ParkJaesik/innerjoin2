@@ -101,7 +101,8 @@
 									<div class="row invite">
 								</c:when>
 							</c:choose>
-							<div class="col-4" style="width: 100%;">${ invite.filePath }</div>
+							<div class="col-4" style="width: 100%;">
+							<img src="${contextPath}/resources/images/member/${ invite.filePath }"> </div>
 							<c:if test="${ !empty loginUser }">
 								<div class="col-8">
 									<c:url var="goGorup" value="goGroupPage.ij">
@@ -143,7 +144,7 @@
 								<div class="row invite">
 							</c:when>
 						</c:choose>
-						<div class="col-4" style="width: 100%;">${ invite.filePath }</div>
+						<img src="${contextPath}/resources/images/member/${ wait.filePath }">
 						<c:if test="${ !empty loginUser }">
 							<div class="col-8">
 								<c:url var="goGorup" value="goGroupPage.ij">
