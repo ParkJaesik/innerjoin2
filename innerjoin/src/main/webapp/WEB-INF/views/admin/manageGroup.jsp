@@ -65,11 +65,11 @@
 							<td align="center">${ g.gNo }</td>
 							
 							<td align="left">
-								<c:url var="memDetail" value="memDetail.ij">
-									<c:param name="memberId" value="${ m.memberId }"/>
+								<c:url var="groupDetail" value="groupDetail.ij">
+									<c:param name="gNo" value="${ g.gNo }"/>
 									<c:param name="page" value="${ pi.currentPage }"/>
 								</c:url>
-								<a href="${ memDetail }">${ g.gName }</a>
+								<a href="${ groupDetail }">${ g.gName }</a>
 							</td>
 							
 							<td align="center">${ g.gHost }</td>

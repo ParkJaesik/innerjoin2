@@ -60,7 +60,7 @@ public class AdminController {
 	public ModelAndView manageGroupView(ModelAndView mv, Integer page) {
 		int currentPage = (page == null) ? 1 : page;
 		
-		//그룹 신고 리스트 가져오기
+		//그룹 리스트 가져오기
 		ArrayList<Group> gList = adService.selectGroupList(currentPage);
 		mv.addObject("gList", gList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageGroup");
 		return mv;
@@ -107,5 +107,33 @@ public class AdminController {
 	//============================================================================
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	
+	
+	/** 그룹 상세페이지로 이동
+	 * @param page
+	 * @param memberId
+	 * @param mv
+	 * @return mv
+	 */
+	@RequestMapping("groupDetail.ij")
+	public ModelAndView groupDetailView(Integer page, int gNo, ModelAndView mv) {
+		Group group = adService.selectGroupDetail(gNo);
+		System.out.println(group);
+		mv.addObject("group", group).setViewName("admin/groupDetail");
+		
+		return mv;
+	}
+	
 }
