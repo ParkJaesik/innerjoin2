@@ -23,6 +23,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
+<style>
+	#group-btn-gallery{
+	background-color: #17A2B8 !important;
+    color: #FFFFFF !important;
+	}
+</style>
 <body>
 
 	<div class="container-fluid" id="all-wrapper">

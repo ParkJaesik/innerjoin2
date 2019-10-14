@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.service.ReportService;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
+import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -153,7 +155,16 @@ public class ReportController {
 	}
 	
 	
-	
+	@ResponseBody
+	@RequestMapping("insertGroupReport.ij")
+	public String insertGroupReport(GroupReport gReport) {
+		int result = rService.insertGroupReport(gReport);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 	
 	

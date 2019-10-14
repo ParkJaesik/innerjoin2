@@ -60,7 +60,7 @@
 									<br>
 									<div class="basic-padding">
 										<div class="image-hover">
-											${ myGroup.filePath }
+											<img src="${contextPath}/resources/images/member/${myGroup.filePath }"> 
 											<!-- 그룹 썸네일 이미지 -->
 											<div class="overlay">
 												<h2>${ myGroup.gName }</h2>

@@ -13,7 +13,7 @@
 	
 	<insert id="insertAlarm" parameterType="map">
 		
-		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,'applyAlarm',#{memberId},0,#{host})
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{memberId},0,#{host})
 		
 	</insert>
 	
@@ -46,4 +46,13 @@
 		FROM ALARM
 		WHERE RECEIVER_ID = #{receiveId} AND ALARM_CODE = 1 ORDER BY ALARM_ID ASC
 	</select>
+	
+	<insert id="replyNote" parameterType="map">
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{resposeMsg},#{senderId},1,#{receiverId})
+		
+	</insert>
+	
+	<insert id="insertReply" parameterType="map">
+		INSERT INTO ALARM VALUES(SEQ_AID.NEXTVAL,#{msg},#{memberId},2,#{receiverId})
+	</insert>
 </mapper>

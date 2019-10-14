@@ -1,6 +1,8 @@
 package com.best.innerjoin.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -115,5 +117,10 @@ public class BoardDao {
 
 	public int boardAttachModify(Board board) {
 		return sqlSession.update("boardMapper.boardAttachModify", board);
+	}
+
+	public String getWriter(int boardNo) {
+		
+		return sqlSession.selectOne("boardMapper.getWriter",boardNo);
 	}
 }
