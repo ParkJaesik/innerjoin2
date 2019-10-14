@@ -119,7 +119,7 @@
     function loadMessage(){
     	
     	var chatMessage = getCookie(gName);
-    
+    	console.log(chatMessage);
     	$("#messageWindow").html(chatMessage);
     }
     
