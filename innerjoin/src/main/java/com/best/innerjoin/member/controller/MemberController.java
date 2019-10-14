@@ -203,7 +203,6 @@ public class MemberController {
 	
 	// 쪽지함으로 이동
 	
-	
 	// 알림함으로 이동
 	@RequestMapping("myNewsForm.ij")
 	public String myNewsForm(HttpServletRequest request,Model model) {

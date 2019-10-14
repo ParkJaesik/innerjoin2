@@ -115,27 +115,29 @@
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }else if(dataArray[0]=="albumInsert"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다."); */
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>"); */
+	        	
 	        	var tmpMsg = dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
 	        }else if(dataArray[0]=="apply"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	
 	        	var tmpMsg = dataArray[1] + "님이 " + "<a href='wgmlist.ij?gNo="+dataArray[4] + "'>" +  dataArray[2] + " 모임에  가입신청을 했습니다."  +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
 	        }else if(dataArray[0]=="albumReply"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	
 	        	var tmpMsg = dataArray[2] + "님이 " + "<a href='albumDetailView.ij?albumNo="+dataArray[3] + "&gNo=" + dataArray[5] +"'>" + dataArray[1]+"모임의" + dataArray[4] + " 앨범에  댓글을 달았습니다.."  +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
 	        }else if(dataArray[0]=="applyMessage"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
-	        	var tmpMsg = dataArray[2] + "모임에 " + dataArray[3] + "님이 가입 문의 쪽지를 보냈습니다.";
+	        	
+	        	var tmpMsg = dataArray[1] + "모임 에 " + dataArray[3] + "님이 가입 문의 <a href='myNoteForm.ij'>쪽지 </a>를 보냈습니다.";
 	        	toastMessage(tmpMsg);
 	        	
-	        }
+	        }else if(dataArray[0]=="replyMsg"){
+			
+				var tmpMsg = dataArray[1] + "님이 가입 문의 쪽지에 대한 <a href='myNoteForm.ij'>답장 </a>을 를 보냈습니다.";
+	        	toastMessage(tmpMsg);
     }
     
     ws.onclose = function(event){
@@ -166,6 +168,7 @@
     	$("#alaram").append("<br>");
     	$('.toast').toast('show');
     }
+	}
 }
 	
 	

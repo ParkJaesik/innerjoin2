@@ -103,6 +103,8 @@ public interface MemberService {
 	 */
 	public abstract int updateInfo(Member member);
 
+
+
 	
 
 

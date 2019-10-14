@@ -40,6 +40,11 @@
 	.noteDate{
 		width: 10em;
 	}
+	#replyMsg{
+	
+	    width: 100%;
+    	resize: none;
+    }
 </style>
 </head>
 <body>
@@ -82,7 +87,7 @@
 									<td>${m.senderId }</td>
 									<td>${m.alarmMsg }</td>
 									<td>
-										<button onclick="location.href='deleteAlarm.ij?alarmId=${m.alarmId}'">읽음</button>
+										<button onclick="location.href='deleteNote.ij?alarmId=${m.alarmId}'">읽음</button>
 										<button class = "iyesMethod" data-toggle="modal" data-target="#exampleModalCenter2" >답장</button>
 										
 									</td>
@@ -114,7 +119,7 @@
       <div class="modal-body">
        	<div></div>
        	<hr>
-       	<textarea rows="5" cols="20" id="resposeMsg"></textarea>
+       	<textarea rows="5" cols="20" id="replyMsg"></textarea>
        	<input type="hidden" id="senderIdAdd">
       </div>
       <div class="modal-footer">
@@ -134,13 +139,42 @@
 	
 	$(".iyesMethod").click(function(){
 		
-		var senderId =  $(this).parent().prev().prev().text();
-		console.log(senderId);
-		$("#senderIdAdd").val(senderId);
+		var receiverId =  $(this).parent().prev().prev().text();
+		$("#senderIdAdd").val(receiverId);
 		
 		
 		
 	});
+	
+	$("#askMsgBtn").click(function(){
+		
+		var senderId = "${loginUser.memberId}";
+		console.log(senderId);
+		var resposeMsg = $("#replyMsg").val();
+		console.log(resposeMsg);
+		var receiverId =  $("#senderIdAdd").val();
+		
+	
+		$.ajax({
+			
+			url : "replyNote.ij",
+			type : "post",
+			data : {receiverId:receiverId,resposeMsg:resposeMsg,senderId:senderId},
+			success : function(result){
+				
+				alert("답장하기 성공");
+				
+				socket.send("replyMsg," + senderId + "," + receiverId + "," + resposeMsg);
+				
+				$('#exampleModalCenter2').modal('hide');
+				
+			} 
+			
+		});
+		
+		
+	});
+	
 
 </script>
 
