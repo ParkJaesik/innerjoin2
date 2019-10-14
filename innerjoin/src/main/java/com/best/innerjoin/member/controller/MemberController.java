@@ -98,9 +98,10 @@ public class MemberController {
 	// 닉네임 중복검사
 	@RequestMapping(value = "dupName.ij", method = RequestMethod.POST)
 	@ResponseBody
-	public String DuplicateNameCheck(String name) {
-		boolean isUsable = mService.checkNameDup(name) == 0 ? true : false;
-		return isUsable + "";
+	public boolean DuplicateNameCheck(String memberName) {
+		boolean isUsable = mService.checkNameDup(memberName) == 0 ? true : false;
+		System.out.println(isUsable);
+		return isUsable;
 	}
 
 	// 마이페이지로 이동
