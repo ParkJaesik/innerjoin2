@@ -8,25 +8,48 @@
 <title>Insert title here</title>
 
 	<style>
-		.basicInfoTable td {
+		.basicInfoTable td:not(.memProfile) {
 			border: 1px solid lightgray;
+			font-size: 1em;
+			font-weight: bold;
+			padding-left: 15px !important;
+			height: 40px !important;
 		}
+		
+		.basicInfoTable {
+			width: 100%;
+			min-width: 500px;
+			max-width: 1000px;
+			
+		}
+		
 		.memProfile {
-			width: 200px;
-			height: 200px;
+			min-width: 100px; 
+			width: 20% !important;
+			height: 160px;
 			border-right: 1px solid lightgray;
+			padding: 20px!important;
+		}
+		
+		#profile {
+			width: 100%;
+			overflow:hidden;
 		}
 		
 		.basicInfoLabel {
 			min-width: 150px;
+			width: 15%;
 			max-width: 200px;
 			background-color: #30a5ff;
 			color: white;
-			font-weight: bold;
 		}
-		#profile {
-			
+		
+		.basicInfoContent {
+			width: 25%;
+			min-width: 200px;
+			max-width: 300px;
 		}
+		
 		
 	
 	</style>
@@ -60,7 +83,7 @@
 						<div class="col-md-12">
 							<table class="table basicInfoTable">
 								<tr>
-									<td rowspan='4' class='memProfile' align="center"><img id='profile' src='${proPath }/${member.memberProPath }'></td>
+									<td rowspan='4' class='memProfile' align="center" width="200px"><img id='profile' src='${proPath }/${member.memberProPath }'></td>
 									<td class='basicInfoLabel'>아이디</td>
 									<td class='basicInfoContent'>${member.memberId }</td>
 									<td class='basicInfoLabel'>개설모임 수</td>
