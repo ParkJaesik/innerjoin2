@@ -76,7 +76,12 @@
 							<td align="center">${ g.gMemCount }</td>
 							<td align="center">${ g.gLimit }</td>
 							<td align="center">${ g.gReptCount }</td>
-							<td align="center">${ g.gStatus }</td>
+							<td align="center">
+							
+										<c:if test="${g.gStatus eq 0}">일반</c:if>
+										<c:if test="${group.gStatus eq 1}">경고</c:if>
+										<c:if test="${group.gStatus eq 2}">폐쇄</c:if>
+							</td>
 							<td align="center">${ g.gEnrollDate}</td>
 						</tr>
 					</c:forEach>
