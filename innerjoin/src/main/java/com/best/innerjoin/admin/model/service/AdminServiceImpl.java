@@ -17,7 +17,7 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adDao;
 
 	@Override
-	public ArrayList<Member> memberList(int currentPage) {
+	public ArrayList<Member> selectMemList(int currentPage) {
 		
 		int listCount = adDao.getMemListCount();
 		
@@ -25,6 +25,19 @@ public class AdminServiceImpl implements AdminService {
 		// 1) 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-		return null;
+		return adDao.selectMemList(pi);
+	}
+
+	@Override
+	public Member selectMemDetail(String memberId) {
+		Member memInfo = adDao.selectMemBasic(memberId);
+		Member memDetail = adDao.selectMemDetail(memberId);
+		if(memDetail != null) {
+			memInfo.setmemberIntroduce(memDetail.getmemberIntroduce());
+			memInfo.setMemberBirthday(memDetail.getMemberBirthday());
+			memInfo.setMemberGender(memDetail.getMemberGender());
+			memInfo.setMemberOpenStatus(memDetail.getMemberOpenStatus());
+		}
+		return memInfo;
 	}
 }

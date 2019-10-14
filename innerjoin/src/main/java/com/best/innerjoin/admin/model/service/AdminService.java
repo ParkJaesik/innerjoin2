@@ -9,6 +9,12 @@ public interface AdminService {
 	/** 회원가입 멤버 리스트 가져오기
 	 * @return
 	 */
-	ArrayList<Member> memberList(int page);
+	ArrayList<Member> selectMemList(int currentPage);
+
+	/** 멤버 정보 모두 가져오기
+	 * @param memberId
+	 * @return
+	 */
+	Member selectMemDetail(String memberId);
 
 }
