@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -123,7 +125,7 @@ public class GroupController {
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	@RequestMapping("goGroupPage.ij")
-	public String goGroupPage(HttpServletRequest request,Group group,Model model) {
+	public String goGroupPage(HttpServletRequest request,Group group,Model model,HttpServletResponse response) {
 		
 		int gNo = group.getgNo();
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
@@ -169,9 +171,9 @@ public class GroupController {
 				}
 			}
 		}
-		/*
-		 * System.out.println(groupMemberCode);
-		 */
+		
+		 System.out.println(groupMemberCode);
+		 
 		
 		model.addAttribute("event", eList2);
 		model.addAttribute("member", memList);
@@ -180,8 +182,6 @@ public class GroupController {
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
-
-		
 		
 		return "group/groupInfo";
 	}

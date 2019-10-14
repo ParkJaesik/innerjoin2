@@ -108,6 +108,31 @@
     var loginUserId = "${loginUser.memberId }";
     var gName = "${gName}";
     
+    $(function(){
+    	
+    	if(gName !=null){
+    		loadMessage();
+    	}
+    	
+    });
+    
+    function loadMessage(){
+    	
+    	var chatMessage = getCookie(gName);
+    
+    	$("#messageWindow").html(chatMessage);
+    }
+    
+    
+    $("#messageWindow").bind('DOMNodeInserted DOMNodeRemoved', function() {
+    	
+    	if(gName !=null){
+	    	var chatMessage = $("#messageWindow").html();
+	    	setCookie(gName,chatMessage,"1");
+    	}
+    });
+    
+    
     function send() {
         if (inputMessage.value == "") {
         } else {
@@ -120,27 +145,41 @@
         
         //socket.send($("#chat_nick").val() + "|" + inputMessage.value);
         inputMessage.value = "";
+        
     }
     
     //     엔터키를 통해 send함
     function enterkey() {
         if (window.event.keyCode == 13) {
             send();
+            
+            
         }
     }
-    /* $(function(){
-    	
-    	$("#messageWindow").on("change",function(){
-    		
-    		$("#messageWindow").scrollTop(99999999);
-    	});
-    	
-    }); */
-    //  채팅이 많아져 스크롤바가 넘어가더라도 자동적으로 스크롤바가 내려가게함
-    /* window.setInterval(function() {
-        var elem = document.getElementById('messageWindow');
-        elem.scrollTop = elem.scrollHeight;
-    }, 5000); */
+
+    
+    function setCookie(cookie_name, value, days) {
+    	  var exdate = new Date();
+    	  exdate.setDate(exdate.getDate() + days);
+    	  // 설정 일수만큼 현재시간에 만료값으로 지정
+
+    	  var cookie_value = escape(value) + ((days == null) ? '' : ';    expires=' + exdate.toUTCString());
+    	  document.cookie = cookie_name + '=' + cookie_value;
+    }
+    
+    function getCookie(cookie_name) {
+    	  var x, y;
+    	  var val = document.cookie.split(';');
+
+    	  for (var i = 0; i < val.length; i++) {
+    	    x = val[i].substr(0, val[i].indexOf('='));
+    	    y = val[i].substr(val[i].indexOf('=') + 1);
+    	    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+    	    if (x == cookie_name) {
+    	      return unescape(y); // unescape로 디코딩 후 값 리턴
+    	    }
+    	  }
+    	}
 </script>
 
 </body>
