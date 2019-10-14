@@ -61,7 +61,7 @@
 														<div class="col-md-3 eventClose">
 															<span class="eventLabel">
 																<!-- <img class="closeBtn detailView_127" alt="닫기" src="resources/images/close.png"> -->
-																<img class="checkBtn detailView_127" alt="참석" src="resources/images/check.jpg">
+																<img id="${e.eno }" class="checkBtn detailView_127" alt="참석" src="resources/images/check.jpg">
 															</span>
 														</div>
 														
@@ -71,7 +71,7 @@
 															<span class="badge badge-default eventLabel">내용</span><span class="eventLabel">${e.eContent}</span>
 																	<!-- <textarea>.....</textarea> -->
 														</div>
-														<div class="col-md-4 eventMember"><span class="badge badge-default eventLabel">참석회원</span><span class="eventMemberLabel"><span class="badge badge-dark eventLabel">1</span>&nbsp; / &nbsp;<span class="badge badge-dark eventLabel">1</span></span>
+														<div class="col-md-4 eventMember"><span class="badge badge-default eventLabel">참석회원</span><span class="eventMemberLabel"><span class="badge badge-dark eventLabel">${e.eMemCount }</span>&nbsp; / &nbsp;<span class="badge badge-dark eventLabel">${e.eLimit }</span></span>
 													</div>
 													<div class="row eventInfo">
 															<div class="col-md-12">
@@ -115,6 +115,88 @@
 					</div>
 				</div>
 			</div>
+			<script>
+			
+			
+			// 해당 이벤트의 참석자 정보
+			function eventMemberList(eno) {
+				var member;
+				$.ajax({
+					url: 'attendMember.ij',
+					type: 'get',
+					data: {eno: eno},
+					dataType: 'json',
+					async : false,
+					success: function(mList) {
+						console.log('mList: ');
+						console.log(mList);
+						member = mList;
+					},
+					error: function(err) {
+						console.log(err);
+						member = null;
+					}
+				});
+				return member;
+			}
+			
+			// eventDetailView에서 체크버튼 누르면 member_event table에 데이터 삽입.
+			$(document).on('click', '.checkBtn', function(event) {
+				console.log(this.parentNode);
+				var eno = $(this).attr('id');
+				console.log("eno: " + eno);
+				
+				// var memberId = ${member.memberId};
+				console.log("참여이벤트리스트 : " + attendEventList);
+				console.log("현재 이벤트 포함여부: " + attendEventList.includes(eno));
+				if(attendEventList.includes(eno)) {
+					alertMessage('이미 참석되었습니다.');
+					return;
+				}
+				
+				var event;
+				var flag = false;
+				$.each(eventInfoList, function(i, v) {
+					if(v.eno == eno && v.eLimit <= v.eMemCount) {
+						console.log("v.eno : " + v.eno + " / eno: " +eno);
+						console.log(v);
+						alertMessage('참석인원이 초과되었습니다.');
+						console.log('참석인원 초과');
+						flag = true;
+						return ;
+					}
+				});
+				if(flag) return;
+				
+				var memberId = 'admin';
+				$.ajax({
+					url: 'attendEvent.ij',
+					data: {eno: eno, memberId: memberId},  
+					type: 'post',
+					success: function(res) {
+						if(res > 0) {
+							alertMessage('참석되었습니다.');
+							console.log('참석되었음. res: 1');
+						} else {
+							alertMessage('다시 시도해주세요.');
+						}
+						console.log(res);
+					},
+					error: function(err) {
+						console.log(err);
+						alertMessage('다시 시도해주세요.');
+					}
+				});
+				getAttendEventList(getCalDate());
+				var event = eventDetail(eno);
+				var member = eventMemberList(eno)
+				var $eventMember = eventMemberDetail(event, member);
+				
+				$('.detailView_'+eno+' .eventMember').remove();
+				$('.eventInfo').append($eventMember);
+			});
+			
+			</script>
 		
 			<div class="col-md-1 aside">
 				<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 or groupMemberCode  eq 2}">

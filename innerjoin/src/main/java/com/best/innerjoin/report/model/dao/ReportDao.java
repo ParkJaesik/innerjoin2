@@ -1,6 +1,8 @@
 package com.best.innerjoin.report.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -70,6 +73,49 @@ public class ReportDao {
 	}
 
 
+	/** 회원 신고 거절
+	 * @param rNo
+	 * @return
+	 */
+	public int deleteReport(int rNo) {
+		return sqlSession.update("reportMapper.deleteReport", rNo);
+	}
+
+
+	/** 회원 신고 횟수 카운트
+	 * @param report
+	 * @return
+	 */
+	public int updateReportCount(GroupMemberReport report) {
+		deleteReport(report.getrNo());
+		
+		System.out.println("dao_report : " + report);
+		return sqlSession.update("reportMapper.updateReportCount", report);
+	}
+
+
+	/** 신고 받은 회원 리스트
+	 * @param responGNo
+	 * @return
+	 */
+	public ArrayList<GroupMember> selectGroupMember(int responGNo,PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		return (ArrayList)sqlSession.selectList("reportMapper.selectGroupMember", responGNo , rowBounds);
+	}
+
+
+	/** 신고 받은 그룹회원 수
+	 * @return
+	 */
+	public int getGroupMemberListCount(int responGNo) {
+		return sqlSession.selectOne("reportMapper.selectReptMemberCount");
+	}
+
+
+	
 //	/** 신고당한 회원 리스트
 //	 * @param pi
 //	 * @return

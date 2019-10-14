@@ -112,30 +112,30 @@
 		<ul class="nav menu">
 			<li id="dashboard"><a href="admin.ij"><em class="fa fa-dashboard">&nbsp;</em> 대시보드 </a></li>
 			<li id="manageMember"><a href="manageMember.ij"><em class="fa fa-calendar">&nbsp;</em> 회원관리</a></li>
-			<li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
-			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
-			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
-			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+			<li id="manageGroup"><a href="manageGroup.ij"><em class="fa fa-bar-chart">&nbsp;</em> 모임관리</a></li>
+			<li class="parent " id="manageReport">
+				<a data-toggle="collapse" href="#report">
+					<em class="fa fa-navicon">&nbsp;</em> 신고관리 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 1
+				<ul class="children collapse" id="report">
+					<li id="memberReport"><a class="report" href="memberReport.ij">
+						<span class="fa fa-arrow-right">&nbsp;</span> 회원신고
 					</a></li>
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 2
+					<li id="groupMemberReport"><a class="report" href="groupMemberReport.ij">
+						<span class="fa fa-arrow-right">&nbsp;</span> 모임회원신고
 					</a></li>
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 3
+					<li id="groupReport"><a class="report" href="groupReport.ij">
+						<span class="fa fa-arrow-right">&nbsp;</span> 모임신고
 					</a></li>
 				</ul>
 			</li>
+			<li id="manageCategory"><a href="manageCategory.ij"><em class="fa fa-clone">&nbsp;</em> 카테고리 관리</a></li>
 			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 	
 </div>
-	<script src="resources/js/admin/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/admin/bootstrap.min.js"></script>
 	<script src="resources/js/admin/chart.min.js"></script>
 	<script src="resources/js/admin/chart-data.js"></script>

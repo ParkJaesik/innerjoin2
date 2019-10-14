@@ -389,25 +389,9 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
-	
-	<script src="resources/js/admin/jquery-1.11.1.min.js"></script>
-	<script src="resources/js/admin/bootstrap.min.js"></script>
-	<script src="resources/js/admin/chart.min.js"></script>
-	<script src="resources/js/admin/chart-data.js"></script>
-	<script src="resources/js/admin/easypiechart.js"></script>
-	<script src="resources/js/admin/easypiechart-data.js"></script>
-	<script src="resources/js/admin/bootstrap-datepicker.js"></script>
-	<script src="resources/js/admin/custom.js"></script>
+
 	<script>
 		window.onload = function () {
-			var chart1 = document.getElementById("line-chart").getContext("2d");
-			window.myLine = new Chart(chart1).Line(lineChartData, {
-			responsive: true,
-			scaleLineColor: "rgba(0,0,0,.2)",
-			scaleGridLineColor: "rgba(0,0,0,.05)",
-			scaleFontColor: "#c5c7cc"
-			});
-			
 			$("#dashboard").addClass("active");
 		};
 	</script>
