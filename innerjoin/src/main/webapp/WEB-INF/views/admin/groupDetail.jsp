@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +104,7 @@
 									</li>
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane active" id="panel-595324">
+									<div class="tab-pane active" id="tab1">
 										<p>
 											I'm in Section 1.
 										</p>
@@ -122,10 +123,10 @@
 											#
 										</th>
 										<th>
-											Product
+											회원이름
 										</th>
 										<th>
-											Payment Taken
+											가입일
 										</th>
 										<th>
 											Status
@@ -133,76 +134,25 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>
-											1
-										</td>
-										<td>
-											TB - Monthly
-										</td>
-										<td>
-											01/04/2012
-										</td>
-										<td>
-											Default
-										</td>
-									</tr>
-									<tr class="table-active">
-										<td>
-											1
-										</td>
-										<td>
-											TB - Monthly
-										</td>
-										<td>
-											01/04/2012
-										</td>
-										<td>
-											Approved
-										</td>
-									</tr>
-									<tr class="table-success">
-										<td>
-											2
-										</td>
-										<td>
-											TB - Monthly
-										</td>
-										<td>
-											02/04/2012
-										</td>
-										<td>
-											Declined
-										</td>
-									</tr>
-									<tr class="table-warning">
-										<td>
-											3
-										</td>
-										<td>
-											TB - Monthly
-										</td>
-										<td>
-											03/04/2012
-										</td>
-										<td>
-											Pending
-										</td>
-									</tr>
-									<tr class="table-danger">
-										<td>
-											4
-										</td>
-										<td>
-											TB - Monthly
-										</td>
-										<td>
-											04/04/2012
-										</td>
-										<td>
-											Call in to confirm
-										</td>
-									</tr>
+									<c:if test="${!empty mList}">
+									<c:forEach var="m" items="${ mList }" varStatus="status">
+										<tr>
+											<td align="center">${ status.count }</td>
+
+											<td align="left">
+												<c:url var="memDetail" value="memDetail.ij">
+													<c:param name="memberId" value="${ m.memberId }"/>
+												</c:url><a href="${memDetail}">${ m.memberId }</a>
+											</td>
+											<td align="center">${ m.levelCode }
+												<c:if test="${m.levelCode eq 0}">개설자</c:if>
+												<c:if test="${m.levelCode eq 1}">매니저</c:if>
+												<c:if test="${m.levelCode eq 2}">일반</c:if>
+											</td>
+										</tr>
+									</c:forEach>
+
+									</c:if>
 								</tbody>
 							</table>
 						</div>
