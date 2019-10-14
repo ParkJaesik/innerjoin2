@@ -11,4 +11,9 @@ public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	public int getMemListCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
