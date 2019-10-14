@@ -120,6 +120,28 @@ public class AlarmController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value= "inviteGroup.ij",method=RequestMethod.POST )
+	public int inviteGroup(String  senderId,String  receiverId,String msg,String gNo) {
+		
+		Map<String,String> alarmMap = new HashMap<>();
+		
+		alarmMap.put("receiverId", receiverId);
+		alarmMap.put("msg", msg);
+		alarmMap.put("senderId",senderId);
+		alarmMap.put("gNo",gNo);
+		
+		int result = gService.inviteGroupMember(alarmMap);
+		
+		
+		int result2 = alarmService.inviteGroup(alarmMap);
+		
+		
+		
+		
+		
+		return result;
+	}
 	
 	
 	

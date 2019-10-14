@@ -4,8 +4,12 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -124,7 +128,7 @@ public class GroupController {
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	@RequestMapping("goGroupPage.ij")
-	public String goGroupPage(HttpServletRequest request,Group group,Model model) {
+	public String goGroupPage(HttpServletRequest request,Group group,Model model,HttpServletResponse response) {
 		
 		int gNo = group.getgNo();
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
@@ -141,7 +145,6 @@ public class GroupController {
 				}
 			}
 		}
-		System.out.println(groupMemberCode);
 		Group tempGroup = gService.goGroupPage(gNo);
 		
 		
@@ -170,9 +173,9 @@ public class GroupController {
 				}
 			}
 		}
-		/*
-		 * System.out.println(groupMemberCode);
-		 */
+		
+		 System.out.println(groupMemberCode);
+		 
 		
 		model.addAttribute("event", eList2);
 		model.addAttribute("member", memList);
@@ -181,8 +184,6 @@ public class GroupController {
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
-
-		
 		
 		return "group/groupInfo";
 	}
@@ -271,13 +272,6 @@ public class GroupController {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
 		/*
 		 * int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
 		 */
@@ -347,6 +341,37 @@ public class GroupController {
 			path= "common/errorPage";
 		}
 		return path;
+	}
+	
+	
+	//모임탈퇴하기
+	@ResponseBody
+	@RequestMapping(value="withdraw.ij", method=RequestMethod.POST)
+	public String withdraw(String loginUserId, String gNo, HttpServletRequest request) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("loginUserId",loginUserId);
+		map.put("gNo",gNo);
+		System.out.println("loginUserId : " + loginUserId);
+		System.out.println("gNo : " + gNo);
+		int result = gService.withdraw(map);
+		
+		int groupNo = Integer.parseInt(gNo);
+		String memberId= loginUserId;
+		Group tempGroup = gService.goGroupPage(groupNo);
+		String result2 = null;
+		if(result>0) {
+			
+			int groupMemberCode = gService.selectCode(memberId,groupNo);
+			request.getSession().setAttribute("group", tempGroup);
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			
+			int result3 = gService.decreaseCount(gNo); 
+			
+			result2 = "success";
+		}
+		return result2;
 	}
 
 }

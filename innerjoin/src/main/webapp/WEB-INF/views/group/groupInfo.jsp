@@ -119,7 +119,7 @@
 			</script>
 		
 			<div class="col-md-1 aside">
-				<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 or groupMemberCode  eq 2}">
+				<c:if test="${groupMemberCode == 0 or groupMemberCode == 1 or groupMemberCode  == 2}">
 				<div id="groupChatWrapper">
 					<%@ include file="/WEB-INF/views/chat/chat.jsp"%>
 				</div>

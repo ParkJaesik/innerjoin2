@@ -2,6 +2,7 @@
 package com.best.innerjoin.group.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,5 +49,13 @@ public interface GroupService {
 	public abstract int updateGroupCount(int gNo);
 
 	public abstract String selectReceiverId(String reciverName);
+
+	public abstract ArrayList<Group> getHostGroup(String memberName);
+
+	public abstract int inviteGroupMember(Map<String, String> alarmMap);
+
+	public abstract int withdraw(Map<String, String> map);
+
+	public abstract int decreaseCount(String gNo);
 }
 
