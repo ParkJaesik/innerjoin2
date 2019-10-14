@@ -2,7 +2,6 @@ package com.best.innerjoin.admin.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +47,28 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public Map<String, List> memGroupInfo(String memberId) {
+	public Map<String, Map> memGroupInfo(String memberId) {
 		ArrayList<GroupMember> mgList = adDao.selectMemGroupList(memberId);
-		System.out.println("mgList: " + mgList);
 		ArrayList<Group> gInfo = adDao.selectJoinGroupList(memberId);
-		
-		Map<String, List> mgInfo = new HashMap<>();
-		mgInfo.put("mgList", mgList);
-		mgInfo.put("gInfo", gInfo);
-		
+		Map<String, Map> mgInfo = new HashMap<>();
+
+		for(int i = 0; i < gInfo.size(); i++) {
+			int gno1 = gInfo.get(i).getgNo();
+			
+			for(int j = 0; j < mgList.size(); j++) {
+			
+				int gno2 = mgList.get(j).getGroupNo();
+				
+				if(gno1 != gno2) break;
+				Map info = new HashMap();
+				
+				info.put("levelCode", mgList.get(i).getLevelCode());
+				info.put("gInfo", gInfo.get(i));
+				
+				mgInfo.put(""+gno1, info);
+			}
+		}
+		System.out.println("mgInfo : " + mgInfo);
 		return mgInfo;
 	}
 	

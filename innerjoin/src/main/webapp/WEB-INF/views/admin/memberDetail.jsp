@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,6 +99,20 @@
 			border: 1px solid lightgray;
 		}
 	
+		.hostTable {
+			min-width: 1000px;
+			border: 1px solid lightgray;
+		}
+		
+		/* .hostTable td, .hostTable th{
+		
+			border: 1px solid lightgray;
+		} */
+		.tab-content {
+			padding: 0 !important;
+		}
+		
+		
 	</style>
 
 
@@ -149,7 +165,7 @@
 								</tr>
 								<tr>
 									<td class='basicInfoLabel'>가입일</td>
-									<td class='basicInfoContent'>${member.memberEnrollDate }</td>
+									<td class='basicInfoContent'>${ fn:split(member.memberEnrollDate, ' ')[0] }</td>
 									<td class='basicInfoLabel'>상태코드</td>
 									<td class='basicInfoContent'>
 										<c:if test="${member.memberStatusCode eq 0}">관리자</c:if>
@@ -194,7 +210,7 @@
 	                            	<td class="detailInfoLabel" rowspan='2'>회원 소개</td>
 	                            	<td class="detailInfoContent" colspan='3' rowspan='2'>
 	                            		<c:if test="${!empty member.memberIntroduce }">
-	                            			${member.memberIntroduce }"
+	                            			${member.memberIntroduce }
 	                            		</c:if>
 	                            		<c:if test="${empty member.memberIntroduce }">
 	                            			-
@@ -222,45 +238,143 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="hostTap">
-										<table class="table">
+										<table class="table hostTable">
 											<thead>
 												<tr>
 													<th>
-														그룹네임
+														번호													</th>
+													<th>
+														그룹명
 													</th>
 													<th>
-														Product
+														지역
 													</th>
 													<th>
-														Payment Taken
+														그룹카테고리
 													</th>
 													<th>
-														Status
+														그룹개설일
+													</th>
+													<th>
+														공개여부
+													</th>
+													<th>
+														그룹상태
 													</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														1
-													</td>
-													<td>
-														TB - Monthly
-													</td>
-													<td>
-														01/04/2012
-													</td>
-													<td>
-														Default
-													</td>
-												</tr>
+												<c:if test="${ empty mgInfo}">
+													<tr>
+														<td colspan='7' align="center">
+															개설 모임이 없습니다.
+														</td>
+													</tr>
+												</c:if>
+												<c:if test="${ !empty mgInfo}">
+													<c:set var="num" value="0"/>
+													<c:forEach var="g" items="${mgInfo}" varStatus="i">
+														<c:if test="${g.value['levelCode'] == 0 }">
+														<c:set var="num" value="${num + 1}"/>
+														<tr>
+															<td>
+																${num }
+															</td>
+															<td>
+																${(g.value['gInfo']).gName }
+															</td>
+															<td>
+																${(g.value['gInfo']).cityName } &nbsp; ${(g.value['gInfo']).districtName }
+															</td>
+															<td>
+																${(g.value['gInfo']).gCategoryName }
+															</td>
+															<td>
+																<fmt:formatDate value="${(g.value['gInfo']).gEnrollDate}" pattern="yyyy.MM.dd"/>	
+																<%-- ${(g.value['gInfo']).gEnrollDate } --%>
+															</td>
+															<td>
+																<c:if test="${(g.value['gInfo']).gOpenStatus == 'Y'}"> 공개 </c:if>
+																<c:if test="${(g.value['gInfo']).gOpenStatus == 'N'}"> 비공개 </c:if>
+															</td>
+															<td>
+																<c:if test="${(g.value['gInfo']).gStatus == 0}"> 일반 </c:if>
+																<c:if test="${(g.value['gInfo']).gStatus == 1}"> 경고 </c:if>
+																<c:if test="${(g.value['gInfo']).gStatus == 2}"> 폐쇄 </c:if>
+															</td>
+														</tr>
+														</c:if>
+													</c:forEach>
+												</c:if>
 											</tbody>
 										</table>
 									</div>
 									<div class="tab-pane" id="joinTab">
-										<p>
-											Howdy, I'm in Section 2.
-										</p>
+										<table class="table joinTable">
+											<thead>
+												<tr>
+													<th>번호</th>
+													<th>그룹명</th>
+													<th>지역</th>
+													<th>그룹카테고리</th>
+													<th>그룹개설일</th>
+													<th>그룹 회원 등급</th>
+													<th>공개여부</th>
+													<th>그룹상태</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:if test="${ empty mgInfo}">
+													<tr>
+														<td colspan='8' align="center">
+															 가입한 모임이 없습니다.
+														</td>
+													</tr>
+												</c:if>
+												<c:if test="${ !empty mgInfo}">
+													<c:set var="num2" value="0"/>
+													<c:forEach var="g" items="${mgInfo}" varStatus="i">
+														<c:if test="${g.value['levelCode'] != 0 }">
+														<c:set var="num2" value="${num2 + 1}"/>
+														<tr>
+															<td>
+																${num2 }
+															</td>
+															<td>
+																${(g.value['gInfo']).gName }
+															</td>
+															<td>
+																${(g.value['gInfo']).cityName } &nbsp; ${(g.value['gInfo']).districtName }
+															</td>
+															<td>
+																${(g.value['gInfo']).gCategoryName }
+															</td>
+															<td>
+																<fmt:formatDate value="${(g.value['gInfo']).gEnrollDate}" pattern="yyyy-MM-dd"/>	
+																<%-- ${(g.value['gInfo']).gEnrollDate } --%>
+															</td>
+															<td>
+																<c:if test="${g.value['levelCode'] == 1}"> 매니저 </c:if>
+																<c:if test="${g.value['levelCode'] == 2}"> 일반 </c:if>
+																<c:if test="${g.value['levelCode'] == 3}"> 초대 </c:if>
+																<c:if test="${g.value['levelCode'] == 4}"> 신청 </c:if>
+																<c:if test="${g.value['levelCode'] == 10}"> 탈퇴 </c:if>
+															</td>
+															<td>
+																<c:if test="${(g.value['gInfo']).gOpenStatus == 'Y'}"> 공개 </c:if>
+																<c:if test="${(g.value['gInfo']).gOpenStatus == 'N'}"> 비공개 </c:if>
+															</td>
+															<td>
+																<c:if test="${(g.value['gInfo']).gStatus == 0}"> 일반 </c:if>
+																<c:if test="${(g.value['gInfo']).gStatus == 1}"> 경고 </c:if>
+																<c:if test="${(g.value['gInfo']).gStatus == 2}"> 폐쇄 </c:if>
+															</td>
+														</tr>
+														</c:if>
+													</c:forEach>
+												</c:if>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
