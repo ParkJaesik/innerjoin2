@@ -72,4 +72,28 @@
   	
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  	<select id="getGroupReptListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM GROUP_REPORT
+		ORDER BY GROUP_REPT_DATE DESC
+	</select>
+  	
+  	
+  
 </mapper>

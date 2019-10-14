@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupReport;
 
 @Repository("adDao")
 public class AdminDao {
@@ -34,6 +35,62 @@ public class AdminDao {
 
 	public Member selectMemDetail(String memberId) {
 		return sqlSession.selectOne("adminMapper.selectMemDetail", memberId);
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/** 그룹 신고 개수 구하는 DAO
+	 * @return
+	 */
+	public int getGroupReptListCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminMapper.getGroupReptListCount");
+	}
+
+	/** 그룹 신고 리스트 DAO
+	 * @param pi
+	 * @return
+	 */
+	public ArrayList<GroupReport> selectGroupReptList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+
+		return (ArrayList)sqlSession.selectList("adminMapper.selectGroupReptList", null, rowBounds);
 	}
 
 }
