@@ -26,7 +26,7 @@
 		<typeAlias type="com.best.innerjoin.report.model.vo.Search" alias="Search"/>
 		<typeAlias type="com.best.innerjoin.alarm.model.vo.Alarm" alias="Alarm"/>
 		<typeAlias type="com.best.innerjoin.report.model.vo.GroupReport" alias="GroupReport"/>
-		<typeAlias type="com.best.innerjoin.mgSearch.model.vo.MgSearch" alias="MgSearch"/>
+		
 
 		
 
