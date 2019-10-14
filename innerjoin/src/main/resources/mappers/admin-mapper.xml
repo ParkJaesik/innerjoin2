@@ -113,6 +113,19 @@
 		ORDER BY GROUP_REPT_DATE DESC
 	</select>
   	
+
+  	<select id="getGroupListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM "GROUP"
+		ORDER BY 1 DESC
+	</select>
+  	
+  	<select id="selectGroupList" resultMap="groupResultSet">
+		SELECT *
+		FROM "GROUP" 
+		ORDER BY GROUP_ENROLL_DATE DESC
+	</select>
+  	
   	
   
 </mapper>

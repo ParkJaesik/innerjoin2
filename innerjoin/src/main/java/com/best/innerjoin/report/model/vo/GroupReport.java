@@ -15,10 +15,6 @@ public class GroupReport {
 	}
 
 	
-
-	
-
-
 	public GroupReport(int groupReptNo, String groupReptContent, int groupNo, String groupName, String memberId,
 			String groupReptStatus, String groupReptDate) {
 		super();

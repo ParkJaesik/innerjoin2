@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -93,6 +94,25 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 
 		return (ArrayList)sqlSession.selectList("adminMapper.selectGroupReptList", null, rowBounds);
+	}
+
+	/** 그룹 개수 DAO
+	 * @return
+	 */
+	public int getGroupListCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminMapper.getGroupListCount");
+	}
+
+	/** 그룹 목록 리스트 DAO
+	 * @param pi
+	 * @return
+	 */
+	public ArrayList<Group> selectGroupList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+
+		return (ArrayList)sqlSession.selectList("adminMapper.selectGroupList", null, rowBounds);
 	}
 
 }

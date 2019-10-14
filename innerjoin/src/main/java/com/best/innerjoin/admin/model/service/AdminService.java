@@ -2,6 +2,7 @@ package com.best.innerjoin.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -49,5 +50,11 @@ public interface AdminService {
 	 * @return
 	 */
 	ArrayList<GroupReport> selectGroupReptList(int currentPage);
+
+	/** 그룹 리스트 가져오기
+	 * @param currentPage
+	 * @return
+	 */
+	ArrayList<Group> selectGroupList(int currentPage);
 
 }

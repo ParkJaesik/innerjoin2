@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.best.innerjoin.admin.model.dao.AdminDao;
 import com.best.innerjoin.admin.model.vo.Pagination;
 import com.best.innerjoin.common.PageInfo;
+import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -81,5 +82,16 @@ public class AdminServiceImpl implements AdminService {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
 		return adDao.selectGroupReptList(pi);
+	}
+
+	@Override
+	public ArrayList<Group> selectGroupList(int currentPage) {
+		int listCount = adDao.getGroupListCount();
+		
+		// 게시물 목록 조회(페이징 처리 적용)
+		// 1) 페이지 정보 저장
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+
+		return adDao.selectGroupList(pi);
 	}
 }
