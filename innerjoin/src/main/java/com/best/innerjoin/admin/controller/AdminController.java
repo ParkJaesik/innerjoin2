@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.admin.model.service.AdminService;
 import com.best.innerjoin.admin.model.vo.Pagination;
+import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
@@ -20,6 +22,8 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adService;
+	@Autowired
+	private GroupService gService;
 	
 	//임시 관리자 페이지로 이동
 	@RequestMapping("admin.ij")
@@ -131,10 +135,13 @@ public class AdminController {
 	 * @return mv
 	 */
 	@RequestMapping("groupDetail.ij")
-	public ModelAndView groupDetailView(Integer page, int gNo, ModelAndView mv) {
+	public ModelAndView groupDetailView(int gNo, ModelAndView mv) {
+		
 		Group group = adService.selectGroupDetail(gNo);
 		System.out.println(group);
-		mv.addObject("group", group).setViewName("admin/groupDetail");
+		ArrayList<GroupMember> mList = gService.groupMemberList(gNo);
+		System.out.println("mList.size() : "+ mList.size());
+		mv.addObject("group", group).addObject("mList", mList).setViewName("admin/groupDetail");
 		
 		return mv;
 	}
