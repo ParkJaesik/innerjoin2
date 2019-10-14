@@ -36,9 +36,12 @@
 		<result property="localCode" column="LOCAL_CODE"/>
 		<result property="gStatus" column="GROUP_STATUS"/>
 		<result property="gCategoryCode" column="GROUP_CATEGORY_CODE"/>
+		<result property="gCategoryName" column="GROUP_CATEGORY_NAME"/>
 		<result property="gReptCount" column="GROUP_REPT_COUNT"/>
 		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
 		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
+		<result property="districtName" column="DISTRICT_NAME"/>
+		<result property="cityName" column="CITY_NAME"/>
 	</resultMap>
 	
   	<resultMap type="GroupReport" id="groupReptResultSet">
@@ -126,6 +129,13 @@
 		ORDER BY GROUP_ENROLL_DATE DESC
 	</select>
   	
-  	
+  	<select id="selectGroupDetail" parameterType="_int" resultMap="groupResultSet">
+  		SELECT G.*, GC.GROUP_CATEGORY_NAME,LDC.DISTRICT_NAME,LCC.CITY_NAME
+  		FROM "GROUP" G
+  		JOIN GROUP_CATEGORY GC ON(GC.GROUP_CATEGORY_CODE = G.GROUP_CATEGORY_CODE)
+  		JOIN LOCAL_DISTRICT_CATEGORY LDC ON(G.LOCAL_CODE = LDC.DISTRICT_CODE)
+  		JOIN LOCAL_CITY_CATEGORY LCC ON(LDC.CITY_CODE = LCC.CITY_CODE)
+  		WHERE GROUP_NO = #{gNo}
+  	</select>
   
 </mapper>

@@ -57,4 +57,10 @@ public interface AdminService {
 	 */
 	ArrayList<Group> selectGroupList(int currentPage);
 
+	/** 그룹 상세 정보 가져오기
+	 * @param gNo
+	 * @return
+	 */
+	Group selectGroupDetail(int gNo);
+
 }

@@ -115,4 +115,12 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectGroupList", null, rowBounds);
 	}
 
+	/** 그룹 상세 정보 DAO
+	 * @param gNo
+	 * @return
+	 */
+	public Group selectGroupDetail(int gNo) {
+		return sqlSession.selectOne("adminMapper.selectGroupDetail", gNo);
+	}
+
 }

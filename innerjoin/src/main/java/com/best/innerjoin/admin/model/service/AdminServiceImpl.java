@@ -94,4 +94,11 @@ public class AdminServiceImpl implements AdminService {
 
 		return adDao.selectGroupList(pi);
 	}
+
+	@Override
+	public Group selectGroupDetail(int gNo) {
+		
+		Group group = adDao.selectGroupDetail(gNo);
+		return group;
+	}
 }
