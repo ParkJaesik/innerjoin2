@@ -42,6 +42,8 @@ public interface AdminService {
 	
 	
 	
+	
+	
 	/** 그룹 신고 리스트 가져오기
 	 * @param currentPage
 	 * @return

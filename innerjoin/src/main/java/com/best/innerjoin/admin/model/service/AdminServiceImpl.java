@@ -70,6 +70,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	
 	
+	
+	
 	@Override
 	public ArrayList<GroupReport> selectGroupReptList(int currentPage) {
 		int listCount = adDao.getGroupReptListCount();

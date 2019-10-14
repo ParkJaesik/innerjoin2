@@ -88,6 +88,8 @@
   
   
   
+  
+  
   	<select id="getGroupReptListCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM GROUP_REPORT

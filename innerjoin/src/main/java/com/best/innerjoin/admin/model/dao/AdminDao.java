@@ -74,6 +74,8 @@ public class AdminDao {
 	
 	
 	
+	
+	
 	/** 그룹 신고 개수 구하는 DAO
 	 * @return
 	 */
