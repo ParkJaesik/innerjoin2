@@ -27,6 +27,16 @@
 		<result property="memberName" column="MEMBER_NAME"/>
 	</resultMap>
 	
+	<!-- 그룹 신고 -->
+	<resultMap id="groupReptResultSet" type="GroupReport">
+		<id property="groupReptNo" column="GROUP_REPT_NO"/>
+		<result property="groupReptContent" column="GROUP_REPT_CONTENT"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="groupReptStatus" column="GROUP_REPT_STATUS"/>
+		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
+	</resultMap>
+	
 	
 	
 	
@@ -145,7 +155,15 @@
 		SELECT MEMBER_REPT_NO, RESPONDENT_ID
 	</select>  -->
 	
-	
-	
+	<!-- 그룹 신고 insert -->
+	<insert id="insertGroupReport" parameterType="GroupReport">
+		INSERT INTO GROUP_REPORT
+		VALUES(SEQ_G_RNO.NEXTVAL, #{groupReptContent},#{groupNo},#{memberId},DEFAULT, DEFAULT)
+	</insert>
 
+	<update id="updateGroupReptCount" parameterType="GroupReport" >
+		UPDATE "GROUP"
+		SET GROUP_REPT_COUNT = GROUP_REPT_COUNT + 1
+		WHERE GROUP_NO = #{groupNo}
+	</update>
 </mapper>

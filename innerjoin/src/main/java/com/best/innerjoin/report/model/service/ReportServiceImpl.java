@@ -14,6 +14,7 @@ import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.dao.ReportDao;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
+import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -90,6 +91,7 @@ public class ReportServiceImpl implements ReportService{
 		return rDao.selectGroupMember(responGNo, pi);
 	}
 
+
 	
 
 
@@ -98,6 +100,13 @@ public class ReportServiceImpl implements ReportService{
 
 	
 	
+
+	@Override
+	public int insertGroupReport(GroupReport gReport) {
+		rDao.insertGroupReport(gReport);
+		return rDao.updateGroupReptCount(gReport);
+	}
+
 //	// 신고 당한 회원 리스트
 //	@Override
 //	public ArrayList<GroupMemberReport> selectMList(int currentPage) {

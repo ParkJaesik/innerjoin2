@@ -9,6 +9,7 @@ import com.best.innerjoin.admin.model.dao.AdminDao;
 import com.best.innerjoin.admin.model.vo.Pagination;
 import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupReport;
 
 @Service("adService")
 public class AdminServiceImpl implements AdminService {
@@ -17,7 +18,7 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adDao;
 
 	@Override
-	public ArrayList<Member> memberList(int currentPage) {
+	public ArrayList<Member> selectMemList(int currentPage) {
 		
 		int listCount = adDao.getMemListCount();
 		
@@ -25,6 +26,60 @@ public class AdminServiceImpl implements AdminService {
 		// 1) 페이지 정보 저장
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-		return null;
+		return adDao.selectMemList(pi);
+	}
+
+	@Override
+	public Member selectMemDetail(String memberId) {
+		Member memInfo = adDao.selectMemBasic(memberId);
+		Member memDetail = adDao.selectMemDetail(memberId);
+		if(memDetail != null) {
+			memInfo.setmemberIntroduce(memDetail.getmemberIntroduce());
+			memInfo.setMemberBirthday(memDetail.getMemberBirthday());
+			memInfo.setMemberGender(memDetail.getMemberGender());
+			memInfo.setMemberOpenStatus(memDetail.getMemberOpenStatus());
+		}
+		return memInfo;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public ArrayList<GroupReport> selectGroupReptList(int currentPage) {
+		int listCount = adDao.getGroupReptListCount();
+		
+		// 게시물 목록 조회(페이징 처리 적용)
+		// 1) 페이지 정보 저장
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+
+		return adDao.selectGroupReptList(pi);
 	}
 }

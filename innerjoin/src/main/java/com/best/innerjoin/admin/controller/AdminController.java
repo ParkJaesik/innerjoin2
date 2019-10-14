@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.admin.model.service.AdminService;
+import com.best.innerjoin.admin.model.vo.Pagination;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupReport;
 
 @Controller
 public class AdminController {
@@ -26,12 +28,28 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("manageMember.ij")
-	public String manageMemberView(Integer page, ModelAndView mv) {
-		page = (page == null)? 1 : page;
+	public ModelAndView manageMemberView(Integer page, ModelAndView mv) {
+		int currentPage = (page == null) ? 1 : page;
 		
 		//회원 정보 리스트 가져오기
-		ArrayList<Member> mList = adService.memberList(page);
-		return "admin/manageMember";
+		ArrayList<Member> mList = adService.selectMemList(currentPage);
+		mv.addObject("mList", mList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageMember");
+		return mv;
+	}
+	
+	/** 회원 상세페이지로 이동
+	 * @param page
+	 * @param memberId
+	 * @param mv
+	 * @return mv
+	 */
+	@RequestMapping("memDetail.ij")
+	public ModelAndView memDetailView(Integer page, String memberId, ModelAndView mv) {
+		Member member = adService.selectMemDetail(memberId);
+		System.out.println(member);
+		mv.addObject("member", member).setViewName("admin/memberDetail");
+		
+		return mv;
 	}
 	
 	/** 모임관리페이지 이동
@@ -62,8 +80,13 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("groupReport.ij")
-	public String groupReportView() {
-		return "admin/groupReport";
+	public ModelAndView groupReportView(ModelAndView mv, Integer page) {
+		int currentPage = (page == null) ? 1 : page;
+		
+		//그룹 신고 리스트 가져오기
+		ArrayList<GroupReport> rList = adService.selectGroupReptList(currentPage);
+		mv.addObject("rList", rList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupReport");
+		return mv;
 	}
 
 	/** 카테고리관리페이지 이동

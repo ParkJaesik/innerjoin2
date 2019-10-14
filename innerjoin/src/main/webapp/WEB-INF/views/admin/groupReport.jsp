@@ -20,14 +20,9 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	
-	<style>
-		.memListTable th {
-			text-align: center;
-		}
-	</style>
 </head>
 <body>
+
 	<jsp:include page="adminMenubar.jsp"/>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
@@ -35,13 +30,13 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active"><a href="manageMember.ij">회원관리</a></li>
+				<li class="active"><a href="manageMember.ij">신고관리</a></li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">회원 리스트</h1>
+				<h1 class="page-header">그룹 신고 리스트</h1>
 			</div>
 		</div><!--/.row-->
 
@@ -49,21 +44,20 @@
 			<div class="col-md-12">
 				
 				<h3 align="center">
-					총 회원 수 : ${ pi.listCount }
+					총 신고 수 : ${ pi.listCount }
 				</h3>
 				
 				<table class="memListTable" align="center" border="1" cellspacing="0" width="900" id="tb">
 					<tr>
 						<th>번호</th>
-						<th>아이디</th>
-						<th>닉네임</th>
-						<th>가입한 모임 수</th>
-						<th>신고 횟수</th>
-						<th>회원 상태</th>
-						<th>가입일</th>
+						<th>모임 이름</th>
+						<th>모임 번호</th>
+						<th>신고자</th>
+						<th>처리 상태</th>
+						<th>신고일</th>
 					</tr>
 					
-					<c:forEach var="m" items="${ mList }" varStatus="status">
+					<c:forEach var="r" items="${ rList }" varStatus="status">
 						<tr>
 							<td align="center">${ status.count }</td>
 							
@@ -72,14 +66,13 @@
 									<c:param name="memberId" value="${ m.memberId }"/>
 									<c:param name="page" value="${ pi.currentPage }"/>
 								</c:url>
-								<a href="${ memDetail }">${ m.memberId }</a>
+								<a href="${ memDetail }">${ r.groupName }</a>
 							</td>
 							
-							<td align="center">${ m.memberName }</td>
-							<td align="center">${ m.memberJoinCount }</td>
-							<td align="center">${ m.memberReptCount }</td>
-							<td align="center">${ m.memberStatusCode }</td>
-							<td align="center">${ fn:split(m.memberEnrollDate, ' ')[0] }</td>
+							<td align="center">${ r.groupNo }</td>
+							<td align="center">${ r.memberId }</td>
+							<td align="center">${ r.groupReptStatus }</td>
+							<td align="center">${ fn:split(r.groupReptDate, ' ')[0] }</td>
 						</tr>
 					</c:forEach>
 					
@@ -133,11 +126,12 @@
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 	  
+	
 	<script>
 		window.onload = function () {
-			$("#manageMember").addClass("active");
+			$("#manageGroup").addClass("active");
 		};
 	</script>
-	
+	  
 </body>
 </html>

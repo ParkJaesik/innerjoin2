@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="adminMapper">
+<mapper namespace="mgSearchMapper">
   <!-- 원본 :  <resultMap type="memberResultSet" id="Member"> -->
   <!-- type , id 반대로 씀 -->
   
@@ -41,78 +41,26 @@
 		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
 	</resultMap>
 	
-  	<resultMap type="GroupReport" id="groupReptResultSet">
-		<id property="groupReptNo" column="GROUP_REPT_NO"/>
-		<result property="groupReptContent" column="GROUP_REPT_CONTENT"/>
-		<result property="groupNo" column="GROUP_NO"/>
-		<result property="groupName" column="GROUP_NAME"/>
-		<result property="memberId" column="MEMBER_ID"/>
-		<result property="groupReptStatus" column="GROUP_REPT_STATUS"/>
-		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
-	</resultMap>
-	
-	
-	<select id="memListCount" resultType="_int">
+	<!-- 공개인 유저 수 조회 -->
+	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM MEMBER
-		WHERE MEMBER_STATUS_CODE IN (1, 2)
+		LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
+		WHERE MEMBER_STATUS_CODE != 3 
+		AND MEMBER_OPEN_STATUS ='Y'
+	</select>
+	
+	<!-- 페이징처리 게시물 조회 -->
+	<select id="selectList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
+		WHERE MEMBER_STATUS_CODE != 3 
+		AND MEMBER_OPEN_STATUS ='Y'
 	</select>
   
-  	<select id="selectMemList" resultMap="memberResultSet">
-  		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_ENROLL_DATE, 
-  			MEMBER_JOIN_COUNT, MEMBER_REPT_COUNT, MEMBER_STATUS_CODE
-  		FROM MEMBER
-  		WHERE MEMBER_STATUS_CODE != 3
-  		ORDER BY MEMBER_ENROLL_DATE DESC
-  	</select>
-  	
-  	<select id="selectMemBasic" parameterType="string" resultMap="memberResultSet">
-  		SELECT MEMBER_ID, MEMBER_NAME, LOGIN_WAY, 
-  			MEMBER_HOST_COUNT, MEMBER_JOIN_COUNT, MEMBER_PRO_PATH, 
-  			MEMBER_REPT_COUNT, MEMBER_STATUS_CODE, MEMBER_ENROLL_DATE
-  		FROM MEMBER
-  		WHERE MEMBER_STATUS_CODE != 3 AND MEMBER_ID = #{memberId}
-  	</select>
-  	
- 	<select id="selectMemDetail" parameterType="string" resultMap="memberResultSet">
-  		SELECT MEMBER_INTRODUCE, MEMBER_BIRTHDAY, MEMBER_GENDER, MEMBER_OPEN_STATUS
-  		FROM MEMBER_ADD_INFO
-  		WHERE MEMBER_ID = #{memberId}
-  	</select>
-  	
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  	<select id="getGroupReptListCount" resultType="_int">
-		SELECT COUNT(*) 
-		FROM GROUP_REPORT
-		ORDER BY GROUP_REPT_DATE DESC
-	</select>
-  	
-  	<select id="selectGroupReptList" resultMap="groupReptResultSet">
-		SELECT GR.*, G.GROUP_NAME
-		FROM GROUP_REPORT GR
-		JOIN "GROUP" G ON(GR.GROUP_NO = G.GROUP_NO)
-		ORDER BY GROUP_REPT_DATE DESC
-	</select>
-  	
-  	
-  
+	
 </mapper>
