@@ -64,6 +64,7 @@
 							<td align="left">
 								<c:url var="groupDetail" value="groupDetail.ij">
 									<c:param name="gNo" value="${ r.groupNo }"/>
+									<c:param name="groupReptNo" value="${ r.groupReptNo}"/>
 									<c:param name="page" value="${ pi.currentPage }"/>
 								</c:url>
 								<a href="${groupDetail}">${ r.groupName }</a>

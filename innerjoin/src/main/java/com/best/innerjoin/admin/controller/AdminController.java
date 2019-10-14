@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.admin.model.service.AdminService;
@@ -135,15 +136,29 @@ public class AdminController {
 	 * @return mv
 	 */
 	@RequestMapping("groupDetail.ij")
-	public ModelAndView groupDetailView(int gNo, ModelAndView mv) {
+	public ModelAndView groupDetailView(Integer groupReptNo,int gNo, ModelAndView mv) {
 		
 		Group group = adService.selectGroupDetail(gNo);
 		System.out.println(group);
 		ArrayList<GroupMember> mList = gService.groupMemberList(gNo);
 		System.out.println("mList.size() : "+ mList.size());
-		mv.addObject("group", group).addObject("mList", mList).setViewName("admin/groupDetail");
+		mv.addObject("group", group).addObject("groupReptNo", groupReptNo).addObject("mList", mList).setViewName("admin/groupDetail");
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateGroupStatus.ij")
+	public int updateGroupStatus(Integer groupReptNo, Group group, ModelAndView mv) {
+		
+		
+		int result = adService.updateGroupStatus(groupReptNo,group);
+		if(result > 0) {
+			return result;
+		}{
+			return result;
+		}
+		
 	}
 	
 }
