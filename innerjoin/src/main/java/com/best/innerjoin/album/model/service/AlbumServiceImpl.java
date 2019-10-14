@@ -246,8 +246,40 @@ public class AlbumServiceImpl implements AlbumService {
 		}
 
 		@Override
-		public int deletePhoto(AlbumPhoto aPhoto) {
-			return aDao.deletePhoto(aPhoto);
+		public int deletePhoto(AlbumPhoto aPhoto,HttpServletRequest request) {
+			
+			int result = aDao.deletePhoto(aPhoto);
+			if(result > 0) {
+				AlbumPhoto photo = aDao.selectPhotoForDelete(aPhoto.getPhotoNo());
+				result += deleteFile(photo.getPhotoRename(),request);
+				System.out.println("삭제 결과 : " + result);
+			}
+			
+			return result;
+		}
+		
+		// 파일 삭제 메소드
+		//  공지글 등록 실패 또는 글 수정으로 업로드 파일이 변한 경우
+		//  저장되어있는 기존 파일 삭제
+		public int deleteFile(String fileName, 
+							HttpServletRequest request) {
+			
+			int result = 0;
+			// 파일 저장 경로 설정
+			String root 
+				= request.getSession().getServletContext().getRealPath("resources");
+			
+			String savePath = root + "\\auploadFiles";
+			
+			// 삭제할 파일 경로 + 파일명
+			File deleteFile = new File(savePath + "\\" + fileName);
+			
+			// 해당 파일이 존재할 경우 삭제
+			if(deleteFile.exists()) {
+				deleteFile.delete();
+				result = 1;
+			}
+			return result;
 		}
 
 		@Override

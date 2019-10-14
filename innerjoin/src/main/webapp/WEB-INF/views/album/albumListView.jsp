@@ -28,7 +28,7 @@
 			<div class="col-md-12 mid_wrapper"> -->
 				<div class="row header">
 					<div class="col-md-12">
-						<h1>모임이름 - album</h1>
+						<h1>${group.gName } - album</h1>
 					</div>
 				</div>
 				<div class="row section">
