@@ -60,4 +60,6 @@ public interface BoardService {
 	 * @return result
 	 */
 	public abstract int replyInsert(Reply reply);
+	
+	public abstract String getWriter(int boardNo);
 }

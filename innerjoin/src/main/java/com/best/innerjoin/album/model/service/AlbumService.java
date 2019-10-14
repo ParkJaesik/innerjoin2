@@ -77,7 +77,7 @@ public interface AlbumService {
 	 * @param aPhoto
 	 * @return
 	 */
-	public abstract int deletePhoto(AlbumPhoto aPhoto);
+	public abstract int deletePhoto(AlbumPhoto aPhoto,HttpServletRequest request);
 
 	
 	/** 사진등록시 알람테이블에 insert해줄 수신자 구하기

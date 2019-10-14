@@ -166,7 +166,6 @@
   	SET LEVEL_CODE = 2
   	WHERE MEMBER_ID = #{memberId}
   	AND GROUP_NO = #{gNo}
-  	AND GROUP_STATUS != 2
   </update>
   
   <!-- 모임 신청 취소 -->
@@ -245,5 +244,7 @@
   	WHERE MEMBER_NAME = #{reciverName}
   
   </select>
+  
+  
   
 </mapper>

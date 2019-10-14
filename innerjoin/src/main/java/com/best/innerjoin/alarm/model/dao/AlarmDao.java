@@ -60,4 +60,16 @@ public class AlarmDao {
 		return (ArrayList)sqlSession.selectList("alarmMapper.selectMyNote",receiverId);
 	}
 
+	public int replyNote(Map<String, String> alarmMap) {
+		return sqlSession.insert("alarmMapper.replyNote", alarmMap);
+	}
+
+	public int insertReply(Map<String, String> tmpMap) {
+		return sqlSession.insert("alarmMapper.insertReply", tmpMap);
+	}
+
+	public int inviteGroup(Map<String, String> alarmMap) {
+		return sqlSession.insert("alarmMapper.inviteGroup",alarmMap );
+	}
+
 }

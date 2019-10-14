@@ -63,8 +63,8 @@ public class GroupServiceImpl implements GroupService{
 
 	
 	@Override
-	public int insertAlarm(String memberId, String host) {
-		return gDao.insertAlarm(memberId,host);
+	public int insertAlarm(String memberId, String host,String msg) {
+		return gDao.insertAlarm(memberId,host,msg);
 	}
 
 	// 모임 회원 등급 조정
@@ -114,6 +114,26 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public String selectReceiverId(String reciverName) {
 		return gDao.selectReceiverId(reciverName);
+	}
+
+	@Override
+	public ArrayList<Group> getHostGroup(String memberName) {
+		return gDao.getHostGroup(memberName);
+	}
+
+	@Override
+	public int inviteGroupMember(Map<String, String> alarmMap) {
+		return gDao.inviteGroupMember(alarmMap);
+	}
+
+	@Override
+	public int withdraw(Map<String, String> map) {
+		return gDao.withdraw(map);
+	}
+
+	@Override
+	public int decreaseCount(String gNo) {
+		return gDao.decreaseCount(gNo);
 	}
 	
 }

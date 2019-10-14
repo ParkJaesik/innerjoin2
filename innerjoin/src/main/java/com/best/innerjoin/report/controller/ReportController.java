@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.service.ReportService;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
+import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -84,7 +86,7 @@ public class ReportController {
 		int result = rService.insertReport(report);
 		
 		if(result > 0) {
-			return "redirect:rblist.ij";
+			return "group/groupMember";
 		}else {
 			model.addAttribute("msg", "신고글 작성 실패");
 			return "common/errorPage";
@@ -142,7 +144,7 @@ public class ReportController {
 		System.out.println("result : " + result);
 		if(result > 0) {
 			ArrayList<GroupMember> gmList = rService.selectGroupMember(report.getResponGNo(), currentPage);
-			model.addAttribute("gmList", gmList).addAttribute("currentPage", currentPage);
+			 model.addAttribute("gmList", gmList).addAttribute("currentPage", currentPage);
 			return "report/gMemReportListView";
 			
 		}else {
@@ -153,10 +155,57 @@ public class ReportController {
 	}
 	
 	
+	// 강퇴하기
+	@RequestMapping("gmDrop.ij")
+	public String groupMemDelete(String memberId, GroupMemberReport report, Model model, HttpServletRequest request) {
+		
+		int result = rService.deleteReptGroupMem(memberId);
+		
+		String path = null;
+		if(result>0) {
+			model.addAttribute("report", report);
+			path = "report/gMemReportListView";
+		}else {
+			model.addAttribute("msg", "회원 강퇴 실패");
+			path = "common/errorPage";
+		}
+		
+		return path;
+		
+	}
 	
 	
 	
+
 	
+
+	
+	@ResponseBody
+	@RequestMapping("insertGroupReport.ij")
+	public String insertGroupReport(GroupReport gReport) {
+		int result = rService.insertGroupReport(gReport);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	
+	
+//	// 신고된 회원 출력 페이지 검색 
+//	@RequestMapping("gmrsearch.ij")
+//	public ModelAndView gmReportSearch(Search search, ModelAndView mv) {
+//		
+//		ArrayList<GroupMemberReport> bSearchList = rService.searchBList(search);
+//		
+//		for(GroupMemberReport r:bSearchList) {
+//			
+//		}
+//		
+//		mv.addObject("blist", bSearchList).addObject("search", search).setViewName("report/gMemReportBoardListView");
+//		return mv;
+//	}
 	
 	
 	

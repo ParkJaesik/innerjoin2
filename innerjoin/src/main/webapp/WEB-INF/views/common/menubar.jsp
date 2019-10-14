@@ -31,10 +31,10 @@
 			<ul>
 				<li id="logo-part"><a class="menu-a" href="index.jsp"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
 				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
-				<li class="menu"><a class="icon solid fa-search" href="#"><span class="menu-detail">Search</span></a></li>
+				<li class="menu"><a class="icon solid fa-search" href="mgSearchForm.ij"><span class="menu-detail">Search</span></a></li>
 				
 				<!-- 로그인 시 사용 가능 -->				
-				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span><span id="newsCount">5</span></a></li>
+				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span></a></li>
 				<c:if test="${ empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-home menu-a" href="loginForm.ij"><span class="menu-detail">Login</span></a></li>
 				</c:if>
@@ -72,13 +72,7 @@
 
 	function showAlarm(){
 		
-		if($("#alarmTable").css("display")=="none"){
-			$("#alarmTable").css("display","block");
-		}else{
-			$("#alarmTable").css("display","none");
-			
-		}
-		
+	
 		
 	};
 
@@ -115,28 +109,35 @@
 	        	$("#alaram").append("<br>");
 	        	$("#alarmTable").css("display","block");
 	        }else if(dataArray[0]=="albumInsert"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에 앨범을 등록했습니다."); */
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>"); */
+	        	
 	        	var tmpMsg = dataArray[1] + "님이 " + "<a href='albumListView.ij?gNo="+dataArray[3]+"'>" +dataArray[2] + " 모임에 앨범이 추가되었습니다." +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
 	        }else if(dataArray[0]=="apply"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	
 	        	var tmpMsg = dataArray[1] + "님이 " + "<a href='wgmlist.ij?gNo="+dataArray[4] + "'>" +  dataArray[2] + " 모임에  가입신청을 했습니다."  +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
 	        }else if(dataArray[0]=="albumReply"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
+	        	
 	        	var tmpMsg = dataArray[2] + "님이 " + "<a href='albumDetailView.ij?albumNo="+dataArray[3] + "&gNo=" + dataArray[5] +"'>" + dataArray[1]+"모임의" + dataArray[4] + " 앨범에  댓글을 달았습니다.."  +"</a>";
 	        	toastMessage(tmpMsg);
 	        	
 	        }else if(dataArray[0]=="applyMessage"){
-	        	/* $("#alaram").append(dataArray[1] + "님이 " + dataArray[2] + " 모임에  가입신청을 했습니다."); */
-	        	var tmpMsg = dataArray[2] + "모임에 " + dataArray[3] + "님이 가입 문의 쪽지를 보냈습니다.";
+	        	
+	        	var tmpMsg = dataArray[1] + "모임 에 " + dataArray[3] + "님이 가입 문의 <a href='myNoteForm.ij'>쪽지 </a>를 보냈습니다.";
 	        	toastMessage(tmpMsg);
 	        	
+	        }else if(dataArray[0]=="replyMsg"){
+			
+				var tmpMsg = dataArray[1] + "님이 가입 문의 쪽지에 대한 <a href='myNoteForm.ij'>답장 </a>을 를 보냈습니다.";
+	        	toastMessage(tmpMsg);
+	        }else if(dataArray[0]=="boardReply"){
+			
+				var tmpMsg = "<a href='bdetail.ij?boardNo=" + dataArray[2] + "&gNo=" + dataArray[4] + "'>"+ dataArray[1] + "모임 게시판에 게시하신 게시글에 댓글이 달렸습니다.</a>";
+	        	toastMessage(tmpMsg);
 	        }
-    }
+    };
     
     ws.onclose = function(event){
     	console.log("info : connection closed");
@@ -145,7 +146,9 @@
     	
     };
     
-    ws.onerror = function(event){console.log("Error :' connection closed");};
+    ws.onerror = function(event){
+    	console.log("Error :' connection closed");
+    };
     
     function toastMessage(tmpMsg){
     	$("#alarmTable").append(
@@ -165,7 +168,8 @@
     	) 
     	$("#alaram").append("<br>");
     	$('.toast').toast('show');
-    }
+    
+	};
 }
 	
 	

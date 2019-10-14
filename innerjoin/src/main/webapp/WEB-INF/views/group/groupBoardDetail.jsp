@@ -157,16 +157,20 @@
 		$("#reply-btn-input").on("click", function(){
 			var replyContent = $("#reply").val();
 			var boardNo = ${ board.boardNo };
-			var groupNo = ${ group.gNo }
+			var groupNo = ${ group.gNo };
+			
+			
+			var gName = "${gName}";
+			
 			$.ajax({
 				url : "rinsert.ij",
 				data : {replyContent : replyContent, boardNo : boardNo, groupNo : groupNo},
 				type : "post",
-				success : function(data) {
-					if (data == "success") {
+				success : function(receiverId) {
+						socket.send("boardReply," + gName + "," + boardNo + "," + receiverId + "," + groupNo);
 						$("#reply").val("");
 						replyList();
-					}
+					
 				}
 			});
 		});

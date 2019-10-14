@@ -460,6 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			alertMessage("내용을 입력해주세요.");
 			return;
 		}
+		
 		// 이벤트 시작일과 종료일이 유효한지 확인
 		if($("#eStart").val() < moment().format('YYYY-MM-DDTHH:mm:ss')) {
 			alertMessage("올바른 시간을 입력해주세요.");

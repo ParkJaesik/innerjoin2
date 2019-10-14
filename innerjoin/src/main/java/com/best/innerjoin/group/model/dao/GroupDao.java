@@ -41,12 +41,13 @@ public class GroupDao {
 		return sqlSession.insert("groupMapper.applyInsertGroup", codeMap);
 	}
 
-	public int insertAlarm(String memberId, String host) {
+	public int insertAlarm(String memberId, String host, String msg) {
 		Map<String,String> alarmMap = new HashMap<>();
 		alarmMap.put("memberId", memberId);
 		alarmMap.put("host", host);
-		System.out.println(alarmMap.get("memberId"));
-		System.out.println(alarmMap.get("host"));
+		alarmMap.put("msg", msg);
+		
+		
 		return sqlSession.insert("alarmMapper.insertAlarm", alarmMap);
 
 	}
@@ -87,6 +88,22 @@ public class GroupDao {
 	public String selectReceiverId(String reciverName) {
 		return sqlSession.selectOne("memberMapper.selectReceiverId", reciverName);
 		
+	}
+
+	public ArrayList<Group> getHostGroup(String memberName) {
+		return (ArrayList)sqlSession.selectList("groupMapper.getHostGroup", memberName);
+	}
+
+	public int inviteGroupMember(Map<String, String> alarmMap) {
+		return sqlSession.insert("groupMapper.inviteGroupMember",alarmMap);
+	}
+
+	public int withdraw(Map<String, String> map) {
+		return sqlSession.update("groupMapper.withdrawGroup",map);
+	}
+
+	public int decreaseCount(String gNo) {
+		return sqlSession.update("groupMapper.decreaseCount",gNo);
 	}
 
 }

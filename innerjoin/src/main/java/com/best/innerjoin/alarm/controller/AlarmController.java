@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.best.innerjoin.alarm.model.service.AlarmService;
@@ -43,8 +44,26 @@ public class AlarmController {
 		
 	}
 	
+	@RequestMapping("deleteNote.ij")
+	public String deleteNote(Alarm alarm) {
+		
+		String alarmId = alarm.getAlarmId();
+		
+		int result = alarmService.deleteAlarm(alarmId);
+		String path  = null;
+		
+		if(result>0) {
+			path = "redirect:myNoteForm.ij";
+		}else {
+			path = "common/errorPage";
+		}
+		return path;
+		
+		
+	}
+	
 	@ResponseBody
-	@RequestMapping("insertNote.ij")
+	@RequestMapping(value="insertNote.ij",method=RequestMethod.POST )
 	public String insertNote(String reciverName, String askMsg,String  senderId,String  gName) {
 		
 		
@@ -82,6 +101,46 @@ public class AlarmController {
 		path = "member/myNote";
 		
 		return path;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "replyNote.ij",method=RequestMethod.POST )
+	public int replyNote(String  senderId,String  receiverId,String resposeMsg) {
+		
+		Map<String,String> alarmMap = new HashMap<>();
+		
+		alarmMap.put("receiverId", receiverId);
+		alarmMap.put("resposeMsg", resposeMsg);
+		alarmMap.put("senderId",senderId);
+		
+		int result = alarmService.replyNote(alarmMap);
+		
+		
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "inviteGroup.ij",method=RequestMethod.POST )
+	public int inviteGroup(String  senderId,String  receiverId,String msg,String gNo) {
+		
+		Map<String,String> alarmMap = new HashMap<>();
+		
+		alarmMap.put("receiverId", receiverId);
+		alarmMap.put("msg", msg);
+		alarmMap.put("senderId",senderId);
+		alarmMap.put("gNo",gNo);
+		
+		int result = gService.inviteGroupMember(alarmMap);
+		
+		
+		int result2 = alarmService.inviteGroup(alarmMap);
+		
+		
+		
+		
+		
+		return result;
 	}
 	
 	

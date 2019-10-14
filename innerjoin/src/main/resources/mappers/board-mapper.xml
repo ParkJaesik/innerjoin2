@@ -103,6 +103,17 @@
 		INSERT INTO REPLY VALUES
 		(SEQ_RNO.NEXTVAL, #{replyContent}, SYSDATE, SYSDATE, DEFAULT, #{boardNo}, #{memberId})
 	</insert>
+	
+	
+	<!-- 작성자 구하기 쿼리  -->
+	<select id="getWriter" parameterType="_int" resultType="string">
+		SELECT MEMBER_ID
+		FROM BOARD
+		WHERE BOARD_NO = #{boardNo}
+	
+	</select>
+	
+	
 </mapper>
 
 

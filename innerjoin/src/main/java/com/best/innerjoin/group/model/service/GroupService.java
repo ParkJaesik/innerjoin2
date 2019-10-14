@@ -2,6 +2,7 @@
 package com.best.innerjoin.group.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,7 @@ public interface GroupService {
 
 	public abstract int applyInsertGroup(String memberId, int gNo);
 
-	public abstract int insertAlarm(String memberId, String host);
+	public abstract int insertAlarm(String memberId, String host, String msg);
 
 	//  회원 등급 조정
 	public abstract int updateLevel(HttpServletRequest request, GroupMember gMember);
@@ -48,5 +49,13 @@ public interface GroupService {
 	public abstract int updateGroupCount(int gNo);
 
 	public abstract String selectReceiverId(String reciverName);
+
+	public abstract ArrayList<Group> getHostGroup(String memberName);
+
+	public abstract int inviteGroupMember(Map<String, String> alarmMap);
+
+	public abstract int withdraw(Map<String, String> map);
+
+	public abstract int decreaseCount(String gNo);
 }
 

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
+import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.Search;
 
 public interface ReportService {
@@ -54,6 +55,23 @@ public interface ReportService {
 	 * @return
 	 */
 	public abstract ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage);
+
+
+
+	/** 신고된 회원 강퇴시키기
+	 * @param memberId
+	 * @return
+	 */
+	public abstract int deleteReptGroupMem(String memberId);
+	
+
+	/** 그룹 신고 insert Service
+	 * @param gReport
+	 * @return
+	 */
+	public abstract int insertGroupReport(GroupReport gReport);
+
+
 
 //	/** 신고당한 회원 리스트 
 //	 * @param currentPage

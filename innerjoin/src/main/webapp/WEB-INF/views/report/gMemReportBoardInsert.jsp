@@ -19,7 +19,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 <style type="text/css">
-	.content {
+	.content-wrap {
 	margin: auto;
 	width: 900px;
 	height: 100%;
@@ -61,7 +61,7 @@
 			         <div class="div3">
 			             <label>신고 유형</label>
 			         </div>
-			         <div class="div5"></div>
+			         <div class="div5">
 			             <input type="radio" name="rCategory" value="욕설 및 비방" <c:if test="${rCategory eq '욕설 및 비방'}">checked="checked"</c:if>> 욕설 및 비방 &nbsp;&nbsp;&nbsp;
 			             <input type="radio" name="rCategory" value="폭력적이거나 혐오 표현" <c:if test="${rCategory eq '폭력적이거나 혐오 표현'}">checked="checked"</c:if>> 폭력적이거나 혐오 표현 <br> 
 			             <input type="radio" name="rCategory" value="선정적인 표현" <c:if test="${rCategory eq '선정적인 표현'}">checked="checked"</c:if>> 선정적인 표현 &nbsp;
@@ -83,9 +83,11 @@
 			     	<button type="button">취소</button>
 			     	<button type="submit" onclick="location.href='rblist.ij'">등록</button>
 			     </div>
+			 
 			</form>
 		</div>
-       </div>
+	</div>
+      
        
        <script>
        $(document).ready(function() {

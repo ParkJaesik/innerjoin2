@@ -27,6 +27,17 @@
 		<result property="memberName" column="MEMBER_NAME"/>
 	</resultMap>
 	
+	<!-- 그룹 신고 -->
+	<resultMap id="groupReptResultSet" type="GroupReport">
+		<id property="groupReptNo" column="GROUP_REPT_NO"/>
+		<result property="groupReptContent" column="GROUP_REPT_CONTENT"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="groupReptStatus" column="GROUP_REPT_STATUS"/>
+		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
+	</resultMap>
+	
+	
 	
 	
 	<!-- 모임 회원 신고글 전체수 조회 -->
@@ -103,7 +114,7 @@
 	UPDATE GROUP_MEMBER
 		SET GROUP_MEM_REPT_COUNT = GROUP_MEM_REPT_COUNT +1
 		WHERE MEMBER_ID = #{responId}
-		AND GROUP_NO = #{responGNo} 
+		AND GROUP_NO = #{responGNo}
 	</update>
 	
 	
@@ -113,10 +124,13 @@
 		FROM GROUP_MEMBER
 		WHERE GROUP_NO = #{responGNo}
 		AND GROUP_MEM_REPT_COUNT > 0
-	</select>
+	</select> 
+	
+	
+	
 	
 	<!-- 신고 받은 그룹 회원 목록 -->
-	<select id="selectGroupMember" parameterType="_int">
+	<select id="selectGroupMember" parameterType="_int" resultMap="groupMemResultSet">
 		SELECT GM.*, M.MEMBER_NAME
 		FROM GROUP_MEMBER GM
 		JOIN MEMBER M ON(M.MEMBER_ID = GM.MEMBER_ID)
@@ -124,15 +138,26 @@
 		AND GM.GROUP_MEM_REPT_COUNT > 0
 	</select>
 	
+	
+	<!-- 신고 받은 회원 강퇴하기 -->
+	<update id="deleteReptGroupMem" parameterType="String">
+		UPDATE GROUP_MEMBER_REPORT
+		SET 
+		
+	</update>
+	
+	
+	
+	
+	<!-- 그룹 신고 insert -->
+	<insert id="insertGroupReport" parameterType="GroupReport">
+		INSERT INTO GROUP_REPORT
+		VALUES(SEQ_G_RNO.NEXTVAL, #{groupReptContent},#{groupNo},#{memberId},DEFAULT, DEFAULT)
+	</insert>
 
-	
-	
-	<!-- 신고당한회원 리스트 -->
-	<!-- <select id="selectList" resultMap="groupMemReportResultSet">
-		SELECT MEMBER_REPT_NO, RESPONDENT_ID
-	</select>  -->
-	
-	
-	
-
+	<update id="updateGroupReptCount" parameterType="GroupReport" >
+		UPDATE "GROUP"
+		SET GROUP_REPT_COUNT = GROUP_REPT_COUNT + 1
+		WHERE GROUP_NO = #{groupNo}
+	</update>
 </mapper>

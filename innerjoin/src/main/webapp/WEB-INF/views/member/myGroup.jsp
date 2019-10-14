@@ -60,16 +60,16 @@
 									<br>
 									<div class="basic-padding">
 										<div class="image-hover">
-											${ myGroup.filePath }
+											<img src="${contextPath}/resources/images/member/${myGroup.filePath }"> 
 											<!-- 그룹 썸네일 이미지 -->
 											<div class="overlay">
 												<h2>${ myGroup.gName }</h2>
 												<c:if test="${ !empty loginUser }">
-													<c:url var="goGorup" value="goGroupPage.ij">
+													<%-- <c:url var="goGorup" value="goGroupPage.ij">
 														<!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
 														<c:param name="gNo" value="${ myGroup.gNo }" />
-													</c:url>
-													<a href="${ goGroup }" class="btn-hover">Show More</a>
+													</c:url> --%>
+													<a href="goGroupPage.ij?gNo=${ myGroup.gNo }" class="btn-hover">Show More</a>
 												</c:if>
 											</div>
 										</div>

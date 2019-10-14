@@ -1,6 +1,8 @@
 package com.best.innerjoin.board.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.best.innerjoin.alarm.model.service.AlarmService;
 import com.best.innerjoin.board.model.service.BoardService;
 import com.best.innerjoin.board.model.vo.Board;
 import com.best.innerjoin.board.model.vo.BoardAttachment;
 import com.best.innerjoin.board.model.vo.Reply;
 import com.best.innerjoin.common.Pagination;
+import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.google.gson.Gson;
@@ -29,6 +33,11 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bService;
+	@Autowired
+	private AlarmService alarmService;
+	@Autowired
+	private GroupService gService;
+	
 	
 	// 게시판 조회
 	@RequestMapping("blist.ij")
@@ -52,7 +61,39 @@ public class BoardController {
 	
 	// 게시글 상세 조회
 	@RequestMapping("bdetail.ij")
-	public ModelAndView boardDetail(int boardNo, ModelAndView mv, Integer page, HttpServletRequest request) {
+	public ModelAndView boardDetail(int boardNo, ModelAndView mv, Integer page, HttpServletRequest request,Integer gNo) {
+		
+		
+		int groupNo = 0;
+		if(request.getSession().getAttribute("group")!=null) {
+			groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
+		}else {
+			groupNo = gNo;
+			Group tempGroup = gService.goGroupPage(groupNo);
+			
+			Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+			Integer groupMemberCode = -1;  
+			if(loginUser!=null) {
+			String memberId = loginUser.getMemberId();
+			
+			
+			if(memberId != null) {
+				groupMemberCode = gService.selectCode(memberId,gNo);
+				if(groupMemberCode ==null) {
+					groupMemberCode = 5;
+					
+				}
+			}
+			request.getSession().setAttribute("group",tempGroup );
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			}
+		
+		}
+		
+		
+		
+		
 		int currentPage = page == null ? 1 : page;
 		
 		Board board = bService.boardDetail(boardNo);
@@ -162,10 +203,30 @@ public class BoardController {
 		
 		reply.setMemberId(memberId);
 		
+		int gNo = ((Group)session.getAttribute("group")).getgNo();
+		int boardNo = reply.getBoardNo();
+		String gName = (String) session.getAttribute("gName");
+		
+		String receiverId =  bService.getWriter(boardNo);
+		
+		
+		
+		
+		
 		int result = bService.replyInsert(reply);
 		
 		if (result > 0) {
-			return "success";
+			
+			String msg = "<a href='bdetail.ij?boardNo=" + boardNo +  "&gNo="+ gNo +"'>"+ gName + "모임 게시판에 게시하신 게시글에 댓글이 달렸습니다.</a>";
+			Map<String,String> tmpMap = new HashMap<String, String>();
+			tmpMap.put("memberId", memberId);
+			tmpMap.put("receiverId",receiverId);
+			tmpMap.put("msg",msg);
+			
+			int result2 = alarmService.insertReply(tmpMap);
+			
+			
+			return receiverId;
 			
 		} else {
 			return "fail";

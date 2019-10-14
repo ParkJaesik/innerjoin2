@@ -4,8 +4,12 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,7 @@ import com.best.innerjoin.event.model.vo.Event;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
+import com.best.innerjoin.member.model.service.MemberService;
 import com.best.innerjoin.member.model.vo.Member;
 
 
@@ -34,6 +39,8 @@ public class GroupController {
 	private AlarmService aService;
 	@Autowired
 	private EventService eService;
+	@Autowired
+	private MemberService mService;
 	
 	
 	@RequestMapping("ginsertForm.ij")
@@ -55,7 +62,8 @@ public class GroupController {
 		}
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		
+		GroupMember gmember = (GroupMember)request.getSession().getAttribute("memberId");
+				
 		int result = gService.insertGroup(group);
 
 		
@@ -120,7 +128,7 @@ public class GroupController {
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
 	@RequestMapping("goGroupPage.ij")
-	public String goGroupPage(HttpServletRequest request,Group group,Model model) {
+	public String goGroupPage(HttpServletRequest request,Group group,Model model,HttpServletResponse response) {
 		
 		int gNo = group.getgNo();
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
@@ -137,7 +145,6 @@ public class GroupController {
 				}
 			}
 		}
-		System.out.println(groupMemberCode);
 		Group tempGroup = gService.goGroupPage(gNo);
 		
 		
@@ -166,9 +173,9 @@ public class GroupController {
 				}
 			}
 		}
-		/*
-		 * System.out.println(groupMemberCode);
-		 */
+		
+		 System.out.println(groupMemberCode);
+		 
 		
 		model.addAttribute("event", eList2);
 		model.addAttribute("member", memList);
@@ -177,8 +184,6 @@ public class GroupController {
 		request.getSession().setAttribute("group", tempGroup);
 		request.getSession().setAttribute("gName", tempGroup.getgName());
 		request.getSession().setAttribute("groupMemberCode", groupMemberCode);
-
-		
 		
 		return "group/groupInfo";
 	}
@@ -190,14 +195,19 @@ public class GroupController {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		int gNo  = ((Group)request.getSession().getAttribute("group")).getgNo();
 		String memberId = loginUser.getMemberId();
-		String host = ((Group)request.getSession().getAttribute("group")).getgHost();
+		String hostName = ((Group)request.getSession().getAttribute("group")).getgHost();
+		String hostId = gService.selectReceiverId(hostName);
+		String gName =  ((Group)request.getSession().getAttribute("group")).getgName();
+		String msg = memberId + "님이 " + "<a href='wgmlist.ij?gNo="+gNo + "'>" +  gName + " 모임에  가입신청을 했습니다."  +"</a>";
+		
+		
 		
 		int result = gService.applyInsertGroup(memberId,gNo);
 		int result2 = 0;
 		
 		if(result>0) {
 			
-			result2 = gService.insertAlarm(memberId,host);
+			result2 = gService.insertAlarm(memberId,hostId,msg);
 			
 			if(result2>0) {
 				return "redirect:goGroupPage.ij?gNo="+gNo;
@@ -260,13 +270,6 @@ public class GroupController {
 			}
 		
 		}
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		/*
@@ -338,6 +341,37 @@ public class GroupController {
 			path= "common/errorPage";
 		}
 		return path;
+	}
+	
+	
+	//모임탈퇴하기
+	@ResponseBody
+	@RequestMapping(value="withdraw.ij", method=RequestMethod.POST)
+	public String withdraw(String loginUserId, String gNo, HttpServletRequest request) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("loginUserId",loginUserId);
+		map.put("gNo",gNo);
+		System.out.println("loginUserId : " + loginUserId);
+		System.out.println("gNo : " + gNo);
+		int result = gService.withdraw(map);
+		
+		int groupNo = Integer.parseInt(gNo);
+		String memberId= loginUserId;
+		Group tempGroup = gService.goGroupPage(groupNo);
+		String result2 = null;
+		if(result>0) {
+			
+			int groupMemberCode = gService.selectCode(memberId,groupNo);
+			request.getSession().setAttribute("group", tempGroup);
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			
+			int result3 = gService.decreaseCount(gNo); 
+			
+			result2 = "success";
+		}
+		return result2;
 	}
 
 }
