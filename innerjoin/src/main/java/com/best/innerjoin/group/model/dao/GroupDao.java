@@ -98,4 +98,12 @@ public class GroupDao {
 		return sqlSession.insert("groupMapper.inviteGroupMember",alarmMap);
 	}
 
+	public int withdraw(Map<String, String> map) {
+		return sqlSession.update("groupMapper.withdrawGroup",map);
+	}
+
+	public int decreaseCount(String gNo) {
+		return sqlSession.update("groupMapper.decreaseCount",gNo);
+	}
+
 }

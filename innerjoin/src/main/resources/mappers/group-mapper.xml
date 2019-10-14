@@ -121,5 +121,17 @@
 	
 	</insert>
 	
+	
+	
+  <update id="withdrawGroup" parameterType="map">
+  	UPDATE GROUP_MEMBER SET LEVEL_CODE = 10
+  	WHERE MEMBER_ID = #{loginUserId} AND GROUP_NO = #{gNo}
+  </update>
+  
+  
+  
+  <update id="decreaseCount" parameterType="string">
+		UPDATE "GROUP" SET GROUP_MEM_COUNT = GROUP_MEM_COUNT-1 WHERE GROUP_NO = #{gNo}
+	</update>
 </mapper>
 

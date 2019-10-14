@@ -125,5 +125,15 @@ public class GroupServiceImpl implements GroupService{
 	public int inviteGroupMember(Map<String, String> alarmMap) {
 		return gDao.inviteGroupMember(alarmMap);
 	}
+
+	@Override
+	public int withdraw(Map<String, String> map) {
+		return gDao.withdraw(map);
+	}
+
+	@Override
+	public int decreaseCount(String gNo) {
+		return gDao.decreaseCount(gNo);
+	}
 	
 }

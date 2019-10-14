@@ -53,5 +53,9 @@ public interface GroupService {
 	public abstract ArrayList<Group> getHostGroup(String memberName);
 
 	public abstract int inviteGroupMember(Map<String, String> alarmMap);
+
+	public abstract int withdraw(Map<String, String> map);
+
+	public abstract int decreaseCount(String gNo);
 }
 

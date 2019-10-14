@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -142,7 +144,6 @@ public class GroupController {
 				}
 			}
 		}
-		System.out.println(groupMemberCode);
 		Group tempGroup = gService.goGroupPage(gNo);
 		
 		
@@ -270,13 +271,6 @@ public class GroupController {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
 		/*
 		 * int groupNo = ((Group)request.getSession().getAttribute("group")).getgNo();
 		 */
@@ -346,6 +340,37 @@ public class GroupController {
 			path= "common/errorPage";
 		}
 		return path;
+	}
+	
+	
+	//모임탈퇴하기
+	@ResponseBody
+	@RequestMapping(value="withdraw.ij", method=RequestMethod.POST)
+	public String withdraw(String loginUserId, String gNo, HttpServletRequest request) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("loginUserId",loginUserId);
+		map.put("gNo",gNo);
+		System.out.println("loginUserId : " + loginUserId);
+		System.out.println("gNo : " + gNo);
+		int result = gService.withdraw(map);
+		
+		int groupNo = Integer.parseInt(gNo);
+		String memberId= loginUserId;
+		Group tempGroup = gService.goGroupPage(groupNo);
+		String result2 = null;
+		if(result>0) {
+			
+			int groupMemberCode = gService.selectCode(memberId,groupNo);
+			request.getSession().setAttribute("group", tempGroup);
+			request.getSession().setAttribute("gName", tempGroup.getgName());
+			request.getSession().setAttribute("groupMemberCode", groupMemberCode);
+			
+			int result3 = gService.decreaseCount(gNo); 
+			
+			result2 = "success";
+		}
+		return result2;
 	}
 
 }
