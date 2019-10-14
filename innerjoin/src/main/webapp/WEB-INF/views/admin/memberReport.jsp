@@ -26,49 +26,21 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Widgets</li>
+				<li class="active">신고관리</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Widgets</h1>
+				<h1 class="page-header">회원신고</h1>
 			</div>
 		</div><!--/.row-->
 
 		<div class="row">
 			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>아이디</th>
-							<th>가입 모임 수	</th>
-							<th>회원가입일</th>
-							<th>누적신고 횟수</th>
-							<th>작성 글 수</th>
-							<th>회원 등급</th>
-							<th>회원 상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							
-						</tr>
-						<tr class="table-active">
-							
-						</tr>
-						<tr class="table-success">
-						
-						</tr>
-						<tr class="table-warning">
-							
-						</tr>
-						<tr class="table-danger">
-							
-						</tr>
-					</tbody>
-				</table>
+			
+			
+			
 			</div><!--/.col-->
 			<div class="col-sm-12">
 				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
@@ -78,7 +50,9 @@
 	  
 	<script>
 		window.onload = function () {
-			$("#manageMember").addClass("active");
+			$("#manageReport").addClass("active");
+			$("#manageReport>a").collapse('show');
+			$("#groupReport").addClass("active");
 		};
 	</script>
 	
