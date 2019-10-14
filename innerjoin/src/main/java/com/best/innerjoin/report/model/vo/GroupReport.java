@@ -5,6 +5,7 @@ public class GroupReport {
 	private int groupReptNo;
 	private String groupReptContent;
 	private int groupNo;
+	private String groupName;
 	private String memberId;
 	private String groupReptStatus;
 	private String groupReptDate;
@@ -15,16 +16,23 @@ public class GroupReport {
 
 	
 
-	public GroupReport(int groupReptNo, String groupReptContent, int groupNo, String memberId, String groupReptStatus,
-			String groupReptDate) {
+	
+
+
+	public GroupReport(int groupReptNo, String groupReptContent, int groupNo, String groupName, String memberId,
+			String groupReptStatus, String groupReptDate) {
 		super();
 		this.groupReptNo = groupReptNo;
 		this.groupReptContent = groupReptContent;
 		this.groupNo = groupNo;
+		this.groupName = groupName;
 		this.memberId = memberId;
 		this.groupReptStatus = groupReptStatus;
 		this.groupReptDate = groupReptDate;
 	}
+
+
+
 
 
 
@@ -81,16 +89,25 @@ public class GroupReport {
 	}
 
 
+	
 
-	@Override
-	public String toString() {
-		return "GroupReport [groupReptNo=" + groupReptNo + ", groupReptContent=" + groupReptContent + ", groupNo="
-				+ groupNo + ", memberId=" + memberId + ", groupReptStatus=" + groupReptStatus + ", groupReptDate="
-				+ groupReptDate + "]";
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 
 
-	
+	@Override
+	public String toString() {
+		return "GroupReport [groupReptNo=" + groupReptNo + ", groupReptContent=" + groupReptContent + ", groupNo="
+				+ groupNo + ", groupName=" + groupName + ", memberId=" + memberId + ", groupReptStatus="
+				+ groupReptStatus + ", groupReptDate=" + groupReptDate + "]";
+	}
+
+
 	
 }

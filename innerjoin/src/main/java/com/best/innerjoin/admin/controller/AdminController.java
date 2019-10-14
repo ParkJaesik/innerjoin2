@@ -85,7 +85,7 @@ public class AdminController {
 		
 		//그룹 신고 리스트 가져오기
 		ArrayList<GroupReport> rList = adService.selectGroupReptList(currentPage);
-		mv.addObject("rList", rList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageMember");
+		mv.addObject("rList", rList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupReport");
 		return mv;
 	}
 
