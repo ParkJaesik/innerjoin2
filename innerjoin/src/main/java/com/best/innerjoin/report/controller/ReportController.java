@@ -142,7 +142,7 @@ public class ReportController {
 		System.out.println("result : " + result);
 		if(result > 0) {
 			ArrayList<GroupMember> gmList = rService.selectGroupMember(report.getResponGNo(), currentPage);
-			model.addAttribute("gmList", gmList).addAttribute("currentPage", currentPage);
+			 model.addAttribute("gmList", gmList).addAttribute("currentPage", currentPage);
 			return "report/gMemReportListView";
 			
 		}else {
@@ -152,11 +152,27 @@ public class ReportController {
 		
 	}
 	
+
+	
+
 	
 	
 	
 	
 	
+//	// 신고된 회원 출력 페이지 검색 
+//	@RequestMapping("gmrsearch.ij")
+//	public ModelAndView gmReportSearch(Search search, ModelAndView mv) {
+//		
+//		ArrayList<GroupMemberReport> bSearchList = rService.searchBList(search);
+//		
+//		for(GroupMemberReport r:bSearchList) {
+//			
+//		}
+//		
+//		mv.addObject("blist", bSearchList).addObject("search", search).setViewName("report/gMemReportBoardListView");
+//		return mv;
+//	}
 	
 	
 	

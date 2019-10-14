@@ -55,6 +55,9 @@ public interface ReportService {
 	 */
 	public abstract ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage);
 
+
+	
+
 //	/** 신고당한 회원 리스트 
 //	 * @param currentPage
 //	 * @return

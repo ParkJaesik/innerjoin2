@@ -83,12 +83,12 @@ div {
 
 
 
-.content {
+/* .content{
 	margin: auto;
 	width: 1000px;
 	height: 100%;
 }
-
+ */
 h3 {
 	margin: 0 0 50px 0;
 	font-weight: bold;
