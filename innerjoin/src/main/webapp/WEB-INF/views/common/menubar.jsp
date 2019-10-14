@@ -31,7 +31,7 @@
 			<ul>
 				<li id="logo-part"><a class="menu-a" href="index.jsp"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
 				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
-				<li class="menu"><a class="icon solid fa-search" href="#"><span class="menu-detail">Search</span></a></li>
+				<li class="menu"><a class="icon solid fa-search" href="mgSearchForm.ij"><span class="menu-detail">Search</span></a></li>
 				
 				<!-- 로그인 시 사용 가능 -->				
 				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span><span id="newsCount">5</span></a></li>

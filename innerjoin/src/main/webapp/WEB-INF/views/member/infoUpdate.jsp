@@ -126,7 +126,7 @@
 			                      
 			                      <!-- 처리하기 -->
 			                      <div class="input-group">
-			                      	<c:if test="${ loginUser.memberGender != ''}">
+			                      	<%-- <c:if test="${ loginUser.memberGender != ''}">
 			                      	<input type="radio" name="memberGender" value="M" id="gender-male"
 			                      	<% if("M".equals("${loginUser.memberGender}")){%>checked<%}%>/>
 									<label for="gender-male">Male</label>
@@ -134,12 +134,12 @@
 									<% if("F".equals("${loginUser.memberGender}")){%>checked<%}%>/>
 									<label for="gender-female">Female</label>
 			                      	</c:if>
-			                      	<c:if test="${ loginUser.memberGender == ''}">
+			                      	<c:if test="${ loginUser.memberGender == ''}"> --%>
 			                      	<input type="radio" name="memberGender" value="M" id="gender-male"/>
 									<label for="gender-male">Male</label>
 									<input type="radio" name="memberGender" value="F" id="gender-female"/>
 									<label for="gender-female">Female</label>
-			                      	</c:if>
+			                      	<%-- </c:if> --%>
 			                    
 			                      </div>
 			                    </div>
@@ -191,11 +191,13 @@
 					type: "POST",
 					data : {name:memberName},
 					success:function(result){
-						if(result == "true"){
+						if(result == true){
 							$("#nameCheck").css({"color":"green","font-size":"13px"});
 							$("#nameCheck").html("사용가능한 닉네임입니다.");
 							nameCheck=true;
 						}else{
+							$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
+							$("#nameCheck").html("이미사용 중인 닉네임입니다.");
 							nameCheck = false;
 						}
 					}
@@ -236,9 +238,11 @@
 		});
 		
 		if("${loginUser.memberGender}" == 'F'){
-			$("#gender-female").attr("checked", true);
+			$("#gender-female").attr("checked", true).attr("disabled", true);
+			$("#gender-male").attr("checked", false).attr("disabled", true);
 		} else{
 			$("#gender-male").attr("checked", true);
+			$("#gender-female").attr("checked", false).attr("disabled", true);
 		}
 		
 		

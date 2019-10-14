@@ -145,27 +145,50 @@
 			var memberPwd = $.trim($("#memberPwd").val());
 			var memberPwd2 = $.trim($("#memberPWd2").val());
 				
+			$("#memberId").on("input", function(){
+				var memberId = $.trim($("#memberId").val());
+				$.ajax({
+					url: "dupId.ij",
+					type: "POST",
+					data: {id:memberId},
+					success:function(result){
+						if(result == "true"){
+							$("#emailCheck").css({"color":"green", "font-size":"13px"});
+							$("#emailCheck").html("사용 가능한 이메일입니다.");
+							idCheck = true;	
+						}else{
+							$("#emailCheck").css({"color":"#df5b4dcb", "font-size":"13px"});
+							$("#emailCheck").html("이미 사용 중인 Email입니다.");
+							$("#memberId").focus();
+							idCheck= false;
+						}
+					}
+				});
 			
-			// 닉네임 중복/형식 검사 
+			});
+			
+			// 닉네임 중복/형식 검사  --> 한번더 살펴보기
 			$("#memberName").on("input", function(){
 				var memberName = $.trim($("#memberName").val());
 				var nameRegExp = /^[0-9a-zA-z가-힣]{3,15}$/;
 				if(!nameRegExp.test(memberName)){
 					$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
 					$("#nameCheck").html("문자,숫자 3~15자리 이내로 입력해주세요.");
-					idCheck = false;
+					nameCheck = false;
 				}else{
 					$.ajax({
 						url: "dupName.ij",
 						type: "POST",
 						data : {name:memberName},
 						success:function(result){
-							if(result == "true"){
+							if(result == true){
 								$("#nameCheck").css({"color":"green","font-size":"13px"});
 								$("#nameCheck").html("사용가능한 닉네임입니다.");
-								nameCheck=true;
+								
 							}else{
-								nameCheck = false;
+								$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
+								$("#nameCheck").html("이미 사용중인 닉네임입니다.");
+								
 							}
 						}
 					});
