@@ -265,12 +265,12 @@ div {
 
 					<div id="mainpage-group-container">
 						<h1>새로운 모임</h1>
-						
+						<c:set var="groupFilePath" value="resources/guploadFiles"/>
 						<div id="group-container">
 							<c:forEach var="g" items="${ list }">
 								<div id="main-group">
 									<div id="main-group-thumbnail">
-										<img src="" alt="">
+										<img src="${groupFilePath }/${g.filePath}" alt="">
 									</div>
 		
 									<div id="main-group-info">

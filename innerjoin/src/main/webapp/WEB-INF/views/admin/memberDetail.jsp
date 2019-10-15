@@ -147,6 +147,10 @@
 			vertical-align: baseline;
 		}
 		
+		#proRept{
+			color: black;
+				
+		}
 		
 	</style>
 
@@ -154,7 +158,7 @@
 
 </head>
 <body>
-	<c:set var="proPath" value="resources/memUploadFiles"/>
+	<c:set var="proPath" value="resources/images/member"/>
 	<jsp:include page="adminMenubar.jsp"/>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
@@ -234,7 +238,7 @@
 	                            	<td class="detailInfoLabel">생일</td>
 	                            	<td class="detailInfoContent" colspan='3'>
 	                            		<c:if test="${!empty member.memberBirthday }">
-	                            			${member.memberBirthday }"
+	                            			${member.memberBirthday }
 	                            		</c:if>
 	                            		<c:if test="${empty member.memberBirthday }">
 	                            			-
@@ -290,7 +294,7 @@
 												<c:if test="${ empty mgInfo}">
 													<tr>
 														<td colspan='7' align="center">
-															개설 모임이 없습니다.
+															개설한 모임이 없습니다.
 														</td>
 													</tr>
 												</c:if>
@@ -435,10 +439,13 @@
 										<tr>
 											<th> 번호 </th>
 											<th> 신고 내용 </th>
-											<th> 신고자(아이디 / 닉네임) </th>
+											<th> 신고자 (아이디 / 닉네임) </th>
 											<th> 신고상태 </th>
 											<th> 신고일 </th>
-											<th> 처리 </th>
+											<th>
+												<button type="button" id="proRept" onclick="processReport();">처리</button>
+												<input type="checkbox" id="allReptChk">all
+											</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -461,13 +468,15 @@
 														${mr.memReptContent }
 													</td>
 													<td>
-														${mr.reporterId}
+														<c:url var="memDetail" value="memDetail.ij">
+															<c:param name="memberId" value="${fn:split(mr.reporterId,'/')[0]}"/>
+														</c:url>
+														<a href="${memDetail }"> ${mr.reporterId} </a>
 													</td>
 													<td>
 														${mr.memReptStatus}
 													</td>
 													<td>
-														<%-- <fmt:parseDate value="${mr.memReptDate}" pattern="yyyy.MM.dd"/> --%>
 														${mr.memReptDate}
 													</td>
 													<td>
@@ -477,7 +486,6 @@
 														<c:if test='${mr.memReptStatus.equals("미처리")}'>
 															<input type="checkbox" name="memReptNo" value="${mr.memReptNo }">
 														</c:if>
-														&nbsp;처리하기
 													</td>
 												</tr>
 											</c:forEach>
@@ -522,6 +530,29 @@
 			location.href="setMemStatus.ij?memberId=${member.memberId}&statusCode=" + changeStatusCode;
 		}
 	
+		
+		function processReport() {
+			if(!confirm("선택한 모든 신고내역의 처리상태를 '처리'로 변경하시겠습니까?")) return;
+			
+			var reptNoList = "";
+			$("input[name=memReptNo]:checked").each(function(i){
+				reptNoList += $(this).val() + ",";
+			});
+			reptNoList = reptNoList.slice(0, -1);
+			console.log(reptNoList);
+
+			location.href="processReport.ij?memberId=${member.memberId}&reptNoList=" + reptNoList;
+			
+		}
+		
+		$(function() {
+			$("#allReptChk").click(function() {
+				if($("#allReptChk").is(":checked")) 
+					$("input[name=memReptNo]").prop('checked', true);
+		        else  
+					$("input[name=memReptNo]").prop('checked', false);
+			});
+		});
 	
 	</script>
 

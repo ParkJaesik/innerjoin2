@@ -89,7 +89,7 @@
 		</div>
 
 		<div id="group-menu-container">
-			<button onclick="location.href='goGroupPage.ij?gNo=8';" type="button" class="btn btn-primary" id="group-btn-index">정보</button>
+			<button onclick="location.href='goGroupPage.ij?gNo=${group.gNo}';" type="button" class="btn btn-primary" id="group-btn-index">정보</button>
 
 			<c:if test="${!empty loginUser and groupMemberCode eq 1 or groupMemberCode eq 0 or groupMemberCode  eq 2}">
 				<button type="button" class="btn btn-primary" id="group-btn-schedule" onclick="location.href='calendar.ij'">일정</button>

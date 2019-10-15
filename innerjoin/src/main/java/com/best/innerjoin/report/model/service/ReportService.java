@@ -63,7 +63,7 @@ public interface ReportService {
 	 * @param memberId
 	 * @return
 	 */
-	public abstract int deleteReptGroupMem(String memberId);
+	public abstract int deleteReptGroupMem(GroupMember groupMember);
 	
 
 	/** 그룹 신고 insert Service

@@ -13,6 +13,7 @@ import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.MemberReport;
 
@@ -86,7 +87,12 @@ public class AdminServiceImpl implements AdminService {
 		return adDao.setMemberStatus(memStatus);
 	}
 
-	
+	@Override
+	public int processReport(String reptNoList) {
+		return adDao.processReport(reptNoList);
+	}
+
+
 	
 	
 	
@@ -152,6 +158,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 
+	@Override
+	public ArrayList<GroupMemberReport> selectGroupMemReptList(int currentPage) {
+		int listCount = adDao.getGroupMemReptListCount();
+		
+		// 게시물 목록 조회(페이징 처리 적용)
+		// 1) 페이지 정보 저장
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+
+		return adDao.selectGroupMemReptList(pi);
+	}
+
+	@Override
+	public int updateGroupMemLevel(GroupMember gMember) {
+		// TODO Auto-generated method stub
+		return adDao.updateGroupMemLevel(gMember);
+	}
 
 
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.MemberReport;
 
@@ -41,6 +43,11 @@ public interface AdminService {
 	 */
 	int setMemberStatus(String memberId, int statusCode);
 
+	/** 회원 신고 상태 바꿔주기
+	 * @param reptNoList
+	 * @return result
+	 */
+	int processReport(String reptNoList);
 	
 	
 	
@@ -83,6 +90,19 @@ public interface AdminService {
 	 * @return
 	 */
 	int updateGroupStatus(Integer groupReptNo,Group group);
+
+	/** 그룹 회원 신고 리스트 가져오기ㅣ
+	 * @param currentPage
+	 * @return
+	 */
+	ArrayList<GroupMemberReport> selectGroupMemReptList(int currentPage);
+
+	/** 그룹 회원 등급 변경
+	 * @param gMember
+	 * @return
+	 */
+	int updateGroupMemLevel(GroupMember gMember);
+
 
 
 	

@@ -43,14 +43,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping("gohome.ij")
-	public String goHome(HttpServletRequest request){
+	public String goHome(HttpServletRequest request, Model model){
 		
 		if(request.getSession().getAttribute("group")!=null) {
 			request.getSession().removeAttribute("group");
 			request.getSession().removeAttribute("gName");
 			request.getSession().removeAttribute("groupMemberCode");
 		}
+		ArrayList<Group> list = gService.mainGroupList();
 		
+		model.addAttribute("list", list);
+		System.out.println("list: " + list);
 		return "/index";
 	}
 	
