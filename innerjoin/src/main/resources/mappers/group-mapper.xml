@@ -27,6 +27,12 @@
 		<result property="memberName" column="MEMBER_NAME"/>
 	</resultMap>
 	
+	<resultMap type="GroupCat" id="groupCatResultSet">
+		<id property="groupCatCode" column="GROUP_CATEGORY_CODE"/>
+		<result property="groupCatName" column="GROUP_CATEGORY_NAME"/>
+	</resultMap>
+	
+	
 	<!-- 모임 등록 쿼리 -->
 	<insert id="insertGroup" parameterType="Group">
 		INSERT INTO "GROUP" 
@@ -143,5 +149,12 @@
 	<update id="rejoinApplyGroupMember" parameterType="map">
 		UPDATE GROUP_MEMBER SET LEVEL_CODE = '4' WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
 	</update>
+	
+	
+	
+	<select id="selectGroupCat" resultMap="groupCatResultSet">
+		SELECT *
+		FROM GROUP_CATEGORY
+	</select>
 </mapper>
 

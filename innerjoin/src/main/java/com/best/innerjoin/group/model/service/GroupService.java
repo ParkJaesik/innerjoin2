@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 
@@ -61,5 +62,7 @@ public interface GroupService {
 	public abstract int selectIsGroupMember(String memberId, int gNo);
 
 	public abstract int rejoinApplyGroupMember(String memberId, int gNo);
+
+	public abstract ArrayList<GroupCat> selectGroupCat();
 }
 

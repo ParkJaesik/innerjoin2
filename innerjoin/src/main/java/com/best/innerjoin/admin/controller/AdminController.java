@@ -14,9 +14,11 @@ import com.best.innerjoin.admin.model.service.AdminService;
 import com.best.innerjoin.admin.model.vo.Pagination;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.google.gson.Gson;
 
 @Controller
 public class AdminController {
@@ -25,6 +27,7 @@ public class AdminController {
 	private AdminService adService;
 	@Autowired
 	private GroupService gService;
+
 	
 	//임시 관리자 페이지로 이동
 	@RequestMapping("admin.ij")
@@ -161,4 +164,15 @@ public class AdminController {
 		
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="loadCat.ij",produces="text/plain;charset=UTF-8")
+	public String loadCategory() {
+		
+		ArrayList<GroupCat> catList = gService.selectGroupCat();
+		
+		
+		return new Gson().toJson(catList);
+		
+	}
 }
