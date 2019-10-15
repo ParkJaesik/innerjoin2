@@ -14,18 +14,20 @@ public class Group { // group VO
 	private int localCode;
 	private int gStatus;
 	private int gCategoryCode;
+	private String gCategoryName;
 	private int gReptCount;
 	private String filePath;
 	private Date gEnrollDate;
 	private Date gModifyDate;
 	private String districtName;
+	private String cityName;
 
 	public Group() {
 	}
 
 	public Group(int gNo, String gHost, String gOpenStatus, String gName, int gLimit, String gInfo, int gMemCount,
-			int localCode, int gStatus, int gCategoryCode, int gReptCount, String filePath, Date gEnrollDate,
-			Date gModifyDate, String districtName) {
+			int localCode, int gStatus, int gCategoryCode, String gCategoryName,int gReptCount, String filePath, Date gEnrollDate,
+			Date gModifyDate, String districtName,String cityName) {
 		super();
 		this.gNo = gNo;
 		this.gHost = gHost;
@@ -37,11 +39,13 @@ public class Group { // group VO
 		this.localCode = localCode;
 		this.gStatus = gStatus;
 		this.gCategoryCode = gCategoryCode;
+		this.gCategoryName = gCategoryName;
 		this.gReptCount = gReptCount;
 		this.filePath = filePath;
 		this.gEnrollDate = gEnrollDate;
 		this.gModifyDate = gModifyDate;
 		this.districtName = districtName;
+		this.cityName = cityName;
 	}
 
 	public int getgNo() {
@@ -163,13 +167,34 @@ public class Group { // group VO
 	public void setDistrictName(String districtName) {
 		this.districtName = districtName;
 	}
+	
+	
+
+	public String getgCategoryName() {
+		return gCategoryName;
+	}
+
+	public void setgCategoryName(String gCategoryName) {
+		this.gCategoryName = gCategoryName;
+	}
+	
+	
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
 
 	@Override
 	public String toString() {
 		return "Group [gNo=" + gNo + ", gHost=" + gHost + ", gOpenStatus=" + gOpenStatus + ", gName=" + gName
 				+ ", gLimit=" + gLimit + ", gInfo=" + gInfo + ", gMemCount=" + gMemCount + ", localCode=" + localCode
-				+ ", gStatus=" + gStatus + ", gCategoryCode=" + gCategoryCode + ", gReptCount=" + gReptCount
-				+ ", filePath=" + filePath + ", gEnrollDate=" + gEnrollDate + ", gModifyDate=" + gModifyDate
-				+ ", districtName=" + districtName + "]";
+				+ ", gStatus=" + gStatus + ", gCategoryCode=" + gCategoryCode + ", gCategoryName=" + gCategoryName
+				+ ", gReptCount=" + gReptCount + ", filePath=" + filePath + ", gEnrollDate=" + gEnrollDate
+				+ ", gModifyDate=" + gModifyDate + ", districtName=" + districtName + ", cityName=" + cityName + "]";
 	}
+
 }

@@ -15,6 +15,7 @@ import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 import com.best.innerjoin.report.model.vo.Search;
 
 @Repository("rDao")
@@ -74,7 +75,7 @@ public class ReportDao {
 	}
 
 
-	/** 회원 신고 거절
+	/** 회원 신고 처리
 	 * @param rNo
 	 * @return
 	 */
@@ -99,32 +100,44 @@ public class ReportDao {
 	 * @param responGNo
 	 * @return
 	 */
-	public ArrayList<GroupMember> selectGroupMember(int responGNo,PageInfo pi) {
+	public ArrayList<GroupMember> selectGroupMember(int responGNo, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		
 		return (ArrayList)sqlSession.selectList("reportMapper.selectGroupMember", responGNo , rowBounds);
 	}
+	
+	
+
 
 
 	/** 신고 받은 그룹회원 수
 	 * @return
 	 */
 	public int getGroupMemberListCount(int responGNo) {
-		return sqlSession.selectOne("reportMapper.selectReptMemberCount");
+		return sqlSession.selectOne("reportMapper.selectReptMemberCount", responGNo);
 	}
-
-
+	
+	
+	
 	/** 그룹 신고 DAO
 	 * @param gReport
 	 * @return
 	 */
 	public int insertGroupReport(GroupReport gReport) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("reportMapper.insertGroupReport", gReport);
 	}
 
+	
+	/** 신고된 회원 강퇴하기
+	 * @param memberId
+	 * @return
+	 */
+	public int deleteReptGroupMem(String memberId) {
+		return sqlSession.update("reportMapper.deleteReptGroupMem", memberId);
+	}
+	
 
 	/** 신고받은 그룹 신고카운트 증가
 	 * @param gReport
@@ -134,6 +147,27 @@ public class ReportDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("reportMapper.updateGroupReptCount", gReport);
 	}
+
+
+	/** 회원 신고 dao
+	 * @param mReport
+	 */
+	public int insertMemberReport(MemberReport mReport) {
+		return sqlSession.insert("reportMapper.insertMemberReport", mReport);
+		
+	}
+
+
+	/** 신고받은 회원 신고받은  횟수 증가
+	 * @param mReport
+	 * @return
+	 */
+	public int updateMemberReptCount(MemberReport mReport) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("reportMapper.updateMemberReptCount", mReport);
+	}
+
+
 
 
 	

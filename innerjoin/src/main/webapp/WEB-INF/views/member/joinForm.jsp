@@ -47,7 +47,7 @@
 				  	<div class="col-4">
 				  	
 		                <div class="margin" style="margin: 50px;"></div>
-				  		<form action="join.ij" method="post" id="joinMember" name="joinMember" onsubmit="return validate();">
+				  		<form action="join.ij" method="post" id="joinMember" name="joinMember">
 			             
 			                <div class="row">
 			                    <h3>회원가입</h3>
@@ -113,7 +113,7 @@
 			                  	</div>
 			                	</div> -->
 			              	</div>
-			              	<button id="button" onclick="validate();" style="float: right;"> 가입</button>
+			              	<button type="button" id="button" onclick="return submitCheck();" style="float: right;"> 가입</button>
 							<button type="button" onclick="index.jsp" class="btn cancel">취소</button>
 			              							
 						
@@ -127,13 +127,15 @@
 	</div>
 	
 	<script>
+	
+	var idCheck = false;
+	var nameCheck = false;
+	var pwdCheck = false;
+	var pwdCheck2 = false;
 		$(function(){
 			
 		
-			var idCheck = false;
-			var nameCheck = false;
-			var pwdCheck = false;
-			var pwdCheck2 = false;
+		
 			// 정규식 검사
 			/* var idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; */
 			
@@ -179,16 +181,18 @@
 					$.ajax({
 						url: "dupName.ij",
 						type: "POST",
-						data : {name:memberName},
+						data : {memberName:memberName},
 						success:function(result){
-							if(result == true){
+							console.log(result);
+							if(result){
 								$("#nameCheck").css({"color":"green","font-size":"13px"});
 								$("#nameCheck").html("사용가능한 닉네임입니다.");
+								nameCheck= true;
 								
 							}else{
 								$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
 								$("#nameCheck").html("이미 사용중인 닉네임입니다.");
-								
+								nameCheck= false;
 							}
 						}
 					});
@@ -241,11 +245,12 @@
 							if(result == "true"){
 								$("#emailCheck").css({"color":"green", "font-size":"13px"});
 								$("#emailCheck").html("사용 가능한 이메일입니다.");
-								
+								idCheck = true;
 							}else{
 								$("#emailCheck").css({"color":"#df5b4dcb", "font-size":"13px"});
 								$("#emailCheck").html("이미 사용 중인 Email입니다.");
 								$("#memberId").focus();
+								idCheck = false;
 							}
 						}
 					});
@@ -255,9 +260,43 @@
 				
 				
 				
-			});
 			
 			
+		});	
+		
+		function submitCheck(){
+			
+			
+			if(idCheck == false){
+				
+				alert("아이디를 확인해주세요");
+				$("#memberId").focus();
+				return false;
+			}
+			
+			if(nameCheck == false){
+				alert("닉네임을 확인해주세요");
+				$("#memberName").focus();
+				return false;	
+			
+			}
+			
+			if(pwdCheck == false){
+				alert("비밀번호를 확인해주세요");
+				$("#memberPwd").focus();
+				return false;	
+			}
+			if(pwdCheck2 == false){
+				alert("비밀번호를 확인해주세요");
+				$("#memberPwd").focus();
+				return false;	
+			}
+			
+			
+			$("#joinMember").submit();
+			
+			
+		}
 			
 		</script>
 			

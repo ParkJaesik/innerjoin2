@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import com.best.innerjoin.group.model.service.GroupService;
+
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.mgSearch.model.service.MgSearchService;
@@ -20,16 +23,32 @@ public class MgSearchController {
 	
 	@Autowired
 	private MgSearchService mgService;
+	@Autowired
+	private GroupService gServeice;
+	
 	
 	// 유저 검색 기본 페이지
 	@RequestMapping("mgSearchForm.ij")
-	public ModelAndView mgSearchForm(ModelAndView mv, Integer page) {
+	public ModelAndView mgSearchForm(HttpServletRequest request,ModelAndView mv, Integer page) {
 		
 		int currentPage = page == null ? 1 : page;
+
 		ArrayList<Member> list = mgService.selectMList(currentPage);
-		System.out.println(list);
+		
+		
+		Member loginUser =  (Member)request.getSession().getAttribute("loginUser");
+		
+		ArrayList<Group> hostGroup = null;
+		if(loginUser !=null) {
+			
+			hostGroup = gServeice.getHostGroup(loginUser.getMemberName());
+			
+			
+		}
+
 		if(list != null) {
-			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).setViewName("common/memberSearch");
+			mv.addObject("list", list).addObject("pi", Pagination.getPageInfo()).addObject("hostGroup", hostGroup).setViewName("common/memberSearch");
+			
 		} else {
 			mv.addObject("msg", "게시물 조회 실패").setViewName("common/errorPage");
 		}

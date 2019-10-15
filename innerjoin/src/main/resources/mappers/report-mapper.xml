@@ -36,6 +36,18 @@
 		<result property="groupReptStatus" column="GROUP_REPT_STATUS"/>
 		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
 	</resultMap>
+
+
+	<!-- 회원 신고 -->
+	<resultMap id="memberReptResultSet" type="MemberReport">
+		<id property="memReptNo" column="MEMBER_REPT_NO"/>
+		<result property="memReptContent" column="MEMBER_REPT_CONTENT"/>
+		<result property="memReptStatus" column="MEMBER_REPT_STATUS"/>
+		<result property="reporterId" column="REPORTER_ID"/>
+		<result property="reportedId" column="REPORTED_ID"/>
+		<result property="memReptDate" column="MEMBER_REPT_DATE"/>
+	</resultMap>
+	
 	
 	
 	
@@ -113,7 +125,7 @@
 	UPDATE GROUP_MEMBER
 		SET GROUP_MEM_REPT_COUNT = GROUP_MEM_REPT_COUNT +1
 		WHERE MEMBER_ID = #{responId}
-		AND GROUP_NO = #{responGNo} 
+		AND GROUP_NO = #{responGNo}
 	</update>
 	
 	
@@ -123,10 +135,13 @@
 		FROM GROUP_MEMBER
 		WHERE GROUP_NO = #{responGNo}
 		AND GROUP_MEM_REPT_COUNT > 0
-	</select>
+	</select> 
+	
+	
+	
 	
 	<!-- 신고 받은 그룹 회원 목록 -->
-	<select id="selectGroupMember" parameterType="_int">
+	<select id="selectGroupMember" parameterType="_int" resultMap="groupMemResultSet">
 		SELECT GM.*, M.MEMBER_NAME
 		FROM GROUP_MEMBER GM
 		JOIN MEMBER M ON(M.MEMBER_ID = GM.MEMBER_ID)
@@ -134,13 +149,16 @@
 		AND GM.GROUP_MEM_REPT_COUNT > 0
 	</select>
 	
-
+	
+	<!-- 신고 받은 회원 강퇴하기 -->
+	<update id="deleteReptGroupMem" parameterType="String">
+		UPDATE GROUP_MEMBER_REPORT
+		SET 
+		
+	</update>
 	
 	
-	<!-- 신고당한회원 리스트 -->
-	<!-- <select id="selectList" resultMap="groupMemReportResultSet">
-		SELECT MEMBER_REPT_NO, RESPONDENT_ID
-	</select>  -->
+	
 	
 	<!-- 그룹 신고 insert -->
 	<insert id="insertGroupReport" parameterType="GroupReport">
@@ -152,5 +170,17 @@
 		UPDATE "GROUP"
 		SET GROUP_REPT_COUNT = GROUP_REPT_COUNT + 1
 		WHERE GROUP_NO = #{groupNo}
+	</update>
+	
+	<!-- 회원 신고 insert -->
+	<insert id="insertMemberReport" parameterType="MemberReport">
+		INSERT INTO MEMBER_REPORT
+		VALUES(SEQ_M_RNO.NEXTVAL, #{memReptContent},DEFAULT,#{reporterId},#{reportedId}, DEFAULT)
+	</insert>
+	
+	<update id="updateMemberReptCount" parameterType="MemberReport" >
+		UPDATE MEMBER
+		SET MEMBER_REPT_COUNT = MEMBER_REPT_COUNT + 1
+		WHERE MEMBER_ID = #{reportedId}
 	</update>
 </mapper>

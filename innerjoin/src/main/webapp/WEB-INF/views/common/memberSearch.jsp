@@ -17,7 +17,19 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css">
  <style type="text/css">
-  
+  	#inviteMsg{
+	
+	    width: 100%;
+    	resize: none;
+    }
+  	#reportMsg{
+	
+	    width: 100%;
+    	resize: none;
+    }
+    .groupSelect{
+    	height: 100%;
+    }
  </style>
 
    
@@ -72,22 +84,18 @@
 						    <img src="${contextPath}/resources/images/member/${user.memberProPath}"></div>
 							
 								<div class="col-8">
-									<c:url var="goGorup" value="goGroupPage.ij"> <!-- 수정 -->
+									<%-- <c:url var="goGorup" value="goGroupPage.ij"> <!-- 수정 -->
 										<!-- 나중에 맞는 값 넣기 -->
 										<c:param name="memberId" value="${ user.memberId }" />
-									</c:url>
-									<h5><a href="${ goGroup }">${ user.memberName }</a></h5> <!-- 수정 -->
+									</c:url> --%>
+									
+									<h5><a href="#">${ user.memberName }</a></h5> <!-- 수정 -->
 									<br>
-									<p><a href="${ goGroup }">${ user.memberIntroduce }</a></p> <!-- 수정 -->
-									<c:url var="invDeny" value="invDeny.ij"> <!-- 수정 -->
-										<c:param name="gNo" value="${ invite.gNo }" /> <!--  신고시 수정 -->
-									</c:url>
-									<c:url var="invAccept" value="invAccept.ij"><!-- 초대시수정 -->
-										<c:param name="gNo" value="${ invite.gNo }" /> <!-- 초대 시  수정 -->
-									</c:url>
-								<c:if test="${ !empty loginUser }">
-									<a href="${ invDeny }" class="btton report">신고</a>  <!-- 신고 시 수정 -->
-									<a href="${ invAccept }" class="btton">초대</a> <!-- 초대 시 수정 -->
+									<p><a href="${ goGroup }">${ user.memberIntroduce }</a></p> <!-- 수정 -->	
+								<c:if test="${ !empty loginUser  and hostGroup != null}">
+									<input name="memberId" type="hidden" value="${user.memberId}">
+									<button class="reportMethod" data-toggle="modal"  data-target="#exampleModalCenter3">신고</button>  <!-- 신고 시 수정 -->
+									<button class="iyesMethod" data-toggle="modal"  data-target="#exampleModalCenter2">초대</button> <!-- 초대 시 수정 -->
 								</c:if>
 								</div>
 					</div>
@@ -138,7 +146,143 @@
 				
 			</div>
 		</div>
+		
+		<!-- 초대 모달 -->
+		<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">모임 초대</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		       	<div>
+		       		<c:if test="${hostGroup != null}">
+		       		<select  class="groupSelect" id="gNo">
+		       		<c:forEach var="hostGroup" items="${hostGroup }" varStatus="status">
+		       			<option class="groupSelect" value="${hostGroup.gNo}">${hostGroup.gName}</option>
+		       		</c:forEach>
+		       		</select>
+		       		</c:if>		
+		       	</div>
+		       	
+		       	<textarea rows="5" cols="20" id="inviteMsg"></textarea>
+		       	<input type="hidden" id="receiverId">
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary" id="inviteBtn">초대하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
+	
+	
+	
+		<!-- 신고 모달 -->
+		<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">회원 신고</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		       	<div>
+		       		<input type="text" id="reportedId" readonly>
+		       	</div>
+		       	
+		       	<textarea rows="5" cols="20" id="reportMsg"></textarea>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary" id="reportBtn">신고하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+
+<script>
+	$(".iyesMethod").click(function(){
+		
+		
+		var receiverId =  $(this).prev().prev().val();
+		
+		$("#receiverId").val(receiverId);
+
+
+	});
+	$(".reportMethod").click(function(){
+		
+		
+		var reportedId = $(this).prev().val();
+		$("#reportedId").val(reportedId);
+
+
+	});
+	
+	$("#inviteBtn").click(function(){
+		
+		var  receiverId = $("#receiverId").val();
+		var  msg = $("#inviteMsg").val();
+		var  senderId = "${loginUser.memberId}";
+		var gNo = $("#gNo").val();
+
+		$.ajax({
+			
+			url : "inviteGroup.ij",
+			type : "post",
+			data : {receiverId:receiverId,msg:msg,senderId:senderId,gNo:gNo},
+			success : function(result){
+				
+				alert("초대하기 성공");
+				
+				
+				$('#exampleModalCenter2').modal('hide');
+				
+			} 
+			
+		});
+		
+		
+	});
+
+	$("#reportBtn").click(function(){
+		
+		var  reporterId = '${loginUser.memberId}';
+		var  reportedId = $("input[name=memberId]").val();
+		var  memReptContent = $("#reportMsg").val();
+		console.log(memReptContent);
+		$.ajax({
+			
+			url : "reportMember.ij",
+			type : "post",
+			data : {reporterId:reporterId,reportedId:reportedId,memReptContent:memReptContent},
+			success : function(result){
+				
+				if(result =='success'){
+					alert("성공");
+					$('#exampleModalCenter3').modal('hide');
+				}else{
+					alert("실패ㅠㅠ");
+					$('#exampleModalCenter3').modal('hide');
+				}
+				
+			} 
+			
+		});
+		 
+		
+	});
+
+</script>
+
 </body>
 </html>

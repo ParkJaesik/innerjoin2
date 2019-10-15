@@ -34,7 +34,7 @@
 				<li class="menu"><a class="icon solid fa-search" href="mgSearchForm.ij"><span class="menu-detail">Search</span></a></li>
 				
 				<!-- 로그인 시 사용 가능 -->				
-				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span><span id="newsCount">5</span></a></li>
+				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span></a></li>
 				<c:if test="${ empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-home menu-a" href="loginForm.ij"><span class="menu-detail">Login</span></a></li>
 				</c:if>

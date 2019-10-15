@@ -79,7 +79,7 @@
 	<div class="content">
             <div class="content-wrap">
                 <form action="ginsert.ij" method="post" enctype="multipart/form-data">
-                    <div class="btn active" style="width: 900px; height:50px; background-color: purple;"></div>
+                    <div class="btn active" style="width: 900px; height:50px; background-color:#ed786a ;"></div>
                     <div class="gWrap">
                         <div class="row">
                             <div class="div1">
@@ -87,7 +87,9 @@
                             </div>
                             <div class="div2">
                                 <input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}">
+                                <input type="hidden" name="levelCode" value="${gmember.levelCode }" <c:if test="${levelCode eq 0}"></c:if>>
                             </div>
+                            
                         </div>
                         <div class="row">
                             <div class="div1">

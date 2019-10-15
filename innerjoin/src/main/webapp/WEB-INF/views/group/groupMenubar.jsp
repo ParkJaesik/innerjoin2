@@ -67,12 +67,14 @@
 
 			<div id="group-button">
 				<c:if test="${ loginUser.memberName eq group.gHost }"> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
-					<c:url var="secession" value="rblist.ij"/>
-					<button type="button" class="btn btn-primary" id="group-btn-manage">모임관리</button>
+					
+					<c:url var="gorlist" value="rblist.ij"/> 
+					
+					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='rblist.ij'">모임관리</button>
 				 </c:if>
 				<c:set var="groupMemberCode" value = "${groupMemberCode }" scope="session"/>
 				
-				<c:if test="${groupMemberCode eq 3 or groupMemberCode eq 5 or groupMemberCode eq -1 or groupMemberCode eq 4}">
+				<c:if test="${groupMemberCode eq 3 or groupMemberCode eq 5 or groupMemberCode eq -1 or groupMemberCode eq 4 or groupMemberCode eq 10}">
 				<button type="button" class="btn btn-primary" id="group-btn-join" data-toggle="modal" data-target="#exampleModalCenter">INNER JOIN하기</button>
 				</c:if>
 				
@@ -80,7 +82,7 @@
 					<button type="button" class="btn btn-primary" id="group-btn-report" data-toggle="modal" data-target="#exampleModalCenter3">모임 신고 하기</button>
 				</c:if>
 				<c:if test="${groupMemberCode eq 1 or groupMemberCode  eq 2}">
-				<button type="button" class="btn btn-primary" id="group-btn-withdraw">모임에서 나가기</button>
+				<button type="button" class="btn btn-primary" id="group-btn-withdraw" data-toggle="modal" data-target="#exampleModalCenter4">모임에서 나가기</button>
 				</c:if>
 				
 			</div>
@@ -167,6 +169,26 @@
     </div>
   </div>
 </div>
+<!-- 모임 탈퇴 모달 -->
+<div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">탈퇴하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	정말 탈퇴하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" id="widthraw">탈퇴하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 	$(function(){
 		
@@ -237,7 +259,7 @@
 		console.log(gLimit);
 		
 		if(gMemCount != gLimit){
-			if(groupMemberCode == 5){
+			if(groupMemberCode == 5 || groupMemberCode == 10){
 				$(location).attr('href','insertGroupMember.ij');
 				var loginUserId = "${loginUser.memberId}";
 				var gName = "${group.gName}"
@@ -253,6 +275,30 @@
 			alert("모임인원이 가득찼습니다.");
 		}
 	
+	});
+	
+	$("#widthraw").click(function(){
+		
+		var loginUserId = "${loginUser.memberId}";
+		var gName = "${group.gName}"
+		var gNo = "${group.gNo}";
+		$.ajax({
+			
+			url : "withdraw.ij",
+			type : "post",
+			data : {loginUserId:loginUserId,gNo:gNo},
+			success : function(success){
+				
+				
+				alert("모임 탈퇴성공");
+				$('#exampleModalCenter4').modal('hide');
+				
+			}
+			
+			
+		});
+			
+		
 	});
 	
 		

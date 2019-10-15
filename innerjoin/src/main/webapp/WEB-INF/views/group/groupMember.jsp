@@ -47,7 +47,7 @@
 									
 								</div>
 								
-								<div id="member-level">
+								<div id="member-level" class="${m.levelCode }">
 									<c:if test="${ m.levelCode == 0 }">
 										<c:set var="member" value="모임장"/>
 									</c:if>
@@ -63,9 +63,19 @@
 								<div id="member-button">
 								<c:if test="">
 								</c:if>
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">회원등급</button>
+									<button id="${m.memberId }" type="button" class="btn btn-primary levelBtn" data-toggle="modal" data-target="#exampleModalCenter1">회원등급</button>
 			
-									<!-- Modal -->
+									
+									<input type="hidden" value="${m.memberId }">
+									<input type="hidden" value="${m.memberName }">
+									<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
+								</div>
+							</div>
+						</div><br>
+					</c:forEach>
+				</div>
+			</div>
+			<!-- Modal -->
 									<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 									  <div class="modal-dialog modal-dialog-centered" role="document">
 									    <div class="modal-content">
@@ -78,12 +88,12 @@
 										      </div>
 										      <div class="modal-body">
 										        <div class="div1">
-													<input type="text" readonly value="">							
+													<input type="text" readonly name="memberId">							
 												</div>
 												<div class="div2" style="margin-top: 10%">
-													모임장<input type="radio" name="levelCode">
-													매니저<input type="radio" name="levelCode">
-													일반회원<input type="radio" name="levelCode">
+													모임장<input type="radio" name="levelCode" value="0">
+													매니저<input type="radio" name="levelCode" value="1">
+													일반회원<input type="radio" name="levelCode" value="2">
 												</div>
 										      </div>
 										      <div class="modal-footer">
@@ -94,16 +104,6 @@
 									    </div>
 									  </div>
 									</div>
-									<input type="hidden" value="${m.memberId }">
-									<input type="hidden" value="${m.memberName }">
-									<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
-								</div>
-							</div>
-						</div><br>
-					</c:forEach>
-				</div>
-			</div>
-			
 			<script type="text/javascript">
 			      /* $(".reportBtn").click(function(e){
 			             console.log($(this).prev().val()); 
@@ -121,7 +121,21 @@
 			          });  
 					 */
 					 
-					 
+					$(".levelBtn").on('click',function () {
+						var memberId = $(this).attr("id");
+						console.log(memberId);
+						
+						$("input[name=memberId]").val(memberId); 
+						
+						var levelCode = $(this).parent().prev().attr('class');
+						$.each($("input[name=levelCode]"), function(k, v){
+							if(v.value == levelCode) {
+								v.setAttribute('checked',true);
+							}
+						});
+						
+						
+					});
 			 
 			      $(".reportBtn").click(function(e){
 			             //alert($(this).prev().val()); 
@@ -141,12 +155,7 @@
 			            
 			         });  
 					 
-			      
-			         
-			  
-			         
-			         
-					 
+		
 					 
 				
 			</script>
