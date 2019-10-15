@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.service.ReportService;
@@ -26,6 +27,9 @@ public class ReportController {
 	
 	@Autowired
 	private ReportService rService;
+	
+	@Autowired
+	private GroupService gService;
 	
 
 	// 모임 회원 신고글 목록 조회
@@ -86,7 +90,8 @@ public class ReportController {
 		report.setReportGNo(group.getgNo());
 		report.setResponGNo(group.getgNo());
 		int result = rService.insertReport(report);
-		
+		ArrayList<GroupMember> list = gService.groupMemberList(group.getgNo());
+		model.addAttribute("list",list);
 		if(result > 0) {
 			return "group/groupMember";
 		}else {
