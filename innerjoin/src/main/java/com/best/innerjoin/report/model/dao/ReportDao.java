@@ -134,8 +134,9 @@ public class ReportDao {
 	 * @param memberId
 	 * @return
 	 */
-	public int deleteReptGroupMem(String memberId) {
-		return sqlSession.update("reportMapper.deleteReptGroupMem", memberId);
+	public int deleteReptGroupMem(GroupMember groupMember) {
+		
+		return sqlSession.update("reportMapper.deleteReptGroupMem", groupMember);
 	}
 	
 
