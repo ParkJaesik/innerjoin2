@@ -63,6 +63,10 @@ public interface GroupService {
 
 	public abstract int rejoinApplyGroupMember(String memberId, int gNo);
 
+
 	public abstract ArrayList<GroupCat> selectGroupCat();
+
+	public abstract int getGno();
+
 }
 

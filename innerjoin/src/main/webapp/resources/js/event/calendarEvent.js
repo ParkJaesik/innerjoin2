@@ -386,10 +386,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 		if(flag) return;
 		
-		var memberId = 'admin';
 		$.ajax({
 			url: 'attendEvent.ij',
-			data: {eno: eno, memberId: memberId},  
+			data: {eno: eno},  
 			type: 'post',
 			success: function(res) {
 				if(res > 0) {
