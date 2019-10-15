@@ -210,11 +210,11 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping("updateGroupMemLevel.ij")
-	public String updateGroupMemLevel(GroupMember gMember, ModelAndView mv) {
+	public String updateGroupMemLevel(int levelCode, ArrayList<GroupMember> gMember, ModelAndView mv) {
 		
 		
-		int result = adService.updateGroupMemLevel(gMember);
-		if(result > 0) {
+		int result = adService.updateGroupMemLevel(levelCode,gMember);
+		if(result == gMember.size()) {
 			return "success";
 		}else{
 			return "fail";
