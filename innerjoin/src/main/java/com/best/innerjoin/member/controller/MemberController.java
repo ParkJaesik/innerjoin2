@@ -1,17 +1,20 @@
 package com.best.innerjoin.member.controller;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.UploadContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +30,7 @@ import com.best.innerjoin.alarm.model.service.AlarmService;
 import com.best.innerjoin.alarm.model.vo.Alarm;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.service.MemberService;
+import com.best.innerjoin.member.model.vo.MailHandler;
 import com.best.innerjoin.member.model.vo.Member;
 
 @SessionAttributes({ "loginUser", "msg" })
@@ -37,6 +41,8 @@ public class MemberController {
 	private MemberService mService;
 	@Autowired
 	private AlarmService alarmService;
+	@Autowired
+	private JavaMailSender mailSender;
 
 	// 로그인 폼으로 가기
 	@RequestMapping("loginForm.ij")
@@ -98,18 +104,16 @@ public class MemberController {
 	// 닉네임 중복검사
 	@RequestMapping(value = "dupName.ij", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean DuplicateNameCheck(String memberName) {
-		boolean isUsable = mService.checkNameDup(memberName) == 0 ? true : false;
-		System.out.println(isUsable);
-		return isUsable;
+	public String DuplicateNameCheck(String name) {
+		boolean isUsable = mService.checkNameDup(name) == 0 ? true : false;
+		return isUsable + "";
 	}
 
 	// 마이페이지로 이동
 	@RequestMapping("myGroupForm.ij")
 	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-		System.out.println("마이페이지" + loginUser.getMemberProPath());
-		System.out.println(loginUser);
+		
 
 		// 내 모임 목록
 		ArrayList<Member> list = mService.selectList(loginUser);
@@ -160,6 +164,55 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	// 다른사람 마이페이지로 이동
+		@RequestMapping("otherGroupForm.ij")
+		public ModelAndView otherGroup(ModelAndView mv, HttpServletRequest request,String memberId) {
+			
+			
+			Member otherUser = mService.selectMemberInfo(memberId);
+			mv.addObject("otherUser", otherUser);
+			
+
+			// 내 모임 목록
+			ArrayList<Member> list = mService.selectList(otherUser);
+
+			// 초대받은 모임 목록
+			ArrayList<Member> invList = mService.selectInvList(otherUser);
+
+			// 신청 목록
+			ArrayList<Member> waitList = mService.selectWaitList(otherUser);
+
+
+			// 내 모임 목록
+			if (list != null) { // 내 모임 목록이 있을 때
+				mv.addObject("list", list).setViewName("member/otherGroup");
+			} else {
+				mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+			}
+
+			// 초대받은 모임 목록
+			if (invList != null) {
+				mv.addObject("invList", invList).setViewName("member/otherGroup");
+			} else {
+				mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+			}
+
+			// 신청 모임 목록
+			if (waitList != null) {
+				mv.addObject("waitList", waitList).setViewName("member/otherGroup");
+			} else {
+				mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+			}
+			
+			return mv;
+		}
+	
+	
+	
+	
+	
 
 	// 모임 초대 수락
 	@RequestMapping("invAccept.ij")
@@ -304,13 +357,14 @@ public class MemberController {
 
 	// 비밀번호 확인
 	@RequestMapping(value = "checkPwd.ij", method = RequestMethod.POST)
-	public String checkPwd(Member loginUser, String memberPwd, Model model) {
+	public String checkPwd(HttpServletRequest request, String memberPwd, Model model) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		String loginUserPwd = loginUser.getMemberPwd();
-
 		int result = mService.checkPwd(loginUserPwd, memberPwd);
-
+		
+		// select count(*) from member where member_id = ${아이디} and member_pwd = ${pwd}; 
 		if (result > 0) {
-			return "redirect:infoUpdateForm.ij";
+			return "redirect:infoUpdateForm.ij?memberId="+loginUser.getMemberId();
 		} else {
 			model.addAttribute("msg", "일치하지않습니다. 다시 입력해 주세요.");
 			return "redirect:checkPwdForm.ij";
@@ -319,8 +373,12 @@ public class MemberController {
 	}
 
 	// 정보수정으로 이동
-	@RequestMapping("infoUpdateForm.ij")
-	public String infoUpdateForm() {
+	@RequestMapping(value = "infoUpdateForm.ij", method = RequestMethod.GET)
+	public String infoUpdateForm(String memberId, Model model) {
+		System.out.println(memberId);
+		Member member = mService.selectMember(memberId);
+		System.out.println(member);
+		model.addAttribute("Member",member);
 		return "member/infoUpdate";
 	}
 
@@ -400,5 +458,31 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기
+	@RequestMapping("findPwd.ij")
+	public String findPwd(String memberId, Model model) throws MessagingException,UnsupportedEncodingException {
+		System.out.println("이메일로 인증 발송");
+		
+		int result = mService.checkIdDup(memberId);
+		if( result > 0) {
+			String host = "http://localhost:8080/innerjoin/";
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("[비밀번호 변경]");
+			sendMail.setText(new StringBuffer().append("<h1>비밀번호 변경</h1>")
+					.append("<h2><a href =" + host + "infoUpdateForm.ij?memberId="+ memberId + "> 비밀번호 재설정하기 </a></h2>").toString());
+			sendMail.setFrom("rjrinal@gmail.com", "InnerJoin");
+			
+			sendMail.setTo(memberId);
+			sendMail.send();
+			
+			model.addAttribute("memberId", memberId);
+			return "member/findPwdResult";
+			
+		} else {
+			model.addAttribute("이메일 전송 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
 
 }

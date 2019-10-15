@@ -56,14 +56,14 @@
 			                <div class="row">
 			                    <h3>정보 수정</h3>
 			                    <div class="input-group input-group-icon">
-									<input type="email" name="memberId" id="memberId" value="${ loginUser.memberId }" readonly="readonly"/>
+									<input type="email" name="memberId" id="memberId" value="${ Member.memberId }" readonly="readonly"/>
 									&nbsp;<span></span>
 								</div>
 								<br>
 								<div class="input-group input-group-icon">
-									<input type="text" value="${ loginUser.memberName }" id="memberName" name="memberName"/>
+									<input type="text" value="${ Member.memberName }" id="memberName" name="memberName"/>
 									<c:if test="${fn:trim(memberName.val())== null }">
-									<input type="hidden" name="memberName" id="memberName" value="${ loginUser.memberName }">
+									<input type="hidden" name="memberName" id="memberName" value="${ Member.memberName }">
 									</c:if>
 									&nbsp;<span style="text-aling:center;" id="nameCheck">&nbsp;</span>
 								</div>
@@ -87,7 +87,7 @@
 			                      	<h5>Date of Birth</h5>
 			                      	<div class="input-group">
 			                      	<c:choose>
-				                      	<c:when test="${ empty loginUser.memberBirthday }">
+				                      	<c:when test="${ empty Member.memberBirthday }">
 				                      	<div class="col-third">
 											<input type="text" placeholder="YYYY" maxlength="4" id="birthday1" name="birthday1"/>
 										</div>
@@ -99,8 +99,8 @@
 										</div>
 										</c:when>
 			                      	
-			                      		<c:when test="${ !empty loginUser.memberBirthday }">
-				                        <c:forTokens var="birthday" items="${ loginUser.memberBirthday }" delims="/" varStatus="status">
+			                      		<c:when test="${ !empty Member.memberBirthday }">
+				                        <c:forTokens var="birthday" items="${ Member.memberBirthday }" delims="/" varStatus="status">
 				                        <c:if test="${ status.index eq 0 }">
 				                        <div class="col-third">
 											<input type="text" name="birthday1" id="birthday1" value="${ birthday }" maxlength="4" readonly="readonly"/>
@@ -150,7 +150,7 @@
 			              	<button id="submit-btn" style="float: right;" onclick="validate();"> 수정</button>
 							<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
 							<c:url var="mLeave" value="mLeave.ij">
-							<c:param name="memberId" value="${ loginUser.memberId }"/>
+							<c:param name="memberId" value="${ Member.memberId }"/>
 							</c:url>
 							<a href="${ mLeave }"> 탈퇴하기</a>
 			            </form>
@@ -237,7 +237,7 @@
 			}
 		});
 		
-		if("${loginUser.memberGender}" == 'F'){
+		if("${Member.memberGender}" == 'F'){
 			$("#gender-female").attr("checked", true).attr("disabled", true);
 			$("#gender-male").attr("checked", false).attr("disabled", true);
 		} else{

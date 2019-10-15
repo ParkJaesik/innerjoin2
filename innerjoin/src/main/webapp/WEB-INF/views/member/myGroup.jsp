@@ -44,6 +44,7 @@
 			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
 			<div class="col-md-10" id="body-content">
 				<!-- 메인페이지 content 부분 -->
+				
 				<jsp:include page="/WEB-INF/views/member/myPageHeaber.jsp" />
 
 

@@ -65,7 +65,7 @@ public class GroupController {
 		GroupMember gmember = (GroupMember)request.getSession().getAttribute("memberId");
 				
 		int result = gService.insertGroup(group);
-
+		int gNo = gService.getGno();
 		
 		String path= null;
 		if(result>0) {
@@ -73,7 +73,7 @@ public class GroupController {
 			//모임 생성 성공시 group-member테이블에 관리자로 행추가 
 			int result2 = gService.insertGroupMemberAdmin(loginUser);
 			
-			path="group/groupIndex";
+			path = "redirect:goGroupPage.ij?gNo="+gNo;
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");
 			path = "common/errorPage";
@@ -163,7 +163,7 @@ public class GroupController {
 		if(!eList.isEmpty()) {
 			eList2 = new ArrayList<Event>();
 			memList = new ArrayList<Member>();
-			for(int i = 0; i < 3;i++) {
+			for(int i = 0; i < 3 && i < eList.size(); i++) {
 				
 				eList2.add(eList.get(i));
 				ArrayList<Member> mList = eService.selectMem(""+eList2.get(i).getEno());
@@ -173,7 +173,7 @@ public class GroupController {
 				}
 			}
 		}
-		
+		System.out.println("tempGroup: "+ tempGroup);
 		 System.out.println(groupMemberCode);
 		 
 		

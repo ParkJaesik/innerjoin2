@@ -136,15 +136,14 @@ public class MemberServiceImpl implements MemberService{
 	// 비밀번호 확인
 	@Override
 	public int checkPwd(String loginUserPwd, String memberPwd) {
-		System.out.println("user" + loginUserPwd);
-		System.out.println("입력" + memberPwd);
 		int result = 0;
-		if( memberPwd == loginUserPwd) {
-			result = 1;
-		}else {
+		if(!bCryptPasswordEncoder.matches(loginUserPwd, memberPwd)) {
 			result = 0;
+		}else {
+			result = 1;
 		}
 		return result;
+		
 	}
 
 	// 초대 거절
@@ -241,6 +240,21 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateProfileAdd(Member member) {
 		return mDao.updateProfileAdd(member);
+	}
+
+
+	// 아이디로 값 얻어오기(비밀번호 찾기)
+	@Override
+	public Member selectMember(String memberId) {
+		
+		return mDao.selectMember(memberId);
+	}
+	
+	//특정 멤버아이디로 멤버정보 가져오기
+	@Override
+	public Member selectMemberInfo(String memberId) {
+		return mDao.selectMemberInfo(memberId);
+
 	}
 
 		
