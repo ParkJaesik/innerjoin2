@@ -92,13 +92,11 @@ public class ReportServiceImpl implements ReportService{
 	}
 
 
-	
-
-
-	
-	
-
-	
+	// 신고된 회원 강퇴하기
+	@Override
+	public int deleteReptGroupMem(String memberId) {
+		return rDao.deleteReptGroupMem(memberId);
+	}
 	
 
 	@Override
@@ -106,6 +104,7 @@ public class ReportServiceImpl implements ReportService{
 		rDao.insertGroupReport(gReport);
 		return rDao.updateGroupReptCount(gReport);
 	}
+
 
 //	// 신고 당한 회원 리스트
 //	@Override
