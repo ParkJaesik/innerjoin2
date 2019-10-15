@@ -145,5 +145,10 @@ public class GroupServiceImpl implements GroupService{
 	public int rejoinApplyGroupMember(String memberId, int gNo) {
 		return gDao.rejoinApplyGroupMember(memberId,gNo);
 	}
+
+	@Override
+	public int getGno() {
+		return gDao.getGno();
+	}
 	
 }

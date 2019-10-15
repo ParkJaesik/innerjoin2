@@ -65,7 +65,7 @@ public class GroupController {
 		GroupMember gmember = (GroupMember)request.getSession().getAttribute("memberId");
 				
 		int result = gService.insertGroup(group);
-
+		int gNo = gService.getGno();
 		
 		String path= null;
 		if(result>0) {
@@ -73,7 +73,7 @@ public class GroupController {
 			//모임 생성 성공시 group-member테이블에 관리자로 행추가 
 			int result2 = gService.insertGroupMemberAdmin(loginUser);
 			
-			path="group/groupIndex";
+			path = "redirect:goGroupPage.ij?gNo="+gNo;
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");
 			path = "common/errorPage";
