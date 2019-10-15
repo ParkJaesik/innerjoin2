@@ -163,7 +163,7 @@ public class GroupController {
 		if(!eList.isEmpty()) {
 			eList2 = new ArrayList<Event>();
 			memList = new ArrayList<Member>();
-			for(int i = 0; i < 3;i++) {
+			for(int i = 0; i < 3 && i < eList.size(); i++) {
 				
 				eList2.add(eList.get(i));
 				ArrayList<Member> mList = eService.selectMem(""+eList2.get(i).getEno());
@@ -173,7 +173,7 @@ public class GroupController {
 				}
 			}
 		}
-		
+		System.out.println("tempGroup: "+ tempGroup);
 		 System.out.println(groupMemberCode);
 		 
 		
