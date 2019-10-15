@@ -323,7 +323,7 @@
                                 <textarea id="rContent" rows="3" cols="110" placeholder="comment..."></textarea>
                             </div>
                             <div class="col-md-1 re-submit-btn">
-                                <button id="submit-btn" class="submit-btn">submit</button>
+                                <button id="submit-btn" class="submit-btn">댓글등록</button>
                             </div>
                         </div>
 

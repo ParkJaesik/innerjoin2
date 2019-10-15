@@ -199,26 +199,31 @@ public class GroupController {
 		String gName =  ((Group)request.getSession().getAttribute("group")).getgName();
 		String msg = memberId + "님이 " + "<a href='wgmlist.ij?gNo="+gNo + "'>" +  gName + " 모임에  가입신청을 했습니다."  +"</a>";
 		
-		
-		
-		int result = gService.applyInsertGroup(memberId,gNo);
+		int result = 0;
 		int result2 = 0;
+		result = gService.selectIsGroupMember(memberId,gNo);
 		
 		if(result>0) {
-			
+			result = gService.rejoinApplyGroupMember(memberId,gNo);
+		}else {
+			result = gService.applyInsertGroup(memberId,gNo);
+		}
+		
+		if(result>0) {
 			result2 = gService.insertAlarm(memberId,hostId,msg);
+			
 			
 			if(result2>0) {
 				return "redirect:goGroupPage.ij?gNo="+gNo;
 			}else {
 				return "common/errorPage";
 			}
-		}else {	
+		}else {
 			return "common/errorPage";
 		}
 		
-		
 	}
+
 
 
 	// 그룹 회원 목록 조회
