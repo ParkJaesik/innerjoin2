@@ -113,8 +113,7 @@ public class MemberController {
 	@RequestMapping("myGroupForm.ij")
 	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-		System.out.println("마이페이지" + loginUser.getMemberProPath());
-		System.out.println(loginUser);
+		
 
 		// 내 모임 목록
 		ArrayList<Member> list = mService.selectList(loginUser);
@@ -165,6 +164,55 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	// 다른사람 마이페이지로 이동
+		@RequestMapping("otherGroupForm.ij")
+		public ModelAndView otherGroup(ModelAndView mv, HttpServletRequest request,String memberId) {
+			
+			
+			Member otherUser = mService.selectMemberInfo(memberId);
+			mv.addObject("otherUser", otherUser);
+			
+
+			// 내 모임 목록
+			ArrayList<Member> list = mService.selectList(otherUser);
+
+			// 초대받은 모임 목록
+			ArrayList<Member> invList = mService.selectInvList(otherUser);
+
+			// 신청 목록
+			ArrayList<Member> waitList = mService.selectWaitList(otherUser);
+
+
+			// 내 모임 목록
+			if (list != null) { // 내 모임 목록이 있을 때
+				mv.addObject("list", list).setViewName("member/otherGroup");
+			} else {
+				mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+			}
+
+			// 초대받은 모임 목록
+			if (invList != null) {
+				mv.addObject("invList", invList).setViewName("member/otherGroup");
+			} else {
+				mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+			}
+
+			// 신청 모임 목록
+			if (waitList != null) {
+				mv.addObject("waitList", waitList).setViewName("member/otherGroup");
+			} else {
+				mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
+			}
+			
+			return mv;
+		}
+	
+	
+	
+	
+	
 
 	// 모임 초대 수락
 	@RequestMapping("invAccept.ij")

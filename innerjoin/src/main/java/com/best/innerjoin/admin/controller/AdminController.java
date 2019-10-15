@@ -1,7 +1,6 @@
 package com.best.innerjoin.admin.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,15 @@ import com.best.innerjoin.admin.model.service.AdminService;
 import com.best.innerjoin.admin.model.vo.Pagination;
 import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
+
+import com.google.gson.Gson;
+
+import com.best.innerjoin.report.model.vo.MemberReport;
+
 
 @Controller
 public class AdminController {
@@ -25,6 +30,7 @@ public class AdminController {
 	private AdminService adService;
 	@Autowired
 	private GroupService gService;
+
 	
 	//임시 관리자 페이지로 이동
 	@RequestMapping("admin.ij")
@@ -55,8 +61,16 @@ public class AdminController {
 	public ModelAndView memDetailView(Integer page, String memberId, ModelAndView mv) {
 		// 멤버 상세정보 조회
 		Member member = adService.selectMemDetail(memberId);
+		
+		// 멤버 개설, 가입 모임 정보 조회
 		Map<String, Map> mgInfo = adService.memGroupInfo(memberId);
-		mv.addObject("member", member).addObject("mgInfo", mgInfo).setViewName("admin/memberDetail");
+		System.out.println("mgInfo" + mgInfo);
+		// 신고 내역 조회
+		ArrayList<MemberReport> mrList = adService.selectMrList(memberId);
+		System.out.println("mrList: " + mrList);
+		
+		mv.addObject("member", member).addObject("mgInfo", mgInfo)
+			.addObject("mrList", mrList).setViewName("admin/memberDetail");
 		
 		return mv;
 	}
@@ -110,6 +124,23 @@ public class AdminController {
 	public String manageCategoryView() {
 		return "admin/manageCategory";
 	}
+	
+	/** (신고처리) 회원 등급 조정
+	 * @param memberId
+	 * @param statusCode
+	 * @return
+	 */
+	@RequestMapping("setMemStatus.ij")
+	public String setMemberStatus(String memberId, int statusCode) {
+		int result = adService.setMemberStatus(memberId, statusCode);
+		return "redirect:memDetail.ij?memberId=" + memberId;
+	}
+	
+	@RequestMapping("processReport.ij")
+	public String processReport(String reptNoList, String memberId) {
+		int result = adService.processReport(reptNoList);
+		return "redirect:memDetail.ij?memberId=" + memberId;
+	}
 
 	
 	//============================================================================
@@ -161,4 +192,15 @@ public class AdminController {
 		
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="loadCat.ij",produces="text/plain;charset=UTF-8")
+	public String loadCategory() {
+		
+		ArrayList<GroupCat> catList = gService.selectGroupCat();
+		
+		
+		return new Gson().toJson(catList);
+		
+	}
 }

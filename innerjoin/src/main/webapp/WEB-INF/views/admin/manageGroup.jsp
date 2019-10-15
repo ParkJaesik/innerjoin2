@@ -20,6 +20,11 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 </head>
+
+<style>
+
+	
+</style>
 <body>
 	<jsp:include page="adminMenubar.jsp"/>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">

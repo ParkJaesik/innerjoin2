@@ -246,6 +246,7 @@
   </select>
   
   
+
   <!-- 아이디로 정보 얻어오기(비밀번호 찾기) -->
   <select id="selectMember" parameterType="String" resultMap="memberResultSet">
   	SELECT *
@@ -255,5 +256,12 @@
 	AND MEMBER_STATUS_CODE != 3 
   </select>
   
+
+  <!-- 특정 아이디로 멤버 정보 가져오기 -->
+  <select id="selectMemberInfo" parameterType="string" resultMap="memberResultSet">
+  	SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
+  	
+  </select>
+
   
 </mapper>
