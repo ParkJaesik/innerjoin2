@@ -75,6 +75,8 @@
 		<result property="rDate" column="REPORT_DATE"/>
 		<result property="rStatusDate" column="REPT_STATUS_DATE"/>
 		<result property="rBoardStatus" column="MEMBER_REPT_B_STATUS"/>
+		<result property="gName" column="GROUP_NAME"/>
+		<result property="levelCode" column="LEVEL_CODE"/>
 	</resultMap>
 	
 	
@@ -184,5 +186,26 @@
   		UPDATE GROUP_REPORT
   		SET GROUP_REPT_STATUS = '처리'
   		WHERE GROUP_REPT_NO = #{groupReptNo}
+  	</update>
+  	
+  	
+  	<select id="getGroupMemReptListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM GROUP_MEMBER_REPORT
+		ORDER BY 1 DESC
+	</select>
+  	
+  	<select id="selectGroupMemReptList" resultMap="groupMemReportResultSet">
+		SELECT GR.*, G.GROUP_NAME,GM.LEVEL_CODE
+		FROM GROUP_MEMBER_REPORT GR
+		JOIN "GROUP" G ON(GR.RESPONDENT_GROUP_NO = G.GROUP_NO)
+		JOIN GROUP_MEMBER GM ON(GM.MEMBER_ID = GR.RESPONDENT_ID)
+		ORDER BY REPT_STATUS_DATE DESC
+	</select>
+	
+	<update id="updateGroupMemLevel" parameterType="GroupMember">
+  		UPDATE GROUP_MEMBER
+  		SET LEVEL_CODE = #{levelCode}
+  		WHERE MEMBER_ID = #{memberId} AND GROUP_NO = #{groupNo}
   	</update>
 </mapper>

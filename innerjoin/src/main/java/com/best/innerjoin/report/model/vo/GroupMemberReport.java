@@ -15,15 +15,20 @@ public class GroupMemberReport {
 	private Date rDate;
 	private Date rStatusDate;
 	private String rBoardStatus;
-	
+	private String gName;
+	private int levelCode;
 
 	
 	public GroupMemberReport() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GroupMemberReport(int rNo, String rContent, String rCategory, String reportId, int reportGNo, String responId,
-			int responGNo, String rStatus, Date rDate, Date rStatusDate, String rBoardStatus) {
+	
+
+
+	public GroupMemberReport(int rNo, String rContent, String rCategory, String reportId, int reportGNo,
+			String responId, int responGNo, String rStatus, Date rDate, Date rStatusDate, String rBoardStatus,
+			String gName, int levelCode) {
 		super();
 		this.rNo = rNo;
 		this.rContent = rContent;
@@ -36,8 +41,12 @@ public class GroupMemberReport {
 		this.rDate = rDate;
 		this.rStatusDate = rStatusDate;
 		this.rBoardStatus = rBoardStatus;
-		
+		this.gName = gName;
+		this.levelCode = levelCode;
 	}
+
+
+
 
 	public int getrNo() {
 		return rNo;
@@ -130,19 +139,36 @@ public class GroupMemberReport {
 	
 	
 	
+	public String getgName() {
+		return gName;
+	}
+
+
+	public void setgName(String gName) {
+		this.gName = gName;
+	}
+
+	
+	public int getLevelCode() {
+		return levelCode;
+	}
+
+
+	public void setLevelCode(int levelCode) {
+		this.levelCode = levelCode;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "GroupMemberReport [rNo=" + rNo + ", rContent=" + rContent + ", rCategory=" + rCategory + ", reportId="
 				+ reportId + ", reportGNo=" + reportGNo + ", responId=" + responId + ", responGNo=" + responGNo
 				+ ", rStatus=" + rStatus + ", rDate=" + rDate + ", rStatusDate=" + rStatusDate + ", rBoardStatus="
-				+ rBoardStatus + "]";
+				+ rBoardStatus + ", gName=" + gName + ", levelCode=" + levelCode + "]";
 	}
 
 
 	
-
-
-	
-	
-
 }

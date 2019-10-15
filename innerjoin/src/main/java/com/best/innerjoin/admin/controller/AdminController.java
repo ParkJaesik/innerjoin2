@@ -1,7 +1,6 @@
 package com.best.innerjoin.admin.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import com.best.innerjoin.group.model.service.GroupService;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
 @Controller
@@ -86,8 +86,15 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("groupMemberReport.ij")
-	public String groupMemberReportView() {
-		return "admin/groupMemberReport";
+	public ModelAndView groupMemberReportView(ModelAndView mv, Integer page) {
+		int currentPage = (page == null) ? 1 : page;
+		
+		//그룹 신고 리스트 가져오기
+		ArrayList<GroupMemberReport> gmrList = adService.selectGroupMemReptList(currentPage);
+		
+		mv.addObject("gmrList", gmrList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupMemberReport");
+		
+		return mv;
 	}
 	
 	/** 그룹신고관리페이지 이동
@@ -157,6 +164,29 @@ public class AdminController {
 			return result;
 		}{
 			return result;
+		}
+		
+	}
+	
+	// 그룹회원 등급 조회
+	@ResponseBody
+	@RequestMapping("adGroupMemSelectCode.ij")
+	public Integer groupMemSelectCode(Integer groupNo, String memberId) {
+		Integer groupMemberCode = gService.selectCode(memberId,groupNo);
+		
+		return groupMemberCode;
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateGroupMemLevel.ij")
+	public String updateGroupMemLevel(GroupMember gMember, ModelAndView mv) {
+		
+		
+		int result = adService.updateGroupMemLevel(gMember);
+		if(result > 0) {
+			return "success";
+		}else{
+			return "fail";
 		}
 		
 	}

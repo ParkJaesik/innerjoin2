@@ -12,6 +12,7 @@ import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
 
 @Repository("adDao")
@@ -152,6 +153,33 @@ public class AdminDao {
 	public int updateReportStatus(Integer groupReptNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("adminMapper.updateReportStatus", groupReptNo);
+	}
+
+	/** 그룹 회원 신고리스트 개수 가져오기
+	 * @return
+	 */
+	public int getGroupMemReptListCount() {
+		return sqlSession.selectOne("adminMapper.getGroupMemReptListCount");
+	}
+
+	/** 그룹 회원 신고 목록 가져오기
+	 * @param pi
+	 * @return
+	 */
+	public ArrayList<GroupMemberReport> selectGroupMemReptList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+
+		return (ArrayList)sqlSession.selectList("adminMapper.selectGroupMemReptList", null, rowBounds);
+	}
+
+	/** 그룹 회원 등급 변경
+	 * @param gMember
+	 * @return
+	 */
+	public int updateGroupMemLevel(GroupMember gMember) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminMapper.updateGroupMemLevel", gMember);
 	}
 
 
