@@ -91,9 +91,6 @@ public class BoardController {
 		
 		}
 		
-		
-		
-		
 		int currentPage = page == null ? 1 : page;
 		
 		Board board = bService.boardDetail(boardNo);
@@ -227,6 +224,19 @@ public class BoardController {
 			
 			
 			return receiverId;
+			
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("rupdate.ij")
+	public String replyUpdate(Reply reply) {
+		int result = bService.replyUpdate(reply);
+		
+		if (result > 0 ) {
+			return "success";
 			
 		} else {
 			return "fail";

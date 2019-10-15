@@ -11,6 +11,7 @@
 		color: #FFFFFF !important;
 }
 </style>
+
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/board/groupBoardDetail-style.css"
 	type="text/css">
@@ -130,6 +131,7 @@
 		function replyList() {
 			var boardNo = ${ board.boardNo };
 			var groupNo = ${ group.gNo }
+			/* var loginUser = ${ loginUser.memberId } */
 			$wrapper = $("#reply-view-container");
 			$wrapper.empty();
 			$content = "";
@@ -140,13 +142,16 @@
 				success : function(list) {
 					if(list.length>0){
 						$.each(list, function(i){
-							$content = '<div class="reply-view" align="center" style="margin-top:10px;"><table><tr>';
+							$content = '<div class="reply-view" align="center" style="margin-top:10px;" id="reply-view'+list[i].replyNo+'"><table><tr>';
 							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
 							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
-							$content += '<a id="reply-edit" href="javascript:update('+list[i].replyNo+');">수정</a>&nbsp;&nbsp;';
-							$content += '<a id="reply-delete" href="">삭제</a></td></tr>';
-							$content += '<tr>';
-							$content += '<td class="reply-content" style="font-weight:bold">'+list[i].replyContent+'</td>';
+							
+							/* if (loginUser == list[i].memberId) {} */
+								$content += '<a id="reply-edit" href="javascript:edit('+list[i].replyNo+',\''+list[i].memberName+'\',\''+list[i].replyContent+'\');">수정</a>&nbsp;&nbsp;';
+								$content += '<a id="reply-delete" href="javascript:delete('+list[i].replyNo+')">삭제</a>';
+							
+							$content += '</td></tr><tr>';
+							$content += '<td class="reply-content" style="font-size:12px;">'+list[i].replyContent+'</td>';
 							$content += '<td class="reply-date" style="text-align:center; font-size:12px;">'+list[i].replyModifyDate+'</td></tr>';
 							$content += '</table></div>';
 							$wrapper.append($content);
@@ -154,6 +159,41 @@
 					} 
 				}
 			});
+		}
+		
+		function edit(i, name, content){
+			$("#reply-view"+i).empty().css("height","75");
+			$content = "";
+			$content += '<table><tr>';
+			$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+name+'</td>'
+			$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;" rowspan="2">'
+			$content += '<a id="edit-edit'+i+'" href="javascript:goEdit('+i+');">완료</a>&nbsp;&nbsp;';
+			$content += '<a id="edit-cancel" href="javascript:replyList();">취소</a></td></tr><tr>';
+			$content += '<td class="reply-content" style="font-weight:bold">'
+			$content += '<textarea id="edit-content'+i+'" style="resize:none; width:100%; height:100%; font-size:12px;">'+content+'</textarea></td></tr>';
+			$content += '</table>';
+			$("#reply-view"+i).append($content);
+			$("#edit-content"+i).focus();
+		}
+		
+		function goEdit(i) {
+			var replyNo = i;
+			var replyContent = $("#edit-content"+i).val();
+			
+			$.ajax({
+				url: "rupdate.ij",
+				data : {replyNo : replyNo, replyContent : replyContent},
+				success : function(result) {
+					if (result == "success") {
+						alert("댓글 수정 완료");
+						replyList();
+						
+					} else {
+						alert("댓글 수정 실패. 다시 시도해주세요");
+					}
+				}
+			});
+						
 		}
 		
 		replyList();
@@ -179,15 +219,7 @@
 			});
 		});
 		
-		$("#reply-edit").on("click", function(){
-			$wrapper = $("#reply-view-container");
-			$wrapper.empty();
-			$content = "";
-			
-			$content = '<div class="reply-view" align="center" style="margin-top:10px;"><table><tr>';
-			$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
-			$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;" rowspan="2">';
-		});
+		
 	</script>
 </body>
 </html>
