@@ -23,21 +23,20 @@
 
 </head>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/common/index.css">
 	
 	
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<!-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> -->
 <!-- 써머노트 -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> -->
+<!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
 
 <!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 
 <body>
 
@@ -50,8 +49,7 @@
 		<div class="row" id="body-wrapper">
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
-				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
-				<%-- <jsp:include page="/WEB-INF/views/album/albumListView.jsp"></jsp:include> --%>
+				<jsp:include page="/WEB-INF/views/group/groupMenubar.jsp"></jsp:include>
 				<div class="content-wrap">
 				    <!-- <div class="div1">
 				        <h2>회원</h2>

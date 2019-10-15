@@ -61,5 +61,7 @@ public interface GroupService {
 	public abstract int selectIsGroupMember(String memberId, int gNo);
 
 	public abstract int rejoinApplyGroupMember(String memberId, int gNo);
+
+	public abstract int getGno();
 }
 

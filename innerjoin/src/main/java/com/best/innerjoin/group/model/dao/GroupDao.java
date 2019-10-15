@@ -33,6 +33,12 @@ public class GroupDao {
 		return sqlSession.selectOne("groupMapper.selectGroup", gNo);
 	}
 
+	// 그룹번호 가져오기
+	public int getGno() {
+		
+		return sqlSession.selectOne("groupMapper.selectgNo");
+	}
+
 	public Integer selectCode(Map codeMap) {
 		return sqlSession.selectOne("groupMapper.selectCode",codeMap);
 	}
