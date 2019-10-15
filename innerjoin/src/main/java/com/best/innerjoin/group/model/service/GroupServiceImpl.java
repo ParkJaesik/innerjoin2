@@ -135,5 +135,15 @@ public class GroupServiceImpl implements GroupService{
 	public int decreaseCount(String gNo) {
 		return gDao.decreaseCount(gNo);
 	}
+
+	@Override
+	public int selectIsGroupMember(String memberId, int gNo) {
+		return gDao.selectIsGroupMember(memberId,gNo);
+	}
+
+	@Override
+	public int rejoinApplyGroupMember(String memberId, int gNo) {
+		return gDao.rejoinApplyGroupMember(memberId,gNo);
+	}
 	
 }

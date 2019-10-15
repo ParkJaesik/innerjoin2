@@ -57,5 +57,9 @@ public interface GroupService {
 	public abstract int withdraw(Map<String, String> map);
 
 	public abstract int decreaseCount(String gNo);
+
+	public abstract int selectIsGroupMember(String memberId, int gNo);
+
+	public abstract int rejoinApplyGroupMember(String memberId, int gNo);
 }
 

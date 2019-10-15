@@ -487,6 +487,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					closeEventForm();
 					alertMessage('새 일정이 등록되었습니다.');
 					// 일정등록 성공 시 소켓 처리
+					
+					
+					
+					
 					eventSetting();
 					
 				}

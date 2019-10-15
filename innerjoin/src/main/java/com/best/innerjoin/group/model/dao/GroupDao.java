@@ -106,4 +106,19 @@ public class GroupDao {
 		return sqlSession.update("groupMapper.decreaseCount",gNo);
 	}
 
+	public int selectIsGroupMember(String memberId, int gNo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("gNo", gNo);
+		
+		return sqlSession.selectOne("groupMapper.selectIsGroupMember",map);
+	}
+
+	public int rejoinApplyGroupMember(String memberId, int gNo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("gNo", gNo);
+		return sqlSession.update("groupMapper.rejoinApplyGroupMember",map);
+	}
+
 }

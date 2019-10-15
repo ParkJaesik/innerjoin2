@@ -133,5 +133,15 @@
   <update id="decreaseCount" parameterType="string">
 		UPDATE "GROUP" SET GROUP_MEM_COUNT = GROUP_MEM_COUNT-1 WHERE GROUP_NO = #{gNo}
 	</update>
+	
+	<select id="selectIsGroupMember" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM GROUP_MEMBER
+		WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
+	
+	</select>
+	<update id="rejoinApplyGroupMember" parameterType="map">
+		UPDATE GROUP_MEMBER SET LEVEL_CODE = '4' WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
+	</update>
 </mapper>
 
