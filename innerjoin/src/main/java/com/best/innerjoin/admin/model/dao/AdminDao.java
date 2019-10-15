@@ -1,6 +1,7 @@
 package com.best.innerjoin.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -64,7 +65,13 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMrList", memberId);
 	}
 	
-	
+	/** 회원 등급 조정
+	 * @param memStatus
+	 * @return result
+	 */
+	public int setMemberStatus(Map<String, String> memStatus) {
+		return sqlSession.update("adminMapper.setMemberStatus", memStatus);
+	}
 	
 	
 	
@@ -161,6 +168,8 @@ public class AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("adminMapper.updateReportStatus", groupReptNo);
 	}
+
+
 
 
 

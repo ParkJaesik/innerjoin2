@@ -61,8 +61,10 @@ public class AdminController {
 		
 		// 신고 내역 조회
 		ArrayList<MemberReport> mrList = adService.selectMrList(memberId);
+		System.out.println("mrList: " + mrList);
 		
-		mv.addObject("member", member).addObject("mgInfo", mgInfo).setViewName("admin/memberDetail");
+		mv.addObject("member", member).addObject("mgInfo", mgInfo)
+			.addObject("mrList", mrList).setViewName("admin/memberDetail");
 		
 		return mv;
 	}
@@ -115,6 +117,17 @@ public class AdminController {
 	@RequestMapping("manageCategory.ij")
 	public String manageCategoryView() {
 		return "admin/manageCategory";
+	}
+	
+	/** (신고처리) 회원 등급 조정
+	 * @param memberId
+	 * @param statusCode
+	 * @return
+	 */
+	@RequestMapping("setMemStatus.ij")
+	public String setMemberStatus(String memberId, int statusCode) {
+		int result = adService.setMemberStatus(memberId, statusCode);
+		return "redirect:memDetail.ij?memberId=" + memberId;
 	}
 
 	

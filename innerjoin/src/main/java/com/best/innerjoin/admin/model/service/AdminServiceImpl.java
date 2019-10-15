@@ -69,7 +69,6 @@ public class AdminServiceImpl implements AdminService {
 				mgInfo.put(""+gno1, info);
 			}
 		}
-		System.out.println("mgInfo : " + mgInfo);
 		return mgInfo;
 	}
 	
@@ -79,7 +78,14 @@ public class AdminServiceImpl implements AdminService {
 		return adDao.selectMrList(memberId);
 	}
 	
-	
+	@Override
+	public int setMemberStatus(String memberId, int statusCode) {
+		Map<String, String> memStatus = new HashMap<>();
+		memStatus.put("memberId", memberId);
+		memStatus.put("statusCode", ""+statusCode);
+		return adDao.setMemberStatus(memStatus);
+	}
+
 	
 	
 	
@@ -144,6 +150,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
+
 
 
 

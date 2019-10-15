@@ -28,16 +28,19 @@ public interface AdminService {
 	 */
 	Map<String, Map> memGroupInfo(String memberId);
 	
-	
-	
 	/** 해당 멤버 신고 내역 가져오기
 	 * @param memberId
 	 * @return mrList
 	 */
 	ArrayList<MemberReport> selectMrList(String memberId);
 	
-	
-	
+	/** 회원 등급 조정
+	 * @param memberId
+	 * @param statusCode
+	 * @return
+	 */
+	int setMemberStatus(String memberId, int statusCode);
+
 	
 	
 	
@@ -80,6 +83,7 @@ public interface AdminService {
 	 * @return
 	 */
 	int updateGroupStatus(Integer groupReptNo,Group group);
+
 
 	
 
