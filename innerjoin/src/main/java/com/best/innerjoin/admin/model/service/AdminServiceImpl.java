@@ -14,6 +14,7 @@ import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 
 @Service("adService")
 public class AdminServiceImpl implements AdminService {
@@ -72,8 +73,11 @@ public class AdminServiceImpl implements AdminService {
 		return mgInfo;
 	}
 	
-	
-	
+	@Override
+	public ArrayList<MemberReport> selectMrList(String memberId) {
+		
+		return adDao.selectMrList(memberId);
+	}
 	
 	
 	
@@ -140,5 +144,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
+
+
 
 }

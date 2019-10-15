@@ -76,6 +76,7 @@
 		<result property="rStatusDate" column="REPT_STATUS_DATE"/>
 		<result property="rBoardStatus" column="MEMBER_REPT_B_STATUS"/>
 	</resultMap>
+
 	
 	
 	<select id="memListCount" resultType="_int">
@@ -122,7 +123,9 @@
   		WHERE MEMBER_ID = #{memberId}
   	</select>
   
-  
+	<select id="selectMrList" parameterType="string" resultMap="">
+	
+	</select>  
   
   
   

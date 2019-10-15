@@ -1,7 +1,6 @@
 package com.best.innerjoin.admin.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 
 @Controller
 public class AdminController {
@@ -55,7 +55,13 @@ public class AdminController {
 	public ModelAndView memDetailView(Integer page, String memberId, ModelAndView mv) {
 		// 멤버 상세정보 조회
 		Member member = adService.selectMemDetail(memberId);
+		
+		// 멤버 개설, 가입 모임 정보 조회
 		Map<String, Map> mgInfo = adService.memGroupInfo(memberId);
+		
+		// 신고 내역 조회
+		ArrayList<MemberReport> mrList = adService.selectMrList(memberId);
+		
 		mv.addObject("member", member).addObject("mgInfo", mgInfo).setViewName("admin/memberDetail");
 		
 		return mv;

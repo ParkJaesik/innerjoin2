@@ -13,6 +13,7 @@ import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 
 @Repository("adDao")
 public class AdminDao {
@@ -55,6 +56,13 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectJoinGroupList", memberId);
 	}
 	
+	/** 회원이 받은 신고 리스트
+	 * @param memberId
+	 * @return mrList
+	 */
+	public ArrayList<MemberReport> selectMrList(String memberId) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectMrList", memberId);
+	}
 	
 	
 	

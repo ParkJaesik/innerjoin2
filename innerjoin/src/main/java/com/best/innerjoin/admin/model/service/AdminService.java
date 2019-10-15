@@ -7,6 +7,7 @@ import java.util.Map;
 import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 
 public interface AdminService {
 
@@ -29,7 +30,11 @@ public interface AdminService {
 	
 	
 	
-	
+	/** 해당 멤버 신고 내역 가져오기
+	 * @param memberId
+	 * @return mrList
+	 */
+	ArrayList<MemberReport> selectMrList(String memberId);
 	
 	
 	
@@ -75,6 +80,8 @@ public interface AdminService {
 	 * @return
 	 */
 	int updateGroupStatus(Integer groupReptNo,Group group);
+
+	
 
 
 }
