@@ -143,5 +143,13 @@
 	<update id="rejoinApplyGroupMember" parameterType="map">
 		UPDATE GROUP_MEMBER SET LEVEL_CODE = '4' WHERE GROUP_NO = #{gNo} AND MEMBER_ID = #{memberId}
 	</update>
+	
+	<!-- 메인 페이지 그룹 목록 조회 쿼리 -->
+	<select id="mainGroupList" resultMap="groupResultSet">
+		SELECT * FROM (SELECT * FROM "GROUP" ORDER BY GROUP_ENROLL_DATE DESC) 
+		<![CDATA[
+		WHERE ROWNUM <= 6
+		]]> 
+	</select>
 </mapper>
 

@@ -61,5 +61,10 @@ public interface GroupService {
 	public abstract int selectIsGroupMember(String memberId, int gNo);
 
 	public abstract int rejoinApplyGroupMember(String memberId, int gNo);
+
+	/** 메인 페이지 그룹 목록 조회 Service
+	 * @return list
+	 */
+	public abstract ArrayList<Group> mainGroupList();
 }
 

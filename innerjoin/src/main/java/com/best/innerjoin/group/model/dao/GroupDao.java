@@ -121,4 +121,8 @@ public class GroupDao {
 		return sqlSession.update("groupMapper.rejoinApplyGroupMember",map);
 	}
 
+	public ArrayList<Group> mainGroupList() {
+		return (ArrayList)sqlSession.selectList("groupMapper.mainGroupList");
+	}
+
 }
