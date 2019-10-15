@@ -225,6 +225,12 @@ public class MemberDao {
 
 
 
+	public Member selectMemberInfo(String memberId) {
+		return sqlSession.selectOne("memberMapper.selectMemberInfo", memberId);
+	}
+
+
+
 	
 
 

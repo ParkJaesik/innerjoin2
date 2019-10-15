@@ -246,5 +246,10 @@
   </select>
   
   
+  <!-- 특정 아이디로 멤버 정보 가져오기 -->
+  <select id="selectMemberInfo" parameterType="string" resultMap="memberResultSet">
+  	SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
+  	
+  </select>
   
 </mapper>

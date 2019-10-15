@@ -223,19 +223,10 @@
 										<!-- 나중에 맞는 값 넣기 -->
 										<c:param name="gNo" value="${ group.gNo }" />
 									</c:url>
-									<h5><a href="${ goGroup }">${ group.gName }</a></h5>
+									<h5><a href="goGroupPage.ij?gNo=${ group.gNo }">${ group.gName }</a></h5>
 									<br>
-									<p><a href="${ goGroup }">${ group.gInfo }</a></p> 
-									<c:url var="invDeny" value="invDeny.ij"> <!-- 수정 -->
-										<c:param name="gNo" value="${ group.gNo }" /> <!--  신고시 수정 -->
-									</c:url>
-									<c:url var="invAccept" value="invAccept.ij"><!-- 초대시수정 -->
-										<c:param name="gNo" value="${ group.gNo }" /> <!-- 초대 시  수정 -->
-									</c:url>
-								<c:if test="${ !empty loginUser }">
-									<a href="${ invDeny }" class="btton report">신고</a>  <!-- 신고 시 수정 -->
-									<a href="${ invAccept }" class="btton">가입신청</a> <!-- 초대 시 수정 -->
-								</c:if>
+									<p><a href="goGroupPage.ij?gNo=${ group.gNo }">${ group.gInfo }</a></p> 
+									
 								</div>
 					</div>
 					</c:forEach>

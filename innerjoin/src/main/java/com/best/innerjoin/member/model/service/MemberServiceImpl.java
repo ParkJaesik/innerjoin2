@@ -243,6 +243,12 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateProfileAdd(member);
 	}
 
+	//특정 멤버아이디로 멤버정보 가져오기
+	@Override
+	public Member selectMemberInfo(String memberId) {
+		return mDao.selectMemberInfo(memberId);
+	}
+
 		
 	
 

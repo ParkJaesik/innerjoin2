@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 
@@ -125,6 +126,10 @@ public class GroupDao {
 		map.put("memberId", memberId);
 		map.put("gNo", gNo);
 		return sqlSession.update("groupMapper.rejoinApplyGroupMember",map);
+	}
+
+	public ArrayList<GroupCat> selectGroupCat() {
+		return (ArrayList)sqlSession.selectList("groupMapper.selectGroupCat");
 	}
 
 }

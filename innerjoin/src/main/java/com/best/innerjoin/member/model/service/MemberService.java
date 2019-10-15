@@ -127,6 +127,8 @@ public interface MemberService {
 	 */
 	public abstract int updateProfileAdd(Member member);
 
+	public abstract Member selectMemberInfo(String memberId);
+
 	
 
 
