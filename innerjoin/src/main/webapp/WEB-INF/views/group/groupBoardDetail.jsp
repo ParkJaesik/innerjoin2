@@ -147,8 +147,8 @@
 							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
 							
 							/* if (loginUser == list[i].memberId) {} */
-								$content += '<a id="reply-edit" href="javascript:edit('+list[i].replyNo+',\''+list[i].memberName+'\',\''+list[i].replyContent+'\');">수정</a>&nbsp;&nbsp;';
-								$content += '<a id="reply-delete" href="javascript:delete('+list[i].replyNo+')">삭제</a>';
+								$content += '<a id="reply-edit" href="javascript:replyEdit('+list[i].replyNo+',\''+list[i].memberName+'\',\''+list[i].replyContent+'\');">수정</a>&nbsp;&nbsp;';
+								$content += '<a id="reply-delete" href="javascript:replyDelete('+list[i].replyNo+')">삭제</a>';
 							
 							$content += '</td></tr><tr>';
 							$content += '<td class="reply-content" style="font-size:12px;">'+list[i].replyContent+'</td>';
@@ -161,7 +161,9 @@
 			});
 		}
 		
-		function edit(i, name, content){
+		replyList();
+		
+		function replyEdit(i, name, content){
 			$("#reply-view"+i).empty().css("height","75");
 			$content = "";
 			$content += '<table><tr>';
@@ -193,7 +195,26 @@
 					}
 				}
 			});
-						
+		}
+
+		function replyDelete(i){
+			if (confirm("삭제하시겠습니까?")) {
+				var replyNo = i;
+				
+				$.ajax({
+					url : "rdelete.ij",
+					data : {replyNo : replyNo},
+					success : function(result){
+						if (result == "success") {
+							alert("댓글 삭제 완료");
+							replyList();
+							
+						} else {
+							alert("댓글 삭제 실패. 다시 시도해주세요");
+						}
+					}
+				});
+			}
 		}
 		
 		replyList();

@@ -198,4 +198,9 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.replyUpdate(reply);
 	}
 
+	@Override
+	public int replyDelete(int replyNo) {
+		return bDao.replyDelete(replyNo);
+	}
+
 }

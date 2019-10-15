@@ -69,4 +69,10 @@ public interface BoardService {
 	 * @return result
 	 */
 	public abstract int replyUpdate(Reply reply);
+
+	/** 댓글 삭제 Service
+	 * @param replyNo
+	 * @return result
+	 */
+	public abstract int replyDelete(int replyNo);
 }

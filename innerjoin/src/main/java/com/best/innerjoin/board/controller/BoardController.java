@@ -243,4 +243,17 @@ public class BoardController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("rdelete.ij")
+	public String replyDelete(int replyNo) {
+		int result = bService.replyDelete(replyNo);
+		
+		if (result > 0) {
+			return "success";
+					
+		} else {
+			return "fail";
+		}
+	}
+	
 }
