@@ -49,15 +49,16 @@
 				
 				<table class="memListTable" align="center" border="1" cellspacing="0" width="900" id="tb">
 					<tr>
-						<th>번호</th>
-						<th>모임 이름</th>
-						<th>모임 번호</th>
-						<th>신고자</th>
-						<th>처리 상태</th>
-						<th>신고일</th>
+						<th align="center">번호</th>
+						<th align="center">모임 이름</th>
+						<th align="center">모임 번호</th>
+						<th align="center">신고자</th>
+						<th align="center">처리 상태</th>
+						<th align="center">신고일</th>
 					</tr>
 					
-					<c:forEach var="r" items="${ rList }" varStatus="status">
+					<c:if test="${!empty rList}">
+						<c:forEach var="r" items="${ rList }" varStatus="status">
 						<tr>
 							<td align="center">${ status.count }</td>
 							
@@ -75,8 +76,12 @@
 							<td align="center">${ r.groupReptStatus }</td>
 							<td align="center">${ fn:split(r.groupReptDate, ' ')[0] }</td>
 						</tr>
-					</c:forEach>
+						</c:forEach>
 					
+					</c:if>
+					<c:if test="${empty rList }">
+						<tr><td>신고가 없습니다.</td></tr>
+					</c:if>
 					<!-- 페이징 처리 -->
 					<tr align="center" height="20">
 						<td colspan="7">
