@@ -259,7 +259,7 @@
 		var  reporterId = '${loginUser.memberId}';
 		var  reportedId = $("input[name=memberId]").val();
 		var  memReptContent = $("#reportMsg").val();
-		
+		console.log(memReptContent);
 		$.ajax({
 			
 			url : "reportMember.ij",
@@ -267,10 +267,13 @@
 			data : {reporterId:reporterId,reportedId:reportedId,memReptContent:memReptContent},
 			success : function(result){
 				
-				alert(" 성공");
-				
-				
-				$('#exampleModalCenter2').modal('hide');
+				if(result =='success'){
+					alert("성공");
+					$('#exampleModalCenter3').modal('hide');
+				}else{
+					alert("실패ㅠㅠ");
+					$('#exampleModalCenter3').modal('hide');
+				}
 				
 			} 
 			
