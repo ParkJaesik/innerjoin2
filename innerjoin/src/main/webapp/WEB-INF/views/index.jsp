@@ -265,51 +265,21 @@ div {
 
 					<div id="mainpage-group-container">
 						<h1>새로운 모임</h1>
+						
 						<div id="group-container">
-							<div id="main-group">
-								<div id="main-group-thumbnail">
-									<img src="" alt="">
+							<c:forEach var="g" items="${ list }">
+								<div id="main-group">
+									<div id="main-group-thumbnail">
+										<img src="" alt="">
+									</div>
+		
+									<div id="main-group-info">
+										<a href="goGroupPage.ij?gNo=${g.gNo}" style="font-size: 32px; font-weight: bold;">
+											${ g.gName }
+										</a>
+									</div>
 								</div>
-	
-								<div id="main-group-info"></div>
-							</div>
-	
-							<div id="main-group">
-								<div id="main-group-thumbnail">
-									<img src="" alt="">
-								</div>
-	
-								<div id="main-group-info"></div>
-							</div>
-	
-							<div id="main-group">
-								<div id="main-group-thumbnail">
-									<img src="" alt="">
-								</div>
-	
-								<div id="main-group-info"></div>
-							</div>
-							<div id="main-group">
-								<div id="main-group-thumbnail">
-									<img src="" alt="">
-								</div>
-	
-								<div id="main-group-info"></div>
-							</div>
-							<div id="main-group">
-								<div id="main-group-thumbnail">
-									<img src="" alt="">
-								</div>
-	
-								<div id="main-group-info"></div>
-							</div>
-							<div id="main-group">
-								<div id="main-group-thumbnail">
-									<img src="" alt="">
-								</div>
-	
-								<div id="main-group-info"></div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
