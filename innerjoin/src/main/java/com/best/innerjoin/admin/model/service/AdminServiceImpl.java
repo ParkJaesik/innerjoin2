@@ -86,7 +86,12 @@ public class AdminServiceImpl implements AdminService {
 		return adDao.setMemberStatus(memStatus);
 	}
 
-	
+	@Override
+	public int processReport(String reptNoList) {
+		return adDao.processReport(reptNoList);
+	}
+
+
 	
 	
 	

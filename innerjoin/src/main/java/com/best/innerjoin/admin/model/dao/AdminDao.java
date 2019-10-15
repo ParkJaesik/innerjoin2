@@ -73,7 +73,13 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.setMemberStatus", memStatus);
 	}
 	
-	
+	/** 회원 신고 처리 상태 바꿔주기
+	 * @param reptNoList
+	 * @return
+	 */
+	public int processReport(String reptNoList) {
+		return sqlSession.update("adminMapper.processReport", reptNoList);
+	}
 	
 	
 	
@@ -168,6 +174,8 @@ public class AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("adminMapper.updateReportStatus", groupReptNo);
 	}
+
+
 
 
 
