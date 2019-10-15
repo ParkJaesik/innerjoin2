@@ -321,7 +321,7 @@ button,
 							</div>
 							<br>
 							<div id="innerMent2" class=".innerMent">
-								모임에 InnerJoin하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요. 
+								모임에 InnerJoin하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요.
 							</div>
 							<br>
 							<c:if test="${loginUser == null }">
