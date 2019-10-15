@@ -150,7 +150,7 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public ArrayList<GroupCat> selectGroupCat() {
 		return gDao.selectGroupCat();
-    
+	}
   @Override
 	public int getGno() {
 		return gDao.getGno();
