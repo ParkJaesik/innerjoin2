@@ -338,15 +338,26 @@ document.addEventListener('DOMContentLoaded', function() {
 					flag = 1;
 					break;
 				}
-	        
+				console.log("프로필 경로: " + member[pos].memberProPath);
 				var $member = $('<div>');
 				$member.addClass('col-md-3 member');
+				
+				var $memberProArea = $('<div>');
+				$memberProArea.addClass('proArea');
+				
 				var $memberImg = $('<img>');
-				$memberImg.attr('alt', '프로필').attr('src', member[pos].path);
+				$memberImg.attr('alt', '프로필').attr('src', 'resources/images/member/' + member[pos].memberProPath);
+				
 				var $memberId = $('<span>');
+//				$memberId.addClass('memberId').append(member[pos].memberName);
+//				    
+//				$member.append($memberImg).append($memberId);
+//				
 				$memberId.addClass('memberId').append(member[pos].memberName);
-				    
-				$member.append($memberImg).append($memberId);
+				
+				$memberProArea.append($memberImg);
+				$member.append($memberProArea).append($memberId);
+
 				$memberRow.append($member);
 			}
 	     

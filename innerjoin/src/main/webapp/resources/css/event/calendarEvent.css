@@ -187,8 +187,15 @@
       padding-right: 10px !important;
       width: 25%;
    }
-   .eventMember .member>img {
-      width: 90%;
+   
+  .proArea {
+   		width: 100%;
+   		height: 80%;
+   		margin: 0;
+   } 
+   
+   .eventMember .member img {
+      width: 100%;
       height: auto;
       border-radius: 15px;
    }
@@ -196,6 +203,9 @@
    .eventMember .memberId {
       display: block;
       text-align: center;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
    }
 
     
