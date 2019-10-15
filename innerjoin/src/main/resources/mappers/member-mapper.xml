@@ -85,7 +85,7 @@
   <update id="updateInfo" parameterType="Member">
   	UPDATE MEMBER
   	SET 
-  	<if test='memberPwd.equals("")'>
+  	<if test='!memberPwd.equals("")'>
   	MEMBER_PWD = #{memberPwd},
   	</if>
   	MEMBER_NAME = #{memberName}
@@ -232,7 +232,7 @@
   <select id="getMember" parameterType="Member" resultMap="memberResultSet">
   	SELECT * FROM MEMBER 
 	LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
-  	WHERE MEMBER_ID = #{memberId} 
+  	WHERE MEMBER_ID = #{memberId}
   </select>
   
   <!-- 모임장이름으로 모임장아이디 가져오기 -->
@@ -246,10 +246,22 @@
   </select>
   
   
+
+  <!-- 아이디로 정보 얻어오기(비밀번호 찾기) -->
+  <select id="selectMember" parameterType="String" resultMap="memberResultSet">
+  	SELECT *
+  	FROM MEMBER
+  	LEFT JOIN MEMBER_ADD_INFO USING(MEMBER_ID) 
+	WHERE MEMBER_ID = #{memberId} 
+	AND MEMBER_STATUS_CODE != 3 
+  </select>
+  
+
   <!-- 특정 아이디로 멤버 정보 가져오기 -->
   <select id="selectMemberInfo" parameterType="string" resultMap="memberResultSet">
   	SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
   	
   </select>
+
   
 </mapper>
