@@ -60,7 +60,7 @@
 		}
 		
 		.tableLabel {
-			display: block;
+			display: inline-block;
 			font-wize: 0.8em;
 			font-weight: bold;
 			margin-bottom: 20px;
@@ -116,11 +116,37 @@
 			border: 1px solid lightgray !important;
 		}
 		
-		.hostTable th, .joinTable th, li.active a {
+		.hostTable th, .joinTable th, li.active a, .memReptTable th {
 			background-color: #30a5ff !important;
 			color: white !important;
 			font-weight: bold !important;
 		}
+		
+		.selectGroup {
+			float: right;
+			display: inline-block !important;
+			
+		}
+		
+		#memStatusSelect {
+			display: inline-block;
+			width: 200px;
+			height: 40px;			
+			border-radius: 5px;
+			vertical-align: baseline;
+		}
+		
+		.memStatusSet {
+			display: inline-block;
+			width: 100px;
+			height: 40px;
+		}
+		
+		.memStatusSet button {
+			height: 100%;
+			vertical-align: baseline;
+		}
+		
 		
 	</style>
 
@@ -251,26 +277,13 @@
 										<table class="table hostTable">
 											<thead>
 												<tr>
-													<th>
-														번호													</th>
-													<th>
-														그룹명
-													</th>
-													<th>
-														지역
-													</th>
-													<th>
-														그룹카테고리
-													</th>
-													<th>
-														그룹개설일
-													</th>
-													<th>
-														공개여부
-													</th>
-													<th>
-														그룹상태
-													</th>
+													<th> 번호 </th>
+													<th> 그룹명 </th>
+													<th> 지역 </th>
+													<th> 그룹카테고리 </th>
+													<th> 그룹개설일 </th>
+													<th> 공개여부 </th>
+													<th> 그룹상태 </th>
 												</tr>
 											</thead>
 											<tbody>
@@ -351,7 +364,10 @@
 																${num2 }
 															</td>
 															<td>
-																${(g.value['gInfo']).gName }
+																<c:url var="groupDetail" value="groupDetail.ij">
+																	<c:param name="gNo" value="${g.key}"/>
+																</c:url>
+																<a href="${groupDetail}">${(g.value['gInfo']).gName }</a>
 															</td>
 															<td>
 																${(g.value['gInfo']).cityName } &nbsp; ${(g.value['gInfo']).districtName }
@@ -393,10 +409,84 @@
 						
 						<div class="col-md-12 mdDiv"></div>
 						
+						<!-- 신고 내역 -->
 						<div class="col-md-12">
-							<span class="tableLabel"> >> &nbsp; 신고 받은 내역</span>
+							<div class="row">
+								<div class="col-md-12">
+									<span class="tableLabel"> >> &nbsp; 신고 받은 내역</span>
+									
+									<div class="input-group selectGroup">
+										<select name="memStatus" class="custom-select" id="memStatusSelect">
+											<option value="1" selected>일반</option>
+											<option value="2">경고</option>
+											<option value="3">탈퇴</option>
+										</select>
+										<div class="memStatusSet">
+											<button class="btn btn-outline-secondary statusSetBtn" type="button" onclick="setMemStatusCode();">등급조정</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 신고 내역 테이블 -->
+							<div class="reportTableArea">
+								<table class="table memReptTable">
+									<thead>
+										<tr>
+											<th> 번호 </th>
+											<th> 신고 내용 </th>
+											<th> 신고자(아이디 / 닉네임) </th>
+											<th> 신고상태 </th>
+											<th> 신고일 </th>
+											<th> 처리 </th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:if test="${ empty mrList}">
+											<tr>
+												<td colspan='6' align="center">
+													신고받은 내역이 없습니다.
+												</td>
+											</tr>
+										</c:if>
+										<c:if test="${ !empty mrList}">
+											<c:set var="num" value="0"/>
+											<c:forEach var="mr" items="${mrList}" varStatus="i">
+												<c:set var="num" value="${num + 1}"/>
+												<tr>
+													<td>
+														${num }
+													</td>
+													<td>
+														${mr.memReptContent }
+													</td>
+													<td>
+														${mr.reporterId}
+													</td>
+													<td>
+														${mr.memReptStatus}
+													</td>
+													<td>
+														<%-- <fmt:parseDate value="${mr.memReptDate}" pattern="yyyy.MM.dd"/> --%>
+														${mr.memReptDate}
+													</td>
+													<td>
+														<c:if test='${!mr.memReptStatus.equals("미처리")}'>
+															<input type="checkbox" disabled='true'>
+														</c:if>
+														<c:if test='${mr.memReptStatus.equals("미처리")}'>
+															<input type="checkbox" name="memReptNo" value="${mr.memReptNo }">
+														</c:if>
+														&nbsp;처리하기
+													</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+									</tbody>
+								</table>
+							</div>
+							
 						</div>
-						
 					</div>
 					
 				</div>
@@ -404,6 +494,36 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		function setMemStatusCode() {
+			var currStatusCode = "${member.memberStatusCode}";
+			var currStatus
+			if(currStatusCode == 1) currStatus = "일반";
+			else if(currStatusCode == 2) currStatus = "경고";
+			else if(currStatusCode == 3) currStatus = "탈퇴";
+
+			var changeStatusCode = $("#memStatusSelect").val();
+			var changeStatus;
+
+			if(changeStatusCode == 1) changeStatus = "일반";
+			else if(changeStatusCode == 2) changeStatus = "경고";
+			else if(changeStatusCode == 3) changeStatus = "탈퇴";
+			
+			if(currStatusCode == changeStatusCode) {
+				alert("현재 등급과 같은 등급으로 변경이 불가합니다.");
+				return false;
+			}
+			
+			if(!confirm("${member.memberId} 회원의 등급을 " + 
+					currStatus + " -> " + changeStatus + " 변경하시겠습니까?" )) 
+				return false;
+			
+			location.href="setMemStatus.ij?memberId=${member.memberId}&statusCode=" + changeStatusCode;
+		}
+	
+	
+	</script>
 
 </body>
 </html>
