@@ -58,7 +58,7 @@ public class AdminController {
 		
 		// 멤버 개설, 가입 모임 정보 조회
 		Map<String, Map> mgInfo = adService.memGroupInfo(memberId);
-		
+		System.out.println("mgInfo" + mgInfo);
 		// 신고 내역 조회
 		ArrayList<MemberReport> mrList = adService.selectMrList(memberId);
 		System.out.println("mrList: " + mrList);
@@ -127,6 +127,12 @@ public class AdminController {
 	@RequestMapping("setMemStatus.ij")
 	public String setMemberStatus(String memberId, int statusCode) {
 		int result = adService.setMemberStatus(memberId, statusCode);
+		return "redirect:memDetail.ij?memberId=" + memberId;
+	}
+	
+	@RequestMapping("processReport.ij")
+	public String processReport(String reptNoList, String memberId) {
+		int result = adService.processReport(reptNoList);
 		return "redirect:memDetail.ij?memberId=" + memberId;
 	}
 

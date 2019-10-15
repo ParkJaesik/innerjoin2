@@ -125,10 +125,11 @@
   	</select>
   
   	<select id="selectJoinGroupList" parameterType="string" resultMap="groupResultSet">
-  		SELECT GROUP_NO, GROUP_OPEN_STATUS, GROUP_NAME, DISTRICT_NAME, 
+  		SELECT GROUP_NO, GROUP_OPEN_STATUS, GROUP_NAME, CITY_NAME || ', ' ||DISTRICT_NAME AS DISTRICT_NAME, 
   			GROUP_STATUS, GROUP_CATEGORY_NAME, GROUP_ENROLL_DATE
   		FROM "GROUP" G
   		JOIN LOCAL_DISTRICT_CATEGORY L ON(G.LOCAL_CODE = L.DISTRICT_CODE)
+  		JOIN LOCAL_CITY_CATEGORY USING(CITY_CODE)
   		JOIN GROUP_CATEGORY USING(GROUP_CATEGORY_CODE)
   		JOIN GROUP_MEMBER USING(GROUP_NO)
   		WHERE MEMBER_ID = #{memberId}
@@ -150,6 +151,11 @@
   		WHERE MEMBER_ID = #{memberId}
   	</update>
   
+  	<update id="processReport" parameterType="string">
+  		UPDATE MEMBER_REPORT
+  		SET MEMBER_REPT_STATUS = '처리'
+  		WHERE MEMBER_REPT_NO IN #{reptNoList}
+  	</update>
   
   
   

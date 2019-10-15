@@ -41,6 +41,11 @@ public interface AdminService {
 	 */
 	int setMemberStatus(String memberId, int statusCode);
 
+	/** 회원 신고 상태 바꿔주기
+	 * @param reptNoList
+	 * @return result
+	 */
+	int processReport(String reptNoList);
 	
 	
 	
@@ -83,6 +88,7 @@ public interface AdminService {
 	 * @return
 	 */
 	int updateGroupStatus(Integer groupReptNo,Group group);
+
 
 
 	
