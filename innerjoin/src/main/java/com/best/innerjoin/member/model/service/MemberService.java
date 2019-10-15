@@ -127,6 +127,12 @@ public interface MemberService {
 	 */
 	public abstract int updateProfileAdd(Member member);
 
+	/** 멤버 아이디로 값 얻어오기(비밀번호 잊어버렸을 경우)
+	 * @param memberId
+	 * @return
+	 */
+	public abstract Member selectMember(String memberId);
+
 	
 
 

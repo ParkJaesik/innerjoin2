@@ -225,6 +225,18 @@ public class MemberDao {
 
 
 
+	/** 아이디로 값 얻어오기(비밀번호 찾기 시) 
+	 * @param memberId
+	 * @return
+	 */
+	public Member selectMember(String memberId) {
+		Member member = sqlSession.selectOne("memberMapper.selectMember", memberId);
+		
+		return member;
+	}
+
+
+
 	
 
 

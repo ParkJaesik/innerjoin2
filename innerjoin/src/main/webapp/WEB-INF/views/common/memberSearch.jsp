@@ -30,6 +30,92 @@
     .groupSelect{
     	height: 100%;
     }
+     .search-header{
+        	position: relative;
+        }
+        .searchMenu{
+        	display: flex;
+			margin: 0 auto;
+			padding: 0;
+			max-width: 1200px;
+			list-style: none;
+        }
+        
+        .searchMenu li{
+        	position: relative;
+			z-index: 1;
+			display: block;
+			margin: 0;
+			text-align: center;
+			flex: 1;
+			left: 15.1em !important;
+        }
+        
+        .searchMenu a{
+	        position: relative;
+			display: block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			line-height: 2.5;
+			padding: 0.5em 0;
+			color: #2CC185;
+			transition: color 0.3s;
+        }
+        
+        .searchMenu a:hover,
+        .searchMenu a:foucs{
+        	color: #74777b;
+        }
+        
+        
+        .searchOp{
+            width: 7em;
+            text-align: center;
+            height: 3em;
+            font-size: 17px;
+            color: #ed786a;
+            padding-top: 0.7em;
+            border-left: 1px solid #ed786a;
+            border-right: 1px solid #ed786a;
+            border-top: 1px solid #ed786a;
+           
+        }
+
+        .search-section{
+            width: 100%;
+            height: 7em;
+            border: 1px solid #ed786a;
+            position: relative;
+            display: inline-block;
+            top: 3.1em;
+        }
+
+        .search-section input{
+            width: 60%;
+            height: 2.8em;
+            border-radius: 3px;
+            border: 1px solid #ed786a;
+        }
+
+        .search-section button{
+            margin-left: -3.6em;
+            padding: 0.6em;
+            border-radius: 0 3px 3px 0;
+            outline: none;
+            box-shadow: none;
+            border: none;
+        }
+
+        select{
+            padding: 0.6em;
+            width: 6em;
+            border-radius: 3px;
+        }
+        select option:focus{
+            background-color: #ed786a;
+            color: white;
+        }
  </style>
 
    
