@@ -53,13 +53,13 @@
 				<div class="search-header row">
 
                             <a href="#" class="searchOp">유저검색</a>
-                            <a href="#" class="searchOp">모임검색</a>
+                            <a href="groupSearchForm.ij" class="searchOp">모임검색</a>
                             
                             <div class="search-section container" align="center">
                                 
-                                <form action="" method="get">
-                                    <input type="search" name="userSearch" id="userSearch" style="margin-top: 2em; padding: 1em;">
-                                    <button><img/>검색</button>
+                                <form action="memberSearch.ij" method="get">
+                                    <input type="search" name="mgSearch" id="mgSearch" style="margin-top: 2em; padding: 1em;">
+                                    <button>검색</button>
                                 </form>    
                             </div>
                         </div>
