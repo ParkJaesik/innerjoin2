@@ -62,4 +62,17 @@ public interface BoardService {
 	public abstract int replyInsert(Reply reply);
 	
 	public abstract String getWriter(int boardNo);
+
+	/** 댓글 수정 Service
+	 * @param replyNo
+	 * @param replyContent
+	 * @return result
+	 */
+	public abstract int replyUpdate(Reply reply);
+
+	/** 댓글 삭제 Service
+	 * @param replyNo
+	 * @return result
+	 */
+	public abstract int replyDelete(int replyNo);
 }

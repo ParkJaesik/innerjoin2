@@ -193,4 +193,14 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.getWriter(boardNo);
 	}
 
+	@Override
+	public int replyUpdate(Reply reply) {
+		return bDao.replyUpdate(reply);
+	}
+
+	@Override
+	public int replyDelete(int replyNo) {
+		return bDao.replyDelete(replyNo);
+	}
+
 }
