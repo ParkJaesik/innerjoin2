@@ -73,6 +73,10 @@ table{
 	border-bottom: 2px solid rgb(190, 190, 190);
 }
 
+.div2 th{
+	border-bottom: 2px solid rgb(190, 190, 190);
+}
+
 #report-td-content {
 	padding-left: 30px;
 }
