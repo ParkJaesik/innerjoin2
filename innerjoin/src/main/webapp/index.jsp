@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,14 +169,13 @@ div {
 	text-align: center;
 }
 
-#group-container #main-group:nth-child(2), #group-container #main-group:nth-child(5)
-	{
+#group-container #main-group:nth-child(2), #group-container #main-group:nth-child(5) {
 	margin-left: 50px;
 	margin-right: 50px;
 }
 
 #group-container #main-group:nth-child(1), #group-container #main-group:nth-child(2),
-	#group-container #main-group:nth-child(3) {
+#group-container #main-group:nth-child(3) {
 	margin-bottom: 50px;
 }
 
@@ -242,10 +241,10 @@ div {
 					<div id="mainpage-thumbnail-container">
 						<div id="thumbnail-container">
 							<div id="slide">
-								<input type="radio" name="pos" id="pos1" checked> <input
-									type="radio" name="pos" id="pos2"> <input type="radio"
-									name="pos" id="pos3"> <input type="radio" name="pos"
-									id="pos4">
+								<input type="radio" name="pos" id="pos1" checked>
+								<input type="radio" name="pos" id="pos2">
+								<input type="radio" name="pos" id="pos3">
+								<input type="radio" name="pos" id="pos4">
 
 								<ul>
 									<li><video src=""></video></li>
@@ -255,62 +254,63 @@ div {
 								</ul>
 
 								<p class="pos">
-									<label for="pos1"></label> <label for="pos2"></label> <label
-										for="pos3"></label> <label for="pos4"></label>
+									<label for="pos1"></label>
+									<label for="pos2"></label>
+									<label for="pos3"></label>
+									<label for="pos4"></label>
 								</p>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div id="mainpage-group-container">
-					<h1>새로운 모임</h1>
-					<div id="group-container">
-						<div id="main-group">
-							<div id="main-group-thumbnail">
-								<img src="" alt="">
+					<div id="mainpage-group-container">
+						<h1>새로운 모임</h1>
+						<div id="group-container">
+							<div id="main-group">
+								<div id="main-group-thumbnail">
+									<img src="" alt="">
+								</div>
+	
+								<div id="main-group-info"></div>
 							</div>
-
-							<div id="main-group-info"></div>
-						</div>
-
-						<div id="main-group">
-							<div id="main-group-thumbnail">
-								<img src="" alt="">
+	
+							<div id="main-group">
+								<div id="main-group-thumbnail">
+									<img src="" alt="">
+								</div>
+	
+								<div id="main-group-info"></div>
 							</div>
-
-							<div id="main-group-info"></div>
-						</div>
-
-						<div id="main-group">
-							<div id="main-group-thumbnail">
-								<img src="" alt="">
+	
+							<div id="main-group">
+								<div id="main-group-thumbnail">
+									<img src="" alt="">
+								</div>
+	
+								<div id="main-group-info"></div>
 							</div>
-
-							<div id="main-group-info"></div>
-						</div>
-						<div id="main-group">
-							<div id="main-group-thumbnail">
-								<img src="" alt="">
+							<div id="main-group">
+								<div id="main-group-thumbnail">
+									<img src="" alt="">
+								</div>
+	
+								<div id="main-group-info"></div>
 							</div>
-
-							<div id="main-group-info"></div>
-						</div>
-						<div id="main-group">
-							<div id="main-group-thumbnail">
-								<img src="" alt="">
+							<div id="main-group">
+								<div id="main-group-thumbnail">
+									<img src="" alt="">
+								</div>
+	
+								<div id="main-group-info"></div>
 							</div>
-
-							<div id="main-group-info"></div>
-						</div>
-						<div id="main-group">
-							<div id="main-group-thumbnail">
-								<img src="" alt="">
+							<div id="main-group">
+								<div id="main-group-thumbnail">
+									<img src="" alt="">
+								</div>
+	
+								<div id="main-group-info"></div>
 							</div>
-
-							<div id="main-group-info"></div>
 						</div>
-
 					</div>
 				</div>
 			</div>
