@@ -22,6 +22,11 @@
 	    width: 100%;
     	resize: none;
     }
+  	#reportMsg{
+	
+	    width: 100%;
+    	resize: none;
+    }
     .groupSelect{
     	height: 100%;
     }
@@ -88,8 +93,8 @@
 									<br>
 									<p><a href="${ goGroup }">${ user.memberIntroduce }</a></p> <!-- 수정 -->	
 								<c:if test="${ !empty loginUser  and hostGroup != null}">
-									<input type="hidden" value="${user.memberId}">
-									<a href="${ invDeny }" class="btton report">신고</a>  <!-- 신고 시 수정 -->
+									<input name="memberId" type="hidden" value="${user.memberId}">
+									<button class="reportMethod" data-toggle="modal"  data-target="#exampleModalCenter3">신고</button>  <!-- 신고 시 수정 -->
 									<button class="iyesMethod" data-toggle="modal"  data-target="#exampleModalCenter2">초대</button> <!-- 초대 시 수정 -->
 								</c:if>
 								</div>
@@ -174,6 +179,33 @@
 		  </div>
 		</div>
 	</div>
+	
+	
+	
+		<!-- 신고 모달 -->
+		<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">회원 신고</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		       	<div>
+		       		<input type="text" id="reportedId" readonly>
+		       	</div>
+		       	
+		       	<textarea rows="5" cols="20" id="reportMsg"></textarea>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary" id="reportBtn">신고하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
@@ -184,6 +216,14 @@
 		var receiverId =  $(this).prev().prev().val();
 		
 		$("#receiverId").val(receiverId);
+
+
+	});
+	$(".reportMethod").click(function(){
+		
+		
+		var reportedId = $(this).prev().val();
+		$("#reportedId").val(reportedId);
 
 
 	});
@@ -211,6 +251,31 @@
 			
 		});
 		
+		
+	});
+
+	$("#reportBtn").click(function(){
+		
+		var  reporterId = '${loginUser.memberId}';
+		var  reportedId = $("input[name=memberId]").val();
+		var  msg = $("#reportMsg").val();
+		
+		$.ajax({
+			
+			url : "reportMember.ij",
+			type : "post",
+			data : {reporterId:reporterId,reportedId:reportedId,msg:msg},
+			success : function(result){
+				
+				alert(" 성공");
+				
+				
+				$('#exampleModalCenter2').modal('hide');
+				
+			} 
+			
+		});
+		 
 		
 	});
 

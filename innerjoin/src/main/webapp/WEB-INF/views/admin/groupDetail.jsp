@@ -97,7 +97,7 @@
 							<div class="tabbable" id="tabs-267588">
 								<ul class="nav nav-tabs">
 									<li class="nav-item">
-										<a class="nav-link active show" href="#tab1" data-toggle="tab">${group.gName }회원 보기</a>
+										<a class="nav-link active show" href="#tab1" data-toggle="tab">${group.gName }의 회원 보기</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="#tab2" data-toggle="tab">모임 관리하기</a>
@@ -108,10 +108,10 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>#</th>
-													<th>회원이름</th>
-													<th>가입일</th>
-													<th>Status</th>
+													<th align="center">#</th>
+													<th align="center">회원이름</th>
+													<th align="center">가입일</th>
+													<th align="center">Status</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -120,18 +120,23 @@
 														<tr>
 															<td align="center">${ status.count }</td>
 
-															<td align="left"><c:url var="memDetail"
+															<td align="center"><c:url var="memDetail"
 																	value="memDetail.ij">
 																	<c:param name="memberId" value="${ m.memberId }" />
-																</c:url><a href="${memDetail}">${ m.memberId }</a></td>
-															<td align="center">${ m.levelCode }<c:if
-																	test="${m.levelCode eq 0}">개설자</c:if> <c:if
-																	test="${m.levelCode eq 1}">매니저</c:if> <c:if
-																	test="${m.levelCode eq 2}">일반</c:if>
+																</c:url><a href="${memDetail}">${ m.memberId }</a>
+															</td>
+															<td>가입일이없어용</td>
+															<td align="center">
+																<c:if	test="${m.levelCode eq 0}">모임장</c:if> 
+																<c:if	test="${m.levelCode eq 1}">매니저</c:if> 
+																<c:if	test="${m.levelCode eq 2}">일반</c:if>
 															</td>
 														</tr>
 													</c:forEach>
 
+												</c:if>
+												<c:if test="${empty mList }">
+													<tr><td align="center">그룹 회원이 없습니다.</td></tr>
 												</c:if>
 											</tbody>
 										</table>
