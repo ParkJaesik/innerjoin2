@@ -99,19 +99,28 @@
 			border: 1px solid lightgray;
 		}
 	
-		.hostTable {
+		.hostTable, .joinTable {
 			min-width: 1000px;
 			border: 1px solid lightgray;
 		}
 		
-		/* .hostTable td, .hostTable th{
-		
-			border: 1px solid lightgray;
-		} */
+		th, td {
+			text-align: center !important;
+			border: 1px solid lightgray !important;
+		} 
 		.tab-content {
 			padding: 0 !important;
 		}
 		
+		.nav-link {
+			border: 1px solid lightgray !important;
+		}
+		
+		.hostTable th, .joinTable th, li.active a {
+			background-color: #30a5ff !important;
+			color: white !important;
+			font-weight: bold !important;
+		}
 		
 	</style>
 
@@ -225,11 +234,12 @@
 						
 						<div class="col-md-12 mdDiv"></div>
 						
+						<!-- 가입모임 정보 -->
 						<div class="col-md-12">
 							<span class="tableLabel"> >> &nbsp; 가입 모임 정보</span>
 							<div class="tabbable" id="memGroupTab">
 								<ul class="nav nav-tabs">
-									<li class="nav-item">
+									<li class="nav-item active">
 										<a class="nav-link active show" href="#hostTap" data-toggle="tab">개설 모임</a>
 									</li>
 									<li class="nav-item">
@@ -379,7 +389,14 @@
 								</div>
 							</div>
 							
+						</div> <!-- /col-md-12 : 가입 모임 정보  -->
+						
+						<div class="col-md-12 mdDiv"></div>
+						
+						<div class="col-md-12">
+							<span class="tableLabel"> >> &nbsp; 신고 받은 내역</span>
 						</div>
+						
 					</div>
 					
 				</div>

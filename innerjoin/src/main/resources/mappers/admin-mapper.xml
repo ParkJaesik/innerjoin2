@@ -62,6 +62,21 @@
 		<result property="memberName" column="MEMBER_NAME"/>
 	</resultMap>
 	
+	<!-- 모임 회원 신고 -->
+	<resultMap id="groupMemReportResultSet" type="GroupMemberReport">
+		<id property="rNo" column="MEMBER_REPT_NO"/>
+		<result property="rContent" column="MEMBER_REPT_CONTENT"/>
+		<result property="rCategory" column="MEMBER_REPT_CATEGORY"/>
+		<result property="reportId" column="REPORTER_ID"/>
+		<result property="reportGNo" column="REPORTER_GROUP_NO"/>
+		<result property="responId" column="RESPONDENT_ID"/>
+		<result property="responGNo" column="RESPONDENT_GROUP_NO"/>
+		<result property="rStatus" column="MEMBER_REPT_STATUS"/>
+		<result property="rDate" column="REPORT_DATE"/>
+		<result property="rStatusDate" column="REPT_STATUS_DATE"/>
+		<result property="rBoardStatus" column="MEMBER_REPT_B_STATUS"/>
+	</resultMap>
+	
 	
 	<select id="memListCount" resultType="_int">
 		SELECT COUNT(*) 
