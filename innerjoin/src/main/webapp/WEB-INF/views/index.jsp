@@ -184,6 +184,7 @@ div {
 	height: 400px;
 	float: left;
 	background-color: rgb(230, 230, 230);
+	border-radius: 10px;
 }
 
 #main-group-thumbnail {
@@ -204,6 +205,78 @@ div {
 	margin-top: 25px;
 	height: 125px;
 }
+
+#mainvideoWrapper{
+	
+	
+	position:relative;   
+  width:100%;
+   height:600px;
+	overflow:hidden
+}
+
+#mainvideo{
+	
+	position:absolute;
+   	width:100%;
+    z-index:-3;
+	    
+}
+.innerMentWrapper{
+	position:absolute;
+	width:100%;
+	z-index:5;
+	align:center;
+	
+}
+#innerMent1{
+	color: white;
+    font-size: 35px;
+	text-align:center;
+	margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 15%;
+    font-weight:600;
+}
+#innerMent2{
+	color: white;
+    font-size: 25px;
+    font-weight:600;
+	text-align:center;
+	
+}
+#innerMent3{
+	margin-left: 45%;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button, 
+.button, .btn {
+    -moz-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    -webkit-appearance: none;
+    position: relative;
+    display: inline-block;
+    background: #ed786a;
+    color: #fff !important;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: 0;
+    outline: 0;
+    font-size: 1em;
+    box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.125);
+    font-weight: 600;
+    text-align: center;
+   
+    letter-spacing: 2px;
+    padding: 0.7em 1em 0.7em 1em;
+    border-radius: 5px !important;
+    
+}
 </style>
 
 </head>
@@ -216,7 +289,7 @@ div {
 				<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 			</div>
 		</div>
-
+		<br>
 		<!-- 페이지 바디부분 -->
 		<div class="row" id="body-wrapper">
 			<div class="col-md-1 aside"></div>
@@ -238,16 +311,38 @@ div {
 				href="admin.ij">관리자페이지</a> --%>
 
 				<div id="mainpage-container">
-					<div id="mainpage-thumbnail-container">
+					<div id="mainvideoWrapper">
+						<video  id="mainvideo" autoplay loop controls muted="true">
+							<source src="${contextPath }/resources/video/mainvideo.mp4" type="video/mp4">
+						</video>
+						<div class="innerMent" id="innerMentWrapper">
+							<div id="innerMent1" class=".innerMent">
+								함께하는 즐거움
+							</div>
+							<br>
+							<div id="innerMent2" class=".innerMent">
+								모임에 InnerJoin하고 사람들과 좋아하는 일을 함께 하며 새로운 경험을 즐겨 보세요.
+							</div>
+							<br>
+							<c:if test="${loginUser == null }">
+							<div id="innerMent3" class=".innerMent">
+								<button onclick="location.href='loginForm.ij'">INNERJOIN</button>
+							</div>
+							</c:if>
+							
+						</div>
+					</div>
+					<!-- <div id="mainpage-thumbnail-container">
 						<div id="thumbnail-container">
+						
 							<div id="slide">
 								<input type="radio" name="pos" id="pos1" checked>
 								<input type="radio" name="pos" id="pos2">
 								<input type="radio" name="pos" id="pos3">
 								<input type="radio" name="pos" id="pos4">
-
+								
 								<ul>
-									<li><video src=""></video></li>
+									<li></li>
 									<li></li>
 									<li></li>
 									<li></li>
@@ -262,7 +357,7 @@ div {
 							</div>
 						</div>
 					</div>
-
+ -->
 					<div id="mainpage-group-container">
 						<h1>새로운 모임</h1>
 						<c:set var="groupFilePath" value="resources/guploadFiles"/>

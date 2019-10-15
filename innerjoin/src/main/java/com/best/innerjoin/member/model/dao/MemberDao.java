@@ -230,6 +230,7 @@ public class MemberDao {
 		
 		return member;
 	}
+
 	public Member selectMemberInfo(String memberId) {
 		return sqlSession.selectOne("memberMapper.selectMemberInfo", memberId);
 
