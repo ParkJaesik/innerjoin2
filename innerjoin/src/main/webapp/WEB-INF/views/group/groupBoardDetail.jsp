@@ -130,8 +130,10 @@
 	<script>
 		function replyList() {
 			var boardNo = ${ board.boardNo };
-			var groupNo = ${ group.gNo }
-			/* var loginUser = ${ loginUser.memberId } */
+			var groupNo = ${ group.gNo };
+			var user = "${ loginUser.memberId }";
+			var host = "${ group.gHost }"
+			
 			$wrapper = $("#reply-view-container");
 			$wrapper.empty();
 			$content = "";
@@ -146,9 +148,12 @@
 							$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
 							$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;">';
 							
-							/* if (loginUser == list[i].memberId) {} */
+							if(user == list[i].memberId) {
 								$content += '<a id="reply-edit" href="javascript:replyEdit('+list[i].replyNo+',\''+list[i].memberName+'\',\''+list[i].replyContent+'\');">수정</a>&nbsp;&nbsp;';
+							}
+							if(user == list[i].memberId || user == host) {
 								$content += '<a id="reply-delete" href="javascript:replyDelete('+list[i].replyNo+')">삭제</a>';
+							}
 							
 							$content += '</td></tr><tr>';
 							$content += '<td class="reply-content" style="font-size:12px;">'+list[i].replyContent+'</td>';
@@ -217,8 +222,6 @@
 			}
 		}
 		
-		replyList();
-		
 		$("#reply-btn-input").on("click", function(){
 			var replyContent = $("#reply").val();
 			var boardNo = ${ board.boardNo };
@@ -239,8 +242,6 @@
 				}
 			});
 		});
-		
-		
 	</script>
 </body>
 </html>
