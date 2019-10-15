@@ -171,4 +171,16 @@
 		SET GROUP_REPT_COUNT = GROUP_REPT_COUNT + 1
 		WHERE GROUP_NO = #{groupNo}
 	</update>
+	
+	<!-- 회원 신고 insert -->
+	<insert id="insertMemberReport" parameterType="MemberReport">
+		INSERT INTO MEMBER_REPORT
+		VALUES(SEQ_M_RNO.NEXTVAL, #{memReptContent},DEFAULT,#{reporterId},#{reportedId}, DEFAULT)
+	</insert>
+	
+	<update id="updateMemberReptCount" parameterType="MemberReport" >
+		UPDATE MEMBER
+		SET MEMBER_REPT_COUNT = MEMBER_REPT_COUNT + 1
+		WHERE MEMBER_ID = #{reportedId}
+	</update>
 </mapper>
