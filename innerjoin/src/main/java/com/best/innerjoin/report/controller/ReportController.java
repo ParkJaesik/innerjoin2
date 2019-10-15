@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -156,20 +157,22 @@ public class ReportController {
 	
 	
 	// 강퇴하기
-	@RequestMapping("gmDrop.ij")
-	public String groupMemDelete(String memberId, GroupMemberReport report, Model model, HttpServletRequest request) {
+	@RequestMapping(value="gmDrop.ij", method=RequestMethod.POST)
+	public String groupMemDelete(GroupMember groupMember, Model model, HttpServletRequest request) {
 		
-		int result = rService.deleteReptGroupMem(memberId);
+		System.out.println(groupMember);
+		int result = rService.deleteReptGroupMem(groupMember);
 		
 		String path = null;
 		if(result>0) {
-			model.addAttribute("report", report);
+			model.addAttribute("groupMember", groupMember);
 			path = "report/gMemReportListView";
+			
 		}else {
 			model.addAttribute("msg", "회원 강퇴 실패");
 			path = "common/errorPage";
 		}
-		
+		System.out.println("강퇴" + result);
 		return path;
 		
 	}

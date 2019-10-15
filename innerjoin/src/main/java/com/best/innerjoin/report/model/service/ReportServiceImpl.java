@@ -94,8 +94,8 @@ public class ReportServiceImpl implements ReportService{
 
 	// 신고된 회원 강퇴하기
 	@Override
-	public int deleteReptGroupMem(String memberId) {
-		return rDao.deleteReptGroupMem(memberId);
+	public int deleteReptGroupMem(GroupMember groupMember) {
+		return rDao.deleteReptGroupMem(groupMember);
 	}
 	
 
