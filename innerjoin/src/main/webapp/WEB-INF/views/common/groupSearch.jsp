@@ -109,7 +109,7 @@
             box-shadow: none;
             border: none;
             position: absolute;
-            top : 6.3em;
+            top : 7.3em;
             right: 5.5em;
             width: 6em;
         }
@@ -176,7 +176,7 @@
                     <div class="search-section container" align="center">
                     	<form action="groupSearch.ij" method="get" id="groupSearch" name="groupSearch">
                             <a href="#" class="searchOp Group">모임검색</a>
-							<a href="#" class="searchOp User">유저검색</a>
+							<a href="mgSearchForm.ij" class="searchOp User">유저검색</a>
 							
 							<span class="groupC">모임유형</span>
                     		<select class="selectO" name="groupCategoryCode" id="groupCategoryCode">
@@ -239,7 +239,7 @@
                   					$("#districtCode").show();
                   					$(".guC").show();
                   					$(".groupC").css('left','3.5em');
-                  					$(".cityC").css('left', '11em')
+                  					$(".cityC").css('left', '11em');
                   				}
 								
 							});
