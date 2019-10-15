@@ -89,7 +89,8 @@
 										<c:param name="memberId" value="${ user.memberId }" />
 									</c:url> --%>
 									
-									<h5><a href="#">${ user.memberName }</a></h5> <!-- 수정 -->
+									<h5><a href="otherGroupForm.ij?memberId=${user.memberId }">${ user.memberName }</a></h5> <!-- 수정 -->
+							
 									<br>
 									<p><a href="${ goGroup }">${ user.memberIntroduce }</a></p> <!-- 수정 -->	
 								<c:if test="${ !empty loginUser  and hostGroup != null}">
@@ -173,7 +174,9 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        
 		        <button type="button" class="btn btn-primary" id="inviteBtn">초대하기</button>
+		       
 		      </div>
 		    </div>
 		  </div>

@@ -35,18 +35,17 @@
                             
 
 							<div class="col-md-4" align="center">
-		                        <form action="profileUpdateForm.ij" method="post" >
-		                        	<input type="hidden" name="memberId" value="${loginUser.memberId }">
+		                        	<input type="hidden" name="memberId" value="${otherUser.memberId }">
 									<div class="profileP" >
-		                        		<img class="img-circle" src="${contextPath}/resources/images/member/${loginUser.memberProPath }">
+		                        		<img class="img-circle" src="${contextPath}/resources/images/member/${otherUser.memberProPath }">
 	    	                        </div>
 	        	                    <br>
-	        	                    <div class="myprofile">${loginUser.memberName }</div>
-	        	                    <div class="myprofile">${loginUser.memberId }</div>
-	            	                <div class="myProfile">${ loginUser.memberIntroduce }</div>
+	        	                    
+	        	                    <div class="myprofile">${otherUser.memberName }</div>
+	        	                    <div class="myprofile">${otherUser.memberId }</div>
+	            	                <div class="myProfile">${ otherUser.memberIntroduce }</div>
 	                	            <br>           
-	                    	        <button>프로필 수정</button>
-	                        	</form>
+	                    	   
                         	</div>
 
                         <div class="col-md-4"></div>
@@ -57,7 +56,7 @@
                         <div class="col-md-8">캘린더</div>
                         <div class="col-md-2"></div> -->
                         <div class="col-md-12">
-                        	<%@ include file="../event/memCalendar.jsp"%>
+                        	
                         </div>
                     </div>
                     <br>
@@ -65,22 +64,9 @@
 			</div>
 		</section>
 	</div>
-	<section id="myPage-menu">
-    	<div class="row">
-        	<div class="col-md-12">
-            	<div class="row">
-                 	<div class="col-md-3"></div>
-                    <div class="col-md-6 menu-detail" >
-                    	<a href="myGroupForm.ij">내 모임</a>
-                        <a href="myNoteForm.ij">쪽지함</a>
-                        <a href="myNewsForm.ij">알림함</a>
-                        <a href="checkPwdForm.ij">정보수정</a>
-                    </div>
-                    <div class="col-md-3"></div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<div class="col-md-1 aside"></div>
+	</div>
+	</div>
 	
 	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
