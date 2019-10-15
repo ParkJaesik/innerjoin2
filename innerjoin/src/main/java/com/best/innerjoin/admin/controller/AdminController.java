@@ -1,3 +1,4 @@
+
 package com.best.innerjoin.admin.controller;
 
 import java.util.ArrayList;
@@ -95,15 +96,20 @@ public class AdminController {
 	public String memberReportView() {
 		return "admin/memberReport";
 	}
-	
-	/** 그룹회원신고관리페이지 이동
+		/** 그룹회원신고관리페이지 이동
 	 * @return
 	 */
 	@RequestMapping("groupMemberReport.ij")
-	public String groupMemberReportView() {
-		return "admin/groupMemberReport";
+	public ModelAndView groupMemberReportView(ModelAndView mv, Integer page) {
+		int currentPage = (page == null) ? 1 : page;
+		
+		//그룹 신고 리스트 가져오기
+		ArrayList<GroupMemberReport> gmrList = adService.selectGroupMemReptList(currentPage);
+		
+		mv.addObject("gmrList", gmrList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupMemberReport");
+		
+		return mv;
 	}
-	
 	/** 그룹신고관리페이지 이동
 	 * @return
 	 */
@@ -192,6 +198,33 @@ public class AdminController {
 		
 	}
 	
+  
+  	
+	// 그룹회원 등급 조회
+	@ResponseBody
+	@RequestMapping("adGroupMemSelectCode.ij")
+	public Integer groupMemSelectCode(Integer groupNo, String memberId) {
+		Integer groupMemberCode = gService.selectCode(memberId,groupNo);
+		
+		return groupMemberCode;
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateGroupMemLevel.ij")
+	public String updateGroupMemLevel(GroupMember gMember, ModelAndView mv) {
+		
+		
+		int result = adService.updateGroupMemLevel(gMember);
+		if(result > 0) {
+			return "success";
+		}else{
+			return "fail";
+		}
+		
+	}
+	
+}
+  
 	
 	@ResponseBody
 	@RequestMapping(value="loadCat.ij",produces="text/plain;charset=UTF-8")
