@@ -14,14 +14,13 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css">
+<%-- <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"> --%>
 <style>
          /* *{border: 1px solid violet;
         box-sizing: border-box;
         }  */
-        .search-header{
-        	position: relative;
-        }
-        .searchMenu{
+         .searchMenu{
         	display: flex;
 			margin: 0 auto;
 			padding: 0;
@@ -47,14 +46,11 @@
 			white-space: nowrap;
 			line-height: 2.5;
 			padding: 0.5em 0;
-			color: #2CC185;
+			
 			transition: color 0.3s;
         }
         
-        .searchMenu a:hover,
-        .searchMenu a:foucs{
-        	color: #74777b;
-        }
+       
         
         
         .searchOp{
@@ -62,28 +58,47 @@
             text-align: center;
             height: 3em;
             font-size: 17px;
-            color: #ed786a;
+            font-weight: bold;
+            color: rgb(50 50 50);
             padding-top: 0.7em;
             border-left: 1px solid #ed786a;
             border-right: 1px solid #ed786a;
             border-top: 1px solid #ed786a;
-           
+            float: left;
         }
+       
+       
+       
 
         .search-section{
             width: 100%;
-            height: 7em;
-            border: 1px solid #ed786a;
+            height: 13em;
+            border: 1px solid #a2a2a2;
             position: relative;
             display: inline-block;
             top: 3.1em;
         }
 
-        .search-section input{
-            width: 60%;
+        .search-section select{
+            width: 7em;
+            height: 2.8em;
+            border-radius: 3px;
+            border: 1px solid #a2a2a2;
+            top: 6.3em;
+            right: 29em;
+            position: relative;
+            padding: 0.2em;
+            margin-left: 0.2em;
+        }
+        
+        #mgSearch{
+            width: 40em;
             height: 2.8em;
             border-radius: 3px;
             border: 1px solid #ed786a;
+            bottom: 3em;
+            margin-left: 4.8em;
+            margin-top: 3.5em !important;
         }
 
         .search-section button{
@@ -93,17 +108,48 @@
             outline: none;
             box-shadow: none;
             border: none;
+            position: absolute;
+            top : 6.3em;
+            right: 5.5em;
+            width: 6em;
+        }
+        .groupC {
+        	position: absolute;
+        	left: 3.5em;
+        	top: 5.5em;
+        	
+        }
+        .cityC{
+        	position: absolute;
+        	left: 11em;
+        	top: 5.5em;
+        }
+        .guC{
+        	position: absolute;
+        	left: 18.3em;
+        	top: 5.5em;
+        }
+        
+        form{
+         margin-top: 1em;
         }
 
-        select{
-            padding: 0.6em;
-            width: 6em;
-            border-radius: 3px;
+      
+        
+        .Group{
+        	border-top: 7px solid #ed786a;
         }
-        select option:focus{
-            background-color: #ed786a;
-            color: white;
+       
+        #content{
+        	position: relative;
+        	top: 6em;
         }
+        
+        .profile-img{
+        	width: 20em;
+        	height: 13em;
+        }
+      
     </style> 
    
 </head>
@@ -123,16 +169,17 @@
 			<!-- 다들 이 페이지 틀 복사해서 만드는페이지에 기본으로 깔고     밑에 body-content 공간에  본인 페이지 include해줘 -->
 			<div class="col-md-10" id="body-contents">
 				<!-- 메인페이지 content 부분 -->
-				<div style="margin: 50px;"></div>
+				<!-- <div style="margin: 50px;"></div> -->
+				
 				
 				<div class="search-header row" align="center">
-					<ul class="searchMenu">
-						<li><a href="#" class="searchOp">모임검색</a></li>
-						<li><a href="mgSearchForm.ij" class="searchOp">유저검색</a></li>
-					</ul>
                     <div class="search-section container" align="center">
                     	<form action="groupSearch.ij" method="get" id="groupSearch" name="groupSearch">
-                    		<select name="groupCategoryCode" id="groupCategoryCode">
+                            <a href="#" class="searchOp Group">모임검색</a>
+							<a href="#" class="searchOp User">유저검색</a>
+							
+							<span class="groupC">모임유형</span>
+                    		<select class="selectO" name="groupCategoryCode" id="groupCategoryCode">
                     			<option value="-1">전체</option>
                     			<option value="0">학습</option>
                     			<option value="1">스포츠/피트니스</option>
@@ -141,14 +188,17 @@
                     			<option value="4">봉사</option>
                     			<option value="5">음식</option>
                     		</select>
-                        	<select name="cityCode" id="cityCode">
+                    		
+                    		<span class="cityC">시</span>
+                    		<select class="selectO" name="cityCode" id="cityCode">
                        			<option value="-2">시를 선택해주세요</option>
                        			<option value="-1">전체</option>
                              	<option value="0">서울시</option>
                       		</select>
-
-                            <select name="districtCode" id="districtCode">
-                            	<option value="-2">도를 선택해주세요.</option>
+                      		
+							<span class="guC">구</span>
+                            <select class="selectO" name="districtCode" id="districtCode">
+                            	<option value="-2">구를 선택해주세요.</option>
                             	<option value="-1">전체</option>
                              	<option value="0">도봉구</option>
                               	<option value="1">강북구</option>
@@ -182,8 +232,14 @@
                   				
                   				if(city != 0 ){
                   					$("#districtCode").hide();
+                  					$(".guC").hide();
+                  					$(".groupC").css('left','7.3em');
+                  					$(".cityC").css('left', '15em')
                   				}else{
                   					$("#districtCode").show();
+                  					$(".guC").show();
+                  					$(".groupC").css('left','3.5em');
+                  					$(".cityC").css('left', '11em')
                   				}
 								
 							});
@@ -194,7 +250,7 @@
                      		
                      		</script>
                             <input type="search" name="mgSearch" id="mgSearch" style="margin-top: 2em; padding: 1em;">
-                            <button><img/>검색</button>
+                            <button>검색</button>
                                 </form>    
                             </div>
                         </div>
@@ -215,10 +271,10 @@
 									<div class="row invite">
 								</c:when>
 							</c:choose>
-							<div class="col-4" style="width: 100%;">
-						    <img src="${contextPath}/resources/images/member/${group.filePath}"></div>
+							<div class="col-5" style="width: 100%;" align="center">
+						    <img class="profile-img" src="${contextPath}/resources/images/member/${group.filePath}"></div>
 							
-								<div class="col-8">
+								<div class="col-7">
 									<c:url var="goGorup" value="goGroupPage.ij">
 										<!-- 나중에 맞는 값 넣기 -->
 										<c:param name="gNo" value="${ group.gNo }" />

@@ -74,28 +74,38 @@
             text-align: center;
             height: 3em;
             font-size: 17px;
-            color: #ed786a;
+            font-weight: bold;
+            color: rgb(50 50 50);
             padding-top: 0.7em;
             border-left: 1px solid #ed786a;
             border-right: 1px solid #ed786a;
             border-top: 1px solid #ed786a;
+            float: left;
+            top: 2em !important;
            
         }
+        form{
+        	/* position: absolute; */
+        	padding: 3em;
+        }
+        
 
         .search-section{
             width: 100%;
-            height: 7em;
-            border: 1px solid #ed786a;
+            height: 13em;
+            border: 1px solid #a2a2a2;
             position: relative;
             display: inline-block;
             top: 3.1em;
         }
 
         .search-section input{
-            width: 60%;
+            width: 50em;
             height: 2.8em;
             border-radius: 3px;
             border: 1px solid #ed786a;
+            bottom: 3em;
+            margin-left: 10em;
         }
 
         .search-section button{
@@ -105,6 +115,10 @@
             outline: none;
             box-shadow: none;
             border: none;
+            position: absolute;
+            top : 6.2em;
+            right: 5.5em;
+            width: 6em;
         }
 
         select{
@@ -115,6 +129,23 @@
         select option:focus{
             background-color: #ed786a;
             color: white;
+        }
+        
+        .User{
+        	border-top: 7px solid #ed786a;
+        }
+        .Group{
+        	z-index: 50;
+        }
+        #content{
+        	position: relative;
+        	top: 6em;
+        }
+        .profile-img{
+        	width: 10em !important;
+        	height: 10em !important;
+        	border-radius: 60em;
+        	border: 1px solid #a2a2a2 !important;
         }
  </style>
 
@@ -138,10 +169,10 @@
 				<!-- 메인페이지 content 부분 -->
 				<div class="search-header row">
 
-                            <a href="#" class="searchOp">유저검색</a>
-                            <a href="groupSearchForm.ij" class="searchOp">모임검색</a>
                             
                             <div class="search-section container" align="center">
+                            <a href="groupSearchForm.ij" class="searchOp Group">모임검색</a>
+                            <a href="#" class="searchOp User">유저검색</a>
                                 
                                 <form action="memberSearch.ij" method="get">
                                     <input type="search" name="mgSearch" id="mgSearch" style="margin-top: 2em; padding: 1em;">
@@ -166,14 +197,11 @@
 									<div class="row invite">
 								</c:when>
 							</c:choose>
-							<div class="col-4" style="width: 100%;">
-						    <img src="${contextPath}/resources/images/member/${user.memberProPath}"></div>
+							<div class="col-5" style="width: 100%; " align="center">
+						    <img class="profile-img" src="${contextPath}/resources/images/member/${user.memberProPath}"></div>
 							
-								<div class="col-8">
-									<%-- <c:url var="goGorup" value="goGroupPage.ij"> <!-- 수정 -->
-										<!-- 나중에 맞는 값 넣기 -->
-										<c:param name="memberId" value="${ user.memberId }" />
-									</c:url> --%>
+								<div class="col-7">
+									
 									
 									<h5><a href="otherGroupForm.ij?memberId=${user.memberId }">${ user.memberName }</a></h5> <!-- 수정 -->
 							
@@ -295,6 +323,7 @@
 		    </div>
 		  </div>
 		</div>
+		<div style="margin: 20em;"></div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
