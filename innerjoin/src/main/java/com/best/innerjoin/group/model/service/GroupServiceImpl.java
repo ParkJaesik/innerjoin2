@@ -148,13 +148,15 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
+	public ArrayList<Group> mainGroupList() {
+		return gDao.mainGroupList();
+  }
 	public ArrayList<GroupCat> selectGroupCat() {
 		return gDao.selectGroupCat();
 	}
   @Override
 	public int getGno() {
 		return gDao.getGno();
-
 	}
 	
 }

@@ -1,52 +1,57 @@
 @charset "UTF-8";
-*{
-    	
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-    }
-    #all-wrapper{
 
-        min-height:2000px;        
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-    }
-    #header-wrapper{
-        height: 6%;
-    }
-    #all-hearder{
-        height: 100%;
-    }
-    #body-wrapper{
-       /*  height: 94%; */
-       
-    }
-    .aside{
-        
-        height: 100%;
-    }
-    #body-content{
-        
-        height: 100%;
-    }
-    #footer-wrapper{
-        height: 10%;
-    }
-    #all-footer{
-        height: 100%;
-    }
-    #all-hearder{
-    	margin:0;
-    	padding:0;
-    }
-	#all-footer{
-		margin:0;
-		padding:0;
-	}
-	#groupChatWrapper{
-		position: fixed;
-	    right: 20px;
-	    bottom: 20px;
-	    z-index: 10;
-        width: 16%;
-        
-	}
+#all-wrapper {
+	min-height: 2000px;
+}
+
+#header-wrapper {
+	height: 6%;
+}
+
+#all-hearder {
+	height: 100%;
+}
+
+#body-wrapper {
+	/*  height: 94%; */
+}
+
+.aside {
+	height: 100%;
+}
+
+#body-content {
+	height: 100%;
+}
+
+#footer-wrapper {
+	height: 10%;
+}
+
+#all-footer {
+	height: 100%;
+}
+
+#all-hearder {
+	margin: 0;
+	padding: 0;
+}
+
+#all-footer {
+	margin: 0;
+	padding: 0;
+}
+
+#groupChatWrapper {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 10;
+	width: 16%;
+}
