@@ -17,11 +17,10 @@ import com.best.innerjoin.group.model.vo.Group;
 import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
+import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
-
-import com.google.gson.Gson;
-
 import com.best.innerjoin.report.model.vo.MemberReport;
+import com.google.gson.Gson;
 
 
 @Controller
@@ -223,7 +222,7 @@ public class AdminController {
 		
 	}
 	
-}
+
   
 	
 	@ResponseBody
