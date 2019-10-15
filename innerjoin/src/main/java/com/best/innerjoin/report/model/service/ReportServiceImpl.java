@@ -15,6 +15,7 @@ import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.dao.ReportDao;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -103,6 +104,12 @@ public class ReportServiceImpl implements ReportService{
 	public int insertGroupReport(GroupReport gReport) {
 		rDao.insertGroupReport(gReport);
 		return rDao.updateGroupReptCount(gReport);
+	}
+
+	@Override
+	public int insertMemberReport(MemberReport mReport) {
+		rDao.insertMemberReport(mReport);
+		return rDao.updateMemberReptCount(mReport);
 	}
 
 

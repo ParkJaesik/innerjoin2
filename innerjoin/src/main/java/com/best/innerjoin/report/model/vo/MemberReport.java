@@ -6,20 +6,24 @@ public class MemberReport {
 	private String memReptStatus;
 	private String reporterId;
 	private String reportedId;
+	private String memReptDate;
 	
 	public MemberReport() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public MemberReport(int memReptNo, String memReptContent, String memReptStatus, String reporterId,
-			String reportedId) {
+			String reportedId, String memReptDate) {
 		super();
 		this.memReptNo = memReptNo;
 		this.memReptContent = memReptContent;
 		this.memReptStatus = memReptStatus;
 		this.reporterId = reporterId;
 		this.reportedId = reportedId;
+		this.memReptDate = memReptDate;
 	}
+
+
 
 	public int getMemReptNo() {
 		return memReptNo;
@@ -61,11 +65,24 @@ public class MemberReport {
 		this.reportedId = reportedId;
 	}
 
+	
+	public String getMemReptDate() {
+		return memReptDate;
+	}
+
+
+
+	public void setMemReptDate(String memReptDate) {
+		this.memReptDate = memReptDate;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "MemberReport [memReptNo=" + memReptNo + ", memReptContent=" + memReptContent + ", memReptStatus="
-				+ memReptStatus + ", reporterId=" + reporterId + ", reportedId=" + reportedId + "]";
+				+ memReptStatus + ", reporterId=" + reporterId + ", reportedId=" + reportedId + ", memReptDate="
+				+ memReptDate + "]";
 	}
-	
-	
+
 }
