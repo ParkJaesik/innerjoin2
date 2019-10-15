@@ -15,6 +15,7 @@ import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 
 @Service("adService")
 public class AdminServiceImpl implements AdminService {
@@ -69,15 +70,29 @@ public class AdminServiceImpl implements AdminService {
 				mgInfo.put(""+gno1, info);
 			}
 		}
-		System.out.println("mgInfo : " + mgInfo);
 		return mgInfo;
 	}
 	
+	@Override
+	public ArrayList<MemberReport> selectMrList(String memberId) {
+		
+		return adDao.selectMrList(memberId);
+	}
 	
-	
-	
-	
-	
+	@Override
+	public int setMemberStatus(String memberId, int statusCode) {
+		Map<String, String> memStatus = new HashMap<>();
+		memStatus.put("memberId", memberId);
+		memStatus.put("statusCode", ""+statusCode);
+		return adDao.setMemberStatus(memStatus);
+	}
+
+	@Override
+	public int processReport(String reptNoList) {
+		return adDao.processReport(reptNoList);
+	}
+
+
 	
 	
 	
@@ -142,6 +157,7 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 
+
 	@Override
 	public ArrayList<GroupMemberReport> selectGroupMemReptList(int currentPage) {
 		int listCount = adDao.getGroupMemReptListCount();
@@ -158,5 +174,6 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return adDao.updateGroupMemLevel(gMember);
 	}
+
 
 }

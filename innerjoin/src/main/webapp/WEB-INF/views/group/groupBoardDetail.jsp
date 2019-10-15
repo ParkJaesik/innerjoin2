@@ -78,9 +78,13 @@
 								<c:param name="page" value="${ currentPage }"/>
 							</c:url>
 							
-							<button onclick="location.href='${ boardModify }';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
+							<c:if test="${ loginUser.memberId eq board.memberId }">
+								<button onclick="location.href='${ boardModify }';" type="button" class="btn btn-primary" id="board-btn-modify">수정</button>
+							</c:if>
 							
-							<button onclick="location.href='${ boardDelete }';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
+							<c:if test="${ loginUser.memberId eq board.memberId or loginUser.memberName eq group.gHost }">
+								<button onclick="location.href='${ boardDelete }';" type="button" class="btn btn-primary" id="board-btn-delete">삭제</button>
+							</c:if>
 							
 							<button onclick="location.href='blist.ij';" type="button" class="btn btn-primary" id="board-btn-list">목록</button>
 						</div>
@@ -176,7 +180,13 @@
 		});
 		
 		$("#reply-edit").on("click", function(){
+			$wrapper = $("#reply-view-container");
+			$wrapper.empty();
+			$content = "";
 			
+			$content = '<div class="reply-view" align="center" style="margin-top:10px;"><table><tr>';
+			$content += '<td class="reply-writer" style="width:500px; font-size:12px;">'+list[i].memberName+'</td>';
+			$content += '<td class="reply-button" style="width:200px; text-align:center; font-size:12px;" rowspan="2">';
 		});
 	</script>
 </body>

@@ -65,7 +65,7 @@ public class GroupController {
 		GroupMember gmember = (GroupMember)request.getSession().getAttribute("memberId");
 				
 		int result = gService.insertGroup(group);
-
+		int gNo = gService.getGno();
 		
 		String path= null;
 		if(result>0) {
@@ -73,7 +73,7 @@ public class GroupController {
 			//모임 생성 성공시 group-member테이블에 관리자로 행추가 
 			int result2 = gService.insertGroupMemberAdmin(loginUser);
 			
-			path="group/groupIndex";
+			path = "redirect:goGroupPage.ij?gNo="+gNo;
 		}else {
 			model.addAttribute("msg", "모임 생성 실패");
 			path = "common/errorPage";
@@ -163,7 +163,7 @@ public class GroupController {
 		if(!eList.isEmpty()) {
 			eList2 = new ArrayList<Event>();
 			memList = new ArrayList<Member>();
-			for(int i = 0; i < 3;i++) {
+			for(int i = 0; i < 3 && i < eList.size(); i++) {
 				
 				eList2.add(eList.get(i));
 				ArrayList<Member> mList = eService.selectMem(""+eList2.get(i).getEno());
@@ -173,7 +173,7 @@ public class GroupController {
 				}
 			}
 		}
-		
+		System.out.println("tempGroup: "+ tempGroup);
 		 System.out.println(groupMemberCode);
 		 
 		
@@ -200,26 +200,31 @@ public class GroupController {
 		String gName =  ((Group)request.getSession().getAttribute("group")).getgName();
 		String msg = memberId + "님이 " + "<a href='wgmlist.ij?gNo="+gNo + "'>" +  gName + " 모임에  가입신청을 했습니다."  +"</a>";
 		
-		
-		
-		int result = gService.applyInsertGroup(memberId,gNo);
+		int result = 0;
 		int result2 = 0;
+		result = gService.selectIsGroupMember(memberId,gNo);
 		
 		if(result>0) {
-			
+			result = gService.rejoinApplyGroupMember(memberId,gNo);
+		}else {
+			result = gService.applyInsertGroup(memberId,gNo);
+		}
+		
+		if(result>0) {
 			result2 = gService.insertAlarm(memberId,hostId,msg);
+			
 			
 			if(result2>0) {
 				return "redirect:goGroupPage.ij?gNo="+gNo;
 			}else {
 				return "common/errorPage";
 			}
-		}else {	
+		}else {
 			return "common/errorPage";
 		}
 		
-		
 	}
+
 
 
 	// 그룹 회원 목록 조회

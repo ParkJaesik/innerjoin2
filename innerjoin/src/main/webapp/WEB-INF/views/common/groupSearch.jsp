@@ -80,7 +80,7 @@
         }
 
         .search-section input{
-            width: 80%;
+            width: 60%;
             height: 2.8em;
             border-radius: 3px;
             border: 1px solid #ed786a;
@@ -128,17 +128,28 @@
 				<div class="search-header row" align="center">
 					<ul class="searchMenu">
 						<li><a href="#" class="searchOp">모임검색</a></li>
-						<li><a href="#" class="searchOp">유저검색</a></li>
+						<li><a href="mgSearchForm.ij" class="searchOp">유저검색</a></li>
 					</ul>
                     <div class="search-section container" align="center">
-                    	<form action="groupSearch.ij" method="get">
+                    	<form action="groupSearch.ij" method="get" id="groupSearch" name="groupSearch">
+                    		<select name="groupCategoryCode" id="groupCategoryCode">
+                    			<option value="-1">전체</option>
+                    			<option value="0">학습</option>
+                    			<option value="1">스포츠/피트니스</option>
+                    			<option value="2">문화예술</option>
+                    			<option value="3">친목</option>
+                    			<option value="4">봉사</option>
+                    			<option value="5">음식</option>
+                    		</select>
                         	<select name="cityCode" id="cityCode">
-                       			<option value="">전체</option>
+                       			<option value="-2">시를 선택해주세요</option>
+                       			<option value="-1">전체</option>
                              	<option value="0">서울시</option>
                       		</select>
 
                             <select name="districtCode" id="districtCode">
-                            	<option value="all">전체</option>
+                            	<option value="-2">도를 선택해주세요.</option>
+                            	<option value="-1">전체</option>
                              	<option value="0">도봉구</option>
                               	<option value="1">강북구</option>
                               	<option value="2">노원구</option>
@@ -165,11 +176,62 @@
                              	<option value="23">금천구</option>
                             	<option value="24">관악구</option>
                      		</select>
-                            <input type="search" name="userSearch" id="userSearch" style="margin-top: 2em; padding: 1em;">
+                     		<script type="text/javascript">
+                     		$("#cityCode").on("input", function () {
+                  				var city = $("#cityCode").val();
+                  				
+                  				if(city != 0 ){
+                  					$("#districtCode").hide();
+                  				}else{
+                  					$("#districtCode").show();
+                  				}
+								
+							});
+                     		
+                     		
+                     		
+                     		
+                     		
+                     		</script>
+                            <input type="search" name="mgSearch" id="mgSearch" style="margin-top: 2em; padding: 1em;">
                             <button><img/>검색</button>
                                 </form>    
                             </div>
                         </div>
+                        
+                        
+                        <section id="content">
+					<div>
+						<div class="mgTitle">
+							<h3>모임 검색 결과</h3>
+						</div>
+						<c:forEach var="group" items="${ gList }" varStatus="status">
+							<br>
+							<c:choose>
+								<c:when test="${ !status.last }">
+									<div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
+								</c:when>
+								<c:when test="${ status.last }">
+									<div class="row invite">
+								</c:when>
+							</c:choose>
+							<div class="col-4" style="width: 100%;">
+						    <img src="${contextPath}/resources/images/member/${group.filePath}"></div>
+							
+								<div class="col-8">
+									<c:url var="goGorup" value="goGroupPage.ij">
+										<!-- 나중에 맞는 값 넣기 -->
+										<c:param name="gNo" value="${ group.gNo }" />
+									</c:url>
+									<h5><a href="goGroupPage.ij?gNo=${ group.gNo }">${ group.gName }</a></h5>
+									<br>
+									<p><a href="goGroupPage.ij?gNo=${ group.gNo }">${ group.gInfo }</a></p> 
+									
+								</div>
+					</div>
+					</c:forEach>
+			</div>
+			</section>
 			</div>
 			<div class="col-md-1 aside">
 				

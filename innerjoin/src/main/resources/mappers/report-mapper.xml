@@ -147,13 +147,16 @@
 		JOIN MEMBER M ON(M.MEMBER_ID = GM.MEMBER_ID)
 		WHERE GM.GROUP_NO = #{responGNo}
 		AND GM.GROUP_MEM_REPT_COUNT > 0
+		AND GM.LEVEL_CODE != 10
 	</select>
 	
 	
 	<!-- 신고 받은 회원 강퇴하기 -->
-	<update id="deleteReptGroupMem" parameterType="String">
-		UPDATE GROUP_MEMBER_REPORT
-		SET 
+	<update id="deleteReptGroupMem" parameterType="GroupMember">
+		UPDATE GROUP_MEMBER
+		SET LEVEL_CODE = 10
+		WHERE GROUP_NO = #{groupNo} 
+		AND MEMBER_ID = #{memberId}
 		
 	</update>
 	

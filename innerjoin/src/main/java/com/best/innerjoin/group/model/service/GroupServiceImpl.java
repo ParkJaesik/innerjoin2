@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.best.innerjoin.group.model.dao.GroupDao;
 import com.best.innerjoin.group.model.exception.GroupException;
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 
@@ -134,6 +135,26 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public int decreaseCount(String gNo) {
 		return gDao.decreaseCount(gNo);
+	}
+
+	@Override
+	public int selectIsGroupMember(String memberId, int gNo) {
+		return gDao.selectIsGroupMember(memberId,gNo);
+	}
+
+	@Override
+	public int rejoinApplyGroupMember(String memberId, int gNo) {
+		return gDao.rejoinApplyGroupMember(memberId,gNo);
+	}
+
+	@Override
+	public ArrayList<GroupCat> selectGroupCat() {
+		return gDao.selectGroupCat();
+	}
+  @Override
+	public int getGno() {
+		return gDao.getGno();
+
 	}
 	
 }

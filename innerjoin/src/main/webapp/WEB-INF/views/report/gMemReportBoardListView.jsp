@@ -43,7 +43,7 @@ h3 {
 }
 
 table{
-	margin: auto;
+	margin: auto; 
 	width: 100%;
 	
 }
@@ -73,6 +73,10 @@ table{
 	border-bottom: 2px solid rgb(190, 190, 190);
 }
 
+.div2 th{
+	border-bottom: 2px solid rgb(190, 190, 190);
+}
+
 #report-td-content {
 	padding-left: 30px;
 }
@@ -99,6 +103,9 @@ table{
 
 }
 
+th{
+	line-height: 150px;
+}
 
 
 
@@ -137,7 +144,8 @@ table{
 		            </div>
 		            
 		            <div class="div2">
-		                <table align="center">
+		                <table>
+		                	<thead align="center">
 		                    <tr>
 		                        <th align="center" id="report-th- no">no</th>
 		                        <th align="center" id="report-th">신고자</th>
@@ -145,8 +153,10 @@ table{
 		                        <th align="center" id="report-th-content">신고내용</th>
 		                        <th align="center" id="report-th-date">날짜</th>
 		                    </tr>
+		                    </thead>
 		                    
 		                    <c:forEach var="r" items="${blist }">
+		                    <tbody>
 			                    <tr>
 			                        <td align="center" id="report-td-no">${r.rNo }</td>
 			                        <td align="center" id="report-td">${r.reportId }</td>
@@ -158,6 +168,7 @@ table{
 			                        <a href="${rdetail}">${r.rCategory }</a></td>
 			                        <td align="center" id="report-td-date">${r.rDate }</td>
 			                    </tr>
+			            	</tbody>
 		                    </c:forEach>
 		                </table>
 		            </div>

@@ -45,9 +45,11 @@
 
 			</div>
 			<div class="col-md-1 aside">
+				<c:if test="${groupMemberCode == 0 or groupMemberCode == 1 or groupMemberCode  == 2}">
 				<div id="groupChatWrapper">
 					<%@ include file="/WEB-INF/views/chat/chat.jsp" %>	
 				</div>
+				</c:if>
 			</div>
 		</div>
 		<div class="row" id="footer-wrapper">

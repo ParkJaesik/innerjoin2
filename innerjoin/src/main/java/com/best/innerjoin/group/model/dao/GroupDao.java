@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.best.innerjoin.group.model.vo.Group;
+import com.best.innerjoin.group.model.vo.GroupCat;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.member.model.vo.Member;
 
@@ -31,6 +32,12 @@ public class GroupDao {
 	public Group goGroupPage(int gNo) {
 		
 		return sqlSession.selectOne("groupMapper.selectGroup", gNo);
+	}
+
+	// 그룹번호 가져오기
+	public int getGno() {
+		
+		return sqlSession.selectOne("groupMapper.selectgNo");
 	}
 
 	public Integer selectCode(Map codeMap) {
@@ -104,6 +111,25 @@ public class GroupDao {
 
 	public int decreaseCount(String gNo) {
 		return sqlSession.update("groupMapper.decreaseCount",gNo);
+	}
+
+	public int selectIsGroupMember(String memberId, int gNo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("gNo", gNo);
+		
+		return sqlSession.selectOne("groupMapper.selectIsGroupMember",map);
+	}
+
+	public int rejoinApplyGroupMember(String memberId, int gNo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("gNo", gNo);
+		return sqlSession.update("groupMapper.rejoinApplyGroupMember",map);
+	}
+
+	public ArrayList<GroupCat> selectGroupCat() {
+		return (ArrayList)sqlSession.selectList("groupMapper.selectGroupCat");
 	}
 
 }

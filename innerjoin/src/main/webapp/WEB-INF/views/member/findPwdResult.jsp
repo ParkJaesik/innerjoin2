@@ -48,15 +48,14 @@
 				  	<div class="col-4">
 				  	
 		                <div class="margin" style="margin: 50px;"></div>
-				  		<form action="findPwd.ij" method="post">
+				  		
 			             
 			                <div class="row">
-			                    <h3>비밀번호 찾기</h3>
+			                    
 			                    <div class="input-group input-group-icon">
-									<input type="email" placeholder="Email" name="memberId" id="memberId"/>
-								
-									&nbsp;<span id="pwdCheck1">&nbsp;</span>
+									이메일 주소로 비밀번호 재설정 메일이 전송되었습니다. 이메일에 들어가셔서 비밀번호를 재설정해주세요
 									
+			
 								</div>
 			                    
 							</div>
