@@ -16,6 +16,7 @@ import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.service.ReportService;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 import com.best.innerjoin.report.model.vo.ReportPagination;
 import com.best.innerjoin.report.model.vo.Search;
 
@@ -222,6 +223,15 @@ public class ReportController {
 //		
 //	}
 	
-
+	@ResponseBody
+	@RequestMapping("reportMember.ij")
+	public String insertMemberReport(MemberReport mReport) {
+		int result = rService.insertMemberReport(mReport);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 
 }

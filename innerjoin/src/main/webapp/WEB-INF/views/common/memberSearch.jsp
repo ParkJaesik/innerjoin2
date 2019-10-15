@@ -258,13 +258,13 @@
 		
 		var  reporterId = '${loginUser.memberId}';
 		var  reportedId = $("input[name=memberId]").val();
-		var  msg = $("#reportMsg").val();
+		var  memReptContent = $("#reportMsg").val();
 		
 		$.ajax({
 			
 			url : "reportMember.ij",
 			type : "post",
-			data : {reporterId:reporterId,reportedId:reportedId,msg:msg},
+			data : {reporterId:reporterId,reportedId:reportedId,memReptContent:memReptContent},
 			success : function(result){
 				
 				alert(" 성공");

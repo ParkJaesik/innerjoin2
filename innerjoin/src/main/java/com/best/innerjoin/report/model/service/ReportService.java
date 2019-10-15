@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 import com.best.innerjoin.report.model.vo.Search;
 
 public interface ReportService {
@@ -70,6 +71,12 @@ public interface ReportService {
 	 * @return
 	 */
 	public abstract int insertGroupReport(GroupReport gReport);
+
+	/** 회원 신고 insert Service
+	 * @param mReport
+	 * @return
+	 */
+	public abstract int insertMemberReport(MemberReport mReport);
 
 
 

@@ -15,6 +15,7 @@ import com.best.innerjoin.common.PageInfo;
 import com.best.innerjoin.group.model.vo.GroupMember;
 import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
+import com.best.innerjoin.report.model.vo.MemberReport;
 import com.best.innerjoin.report.model.vo.Search;
 
 @Repository("rDao")
@@ -145,6 +146,25 @@ public class ReportDao {
 	public int updateGroupReptCount(GroupReport gReport) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("reportMapper.updateGroupReptCount", gReport);
+	}
+
+
+	/** 회원 신고 dao
+	 * @param mReport
+	 */
+	public int insertMemberReport(MemberReport mReport) {
+		return sqlSession.insert("reportMapper.insertMemberReport", mReport);
+		
+	}
+
+
+	/** 신고받은 회원 신고받은  횟수 증가
+	 * @param mReport
+	 * @return
+	 */
+	public int updateMemberReptCount(MemberReport mReport) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("reportMapper.updateMemberReptCount", mReport);
 	}
 
 

@@ -36,6 +36,17 @@
 		<result property="groupReptStatus" column="GROUP_REPT_STATUS"/>
 		<result property="groupReptDate" column="GROUP_REPT_DATE"/>
 	</resultMap>
+
+
+	<!-- 회원 신고 -->
+	<resultMap id="memberReptResultSet" type="MemberReport">
+		<id property="memReptNo" column="MEMBER_REPT_NO"/>
+		<result property="memReptContent" column="MEMBER_REPT_CONTENT"/>
+		<result property="memReptStatus" column="MEMBER_REPT_STATUS"/>
+		<result property="reporterId" column="REPORTER_ID"/>
+		<result property="reportedId" column="REPORTED_ID"/>
+		<result property="memReptDate" column="MEMBER_REPT_DATE"/>
+	</resultMap>
 	
 	
 	
