@@ -135,8 +135,9 @@
 	
 	<script>
 		window.onload = function () {
-			$("#manageGroup").addClass("active");
+			$("#manageReport").addClass("active");
 		};
+		
 	</script>
 	  
 </body>

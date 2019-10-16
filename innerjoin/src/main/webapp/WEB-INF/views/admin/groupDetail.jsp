@@ -13,9 +13,10 @@
 			border: 1px solid lightgray;
 		}
 		.memProfile {
-			width: 200px;
+			width: 300px;
 			height: 200px;
 			border-right: 1px solid lightgray;
+			overflow: hidden;
 		}
 		
 		.basicInfoLabel {
@@ -26,7 +27,7 @@
 			font-weight: bold;
 		}
 		#profile {
-			
+			width: 100%;
 		}
 		
 	
@@ -36,7 +37,7 @@
 
 </head>
 <body>
-	<c:set var="proPath" value="resources/gloadFiles"/>
+	<c:set var="proPath" value="resources/guploadFiles"/>
 	<jsp:include page="adminMenubar.jsp"/>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">

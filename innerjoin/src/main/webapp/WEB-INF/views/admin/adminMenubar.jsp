@@ -128,7 +128,7 @@
 					</a></li>
 				</ul>
 			</li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="gohome.ij"><em class="fa fa-power-off">&nbsp;</em> Inner Join 가기 </a></li>
 		</ul>
 	</div><!--/.sidebar-->
 	
