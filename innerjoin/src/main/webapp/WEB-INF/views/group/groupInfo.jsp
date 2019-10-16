@@ -93,9 +93,9 @@
 														<div class="col-md-3 eventClose">
 															<span class="eventLabel">
 																<!-- <img class="closeBtn detailView_127" alt="닫기" src="resources/images/close.png"> -->
-																<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 or groupMemberCode  eq 2}">
+																<%-- <c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 or groupMemberCode  eq 2}">
 																<img id="${e.eno }" class="checkBtn detailView_127" alt="참석" src="resources/images/check.jpg">
-																</c:if>
+																</c:if> --%>
 															</span>
 														</div>
 														
