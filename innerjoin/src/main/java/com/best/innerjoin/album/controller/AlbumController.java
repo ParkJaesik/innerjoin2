@@ -79,8 +79,7 @@ public class AlbumController {
 		  for (MultipartFile mf : files) { 
 			  String originFileName = mf.getOriginalFilename(); // ���� ���� �� long fileSize = mf.getSize(); //
 			  long fileSize = mf.getSize();
-			  System.out.println("originFileName : " + originFileName);
-			  System.out.println("fileSize : " + fileSize); 
+			 
 		  }
 		 
 	    
@@ -201,12 +200,9 @@ public class AlbumController {
 		
 		Album album = aService.selectAlbum(albumNo); 
 		ArrayList<AlbumPhoto> photoList = aService.selectPhoto(albumNo);
-		for(AlbumPhoto a : photoList) {
-			System.out.println(a.toString());
-		}
-		/* System.out.println(albumNo); */
-		System.out.println("포토 리스트 : "+photoList.size());
-		System.out.println(album.toString());
+		/*
+		 * for(AlbumPhoto a : photoList) { System.out.println(a.toString()); }
+		 */
 		if(album != null) {
 			mv.addObject("album", album).addObject("list", photoList).addObject("currentPage", currentPage).setViewName("album/groupIndex+albumDetailView");
 		} else {
@@ -292,9 +288,9 @@ public class AlbumController {
 	public String getReplyList(int albumNo){
 		
 		ArrayList<AlbumReply> list = aService.selectReply(albumNo);
-		for(AlbumReply r : list) {
-			System.out.println(r.toString());
-		}
+		/*
+		 * for(AlbumReply r : list) { System.out.println(r.toString()); }
+		 */
 		// gson 생성시 형식 지정
 		/*
 		 * Gson gson = new
@@ -340,9 +336,9 @@ public class AlbumController {
 	public String getPhotoList(int albumNo){
 		
 		ArrayList<AlbumPhoto> list = aService.selectPhoto(albumNo);
-		for(AlbumPhoto p : list) {
-			System.out.println(p.toString());
-		}
+		/*
+		 * for(AlbumPhoto p : list) { System.out.println(p.toString()); }
+		 */
 		// gson 생성시 형식 지정
 		/*
 		 * Gson gson = new
