@@ -7,6 +7,7 @@
 		<result property="albumTitle" column="ALBUM_TITLE"/>
 		<result property="albumStatus" column="ALBUM_STATUS"/>
 		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberName" column="MEMBER_NAME"/>
 		<result property="groupNo" column="GROUP_NO"/>
 		<result property="albumCreateDate" column="ALBUM_CREATE_DATE"/>
 		<result property="albumModifyDate" column="ALBUM_MODIFY_DATE"/>
@@ -59,15 +60,17 @@
 	</select>
 	
 	<select id="selectAlbumList" parameterType="String" resultMap="albumResultSet">
-		SELECT *
-		FROM ALBUM
-		WHERE GROUP_NO = #{gno} AND ALBUM_STATUS = 'Y' ORDER BY 1 DESC
+		SELECT A.*, M.MEMBER_NAME 
+		FROM ALBUM A
+		JOIN MEMBER M ON(M.MEMBER_ID = A.MEMBER_ID)
+		WHERE A.GROUP_NO = #{gno} AND A.ALBUM_STATUS = 'Y' ORDER BY 1 DESC
 	</select>
 	
 	<select id="selectAlbum" parameterType="_int" resultMap="albumResultSet">
-		SELECT *
-		FROM ALBUM
-		WHERE ALBUM_NO = #{albumNo}
+		SELECT A.*, M.MEMBER_NAME 
+		FROM ALBUM A
+		JOIN MEMBER M ON(M.MEMBER_ID = A.MEMBER_ID)
+		WHERE A.ALBUM_NO = #{albumNo}
 	</select>
 	
 	<select id="selectPhotoList" parameterType="_int" resultMap="photoResultSet">
