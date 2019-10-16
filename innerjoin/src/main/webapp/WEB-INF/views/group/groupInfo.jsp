@@ -42,6 +42,7 @@
 									<c:if test="${empty board}">
 										새 글이 없습니다.
 									</c:if>
+									<c:if test="${!empty board}">
 									<c:forEach var="b" items="${ board }">
 											<div class="row board">
 														<div class="col-md-3">
@@ -56,6 +57,7 @@
 														<hr>
 											</div>
 									</c:forEach>
+									</c:if>
 								</div>
 							</div>
 						</div>
