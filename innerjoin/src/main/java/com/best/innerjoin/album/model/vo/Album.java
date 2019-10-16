@@ -6,6 +6,7 @@ public class Album {
 	private String albumTitle;
 	private char albumStatus;
 	private String memberId;
+	private String memberName;
 	private int groupNo;
 	private String albumCreateDate;
 	private String albumModifyDate;
@@ -16,19 +17,20 @@ public class Album {
 	}
 
 	
-	public Album(int albumNo, String albumTitle, char albumStatus, String memberId, int groupNo, String albumCreateDate,
-			String albumModifyDate, String albumThumbnail) {
+
+	public Album(int albumNo, String albumTitle, char albumStatus, String memberId, String memberName, int groupNo,
+			String albumCreateDate, String albumModifyDate, String albumThumbnail) {
 		super();
 		this.albumNo = albumNo;
 		this.albumTitle = albumTitle;
 		this.albumStatus = albumStatus;
 		this.memberId = memberId;
+		this.memberName = memberName;
 		this.groupNo = groupNo;
 		this.albumCreateDate = albumCreateDate;
 		this.albumModifyDate = albumModifyDate;
 		this.albumThumbnail = albumThumbnail;
 	}
-
 
 
 	public int getAlbumNo() {
@@ -100,14 +102,27 @@ public class Album {
 		this.albumThumbnail = albumThumbnail;
 	}
 
+	
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Album [albumNo=" + albumNo + ", albumTitle=" + albumTitle + ", albumStatus=" + albumStatus
-				+ ", memberId=" + memberId + ", groupNo=" + groupNo + ", albumCreateDate=" + albumCreateDate
-				+ ", albumModifyDate=" + albumModifyDate + ", albumThumbnail=" + albumThumbnail + "]";
+				+ ", memberId=" + memberId + ", memberName=" + memberName + ", groupNo=" + groupNo
+				+ ", albumCreateDate=" + albumCreateDate + ", albumModifyDate=" + albumModifyDate + ", albumThumbnail="
+				+ albumThumbnail + "]";
 	}
 
 
-	
 }

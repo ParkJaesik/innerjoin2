@@ -132,7 +132,6 @@
                 	var albumTitle = "${album.albumTitle}";
                 	var albumNo = ${album.albumNo};
                 	var groupNo = ${album.groupNo};
-                	alert(arContent + ", "+ albumNo + ", " + groupNo);
         			$.ajax({
         				url: "addReply.ij",
         				data : {arContent : arContent, albumNo : albumNo,groupNo : groupNo,albumTitle:albumTitle},
@@ -255,7 +254,7 @@
             <div class="row al-header">
                 <div class="col-md-3 al-info">
                     <h5>${album.albumModifyDate}</h5>
-                    <h6>by. ${album.memberId}</h6>
+                    <h6>by. ${album.memberName}</h6>
                 </div>
                 <div class="col-md-4 al-title">
                 </div>

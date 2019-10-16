@@ -54,7 +54,7 @@
 									<h4 onclick="goDetail(${a.albumNo});"><c:out value="${a.albumTitle}"></c:out></h4>
 								</c:otherwise>
 							</c:choose>
-							<p>by. ${a.memberId}</p>
+							<p>by. ${a.memberName}</p>
 						</div>
 					<%-- <% } %> --%>
 					</c:forEach>
