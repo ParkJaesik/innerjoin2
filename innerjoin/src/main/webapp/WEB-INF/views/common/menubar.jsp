@@ -92,7 +92,7 @@
 
 	function connectWS() {
 		
-		var ws  = new WebSocket("ws://192.168.10.74:8080/innerjoin/replyEcho.ij");
+		var ws  = new WebSocket("ws://192.168.10.75:8080/innerjoin/replyEcho.ij");
 		
 	    socket = ws;
 	    

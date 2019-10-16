@@ -156,9 +156,9 @@
 
 	<!-- 메인 페이지 그룹 목록 조회 쿼리 -->
 	<select id="mainGroupList" resultMap="groupResultSet">
-		SELECT * FROM (SELECT * FROM "GROUP" ORDER BY GROUP_ENROLL_DATE DESC) 
+		SELECT * FROM (SELECT * FROM "GROUP" WHERE GROUP_STATUS != 2 ORDER BY GROUP_ENROLL_DATE DESC) 
 		<![CDATA[
-		WHERE ROWNUM <= 6
+		WHERE ROWNUM <= 6 
 		]]>
   </select>
 
