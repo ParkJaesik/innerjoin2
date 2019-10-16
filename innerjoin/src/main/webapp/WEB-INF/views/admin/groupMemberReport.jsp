@@ -334,9 +334,15 @@
 				reptList.push(gnoRept);
 			});
 			console.log(reptList);
+			
+			var str = JSON.stringify(reptList);
+			
+			console.log(str);
+			
 			$.ajax({
 				url: "updateGroupMemLevel.ij",
-				data: {levelCode:level, reptList: reptList},
+				//data: {reptList:  JSON.stringify(reptList), levelCode:level},
+				data: {str : str, levelCode: level},
 				type: 'post',
 				success: function(result) {
 					if(result == 'success'){
