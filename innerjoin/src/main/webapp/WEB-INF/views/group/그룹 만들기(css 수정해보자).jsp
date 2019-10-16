@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,14 +95,11 @@
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
 				<div class="content-wrap">
-					<form action="groupupdate.ij" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="gNo" value="${group.gNo }">
-					<input type="hidden" name="filePath" value="${group.filePath}">
-					
+					<form action="ginsert.ij" method="post" enctype="multipart/form-data" id="groupForm">
 						<!--  <div class="btn active" style="width: 900px; height:50px; background-color:#ed786a ;"></div> -->
 						<!--  <div class="gWrap"> -->
 						<div class="row1">
-							<h3>모임 수정</h3>
+							<h3>모임 생성</h3>
 						</div>
 						
 						<div class="row">
@@ -123,17 +119,17 @@
 						
 						<div class="row">
 							<div class="div1">
-								<label>모임 카테고리</label>
+								<label>모임카테고리</label>
 							</div>
 							<div class="div2">
-								<select id="categorysel" name="gCategoryCode" required="required">
+								<select id="categorysel" name="gCategoryCode" required>
 									<option value="all">카테고리를 선택하세요.</option>
-									<option value="0" <c:if test="${group.gCategoryCode == '0' }" >selected</c:if>>학습</option>
-									<option value="1" <c:if test="${group.gCategoryCode == '1' }" >selected</c:if>>운동</option>
-									<option value="2" <c:if test="${group.gCategoryCode == '2' }" >selected</c:if>>문화예술</option>
-									<option value="3" <c:if test="${group.gCategoryCode == '3' }" >selected</c:if>>친목</option>
-									<option value="4" <c:if test="${group.gCategoryCode == '4' }" >selected</c:if>>봉사</option>
-									<option value="5" <c:if test="${group.gCategoryCode == '5' }" >selected</c:if>>음식</option>
+									<option value="0">학습</option>
+									<option value="1">운동</option>
+									<option value="2">문화예술</option>
+									<option value="3">친목</option>
+									<option value="4">봉사</option>
+									<option value="5">음식</option>
 								</select>
 							</div>
 						</div>
@@ -143,7 +139,7 @@
 								<label>모임명</label>
 							</div>
 							<div class="div2">
-								<input type="text" name="gName" value="${gName }" required="required">
+								<input type="text" name="gName" required="required" placeholder="모임명을 적어주세요." style="width: 600px;">
 							</div>
 						</div>
 						<div class="row">
@@ -151,36 +147,36 @@
 								<label>장소</label>
 							</div>
 							<div class="div2">
-								<select id="citysel" required="required">
+								<select id="citysel" required>
 									<option value="city">도시를 선택해주세요.</option>
 									<option value="0">서울특별시</option>
-								</select> <select id="guSel" name="localCode" required="required">
-									<option value="-1" <c:if test="${group.localCode == '-1' }" >selected</c:if>>구를 선택해주세요.</option>
-									<option value="0" <c:if test="${group.localCode == '0' }" >selected</c:if>>도봉구</option>
-									<option value="1" <c:if test="${group.localCode == '1' }" >selected</c:if>>강북구</option>
-									<option value="2" <c:if test="${group.localCode == '2' }" >selected</c:if>>노원구</option>
-									<option value="3" <c:if test="${group.localCode == '3' }" >selected</c:if>>성북구</option>
-									<option value="4" <c:if test="${group.localCode == '4' }" >selected</c:if>>은평구</option>
-									<option value="5" <c:if test="${group.localCode == '5' }" >selected</c:if>>종로구</option>
-									<option value="6" <c:if test="${group.localCode == '6' }" >selected</c:if>>동대문구</option>
-									<option value="7" <c:if test="${group.localCode == '7' }" >selected</c:if>>중랑구</option>
-									<option value="8" <c:if test="${group.localCode == '8' }" >selected</c:if>>서대문구</option>
-									<option value="9" <c:if test="${group.localCode == '9' }" >selected</c:if>>중구</option>
-									<option value="10" <c:if test="${group.localCode == '10' }" >selected</c:if>>성동구</option>
-									<option value="11" <c:if test="${group.localCode == '11' }" >selected</c:if>>마포구</option>
-									<option value="12" <c:if test="${group.localCode == '12' }" >selected</c:if>>용산구</option>
-									<option value="13" <c:if test="${group.localCode == '13' }" >selected</c:if>>광진구</option>
-									<option value="14" <c:if test="${group.localCode == '14' }" >selected</c:if>>강서구</option>
-									<option value="15" <c:if test="${group.localCode == '15' }" >selected</c:if>>영등포구</option>
-									<option value="16" <c:if test="${group.localCode == '16' }" >selected</c:if>>동작구</option>
-									<option value="17" <c:if test="${group.localCode == '17' }" >selected</c:if>>서초구</option>
-									<option value="18" <c:if test="${group.localCode == '18' }" >selected</c:if>>강남구</option>
-									<option value="19" <c:if test="${group.localCode == '19' }" >selected</c:if>>송파구</option>
-									<option value="20" <c:if test="${group.localCode == '20' }" >selected</c:if>>강동구</option>
-									<option value="21" <c:if test="${group.localCode == '21' }" >selected</c:if>>양천구</option>
-									<option value="22" <c:if test="${group.localCode == '22' }" >selected</c:if>>구로구</option>
-									<option value="23" <c:if test="${group.localCode == '23' }" >selected</c:if>>금천구</option>
-									<option value="24" <c:if test="${group.localCode == '24' }" >selected</c:if>>관악구</option>
+								</select> <select id="guSel" name="localCode" required>
+									<option value="-1">구를 선택해주세요.</option>
+									<option value="0">도봉구</option>
+									<option value="1">강북구</option>
+									<option value="2">노원구</option>
+									<option value="3">성북구</option>
+									<option value="4">은평구</option>
+									<option value="5">종로구</option>
+									<option value="6">동대문구</option>
+									<option value="7">중랑구</option>
+									<option value="8">서대문구</option>
+									<option value="9">중구</option>
+									<option value="10">성동구</option>
+									<option value="11">마포구</option>
+									<option value="12">용산구</option>
+									<option value="13">광진구</option>
+									<option value="14">강서구</option>
+									<option value="15">영등포구</option>
+									<option value="16">동작구</option>
+									<option value="17">서초구</option>
+									<option value="18">강남구</option>
+									<option value="19">송파구</option>
+									<option value="20">강동구</option>
+									<option value="21">양천구</option>
+									<option value="22">구로구</option>
+									<option value="23">금천구</option>
+									<option value="24">관악구</option>
 								</select>
 								<script type="text/javascript">
 									$("#citysel").on("input", function() {
@@ -199,11 +195,12 @@
 						</div>
 						<div class="row">
 							<div class="div1">
-								<label>공개 여부</label>
+								<label>공개여부</label>
 							</div>
 							<div class="div2">
-								공개<input type="radio" name="gOpenStatus" value="Y" required="required" <c:if test="${group.gOpenStatus == 'Y' }" >checked</c:if>> 
-								비공개<input type="radio" name="gOpenStatus" value="N"  required="required" <c:if test="${group.gOpenStatus == 'N' }" >checked</c:if>>
+								<input type="radio" name="gOpenStatus" value="Y" required="required">&nbsp;공개 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+								<input
+									type="radio" name="gOpenStatus" value="N" required="required">&nbsp;비공개 
 							</div>
 						</div>
 						<div class="row">
@@ -211,7 +208,7 @@
 								<label>최대정원</label>
 							</div>
 							<div class="div2">
-								<input type="number" max="100" name="gLimit" value="${group.gLimit }" required="required">명
+								<input type="number" max="100" name="gLimit" required="required">명
 							</div>
 						</div>
 						<!-- </div> -->
@@ -219,25 +216,20 @@
 						<!-- <div class="gWrap"> -->
 						<div class="row">
 							<div class="div1">
-								<label>모임 소개</label>
+								<label>모임소개</label>
 							</div>
 							<div class="div2">
-							<c:set var="gInfo" value="${fn:replace(group.gInfo,'<br>','') }"/>
-								<textarea name="gInfo" id="summernote" required="required">${group.gInfo}</textarea>
+								<textarea name="gInfo" id="summernote" value="" required="required"></textarea>
 
 							</div>
 						</div>
 						<div class="row">
 							<div class="div1">
-								<label>대표 사진</label>
+								<label>대표사진</label>
 							</div>
 							<div class="div2">
-								<img id="gOriginFileName" style="max-width: 100%">
-								<input type="file" name="reloadFile" value="${group.filePath }" required="required">
-								<c:if test="${!empty group.filePath}">
-									
-									<p>현재 업로드된 파일 : ${group.filePath }</p>
-								</c:if>
+								<img id="gOriginFileName" style="max-width: 100%"> <input
+									type="file" name="uploadFile" required="required">
 							</div>
 						</div>
 

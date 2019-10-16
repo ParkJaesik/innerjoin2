@@ -157,7 +157,7 @@
 		SET LEVEL_CODE = 10
 		WHERE GROUP_NO = #{groupNo} 
 		AND MEMBER_ID = #{memberId}
-		
+
 	</update>
 	
 	

@@ -81,13 +81,11 @@ public class ReportServiceImpl implements ReportService{
 	
 	// 신고 받은 회원 목록 
 	@Override
-	public ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage) {
+	public ArrayList<GroupMember> selectGroupMember(int responGNo) {
 		
 		int listCount = rDao.getGroupMemberListCount(responGNo);
 		
-		PageInfo pi = ReportPagination.getPageInfo(currentPage, listCount);
-		
-		return rDao.selectGroupMember(responGNo, pi);
+		return rDao.selectGroupMember(responGNo);
 	}
 
 

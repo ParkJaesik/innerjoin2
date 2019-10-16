@@ -173,7 +173,7 @@ th{
 		                </table>
 		            </div>
 		            <div class="mreport">
-		            	<c:url var="gogmlist" value="gmrcount.ij">
+		            	<c:url var="gogmlist" value="gmReportList.ij">
 		            		<c:param name="gNo" value="${group.gNo }"></c:param>
 		            	</c:url>
 		                <label><a href="${gogmlist}">신고 회원 보기</a></label>
