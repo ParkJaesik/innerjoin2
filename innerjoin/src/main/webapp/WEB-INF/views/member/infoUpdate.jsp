@@ -151,7 +151,8 @@
 							<c:url var="mLeave" value="mLeave.ij">
 							<c:param name="memberId" value="${ Member.memberId }"/>
 							</c:url>
-							<a href="${ mLeave }"> 탈퇴하기</a>
+							<!-- button type="button" id="mleave" onclick="bye();">탈퇴하기</button> -->
+							<a id="mleave" onclick="bye();" href="#"> 탈퇴하기</a>
 			            </form>
 				  	</div>
 				  	<div class="col-4"></div>
@@ -275,12 +276,15 @@
 			
 			
 		
-			if(nameCheck == false){
-				alert("닉네임을 확인해주세요");
-				$("#memberName").focus();
-				return false;	
+			if( $("#memberName").change function(){
+				if(nameCheck == false){
+					alert("닉네임을 확인해주세요");
+					$("#memberName").focus();
+					return false;	
+				
+				}
+			});
 			
-			}
 			
 			if($("#memberPwd").val() == '' && $("#memberPwd2").val() == ''){
 				return true;
@@ -303,6 +307,14 @@
 			
 			
 		}
+		
+		function bye() {
+			if(confirm("정말로 탈퇴하시겠습니까?") == true){
+				location.href = "${ mLeave }";
+			}
+			
+		}
+		
 			
 		</script>
 	

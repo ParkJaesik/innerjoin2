@@ -239,6 +239,17 @@ public class MemberDao {
 
 
 
+	/** 비밀번호 수정 (비밀번호 분실)
+	 * @param member
+	 * @return
+	 */
+	public int updatePwd(Member member) {
+		
+		return sqlSession.update("memberMapper.updatePwd", member);
+	}
+
+
+
 	
 
 

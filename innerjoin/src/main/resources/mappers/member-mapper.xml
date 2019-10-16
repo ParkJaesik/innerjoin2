@@ -85,7 +85,7 @@
   <update id="updateInfo" parameterType="Member">
   	UPDATE MEMBER
   	SET 
-  	<if test='!memberPwd.equals("")'>
+  	<if test='!memberPwd.equals("")'> <!-- !없으면 변경이 안되지만 , !있을 시 null이여도 무조건 변경됨 -->
   	MEMBER_PWD = #{memberPwd},
   	</if>
   	MEMBER_NAME = #{memberName}
@@ -129,7 +129,9 @@
 	WHERE MEMBER_ID = #{memberId}
 	AND GROUP_STATUS != 2
 	AND LEVEL_CODE != 3
-	AND LEVEL_CODE != 4 
+	AND LEVEL_CODE != 4
+	AND LEVEL_CODE != 10
+	 
   </select>
   
   <!-- 초대받은 모임 목록 -->
@@ -150,6 +152,7 @@
 	WHERE MEMBER_ID = #{memberId}
 	AND GROUP_STATUS != 2
     AND LEVEL_CODE = 4
+    AND LEVEL_CODE != 10
   </select>
   
   <!-- 초대 거절 -->
@@ -263,6 +266,13 @@
   	SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
   	
   </select>
+  
+  <!-- 비밀번호 분실 시 변경 -->
+  <update id="updatePwd" parameterType="Member">
+  	UPDATE MEMBER
+  	SET MEMBER_PWD = #{ memberPwd }
+  	WHERE MEMBER_ID = #{ memberId }
+  </update>
 
   
 </mapper>

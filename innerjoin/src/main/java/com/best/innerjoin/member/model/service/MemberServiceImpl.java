@@ -207,12 +207,13 @@ public class MemberServiceImpl implements MemberService{
 	// 회원정보 수정 
 	@Override
 	public int updateInfo(Member member) {
+		System.out.println( "비밀번호 " + member.getMemberId());
 		
-		System.out.println("비밀번호 : " + member.getMemberPwd());
-		if(member.getMemberPwd() != null) {
-		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
-		member.setMemberPwd(encPwd);
-		}	
+			String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+			member.setMemberPwd(encPwd);
+		
+		
+		
 		int result = mDao.updateInfo(member);
 		if(result > 0) {
 			result = mDao.updateAddInfo(member);
@@ -260,6 +261,16 @@ public class MemberServiceImpl implements MemberService{
 	public Member selectMemberInfo(String memberId) {
 		return mDao.selectMemberInfo(memberId);
 
+	}
+
+	// 비밀번호 분실 시 변경
+	@Override
+	public int updatePwd(Member member) {
+		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setMemberPwd(encPwd);
+		
+		return mDao.updatePwd(member);
+		
 	}
 
 		

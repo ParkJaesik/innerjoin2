@@ -17,6 +17,7 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css"/>
 <title>정보수정</title>
 <style type="text/css">
 	/* *{

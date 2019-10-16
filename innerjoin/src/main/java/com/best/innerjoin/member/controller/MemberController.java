@@ -114,6 +114,8 @@ public class MemberController {
 	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
+		System.out.println("마이페이지 이동: " + loginUser);
+		
 
 		// 내 모임 목록
 		ArrayList<Member> list = mService.selectList(loginUser);
@@ -149,6 +151,7 @@ public class MemberController {
 
 		return mv;
 	}
+
 
 	// 모임 초대 거절
 	@RequestMapping("invDeny.ij")
@@ -257,8 +260,6 @@ public class MemberController {
 	@RequestMapping(value = "profileUpdate.ij", method = RequestMethod.POST)
 	public String profileUpdate(Member member, Model model, HttpServletRequest request, MultipartFile reloadFile) {
 		if (reloadFile != null && !reloadFile.isEmpty()) {
-		
-			System.out.println(reloadFile.getOriginalFilename());
 			String originFile = mService.getOriginFileName(member.getMemberId());
 			String renameFile = "";
 			if (!originFile.equals("user.png")) {
@@ -279,14 +280,18 @@ public class MemberController {
 		}
 		result2 = mService.updateProfile(member);
 		
+		Member updateMember = mService.selectMember(member.getMemberId());
+		System.out.println("updateMember : " + updateMember);
+		System.out.println(updateMember);
+		System.out.println(result);
+		System.out.println(result2);
 		
-		
-		if (result > 0) {
-			model.addAttribute(member);
-		} else {
-
+		if (result2 > 0) {
+			request.getSession().removeAttribute("loginUser");
+			request.getSession().setAttribute("loginUser", updateMember);
+			System.out.println("세션 변경 성공");
 		}
-		return "member/profileUpdate";
+		return "redirect:myGroupForm.ij"; // -----수정
 	}
 
 	public void saveFile(String renameFileName, MultipartFile uploadfile, HttpServletRequest request) {
@@ -381,6 +386,8 @@ public class MemberController {
 		model.addAttribute("Member",member);
 		return "member/infoUpdate";
 	}
+	
+	
 
 	// 정보수정
 	@RequestMapping(value = "infoUpdate.ij", method = RequestMethod.POST)
@@ -393,11 +400,33 @@ public class MemberController {
 		int result = mService.updateInfo(member);
 
 		if (result > 0) {
-			return "redirect:infoUpdateForm.ij";
+			return "redirect:myGroupForm.ij";
 		} else {
 			model.addAttribute("msg", "정보 수정 중 오류 발생");
-			return "redirect:infoUpdateForm.ij";
+			return "common/errorPage";
 		}
+	}
+	
+	
+	// 비밀번호 분실 비밀번호 입력 폼
+		@RequestMapping(value="updatePwdForm.ij", method= RequestMethod.GET)
+		public String updatePwdForm(String memberId, Model model) {
+			return"member/pwdUpdate";
+		}
+	
+	// 비밀번호 잃어버리고 수정
+	@RequestMapping(value="updatePwd.ij", method=RequestMethod.POST)
+	public String updatePwd(Member member, Model model) {
+		int result  = mService.updatePwd(member);
+		
+		
+		if( result > 0) {
+			return "redirect:loginForm.ij";
+		} else {
+			model.addAttribute("msg", "비밀번호 변경 중 오류 발생");
+			return "common/errorPage";
+		}
+		
 	}
 
 	// 로그아웃
@@ -423,7 +452,7 @@ public class MemberController {
 		if (result > 0) {
 			rdAttr.addFlashAttribute("leaveMsg", "탈퇴되셨습니다.");
 			status.setComplete();
-			System.out.println("2adfadfa");
+			
 
 			return "redirect:/";
 		} else {
@@ -466,7 +495,7 @@ public class MemberController {
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("[비밀번호 변경]");
 			sendMail.setText(new StringBuffer().append("<h1>비밀번호 변경</h1>")
-					.append("<h2><a href =" + host + "infoUpdateForm.ij?memberId="+ memberId + "> 비밀번호 재설정하기 </a></h2>").toString());
+					.append("<h2><a href =" + host + "updatePwdForm.ij?memberId="+ memberId + "> 비밀번호 재설정하기 </a></h2>").toString());
 			sendMail.setFrom("rjrinal@gmail.com", "InnerJoin");
 			
 			sendMail.setTo(memberId);
