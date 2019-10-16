@@ -110,7 +110,6 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li id="dashboard"><a href="admin.ij"><em class="fa fa-dashboard">&nbsp;</em> 대시보드 </a></li>
 			<li id="manageMember"><a href="manageMember.ij"><em class="fa fa-calendar">&nbsp;</em> 회원관리</a></li>
 			<li id="manageGroup"><a href="manageGroup.ij"><em class="fa fa-bar-chart">&nbsp;</em> 모임관리</a></li>
 			<li class="parent " id="manageReport">
@@ -129,7 +128,6 @@
 					</a></li>
 				</ul>
 			</li>
-			<li id="manageCategory"><a href="manageCategory.ij"><em class="fa fa-clone">&nbsp;</em> 카테고리 관리</a></li>
 			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->

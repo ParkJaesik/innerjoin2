@@ -2,7 +2,10 @@
 package com.best.innerjoin.admin.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,8 @@ import com.best.innerjoin.report.model.vo.GroupMemberReport;
 import com.best.innerjoin.report.model.vo.GroupReport;
 import com.best.innerjoin.report.model.vo.MemberReport;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 
 @Controller
@@ -34,8 +39,15 @@ public class AdminController {
 	
 	//임시 관리자 페이지로 이동
 	@RequestMapping("admin.ij")
-	public String adminView() {
-		return "admin/admin";
+	public String adminView(HttpSession session) {
+		
+		if(((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+			
+			return "redirect:manageMember.ij";
+		}else {
+			return "redirect:gohome.ij";
+		}
+		
 	}  
 
 	/** 회원관리페이지 이동
@@ -183,6 +195,7 @@ public class AdminController {
 		return mv;
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping("updateGroupStatus.ij")
 	public int updateGroupStatus(Integer groupReptNo, Group group, ModelAndView mv) {
@@ -208,22 +221,35 @@ public class AdminController {
 		return groupMemberCode;
 	}
 	
+	// 그룹회원 등급 변경
 	@ResponseBody
 	@RequestMapping("updateGroupMemLevel.ij")
-	public String updateGroupMemLevel(int levelCode, ArrayList<GroupMember> gMember, ModelAndView mv) {
+	public String updateGroupMemLevel(String levelCode,String str,ModelAndView mv) {
+		
+		int level = Integer.parseInt(levelCode);
+		System.out.println(str);
+		System.out.println(level);
 		
 		
-		int result = adService.updateGroupMemLevel(levelCode,gMember);
-		if(result == gMember.size()) {
-			return "success";
-		}else{
-			return "fail";
-		}
+		JsonArray arr =  (JsonArray)(new JsonParser().parse(str));
 		
+		//JsonObject obj = (JsonObject)(new JsonParser().parse(str));
+		
+	    List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+	      
+		System.out.println(arr);
+		
+		/*
+		 * ArrayList<GroupMember> gList = new ArrayList<GroupMember>(reptList); int
+		 * result = adService.updateGroupMemLevel(level,gList);
+		 * System.out.println("gMember : "+reptList);
+		 * System.out.println("gMember사이즈 : "+reptList.size()); if(result ==
+		 * reptList.size()) { return "success"; }else{ return "fail"; }
+		 */	
+		return "success";
 	}
 	
 
-  
 	
 	@ResponseBody
 	@RequestMapping(value="loadCat.ij",produces="text/plain;charset=UTF-8")

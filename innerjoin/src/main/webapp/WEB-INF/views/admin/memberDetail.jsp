@@ -532,16 +532,22 @@
 	
 		
 		function processReport() {
-			if(!confirm("선택한 모든 신고내역의 처리상태를 '처리'로 변경하시겠습니까?")) return;
+			if(!confirm("선택한 모든 신고내역의 그룹 회원 상태를 변경하시겠습니까?")) return;
 			
 			var reptNoList = "";
-			$("input[name=memReptNo]:checked").each(function(i){
+			var length = $("input[name=gMemReptNo]:checked").length;
+			var gMember =[];
+			for(var i=0;i<length;i++){
+				
+			}
+			
+			$("input[name=gMemReptNo]:checked").each(function(i){
 				reptNoList += $(this).val() + ",";
 			});
 			reptNoList = reptNoList.slice(0, -1);
 			console.log(reptNoList);
 
-			location.href="processReport.ij?memberId=${member.memberId}&reptNoList=" + reptNoList;
+			location.href="updateGroupMemLevel.ij?memberId=${member.memberId}&reptNoList=" + reptNoList;
 			
 		}
 		
