@@ -99,7 +99,7 @@ float: left;}
 							</div>
 							<div>
 	                    	<a href="javascript:history.back(-1)" class="button icon solid mMenu cancel" id="goBack">취소</a>
-	          				<button style="float: right;">수정</button>
+	          				<button id="iSubmit" style="float: right;">수정</button>
 	                    	</div>
 							
 	                   </form>
@@ -128,9 +128,22 @@ float: left;}
 		
 	
 	});
-	</script>
-
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	$("#iSubmit").on("click"), function() {
+		var proPath = ${ member.memberProPath };
+		var mId = ${ member.memberId};
+		var mIntro = ${ member.memberIntroduce };
+		var gender = $("input[type = radio ]").val();
+		
+		$.ajax({
+			url: "profileUpdate.ij",
+			data : {proPath : proPath, mIntor : mIntro, mId : mId, gender : gender},
+			type : "post",
+			success : function(member){
+				if()
+			}
+		});
+		}
 
 	</body>
 </html>
