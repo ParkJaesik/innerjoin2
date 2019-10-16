@@ -17,87 +17,62 @@
 	margin: auto;
 	
 	} */
-.content-wrap{
+.content-wrap {
 	margin: auto;
-	margin-top: 3%;
 	width: 100%;
-	max-height :5000px; 
-	margin-left: 15%;
-	
-	/* padding: 0% */;
-}
-.div1{
-	margin-left: -3%;
-
+	height: 100%;
+	margin-left: 13%;;
 }
 
-.row{
-	height: 150px;
-
+.row {
+	width: 100%;
 }
 
-
-
-
-table{
-	margin-top: 8%;
+.row1 {
+	width: 100%;
 }
 
-th{
-	width: 40%;
-
+.div1 {
+	width: 35%;
+	min-height: 100px;
+	float: left;
+	display: inline-block;
 }
 
-td{
-	width: 60%;
+.div2 {
+	width: 65%;
+	min-height: 100px;
+	display: inline-block;
 }
 
-.p{
-	font-size: 13px;
-	font-weight: 10px;
-	color: gray;
+.temp {
+	min-height: 100px;
 }
 
-label{
-	font-size: 20px;
+.button-wrap {
+	width: 100%;
+	height: 100px;
 }
 
-#userId{
-	border: none; 
-	color: #ed776acb; 
-	font-size: 20px;
+.btn {
+	cursor: pointer;
 }
 
-.input{
-	height:40px;
-
-}
-#gName{
-	width: 600px; 
-	height: 42px;
+.active {
+	cursor: initial;
 }
 
-#mlimit{
-	width: 100px;
-	height: 35px;
-
+#guSel {
+	display: none;
 }
 
-.button-wrap button{
-	width: 100px;
-	height: 40px;
-	
-	
+.btn active {
 	
 }
 
-.button-wrap{
-	margin-left: 30%
+#groupForm {
+	margin: auto;
 }
-
-
-
-
 </style>
 
 
@@ -121,55 +96,66 @@ label{
 			<div class="col-md-1 aside"></div>
 			<div class="col-md-10" id="body-content">
 				<div class="content-wrap">
-						<!--  <div class="btn active" style="width: 900px; height:50px; background-color:#ed786a ;"></div> -->
-						<!--  <div class="gWrap"> -->
-					<div class="div1">
-						<h3>모임 수정</h3>
-					</div>
 					<form action="groupupdate.ij" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="gNo" value="${group.gNo }">
 					<input type="hidden" name="filePath" value="${group.filePath}">
-						<table>
-							<tr class="row">
-								<th><label>모임장</label></th>
-								<td>
-									<input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}" >
-									<input type="hidden" name="levelCode" value="${gmember.levelCode }">
-									<c:if test="${ levelCode eq 0 }"></c:if>
-								</td>
-	
-							</tr>
-							
-							<tr class="row">
-								<th><label>모임카테고리</label></th>
-								<td>
-									<select class="input" id="categorysel" name="gCategoryCode" required >
-										<option value="all">카테고리를 선택하세요.</option>
-										<option value="0" <c:if test="${group.gCategoryCode == '0' }" >selected</c:if>>학습</option>
-										<option value="1" <c:if test="${group.gCategoryCode == '1' }" >selected</c:if>>운동</option>
-										<option value="2" <c:if test="${group.gCategoryCode == '2' }" >selected</c:if>>문화예술</option>
-										<option value="3" <c:if test="${group.gCategoryCode == '3' }" >selected</c:if>>친목</option>
-										<option value="4" <c:if test="${group.gCategoryCode == '4' }" >selected</c:if>>봉사</option>
-										<option value="5" <c:if test="${group.gCategoryCode == '5' }" >selected</c:if>>음식</option>
-									</select>
-								</td>
-							</tr>
-							
-							<tr class="row">
-								<th><label>모임명</label></th>
-								<td class="div2">
-									<input type="text" id="gName" value="${gName }" name="gName" required="required" placeholder="모임명을 적어주세요." >
-								</td>
-							</tr>
+					
+						<!--  <div class="btn active" style="width: 900px; height:50px; background-color:#ed786a ;"></div> -->
+						<!--  <div class="gWrap"> -->
+						<div class="row1">
+							<h3>모임 수정</h3>
+						</div>
 						
-							<tr class="row">
-								<th><label>장소</label></th>
-								<td>
-									<select id="citysel" required class="input">
-										<option value="city">도시를 선택해주세요.</option>
-										<option value="0">서울특별시</option>
-									</select> <select id="guSel" name="localCode" required class="input">
-										<option value="-1" <c:if test="${group.localCode == '-1' }" >selected</c:if>>구를 선택해주세요.</option>
+						<div class="row">
+							<div class="div1">
+								<label>모임장</label>
+							</div>
+							
+							<div class="div2">
+								<input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}">
+								<input type="hidden" name="levelCode" value="${gmember.levelCode }">
+								<c:if test="${ levelCode eq 0 }">
+								
+								</c:if>
+							</div>
+
+						</div>
+						
+						<div class="row">
+							<div class="div1">
+								<label>모임 카테고리</label>
+							</div>
+							<div class="div2">
+								<select id="categorysel" name="gCategoryCode" required="required">
+									<option value="all">카테고리를 선택하세요.</option>
+									<option value="0" <c:if test="${group.gCategoryCode == '0' }" >selected</c:if>>학습</option>
+									<option value="1" <c:if test="${group.gCategoryCode == '1' }" >selected</c:if>>운동</option>
+									<option value="2" <c:if test="${group.gCategoryCode == '2' }" >selected</c:if>>문화예술</option>
+									<option value="3" <c:if test="${group.gCategoryCode == '3' }" >selected</c:if>>친목</option>
+									<option value="4" <c:if test="${group.gCategoryCode == '4' }" >selected</c:if>>봉사</option>
+									<option value="5" <c:if test="${group.gCategoryCode == '5' }" >selected</c:if>>음식</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="div1">
+								<label>모임명</label>
+							</div>
+							<div class="div2">
+								<input type="text" name="gName" value="${gName }" required="required">
+							</div>
+						</div>
+						<div class="row">
+							<div class="div1">
+								<label>장소</label>
+							</div>
+							<div class="div2">
+								<select id="citysel" required="required">
+									<option value="city">도시를 선택해주세요.</option>
+									<option value="0">서울특별시</option>
+								</select> <select id="guSel" name="localCode" required="required">
+									<option value="-1" <c:if test="${group.localCode == '-1' }" >selected</c:if>>구를 선택해주세요.</option>
 									<option value="0" <c:if test="${group.localCode == '0' }" >selected</c:if>>도봉구</option>
 									<option value="1" <c:if test="${group.localCode == '1' }" >selected</c:if>>강북구</option>
 									<option value="2" <c:if test="${group.localCode == '2' }" >selected</c:if>>노원구</option>
@@ -195,67 +181,72 @@ label{
 									<option value="22" <c:if test="${group.localCode == '22' }" >selected</c:if>>구로구</option>
 									<option value="23" <c:if test="${group.localCode == '23' }" >selected</c:if>>금천구</option>
 									<option value="24" <c:if test="${group.localCode == '24' }" >selected</c:if>>관악구</option>
-									</select>
-									<script type="text/javascript">
-										$("#citysel").on("input", function() {
-											var citysel = $("#citysel").val();
-	
-											if (citysel == 0) {
-												$("#guSel").show();
-											} else {
-												$("#guSel").hide();
-											}
-	
-										});
-									</script>
-								</td>
-	
-							</tr>
-							
-							<tr class="row">
-								<th><label>공개여부</label></th>
-								<td>
-									<input type="radio" name="gOpenStatus" value="Y" required="required" <c:if test="${group.gOpenStatus == 'Y' }" >checked</c:if>>&nbsp;공개 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<input type="radio" name="gOpenStatus" value="N" required="required" <c:if test="${group.gOpenStatus == 'N' }" >checked</c:if>>&nbsp;비공개 
-								</td>
-							</tr>
-							<tr class="row">
-								<th>
-									<label>모임인원</label><br>
-									<p class="p">최대 100명까지 가능합니다.</p>
-								</th>
-								<td><input id="mlimit" type="number" min="0" max="100" name="gLimit" required="required" value="${group.gLimit }">&nbsp;명</td>
-							</div>
-							<!-- </div> -->
-							<!-- <div class="btn" style="width: 900px; height:50px; background-color: purple;"></div> -->
-							<!-- <div class="gWrap"> -->
-							<tr class="row" style="margin-bottom: 30%;">
-								<th><label>모임소개</label></th>
-								<td class="div2">
-									<c:set var="gInfo" value="${fn:replace(group.gInfo,'<br>','') }"/>
-									<textarea name="gInfo" id="summernote" value="" required="required" >${group.gInfo}</textarea>
-								</td>
-							</tr>
+								</select>
+								<script type="text/javascript">
+									$("#citysel").on("input", function() {
+										var citysel = $("#citysel").val();
 
-							<tr class="row" style="margin-top: 40%;">
-								<th><label>대표사진</label></th>
-								<td>
-									<img id="gOriginFileName" style="max-width: 100%"> 
-									<input type="file" name="uploadFile" required="required" value="${group.filePath }">
-									<c:if test="${!empty group.filePath}">
+										if (citysel == 0) {
+											$("#guSel").show();
+										} else {
+											$("#guSel").hide();
+										}
+
+									});
+								</script>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="div1">
+								<label>공개 여부</label>
+							</div>
+							<div class="div2">
+								공개<input type="radio" name="gOpenStatus" value="Y" required="required" <c:if test="${group.gOpenStatus == 'Y' }" >checked</c:if>> 
+								비공개<input type="radio" name="gOpenStatus" value="N"  required="required" <c:if test="${group.gOpenStatus == 'N' }" >checked</c:if>>
+							</div>
+						</div>
+						<div class="row">
+							<div class="div1">
+								<label>최대정원</label>
+							</div>
+							<div class="div2">
+								<input type="number" max="100" name="gLimit" value="${group.gLimit }" required="required">명
+							</div>
+						</div>
+						<!-- </div> -->
+						<!-- <div class="btn" style="width: 900px; height:50px; background-color: purple;"></div> -->
+						<!-- <div class="gWrap"> -->
+						<div class="row">
+							<div class="div1">
+								<label>모임 소개</label>
+							</div>
+							<div class="div2">
+							<c:set var="gInfo" value="${fn:replace(group.gInfo,'<br>','') }"/>
+								<textarea name="gInfo" id="summernote" required="required">${group.gInfo}</textarea>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="div1">
+								<label>대표 사진</label>
+							</div>
+							<div class="div2">
+								<img id="gOriginFileName" style="max-width: 100%">
+								<input type="file" name="reloadFile" value="${group.filePath }" required="required">
+								<c:if test="${!empty group.filePath}">
 									
 									<p>현재 업로드된 파일 : ${group.filePath }</p>
 								</c:if>
-								</td>
-							</tr>
-						</table>
-	
-						<div class="button-wrap">
-							<button type="reset" id="cancel">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+							</div>
+						</div>
+
+						<div class="button-wrap" align="center">
+							<button type="reset" id="cancel">취소</button>
 							<button type="submit" id="submit">등록</button>
 						</div>
-	
-							<!--  </div> -->
+
+						<!--  </div> -->
 					</form>
 					<div class="temp"></div>
 				</div>
@@ -286,8 +277,7 @@ label{
 
 		$(document).ready(function() {
 			$("#summernote").summernote({
-				height : 400,
-				width : 800,
+				height : 300,
 				minHeight : null,
 				maxHeight : null,
 				focus : true
