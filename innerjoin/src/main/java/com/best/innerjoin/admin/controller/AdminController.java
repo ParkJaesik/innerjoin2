@@ -76,10 +76,8 @@ public class AdminController {
 		
 		// 멤버 개설, 가입 모임 정보 조회
 		Map<String, Map> mgInfo = adService.memGroupInfo(memberId);
-		System.out.println("mgInfo" + mgInfo);
 		// 신고 내역 조회
 		ArrayList<MemberReport> mrList = adService.selectMrList(memberId);
-		System.out.println("mrList: " + mrList);
 		
 		mv.addObject("member", member).addObject("mgInfo", mgInfo)
 			.addObject("mrList", mrList).setViewName("admin/memberDetail");
@@ -187,9 +185,7 @@ public class AdminController {
 	public ModelAndView groupDetailView(Integer groupReptNo,int gNo, ModelAndView mv) {
 		
 		Group group = adService.selectGroupDetail(gNo);
-		System.out.println(group);
 		ArrayList<GroupMember> mList = gService.groupMemberList(gNo);
-		System.out.println("mList.size() : "+ mList.size());
 		mv.addObject("group", group).addObject("groupReptNo", groupReptNo).addObject("mList", mList).setViewName("admin/groupDetail");
 		
 		return mv;
@@ -237,7 +233,6 @@ public class AdminController {
 		
 	    List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 	      
-		System.out.println(arr);
 		
 		/*
 		 * ArrayList<GroupMember> gList = new ArrayList<GroupMember>(reptList); int
