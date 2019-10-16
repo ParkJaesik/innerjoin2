@@ -33,15 +33,20 @@
 	<!-- <div class="container" id="profile" > -->
 		<nav id="nav">
 			<ul>
+				<!-- 관리자 로그인 시 사용 가능 -->
+				<c:if test="${ !empty sessionScope.loginUser and sessionScope.loginUser.memberStatusCode == 0 }">
+				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='admin.ij'"><span class="menu-detail">관리자</span></a></li>
+				</c:if>				
+
 				<li id="logo-part"><a class="menu-a" href="gohome.ij"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a></li>
 				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
 				<li class="menu"><a class="icon solid fa-search" href="groupSearchForm.ij"><span class="menu-detail">Search</span></a></li>
 				
+
 				<!-- 로그인 시 사용 가능 -->
 				<c:if test="${ !empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span></a></li>
 				</c:if>				
-				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='loginForm.ij'"><span class="menu-detail">News</span></a></li>
 				<c:if test="${ empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-home menu-a" href="loginForm.ij"><span class="menu-detail">Login</span></a></li>
 				</c:if>
@@ -87,7 +92,7 @@
 
 	function connectWS() {
 		
-		var ws  = new WebSocket("ws://localhost:8080/innerjoin/replyEcho.ij");
+		var ws  = new WebSocket("ws://192.168.10.74:8080/innerjoin/replyEcho.ij");
 		
 	    socket = ws;
 	    
