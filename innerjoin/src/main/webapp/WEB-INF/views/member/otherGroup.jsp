@@ -16,6 +16,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
+
 <title>마이페이지</title>
 <style type="text/css">
 /*  *{
@@ -58,7 +59,7 @@
 						</div>
 						<div class="row">
 							<c:forEach var="myGroup" items="${list}" varStatus="status">
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<br>
 									<div class="basic-padding">
 										<div class="image-hover">
@@ -77,7 +78,7 @@
 										</div>
 									</div>
 								</div>
-								<c:if test="${ status.index }%3 == 2">
+								<c:if test="${ status.index }%4 == 3">
 									<div class="row">
 								</c:if>
 								<c:if test="${ status.last }">

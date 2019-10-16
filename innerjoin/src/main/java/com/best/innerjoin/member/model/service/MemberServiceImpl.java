@@ -137,9 +137,13 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int checkPwd(String loginUserPwd, String memberPwd) {
 		int result = 0;
-		if(!bCryptPasswordEncoder.matches(loginUserPwd, memberPwd)) {
+		System.out.println(loginUserPwd);
+		System.out.println(memberPwd);
+		if(!bCryptPasswordEncoder.matches(memberPwd , loginUserPwd)) {
+			System.out.println(result);
 			result = 0;
 		}else {
+//			return mDao.checkPwd(memberId);
 			result = 1;
 		}
 		return result;

@@ -144,8 +144,9 @@ button:active,
     text-align: center;
 }
 #myPage-menu a{
-    background-color: #ed786a;
-    color: #fff !important;
+    background-color: #e6e6e6;
+    color: #323232;
+/*     color: #fff !important; */
     padding: 0.7em 1em 0.7em 1em;
     border-radius: 5px !important;
     text-decoration: none;

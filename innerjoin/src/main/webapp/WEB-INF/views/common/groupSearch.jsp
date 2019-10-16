@@ -272,7 +272,7 @@
 								</c:when>
 							</c:choose>
 							<div class="col-5" style="width: 100%;" align="center">
-						    <img class="profile-img" src="${contextPath}/resources/images/member/${group.filePath}"></div>
+						    <img class="profile-img" src="${contextPath}/resources/guploadFiles/${group.filePath}"></div>
 							
 								<div class="col-7">
 									<c:url var="goGorup" value="goGroupPage.ij">

@@ -16,7 +16,8 @@
 	href="${contextPath}/resources/css/common/index.css">
 
 
-<link rel="stylesheet" href="${contextPath}/resources/css/myPage.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
 
 <title>정보수정</title>
 <style type="text/css">
@@ -44,12 +45,14 @@
 				<div class="row">
 					<div class="col-md-4"></div>
 						<div class="col-md-4">
-							<div class="margin"></div>
-							<div id="content">
+							<!-- <div style="margin: 3em;"></div> -->
+							<div id="content" style="margin: auto; margin-top: 10em;">
 
 							<header>
 								<h2>비밀번호 입력 </h2>
 							</header>
+							<br>
+							<h5>본인 확인을 위해 비밀번호를 입력해주세요.</h5>
 									
 							<form action="checkPwd.ij" id="checkPwd" name="checkPwd" method="post">
 								<div>

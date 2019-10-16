@@ -20,6 +20,16 @@
 	height: 13em;
 	border-radius: 150px;
 }
+
+.line{
+	border-bottom: none;
+}
+.mInfo{
+	height: 10em;
+	border: 2px solid #ed786a;
+	border-radius: 5px;
+	padding: 1em;
+}
 </style>
 </head>
 <body>
@@ -41,9 +51,8 @@
 	    	                        </div>
 	        	                    <br>
 	        	                    
-	        	                    <div class="myprofile">${otherUser.memberName }</div>
-	        	                    <div class="myprofile">${otherUser.memberId }</div>
-	            	                <div class="myProfile">${ otherUser.memberIntroduce }</div>
+	        	                    <div class="myprofile"><h5>${otherUser.memberName }(${otherUser.memberId })</h5></div>
+	            	                <div class="myProfile mInfo">${ otherUser.memberIntroduce }</div>
 	                	            <br>           
 	                    	   
                         	</div>
@@ -52,9 +61,7 @@
 					</div>
                     <br>
                     <div class="row">
-                    <!-- 	<div class="col-md-2"></div>
-                        <div class="col-md-8">캘린더</div>
-                        <div class="col-md-2"></div> -->
+                    
                         <div class="col-md-12">
                         	
                         </div>

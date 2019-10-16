@@ -17,6 +17,7 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css">
 
 
 
@@ -36,6 +37,9 @@
 	textarea {
 	width: 100%;
 }
+
+.cancel{
+float: left;}
 </style>
 </head>
 <body>
@@ -83,7 +87,9 @@
 								</c:if>
 	                	    <br>
 							<div class="col-half">
-			                      <h5>자기소개 공개여부</h5>
+							
+							<br>
+			                      <h5 style="float: left;">공개여부</h5>
 			                      <div class="input-group">
 									<input type="radio" name="memberOpenStatus" value="Y" id="gender-male"/>
 									<label for="gender-male">공개</label>
@@ -92,8 +98,8 @@
 								</div>
 							</div>
 							<div>
-	                    	<a href="#" class="button icon solid mMenu" id="goBack">취소</a>
-	                    	<button>수정</button>
+	                    	<a href="javascript:history.back(-1)" class="button icon solid mMenu cancel" id="goBack">취소</a>
+	          				<button style="float: right;">수정</button>
 	                    	</div>
 							
 	                   </form>
@@ -103,6 +109,7 @@
 				</div>
 				<div class="col-md-1 aside"></div>
 			</div>
+		</div>
 	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

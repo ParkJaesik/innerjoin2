@@ -16,11 +16,16 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css"/>
 <title>마이페이지</title>
 <style type="text/css">
-	/* *{
-	 	 border: 1px solid black;
-	 }  */
+	.cancel{
+		bottom: 0.7em;
+		height: 2.8em;
+		font-weight: 400 !important;
+		float: left;
+		margin-left: 0;
+	}
 </style>
 </head>
 <body>
@@ -114,7 +119,7 @@
 			                	</div> -->
 			              	</div>
 			              	<button type="button" id="button" onclick="return submitCheck();" style="float: right;"> 가입</button>
-							<button type="button" onclick="index.jsp" class="btn cancel">취소</button>
+							<button type="button" onclick="index.jsp" class="btn cancel" style="background-color: rgba(141, 141, 140, 0.836); padding: 11.2px 16px 11.2px 16px;">취소</button>
 			              							
 						
 			            </form>

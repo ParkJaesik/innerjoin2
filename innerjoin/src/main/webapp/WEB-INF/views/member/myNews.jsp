@@ -41,6 +41,12 @@
 	.noteDate{
 		width: 10em;
 	}
+	
+	.new{
+		background-color: #ed786a !important;
+    	color: #fff !important;
+	}
+	
 </style>
 </head>
 <body>

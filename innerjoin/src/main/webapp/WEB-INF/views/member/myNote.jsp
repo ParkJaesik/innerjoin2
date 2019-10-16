@@ -45,6 +45,10 @@
 	    width: 100%;
     	resize: none;
     }
+    .note{
+    	background-color: #ed786a !important;
+    	color: #fff !important;
+    }
 </style>
 </head>
 <body>
