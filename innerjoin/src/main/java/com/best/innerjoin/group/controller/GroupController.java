@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.best.innerjoin.alarm.model.service.AlarmService;
+import com.best.innerjoin.board.model.service.BoardService;
+import com.best.innerjoin.board.model.vo.Board;
 import com.best.innerjoin.event.model.service.EventService;
 import com.best.innerjoin.event.model.vo.Event;
 import com.best.innerjoin.group.model.service.GroupService;
@@ -41,6 +42,8 @@ public class GroupController {
 	private EventService eService;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private BoardService bService;
 	
 	
 	@RequestMapping("ginsertForm.ij")
@@ -196,16 +199,18 @@ public class GroupController {
 		String time1 = format1.format(time);
 		
 		ArrayList<Event> eList = eService.groupEventList(time1, ""+gNo);
+		ArrayList<Board> bList = bService.boardList(1,gNo);
 		ArrayList<Member> memList = null;
-		
 		ArrayList<Event> eList2 = null;
+		ArrayList<Board> bList2 = null;
 		
 		// 이벤트 리스트 최신 3개 자르기
 		if(!eList.isEmpty()) {
 			eList2 = new ArrayList<Event>();
 			memList = new ArrayList<Member>();
+			bList2 = new ArrayList<Board>();
 			for(int i = 0; i < 3 && i < eList.size(); i++) {
-				
+				bList2.add(bList.get(i));
 				eList2.add(eList.get(i));
 				ArrayList<Member> mList = eService.selectMem(""+eList2.get(i).getEno());
 				for(int j = 0; j < mList.size();j++ ) {
@@ -219,6 +224,7 @@ public class GroupController {
 		 
 		
 		model.addAttribute("event", eList2);
+		model.addAttribute("board", bList2);
 		model.addAttribute("member", memList);
 		model.addAttribute("group", tempGroup);
 		model.addAttribute("groupMemberCode", groupMemberCode);
