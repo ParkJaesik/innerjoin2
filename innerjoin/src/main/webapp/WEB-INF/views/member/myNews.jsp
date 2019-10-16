@@ -41,6 +41,12 @@
 	.noteDate{
 		width: 10em;
 	}
+	
+	.new{
+		background-color: #ed786a !important;
+    	color: #fff !important;
+	}
+	
 </style>
 </head>
 <body>
@@ -98,7 +104,7 @@
 				  	</div>
 				  	<div class="col-1"></div>
 				  </div>
-				</div>
+				</div> 
 				<div class="col-md-1 aside"></div>
 			</div>
 	</div>

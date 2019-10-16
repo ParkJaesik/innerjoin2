@@ -59,9 +59,9 @@ public class MemberController {
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 			// return "home"; // forward 방식
-			return "redirect:/"; //
+			return "redirect:myGroupForm.ij"; //
 		} else {
-			rd.addFlashAttribute("msg", "아이디 또는 비밀번호를 다시 확인하세요.");
+			rd.addFlashAttribute("errorMsg", "아이디 또는 비밀번호를 다시 확인하세요.");
 			return "redirect:loginForm.ij";
 		}
 
@@ -120,11 +120,10 @@ public class MemberController {
 
 		// 초대받은 모임 목록
 		ArrayList<Member> invList = mService.selectInvList(loginUser);
-
+		
 		// 신청 목록
 		ArrayList<Member> waitList = mService.selectWaitList(loginUser);
 
-		System.out.println(list);
 
 		// 내 모임 목록
 		if (list != null) { // 내 모임 목록이 있을 때
@@ -136,6 +135,7 @@ public class MemberController {
 		// 초대받은 모임 목록
 		if (invList != null) {
 			mv.addObject("invList", invList).setViewName("member/myGroup");
+			
 		} else {
 			mv.addObject("msg", " 내 목임 목록 조회 오류 발생").setViewName("common/errorPage");
 		}
@@ -257,7 +257,7 @@ public class MemberController {
 	@RequestMapping(value = "profileUpdate.ij", method = RequestMethod.POST)
 	public String profileUpdate(Member member, Model model, HttpServletRequest request, MultipartFile reloadFile) {
 		if (reloadFile != null && !reloadFile.isEmpty()) {
-			System.out.println("실행");
+		
 			System.out.println(reloadFile.getOriginalFilename());
 			String originFile = mService.getOriginFileName(member.getMemberId());
 			String renameFile = "";
@@ -268,7 +268,7 @@ public class MemberController {
 			renameFile = renameFile(reloadFile);
 			saveFile(renameFile, reloadFile, request);
 			member.setMemberProPath(renameFile);
-			System.out.println(member.getMemberProPath());
+			
 		}
 		
 		int result = 0;
@@ -278,7 +278,7 @@ public class MemberController {
 			result = mService.updateProfileAdd(member);
 		}
 		result2 = mService.updateProfile(member);
-		System.out.println("result2 : " + result2);
+		
 		
 		
 		if (result > 0) {
@@ -360,7 +360,7 @@ public class MemberController {
 	public String checkPwd(HttpServletRequest request, String memberPwd, Model model) {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		String loginUserPwd = loginUser.getMemberPwd();
-		int result = mService.checkPwd(loginUserPwd, memberPwd);
+		int result = mService.checkPwd(loginUserPwd, memberPwd); 
 		
 		// select count(*) from member where member_id = ${아이디} and member_pwd = ${pwd}; 
 		if (result > 0) {

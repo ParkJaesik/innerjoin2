@@ -214,6 +214,7 @@
   	WHERE MEMBER_ID = #{memberId} 
   </select>
   
+  <!-- 프로필 수정(프로필사진) -->
   <update id="updateProfile" parameterType="Member">
   	UPDATE MEMBER SET 
   	<if test="memberProPath != null">
@@ -221,11 +222,11 @@
   	</if>
 	WHERE MEMBER_ID = #{memberId} 
   </update>
-  
+  <!-- 프로필 수정(자기소개, 공개여부) -->
   <update id="updateProfileAdd" parameterType="Member">
   	UPDATE MEMBER_ADD_INFO SET
 	MEMBER_INTRODUCE = #{memberIntroduce}
-	<!-- MEMBER_OPEN_STATUS = #{memberOpenStatus} -->
+	MEMBER_OPEN_STATUS = #{memberOpenStatus}
 	WHERE MEMBER_ID = #{memberId}
   </update>
   

@@ -27,7 +27,7 @@
 	}
 	
 </style>
-</head>
+</head> 
 <body>
 <section id="header">
 	<!-- <div class="container" id="profile" > -->
@@ -37,8 +37,11 @@
 				<%-- <a class="menu-a" href="#"><img id="ij-logo" src="${contextPath}/resources/images/innerJoin.png"></a> --%>
 				<li class="menu"><a class="icon solid fa-search" href="groupSearchForm.ij"><span class="menu-detail">Search</span></a></li>
 				
-				<!-- 로그인 시 사용 가능 -->				
+				<!-- 로그인 시 사용 가능 -->
+				<c:if test="${ !empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='myNewsForm.ij'"><span class="menu-detail">News</span></a></li>
+				</c:if>				
+				<li class="menu"><a class="icon solid fa-envelope menu-a" onclick="location.href='loginForm.ij'"><span class="menu-detail">News</span></a></li>
 				<c:if test="${ empty sessionScope.loginUser }">
 				<li class="menu"><a class="icon solid fa-home menu-a" href="loginForm.ij"><span class="menu-detail">Login</span></a></li>
 				</c:if>

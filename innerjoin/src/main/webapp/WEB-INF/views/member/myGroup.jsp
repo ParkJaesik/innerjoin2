@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,24 @@
 	 a {
 	 	text-decoration: none;
 	 }
+	 
+	 .btn{
+	 	background-color: #ed786a !important; 
+	 }
+	 
+	 .cancel{
+	 	background-color: #a2a2a2 !important;
+	 }
+	 .profile-img{
+        	width: 20em;
+        	height: 13em;
+        }
+        
+    .mgroup{
+    	background-color: #ed786a !important;
+    	color: #fff !important;
+    }   
+        
 </style>
 </head>
 <body>
@@ -61,15 +80,11 @@
 									<br>
 									<div class="basic-padding">
 										<div class="image-hover">
-											<img src="${contextPath}/resources/images/member/${myGroup.filePath }"> 
+											<img src="${contextPath}/resources/guploadFiles/${myGroup.filePath }"> 
 											<!-- 그룹 썸네일 이미지 -->
 											<div class="overlay">
 												<h2>${ myGroup.gName }</h2>
 												<c:if test="${ !empty loginUser }">
-													<%-- <c:url var="goGorup" value="goGroupPage.ij">
-														<!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
-														<c:param name="gNo" value="${ myGroup.gNo }" />
-													</c:url> --%>
 													<a href="goGroupPage.ij?gNo=${ myGroup.gNo }" class="btn-hover">Show More</a>
 												</c:if>
 											</div>
@@ -79,7 +94,7 @@
 								<c:if test="${ status.index }%3 == 2">
 									<div class="row">
 								</c:if>
-								<c:if test="${ status.last }">
+								<c:if test="${ status.last }"> 
 						</div>
 						</c:if>
 						</c:forEach>
@@ -95,6 +110,9 @@
 						<c:forEach var="invite" items="${ invList }" varStatus="status">
 							<br>
 							<c:choose>
+								<c:when test="${fn:length(invList) == 0 }">
+									<h4> 초대받은 모임이 없습니다.</h4>
+								</c:when>
 								<c:when test="${ !status.last }">
 									<div class="row invite" style="border-bottom: 1px dotted #a2a2a2;">
 								</c:when>
@@ -102,10 +120,10 @@
 									<div class="row invite">
 								</c:when>
 							</c:choose>
-							<div class="col-4" style="width: 100%;">
-							<img src="${contextPath}/resources/images/member/${ invite.filePath }"> </div>
+							<div class="col-5" style="width: 100%;">
+							<img class="profile-img" src="${contextPath}/resources/guploadFiles/${ invite.filePath }"> </div>
 							<c:if test="${ !empty loginUser }">
-								<div class="col-8">
+								<div class="col-7">
 									<c:url var="goGorup" value="goGroupPage.ij">
 										<!-- 나중에 맞는 값 넣기 -->
 										<c:param name="gNo" value="${ invite.gNo }" />
@@ -145,9 +163,11 @@
 								<div class="row invite">
 							</c:when>
 						</c:choose>
-						<img src="${contextPath}/resources/images/member/${ wait.filePath }">
+						<div class="col-5" style="width: 100%;" align="center">
+							<img class="profile-img" src="${contextPath}/resources/guploadFiles/${ wait.filePath }">
+						</div>
 						<c:if test="${ !empty loginUser }">
-							<div class="col-8">
+							<div class="col-7">
 								<c:url var="goGorup" value="goGroupPage.ij">
 									<!-- 나중에 맞는 값 넣기/ 모임페이지 컨트롤러 -->
 									<c:param name="gNo" value="${ wait.gNo }" />

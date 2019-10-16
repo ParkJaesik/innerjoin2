@@ -17,14 +17,13 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/common/index.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css"/>
 
 
 
 <title>마이페이지</title>
 <style type="text/css">
-	/* *{
-	 	 border: 1px solid black;
-	 }  */
+
 </style>
 </head>
 <body>
@@ -147,7 +146,7 @@
 			                  </div>
 			                 
 			              	</div>
-			              	<button id="submit-btn" style="float: right;" onclick="validate();"> 수정</button>
+			              	<button id="submit-btn" style="float: right;" onclick=""return submitCheck();"> 수정</button>
 							<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
 							<c:url var="mLeave" value="mLeave.ij">
 							<c:param name="memberId" value="${ Member.memberId }"/>
@@ -164,84 +163,14 @@
 	<script>
 	$(function(){
 		
-		var nameCheck = false;
-		var pwdCheck = false;
-		var pwdCheck2 = false;
-		// 정규식 검사
-		/* var idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; */
-		
-			
-		/* 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식 */
-		var pwdRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-		var memberName = $.trim($("#memberName").val());
-		var memberPwd = $.trim($("#memberPwd").val());
-		var memberPwd2 = $.trim($("#memberPWd2").val());
-		
-		// 닉네임 중복/형식 검사 
-		$("#memberName").on("input", function(){
-			var memberName = $.trim($("#memberName").val());
-			var nameRegExp = /^[0-9a-zA-z가-힣]{3,15}$/;
-			if(!nameRegExp.test(memberName)){
-				$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
-				$("#nameCheck").html("문자,숫자 3~15자리 이내로 입력해주세요.");
-				idCheck = false;
-			}else{
-				$.ajax({
-					url: "dupName.ij",
-					type: "POST",
-					data : {name:memberName},
-					success:function(result){
-						if(result == true){
-							$("#nameCheck").css({"color":"green","font-size":"13px"});
-							$("#nameCheck").html("사용가능한 닉네임입니다.");
-							nameCheck=true;
-						}else{
-							$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
-							$("#nameCheck").html("이미사용 중인 닉네임입니다.");
-							nameCheck = false;
-						}
-					}
-				});
-					
-			}
-		});
-		
-		// 비밀번호 정규식 검사
-		$("#memberPwd").on("input", function(){
-			var memberPwd = $.trim($("#memberPwd").val());
-			if(!pwdRegExp.test(memberPwd)){
-				$("#pwdCheck1").css({"color":"#df5b4dcb", "font-size":"13px"});
-				$("#pwdCheck1").html("특수문자, 문자, 숫자 포함 8~15 자리로 입력해주세요.");
-				pwdCheck = false;
-			}else{
-				$("#pwdCheck1").html(" ");
-				pwdCheck = true;
-			}
-					
-				
-		});
-			
-		$("#memberPwd, #memberPwd2").on("input", function(){
-			memberPwd = $.trim($("#memberPwd").val());
-			var memberPwd2 = $.trim($("#memberPwd2").val());
-			if(pwdCheck==true){
-				if(memberPwd == memberPwd2){
-					$("#pwdCheck2").css({"color":"green", "font-size":"13px"});
-					$("#pwdCheck2").html("비밀번호 일치");
-					pwdCheck2 = true;
-				}else{
-					$("#pwdCheck2").css({"color":"#df5b4dcb", "font-size":"13px"});
-					$("#pwdCheck2").html("비밀번호 불일치");
-					pwdCheck2 = false;
-				}	
-			}
-		});
 		
 		if("${Member.memberGender}" == 'F'){
-			$("#gender-female").attr("checked", true).attr("disabled", true);
+			$("#gender-female").attr("checked", true).attr("readonly", true);
 			$("#gender-male").attr("checked", false).attr("disabled", true);
-		} else{
-			$("#gender-male").attr("checked", true);
+		} 
+		
+		if("${Member.memberGender}" == 'M'){
+			$("#gender-male").attr("checked", true).att("readonly", true);
 			$("#gender-female").attr("checked", false).attr("disabled", true);
 		}
 		
@@ -249,6 +178,133 @@
 	
 	});
 	</script>
+<script>
+	
+	var idCheck = false;
+	var nameCheck = false;
+	var pwdCheck = false;
+	var pwdCheck2 = false;
+		$(function(){
+			
+		
+		
+			// 정규식 검사
+			/* var idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; */
+			
+				
+			/* 특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식 */
+			var pwdRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+			
+			var memberName = $.trim($("#memberName").val());
+			var memberPwd = $.trim($("#memberPwd").val());
+			var memberPwd2 = $.trim($("#memberPWd2").val());
+				
+			
+			
+			// 닉네임 중복/형식 검사  --> 한번더 살펴보기
+			$("#memberName").on("input", function(){
+				var memberName = $.trim($("#memberName").val());
+				var nameRegExp = /^[0-9a-zA-z가-힣]{3,15}$/;
+				if(!nameRegExp.test(memberName)){
+					$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
+					$("#nameCheck").html("문자,숫자 3~15자리 이내로 입력해주세요.");
+					nameCheck = false;
+				}else{
+					$.ajax({
+						url: "dupName.ij",
+						type: "POST",
+						data : {memberName:memberName},
+						success:function(result){
+							console.log(result);
+							if(result){
+								$("#nameCheck").css({"color":"green","font-size":"13px"});
+								$("#nameCheck").html("사용가능한 닉네임입니다.");
+								nameCheck= true;
+								
+							}else{
+								$("#nameCheck").css({"color":"#df5b4dcb","font-size":"13px"});
+								$("#nameCheck").html("이미 사용중인 닉네임입니다.");
+								nameCheck= false;
+							}
+						}
+					});
+						
+				}
+			});
+			
+			// 비밀번호 정규식 검사
+			$("#memberPwd").on("input", function(){
+				var memberPwd = $.trim($("#memberPwd").val());
+				if(!pwdRegExp.test(memberPwd)){
+					$("#pwdCheck1").css({"color":"#df5b4dcb", "font-size":"13px"});
+					$("#pwdCheck1").html("특수문자, 문자, 숫자 포함 8~15 자리로 입력해주세요.");
+					pwdCheck = false;
+				}else{
+					$("#pwdCheck1").html(" ");
+					pwdCheck = true;
+				}
+						
+				 	
+			});
+				
+			$("#memberPwd, #memberPwd2").on("input", function(){
+				memberPwd = $.trim($("#memberPwd").val());
+				var memberPwd2 = $.trim($("#memberPwd2").val());
+				if(pwdCheck==true){
+					if(memberPwd == memberPwd2){
+						$("#pwdCheck2").css({"color":"green", "font-size":"13px"});
+						$("#pwdCheck2").html("비밀번호 일치");
+						pwdCheck2 = true;
+					}else{
+						$("#pwdCheck2").css({"color":"#df5b4dcb", "font-size":"13px"});
+						$("#pwdCheck2").html("비밀번호 불일치");
+						pwdCheck2 = false;
+					}	
+				}
+			});
+				
+			
+				
+				
+			
+			
+		});	
+		
+		function submitCheck(){
+			
+			
+			if(idCheck == false){
+				
+				alert("아이디를 확인해주세요");
+				$("#memberId").focus();
+				return false;
+			}
+			
+			if(nameCheck == false){
+				alert("닉네임을 확인해주세요");
+				$("#memberName").focus();
+				return false;	
+			
+			}
+			
+			if(pwdCheck == false){
+				alert("비밀번호를 확인해주세요");
+				$("#memberPwd").focus();
+				return false;	
+			}
+			if(pwdCheck2 == false){
+				alert("비밀번호를 확인해주세요");
+				$("#memberPwd").focus();
+				return false;	
+			}
+			
+			
+			$("#joinMember").submit();
+			
+			
+		}
+			
+		</script>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

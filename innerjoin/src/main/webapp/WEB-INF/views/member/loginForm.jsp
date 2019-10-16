@@ -202,8 +202,8 @@
 							</div>
 							<div class="input-group input-group-icon">
 								<input type="password" placeholder="Password" name="memberPwd"/>
-								<c:if test="${ !empty msg }">
-								<span  aling="center" style="color: #df5849;">${ msg }</span>
+								<c:if test="${ !empty errorMsg }">
+								<span  aling="center" style="color: #df5849;">${ errorMsg }</span>
 								</c:if>
 							</div>
 							<button id="submit-btn" style="float: right; padding: 15px 20px 15px 20px; width: 100%;" >
@@ -231,6 +231,8 @@
 				</div>
 				<div class="col-md-1 aside"></div>
 			</div>
+	</div>
+	
 	</div>
 	<div class="margin" style="margin: 50px;"></div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

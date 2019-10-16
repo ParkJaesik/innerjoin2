@@ -20,6 +20,12 @@
 	height: 13em;
 	border-radius: 150px;
 }
+.mInfo{
+	height: 10em;
+	border: 2px solid #ed786a;
+	border-radius: 5px;
+	padding: 1em; 
+}
 </style>
 </head>
 <body>
@@ -41,9 +47,9 @@
 		                        		<img class="img-circle" src="${contextPath}/resources/images/member/${loginUser.memberProPath }">
 	    	                        </div>
 	        	                    <br>
-	        	                    <div class="myprofile">${loginUser.memberName }</div>
-	        	                    <div class="myprofile">${loginUser.memberId }</div>
-	            	                <div class="myProfile">${ loginUser.memberIntroduce }</div>
+	        	                    <div class="myprofile"><h5>${loginUser.memberName }(${loginUser.memberId })</h5></div>
+	        	                  
+	            	                <div class="myProfile mInfo">${ loginUser.memberIntroduce }</div>
 	                	            <br>           
 	                    	        <button>프로필 수정</button>
 	                        	</form>
@@ -71,10 +77,10 @@
             	<div class="row">
                  	<div class="col-md-3"></div>
                     <div class="col-md-6 menu-detail" >
-                    	<a href="myGroupForm.ij">내 모임</a>
-                        <a href="myNoteForm.ij">쪽지함</a>
-                        <a href="myNewsForm.ij">알림함</a>
-                        <a href="checkPwdForm.ij">정보수정</a>
+                    	<a href="myGroupForm.ij" class="mgroup">내 모임</a>
+                        <a href="myNoteForm.ij" class="note">쪽지함</a>
+                        <a href="myNewsForm.ij" class="new">알림함</a>
+                        <a href="checkPwdForm.ij" class="uinfo">정보수정</a>
                     </div>
                     <div class="col-md-3"></div>
 				</div>
