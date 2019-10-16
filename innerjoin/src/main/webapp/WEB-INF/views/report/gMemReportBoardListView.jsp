@@ -45,6 +45,7 @@ h3 {
 table{
 	margin: auto; 
 	width: 100%;
+	margin: 2%;
 	
 }
 

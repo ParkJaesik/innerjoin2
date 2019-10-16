@@ -241,11 +241,11 @@ label{
 								<th><label>대표사진</label></th>
 								<td>
 									<img id="gOriginFileName" style="max-width: 100%"> 
-									<input type="file" name="uploadFile" required="required" value="${group.filePath }">
+									<input type="file" name="reloadFile" value="${group.filePath }" required="required">
 									<c:if test="${!empty group.filePath}">
-									
-									<p>현재 업로드된 파일 : ${group.filePath }</p>
-								</c:if>
+										
+										<p>현재 업로드된 파일 : ${group.filePath }</p>
+									</c:if>
 								</td>
 							</tr>
 						</table>

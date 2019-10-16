@@ -130,7 +130,7 @@ label{
 							<tr class="row">
 								<th><label>모임장</label></th>
 								<td>
-									<input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}" >
+									<input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}">
 									<input type="hidden" name="levelCode" value="${gmember.levelCode }">
 									<c:if test="${ levelCode eq 0 }"></c:if>
 								</td>
@@ -140,7 +140,7 @@ label{
 							<tr class="row">
 								<th><label>모임카테고리</label></th>
 								<td>
-									<select class="input" id="categorysel" name="gCategoryCode" required >
+									<select class="input" id="categorysel" name="gCategoryCode" required>
 										<option value="all">카테고리를 선택하세요.</option>
 										<option value="0">학습</option>
 										<option value="1">운동</option>
