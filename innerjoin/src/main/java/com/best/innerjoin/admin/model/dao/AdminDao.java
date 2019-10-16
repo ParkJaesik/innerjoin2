@@ -203,6 +203,25 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.updateGroupMemLevel", gMember);
 	}
 
+	/** 모든 회원신고 내역 조회
+	 * @param pi
+	 * @return mrList
+	 */
+	public ArrayList<MemberReport> selectAllMrList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectAllMrList", null, rowBounds);
+	}
+
+	/** 회원 신고 내역 개수
+	 * @return
+	 */
+	public int getMemReptCount() {
+
+		return sqlSession.selectOne("adminMapper.selectMemReptCount");
+	}
+
 
 
 

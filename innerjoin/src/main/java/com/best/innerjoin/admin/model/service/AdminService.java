@@ -104,6 +104,12 @@ public interface AdminService {
 	 */
 	int updateGroupMemLevel(int levelCode,ArrayList<GroupMember> gMember);
 
+	/** 회원 신고 내역 전부 불러오기
+	 * @param currentPage 
+	 * @return
+	 */
+	ArrayList<MemberReport> selectAllMrList(int currentPage);
+
 
 
 	

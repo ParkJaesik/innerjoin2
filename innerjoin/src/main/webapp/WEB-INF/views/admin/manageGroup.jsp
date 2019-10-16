@@ -83,9 +83,9 @@
 							<td align="center">${ g.gReptCount }</td>
 							<td align="center">
 							
-										<c:if test="${g.gStatus eq 0}">일반</c:if>
-										<c:if test="${group.gStatus eq 1}">경고</c:if>
-										<c:if test="${group.gStatus eq 2}">폐쇄</c:if>
+								<c:if test="${g.gStatus eq 0}">일반</c:if>
+								<c:if test="${group.gStatus eq 1}">경고</c:if>
+								<c:if test="${group.gStatus eq 2}">폐쇄</c:if>
 							</td>
 							<td align="center">${ g.gEnrollDate}</td>
 						</tr>
@@ -100,7 +100,7 @@
 								[이전] &nbsp;
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="manageMember.ij">
+								<c:url var="before" value="manageGroup.ij">
 									<c:param name="page" value="${ pi.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }">[이전]</a> &nbsp;
@@ -113,7 +113,7 @@
 								</c:if>
 								
 								<c:if test="${ p ne currentPage }">
-									<c:url var="pagination" value="manageMember.ij">
+									<c:url var="pagination" value="manageGroup.ij">
 										<c:param name="page" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }">${ p }</a> &nbsp;
@@ -125,7 +125,7 @@
 								[다음]
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="after" value="manageMember.ij">
+								<c:url var="after" value="manageGroup.ij">
 									<c:param name="page" value="${ pi.currentPage + 1 }"/>
 								</c:url> 
 								<a href="${ after }">[다음]</a>

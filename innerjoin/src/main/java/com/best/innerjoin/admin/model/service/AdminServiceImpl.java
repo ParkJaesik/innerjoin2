@@ -180,5 +180,13 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 
+	@Override
+	public ArrayList<MemberReport> selectAllMrList(int currentPage) {
+		int listCount = adDao.getMemReptCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		return adDao.selectAllMrList(pi);
+	}
+
 
 }
