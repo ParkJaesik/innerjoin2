@@ -168,5 +168,21 @@
 		SELECT *
 		FROM GROUP_CATEGORY
 	</select>
+	
+	
+	<!-- 그룹 수정 -->
+	<update id="updateGroup" parameterType="Group">
+		UPDATE "GROUP"
+		SET GROUP_OPEN_STATUS = #{gOpenStatus},	
+			GROUP_NAME = #{gName},
+			GROUP_INFO = #{gInfo},
+			GROUP_LIMIT = #{gLimit},
+			GROUP_FILE_PATH = #{filePath},
+			GROUP_MODIFY_DATE = SYSDATE
+		WHERE GROUP_NO = #{gNo}
+			
+			
+		
+	</update>
 </mapper>
 
