@@ -39,8 +39,6 @@ public class MemberServiceImpl implements MemberService{
 	public Member loginMember(Member member) {
 		System.out.println(member);
 		Member loginUser = mDao.loginMember(member);
-		System.out.println(member.getMemberPwd());
-		System.out.println(loginUser.getMemberPwd());
 		if(!bCryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
 			System.out.println(loginUser);
 			loginUser = null;
@@ -209,9 +207,12 @@ public class MemberServiceImpl implements MemberService{
 	// 회원정보 수정 
 	@Override
 	public int updateInfo(Member member) {
+		
+		System.out.println("비밀번호 : " + member.getMemberPwd());
+		if(member.getMemberPwd() != null) {
 		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
-			
 		member.setMemberPwd(encPwd);
+		}	
 		int result = mDao.updateInfo(member);
 		if(result > 0) {
 			result = mDao.updateAddInfo(member);

@@ -390,8 +390,6 @@ public class MemberController {
 			member.setMemberBirthday(birthday1 + "/" + birthday2 + "/" + birthday3);
 		}
 
-		System.out.println("수정" + member);
-
 		int result = mService.updateInfo(member);
 
 		if (result > 0) {

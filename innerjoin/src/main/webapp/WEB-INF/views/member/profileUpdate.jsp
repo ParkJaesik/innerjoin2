@@ -111,6 +111,24 @@ float: left;}
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		
+		
+		if("${member.memberOpenStatus}" == 'N'){
+			$("#gender-female").attr("checked", true);
+			$("#gender-male").attr("checked", false);
+		} 
+		
+		if("${member.memberOpenStatus}" == 'Y'){
+			$("#gender-male").attr("checked", true);
+			$("#gender-female").attr("checked", false);
+		}
+		
+		
+	
+	});
+	</script>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -133,41 +151,3 @@ float: left;}
 
 
 
-<!-- #profile{
-				padding-top: 150px !important; 
-				padding-bottom: 50px !important; 
-			}
-
-			.mMenu{
-				padding : 5px 20px 5px 20px;
-			}
-
-			.name-line{
-				border-bottom: 2px solid rgba(151, 150, 150, 0.808);
-			}
-			.detail-name{
-				margin-bottom: 0;
-			}
-			.sub-menu{
-				text-align: center;
-			}
-			
-			.invite-name{
-				border-bottom: 1px dashed #7777767e;
-			}
-			.note{
-				
-				margin-top: 40px;
-				font-size: 14px;
-			}
-			.inputFile{
-				margin-top: 2em;
-				margin-bottom: 2em;
-			}
-			#goBack{
-				background-color: rgba(141, 141, 140, 0.836);
-			}
-			.updateProfile{
-				height: 2.5em;
-			} -->
-			
