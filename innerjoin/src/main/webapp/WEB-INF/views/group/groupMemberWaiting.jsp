@@ -29,7 +29,7 @@
 				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
 				
 				<div id="member-container">
-					<h1 align="center">회원</h1>
+					<h1 align="center">대기 중인 회원</h1>
 					
 					<h5 align="right">
 						<a href="gmlist.ij">회원 명단</a>
