@@ -41,6 +41,7 @@
 		<result property="gOriginFileName" column="GROUP_ORIGIN_FILENAME"/>
 		<result property="gRenameFileName" column="GROUP_RENAME_FILENAME"/>
 		<result property="districtName" column="DISTRICT_NAME"/>
+		<result property="filePath" column="GROUP_FILE_PATH"/>
 		<result property="cityName" column="CITY_NAME"/>
 	</resultMap>
 	

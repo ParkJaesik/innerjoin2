@@ -8,10 +8,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Lumino - Widgets</title>
-	<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 	<link href="resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="resources/css/admin/styles.css" rel="stylesheet">
@@ -34,9 +31,9 @@
     	}
     	
     		
-		.selectGroup *{
+		.selectGroup{
 			float: right !important;
-			
+			display: block !important;
 		}
 		
 		#memStatusSelect {
@@ -88,10 +85,6 @@
 				</h3>
 				<div class="input-group selectGroup">
 					
-					<div class="memStatusSet">
-						<button class="btn btn-primary statusSetBtn"
-							type="button" onclick="setMemStatusCode();">등급조정</button>
-					</div>
 					<select name="memStatus" class="custom-select" id="memStatusSelect">
 							<option value="0">개설자</option>
 							<option value="1">매니저</option>
@@ -100,6 +93,10 @@
 							<option value="4">신청</option>
 							<option value="10">탈퇴</option>
 					</select>
+					<div class="memStatusSet">
+						<button class="btn btn-primary statusSetBtn"
+							type="button" onclick="setMemStatusCode();">등급조정</button>
+					</div>
 					
 				</div>
 				<table class="memListTable" align="center" border="1" cellspacing="0" width="900" id="tb">
@@ -114,7 +111,6 @@
 						<th align="center" width="200px">신고일</th>
 						<th align="center" width="200px">신고처리일</th>
 						<th align="center">
-							<button type="button" id="proRept" onclick="processReport();">처리</button>
 							<input type="checkbox" id="allReptChk">all
 						</th>
 					</tr>
@@ -122,7 +118,7 @@
 					<c:if test="${!empty gmrList}">
 						<c:forEach var="r" items="${ gmrList }" varStatus="status">
 						<tr>
-							<td align="center">${ status.count }</td>
+							<td align="center">${ (pi.currentPage - 1) * pi.limit + status.count }</td>
 							
 							<td class="gNo"align="center">${ r.reportGNo }</td>
 							<td align="left">
