@@ -204,6 +204,7 @@ public class MemberDao {
 	 * @return
 	 */
 	public int updateProfile(Member member) {
+		
 		return sqlSession.update("memberMapper.updateProfile",member);
 	}
 
@@ -214,7 +215,7 @@ public class MemberDao {
 	 * @return
 	 */
 	public int updateProfileAdd(Member member) {
-		
+		System.out.println("프로필 추가정보 수정 : " + member);
 		return sqlSession.update("memberMapper.updateProfileAdd",member);
 	}
 
@@ -234,6 +235,17 @@ public class MemberDao {
 	public Member selectMemberInfo(String memberId) {
 		return sqlSession.selectOne("memberMapper.selectMemberInfo", memberId);
 
+	}
+
+
+
+	/** 비밀번호 수정 (비밀번호 분실)
+	 * @param member
+	 * @return
+	 */
+	public int updatePwd(Member member) {
+		
+		return sqlSession.update("memberMapper.updatePwd", member);
 	}
 
 

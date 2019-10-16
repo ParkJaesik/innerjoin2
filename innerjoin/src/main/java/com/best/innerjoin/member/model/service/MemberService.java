@@ -130,11 +130,17 @@ public interface MemberService {
 
 	/** 멤버 아이디로 값 얻어오기(비밀번호 잊어버렸을 경우)
 	 * @param memberId
-	 * @return
+	 * @return 
 	 */
 	public abstract Member selectMember(String memberId);
 
 	public abstract Member selectMemberInfo(String memberId);
+
+	/** 비밀번호 분실 시 수정
+	 * @param member
+	 * @return result
+	 */
+	public abstract int updatePwd(Member member);
 
 
 	

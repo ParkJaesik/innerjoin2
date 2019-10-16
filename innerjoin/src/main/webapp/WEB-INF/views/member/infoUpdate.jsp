@@ -146,12 +146,13 @@
 			                  </div>
 			                 
 			              	</div>
-			              	<button id="submit-btn" style="float: right;" onclick=""return submitCheck();"> 수정</button>
+			              	<button id="submit-btn" style="float: right;" onclick="return submitCheck();"> 수정</button>
 							<button style="background-color: rgba(141, 141, 140, 0.836);">취소</button>
 							<c:url var="mLeave" value="mLeave.ij">
 							<c:param name="memberId" value="${ Member.memberId }"/>
 							</c:url>
-							<a href="${ mLeave }"> 탈퇴하기</a>
+							<!-- button type="button" id="mleave" onclick="bye();">탈퇴하기</button> -->
+							<a id="mleave" onclick="bye();" href="#"> 탈퇴하기</a>
 			            </form>
 				  	</div>
 				  	<div class="col-4"></div>
@@ -179,8 +180,10 @@
 	});
 	</script>
 <script>
+
 	
-	var idCheck = false;
+	
+	
 	var nameCheck = false;
 	var pwdCheck = false;
 	var pwdCheck2 = false;
@@ -232,40 +235,39 @@
 				}
 			});
 			
-			// 비밀번호 정규식 검사
-			$("#memberPwd").on("input", function(){
-				var memberPwd = $.trim($("#memberPwd").val());
-				if(!pwdRegExp.test(memberPwd)){
-					$("#pwdCheck1").css({"color":"#df5b4dcb", "font-size":"13px"});
-					$("#pwdCheck1").html("특수문자, 문자, 숫자 포함 8~15 자리로 입력해주세요.");
-					pwdCheck = false;
-				}else{
-					$("#pwdCheck1").html(" ");
-					pwdCheck = true;
-				}
-						
-				 	
-			});
-				
+			
+			
+				$("#memberPwd").on("input", function(){
+			
+					var memberPwd = $.trim($("#memberPwd").val());
+					if(!pwdRegExp.test(memberPwd)){
+						$("#pwdCheck1").css({"color":"#df5b4dcb", "font-size":"13px"});
+						$("#pwdCheck1").html("특수문자, 문자, 숫자 포함 8~15 자리로 입력해주세요.");
+						pwdCheck = false;
+					}else{
+						$("#pwdCheck1").html(" ");
+						pwdCheck = true;
+					}
+				});
 			$("#memberPwd, #memberPwd2").on("input", function(){
 				memberPwd = $.trim($("#memberPwd").val());
-				var memberPwd2 = $.trim($("#memberPwd2").val());
-				if(pwdCheck==true){
-					if(memberPwd == memberPwd2){
-						$("#pwdCheck2").css({"color":"green", "font-size":"13px"});
-						$("#pwdCheck2").html("비밀번호 일치");
-						pwdCheck2 = true;
-					}else{
-						$("#pwdCheck2").css({"color":"#df5b4dcb", "font-size":"13px"});
-						$("#pwdCheck2").html("비밀번호 불일치");
-						pwdCheck2 = false;
-					}	
-				}
-			});
-				
+					var memberPwd2 = $.trim($("#memberPwd2").val());
+					if(pwdCheck==true){
+						if(memberPwd == memberPwd2){
+							$("#pwdCheck2").css({"color":"green", "font-size":"13px"});
+							$("#pwdCheck2").html("비밀번호 일치");
+							pwdCheck2 = true;
+						}else{
+							$("#pwdCheck2").css({"color":"#df5b4dcb", "font-size":"13px"});
+							$("#pwdCheck2").html("비밀번호 불일치");
+							pwdCheck2 = false;
+						}	
+					}
+				});
+						
+					
 			
-				
-				
+		
 			
 			
 		});	
@@ -273,19 +275,21 @@
 		function submitCheck(){
 			
 			
-			if(idCheck == false){
+		
+			if( $("#memberName").change function(){
+				if(nameCheck == false){
+					alert("닉네임을 확인해주세요");
+					$("#memberName").focus();
+					return false;	
 				
-				alert("아이디를 확인해주세요");
-				$("#memberId").focus();
-				return false;
-			}
+				}
+			});
 			
-			if(nameCheck == false){
-				alert("닉네임을 확인해주세요");
-				$("#memberName").focus();
-				return false;	
 			
-			}
+			if($("#memberPwd").val() == '' && $("#memberPwd2").val() == ''){
+				return true;
+			} 
+			
 			
 			if(pwdCheck == false){
 				alert("비밀번호를 확인해주세요");
@@ -297,12 +301,20 @@
 				$("#memberPwd").focus();
 				return false;	
 			}
-			
-			
-			$("#joinMember").submit();
+				
+			alert("정보가 수정되었습니다.");
+			$("#infoForm").submit();
 			
 			
 		}
+		
+		function bye() {
+			if(confirm("정말로 탈퇴하시겠습니까?") == true){
+				location.href = "${ mLeave }";
+			}
+			
+		}
+		
 			
 		</script>
 	

@@ -39,8 +39,6 @@ public class MemberServiceImpl implements MemberService{
 	public Member loginMember(Member member) {
 		System.out.println(member);
 		Member loginUser = mDao.loginMember(member);
-		System.out.println(member.getMemberPwd());
-		System.out.println(loginUser.getMemberPwd());
 		if(!bCryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
 			System.out.println(loginUser);
 			loginUser = null;
@@ -157,7 +155,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		gMem.put("memberId", loginUser.getMemberId());
 		gMem.put("gNo", gNo);
-		
+		System.out.println("거절 ★★★: " + gMem);
 		return mDao.deleteInv(gMem);
 	}
 
@@ -209,9 +207,13 @@ public class MemberServiceImpl implements MemberService{
 	// 회원정보 수정 
 	@Override
 	public int updateInfo(Member member) {
-		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
-			
-		member.setMemberPwd(encPwd);
+		System.out.println( "비밀번호 " + member.getMemberId());
+		
+			String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+			member.setMemberPwd(encPwd);
+		
+		
+		
 		int result = mDao.updateInfo(member);
 		if(result > 0) {
 			result = mDao.updateAddInfo(member);
@@ -259,6 +261,16 @@ public class MemberServiceImpl implements MemberService{
 	public Member selectMemberInfo(String memberId) {
 		return mDao.selectMemberInfo(memberId);
 
+	}
+
+	// 비밀번호 분실 시 변경
+	@Override
+	public int updatePwd(Member member) {
+		String encPwd = bCryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setMemberPwd(encPwd);
+		
+		return mDao.updatePwd(member);
+		
 	}
 
 		
