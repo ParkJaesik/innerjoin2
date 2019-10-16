@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		  
 		// 이벤트상세보기 구체적 정보
 		var $eventInfo = $('<div>');
-		$eventInfo.addClass('row eventInfo');
+		$eventInfo.addClass('row eventInfo eventInfo_' + event.eno);
 		  
 		var $eventInfoCol = $('<div>');
 		$eventInfoCol.addClass('col-md-4');
@@ -378,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		// var memberId = ${member.memberId};
 		console.log("참여이벤트리스트 : " + attendEventList);
 		console.log("현재 이벤트 포함여부: " + attendEventList.includes(eno));
+		getAttendEventList(getCalDate());
 		if(attendEventList.includes(eno)) {
 			alertMessage('이미 참석되었습니다.');
 			return;
@@ -421,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var $eventMember = eventMemberDetail(event, member);
 		
 		$('.detailView_'+eno+' .eventMember').remove();
-		$('.eventInfo').append($eventMember);
+		$('.eventInfo_' + eno).append($eventMember);
 	});
 	
    
