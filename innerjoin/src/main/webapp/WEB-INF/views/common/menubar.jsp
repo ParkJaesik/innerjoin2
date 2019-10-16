@@ -27,7 +27,7 @@
 	}
 	
 </style>
-</head>
+</head> 
 <body>
 <section id="header">
 	<!-- <div class="container" id="profile" > -->

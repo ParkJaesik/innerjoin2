@@ -53,7 +53,7 @@
 				  	
 		                <div class="margin" style="margin: 50px;"></div>
 				  		<form action="join.ij" method="post" id="joinMember" name="joinMember">
-			             
+			              
 			                <div class="row">
 			                    <h3>회원가입</h3>
 			                    <div class="input-group input-group-icon">

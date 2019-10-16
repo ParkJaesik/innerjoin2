@@ -94,7 +94,7 @@
 								<c:if test="${ status.index }%3 == 2">
 									<div class="row">
 								</c:if>
-								<c:if test="${ status.last }">
+								<c:if test="${ status.last }"> 
 						</div>
 						</c:if>
 						</c:forEach>

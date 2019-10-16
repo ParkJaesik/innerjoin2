@@ -244,7 +244,7 @@
 					pwdCheck = true;
 				}
 						
-					
+				 	
 			});
 				
 			$("#memberPwd, #memberPwd2").on("input", function(){

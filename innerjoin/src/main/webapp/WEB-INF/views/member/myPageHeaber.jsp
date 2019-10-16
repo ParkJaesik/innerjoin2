@@ -24,7 +24,7 @@
 	height: 10em;
 	border: 2px solid #ed786a;
 	border-radius: 5px;
-	padding: 1em;
+	padding: 1em; 
 }
 </style>
 </head>

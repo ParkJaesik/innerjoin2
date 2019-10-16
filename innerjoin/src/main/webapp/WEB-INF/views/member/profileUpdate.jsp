@@ -71,7 +71,7 @@ float: left;}
 							<c:if test="${ !empty member.memberProPath }">
 								<input type="hidden" value="${member.memberProPath }" name="memberProPath">
 		                    	<img class="img-circle" src="${contextPath}/resources/images/member/${member.memberProPath }">
-							</c:if>
+							</c:if> 
 							<div class="margin" style="margin: 30px;"></div>
 							<input type="file" name="reloadFile">
 		                    	

@@ -360,7 +360,7 @@ public class MemberController {
 	public String checkPwd(HttpServletRequest request, String memberPwd, Model model) {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		String loginUserPwd = loginUser.getMemberPwd();
-		int result = mService.checkPwd(loginUserPwd, memberPwd);
+		int result = mService.checkPwd(loginUserPwd, memberPwd); 
 		
 		// select count(*) from member where member_id = ${아이디} and member_pwd = ${pwd}; 
 		if (result > 0) {
