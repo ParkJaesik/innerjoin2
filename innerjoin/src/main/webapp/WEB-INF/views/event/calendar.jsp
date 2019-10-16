@@ -40,8 +40,10 @@
 			<div id='calendar'></div>
       
 		</div>
-       
-		<c:if test="${groupMemberCode == 0}" >
+       <script>
+       	console.log("그룹멤버 코드: ${groupMemberCode}");
+       </script>
+		<c:if test="${groupMemberCode == 0 || groupMemberCode == 1}" >
 			<div class="row">
 	            <!-- modal -->
 	            <div class="col-md-12" id="addEventWrapper">
