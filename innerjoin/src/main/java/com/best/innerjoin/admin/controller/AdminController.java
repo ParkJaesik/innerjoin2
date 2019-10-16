@@ -41,7 +41,9 @@ public class AdminController {
 	@RequestMapping("admin.ij")
 	public String adminView(HttpSession session) {
 		
-		if(((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+		System.out.println((Member)session.getAttribute("loginUser"));
+		
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
 			
 			return "redirect:manageMember.ij";
 		}else {
@@ -54,12 +56,19 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("manageMember.ij")
-	public ModelAndView manageMemberView(Integer page, ModelAndView mv) {
+	public ModelAndView manageMemberView(HttpSession session,Integer page, ModelAndView mv) {
 		int currentPage = (page == null) ? 1 : page;
 		
-		//회원 정보 리스트 가져오기
-		ArrayList<Member> mList = adService.selectMemList(currentPage);
-		mv.addObject("mList", mList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageMember");
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+			
+			//회원 정보 리스트 가져오기
+			ArrayList<Member> mList = adService.selectMemList(currentPage);
+			mv.addObject("mList", mList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageMember");
+		}else {
+			mv.setViewName("redirect:gohome.ij");
+		}
+		
+		
 		return mv;
 	}
 	
@@ -70,7 +79,7 @@ public class AdminController {
 	 * @return mv
 	 */
 	@RequestMapping("memDetail.ij")
-	public ModelAndView memDetailView(Integer page, String memberId, ModelAndView mv) {
+	public ModelAndView memDetailView(HttpSession session,Integer page, String memberId, ModelAndView mv) {
 		// 멤버 상세정보 조회
 		Member member = adService.selectMemDetail(memberId);
 		
@@ -79,9 +88,13 @@ public class AdminController {
 		// 신고 내역 조회
 		ArrayList<MemberReport> mrList = adService.selectMrList(memberId);
 		
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+		
 		mv.addObject("member", member).addObject("mgInfo", mgInfo)
 			.addObject("mrList", mrList).setViewName("admin/memberDetail");
-		
+		}else {
+			mv.setViewName("redirect:gohome.ij");
+		}
 		return mv;
 	}
 	
@@ -89,12 +102,19 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("manageGroup.ij")
-	public ModelAndView manageGroupView(ModelAndView mv, Integer page) {
+	public ModelAndView manageGroupView(HttpSession session, ModelAndView mv, Integer page) {
 		int currentPage = (page == null) ? 1 : page;
 		
 		//그룹 리스트 가져오기
 		ArrayList<Group> gList = adService.selectGroupList(currentPage);
+		
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
 		mv.addObject("gList", gList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/manageGroup");
+		
+		}else {
+			mv.setViewName("redirect:gohome.ij");
+		}
+		
 		return mv;
 	}
 	
@@ -116,26 +136,33 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("groupMemberReport.ij")
-	public ModelAndView groupMemberReportView(ModelAndView mv, Integer page) {
+	public ModelAndView groupMemberReportView(HttpSession session,ModelAndView mv, Integer page) {
 		int currentPage = (page == null) ? 1 : page;
 		
 		//그룹 신고 리스트 가져오기
 		ArrayList<GroupMemberReport> gmrList = adService.selectGroupMemReptList(currentPage);
-		
-		mv.addObject("gmrList", gmrList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupMemberReport");
-		
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+			mv.addObject("gmrList", gmrList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupMemberReport");
+		}else {
+			mv.setViewName("redirect:gohome.ij");
+		}
 		return mv;
 	}
 	/** 그룹신고관리페이지 이동
 	 * @return
 	 */
 	@RequestMapping("groupReport.ij")
-	public ModelAndView groupReportView(ModelAndView mv, Integer page) {
+	public ModelAndView groupReportView(HttpSession session, ModelAndView mv, Integer page) {
 		int currentPage = (page == null) ? 1 : page;
 		
 		//그룹 신고 리스트 가져오기
 		ArrayList<GroupReport> rList = adService.selectGroupReptList(currentPage);
-		mv.addObject("rList", rList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupReport");
+		
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+			mv.addObject("rList", rList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/groupReport");
+		}else {
+			mv.setViewName("redirect:gohome.ij");
+		}
 		return mv;
 	}
 
@@ -189,12 +216,16 @@ public class AdminController {
 	 * @return mv
 	 */
 	@RequestMapping("groupDetail.ij")
-	public ModelAndView groupDetailView(Integer groupReptNo,int gNo, ModelAndView mv) {
+	public ModelAndView groupDetailView(HttpSession session, Integer groupReptNo,int gNo, ModelAndView mv) {
 		
 		Group group = adService.selectGroupDetail(gNo);
 		ArrayList<GroupMember> mList = gService.groupMemberList(gNo);
-		mv.addObject("group", group).addObject("groupReptNo", groupReptNo).addObject("mList", mList).setViewName("admin/groupDetail");
 		
+		if(session.getAttribute("loginUser") != null && ((Member)session.getAttribute("loginUser")).getMemberStatusCode() == 0) {
+		mv.addObject("group", group).addObject("groupReptNo", groupReptNo).addObject("mList", mList).setViewName("admin/groupDetail");
+		}else {
+			mv.setViewName("redirect:gohome.ij");
+		}
 		return mv;
 	}
 	
