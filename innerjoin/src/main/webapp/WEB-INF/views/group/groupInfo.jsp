@@ -87,7 +87,7 @@
 																	</div>
 																</div>
 																<div class="eventLocation"><span class="badge badge-default eventLabel">위치</span>
-																	<address></address>
+																	<address class="address"></address>
 																</div>
 																
 															</div>
@@ -108,6 +108,9 @@
 				</div>
 			</div>
 			<script>
+				$(function() {
+					$(".address").text($("#group-area").text().split(':')[1]);
+				});
 		
 			
 			// eventDetailView에서 체크버튼 누르면 member_event table에 데이터 삽입.
