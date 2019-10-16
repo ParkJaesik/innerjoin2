@@ -174,7 +174,7 @@
     WHERE MEMBER_ID = #{memberId}
     AND GROUP_NO = #{gNo}
     AND LEVEL_CODE = 4
-    AND GROUP_STATUS != 2
+   
   </delete>
   
   

@@ -154,7 +154,7 @@ public class MemberController {
 	@RequestMapping("invDeny.ij")
 	public String deleteInv(HttpServletRequest request, int gNo, Model model) {
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
+		System.out.println("출력 :" + loginUser);
 		int result = mService.deleteInv(loginUser, gNo);
 
 		if (result > 0) {

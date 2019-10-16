@@ -157,7 +157,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		gMem.put("memberId", loginUser.getMemberId());
 		gMem.put("gNo", gNo);
-		
+		System.out.println("거절 ★★★: " + gMem);
 		return mDao.deleteInv(gMem);
 	}
 
