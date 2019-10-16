@@ -1,11 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+.content-wrap{
+	margin: auto;
+	/* margin-top: 3%; */
+	width: 70%;
+	margin-left: 20%;
+	
+}
+
+th{
+	width: 35%;
+}
+
+td{
+
+	width: 65%;
+}
+
+.div2{
+	margin-top: 10%;
+	
+}
+
+
+.div3{
+	height: 150px;
+
+}
+
+.input{
+	width: 250px;
+	height: 40px;
+}
+
+.button-wrap button{
+	width: 100px;
+	height: 40px;
+	background-color: 	
+	
+	
+}
+
+.button-wrap{
+	margin-left: 35%;
+	margin-top: 7%;
+}
+
+
+
+
+</style>
+
+
 </head>
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
@@ -34,76 +89,71 @@
 				<%@ include file="/WEB-INF/views/group/groupMenubar.jsp"%>
 				<%-- <jsp:include page="/WEB-INF/views/album/albumListView.jsp"></jsp:include> --%>
 				<div class="content-wrap">
-					<form method="POST">
 					<div class="div1">
 						<h3>신고 게시글 상세보기</h3>
 					</div>	
-					<div class="div2">
-						<div class="div3">
-							<div class="div3-1">
+					<form method="POST">
+					<table class="div2">
+						<tr class="div3">
+							<th class="div3-1">
 								<label>신고하는 회원</label>
-							</div>
-							<div class="div3-2">
+							</th>
+							<td class="div3-2">
 								<input type="hidden" name="reportGNo" value="${report.reportGNo}">
 								<input type="hidden" name="responGNo" value="${report.responGNo}">
 								<input type="hidden" name="rNo" value="${report.rNo }">
-								<input type="text" name="reportId" value="${report.reportId }" readonly="readonly">
+								<input class="input" type="text" name="reportId" value="${report.reportId }" readonly="readonly">
 								
-							</div>
-						</div>
-						<div class="div3">
-							<div class="div3-1">
+							</td>
+						</tr>
+						<tr class="div3">
+							<th class="div3-1">
 								<label>신고받는 회원</label>
-							</div>
-							<div class="div3-2">
-								<input type="text" name="responId" value="${report.responId }" readonly="readonly"> 
+							</th>
+							<td class="div3-2">
+								<input class="input" type="text" name="responId" value="${report.responId }" readonly="readonly">
+							</td>	 
 								
-						</div>
-						<div class="div3">
-							<div class="rType">
-								<div class="div3-1">
-									<label>신고유형</label>
-								</div>
-								<div class="div3-2">
-									<input type="hidden" name="rCategory" value="${report.rCategory }" >
-									<p>${report.rCategory }</p>
-								</div>
-							</div>
-							<div class="rDate">
-								<div class="div3-1">
-									<label>날짜</label>
-								</div>
-								<div class="div3-2">
+						</tr>
+						<tr class="div3">
+							<th class="div3-1">
+								<label>신고유형</label>
+							</th>
+							<td class="div3-2">
+								<input type="hidden" name="rCategory" value="${report.rCategory }" >
+								<p>${report.rCategory }</p>
+							</td>
+						</tr>
+						<tr class="div3">
+							<th class="div3-1">
+								<label>날짜</label>
+							</th>
+							<td class="div3-2">
 								
-									<p>${report.rDate }</p>
-								</div>
-							</div>
-						</div>
-						<div class="div4">
-							<div class="div4-1">
+								<p>${report.rDate }</p>
+							</td>
+						</tr>
+						<tr class="div4">
+							<th class="div4-1">
 								<label>신고내용</label>
-							</div>
-							<div class="div4-2">
-							<input type="hidden" name="rContent" value="${report.rContent}" >
-								<textarea rows="10" cols="40" readonly >${report.rContent }</textarea>
-							</div>
-						</div>	
+							</th>
+							<td class="div4-2">
+								<input type="hidden" name="rContent" value="${report.rContent}" >
+								<c:set var="rContent" value="${fn:replace(report.rContent,'<br>','') }"/>
+								<textarea rows="15" cols="80" readonly style="resize: none;">${report.rContent }</textarea>
+								
+							</td>
+						</tr>	
 					</div>
-					<div class="btn">
-						<div></div>
-						<div class="btn1">
-							<button type="button">목록</button>
-							
-							
-							
-							<button type="button" id="rejectBtn">거절</button>
-							
-							
-							<button type="button" id="acceptBtn">수락</button>
-						</div>
+					</table>
+					
+					<div class="button-wrap">
+						<button type="button" onclick="">목록</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" id="rejectBtn">거절</button>&nbsp;&nbsp;&nbsp;
+						<button type="button" id="acceptBtn">수락</button>
 					</div>
+					
 					</form>
-				</div>
 				
 				
 				
@@ -121,6 +171,7 @@
 			<div class="col-md-12" id="all-footer">
 			</div>
 		</div>
+	</div>
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
@@ -140,6 +191,16 @@
 		$("form").attr('action','gmrcount.ij');
 		$("form").submit();
 		
+	});
+	
+	$(document).ready(function() {
+		$("#summernote").summernote({
+			height : 400,
+			width : 800,
+			minHeight : null,
+			maxHeight : null,
+			focus : true
+		});
 	});
 	
 	</script>
