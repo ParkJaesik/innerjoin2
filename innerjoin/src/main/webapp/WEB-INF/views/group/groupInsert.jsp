@@ -19,35 +19,78 @@
 .content-wrap{
 	margin: auto;
 	margin-top: 3%;
-	width: 70%;
-	height: 100%;
-	margin: 0%;
+	width: 100%;
+	max-height :5000px; 
+	margin-left: 15%;
+	
+	/* padding: 0% */;
 }
 .div1{
 	margin-left: -3%;
+
 }
+
+.row{
+	height: 150px;
+
+}
+
+
+
 
 table{
-	margin-top: 10%;
-}
-tr{
-	height: 120px;
-
+	margin-top: 8%;
 }
 
 th{
-	width: 35%;
+	width: 40%;
 
 }
 
 td{
-	width: 65%;
+	width: 60%;
 }
 
 .p{
 	font-size: 13px;
 	font-weight: 10px;
 	color: gray;
+}
+
+label{
+	font-size: 20px;
+}
+
+#userId{
+	border: none; 
+	color: #ed776acb; 
+	font-size: 20px;
+}
+
+.input{
+	height:40px;
+
+}
+#gName{
+	width: 600px; 
+	height: 42px;
+}
+
+#mlimit{
+	width: 100px;
+	height: 35px;
+
+}
+
+.button-wrap button{
+	width: 100px;
+	height: 40px;
+	
+	
+}
+
+.button-wrap{
+	margin-left: 30%
 }
 
 
@@ -86,7 +129,7 @@ td{
 							<tr class="row">
 								<th><label>모임장</label></th>
 								<td>
-									<input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}" style="border: none; color: #ed776acb;">
+									<input type="text" id="userId" name="gHost" readonly value="${loginUser.memberName}" >
 									<input type="hidden" name="levelCode" value="${gmember.levelCode }">
 									<c:if test="${ levelCode eq 0 }"></c:if>
 								</td>
@@ -96,7 +139,7 @@ td{
 							<tr class="row">
 								<th><label>모임카테고리</label></th>
 								<td>
-									<select id="categorysel" name="gCategoryCode" required>
+									<select class="input" id="categorysel" name="gCategoryCode" required >
 										<option value="all">카테고리를 선택하세요.</option>
 										<option value="0">학습</option>
 										<option value="1">운동</option>
@@ -111,17 +154,17 @@ td{
 							<tr class="row">
 								<th><label>모임명</label></th>
 								<td class="div2">
-									<input type="text" name="gName" required="required" placeholder="모임명을 적어주세요." style="width: 600px;">
+									<input type="text" id="gName" name="gName" required="required" placeholder="모임명을 적어주세요." >
 								</td>
 							</tr>
 						
 							<tr class="row">
 								<th><label>장소</label></th>
 								<td>
-									<select id="citysel" required>
+									<select id="citysel" required class="input">
 										<option value="city">도시를 선택해주세요.</option>
 										<option value="0">서울특별시</option>
-									</select> <select id="guSel" name="localCode" required>
+									</select> <select id="guSel" name="localCode" required class="input">
 										<option value="-1">구를 선택해주세요.</option>
 										<option value="0">도봉구</option>
 										<option value="1">강북구</option>
@@ -169,8 +212,7 @@ td{
 								<th><label>공개여부</label></th>
 								<td>
 									<input type="radio" name="gOpenStatus" value="Y" required="required">&nbsp;공개 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<input
-										type="radio" name="gOpenStatus" value="N" required="required">&nbsp;비공개 
+									<input type="radio" name="gOpenStatus" value="N" required="required">&nbsp;비공개 
 								</td>
 							</tr>
 							<tr class="row">
@@ -178,29 +220,29 @@ td{
 									<label>모임인원</label><br>
 									<p class="p">최대 100명까지 가능합니다.</p>
 								</th>
-								<td><input type="number" max="100" name="gLimit" required="required" style="width: 100px;">&nbsp;명</td>
+								<td><input id="mlimit" type="number" min="0" max="100" name="gLimit" required="required" >&nbsp;명</td>
 							</div>
 							<!-- </div> -->
 							<!-- <div class="btn" style="width: 900px; height:50px; background-color: purple;"></div> -->
 							<!-- <div class="gWrap"> -->
-							<tr class="row">
+							<tr class="row" style="margin-bottom: 30%;">
 								<th><label>모임소개</label></th>
 								<td class="div2">
-									<textarea name="gInfo" id="summernote" value="" required="required"></textarea>
+									<textarea name="gInfo" id="summernote" value="" required="required" ></textarea>
 								</td>
 							</tr>
 
-							<tr class="row">
+							<tr class="row" style="margin-top: 40%;">
 								<th><label>대표사진</label></th>
 								<td>
-									<img id="gOriginFileName" style="max-width: 100%"> <input
-										type="file" name="uploadFile" required="required">
+									<img id="gOriginFileName" style="max-width: 100%"> 
+									<input type="file" name="uploadFile" required="required">
 								</td>
 							</tr>
 						</table>
 	
-						<div class="button-wrap" align="center">
-							<button type="reset" id="cancel">취소</button>
+						<div class="button-wrap">
+							<button type="reset" id="cancel">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="submit" id="submit">등록</button>
 						</div>
 	
@@ -235,7 +277,8 @@ td{
 
 		$(document).ready(function() {
 			$("#summernote").summernote({
-				height : 300,
+				height : 400,
+				width : 800,
 				minHeight : null,
 				maxHeight : null,
 				focus : true
