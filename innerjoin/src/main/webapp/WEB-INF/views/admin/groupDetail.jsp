@@ -157,6 +157,10 @@
 		</div>
 	</div>
 	<script>
+	
+	window.onload = function () {
+		$("#manageGroup").addClass("active");
+	};
 	var gStatus;
 	var gNo = ${group.gNo};
 	var groupReptNo = '${groupReptNo}';
