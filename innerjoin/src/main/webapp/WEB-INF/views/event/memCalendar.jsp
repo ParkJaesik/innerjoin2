@@ -136,7 +136,7 @@
 				eventTimeFormat: { // like '14:30:00'
 					hour: '2-digit',
 					minute: '2-digit',
-					meridiem: false
+					meridiem: true
 				}
 			});
 			

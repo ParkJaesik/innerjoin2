@@ -212,7 +212,9 @@ div {
 	position:relative;   
   width:100%;
    height:600px;
-	overflow:hidden
+	overflow:hidden;
+	background-color: rgba(178, 180, 184, 0.2);
+	min-width: 1060px;
 }
 
 #mainvideo{
@@ -247,6 +249,10 @@ div {
 }
 #innerMent3{
 	margin-left: 45%;
+}
+
+.innerMent {
+	 text-shadow: 0.5px 0.5px 0.5px gray;
 }
 
 input[type="button"],
