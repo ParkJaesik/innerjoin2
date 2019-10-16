@@ -291,15 +291,8 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:if test="${ empty mgInfo}">
-													<tr>
-														<td colspan='7' align="center">
-															개설한 모임이 없습니다.
-														</td>
-													</tr>
-												</c:if>
+												<c:set var="num" value="0"/>
 												<c:if test="${ !empty mgInfo}">
-													<c:set var="num" value="0"/>
 													<c:forEach var="g" items="${mgInfo}" varStatus="i">
 														<c:if test="${g.value['levelCode'] == 0 }">
 														<c:set var="num" value="${num + 1}"/>
@@ -333,6 +326,13 @@
 														</c:if>
 													</c:forEach>
 												</c:if>
+												<c:if test="${ empty mgInfo or num == 0}">
+													<tr>
+														<td colspan='7' align="center">
+															개설한 모임이 없습니다.
+														</td>
+													</tr>
+												</c:if>
 											</tbody>
 										</table>
 									</div>
@@ -351,15 +351,8 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:if test="${ empty mgInfo}">
-													<tr>
-														<td colspan='8' align="center">
-															 가입한 모임이 없습니다.
-														</td>
-													</tr>
-												</c:if>
+												<c:set var="num2" value="0"/>
 												<c:if test="${ !empty mgInfo}">
-													<c:set var="num2" value="0"/>
 													<c:forEach var="g" items="${mgInfo}" varStatus="i">
 														<c:if test="${g.value['levelCode'] != 0 }">
 														<c:set var="num2" value="${num2 + 1}"/>
@@ -402,6 +395,13 @@
 														</tr>
 														</c:if>
 													</c:forEach>
+												<c:if test="${ empty mgInfo or num2 == 0}">
+													<tr>
+														<td colspan='8' align="center">
+															 가입한 모임이 없습니다.
+														</td>
+													</tr>
+												</c:if>
 												</c:if>
 											</tbody>
 										</table>

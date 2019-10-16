@@ -68,6 +68,10 @@
 		margin-right: 0;
 		margin-left: 0;
 	}
+	
+	.cancelBtn {
+		background-color: #737373 !important;
+	}
 
 </style>
 </head>
