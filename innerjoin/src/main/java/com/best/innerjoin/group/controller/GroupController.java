@@ -339,10 +339,13 @@ public class GroupController {
 	// 회원 등급 수정
 	@RequestMapping("memlevel.ij")
 	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
-		
+		Group group = (Group)request.getSession().getAttribute("group");
 		int result = gService.updateLevel(request, gMember);
 		
 		String path = null;
+		
+		ArrayList<GroupMember> list = gService.groupMemberList(group.getgNo());
+		model.addAttribute("list",list);
 		if(result > 0) {
 			
 			path = "group/groupMember";

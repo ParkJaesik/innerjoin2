@@ -169,7 +169,9 @@ public class ReportController {
 		System.out.println(groupMember);
 		int result = rService.deleteReptGroupMem(groupMember);
 		
+		
 		String path = null;
+		
 		if(result>0) {
 			model.addAttribute("groupMember", groupMember);
 			path = "report/gMemReportListView";
