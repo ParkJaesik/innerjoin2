@@ -102,8 +102,15 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("memberReport.ij")
-	public String memberReportView() {
-		return "admin/memberReport";
+	public ModelAndView memberReportView(ModelAndView mv, Integer page) {
+		int currentPage = (page == null) ? 1 : page;
+
+		
+		ArrayList<MemberReport> mrList = adService.selectAllMrList(currentPage);
+		System.out.println("mrList: " + mrList);
+		
+		mv.addObject("mrList", mrList).addObject("pi", Pagination.getPageInfo()).setViewName("admin/memberReport");
+		return mv;
 	}
 		/** 그룹회원신고관리페이지 이동
 	 * @return
