@@ -191,7 +191,6 @@ table{
 	
 	<script type="text/javascript">
     	$("#outBtn").on("click", function () {
-    		
 			if(confirm("정말 강퇴하시겠습니까?")){
 				$("form").attr('action','gmDrop.ij');
 				$("form").submit();

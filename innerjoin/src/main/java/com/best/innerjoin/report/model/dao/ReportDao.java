@@ -100,12 +100,9 @@ public class ReportDao {
 	 * @param responGNo
 	 * @return
 	 */
-	public ArrayList<GroupMember> selectGroupMember(int responGNo, PageInfo pi) {
+	public ArrayList<GroupMember> selectGroupMember(int responGNo) {
 		
-		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
-		
-		return (ArrayList)sqlSession.selectList("reportMapper.selectGroupMember", responGNo , rowBounds);
+		return (ArrayList)sqlSession.selectList("reportMapper.selectGroupMember", responGNo);
 	}
 	
 	

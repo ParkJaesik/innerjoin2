@@ -52,10 +52,9 @@ public interface ReportService {
 
 	/** 신고 받은 회원 목록 출력
 	 * @param responGNo
-	 * @param currentPage 
 	 * @return
 	 */
-	public abstract ArrayList<GroupMember> selectGroupMember(int responGNo, int currentPage);
+	public abstract ArrayList<GroupMember> selectGroupMember(int responGNo);
 
 
 

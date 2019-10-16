@@ -140,9 +140,7 @@ public class ReportController {
 	
 	//  회원 신고 횟수 카운트
 	@RequestMapping("gmrcount.ij")
-	public String reportcountupdate(GroupMemberReport report, Model model, HttpServletRequest request, Integer page) {
-		
-		int currentPage = page == null ? 1 :page;
+	public String reportcountupdate(GroupMemberReport report, Model model, HttpServletRequest request) {
 		
 		System.out.println(report.toString());
 		
@@ -150,8 +148,8 @@ public class ReportController {
 		int result = rService.updateReportCount(report);
 		System.out.println("result : " + result);
 		if(result > 0) {
-			ArrayList<GroupMember> gmList = rService.selectGroupMember(report.getResponGNo(), currentPage);
-			 model.addAttribute("gmList", gmList).addAttribute("currentPage", currentPage);
+			ArrayList<GroupMember> gmList = rService.selectGroupMember(report.getResponGNo());
+			 model.addAttribute("gmList", gmList);
 			return "report/gMemReportListView";
 			
 		}else {
@@ -161,6 +159,13 @@ public class ReportController {
 		
 	}
 	
+	// 신고된 회원 리스트
+	@RequestMapping("gmReportList.ij")
+	public String gourpMemReportList(int gNo, Model model) {
+		ArrayList<GroupMember> gmList = rService.selectGroupMember(gNo);
+		model.addAttribute("gmList", gmList);
+		return "report/gMemReportListView";
+	}
 	
 	// 강퇴하기
 	@RequestMapping(value="gmDrop.ij", method=RequestMethod.POST)
@@ -169,19 +174,16 @@ public class ReportController {
 		System.out.println(groupMember);
 		int result = rService.deleteReptGroupMem(groupMember);
 		
-		
-		String path = null;
-		
 		if(result>0) {
+			ArrayList<GroupMember> gmList = rService.selectGroupMember(groupMember.getGroupNo());
+			model.addAttribute("gmList", gmList);
 			model.addAttribute("groupMember", groupMember);
-			path = "report/gMemReportListView";
+			return "report/gMemReportListView";
 			
 		}else {
 			model.addAttribute("msg", "회원 강퇴 실패");
-			path = "common/errorPage";
+			return "common/errorPage";
 		}
-		System.out.println("강퇴" + result);
-		return path;
 		
 	}
 	
