@@ -123,4 +123,12 @@ public class BoardDao {
 		
 		return sqlSession.selectOne("boardMapper.getWriter",boardNo);
 	}
+
+	public int replyUpdate(Reply reply) {
+		return sqlSession.update("boardMapper.replyUpdate", reply);
+	}
+
+	public int replyDelete(int replyNo) {
+		return sqlSession.update("boardMapper.replyDelete", replyNo);
+	}
 }

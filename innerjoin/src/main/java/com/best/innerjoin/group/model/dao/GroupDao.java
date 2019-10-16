@@ -137,4 +137,13 @@ public class GroupDao {
 
 	}
 
+	/** 그룹 수정
+	 * @param group
+	 * @return
+	 */
+	public int updateGroup(Group group) {
+		
+		return sqlSession.update("groupMapper.updateGroup", group);
+	}
+
 }

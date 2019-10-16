@@ -100,7 +100,7 @@ table{
 		                    
 		                    <c:forEach var="gmr" items="${gmList }">
 		                    	
-		            			<form name="dropForm" method="post">
+		            			<form name="dropForm" method="post" action="gmDrop.ij">
 			                    <tr>
 			                    	<input type="hidden" name="memberId" value="${gmr.memberId}">
 			                    	<input type="hidden" name="groupMemReptCount" value="${gmr.groupMemReptCount }">
@@ -191,7 +191,6 @@ table{
 	
 	<script type="text/javascript">
     	$("#outBtn").on("click", function () {
-    		
     		
 			if(confirm("정말 강퇴하시겠습니까?")){
 				$("form").attr('action','gmDrop.ij');

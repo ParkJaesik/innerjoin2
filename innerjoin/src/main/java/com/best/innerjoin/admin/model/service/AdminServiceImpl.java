@@ -170,9 +170,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int updateGroupMemLevel(GroupMember gMember) {
+	public int updateGroupMemLevel(int levelCode,ArrayList<GroupMember> gMember) {
 		// TODO Auto-generated method stub
-		return adDao.updateGroupMemLevel(gMember);
+		int result = 0;
+		for(int i = 0 ; i <gMember.size();i++) {
+			gMember.get(i).setLevelCode(levelCode);
+			result += adDao.updateGroupMemLevel(gMember.get(i));
+		}
+		return result;
+	}
+
+	@Override
+	public ArrayList<MemberReport> selectAllMrList(int currentPage) {
+		int listCount = adDao.getMemReptCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		return adDao.selectAllMrList(pi);
 	}
 
 

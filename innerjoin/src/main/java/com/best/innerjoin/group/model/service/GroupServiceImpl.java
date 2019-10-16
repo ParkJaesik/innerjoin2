@@ -154,9 +154,17 @@ public class GroupServiceImpl implements GroupService{
 	public ArrayList<GroupCat> selectGroupCat() {
 		return gDao.selectGroupCat();
 	}
+
   @Override
 	public int getGno() {
 		return gDao.getGno();
+	}
+
+  	// 그룹 수정
+	@Override
+	public int updateNotice(Group group) {
+		group.setgInfo(group.getgInfo().replace("\n", "<br>"));
+		return gDao.updateGroup(group);
 	}
 	
 }

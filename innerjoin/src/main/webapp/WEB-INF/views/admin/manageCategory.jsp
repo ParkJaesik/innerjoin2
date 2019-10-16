@@ -51,7 +51,7 @@
 					<th>카테고리 코드</th>
 					<th>카테고리 이름</th>
 					<th></th>
-				<tr>
+				</tr>
 			</table>
 			<br>
 			
@@ -87,16 +87,14 @@
 				dataType:"JSON",
 				
 				success:function(catList){
-					
-					console.log(catList);
+
 					catList.forEach(function(element) {
 						
-						console.log(element.groupCatName);
-						$("#category").append("<tr>" + "<form>" +
-								"<td><input type='text' value='" + element.groupCatCode + "' name='groupCatCode' readonly>" + "</td>" + 
+						$("#category").append("<tr>"+
+								"<td>"+ element.groupCatCode +"</td>" + 
 								"<td><input type='text' value='"+ element.groupCatName +"' name ='groupCatName'>" + "</td>" + 
-								"<td>"+ "<button type='button' id='changeCatName'>변경하기</button>" + "</td>" +
-								"</form></tr>");
+								"<td>"+ "<button type='button' class='changeCatName'>변경하기</button>" + "</td>" +
+								"</tr>");
 						});
 				}
 				
@@ -110,6 +108,7 @@
 		
 		$("#addCategory").click(function(){
 			var lastCode = $("#category tr:last-child td:first-child").text();
+			console.log(lastCode);
 			var nextCode = Number(lastCode) + 1;
 			$("#category").append("<tr>" + 
 					"<td>" + nextCode + "</td>" + 
@@ -119,8 +118,24 @@
 		});
 		
 		
-		$("#changeCatName").click(function(){
+		$(document).on("click",".changeCatName",function(){
 			
+			
+			var groupCatCode = $(this).prev().prev().text();
+			var groupCatName = $(this).prev().val();
+			
+			console.log(groupCatCode);
+			console.log(groupCatName);
+			
+	/* 		
+			$.ajax({
+				
+				url:"changeCatName.ij",
+				data:{},
+				success:function(catList){
+					
+					loadCategory();
+				} */
 		});
 	</script>
 	

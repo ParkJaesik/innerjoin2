@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 		plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
 		height: "auto",
-		contentHeight: 450,
+		contentHeight: 550,
         /*locale: 'ko',*/
 		header: {
 			left: 'prev,next today',
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		eventTimeFormat: { // like '14:30:00'
 			hour: '2-digit',
 			minute: '2-digit',
-			meridiem: false
+			meridiem: true
 		}
 	});
 
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var $eventLabelLoc = $('<span>');
 		$eventLabelLoc.addClass('badge badge-default eventLabel').append('위치');
 		var $address = $('<address>');
-		$address.append(event.address);
+		$address.append(event.address).append($("#group-area").text().split(':')[1]);
 		$eventLocation.append($eventLabelLoc).append($address);
 		
 		$eventInfoCol.append($eventDay).append($eventLocation);
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var $eventLabelContent = $('<span>');
 		$eventLabelContent.addClass('badge badge-default eventLabel').append('내용');
 		var $textarea = $('<textarea>');
-		$textarea.attr('readonly');
+		$textarea.attr('readonly', 'true');
 		$textarea.append(event.eContent);
 		  
 		$eventContent.append($eventLabelContent).append($textarea);

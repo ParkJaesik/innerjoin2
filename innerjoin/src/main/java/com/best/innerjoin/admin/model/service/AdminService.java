@@ -98,10 +98,17 @@ public interface AdminService {
 	ArrayList<GroupMemberReport> selectGroupMemReptList(int currentPage);
 
 	/** 그룹 회원 등급 변경
+	 * @param levelCode 
 	 * @param gMember
 	 * @return
 	 */
-	int updateGroupMemLevel(GroupMember gMember);
+	int updateGroupMemLevel(int levelCode,ArrayList<GroupMember> gMember);
+
+	/** 회원 신고 내역 전부 불러오기
+	 * @param currentPage 
+	 * @return
+	 */
+	ArrayList<MemberReport> selectAllMrList(int currentPage);
 
 
 

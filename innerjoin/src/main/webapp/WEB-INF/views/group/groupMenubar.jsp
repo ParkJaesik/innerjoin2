@@ -68,9 +68,12 @@
 			<div id="group-button">
 				<c:if test="${ loginUser.memberName eq group.gHost }"> <!-- 유저가 모임장일 때 모임관리 버튼 보이게 -->
 					
+					<c:url var="gupdate" value="groupupdateForm.ij"/>
+					<button type="button" class="btn btn-primary" id="group-btn-update" onclick="location.href='groupupdateForm.ij'">모임관리</button>
+					
 					<c:url var="gorlist" value="rblist.ij"/> 
 					
-					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='rblist.ij'">모임관리</button>
+					<button type="button" class="btn btn-primary" id="group-btn-manage" onclick="location.href='rblist.ij'">신고관리</button>
 				 </c:if>
 				<c:set var="groupMemberCode" value = "${groupMemberCode }" scope="session"/>
 				

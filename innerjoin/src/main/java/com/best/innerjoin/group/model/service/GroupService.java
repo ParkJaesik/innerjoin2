@@ -74,5 +74,11 @@ public interface GroupService {
 
 	public abstract int getGno();
 
+	/** 그룹 수정
+	 * @param group
+	 * @return
+	 */
+	public abstract int updateNotice(Group group);
+
 }
 

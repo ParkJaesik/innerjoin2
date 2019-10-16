@@ -64,6 +64,10 @@
 	.fc-day-number:hover {
 		cursor: default;
 	}
+	.groupBtn, .cancelBtn {
+		margin-right: 0;
+		margin-left: 0;
+	}
 
 </style>
 </head>
@@ -132,7 +136,7 @@
 				eventTimeFormat: { // like '14:30:00'
 					hour: '2-digit',
 					minute: '2-digit',
-					meridiem: false
+					meridiem: true
 				}
 			});
 			
@@ -254,7 +258,11 @@
 				console.log(this);
 				var eno = this.classList[1].split('_')[1];
 				console.log(eno);
-				var groupBtn = "<a role='button' class='btn btn-primary groupBtn' href='calendar.ij?eno=" + eno +"'>모임으로</a>";
+				var gno = $(this).parent().attr('class').split(' ')[5].split('_')[1];
+				console.log("gno: ");
+				console.log(gno);
+				
+				var groupBtn = "<a role='button' class='btn btn-primary groupBtn' href='goGroupPage.ij?gNo=" + gno +"'>모임으로</a>";
 				var cancelBtn = "<a role='button' class='btn btn-secondary cancelBtn eno_" + eno + "' >취소하기</a>";
 				//var link = "<a href='http://www.naver.com'>네이버</a>";
 				console.log(groupBtn + cancelBtn);

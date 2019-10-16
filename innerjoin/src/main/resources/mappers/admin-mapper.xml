@@ -239,4 +239,21 @@
   		SET LEVEL_CODE = #{levelCode}
   		WHERE MEMBER_ID = #{memberId} AND GROUP_NO = #{groupNo}
   	</update>
+  	
+  	<select id="selectMemReptCount" resultType="_int">
+  		SELECT COUNT(*)
+  		FROM MEMBER_REPORT
+  		
+  	</select>
+  	
+  	<select id="selectAllMrList" resultMap="memberReptResultSet">
+		SELECT MEMBER_REPT_NO, MEMBER_REPT_CONTENT, MEMBER_REPT_STATUS, MEMBER_REPT_DATE,
+			    TO_CHAR(TO_DATE(MEMBER_REPT_DATE, 'YY/MM/DD'), 'YYYY-MM-DD') AS MEMBER_REPT_DATE,
+		    REPORTER_ID || '/' || M.MEMBER_NAME AS REPORTER_ID, REPORTED_ID || '/' || M2.MEMBER_NAME AS REPORTED_ID
+		FROM MEMBER_REPORT MR
+		JOIN MEMBER M ON (MR.REPORTER_ID = M.MEMBER_ID)
+		JOIN MEMBER M2 ON (MR.REPORTED_ID = M2.MEMBER_ID)
+  
+  	</select>
+  	
 </mapper>

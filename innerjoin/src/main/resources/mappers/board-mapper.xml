@@ -110,10 +110,17 @@
 		SELECT MEMBER_ID
 		FROM BOARD
 		WHERE BOARD_NO = #{boardNo}
-	
 	</select>
 	
+	<!-- 댓글 수정 쿼리 -->
+	<update id="replyUpdate" parameterType="Reply">
+		UPDATE REPLY SET REPLY_CONTENT = #{replyContent}, REPLY_MODIFY_DATE = SYSDATE WHERE REPLY_NO = #{replyNo}
+	</update>
 	
+	<!-- 댓글 삭제 쿼리 -->
+	<update id="replyDelete" parameterType="_int">
+		UPDATE REPLY SET REPLY_STATUS = 'N' WHERE REPLY_NO = #{replyNo}
+	</update>
 </mapper>
 
 

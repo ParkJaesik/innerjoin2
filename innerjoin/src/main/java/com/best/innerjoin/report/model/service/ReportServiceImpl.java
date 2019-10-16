@@ -47,8 +47,6 @@ public class ReportServiceImpl implements ReportService{
 	@Override
 	public int insertReport(GroupMemberReport report) {
 
-		
-		
 		report.setrContent(report.getrContent().replace("\n", "<br>"));
 		
 		int result = rDao.insertReport(report);

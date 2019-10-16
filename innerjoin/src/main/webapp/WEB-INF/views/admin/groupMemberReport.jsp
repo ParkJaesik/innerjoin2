@@ -32,6 +32,34 @@
 	    width: 100%;
     	resize: none;
     	}
+    	
+    		
+		.selectGroup *{
+			float: right !important;
+			
+		}
+		
+		#memStatusSelect {
+			display: inline-block;
+			width: 200px;
+			height: 40px;			
+			border-radius: 5px;
+			vertical-align: baseline;
+		}
+		
+		.memStatusSet {
+			display: inline-block;
+			width: 100px;
+			height: 40px;
+		}
+		
+		.memStatusSet button {
+			height: 100%;
+			vertical-align: baseline;
+		}
+		.custom-select{
+		font-size: 15px !important;
+		}
 	</style>
 </head>
 <body>
@@ -58,7 +86,22 @@
 				<h3 align="center">
 					총 신고 수 : ${ pi.listCount }
 				</h3>
-				
+				<div class="input-group selectGroup">
+					
+					<div class="memStatusSet">
+						<button class="btn btn-primary statusSetBtn"
+							type="button" onclick="setMemStatusCode();">등급조정</button>
+					</div>
+					<select name="memStatus" class="custom-select" id="memStatusSelect">
+							<option value="0">개설자</option>
+							<option value="1">매니저</option>
+							<option value="2" selected>일반</option>
+							<option value="3">초대</option>
+							<option value="4">신청</option>
+							<option value="10">탈퇴</option>
+					</select>
+					
+				</div>
 				<table class="memListTable" align="center" border="1" cellspacing="0" width="900" id="tb">
 					<tr>
 						<th align="center">번호</th>
@@ -70,7 +113,10 @@
 						<th align="center" width="200px">처리 상태</th>
 						<th align="center" width="200px">신고일</th>
 						<th align="center" width="200px">신고처리일</th>
-						<th align="center">관리하기</th>
+						<th align="center">
+							<button type="button" id="proRept" onclick="processReport();">처리</button>
+							<input type="checkbox" id="allReptChk">all
+						</th>
 					</tr>
 					
 					<c:if test="${!empty gmrList}">
@@ -97,11 +143,14 @@
 								<c:if	test="${r.levelCode eq 4}">신청</c:if>
 								<c:if	test="${r.levelCode eq 10}">탈퇴</c:if>
 							</td>
-							<td align="center">${r.reportId }</td>
+							<td align="center" class="reportId">${r.reportId }</td>
 							<td align="center">${r.rBoardStatus }</td>
 							<td align="center">${r.rDate}</td>
 							<td align="center">${r.rStatusDate }</td>
-							<td align="center" ><button id="${r.levelCode }" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">관리하기</button></td>
+							<td align="center" ><%-- <button id="${r.levelCode }" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">관리하기</
+							button> --%>
+								<input type="checkbox" name="gMemReptNo" value="${mr.memReptNo }">
+							</td>
 						</tr>
 						</c:forEach>
 					
@@ -118,7 +167,7 @@
 								[이전] &nbsp;
 							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
-								<c:url var="before" value="manageMember.ij">
+								<c:url var="before" value="groupMemberReport.ij">
 									<c:param name="page" value="${ pi.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }">[이전]</a> &nbsp;
@@ -131,7 +180,7 @@
 								</c:if>
 								
 								<c:if test="${ p ne currentPage }">
-									<c:url var="pagination" value="manageMember.ij">
+									<c:url var="pagination" value="groupMemberReport.ij">
 										<c:param name="page" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }">${ p }</a> &nbsp;
@@ -143,7 +192,7 @@
 								[다음]
 							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url var="after" value="manageMember.ij">
+								<c:url var="after" value="groupMemberReport.ij">
 									<c:param name="page" value="${ pi.currentPage + 1 }"/>
 								</c:url> 
 								<a href="${ after }">[다음]</a>
@@ -201,7 +250,7 @@
 			$("#groupReport").addClass("active");
 		};
 		
-		$(function(){
+	/*  	$(function(){
 			
 			$(".btn-primary").click(function(){
 				var memberId = $(this).parent().parent().children('.memberId').attr('id');
@@ -216,13 +265,13 @@
 					}
 					console.log($(this));
 				});
-				 */
+				 
 			});
 			
-			$("#manageBtn").click(function(){
+			$("#manageBtn").on('click',function(){
 				
 				var levelCode = $("select[name=levelCode] option:selected").val();
-				var groupNo2 = $(".modal-header").children('#gNo').text();
+				var groupNo2 = document.getElementById("gNo").innerText;
 				var memberId2 = $(".modal-body h4").text();
 				
 				console.log("memberId : "+memberId2 +", groupNo: " + groupNo2 + ", levelCode : " + levelCode);
@@ -263,6 +312,50 @@
 					console.log("Ajax 통신 실패");
 				}
 			}); 
+		}  */
+		
+		$(function() {
+			$("#allReptChk").click(function() {
+				if($("#allReptChk").is(":checked")) 
+					$("input[name=gMemReptNo]").prop('checked', true);
+		        else  
+					$("input[name=gMemReptNo]").prop('checked', false);
+			});
+			
+			
+		});
+		function setMemStatusCode(levelCode) {
+			var level = $("select[name=memStatus] option:selected").val();
+			var reptList = [];
+			$("input[name=gMemReptNo]:checked").each(function(i){
+				var gNo = $(this).parent().parent().children('td.gNo').text();
+				var reportId = $(this).parent().parent().children('td.reportId').text();
+				var gnoRept = {"groupNo":gNo, "memberId": reportId};
+				reptList.push(gnoRept);
+			});
+			console.log(reptList);
+			
+			var str = JSON.stringify(reptList);
+			
+			console.log(str);
+			
+			$.ajax({
+				url: "updateGroupMemLevel.ij",
+				//data: {reptList:  JSON.stringify(reptList), levelCode:level},
+				data: {str : str, levelCode: level},
+				type: 'post',
+				success: function(result) {
+					if(result == 'success'){
+						alert("변경 성공");
+						location.href="groupMemberReport.ij";
+					}else{
+						alert("변경 실패ㅠ");
+					}
+				},
+				error: function(err){
+					console.log("ajax 통신 실패");
+				}
+			});
 		}
 	</script>
 	

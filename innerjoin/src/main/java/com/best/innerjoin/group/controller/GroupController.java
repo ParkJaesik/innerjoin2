@@ -124,6 +124,47 @@ public class GroupController {
 		}
 	}
 	
+	// 그룹 수정폼
+	@RequestMapping("groupupdateForm.ij")
+	public String groupUpdateForm() {
+		return "group/groupUpdateView";
+	}
+	
+	
+	// 그룹 수정
+	@RequestMapping(value="groupupdate.ij", method=RequestMethod.POST)
+	public String groupUpdate(Group group, HttpServletRequest request, Model model, MultipartFile reloadFile) {
+		
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			
+			if(group.getFilePath() != null) { 
+				deleteFile(group.getFilePath(), request);
+			}
+			
+			String savePath = saveFile(reloadFile, request);
+			
+			if(savePath != null) {
+				group.setFilePath(reloadFile.getOriginalFilename());
+			}else {
+				group.setFilePath(null);
+			}
+		}
+		
+		int result = gService.updateNotice(group);
+		
+		String path = null;
+		if(result>0) {
+			path = "redirect:goGroupPage.ij?gNo="+group.getgNo();
+		}else {
+			model.addAttribute("msg", "모임 수정 실패");
+			path = "common/errorPage";
+		}
+		return path;
+		
+
+		
+	}
+	
 	
 	
 //	클릭한 그룹 페이지로 이동하는 메소드
@@ -298,10 +339,13 @@ public class GroupController {
 	// 회원 등급 수정
 	@RequestMapping("memlevel.ij")
 	public String memLevelUpdate(HttpServletRequest request, Model model, GroupMember gMember) {
-		
+		Group group = (Group)request.getSession().getAttribute("group");
 		int result = gService.updateLevel(request, gMember);
 		
 		String path = null;
+		
+		ArrayList<GroupMember> list = gService.groupMemberList(group.getgNo());
+		model.addAttribute("list",list);
 		if(result > 0) {
 			
 			path = "group/groupMember";
