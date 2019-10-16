@@ -31,10 +31,11 @@
 				<div id="member-container">
 					<h1 align="center">현재 회원</h1>
 					
+					<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 }">
 					<h5 align="right">
 						<a href="wgmlist.ij">대기중인 명단</a>
 					</h5>
-					
+					</c:if>
 					<c:forEach var="m" items="${ list }">
 						<div id="member-part">
 							<div id="member">
@@ -61,9 +62,10 @@
 								</div>
 				
 								<div id="member-button">
-								<c:if test="">
+								<c:if test="${groupMemberCode eq 0 or groupMemberCode eq 1 }">
+								<button id="${m.memberId }" type="button" class="btn btn-primary levelBtn" data-toggle="modal" data-target="#exampleModalCenter1">회원등급</button>
+			
 								</c:if>
-									<button id="${m.memberId }" type="button" class="btn btn-primary levelBtn" data-toggle="modal" data-target="#exampleModalCenter1">회원등급</button>
 			
 									
 									<input type="hidden" value="${m.memberId }">
