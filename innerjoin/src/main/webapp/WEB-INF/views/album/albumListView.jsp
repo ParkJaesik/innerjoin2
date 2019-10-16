@@ -34,6 +34,9 @@
 				<div class="row section">
 					<div class="col-md-12 padding_top">
 					<%-- <% for(int i= 0; i < 6; i++){ %> --%>
+					<c:if test="${empty list}">
+						<h4>등록된 앨범이 없습니다</h4>
+					</c:if>
 					<c:forEach var="a" items="${ list }">
 						<div class="preview-box">
 							<c:url var="adetail" value="bdetail.kh">
@@ -58,6 +61,7 @@
 					</div>
 				</div>
 				<div class="row footer">
+					<c:if test="${!empty list}">
 					<div class="col-md-11" style="min-width:50px; min-height:50px;">
 						<!-- 페이징 처리 -->
 						<table align="center">
@@ -106,10 +110,12 @@
 						</tr>
 						</table>
 					</div>
+					</c:if>
 					<div class="col-md-1" style="width:50px; height:50px;">
 						<img src="resources/images/album/upload-button.png">
 					</div>
 				</div>
+				
 		<!-- </div>
 		</div> -->
 	</div>

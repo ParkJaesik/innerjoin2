@@ -38,7 +38,25 @@
 							</div>
 							<div id="group-main-new-container">
 								<h1>NEW</h1>
-								<div id="group-main-new"></div>
+								<div id="group-main-new">
+									<c:if test="${empty board}">
+										새 글이 없습니다.
+									</c:if>
+									<c:forEach var="b" items="${ board }">
+											<div class="row board">
+														<div class="col-md-3">
+														${b.boardCreateDate } <c:url var="boardDetail" value="bdetail.ij">
+															<c:param name="boardNo" value="${ b.boardNo }" />
+															<c:param name="page" value="${ pi.currentPage }" />
+														</c:url>
+														</div>
+														<div class="col-md-9" align="right">
+														<a href="${ boardDetail }">${ b.boardTitle }</a>
+														</div>
+														<hr>
+											</div>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -47,6 +65,19 @@
 						<div id="right-content">
 							<div id="group-main-event-container">
 								<h1>예정된 이벤트</h1>
+								<c:if test="${empty event}">
+									<div class="row detailWrapper" style="align:center">
+										<div class="col-md-12">
+											<div class="row eventDetail detailView_127">
+												<div class="col-md-12">
+													<div class="row eventTitle">
+													예정된 이벤트가 없습니다.
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</c:if>
 								<c:forEach var="e" items="${ event }">
 									<%-- <div id="group-main-event">
 										<span style="font-weight:bold">${ e.eTitle }</span>
