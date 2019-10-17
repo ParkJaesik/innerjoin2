@@ -85,7 +85,7 @@
   <update id="updateInfo" parameterType="Member">
   	UPDATE MEMBER
   	SET 
-  	<if test='!memberPwd.equals("")'> <!-- !없으면 변경이 안되지만 , !있을 시 null이여도 무조건 변경됨 -->
+  	<if test='memberPwd.equals("")'> <!-- !없으면 변경이 안되지만 , !있을 시 null이여도 무조건 변경됨 -->
   	MEMBER_PWD = #{memberPwd},
   	</if>
   	MEMBER_NAME = #{memberName}
