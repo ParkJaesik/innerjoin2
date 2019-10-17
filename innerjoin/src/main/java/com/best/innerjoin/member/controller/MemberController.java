@@ -114,7 +114,6 @@ public class MemberController {
 	public ModelAndView myGroup(ModelAndView mv, HttpServletRequest request) {
 		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		
-		System.out.println("마이페이지 이동: " + loginUser);
 		
 
 		// 내 모임 목록
@@ -257,8 +256,10 @@ public class MemberController {
 	}
 
 	// 프로필 수정
+	@ResponseBody
 	@RequestMapping(value = "profileUpdate.ij", method = RequestMethod.POST)
 	public String profileUpdate(Member member, Model model, HttpServletRequest request, MultipartFile reloadFile) {
+		
 		if (reloadFile != null && !reloadFile.isEmpty()) {
 			String originFile = mService.getOriginFileName(member.getMemberId());
 			String renameFile = "";
@@ -275,23 +276,20 @@ public class MemberController {
 		int result = 0;
 		int result2 = 0;
 		
-		if(!member.getmemberIntroduce().isEmpty()) {
+		if(member.getmemberIntroduce()!=null) {
 			result = mService.updateProfileAdd(member);
 		}
 		result2 = mService.updateProfile(member);
 		
+		
 		Member updateMember = mService.selectMember(member.getMemberId());
-		System.out.println("updateMember : " + updateMember);
-		System.out.println(updateMember);
-		System.out.println(result);
-		System.out.println(result2);
 		
 		if (result2 > 0) {
 			request.getSession().removeAttribute("loginUser");
 			request.getSession().setAttribute("loginUser", updateMember);
-			System.out.println("세션 변경 성공");
+			
 		}
-		return "redirect:myGroupForm.ij"; // -----수정
+		return "success"; // -----수정
 	}
 
 	public void saveFile(String renameFileName, MultipartFile uploadfile, HttpServletRequest request) {

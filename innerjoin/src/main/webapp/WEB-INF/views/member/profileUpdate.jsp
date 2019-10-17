@@ -64,16 +64,16 @@ float: left;}
 				  <div class="row">
 				  	<div class="col-4"></div>
 				  	<div class="col-md-4" align="center">
-		            	<form action="profileUpdate.ij" method="post" enctype="Multipart/form-data">
-		            		<input type="hidden" name="memberId" value="${loginUser.memberId }">
+		            	<!-- <form action="profileUpdate.ij" method="post" enctype="Multipart/form-data"> -->
+		            		<input type="hidden" id="memberId" name="memberId" value="${loginUser.memberId }">
 		            		<div class="margin" style="margin: 50px;"></div>
 							<div class="profileP" >
 							<c:if test="${ !empty member.memberProPath }">
-								<input type="hidden" value="${member.memberProPath }" name="memberProPath">
+								<input type="hidden" id="memberProPath" value="${member.memberProPath }" name="memberProPath">
 		                    	<img class="img-circle" src="${contextPath}/resources/images/member/${member.memberProPath }">
 							</c:if> 
 							<div class="margin" style="margin: 30px;"></div>
-							<input type="file" name="reloadFile">
+							<input type="file" name="reloadFile" id="reloadFile">
 		                    	
 	    	                </div>
 	        	            <br>
@@ -99,10 +99,10 @@ float: left;}
 							</div>
 							<div>
 	                    	<a href="javascript:history.back(-1)" class="button icon solid mMenu cancel" id="goBack">취소</a>
-	          				<button style="float: right;">수정</button>
+	          				<button id="updateBtn" style="float: right;">수정</button>
 	                    	</div>
 							
-	                   </form>
+	                  <!--  </form> -->
                     </div>
 				  	<div class="col-4"></div>
 				  </div>
@@ -125,7 +125,25 @@ float: left;}
 			$("#gender-female").attr("checked", false);
 		}
 		
-		
+		$("#updateBtn").click(function(){
+			
+			var memberId = $("#memberId").val();
+			var memberProPath = $("#memberProPath").val();
+			var reloadFile = $("#reloadFile").val();
+			var memberIntroduce = $("#memberIntroduce").val();
+			var memberOpenStatus = $("input[name=memberOpenStatus]").val();
+			
+			$.ajax({
+				url:"profileUpdate.ij",
+				data:{memberId:memberId,memberProPath:memberProPath,reloadFile:reloadFile,memberIntroduce:memberIntroduce,memberOpenStatus:memberOpenStatus},
+				type:"post",
+				success:function(success){
+						
+					location.href="myGroupForm.ij";
+				}
+			});
+			
+		});
 	
 	});
 	</script>

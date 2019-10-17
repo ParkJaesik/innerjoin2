@@ -59,7 +59,7 @@
 								</div>
 			                    
 							</div>
-			              	<button id="submit-btn" style="width: 100%">이메일 받기</button>
+			              	
 			              	
 			              	
 			              	<input type="hidden" value="">
