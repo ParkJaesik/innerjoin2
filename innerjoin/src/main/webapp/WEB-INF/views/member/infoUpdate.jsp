@@ -184,7 +184,7 @@
 	
 	
 	
-	var nameCheck = false;
+	var nameCheck = true;
 	var pwdCheck = false;
 	var pwdCheck2 = false;
 		$(function(){
@@ -274,16 +274,13 @@
 		
 		function submitCheck(){
 			
-			
 		
-			if( $("#memberName").change function(){
-				if(nameCheck == false){
-					alert("닉네임을 확인해주세요");
-					$("#memberName").focus();
-					return false;	
-				
-				}
-			});
+			if(nameCheck == false){
+				alert("닉네임을 확인해주세요");
+				$("#memberName").focus();
+				return false;	
+			
+			}
 			
 			
 			if($("#memberPwd").val() == '' && $("#memberPwd2").val() == ''){

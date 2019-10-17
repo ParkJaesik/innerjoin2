@@ -409,10 +409,10 @@ public class MemberController {
 	
 	
 	// 비밀번호 분실 비밀번호 입력 폼
-		@RequestMapping(value="updatePwdForm.ij", method= RequestMethod.GET)
-		public String updatePwdForm(String memberId, Model model) {
-			return"member/pwdUpdate";
-		}
+	@RequestMapping(value="updatePwdForm.ij", method= RequestMethod.GET)
+	public String updatePwdForm(String memberId, Model model) {
+		return"member/pwdUpdate";
+	}
 	
 	// 비밀번호 잃어버리고 수정
 	@RequestMapping(value="updatePwd.ij", method=RequestMethod.POST)
