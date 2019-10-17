@@ -45,13 +45,28 @@ td{
 .button-wrap button{
 	width: 100px;
 	height: 40px;
-	background-color: 	
+	border-radius: 5px !important;
+	box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.125);
+	font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    background-color: #e6e6e6;
+    color: #323232;
+	
 	
 	
 }
 
+.button-wrap button:hover{
+	background: #fd887a;
+    border-radius: 5px;
+}
+
+.button-wrap button:active{
+	background: #ed786a;
+}
 .button-wrap{
-	margin-left: 35%;
+	margin-left: 30%;
 	margin-top: 7%;
 }
 
@@ -148,8 +163,8 @@ td{
 					</table>
 					
 					<div class="button-wrap">
-						<button type="button" onclick="">목록</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button" id="rejectBtn">거절</button>&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="location.href='rblist.ij'">목록</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" id="rejectBtn">거절</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" id="acceptBtn">수락</button>
 					</div>
 					
