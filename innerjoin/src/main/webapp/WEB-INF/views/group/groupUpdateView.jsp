@@ -86,10 +86,28 @@ label{
 .button-wrap button{
 	width: 100px;
 	height: 40px;
+	border-radius: 5px !important;
+	box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.125);
+	font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    background-color: #e6e6e6;
+    color: #323232;
 	
 	
 	
 }
+
+.button-wrap button:hover{
+	background: #fd887a;
+    border-radius: 5px;
+}
+
+.button-wrap button:active{
+	background: #ed786a;
+}
+
+
 
 .button-wrap{
 	margin-left: 30%
@@ -251,7 +269,7 @@ label{
 						</table>
 	
 						<div class="button-wrap">
-							<button type="reset" id="cancel">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="button" id="cancel" onclick="location.href=''">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="submit" id="submit">등록</button>
 						</div>
 	

@@ -108,6 +108,24 @@ th{
 	line-height: 150px;
 }
 
+.mreport a{
+	text-decoration: none;
+	color: #fd887a;
+}
+.mreport a:hover {
+	color: gray;
+	text-decoration: none;
+}
+
+tbody a{
+	text-decoration: none;
+	color: #fd887a;
+}
+
+tbody a:hover{
+	color: gray;
+	text-decoration: none;
+}
 
 
 </style>
