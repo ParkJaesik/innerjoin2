@@ -179,10 +179,11 @@ label{
 							<tr class="row">
 								<th><label>장소</label></th>
 								<td>
-									<select id="citysel" required class="input">
+									<select id="citysel" class="input">
 										<option value="city">도시를 선택해주세요.</option>
 										<option value="0">서울특별시</option>
-									</select> <select id="guSel" name="localCode" required class="input">
+									</select> 
+									<select id="guSel" name="localCode" class="input">
 										<option value="-1">구를 선택해주세요.</option>
 										<option value="0">도봉구</option>
 										<option value="1">강북구</option>

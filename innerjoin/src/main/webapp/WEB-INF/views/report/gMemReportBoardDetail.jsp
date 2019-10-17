@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,8 +145,8 @@ td{
 								<label>날짜</label>
 							</th>
 							<td class="div3-2">
-								
-								<p>${report.rDate }</p>
+								<fmt:formatDate value="${report.rDate}" pattern="yyyy.MM.dd"/>
+								<%-- <p>${report.rDate }</p> --%>
 							</td>
 						</tr>
 						<tr class="div4">

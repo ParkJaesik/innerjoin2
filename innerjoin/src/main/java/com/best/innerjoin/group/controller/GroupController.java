@@ -75,6 +75,7 @@ public class GroupController {
 			
 			//모임 생성 성공시 group-member테이블에 관리자로 행추가 
 			int result2 = gService.insertGroupMemberAdmin(loginUser);
+			gService.updateGroupCount(gNo);
 			
 			path = "redirect:goGroupPage.ij?gNo="+gNo;
 		}else {
