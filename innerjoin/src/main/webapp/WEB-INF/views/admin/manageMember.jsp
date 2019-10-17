@@ -65,7 +65,7 @@
 					
 					<c:forEach var="m" items="${ mList }" varStatus="status">
 						<tr>
-							<td align="center">${ status.count }</td>
+							<td align="center">${ (pi.currentPage - 1) * pi.limit + status.count }</td>
 							
 							<td align="left">
 								<c:url var="memDetail" value="memDetail.ij">
