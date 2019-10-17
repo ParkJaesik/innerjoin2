@@ -256,6 +256,7 @@ public class MemberController {
 	}
 
 	// 프로필 수정
+
 	@ResponseBody
 	@RequestMapping(value = "profileUpdate.ij", method = RequestMethod.POST)
 	public String profileUpdate(Member member, Model model, HttpServletRequest request, MultipartFile reloadFile) {
@@ -291,6 +292,7 @@ public class MemberController {
 		}
 		return "success"; // -----수정
 	}
+
 
 	public void saveFile(String renameFileName, MultipartFile uploadfile, HttpServletRequest request) {
 

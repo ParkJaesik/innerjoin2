@@ -211,14 +211,14 @@
 							</button>    
         
 						</form>
-               <div id="gSignInWrapper">
+    <!--            <div id="gSignInWrapper">
                 <div id="customBtn" class="customGPlusSignIn">
                   <span class="icon">
                     <img src='resources/images/btn_google_icon.svg'>
                   </span>
                   <span class="buttonText" >구글로 로그인</span>
                 </div>
-              </div>
+              </div> -->
 						<div>
 							<a href="joinForm.ij" style="margin-left: 50px; margin-top: 10px; float: left; ">회원가입</a>
 							<a href="findPwdForm.ij" style="margin-right: 50px; margin-top: 10px; float: right;">비밀번호 찾기</a>

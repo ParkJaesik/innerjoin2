@@ -99,7 +99,11 @@ float: left;}
 							</div>
 							<div>
 	                    	<a href="javascript:history.back(-1)" class="button icon solid mMenu cancel" id="goBack">취소</a>
+
 	          				<button id="updateBtn" style="float: right;">수정</button>
+
+	          		
+
 	                    	</div>
 							
 	                  <!--  </form> -->
@@ -146,9 +150,8 @@ float: left;}
 		});
 	
 	});
-	</script>
-
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	
 
 	</body>
 </html>

@@ -70,7 +70,9 @@
 									
 									<input type="hidden" value="${m.memberId }">
 									<input type="hidden" value="${m.memberName }">
-									<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
+									<c:if test="${m.levelCode ne 0 }">
+										<button type="button" class="btn btn-primary reportBtn" id="member-btn-report">신고하기</button>
+									</c:if>
 								</div>
 							</div>
 						</div><br>
@@ -93,7 +95,7 @@
 													<input type="text" readonly name="memberId">							
 												</div>
 												<div class="div2" style="margin-top: 10%">
-													모임장<input type="radio" name="levelCode" value="0">
+													<!-- 모임장<input type="radio" name="levelCode" value="0"> -->
 													매니저<input type="radio" name="levelCode" value="1">
 													일반회원<input type="radio" name="levelCode" value="2">
 												</div>
